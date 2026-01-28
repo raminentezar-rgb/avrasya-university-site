@@ -1,0 +1,234 @@
+from django.db import models
+from django.urls import reverse
+from duyurular.models import Duyuru, DuyuruDosya  # ایمپورت مدل‌های اصلی
+from django.utils import timezone
+
+class LeeDuyuru(models.Model):
+    """مدل اطلاعیه‌های دانشکده LEE"""
+    
+    # لینک به اطلاعیه اصلی
+    ana_duyuru = models.OneToOneField(
+        Duyuru, 
+        on_delete=models.CASCADE,
+        related_name='lee_duyuru',
+        verbose_name="Ana Duyuru",
+        null=True,
+        blank=True
+    )
+    
+    KATEGORI_CHOICES = [
+        ('akademik', 'Akademik'),
+        ('etkinlik', 'Etkinlik'),
+        ('ogrenci', 'Öğrenci'),
+        ('genel', 'Genel'),
+    ]
+    
+    baslik = models.CharField(max_length=200, verbose_name="Başlık")
+    icerik = models.TextField(verbose_name="İçerik")
+    ozet = models.TextField(blank=True, verbose_name="Özet", help_text="Kısa özet (opsiyonel)")
+    kategori = models.CharField(max_length=20, choices=KATEGORI_CHOICES, default='genel', verbose_name="Kategori")
+    
+    # فایل‌های ضمیمه
+    dosya = models.FileField(upload_to='lee/duyurular/', blank=True, null=True, verbose_name="Dosya Eki")
+    
+    # تاریخ‌ها
+    yayin_tarihi = models.DateTimeField(auto_now_add=True, verbose_name="Yayın Tarihi")
+    guncelleme_tarihi = models.DateTimeField(auto_now=True, verbose_name="Güncelleme Tarihi")
+    
+    # وضعیت
+    yayinda = models.BooleanField(default=True, verbose_name="Yayında")
+    onemli = models.BooleanField(default=False, verbose_name="Önemli Duyuru")
+    
+    # ترتیب نمایش
+    sira = models.PositiveIntegerField(default=0, verbose_name="Sıra")
+    
+    class Meta:
+        verbose_name = "LEE Duyurusu"
+        verbose_name_plural = "LEE Duyuruları"
+        ordering = ['-onemli', '-yayin_tarihi', 'sira']
+    
+    def __str__(self):
+        return self.baslik
+    
+    def get_absolute_url(self):
+        return reverse('lee:duyuru_detay', args=[self.id])
+    
+    @property
+    def kisa_ozet(self):
+        """برگرداندن خلاصه کوتاه"""
+        if self.ozet:
+            return self.ozet[:100] + "..." if len(self.ozet) > 100 else self.ozet
+        return self.icerik[:100] + "..." if len(self.icerik) > 100 else self.icerik
+    
+    @property
+    def dosya_adi(self):
+        """برگرداندن نام فایل"""
+        if self.dosya:
+            return self.dosya.name.split('/')[-1]
+        return None
+
+    def mevcut_dosyalar(self):
+        """برگرداندن فایل‌های ضمیمه از اطلاعیه اصلی"""
+        dosyalar = []
+        if self.ana_duyuru:
+            for dosya in self.ana_duyuru.dosyalar.all():
+                dosyalar.append({
+                    'adi': dosya.dosya_adi,
+                    'url': dosya.dosya.url,
+                    'icon': dosya.get_icon(),
+                    'tur': dosya.get_tur_display(),
+                    'aciklama': dosya.aciklama
+                })
+        return dosyalar
+
+    def save(self, *args, **kwargs):
+        # اگر لینک به اطلاعیه اصلی وجود دارد، اطلاعات را همگام‌سازی کن
+        if self.ana_duyuru:
+            self.baslik = self.ana_duyuru.baslik
+            self.icerik = self.ana_duyuru.icerik
+            self.ozet = self.ana_duyuru.ozet
+            self.yayin_tarihi = self.ana_duyuru.yayin_tarihi
+            self.yayinda = self.ana_duyuru.yayinda
+        super().save(*args, **kwargs)
+
+
+class LeeDosya(models.Model):
+    """مدل برای فایل‌های ضمیمه در اپ LEE"""
+    DOSYA_TURleri = [
+        ('word', 'Word Belgesi'),
+        ('pdf', 'PDF Belgesi'),
+        ('excel', 'Excel Dosyası'),
+        ('resim', 'Resim'),
+        ('arsiv', 'Arşiv Dosyası'),
+        ('diger', 'Diğer'),
+    ]
+    
+    duyuru = models.ForeignKey(
+        LeeDuyuru, 
+        on_delete=models.CASCADE, 
+        related_name='dosyalar',
+        verbose_name="Duyuru"
+    )
+    dosya = models.FileField(
+        upload_to='lee/dosyalar/%Y/%m/%d/',
+        verbose_name="Dosya"
+    )
+    dosya_adi = models.CharField(
+        max_length=255,
+        verbose_name="Dosya Adı",
+        blank=True
+    )
+    tur = models.CharField(
+        max_length=10,
+        choices=DOSYA_TURleri,
+        default='diger',
+        verbose_name="Dosya Türü"
+    )
+    aciklama = models.TextField(
+        blank=True,
+        verbose_name="Açıklama"
+    )
+    olusturulma_tarihi = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Oluşturulma Tarihi"
+    )
+
+    class Meta:
+        verbose_name = "LEE Dosyası"
+        verbose_name_plural = "LEE Dosyaları"
+        ordering = ['tur', 'dosya_adi']
+
+    def __str__(self):
+        return self.dosya_adi or self.dosya.name
+
+    def get_icon(self):
+        """Dosya türüne göre ikon belirleme"""
+        icon_map = {
+            'word': 'bi-file-word',
+            'pdf': 'bi-file-pdf',
+            'excel': 'bi-file-excel',
+            'resim': 'bi-file-image',
+            'arsiv': 'bi-file-zip',
+            'diger': 'bi-file-earmark'
+        }
+        return icon_map.get(self.tur, 'bi-file-earmark')
+
+    def save(self, *args, **kwargs):
+        # Dosya adını otomatik olarak ayarla
+        if not self.dosya_adi:
+            self.dosya_adi = self.dosya.name
+        super().save(*args, **kwargs)
+
+
+
+
+
+
+
+class Lee_Etkinlik(models.Model):
+    ETKINLIK_TURU_CHOICES = [
+        ('konferans', 'Konferans / Kongre / Sempozyum'),
+        ('seminer', 'Seminer / Panel'),
+        ('kultur', 'Kültür-Sanat Etkinliği'),
+        ('spor', 'Spor Etkinliği'),
+        ('tanitim', 'Tanıtım Günleri'),
+        ('workshop', 'Workshop / Atölye'),
+        ('diger', 'Diğer'),
+    ]
+    
+    baslik = models.CharField(max_length=255, verbose_name="Etkinlik Başlığı")
+    slug = models.SlugField(unique=True, verbose_name="SEO URL")
+    kisa_aciklama = models.TextField(blank=True, verbose_name="Kısa Açıklama")
+    detayli_aciklama = models.TextField(verbose_name="Detaylı Açıklama")
+    etkinlik_turu = models.CharField(
+        max_length=20, 
+        choices=ETKINLIK_TURU_CHOICES, 
+        default='diger',
+        verbose_name="Etkinlik Türü"
+    )
+    
+    baslangic_tarihi = models.DateTimeField(verbose_name="Başlangıç Tarihi")
+    bitis_tarihi = models.DateTimeField(verbose_name="Bitiş Tarihi", blank=True, null=True)
+    yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
+    
+    afis = models.ImageField(
+        upload_to='etkinlikler/afis/%Y/%m/%d/', 
+        blank=True, 
+        null=True,
+        verbose_name="Etkinlik Afişi"
+    )
+    
+    katilim_linki = models.URLField(blank=True, verbose_name="Katılım Linki")
+    kayit_gerekiyor = models.BooleanField(default=False, verbose_name="Kayıt Gerekiyor")
+    ucretli = models.BooleanField(default=False, verbose_name="Ücretli Etkinlik")
+    
+    yayinda = models.BooleanField(default=False, verbose_name="Yayında")
+    olusturulma_tarihi = models.DateTimeField(auto_now_add=True)
+    guncellenme_tarihi = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['baslangic_tarihi']
+        verbose_name = "Etkinlik"
+        verbose_name_plural = "Etkinlikler"
+
+    def __str__(self):
+        return self.baslik
+
+    def get_absolute_url(self):
+        return reverse('lee:etkinlik_detay', args=[self.slug])
+
+    def yaklasan_etkinlik(self):
+        """Etkinliğin yaklaşıp yaklaşmadığını kontrol eder"""
+        return self.baslangic_tarihi <= timezone.now() + timezone.timedelta(days=7)
+
+    def devam_ediyor(self):
+        """Etkinliğin devam edip etmediğini kontrol eder"""
+        now = timezone.now()
+        if self.bitis_tarihi:
+            return self.baslangic_tarihi <= now <= self.bitis_tarihi
+        return self.baslangic_tarihi.date() == now.date()
+
+    def gun_kaldi(self):
+        """Etkinliğe kaç gün kaldığını hesaplar"""
+        kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
+        return max(0, kalan_gun)

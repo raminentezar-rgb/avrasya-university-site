@@ -1,0 +1,231 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{ fakulte_tam_adi }} Duyuruları - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<div class="super_container">
+    <!-- Page Content -->
+    <div class="page_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">Duyurular</a></li>
+                            <li class="breadcrumb-item active">{{ fakulte_tam_adi }}</li>
+                        </ol>
+                    </nav>
+                    
+                    <!-- Page Title -->
+                    {% comment %} <div class="section_title">
+                        <h1>{{ fakulte_tam_adi }} Duyuruları</h1>
+                    </div> {% endcomment %}
+
+                    <!-- Info Alert -->
+                    <div class="info-alert">
+                        <i class="fas fa-info-circle"></i>
+                        {{ fakulte_tam_adi }}'na ait toplam <strong>{{ duyurular.count }}</strong> duyuru bulunmaktadır.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Sections -->
+            {% if bolumler %}
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="departments-section">
+                        <h5 class="section-subtitle">
+                            <i class="fas fa-bookmark"></i> {{ fakulte_adi }} Bölümleri
+                        </h5>
+                        <div class="departments-grid">
+                            {% for bolum in bolumler %}
+                            <a href="{% url 'duyurular:bolum_liste' bolum_kodu=bolum.kod %}" class="department-card">
+                                <span class="department-name">{{ bolum.ad }}</span>
+                                <span class="department-count">{{ bolum.duyuru_set.count }}</span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Announcements Grid -->
+            <div class="row">
+                {% for duyuru in duyurular %}
+                <div class="col-lg-6 mb-4">
+                    <div class="announcement-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <span class="announcement-badge">{{ duyuru.get_fakulte_display }}</span>
+                                    {% if duyuru.bolumler.exists %}
+                                        {% for bolum in duyuru.bolumler.all|slice:":2" %}
+                                            <span class="announcement-badge bg-secondary">{{ bolum.ad }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <small class="text-muted">
+                                    <i class="far fa-calendar"></i> 
+                                    {{ duyuru.yayin_tarihi|date:'d F Y' }}
+                                </small>
+                            </div>
+                            
+                            <h5 class="card-title">{{ duyuru.baslik }}</h5>
+                            
+                            <div class="announcement-content">
+                                {% if duyuru.ozet %}
+                                    {{ duyuru.ozet|truncatewords:30 }}
+                                {% else %}
+                                    {{ duyuru.icerik|truncatewords:30 }}
+                                {% endif %}
+                            </div>
+
+                            <!-- Files -->
+                            {% with dosyalar=duyuru.mevcut_dosyalar %}
+                                {% if dosyalar %}
+                                <div class="file-badges mt-3">
+                                    <h6 class="text-secondary mb-2">İlgili Dosyalar:</h6>
+                                    {% for dosya in dosyalar %}
+                                        <a href="{{ dosya.url }}" class="file-badge" download>
+                                            <i class="fas fa-download"></i> {{ dosya.tur }}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% endwith %}
+
+                            <div class="announcement-card-footer">
+                                <a href="{{ duyuru.get_absolute_url }}" class="btn-primary">
+                                    Devamını Oku <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <small class="text-muted">
+                                    {{ duyuru.yayin_tarihi|timesince }} önce
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="announcements-empty">
+                        <i class="fas fa-bullhorn"></i>
+                        <h4>Duyuru Bulunamadı</h4>
+                        <p>{{ fakulte_tam_adi }} için henüz duyuru bulunmamaktadır.</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.info-alert {
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    color: var(--pure-white);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(29, 97, 169, 0.3);
+    margin-top: 200px;
+    
+}
+
+.info-alert i {
+    font-size: 24px;
+    
+}
+
+.info-alert strong {
+    font-weight: 700;
+}
+
+.departments-section {
+    background: var(--pure-white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.section-subtitle {
+    
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--neutral-cream);
+}
+
+.departments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.department-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--neutral-cream);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 300ms ease;
+}
+
+.department-card:hover {
+    background: var(--secondary-medium-blue);
+    border-color: var(--accent-light-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.3);
+}
+
+.department-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: all 300ms ease;
+}
+
+.department-count {
+    background: var(--secondary-medium-blue);
+    color: var(--pure-white);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 300ms ease;
+}
+
+.department-card:hover .department-name {
+    color: var(--pure-white);
+}
+
+.department-card:hover .department-count {
+    background: var(--pure-white);
+    color: var(--secondary-medium-blue);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .departments-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-alert {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ duyuru.baslik }} - Odyoloji Bölümü - Avrasya Üniversitesi{% endblock %}
+{% block content %}
+{% load static %}
+<div class="row">
+  <!-- Sidebar Menu -->
+  <div class="col-lg-3 mb-4">
+        {% include 'odyoloji/sidebar.html' %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Duyurular</h1>
+
+                        <p class="lead mb-4">
+                           
+                        </p>
+                        {% comment %} <div class="d-flex gap-3">
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-calendar me-1"></i>1999'dan Beri
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-building me-1"></i>5 Bölüm
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-award me-1"></i>25 Yıllık Deneyim
+                            </span>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-megaphone  display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <div class="container mt-4">
+    <article class="bg-white p-4 rounded shadow-sm">
+      <!-- هدر -->
+      <header class="mb-4 border-bottom pb-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">Tüm Duyurular</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'odyoloji:liste' %}">Odyoloji Bölümü</a></li>
+            <li class="breadcrumb-item active">Duyuru</li>
+          </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <span class="badge bg-primary mb-2">{{ duyuru.get_fakulte_display }}</span>
+            <span class="badge bg-success mb-2">Odyoloji Bölümü</span>
+            <h1 class="text-primary">{{ duyuru.baslik }}</h1>
+          </div>
+        </div>
+        <p class="text-muted">
+          <i class="bi bi-calendar-event"></i>
+          {{ duyuru.yayin_tarihi|date:'d F Y H:i' }}
+        </p>
+      </header>
+
+      <!-- محتوای اصلی -->
+      <div class="content mb-5">
+        {{ duyuru.icerik|linebreaks }}
+      </div>
+
+      <!-- بخش فایل‌های قابل دانلود -->
+      {% with dosyalar=duyuru.mevcut_dosyalar %}
+        {% if dosyalar %}
+          <section class="mt-5 pt-4 border-top">
+            <h4 class="text-secondary mb-3">
+              <i class="bi bi-download"></i> İndirilebilir Dosyalar
+            </h4>
+            <div class="row">
+              {% for dosya in dosyalar %}
+                <div class="col-md-4 mb-3">
+                  <div class="card border-0 bg-light h-100">
+                    <div class="card-body text-center">
+                      <i class="bi {{ dosya.icon }} display-4 text-primary mb-2"></i>
+                      <h6 class="card-title">{{ dosya.adi }}</h6>
+                      <p class="text-muted small">{{ dosya.tur }}</p>
+                      {% if dosya.aciklama %}
+                        <p class="card-text small">{{ dosya.aciklama|truncatewords:10 }}</p>
+                      {% endif %}
+                      <a href="{{ dosya.url }}" class="btn btn-primary btn-sm" download>
+                        <i class="bi bi-download"></i> İndir
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </section>
+        {% endif %}
+      {% endwith %}
+
+      <!-- بخش اطلاعیه‌های مرتبط -->
+      {% if ilgili_duyurular %}
+        <section class="mt-5 pt-4 border-top">
+          <h4 class="text-secondary mb-3">
+            <i class="bi bi-link"></i> Diğer Odyoloji Bölümü Duyuruları
+          </h4>
+          <div class="row">
+            {% for ilgili in ilgili_duyurular %}
+              <div class="col-md-4 mb-3">
+                <div class="card border-0 bg-light h-100">
+                  <div class="card-body">
+                    <span class="badge bg-primary mb-2 small">{{ ilgili.get_fakulte_display }}</span>
+                    <span class="badge bg-success mb-2 small">Hemşirelik Bölümü</span>
+                    <h6 class="card-title">{{ ilgili.baslik|truncatewords:8 }}</h6>
+                    <p class="text-muted small">
+                      <i class="bi bi-calendar-event"></i>
+                      {{ ilgili.yayin_tarihi|date:'d M Y' }}
+                    </p>
+                    <a href="{% url 'odyoloji:detay' ilgili.slug %}" class="btn btn-outline-primary btn-sm">
+                      Detay
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+
+      <!-- دکمه‌های ناوبری -->
+      <div class="mt-4 d-flex justify-content-between flex-wrap gap-2">
+        <a href="{% url 'odyoloji:liste' %}" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left"></i> Tüm Odyoloji Bölümü
+        </a>
+        <div class="d-flex gap-2">
+          <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=duyuru.fakulte %}" class="btn btn-outline-primary">
+            <i class="bi bi-filter"></i> {{ duyuru.get_fakulte_display }} Duyuruları
+          </a>
+          <a href="{% url 'duyurular:liste' %}" class="btn btn-outline-info">
+            <i class="bi bi-grid"></i> Tüm Duyurular
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+{% endblock %}

@@ -1,0 +1,686 @@
+<!-- signup.html بهبود یافته -->
+{% extends "core/base.html" %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+<div class="container auth-container" style="margin-top: 240px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="logo-container mb-4">
+                        <div class="logo-circle">
+                            <img src="{% static 'core/img/AVRASYA-PNG-LOGO.png' %}" alt="Avrasya University Logo" class="logo-image">
+                        </div>
+                    </div>
+                    <h2 style=" font-family: Metropolis, sans-serif; font-weight: 800;">Öğrenci Hesabı Oluştur</h2>
+                    <p class="text-muted">Başlamak için bilgilerinizi doldurun</p>
+                </div>
+
+                <form method="post" class="auth-form" id="signupForm">
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        Lütfen aşağıdaki hataları düzeltin.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="row">
+                        <!-- Sol Taraf: Kişisel Bilgiler -->
+                        <div class="col-md-6">
+                            <h5 class="form-section-title">
+                                <i class="fas fa-user-circle"></i> Kişisel Bilgiler
+                            </h5>
+                            
+                            {% for field in form %}
+                                {% if field.name in 'username,first_name,last_name,email' %}
+                                <div class="form-group">
+                                    <label for="{{ field.id_for_label }}" class="form-label">
+                                        {% if field.name == 'username' %}
+                                            <i class="fas fa-user"></i> Kullanıcı Adı
+                                            <span class="text-danger">*</span>
+                                        {% elif field.name == 'first_name' %}
+                                            <i class="fas fa-signature"></i> Ad
+                                            <span class="text-danger">*</span>
+                                        {% elif field.name == 'last_name' %}
+                                            <i class="fas fa-signature"></i> Soyad
+                                            <span class="text-danger">*</span>
+                                        {% elif field.name == 'email' %}
+                                            <i class="fas fa-envelope"></i> E-posta Adresi
+                                            <span class="text-danger">*</span>
+                                        {% endif %}
+                                    </label>
+                                    
+                                    <div class="input-with-icon">
+                                        {{ field }}
+                                        {% if field.name == 'email' %}
+                                        <span class="input-icon validation-icon">
+                                            <i class="fas fa-check-circle text-success d-none" id="emailValid"></i>
+                                            <i class="fas fa-times-circle text-danger d-none" id="emailInvalid"></i>
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    
+                                    {% for error in field.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- Sağ Taraf: Güvenlik Bilgileri -->
+                        <div class="col-md-6">
+                            <h5 class="form-section-title">
+                                <i class="fas fa-shield-alt"></i> Güvenlik Bilgileri
+                            </h5>
+                            
+                            {% for field in form %}
+                                {% if field.name in 'password1,password2' %}
+                                <div class="form-group">
+                                    <label for="{{ field.id_for_label }}" class="form-label">
+                                        {% if field.name == 'password1' %}
+                                            <i class="fas fa-lock"></i> Şifre
+                                            <span class="text-danger">*</span>
+                                        {% elif field.name == 'password2' %}
+                                            <i class="fas fa-lock"></i> Şifre Tekrar
+                                            <span class="text-danger">*</span>
+                                        {% endif %}
+                                    </label>
+                                    
+                                    <div class="input-with-icon">
+                                        {{ field }}
+                                        <span class="input-icon">
+                                            <i class="fas fa-eye toggle-password" data-target="{{ field.id_for_label }}"></i>
+                                        </span>
+                                    </div>
+                                    
+                                    {% if field.name == 'password1' %}
+                                    <div class="password-strength mt-2">
+                                        <div class="strength-bar">
+                                            <div class="strength-fill" id="passwordStrength"></div>
+                                        </div>
+                                        <small class="strength-text" id="strengthText">Şifre gücü: Zayıf</small>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                                    {% endif %}
+                                    
+                                    {% for error in field.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            <!-- Öğrenci Numarası -->
+                            <div class="form-group">
+                                <label for="student_number" class="form-label">
+                                    <i class="fas fa-id-card"></i> Öğrenci Numarası
+                                </label>
+                                <div class="input-with-icon">
+                                    <input type="text" id="student_number" name="student_number" 
+                                           class="form-control" placeholder="Öğrenci numaranızı giriniz">
+                                </div>
+                                <small class="form-text text-muted">Opsiyonel: Üniversite öğrenci numaranız</small>
+                            </div>
+                            
+                            <!-- Şartlar ve Koşullar -->
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="terms" required>
+                                    <label class="custom-control-label" for="terms">
+                                        <a href="#" class="terms-link">Kullanım Şartları</a>'nı ve 
+                                        <a href="#" class="terms-link">Gizlilik Politikası</a>'nı okudum ve kabul ediyorum
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-auth btn-auth-primary btn-block mt-4" id="submitBtn">
+                        <i class="fas fa-user-plus mr-2"></i> Hesap Oluştur
+                        <span class="spinner-border spinner-border-sm ml-2 d-none" id="submitSpinner"></span>
+                    </button>
+
+                    <div class="divider">
+                        <span>veya</span>
+                    </div>
+
+                    <a href="#" class="btn-auth btn-auth-secondary btn-block mb-3">
+                        <i class="fab fa-google mr-2"></i> Google ile Kaydol
+                    </a>
+
+                    <div class="auth-links text-center mt-4">
+                        <a href="{% url 'accounts:login' %}" class="auth-link">
+                            <i class="fas fa-sign-in-alt"></i> Zaten hesabınız var mı? Giriş Yapın
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="auth-info-card mt-4">
+                <h5><i class="fas fa-graduation-cap text-primary mr-2"></i> Neden Hesap Oluşturmalısınız?</h5>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="feature-item mb-3">
+                            <i class="fas fa-ticket-alt feature-icon"></i>
+                            <span>Destek talepleri oluşturun ve takip edin</span>
+                        </div>
+                        <div class="feature-item mb-3">
+                            <i class="fas fa-book feature-icon"></i>
+                            <span>Kişiselleştirilmiş üniversite kaynakları</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-item mb-3">
+                            <i class="fas fa-history feature-icon"></i>
+                            <span>Arama geçmişinizi kaydedin</span>
+                        </div>
+                        <div class="feature-item mb-3">
+                            <i class="fas fa-bell feature-icon"></i>
+                            <span>Önemli güncellemelerden haberdar olun</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* استایل‌های جدید برای فرم */
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #1d61a9;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    
+    .form-label i {
+        margin-right: 8px;
+        color: #8dd4e3;
+    }
+    
+    .form-label .text-danger {
+        margin-left: 4px;
+    }
+    
+    /* استایل فیلدهای فرم */
+    .auth-form input[type="text"],
+    .auth-form input[type="email"],
+    .auth-form input[type="password"] {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e1e5eb;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        background-color: white;
+        color: #333;
+    }
+    
+    .auth-form input:focus {
+        outline: none;
+        border-color: #8dd4e3;
+        box-shadow: 0 0 0 3px rgba(141, 212, 227, 0.2);
+    }
+    
+    .auth-form input::placeholder {
+        color: #adb5bd;
+        font-size: 14px;
+    }
+    
+    /* استایل برای help text */
+    .form-text {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #6c757d !important;
+    }
+    
+    /* استایل برای خطاها */
+    .invalid-feedback {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #dc3545;
+    }
+    
+    .invalid-feedback i {
+        margin-right: 5px;
+    }
+    
+    /* استایل برای checkbox */
+    .custom-checkbox {
+        margin-top: 15px;
+        padding-left: 30px;
+        position: relative;
+    }
+    
+    .custom-control-input {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .custom-control-label {
+        font-size: 14px;
+        color: #495057;
+        cursor: pointer;
+    }
+    
+    .custom-control-label a {
+        color: #1d61a9;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .custom-control-label a:hover {
+        text-decoration: underline;
+    }
+    
+    /* استایل بخش‌های فرم */
+    .form-section-title {
+        color: #1d61a9;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f0f7ff;
+    }
+    
+    .form-section-title i {
+        color: #8dd4e3;
+        margin-right: 10px;
+    }
+    
+    /* استایل برای input-with-icon */
+    .input-with-icon {
+        position: relative;
+    }
+    
+    .input-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        cursor: pointer;
+        z-index: 2;
+    }
+    
+    .input-icon:hover {
+        color: #1d61a9;
+    }
+    
+    /* استایل لوگو */
+    .logo-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 50%;
+    }
+    
+    /* استایل برای password strength */
+    .password-strength {
+        display: none;
+    }
+    
+    .strength-bar {
+        height: 4px;
+        background: #e9ecef;
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
+    
+    .strength-fill {
+        height: 100%;
+        width: 0%;
+        background: #dc3545;
+        transition: width 0.3s ease, background 0.3s ease;
+    }
+    
+    .strength-text {
+        font-size: 12px;
+        color: #6c757d;
+    }
+    
+    /* استایل برای validation icon */
+    .validation-icon {
+        right: 45px !important;
+    }
+    
+    /* استایل برای feature items */
+    .feature-item {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+    
+    .feature-icon {
+        color: #8dd4e3;
+        margin-right: 10px;
+        font-size: 16px;
+        min-width: 20px;
+    }
+    
+    /* استایل برای required fields */
+    .required-field::after {
+        content: " *";
+        color: #dc3545;
+    }
+    
+    /* استایل برای حالت focus */
+    .form-group:focus-within .form-label {
+        color: #092442;
+    }
+    
+    /* استایل برای فرم در حالت موبایل */
+    @media (max-width: 768px) {
+        .auth-form input[type="text"],
+        .auth-form input[type="email"],
+        .auth-form input[type="password"] {
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+        
+        .form-label {
+            font-size: 13px;
+        }
+        
+        .form-section-title {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // اضافه کردن استایل به فیلدهای Django
+        document.querySelectorAll('.auth-form input').forEach(input => {
+            // حذف کلاس‌های پیش‌فرض Django
+            input.classList.remove('form-control');
+            
+            // تنظیم placeholder مناسب
+            if (input.id === 'id_username') {
+                input.placeholder = 'Kullanıcı adınızı giriniz';
+            } else if (input.id === 'id_first_name') {
+                input.placeholder = 'Adınızı giriniz';
+            } else if (input.id === 'id_last_name') {
+                input.placeholder = 'Soyadınızı giriniz';
+            } else if (input.id === 'id_email') {
+                input.placeholder = 'E-posta adresinizi giriniz';
+            } else if (input.id === 'id_password1') {
+                input.placeholder = 'Şifrenizi oluşturun';
+            } else if (input.id === 'id_password2') {
+                input.placeholder = 'Şifrenizi tekrar giriniz';
+            }
+            
+            // اضافه کردن event listener برای focus
+            input.addEventListener('focus', function() {
+                this.parentElement.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.parentElement.classList.remove('focused');
+                }
+            });
+        });
+        
+        // نمایش/مخفی کردن رمز عبور
+        document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const passwordInput = document.getElementById(targetId);
+                const iconElement = this;
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    iconElement.classList.remove('fa-eye');
+                    iconElement.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    iconElement.classList.remove('fa-eye-slash');
+                    iconElement.classList.add('fa-eye');
+                }
+            });
+        });
+        
+        // بررسی قدرت رمز عبور
+        const passwordInput = document.getElementById('id_password1');
+        const strengthBar = document.getElementById('passwordStrength');
+        const strengthText = document.getElementById('strengthText');
+        
+        if (passwordInput) {
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strength = checkPasswordStrength(password);
+                
+                // نمایش بخش password strength
+                const passwordStrengthDiv = this.parentElement.nextElementSibling;
+                if (passwordStrengthDiv && passwordStrengthDiv.classList.contains('password-strength')) {
+                    passwordStrengthDiv.style.display = 'block';
+                }
+                
+                if (strengthBar) {
+                    strengthBar.style.width = strength.percentage + '%';
+                    strengthBar.style.background = strength.color;
+                }
+                
+                if (strengthText) {
+                    strengthText.textContent = 'Şifre gücü: ' + strength.text;
+                    strengthText.style.color = strength.color;
+                }
+            });
+        }
+        
+        // اعتبارسنجی ایمیل
+        const emailInput = document.getElementById('id_email');
+        const emailValidIcon = document.getElementById('emailValid');
+        const emailInvalidIcon = document.getElementById('emailInvalid');
+        
+        if (emailInput && emailValidIcon && emailInvalidIcon) {
+            emailInput.addEventListener('blur', function() {
+                const email = this.value;
+                if (email) {
+                    const isValid = validateEmail(email);
+                    if (isValid) {
+                        emailValidIcon.classList.remove('d-none');
+                        emailInvalidIcon.classList.add('d-none');
+                        this.style.borderColor = '#28a745';
+                    } else {
+                        emailValidIcon.classList.add('d-none');
+                        emailInvalidIcon.classList.remove('d-none');
+                        this.style.borderColor = '#dc3545';
+                    }
+                } else {
+                    emailValidIcon.classList.add('d-none');
+                    emailInvalidIcon.classList.add('d-none');
+                    this.style.borderColor = '#e1e5eb';
+                }
+            });
+        }
+        
+        // ارسال فرم
+        const form = document.getElementById('signupForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitSpinner = document.getElementById('submitSpinner');
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const termsCheckbox = document.getElementById('terms');
+                
+                if (!termsCheckbox.checked) {
+                    e.preventDefault();
+                    showToast('Lütfen Kullanım Şartları\'nı kabul edin.', 'warning');
+                    termsCheckbox.focus();
+                    return false;
+                }
+                
+                // بررسی تطابق رمز عبور
+                const password1 = document.getElementById('id_password1');
+                const password2 = document.getElementById('id_password2');
+                
+                if (password1 && password2 && password1.value !== password2.value) {
+                    e.preventDefault();
+                    showToast('Şifreler eşleşmiyor. Lütfen kontrol edin.', 'error');
+                    password2.focus();
+                    return false;
+                }
+                
+                // نمایش spinner
+                if (submitSpinner) {
+                    submitSpinner.classList.remove('d-none');
+                    submitBtn.disabled = true;
+                }
+            });
+        }
+        
+        // توابع کمکی
+        function checkPasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            
+            const strength = [
+                { percentage: 20, color: '#dc3545', text: 'Çok Zayıf' },
+                { percentage: 40, color: '#fd7e14', text: 'Zayıf' },
+                { percentage: 60, color: '#ffc107', text: 'Orta' },
+                { percentage: 80, color: '#28a745', text: 'Güçlü' },
+                { percentage: 100, color: '#20c997', text: 'Çok Güçlü' }
+            ];
+            
+            return strength[Math.min(score, 4)];
+        }
+        
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function showToast(message, type = 'info') {
+            // ایجاد toast
+            const toast = document.createElement('div');
+            toast.className = `auth-toast auth-toast-${type}`;
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'times-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4000);
+        }
+        
+        // اضافه کردن استایل برای toast
+        const toastStyle = document.createElement('style');
+        toastStyle.textContent = `
+            .auth-toast {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: white;
+                border-radius: 8px;
+                padding: 15px 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                z-index: 9999;
+                transform: translateX(120%);
+                transition: transform 0.3s ease;
+                max-width: 350px;
+                border-left: 4px solid;
+            }
+            
+            .auth-toast.show {
+                transform: translateX(0);
+            }
+            
+            .auth-toast-success {
+                border-left-color: #28a745;
+            }
+            
+            .auth-toast-error {
+                border-left-color: #dc3545;
+            }
+            
+            .auth-toast-warning {
+                border-left-color: #ffc107;
+            }
+            
+            .auth-toast-info {
+                border-left-color: #17a2b8;
+            }
+            
+            .toast-content {
+                display: flex;
+                align-items: center;
+            }
+            
+            .toast-content i {
+                font-size: 18px;
+                margin-right: 10px;
+            }
+            
+            .auth-toast-success .toast-content i {
+                color: #28a745;
+            }
+            
+            .auth-toast-error .toast-content i {
+                color: #dc3545;
+            }
+            
+            .auth-toast-warning .toast-content i {
+                color: #ffc107;
+            }
+            
+            .auth-toast-info .toast-content i {
+                color: #17a2b8;
+            }
+            
+            .toast-content span {
+                flex: 1;
+                font-size: 14px;
+                color: #333;
+            }
+        `;
+        document.head.appendChild(toastStyle);
+    });
+</script>
+{% endblock %}

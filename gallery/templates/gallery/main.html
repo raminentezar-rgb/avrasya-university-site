@@ -1,0 +1,592 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Fotoğraf Galerisi | Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="gallery-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="gallery-hero-content">
+                    <h1> Avrasya Fotoğraf Galerisi</h1>
+                    <p>Avrasya Üniversitesi'nin anılarını, etkinliklerini ve kampüs yaşamını keşfedin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="gallery-categories">
+    <div class="container">
+        <div class="section-title">
+            <h1>Galeri Kategorileri</h1>
+            <p class="section-subtitle">Keşfetmek istediğiniz kategoriyi seçin</p>
+        </div>
+
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="category-card">
+                    <a href="{{ category.get_absolute_url }}" class="category-link">
+                        <div class="category-image">
+                            {% if category.cover_image %}
+                                <img src="{{ category.cover_image.url }}" alt="{{ category.name }}" loading="lazy">
+                            {% else %}
+                                <div class="category-placeholder">
+                                    <i class="fas fa-images"></i>
+                                </div>
+                            {% endif %}
+                            <div class="category-overlay">
+                                <span class="view-category">Galeriyi Görüntüle</span>
+                            </div>
+                        </div>
+                        <div class="category-info">
+                            <h3>{{ category.name }}</h3>
+                            {% if category.description %}
+                                <p>{{ category.description|truncatechars:100 }}</p>
+                            {% endif %}
+                            <span class="image-count">{{ category.images.count }} fotoğraf</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="empty-state">
+                    <i class="fas fa-images"></i>
+                    <h4>Henüz kategori eklenmemiş</h4>
+                    <p>Galeri kategorileri yakında eklenecektir.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Featured Images Section -->
+<section class="featured-images">
+    <div class="container">
+        <div class="section-title">
+            <h1>Son Eklenen Fotoğraflar</h1>
+            <p class="section-subtitle">En güncel görsellerimizden seçkiler</p>
+        </div>
+
+        <div class="row">
+            {% for image in featured_images %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="image-card">
+                    <a href="{% url 'gallery:image_detail' image.id %}" data-lightbox="featured-gallery" data-title="{{ image.title }}">
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}" alt="{{ image.title }}" loading="lazy">
+                            <div class="image-overlay">
+                                <div class="overlay-content">
+                                    <h4>{{ image.title|truncatechars:30 }}</h4>
+                                    <span>{{ image.upload_date|date:"d.m.Y" }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="image-meta">
+                        <span class="category-badge">{{ image.category.name }}</span>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="empty-state">
+                    <i class="fas fa-camera"></i>
+                    <h4>Henüz fotoğraf eklenmemiş</h4>
+                    <p>Fotoğraflar yakında eklenecektir.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="gallery-stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h3><span class="counter" data-count="{{ categories.count }}">0</span></h3>
+                <p>Kategori</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3><span class="counter" data-count="{{ featured_images.count }}">0</span></h3>
+                <p>Fotoğraf</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>{{ featured_images.0.upload_date|date:"Y" }}</h3>
+                <p>Güncel Yıl</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>+1000</h3>
+                <p>Günlük Görüntülenme</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Gallery Hero */
+.gallery-hero {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    padding: 100px 0 60px;
+    margin-top: 150px;
+    color: var(--pure-white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('{% static "core/img/pattern.svg" %}') repeat;
+    opacity: 0.1;
+}
+
+.gallery-hero-content {
+    position: relative;
+    z-index: 1;
+    
+}
+
+.gallery-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--pure-white);
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.gallery-hero p {
+    font-size: 18px;
+    color: var(--accent-light-blue);
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Gallery Categories */
+.gallery-categories {
+    padding: 80px 0;
+    background: var(--pure-white);
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: var(--text-light);
+    margin-top: 10px;
+}
+
+.category-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(29, 97, 169, 0.2);
+}
+
+.category-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.category-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.category-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pure-white);
+}
+
+.category-placeholder i {
+    font-size: 64px;
+    opacity: 0.8;
+}
+
+.category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(9, 36, 66, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.view-category {
+    color: var(--pure-white);
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 2px solid var(--accent-light-blue);
+    border-radius: 4px;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-overlay {
+    opacity: 1;
+}
+
+.category-card:hover .category-image img {
+    transform: scale(1.1);
+}
+
+.category-card:hover .view-category {
+    transform: translateY(0);
+}
+
+.category-info {
+    padding: 25px;
+}
+
+.category-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 10px;
+}
+
+.category-info p {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.image-count {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-light-blue);
+    background: rgba(141, 212, 227, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+/* Featured Images */
+.featured-images {
+    padding: 80px 0;
+    background: var(--neutral-cream);
+}
+
+.image-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.image-card:hover .image-container img {
+    transform: scale(1.1);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(9, 36, 66, 0.9), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+}
+
+.overlay-content {
+    padding: 20px;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.overlay-content h4 {
+    color: var(--pure-white);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.overlay-content span {
+    color: var(--accent-light-blue);
+    font-size: 12px;
+}
+
+.image-card:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-card:hover .overlay-content {
+    transform: translateY(0);
+}
+
+.image-meta {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--secondary-medium-blue);
+    background: rgba(29, 97, 169, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Gallery Stats */
+.gallery-stats {
+    padding: 60px 0;
+    background: var(--pure-white);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 30px;
+    border-radius: 12px;
+    background: var(--neutral-cream);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: var(--pure-white);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--secondary-medium-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.stat-icon i {
+    font-size: 24px;
+    color: var(--pure-white);
+}
+
+.stat-item h3 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    font-size: 14px;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: var(--neutral-cream);
+    margin-bottom: 20px;
+}
+
+.empty-state h4 {
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: var(--text-light);
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .gallery-hero {
+        padding: 80px 0 40px;
+    }
+    
+    .gallery-hero h1 {
+        font-size: 36px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .image-container {
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-categories,
+    .featured-images {
+        padding: 60px 0;
+    }
+    
+    .category-image {
+        height: 180px;
+    }
+    
+    .stat-item h3 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 576px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-container {
+        height: 180px;
+    }
+    
+    .gallery-hero h1 {
+        font-size: 28px;
+    }
+    
+    .gallery-hero p {
+        font-size: 16px;
+    }
+}
+
+
+    .section-title h1 {
+        font-weight: 800;
+        font-family: 'Montserrat', sans-serif;
+    }
+</style>
+
+<script>
+// Counter animation
+document.addEventListener('DOMContentLoaded', function() {
+    const counters = document.querySelectorAll('.counter');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16); // 60fps
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 16);
+                
+                observer.unobserve(counter);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => observer.observe(counter));
+});
+
+// Initialize Lightbox
+lightbox.option({
+    'resizeDuration': 200,
+    'wrapAround': true,
+    'albumLabel': "Fotoğraf %1 / %2",
+    'fadeDuration': 300
+});
+</script>
+{% endblock %}

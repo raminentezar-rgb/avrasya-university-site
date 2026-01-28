@@ -1,0 +1,10 @@
+<h2>“{{ query }}” için sonuçlar</h2>
+
+{% for item in results %}
+    <div class="qa_answer">
+        <h4>{{ item.question }}</h4>
+        <p>{{ item.answer }}</p>
+    </div>
+{% empty %}
+    <p>Bu soruya ait hazır bir cevap bulunamadı.</p>
+{% endfor %}

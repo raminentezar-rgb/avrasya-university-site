@@ -1,0 +1,50 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}BAP Komisyonu - Avrasya University{% endblock %}
+
+{% block content %}
+<section class="research-hero" style="background: linear-gradient(135deg, #8dd4e3 0%, #1d61a9 100%); padding: 100px 0 60px;">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>BAP Komisyonu</h1>
+            <p>Bilimsel Araştırma Projeleri Komisyonu</p>
+        </div>
+    </div>
+</section>
+
+<section class="research-section">
+    <div class="container">
+        <div class="sidebar-layout">
+            <!-- سایدبار در سمت چپ -->
+            <div class="sidebar-left">
+                {% include 'arastirma/includes/bap_sidebar.html' %}
+            </div>
+            
+            <!-- محتوای اصلی در سمت راست -->
+            <div class="content-right">
+                <div class="research-card">
+                    <h3>BAP Komisyonu Hakkında</h3>
+                    <p>Bilimsel Araştırma Projeleri (BAP) Komisyonu, üniversitemizde yürütülen araştırma projelerinin değerlendirilmesi, desteklenmesi ve yönlendirilmesinden sorumludur.</p>
+                    
+                    <h5 class="mt-4">Komisyon Üyeleri</h5>
+                    <ul>
+                        <li>Prof. Dr. Ahmet Yılmaz - Başkan</li>
+                        <li>Doç. Dr. Mehmet Kaya - Üye</li>
+                        <li>Dr. Zeynep Şahin - Üye</li>
+                        <li>Prof. Dr. Can Demir - Üye</li>
+                    </ul>
+                    
+                    <h5 class="mt-4">Görevleri</h5>
+                    <ul>
+                        <li>Proje başvurularını değerlendirmek</li>
+                        <li>Proje bütçelerini onaylamak</li>
+                        <li>Proje ilerlemelerini izlemek</li>
+                        <li>Final raporlarını değerlendirmek</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

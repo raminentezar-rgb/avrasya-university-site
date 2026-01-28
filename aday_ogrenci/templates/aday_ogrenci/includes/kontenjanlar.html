@@ -1,0 +1,1028 @@
+{% extends 'aday_ogrenci/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Avrasya Üniversitesi - 2025 YKS KONTENJANLARI{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>2025 YKS KONTENJAN ve ÖZEL KOŞULLAR</h1>
+            <p>T.C. AVRASYA ÜNİVERSİTESİ 2025 YKS Kontenjanları ve Bakınız Koşulları</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'aday_ogrenci/aday_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی سمت راست -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- اطلاعات کلیدی -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="summary-card">
+                            <h3 class="summary-title">📊 Kontenjan Özeti</h3>
+                            <div class="row summary-stats">
+                                <div class="col-md-4 mb-3">
+                                    <div class="stat-card stat-primary">
+                                        <div class="stat-number">2,467</div>
+                                        <div class="stat-label">Genel Kontenjan</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="stat-card stat-secondary">
+                                        <div class="stat-number">57</div>
+                                        <div class="stat-label">Şehit/Gazi Yakını</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="stat-card stat-warning">
+                                        <div class="stat-number">59</div>
+                                        <div class="stat-label">Depremzede Kontenjanı</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فیلترها -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="filter-section">
+                            <h5 class="filter-title mb-3">🔍 Kontenjanları Filtrele</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="facultyFilter">
+                                        <option value="all">Fakülte/Yüksekokul (Tümü)</option>
+                                        <option value="FEN-EDEBİYAT FAKÜLTESİ">Fen-Edebiyat Fakültesi</option>
+                                        <option value="İKTİSADİ VE İDARİ BİLİMLER FAKÜLTESİ">İktisadi ve İdari Bilimler Fakültesi</option>
+                                        <option value="İLETİŞİM FAKÜLTESİ">İletişim Fakültesi</option>
+                                        <option value="MÜHENDİSLİK VE MİMARLIK FAKÜLTESİ">Mühendislik ve Mimarlık Fakültesi</option>
+                                        <option value="SAĞLIK BİLİMLERİ FAKÜLTESİ">Sağlık Bilimleri Fakültesi</option>
+                                        <option value="SPOR BİLİMLERİ FAKÜLTESİ">Spor Bilimleri Fakültesi</option>
+                                        <option value="UYGULAMALI BİLİMLER YÜKSEKOKULU">Uygulamalı Bilimler Yüksekokulu</option>
+                                        <option value="MESLEK YÜKSEKOKULU">Meslek Yüksekokulu</option>
+                                        <option value="SAĞLIK HİZMETLERİ MESLEK YÜKSEKOKULU">Sağlık Hizmetleri Meslek Yüksekokulu</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="scoreTypeFilter">
+                                        <option value="all">Puan Türü (Tümü)</option>
+                                        <option value="SAY">SAY</option>
+                                        <option value="EA">EA</option>
+                                        <option value="SÖZ">SÖZ</option>
+                                        <option value="DİL">DİL</option>
+                                        <option value="TYT">TYT</option>
+                                        <option value="ÖZYES">ÖZYES</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="programTypeFilter">
+                                        <option value="all">Program Türü (Tümü)</option>
+                                        <option value="BURSLU">Burslu</option>
+                                        <option value="ÜCRETLİ">Ücretli</option>
+                                        <option value="İNDİRİMLİ">%50 İndirimli</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول Kontenjanlar -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-card">
+                            <div class="table-header">
+                                <h4 class="table-title">📋 2025 YKS Kontenjan Listesi</h4>
+                                <p class="table-subtitle">T.C. Avrasya Üniversitesi tüm program kontenjanları</p>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table kontenjan-table" id="kontenjanTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="25%">Fakülte/Yüksekokul</th>
+                                            <th width="35%">Program Adı</th>
+                                            <th width="10%">Puan Türü</th>
+                                            <th width="8%">Genel</th>
+                                            <th width="8%">Şehit/Gazi</th>
+                                            <th width="8%">Deprem</th>
+                                            <th width="6%">Detay</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Fen-Edebiyat Fakültesi -->
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="DİL" data-type="BURSLU">
+                                            <td><strong>FEN-EDEBİYAT FAKÜLTESİ</strong></td>
+                                            <td>İNGİLİZ DİLİ VE EDEBİYATI PR. (BURSLU)</td>
+                                            <td><span class="badge badge-dil">DİL</span></td>
+                                            <td><strong>7</strong></td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td><button class="btn-detail" data-program="ingiliz-dili-1">👁️</button></td>
+                                        </tr>
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="DİL" data-type="ÜCRETLİ">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>İNGİLİZ DİLİ VE EDEBİYATI PR. (ÜCRETLİ)</td>
+                                            <td><span class="badge badge-dil">DİL</span></td>
+                                            <td><strong>25</strong></td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td><button class="btn-detail" data-program="ingiliz-dili-2">👁️</button></td>
+                                        </tr>
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="DİL" data-type="İNDİRİMLİ">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>İNGİLİZ DİLİ VE EDEBİYATI PR. (%50 İNDİRİMLİ)</td>
+                                            <td><span class="badge badge-dil">DİL</span></td>
+                                            <td><strong>17</strong></td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td><button class="btn-detail" data-program="ingiliz-dili-3">👁️</button></td>
+                                        </tr>
+                                        
+                                        <!-- İngilizce Mütercim ve Tercümanlık -->
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="DİL" data-type="BURSLU">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>İNGİLİZCE MÜTERCİM VE TERCÜMANLIK PR. (BURSLU)</td>
+                                            <td><span class="badge badge-dil">DİL</span></td>
+                                            <td><strong>7</strong></td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td><button class="btn-detail" data-program="mütercim-1">👁️</button></td>
+                                        </tr>
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="DİL" data-type="ÜCRETLİ">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>İNGİLİZCE MÜTERCİM VE TERCÜMANLIK PR. (ÜCRETLİ)</td>
+                                            <td><span class="badge badge-dil">DİL</span></td>
+                                            <td><strong>25</strong></td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td><button class="btn-detail" data-program="mütercim-2">👁️</button></td>
+                                        </tr>
+                                        
+                                        <!-- Moleküler Biyoloji ve Genetik -->
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="SAY" data-type="BURSLU">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>MOLEKÜLER BİYOLOJİ VE GENETİK PR. (İNGİLİZCE) (BURSLU)</td>
+                                            <td><span class="badge badge-say">SAY</span></td>
+                                            <td><strong>3</strong></td>
+                                            <td>1</td>
+                                            <td>-</td>
+                                            <td><button class="btn-detail" data-program="molekuler-1">👁️</button></td>
+                                        </tr>
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="SAY" data-type="ÜCRETLİ">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>MOLEKÜLER BİYOLOJİ VE GENETİK PR. (İNGİLİZCE) (ÜCRETLİ)</td>
+                                            <td><span class="badge badge-say">SAY</span></td>
+                                            <td><strong>10</strong></td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td><button class="btn-detail" data-program="molekuler-2">👁️</button></td>
+                                        </tr>
+                                        
+                                        <!-- Psikoloji -->
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="EA" data-type="BURSLU">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>PSİKOLOJİ PR. (BURSLU)</td>
+                                            <td><span class="badge badge-ea">EA</span></td>
+                                            <td><strong>9</strong></td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td><button class="btn-detail" data-program="psikoloji-1">👁️</button></td>
+                                        </tr>
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="EA" data-type="ÜCRETLİ">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>PSİKOLOJİ PR. (ÜCRETLİ)</td>
+                                            <td><span class="badge badge-ea">EA</span></td>
+                                            <td><strong>55</strong></td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td><button class="btn-detail" data-program="psikoloji-2">👁️</button></td>
+                                        </tr>
+                                        
+                                        <!-- Türk Dili ve Edebiyatı -->
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="SÖZ" data-type="BURSLU">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>TÜRK DİLİ VE EDEBİYATI PR. (BURSLU)</td>
+                                            <td><span class="badge badge-soz">SÖZ</span></td>
+                                            <td><strong>3</strong></td>
+                                            <td>1</td>
+                                            <td>-</td>
+                                            <td><button class="btn-detail" data-program="turk-dili-1">👁️</button></td>
+                                        </tr>
+                                        <tr data-faculty="FEN-EDEBİYAT FAKÜLTESİ" data-score="SÖZ" data-type="ÜCRETLİ">
+                                            <td>FEN-EDEBİYAT FAKÜLTESİ</td>
+                                            <td>TÜRK DİLİ VE EDEBİYATI PR. (ÜCRETLİ)</td>
+                                            <td><span class="badge badge-soz">SÖZ</span></td>
+                                            <td><strong>12</strong></td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td><button class="btn-detail" data-program="turk-dili-2">👁️</button></td>
+                                        </tr>
+                                        
+                                        <!-- İktisadi ve İdari Bilimler Fakültesi -->
+                                        <tr data-faculty="İKTİSADİ VE İDARİ BİLİMLER FAKÜLTESİ" data-score="EA" data-type="BURSLU">
+                                            <td><strong>İKTİSADİ VE İDARİ BİLİMLER FAKÜLTESİ</strong></td>
+                                            <td>İŞLETME PR. (İNGİLİZCE) (BURSLU)</td>
+                                            <td><span class="badge badge-ea">EA</span></td>
+                                            <td><strong>5</strong></td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td><button class="btn-detail" data-program="isletme-1">👁️</button></td>
+                                        </tr>
+                                        
+                                        <!-- Sağlık Bilimleri Fakültesi -->
+                                        <tr data-faculty="SAĞLIK BİLİMLERİ FAKÜLTESİ" data-score="SAY" data-type="BURSLU">
+                                            <td><strong>SAĞLIK BİLİMLERİ FAKÜLTESİ</strong></td>
+                                            <td>HEMŞİRELİK PR. (BURSLU)</td>
+                                            <td><span class="badge badge-say">SAY</span></td>
+                                            <td><strong>8</strong></td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td><button class="btn-detail" data-program="hemsirelik-1">👁️</button></td>
+                                        </tr>
+                                        
+                                        <!-- Meslek Yüksekokulu -->
+                                        <tr data-faculty="MESLEK YÜKSEKOKULU" data-score="TYT" data-type="BURSLU">
+                                            <td><strong>MESLEK YÜKSEKOKULU</strong></td>
+                                            <td>BİLGİSAYAR PROGRAMCILIĞI PR. (BURSLU)</td>
+                                            <td><span class="badge badge-tyt">TYT</span></td>
+                                            <td><strong>8</strong></td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td><button class="btn-detail" data-program="bilgisayar-1">👁️</button></td>
+                                        </tr>
+                                        
+                                        <!-- Daha fazla satır buraya eklenebilir -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="table-footer">
+                                <div class="alert alert-info mb-0">
+                                    <strong>📌 Not:</strong> Tablo toplam 2,467 genel kontenjan, 57 şehit/gazi yakını kontenjanı ve 59 depremzede kontenjanını göstermektedir. "Detay" butonuna tıklayarak program özel koşullarını görüntüleyebilirsiniz.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Özel Koşullar ve Açıklamalar -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="conditions-card">
+                            <div class="conditions-header">
+                                <h4 class="conditions-title">📝 Bakınız Kodları ve Özel Koşullar</h4>
+                            </div>
+                            <div class="conditions-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="code-list">
+                                            <h5>Bakınız Kodları:</h5>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="code-item">
+                                                        <span class="code-number">1</span>
+                                                        <span class="code-desc">Mesleki program lise şartı</span>
+                                                    </div>
+                                                    <div class="code-item">
+                                                        <span class="code-number">10</span>
+                                                        <span class="code-desc">Fiziksel şartlar (Sivil Havacılık)</span>
+                                                    </div>
+                                                    <div class="code-item">
+                                                        <span class="code-number">18</span>
+                                                        <span class="code-desc">Vakıf üniversitesi ücret bilgisi</span>
+                                                    </div>
+                                                    <div class="code-item">
+                                                        <span class="code-number">21</span>
+                                                        <span class="code-desc">Zorunlu hazırlık sınıfı</span>
+                                                    </div>
+                                                    <div class="code-item">
+                                                        <span class="code-number">22</span>
+                                                        <span class="code-desc">Yalnız kız öğrenci kabulü</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="code-item">
+                                                        <span class="code-number">23</span>
+                                                        <span class="code-desc">Öğretim dili İngilizce</span>
+                                                    </div>
+                                                    <div class="code-item">
+                                                        <span class="code-number">24</span>
+                                                        <span class="code-desc">Hazırlık başarı koşulu</span>
+                                                    </div>
+                                                    <div class="code-item">
+                                                        <span class="code-number">31</span>
+                                                        <span class="code-desc">Ebelik özel şartları</span>
+                                                    </div>
+                                                    <div class="code-item">
+                                                        <span class="code-number">64</span>
+                                                        <span class="code-desc">Başarı sıralaması şartı</span>
+                                                    </div>
+                                                    <div class="code-item">
+                                                        <span class="code-number">143</span>
+                                                        <span class="code-desc">Mimarlık 250.000 sıralama</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="important-notes">
+                                            <h5>⚠️ Önemli Uyarılar:</h5>
+                                            <div class="note-item">
+                                                <h6>Mimarlık Programları:</h6>
+                                                <p>250.000 başarı sırası şartı: Bu şartı sağlamayan adaylar yerleştirilmeyecektir.</p>
+                                            </div>
+                                            <div class="note-item">
+                                                <h6>Mühendislik Programları:</h6>
+                                                <p>300.000 başarı sırası şartı: Bu şartı sağlamayan adaylar yerleştirilmeyecektir.</p>
+                                            </div>
+                                            <div class="note-item">
+                                                <h6>Özel Yetenek Programları:</h6>
+                                                <p>Antrenörlük Eğitimi, Egzersiz ve Spor Bilimleri, Rekreasyon programları için özel yetenek sınavı gerekmektedir.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF İndirme Bölümü -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-12">
+                        <div class="download-card">
+                            <div class="download-content">
+                                <div class="download-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="download-text">
+                                    <h4>Resmi Kontenjan Belgesini İndir</h4>
+                                    <p>Tüm kontenjan ve özel koşulları içeren resmi PDF belgesini indirebilirsiniz.</p>
+                                    <div class="download-info">
+                                        <span><i class="fas fa-file-alt"></i> 2025-YKS-kontenjanlari-01.08.2025-.pdf</span>
+                                        <span><i class="fas fa-hdd"></i> 500KB</span>
+                                        <span><i class="fas fa-calendar-alt"></i> 01.08.2025</span>
+                                    </div>
+                                </div>
+                                <div class="download-btn-wrapper">
+                                    <a href="{% static 'docs/2025-YKS-kontenjanlari-01.08.2025-.pdf' %}" class="btn btn-download" download>
+                                        <i class="fas fa-download"></i> PDF'yi İndir
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* Özet Kartı */
+.summary-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 25px;
+    border-left: 5px solid var(--secondary-medium-blue);
+}
+
+.summary-title {
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-size: 1.4rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.summary-stats {
+    margin-top: 15px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-primary .stat-number {
+    color: var(--secondary-medium-blue);
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.stat-secondary .stat-number {
+    color: #198754;
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.stat-warning .stat-number {
+    color: #fd7e14;
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.stat-label {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 5px;
+    font-family: 'Metropolis', sans-serif;
+}
+
+/* Filtre Bölümü */
+.filter-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.filter-title {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.filter-select {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    font-family: 'Metropolis', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 0.25rem rgba(29, 97, 169, 0.25);
+}
+
+/* Tablo Kartı */
+.table-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.table-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    padding: 25px;
+    color: white;
+}
+
+.table-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.table-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.kontenjan-table {
+    margin: 0;
+    font-size: 0.95rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.kontenjan-table thead th {
+    background: #f8f9fa;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    padding: 15px 12px;
+    border-bottom: 2px solid var(--secondary-medium-blue);
+}
+
+.kontenjan-table tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    border-color: #e9ecef;
+}
+
+.kontenjan-table tbody tr:hover {
+    background-color: rgba(141, 212, 227, 0.1);
+}
+
+.kontenjan-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Badge stilleri */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    font-family: 'Metropolis', sans-serif;
+    display: inline-block;
+    min-width: 50px;
+    text-align: center;
+}
+
+.badge-say {
+    background-color: #dc3545;
+    color: white;
+}
+
+.badge-ea {
+    background-color: #198754;
+    color: white;
+}
+
+.badge-soz {
+    background-color: #6f42c1;
+    color: white;
+}
+
+.badge-dil {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.badge-tyt {
+    background-color: #0dcaf0;
+    color: white;
+}
+
+.badge-özyes {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+/* Detay butonu */
+.btn-detail {
+    background: transparent;
+    border: 1px solid var(--secondary-medium-blue);
+    color: var(--secondary-medium-blue);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-detail:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+}
+
+.table-footer {
+    padding: 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Koşullar Kartı */
+.conditions-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    overflow: hidden;
+}
+
+.conditions-header {
+    background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+    padding: 20px 25px;
+    color: white;
+}
+
+.conditions-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.conditions-body {
+    padding: 30px;
+}
+
+.code-list h5,
+.important-notes h5 {
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.code-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.code-number {
+    background: var(--secondary-medium-blue);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.code-desc {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.note-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff8e1;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+}
+
+.note-item h6 {
+    color: #d4a017;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 8px;
+}
+
+.note-item p {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 0;
+}
+
+/* İndirme Kartı */
+.download-card {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+}
+
+.download-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.download-icon {
+    font-size: 3rem;
+    font-family: 'Metropolis', sans-serif;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.download-text {
+    flex: 1;
+}
+
+.download-text h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.download-text p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+}
+
+.download-info {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    font-family: 'Metropolis', sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.download-info span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-download {
+    background: white;
+    color: var(--primary-dark-blue);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: 'Metropolis', sans-serif;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background: #f8f9fa;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    color: var(--primary-dark-blue);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .main-container {
+        padding: 15px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .download-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .download-info {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+    }
+    
+    .content-wrapper {
+        margin-top: 0;
+    }
+    
+    .conditions-body .row {
+        flex-direction: column;
+    }
+    
+    .conditions-body .col-lg-6 {
+        margin-bottom: 30px;
+    }
+    
+    .conditions-body .col-lg-6:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .table-header {
+        padding: 20px;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+        font-family: 'Metropolis', sans-serif;
+    }
+    
+    .kontenjan-table thead th,
+    .kontenjan-table tbody td {
+        padding: 10px 8px;
+    }
+    
+    .summary-title {
+        font-size: 1.2rem;
+        font-family: 'Metropolis', sans-serif;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem !important;
+        font-family: 'Metropolis', sans-serif;
+    }
+    
+    .filter-section {
+        padding: 20px;
+    }
+    
+    .conditions-header {
+        padding: 15px 20px;
+    }
+    
+    .conditions-body {
+        padding: 20px;
+    }
+    
+    .download-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 15px;
+    }
+    
+    .summary-card {
+        padding: 20px;
+    }
+    
+    .table-header {
+        padding: 15px;
+    }
+    
+    .kontenjan-table {
+        font-size: 0.8rem;
+        font-family: 'Metropolis', sans-serif;
+    }
+    
+    .btn-download {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        font-family: 'Metropolis', sans-serif;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Tablo filtreleme fonksiyonu
+    function filterTable() {
+        const facultyValue = document.getElementById('facultyFilter').value;
+        const scoreValue = document.getElementById('scoreTypeFilter').value;
+        const typeValue = document.getElementById('programTypeFilter').value;
+        
+        const rows = document.querySelectorAll('#kontenjanTable tbody tr');
+        let visibleCount = 0;
+        
+        rows.forEach(row => {
+            const faculty = row.getAttribute('data-faculty');
+            const score = row.getAttribute('data-score');
+            const type = row.getAttribute('data-type');
+            
+            let showRow = true;
+            
+            if (facultyValue !== 'all' && faculty !== facultyValue) {
+                showRow = false;
+            }
+            
+            if (scoreValue !== 'all' && score !== scoreValue) {
+                showRow = false;
+            }
+            
+            if (typeValue !== 'all' && type !== typeValue) {
+                showRow = false;
+            }
+            
+            if (showRow) {
+                row.style.display = '';
+                visibleCount++;
+                // Fakülte başlıklarını güncelle
+                if (row.querySelector('td strong')) {
+                    row.style.borderTop = '2px solid var(--secondary-medium-blue)';
+                }
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        // Eğer hiç satır görünmüyorsa mesaj göster
+        const tableBody = document.querySelector('#kontenjanTable tbody');
+        let noResultsRow = tableBody.querySelector('.no-results');
+        
+        if (visibleCount === 0) {
+            if (!noResultsRow) {
+                noResultsRow = document.createElement('tr');
+                noResultsRow.className = 'no-results';
+                noResultsRow.innerHTML = `
+                    <td colspan="7" class="text-center py-4">
+                        <i class="fas fa-search me-2"></i>
+                        Seçtiğiniz kriterlere uygun program bulunamadı.
+                    </td>
+                `;
+                tableBody.appendChild(noResultsRow);
+            }
+        } else if (noResultsRow) {
+            noResultsRow.remove();
+        }
+    }
+    
+    // Filtre değişikliklerini dinle
+    document.querySelectorAll('.filter-select').forEach(select => {
+        select.addEventListener('change', filterTable);
+    });
+    
+    // Detay butonlarına tıklama
+    document.querySelectorAll('.btn-detail').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const programId = this.getAttribute('data-program');
+            alert(`Program detayları görüntülenecek: ${programId}\n\nBu özellik geliştirme aşamasındadır.`);
+        });
+    });
+    
+    // PDF indirme butonuna animasyon ekle
+    const downloadBtn = document.querySelector('.btn-download');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> İndiriliyor...';
+            this.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> İndirildi!';
+                this.style.background = '#198754';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.opacity = '1';
+                    this.style.background = 'white';
+                }, 2000);
+            }, 1000);
+        });
+    }
+    
+    // Başlangıçta tabloyu filtrele
+    filterTable();
+    
+    // Tablo satırlarına hover efekti
+    const tableRows = document.querySelectorAll('.kontenjan-table tbody tr');
+    tableRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'rgba(141, 212, 227, 0.15)';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            const isEven = Array.from(tableRows).indexOf(this) % 2 === 1;
+            this.style.backgroundColor = isEven ? '#f8f9fa' : 'white';
+        });
+    });
+});
+</script>
+{% endblock %}

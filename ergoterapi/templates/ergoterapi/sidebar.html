@@ -1,0 +1,348 @@
+<!-- Sidebar Menu -->
+<div class="col-lg-12 mb-4">
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <a href="{% url 'ergoterapi:ergoterapi' %}" class="text-white text-decoration-none">
+                <h5 class="mb-0"><i class="bi bi-heart-pulse"></i> Ergoterapi Bölümü </h5>
+            </a>
+        </div>
+        <div class="card-body p-0">
+            <div class="list-group list-group-flush" id="facultyMenu">
+                <!-- Genel Bilgiler -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#genelBilgilerCollapse">
+                        <span><i class="bi bi-info-circle me-2"></i>Genel Bilgiler</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="genelBilgilerCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'ergoterapi:tarihce' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-clock-history me-2"></i>Tarihçe
+                            </a>
+                            <a href="{% url 'ergoterapi:misyon_visyon' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-bullseye me-2"></i>Misyon & Vizyon
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kalite Yönetimi -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#kaliteYonetimiCollapse">
+                        <span><i class="bi bi-award me-2"></i>Kalite Yönetimi</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="kaliteYonetimiCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'ergoterapi:akreditasyon_belgesi' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-file-earmark-check me-2"></i>MÜDEK Akreditasyon Belgesi
+                            </a>
+                            <a href="{% url 'ergoterapi:komisyon_sorumlular' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-people me-2"></i>Komisyon/Sorumlular
+                            </a>
+                            <a href="{% url 'ergoterapi:program_ogretim_amaclari' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-target me-2"></i>Program Öğretim Amaçları
+                            </a>
+                            <a href="{% url 'ergoterapi:program_ogrenim_ciktilari' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-list-check me-2"></i>Program Öğrenim Çıktıları
+                            </a>
+                            <a href="{% url 'ergoterapi:anketler' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-clipboard-data me-2"></i>Anketler
+                            </a>
+                            <a href="{% url 'ergoterapi:ders_plani' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-journal-text me-2"></i>Ders Planı
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yönetimi -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#yonetimCollapse">
+                        <span><i class="bi bi-person-gear me-2"></i>Yönetimi</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="yonetimCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'ergoterapi:yonetimi' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-diagram-3 me-2"></i>Bölüm Yönetim
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laboratuvarlar -->
+                {% comment %} <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#laboratuvarlarCollapse">
+                        <span><i class="bi bi-gear me-2"></i>Laboratuvarlar</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="laboratuvarlarCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'elektrik_elektronik:elektrik_laboratuvari' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-lightning-charge me-2"></i>Elektrik Laboratuvarı
+                            </a>
+                            <a href="{% url 'elektrik_elektronik:elektronik_laboratuvari' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-cpu me-2"></i>Elektronik Laboratuvarı
+                            </a>
+                            <a href="{% url 'elektrik_elektronik:kontrol_laboratuvari' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-gear me-2"></i>Kontrol Laboratuvarı
+                            </a>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+
+                <!-- İdari Faaliyetler -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#idariFaaliyetlerCollapse">
+                        <span><i class="bi bi-briefcase me-2"></i>İdari Faaliyetler</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="idariFaaliyetlerCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'ergoterapi:idari_faaliyetler_2024_2025' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-calendar-check me-2"></i>İdari Faaliyetler (2024-2025)
+                            </a>
+                            <a href="{% url 'ergoterapi:idari_faaliyetler_2023_2024' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-calendar-week me-2"></i>İdari Faaliyetler (2023-2024)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diğer Faaliyetler -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#digerFaaliyetlerCollapse">
+                        <span><i class="bi bi-activity me-2"></i>Diğer Faaliyetler</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="digerFaaliyetlerCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'ergoterapi:diger_faaliyetler_2024_2025' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-graph-up me-2"></i>Diğer Faaliyetler (2024-2025)
+                            </a>
+                            <a href="{% url 'ergoterapi:diger_faaliyetler_2023_2024' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-graph-down me-2"></i>Diğer Faaliyetler (2023-2024)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Öğrenci -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#ogrenciCollapse">
+                        <span><i class="bi bi-mortarboard me-2"></i>Öğrenci</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="ogrenciCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'ergoterapi:ogrenci_isleri' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-person-lines-fill me-2"></i>Öğrenci İşleri
+                            </a>
+                            <a href="{% url 'ergoterapi:cift_anadal' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-layers me-2"></i>Çift Anadal ve Yandal Protokolleri
+                            </a>
+                            <a href="{% url 'ergoterapi:erasmus' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-globe me-2"></i>ERASMUS+ İkili Anlaşmalar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diğer Menüler -->
+                <a href="{% url 'ergoterapi:liste' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-megaphone me-2"></i>Duyurular</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'ergoterapi:etkinlik_listesi' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-calendar-event me-2"></i>Etkinlikler</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'ergoterapi:ders_programi' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-calendar-week me-2"></i>Ders Programı</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'ergoterapi:iletisim' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-telephone me-2"></i>İletişim</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx" 
+                   class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center"
+                   target="_blank">
+                    <span><i class="bi bi-file-text me-2"></i>Bologna</span>
+                    <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی برای صفحه تاریخچه */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #2c3e50, #3498db);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 0 4px white, 0 0 0 6px #3498db;
+}
+
+.timeline-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #3498db;
+}
+
+.timeline-content h5 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content .year {
+    color: #3498db;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* استایل‌های کارت‌ها */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+/* استایل‌های دکمه‌ها */
+.btn-primary {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    border: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+/* استایل‌های آیکون‌ها */
+.icon-lg {
+    font-size: 3rem;
+}
+
+.icon-md {
+    font-size: 2rem;
+}
+
+/* استایل‌های لیست‌ها */
+.list-group-item {
+    transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #fd7e14;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 15px;
+    }
+    
+    .timeline-marker {
+        left: -1.5rem;
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .timeline {
+        padding-left: 1.5rem;
+    }
+}
+</style>

@@ -1,0 +1,1455 @@
+{% extends 'kutuphane/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Hızlı Bağlantılar{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Hızlı Bağlantılar</h1>
+            <p>Kitap kataloğu, araştırma araçları ve engelsiz kütüphane hizmetlerine hızlı erişim</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'kutuphane/kutuphane_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- بخش اول: کاتالوگ و تحقیقات -->
+                <div class="link-section">
+                    <div class="section-header">
+                        <div class="section-title-container">
+                            <h2 class="section-title">
+                                <i class="fas fa-search"></i>
+                                Araştırma ve Katalog Bağlantıları
+                            </h2>
+                            <p class="section-subtitle">Üniversitemizin kütüphane kataloğu ve araştırma araçlarına doğrudan erişim sağlayın</p>
+                        </div>
+                        <div class="section-decoration">
+                            <div class="decoration-line"></div>
+                            {% comment %} <div class="decoration-dot"></div>
+                            <div class="decoration-line"></div> {% endcomment %}
+                        </div>
+                    </div>
+                    
+                    <!-- تب‌های بخش اول -->
+                    <div class="link-tabs-container">
+                        <div class="link-tabs-nav">
+                            <div class="link-tabs-nav-inner">
+                                <button class="link-tab-btn active" data-tab="catalog-tab">
+                                    <i class="fas fa-book"></i>
+                                    <span>Katalog</span>
+                                </button>
+                                <button class="link-tab-btn" data-tab="discovery-tab">
+                                    <i class="fas fa-search-plus"></i>
+                                    <span>ULAKBİM Keşif</span>
+                                </button>
+                                <button class="link-tab-btn" data-tab="tuik-tab">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>TÜİK Veri Portalı</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="link-tabs-content">
+                            <!-- تب کاتالوگ -->
+                            <div class="link-tab-pane active" id="catalog-tab">
+                                <div class="tab-content-header">
+                                    <div class="tab-header-text">
+                                        <h3>
+                                            <i class="fas fa-book-open"></i>
+                                            Avrasya Üniversitesi Kütüphane Kataloğu
+                                        </h3>
+                                        <p>Üniversitemiz kütüphanesindeki tüm materyallere erişim sağlayın</p>
+                                    </div>
+                                    <div class="tab-header-actions">
+                                        <a href="https://katalog.avrasya.edu.tr/yordam/" target="_blank" class="primary-link-btn">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            Siteye Git
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content-body">
+                                    <div class="info-cards-grid">
+                                        <div class="info-card">
+                                            <div class="info-card-icon">
+                                                <i class="fas fa-book"></i>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <h4>Kitap Arama</h4>
+                                                <p>Fiziksel ve elektronik kitapları katalogda arayın</p>
+                                            </div>
+                                        </div>
+                                        <div class="info-card">
+                                            <div class="info-card-icon">
+                                                <i class="fas fa-newspaper"></i>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <h4>Dergi Erişimi</h4>
+                                                <p>Akademik dergilere online erişim sağlayın</p>
+                                            </div>
+                                        </div>
+                                        <div class="info-card">
+                                            <div class="info-card-icon">
+                                                <i class="fas fa-file-alt"></i>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <h4>Tez Koleksiyonu</h4>
+                                                <p>Lisansüstü tezlere dijital erişim</p>
+                                            </div>
+                                        </div>
+                                        <div class="info-card">
+                                            <div class="info-card-icon">
+                                                <i class="fas fa-user-clock"></i>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <h4>Rezervasyon</h4>
+                                                <p>Kitapları online rezerve edin</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- تب ULAKBİM -->
+                            <div class="link-tab-pane" id="discovery-tab">
+                                <div class="tab-content-header">
+                                    <div class="tab-header-text">
+                                        <h3>
+                                            <i class="fas fa-database"></i>
+                                            ULAKBİM Keşif Servisi
+                                        </h3>
+                                        <p>Türkiye'deki akademik kaynaklara entegre erişim platformu</p>
+                                    </div>
+                                    <div class="tab-header-actions">
+                                        <a href="https://www.ulakbim.gov.tr/yeniweb/ulakkesif/" target="_blank" class="primary-link-btn">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            Siteye Git
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content-body">
+                                    <div class="feature-highlight">
+                                        <div class="feature-highlight-content">
+                                            <h4><i class="fas fa-star"></i> Platform Özellikleri</h4>
+                                            <ul class="feature-list">
+                                                <li><i class="fas fa-check"></i> 50.000+ akademik dergi</li>
+                                                <li><i class="fas fa-check"></i> 30 milyon+ makale ve yayın</li>
+                                                <li><i class="fas fa-check"></i> Türkçe-İngilizce çift dil arama</li>
+                                                <li><i class="fas fa-check"></i> Atıf analizi araçları</li>
+                                            </ul>
+                                        </div>
+                                        <div class="feature-highlight-image">
+                                            <div class="stats-badge">
+                                                <span class="stats-number">30M+</span>
+                                                <span class="stats-label">Makale</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- تب TÜİK -->
+                            <div class="link-tab-pane" id="tuik-tab">
+                                <div class="tab-content-header">
+                                    <div class="tab-header-text">
+                                        <h3>
+                                            <i class="fas fa-chart-line"></i>
+                                            TÜİK Veri Portalı
+                                        </h3>
+                                        <p>Türkiye İstatistik Kurumu'nun resmi veri ve istatistik portalı</p>
+                                    </div>
+                                    <div class="tab-header-actions">
+                                        <a href="https://data.tuik.gov.tr/" target="_blank" class="primary-link-btn">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            Siteye Git
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content-body">
+                                    <div class="data-categories">
+                                        <h4><i class="fas fa-folder-open"></i> Veri Kategorileri</h4>
+                                        <div class="categories-grid">
+                                            <span class="category-tag">Ekonomi</span>
+                                            <span class="category-tag">Nüfus</span>
+                                            <span class="category-tag">Eğitim</span>
+                                            <span class="category-tag">Sağlık</span>
+                                            <span class="category-tag">Tarım</span>
+                                            <span class="category-tag">Sanayi</span>
+                                            <span class="category-tag">İstihdam</span>
+                                            <span class="category-tag">Dış Ticaret</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="download-options">
+                                        <h5><i class="fas fa-download"></i> İndirme Formatları</h5>
+                                        <div class="format-badges">
+                                            <span class="format-badge"><i class="far fa-file-excel"></i> Excel</span>
+                                            <span class="format-badge"><i class="fas fa-file-csv"></i> CSV</span>
+                                            <span class="format-badge"><i class="far fa-file-pdf"></i> PDF</span>
+                                            <span class="format-badge"><i class="fas fa-file-code"></i> XML</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- بخش دوم: Engelsiz Kütüphane -->
+                <div class="link-section accessible-section">
+                    <div class="section-header">
+                        <div class="section-title-container">
+                            <h2 class="section-title">
+                                <i class="fas fa-universal-access"></i>
+                                Engelsiz Kütüphane
+                            </h2>
+                            <p class="section-subtitle">Görme engelli bireyler için özel olarak hazırlanmış sesli kitap ve kütüphane hizmetleri</p>
+                        </div>
+                        <div class="section-decoration">
+                            <div class="decoration-line"></div>
+                            {% comment %} <div class="decoration-dot"></div>
+                            <div class="decoration-line"></div> {% endcomment %}
+                        </div>
+                    </div>
+                    
+                    <!-- تب‌های بخش دوم -->
+                    <div class="link-tabs-container">
+                        <div class="link-tabs-nav">
+                            <div class="link-tabs-nav-inner">
+                                <button class="link-tab-btn active" data-tab="talking-library-tab">
+                                    <i class="fas fa-headphones"></i>
+                                    <span>Konuşan Kitaplık</span>
+                                </button>
+                                <button class="link-tab-btn" data-tab="trt-audio-tab">
+                                    <i class="fas fa-broadcast-tower"></i>
+                                    <span>TRT Sesli Kitap</span>
+                                </button>
+                                <button class="link-tab-btn" data-tab="getem-tab">
+                                    <i class="fas fa-hands-helping"></i>
+                                    <span>GETEM</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="link-tabs-content">
+                            <!-- تب کنواشان کتابخانه -->
+                            <div class="link-tab-pane active" id="talking-library-tab">
+                                <div class="tab-content-header">
+                                    <div class="tab-header-text">
+                                        <h3>
+                                            <i class="fas fa-book-reader"></i>
+                                            Milli Kütüphane Konuşan Kitaplık
+                                        </h3>
+                                        <p>Görme engelliler için hazırlanmış binlerce sesli kitap koleksiyonu</p>
+                                    </div>
+                                    <div class="tab-header-actions">
+                                        <a href="https://konusankitaplik.mkutup.gov.tr/" target="_blank" class="primary-link-btn">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            Siteye Git
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content-body">
+                                    <div class="service-features">
+                                        <div class="feature-card">
+                                            <div class="feature-card-icon accessibility-icon">
+                                                <i class="fas fa-audio-description"></i>
+                                            </div>
+                                            <h4>Tam Erişilebilirlik</h4>
+                                            <p>Ekran okuyucu yazılımlarla tam uyumlu</p>
+                                        </div>
+                                        <div class="feature-card">
+                                            <div class="feature-card-icon accessibility-icon">
+                                                <i class="fas fa-language"></i>
+                                            </div>
+                                            <h4>Çok Dilli İçerik</h4>
+                                            <p>Türkçe ve yabancı dil sesli kitaplar</p>
+                                        </div>
+                                        <div class="feature-card">
+                                            <div class="feature-card-icon accessibility-icon">
+                                                <i class="fas fa-mobile-alt"></i>
+                                            </div>
+                                            <h4>Mobil Uyumlu</h4>
+                                            <p>Tüm cihazlardan erişim imkanı</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="accessibility-notice">
+                                        <i class="fas fa-info-circle"></i>
+                                        <p>Bu platform görme engelli bireylerin kullanımı için özel olarak tasarlanmıştır ve ücretsiz erişim sağlar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- تب TRT -->
+                            <div class="link-tab-pane" id="trt-audio-tab">
+                                <div class="tab-content-header">
+                                    <div class="tab-header-text">
+                                        <h3>
+                                            <i class="fas fa-microphone-alt"></i>
+                                            TRT Dinle - Sesli Kitaplar
+                                        </h3>
+                                        <p>TRT'nin profesyonel seslendirme sanatçıları tarafından seslendirilmiş kitaplar</p>
+                                    </div>
+                                    <div class="tab-header-actions">
+                                        <a href="https://www.trtdinle.com/" target="_blank" class="primary-link-btn">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            Siteye Git
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content-body">
+                                    <div class="audio-player-preview">
+                                        <div class="player-header">
+                                            <h5><i class="fas fa-play-circle"></i> Örnek Dinleme</h5>
+                                            <span class="duration">45:30</span>
+                                        </div>
+                                        <div class="player-controls">
+                                            <button class="player-btn"><i class="fas fa-step-backward"></i></button>
+                                            <button class="player-btn play-btn"><i class="fas fa-play"></i></button>
+                                            <button class="player-btn"><i class="fas fa-step-forward"></i></button>
+                                        </div>
+                                        <div class="player-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 30%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="content-categories">
+                                        <h5><i class="fas fa-tags"></i> İçerik Kategorileri</h5>
+                                        <div class="categories-list">
+                                            <span class="content-category"><i class="fas fa-book"></i> Roman</span>
+                                            <span class="content-category"><i class="fas fa-theater-masks"></i> Tiyatro</span>
+                                            <span class="content-category"><i class="fas fa-history"></i> Tarih</span>
+                                            <span class="content-category"><i class="fas fa-lightbulb"></i> Bilim</span>
+                                            <span class="content-category"><i class="fas fa-child"></i> Çocuk</span>
+                                            <span class="content-category"><i class="fas fa-graduation-cap"></i> Eğitim</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- تب GETEM -->
+                            <div class="link-tab-pane" id="getem-tab">
+                                <div class="tab-content-header">
+                                    <div class="tab-header-text">
+                                        <h3>
+                                            <i class="fas fa-universal-access"></i>
+                                            GETEM - Görme Engelliler Teknoloji ve Eğitim Laboratuvarı
+                                        </h3>
+                                        <p>Boğaziçi Üniversitesi bünyesinde görme engelliler için teknoloji ve eğitim çözümleri</p>
+                                    </div>
+                                    <div class="tab-header-actions">
+                                        <a href="https://getem.boun.edu.tr/" target="_blank" class="primary-link-btn">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            Siteye Git
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content-body">
+                                    <div class="getem-services">
+                                        <h4><i class="fas fa-concierge-bell"></i> GETEM Hizmetleri</h4>
+                                        <div class="services-grid">
+                                            <div class="service-item">
+                                                <i class="fas fa-book-audio"></i>
+                                                <span>Sesli Kitap</span>
+                                            </div>
+                                            <div class="service-item">
+                                                <i class="fas fa-file-audio"></i>
+                                                <span>E-Kitap</span>
+                                            </div>
+                                            <div class="service-item">
+                                                <i class="fas fa-laptop-code"></i>
+                                                <span>Teknoloji Eğitimi</span>
+                                            </div>
+                                            <div class="service-item">
+                                                <i class="fas fa-chalkboard-teacher"></i>
+                                                <span>Eğitim Desteği</span>
+                                            </div>
+                                            <div class="service-item">
+                                                <i class="fas fa-hands"></i>
+                                                <span>Bireysel Danışmanlık</span>
+                                            </div>
+                                            <div class="service-item">
+                                                <i class="fas fa-tools"></i>
+                                                <span>Yazılım Desteği</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="getem-stats">
+                                        <div class="stat-item">
+                                            <span class="stat-number">50.000+</span>
+                                            <span class="stat-label">Sesli Kitap</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-number">10.000+</span>
+                                            <span class="stat-label">Kullanıcı</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-number">100%</span>
+                                            <span class="stat-label">Ücretsiz</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های اصلی و متغیرها */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+    --success-green: #28a745;
+    --warning-yellow: #ffc107;
+    --border-color: rgba(141, 212, 227, 0.3);
+    --shadow-light: 0 5px 20px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --gradient-primary: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    --gradient-accent: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+}
+
+/* استایل‌های کلی */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid var(--border-color);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+}
+
+/* بخش‌های لینک */
+.link-section {
+    margin-bottom: 60px;
+}
+
+.link-section:last-child {
+    margin-bottom: 0;
+}
+
+.accessible-section {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.03), rgba(9, 36, 66, 0.03));
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+/* هدر بخش */
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title-container {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.section-title i {
+    color: var(--secondary-medium-blue);
+    font-size: 1.8rem;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.section-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.decoration-line {
+    width: 80px;
+    height: 3px;
+    background: var(--gradient-accent);
+    border-radius: 2px;
+}
+
+.decoration-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--secondary-medium-blue);
+    border-radius: 50%;
+}
+
+/* تب‌های لینک */
+.link-tabs-container {
+    background: var(--pure-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+}
+
+.link-tabs-nav {
+    background: var(--gradient-primary);
+    padding: 0;
+}
+
+.link-tabs-nav-inner {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.link-tabs-nav-inner::-webkit-scrollbar {
+    display: none;
+}
+
+.link-tab-btn {
+    flex: 1;
+    min-width: 200px;
+    padding: 22px 20px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+.link-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.link-tab-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-bottom: 4px solid var(--accent-light-blue);
+}
+
+.link-tab-btn i {
+    font-size: 1.2rem;
+}
+
+/* محتوای تب‌ها */
+.link-tabs-content {
+    padding: 0;
+}
+
+.link-tab-pane {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.link-tab-pane.active {
+    display: block;
+}
+
+.tab-content-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.04), rgba(29, 97, 169, 0.06));
+    padding: 30px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.tab-header-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.tab-content-header h3 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 10px 0;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tab-content-header h3 i {
+    color: var(--secondary-medium-blue);
+}
+
+.tab-content-header p {
+    color: var(--text-light);
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.tab-header-actions {
+    flex: 0 0 auto;
+}
+
+.primary-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gradient-accent);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(29, 97, 169, 0.25);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.primary-link-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(29, 97, 169, 0.35);
+    color: white;
+    text-decoration: none;
+}
+
+.tab-content-body {
+    padding: 30px;
+}
+
+/* کارت‌های اطلاعات */
+.info-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin: 20px 0;
+}
+
+.info-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--accent-light-blue);
+}
+
+.info-card-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 24px;
+}
+
+.info-card h4 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+}
+
+.info-card p {
+    color: var(--text-light);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* ویژگی‌های برجسته */
+.feature-highlight {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.05));
+    border-radius: 16px;
+    padding: 30px;
+    margin: 20px 0;
+}
+
+.feature-highlight-content {
+    flex: 1;
+}
+
+.feature-highlight h4 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 20px 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.feature-highlight h4 i {
+    color: var(--warning-yellow);
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-list li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-dark);
+}
+
+.feature-list li i {
+    color: var(--success-green);
+}
+
+.feature-highlight-image {
+    flex: 0 0 auto;
+}
+
+.stats-badge {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 30px 25px;
+    border-radius: 16px;
+    text-align: center;
+    min-width: 150px;
+}
+
+.stats-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stats-label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 8px;
+}
+
+/* دسته‌بندی‌ها */
+.data-categories, .content-categories {
+    margin: 30px 0;
+}
+
+.data-categories h4, .content-categories h5 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 20px 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.data-categories h4 i, .content-categories h5 i {
+    color: var(--secondary-medium-blue);
+}
+
+.categories-grid, .categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.category-tag {
+    background: rgba(141, 212, 227, 0.15);
+    color: var(--primary-dark-blue);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: all 0.3s ease;
+}
+
+.category-tag:hover {
+    background: rgba(141, 212, 227, 0.25);
+    transform: translateY(-2px);
+}
+
+/* ویژگی‌های سرویس */
+.service-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.feature-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.feature-card-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 28px;
+}
+
+.accessibility-icon {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+}
+
+.feature-card h4 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+}
+
+.feature-card p {
+    color: var(--text-light);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* پخش کننده صوتی */
+.audio-player-preview {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+}
+
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.player-header h5 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.player-header h5 i {
+    color: var(--secondary-medium-blue);
+}
+
+.duration {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.player-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.3);
+}
+
+.play-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+}
+
+.player-progress {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: rgba(141, 212, 227, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-accent);
+    border-radius: 3px;
+}
+
+.content-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(141, 212, 227, 0.1);
+    color: var(--primary-dark-blue);
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: all 0.3s ease;
+}
+
+.content-category:hover {
+    background: rgba(141, 212, 227, 0.2);
+    transform: translateY(-2px);
+}
+
+.content-category i {
+    color: var(--secondary-medium-blue);
+}
+
+/* خدمات GETEM */
+.getem-services {
+    margin: 30px 0;
+}
+
+.getem-services h4 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 25px 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.getem-services h4 i {
+    color: var(--secondary-medium-blue);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.service-item {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--accent-light-blue);
+}
+
+.service-item i {
+    font-size: 2rem;
+    color: var(--secondary-medium-blue);
+}
+
+.service-item span {
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.getem-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    line-height: 1;
+}
+
+.stat-label {
+    display: block;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-top: 8px;
+}
+
+/* اطلاعیه دسترسی */
+.accessibility-notice {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.1), rgba(9, 36, 66, 0.05));
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    border-left: 4px solid var(--accent-light-blue);
+}
+
+.accessibility-notice i {
+    color: var(--secondary-medium-blue);
+    font-size: 1.5rem;
+    margin-top: 2px;
+}
+
+.accessibility-notice p {
+    margin: 0;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* گزینه‌های دانلود */
+.download-options {
+    margin-top: 30px;
+}
+
+.download-options h5 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 20px 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.download-options h5 i {
+    color: var(--secondary-medium-blue);
+}
+
+.format-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.format-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--pure-white);
+    color: var(--text-dark);
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.format-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--accent-light-blue);
+}
+
+.format-badge i {
+    color: var(--secondary-medium-blue);
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.link-tab-pane {
+    animation: fadeIn 0.4s ease;
+}
+
+.info-card, .feature-card, .service-item {
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.info-card:nth-child(1) { animation-delay: 0.1s; }
+.info-card:nth-child(2) { animation-delay: 0.2s; }
+.info-card:nth-child(3) { animation-delay: 0.3s; }
+.info-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* رسپانسیو */
+@media (max-width: 1200px) {
+    .feature-highlight {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .stats-badge {
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .link-tab-btn {
+        min-width: 180px;
+        padding: 18px 15px;
+        font-size: 1rem;
+    }
+    
+    .tab-content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 25px;
+    }
+    
+    .tab-header-text {
+        min-width: 100%;
+    }
+    
+    .tab-content-body {
+        padding: 25px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .link-section {
+        margin-bottom: 40px;
+    }
+    
+    .accessible-section {
+        padding: 20px;
+    }
+    
+    .link-tab-btn {
+        min-width: 160px;
+        padding: 15px 12px;
+        font-size: 0.95rem;
+    }
+    
+    .link-tab-btn span {
+        display: none;
+    }
+    
+    .link-tab-btn i {
+        font-size: 1.4rem;
+    }
+    
+    .info-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .service-features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .feature-card {
+        padding: 20px;
+    }
+    
+    .categories-grid, .categories-list {
+        justify-content: center;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .tab-content-header {
+        padding: 20px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.3rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .tab-content-body {
+        padding: 20px;
+    }
+    
+    .info-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .primary-link-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .getem-stats {
+        gap: 25px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .link-tab-pane, .info-card, .feature-card, 
+    .service-item, .primary-link-btn, .category-tag,
+    .content-category, .format-badge {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .info-card:hover, .feature-card:hover, .service-item:hover,
+    .primary-link-btn:hover, .category-tag:hover, 
+    .content-category:hover, .format-badge:hover {
+        transform: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت تب‌ها
+    const tabButtons = document.querySelectorAll('.link-tab-btn');
+    const tabPanes = document.querySelectorAll('.link-tab-pane');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // حذف کلاس active از همه تب‌ها
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+            
+            // اضافه کردن کلاس active به تب انتخاب شده
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // انیمیشن‌های هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده عناصر برای انیمیشن
+    const animatedElements = document.querySelectorAll('.info-card, .feature-card, .service-item');
+    animatedElements.forEach(element => {
+        element.style.opacity = '0';
+        observer.observe(element);
+    });
+    
+    // بازخورد کلیک روی لینک
+    const linkButtons = document.querySelectorAll('.primary-link-btn');
+    linkButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // تایید بصری باز شدن لینک
+            const originalHTML = this.innerHTML;
+            const originalBg = this.style.background;
+            
+            this.innerHTML = '<i class="fas fa-check"></i> Yönlendiriliyor...';
+            this.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+            
+            setTimeout(() => {
+                this.innerHTML = originalHTML;
+                this.style.background = originalBg || '';
+            }, 1500);
+        });
+    });
+    
+    // شبیه‌سازی پخش کننده صوتی
+    const playBtn = document.querySelector('.play-btn');
+    if (playBtn) {
+        playBtn.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-play')) {
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                this.classList.add('playing');
+            } else {
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                this.classList.remove('playing');
+            }
+        });
+    }
+    
+    // فعال‌سازی تب بر اساس URL هش
+    const hash = window.location.hash;
+    if (hash) {
+        const tabElement = document.querySelector(`[data-tab="${hash}"]`);
+        if (tabElement) {
+            tabElement.click();
+            // اسکرول به تب
+            setTimeout(() => {
+                tabElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+    }
+});
+</script>
+{% endblock %}

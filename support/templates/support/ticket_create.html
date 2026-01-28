@@ -1,0 +1,687 @@
+{% extends "support/base.html" %}
+{% block content %}
+
+<div class="page-header" style="margin-top: -100px; position: relative;">
+    <div class="page-header-content">
+        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">Destek Talebi Oluştur</h1>
+        <p >Üniversite ile ilgili her türlü sorun veya sorunuz için yardım alın. Ekibimiz size yardımcı olmak için burada.</p>
+    </div>
+    
+    <!-- قسمت احراز هویت در گوشه بالا راست -->
+    <div class="auth-buttons" style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; align-items: center;">
+        {% if user.is_authenticated %}
+            <!-- اگر کاربر لاگین کرده باشد -->
+            <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: white; font-weight: 500;">
+                    <i class="fas fa-user-circle"></i> {{ user.username }}
+                </span>
+                
+                <!-- دکمه داشبورد -->
+                {% if user.profile.role == 'student' %}
+                    <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Taleplerim
+                    </a>
+                {% elif user.profile.role == 'staff' %}
+                    <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                {% else %}
+                    <a href="/" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                {% endif %}
+                
+                <!-- فرم logout -->
+                <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                    </button>
+                </form>
+            </div>
+        {% else %}
+            <!-- اگر کاربر لاگین نکرده باشد -->
+            <div class="guest-buttons" style="display: flex; gap: 10px;">
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                </a>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm" style="background-color: white; color: var(--primary-dark-blue);">
+                    <i class="fas fa-user-plus"></i> Kayıt Ol
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container support-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <div class="support-card glass-card">
+                <div class="card-header">
+                    <h2 class="mb-1"><i class="fas fa-edit"></i> Yeni Destek Talebi Oluştur</h2>
+                    <p class="text-muted mb-0">Daha hızlı çözüm için lütfen sorununuz hakkında detaylı bilgi verin.</p>
+                </div>
+
+                <form method="post" id="ticket-form" class="ticket-form">
+                    {% csrf_token %}
+                    
+                    <!-- Bölüm Seçimi -->
+                    <div class="form-group">
+                        <label for="department-select" class="form-label">
+                            <i class="fas fa-building"></i> Bölüm Seçiniz *
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="department-select" name="department" class="form-control" required >
+                                <option value="">Bir bölüm seçin...</option>
+                                {% for dept in departments %}
+                                    <option value="{{ dept.id }}">{{ dept.name }}</option>
+                                {% endfor %}
+                            </select>
+                            {% comment %} <i class="fas fa-chevron-down select-icon"></i> {% endcomment %}
+                        </div>
+                        <small class="form-text">
+                            Sorununuzu en iyi şekilde çözebilecek bölümü seçin
+                        </small>
+                    </div>
+
+                    <!-- Kategori Seçimi -->
+                    <div class="form-group">
+                        <label for="category-select" class="form-label">
+                            <i class="fas fa-tags"></i> Kategori Seçiniz *
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="category-select" name="category" class="form-control" required disabled>
+                                <option value="">Önce bir bölüm seçin</option>
+                            </select>
+                            {% comment %} <i class="fas fa-chevron-down select-icon"></i> {% endcomment %}
+                        </div>
+                        <small class="form-text">
+                            Sorun türünüze en uygun kategoriyi seçin
+                        </small>
+                    </div>
+
+                    <!-- Konu -->
+                    <div class="form-group">
+                        <label for="subject" class="form-label">
+                            <i class="fas fa-heading"></i> Konu *
+                        </label>
+                        <input type="text" id="subject" name="subject" 
+                               class="form-control" 
+                               placeholder="Sorununuzun kısa ve açıklayıcı başlığı"
+                               required>
+                    </div>
+
+                    <!-- Mesaj -->
+                    <div class="form-group">
+                        <label for="message" class="form-label">
+                            <i class="fas fa-comment-dots"></i> Detaylı Açıklama *
+                        </label>
+                        <textarea id="message" name="message" rows="8" 
+                                  class="form-control" 
+                                  placeholder="Lütfen sorununuzu detaylı bir şekilde açıklayın. Aşağıdaki bilgileri ekleyin:
+• Karşılaştığınız özel hata mesajları
+• Sorunu yeniden oluşturma adımları
+• Sorunun oluştuğu tarih ve saat
+• İlgili ekran görüntüleri veya dosya adları"
+                                  required></textarea>
+                        <div class="form-tips">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>İpucu: Ne kadar çok detay verirseniz, o kadar hızlı yardımcı olabiliriz!</span>
+                        </div>
+                    </div>
+
+                    <!-- Öncelik -->
+                    <div class="form-group">
+                        <label for="priority" class="form-label">
+                            <i class="fas fa-flag"></i> Öncelik Seviyesi
+                        </label>
+                        <div class="priority-options">
+                            <div class="priority-item" data-value="low">
+                                <div class="priority-indicator low"></div>
+                                <div class="priority-content">
+                                    <h6>Düşük</h6>
+                                    <p>Genel soru veya acil olmayan sorun</p>
+                                </div>
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="priority-item active" data-value="medium">
+                                <div class="priority-indicator medium"></div>
+                                <div class="priority-content">
+                                    <h6>Orta</h6>
+                                    <p>İşlevselliği etkileyen normal sorun</p>
+                                </div>
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="priority-item" data-value="high">
+                                <div class="priority-indicator high"></div>
+                                <div class="priority-content">
+                                    <h6>Yüksek</h6>
+                                    <p>Acil müdahale gerektiren acil sorun</p>
+                                </div>
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" id="priority" name="priority" value="medium">
+                    </div>
+
+                    <!-- Form Aksiyonları -->
+                    <div class="form-actions">
+                        <a href="{% url 'support:search' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left"></i> Arama'ya Dön
+                        </a>
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <i class="fas fa-paper-plane"></i> Destek Talebi Gönder
+                            <i class="fas fa-spinner fa-spin loading-icon"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Yardım İpuçları -->
+            <div class="help-tips-card">
+                <h5><i class="fas fa-info-circle"></i> Göndermeden Önce</h5>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Sorununuzun SSS bölümümüzde çözülüp çözülmediğini kontrol edin</li>
+                    <li><i class="fas fa-check-circle"></i> Tüm gerekli detayları verdiğinizden emin olun</li>
+                    <li><i class="fas fa-check-circle"></i> Gerekirse ilgili ekran görüntülerini veya dosyaları ekleyin</li>
+                    <li><i class="fas fa-check-circle"></i> Talep numaranızla birlikte bir onay e-postası alacaksınız</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Yeni form stilleri */
+.support-hero {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    color: white;
+    padding: 4rem 0 3rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.support-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231d61a9' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Form kartı */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-2px);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.3);
+}
+
+.card-header h2 {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+/* Form */
+.ticket-form .form-group {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.form-label i {
+    color: var(--secondary-blue);
+    font-size: 1.1rem;
+}
+
+.form-control {
+    padding: 1rem 1.25rem;
+    border: 2px solid rgba(141, 212, 227, 0.4);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(248, 250, 252, 0.8);
+}
+
+.form-control:focus {
+    border-color: var(--secondary-blue);
+    box-shadow: 0 0 0 4px rgba(29, 97, 169, 0.15);
+    background: white;
+    outline: none;
+}
+
+textarea.form-control {
+    min-height: 180px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* Select wrapper */
+.select-wrapper {
+    position: relative;
+}
+
+.select-icon {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-blue);
+    pointer-events: none;
+}
+
+/* Öncelik seçenekleri */
+.priority-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .priority-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+.priority-item {
+    background: rgba(248, 250, 252, 0.8);
+    border: 2px solid rgba(141, 212, 227, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.priority-item:hover {
+    border-color: var(--secondary-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.priority-item.active {
+    border-color: var(--secondary-blue);
+    background: rgba(29, 97, 169, 0.05);
+}
+
+.priority-item.active .fa-check-circle {
+    opacity: 1;
+    color: var(--secondary-blue);
+}
+
+.priority-item .fa-check-circle {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 1.25rem;
+}
+
+.priority-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.priority-indicator.low {
+    background: #2ecc71;
+}
+
+.priority-indicator.medium {
+    background: #f39c12;
+}
+
+.priority-indicator.high {
+    background: #e74c3c;
+}
+
+.priority-content h6 {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text-dark);
+}
+
+.priority-content p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Form ipuçları */
+.form-tips {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(141, 212, 227, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--secondary-blue);
+    font-size: 0.9rem;
+}
+
+.form-tips i {
+    font-size: 1rem;
+}
+
+/* Form aksiyonları */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(141, 212, 227, 0.3);
+}
+
+.btn {
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--secondary-blue);
+    color: var(--secondary-blue);
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: var(--secondary-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    position: relative;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-submit .loading-icon {
+    display: none;
+    margin-left: 0.5rem;
+}
+
+/* Yardım ipuçları kartı */
+.help-tips-card {
+    background: rgba(141, 212, 227, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border-left: 4px solid var(--secondary-blue);
+}
+
+.help-tips-card h5 {
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.help-tips-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.help-tips-card li {
+    padding: 0.5rem 0;
+    color: var(--text-medium);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    line-height: 1.6;
+}
+
+.help-tips-card li i {
+    color: var(--secondary-blue);
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+/* Küçük form metni */
+.form-text {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Responsive ayarlamalar */
+@media (max-width: 768px) {
+    .support-hero {
+        padding: 3rem 0 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .glass-card {
+        padding: 1.5rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+    
+    .card-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .glass-card {
+        padding: 1.25rem;
+    }
+}
+
+/* RTL desteği */
+body[dir="rtl"] .hero-content h1,
+body[dir="rtl"] .card-header h2 {
+    direction: rtl;
+}
+
+body[dir="rtl"] .form-label,
+body[dir="rtl"] .help-tips-card h5 {
+    direction: rtl;
+}
+
+body[dir="rtl"] .form-tips,
+body[dir="rtl"] .help-tips-card li {
+    direction: rtl;
+    text-align: right;
+}
+
+body[dir="rtl"] .select-icon {
+    right: auto;
+    left: 1.25rem;
+}
+
+body[dir="rtl"] .help-tips-card {
+    border-left: none;
+    border-right: 4px solid var(--secondary-blue);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const deptSelect = document.getElementById("department-select");
+    const categorySelect = document.getElementById("category-select");
+    const priorityItems = document.querySelectorAll(".priority-item");
+    const priorityInput = document.getElementById("priority");
+    const submitBtn = document.querySelector(".btn-submit");
+    const loadingIcon = submitBtn.querySelector(".loading-icon");
+
+    // Bölüm değişiklik handler'ı
+    deptSelect.addEventListener("change", function () {
+        const departmentId = this.value;
+        
+        if (!departmentId) {
+            categorySelect.innerHTML = '<option value="">Önce bir bölüm seçin</option>';
+            categorySelect.disabled = true;
+            return;
+        }
+
+        // Yükleniyor göster
+        categorySelect.innerHTML = '<option value="">Kategoriler yükleniyor...</option>';
+        categorySelect.disabled = true;
+
+        fetch(`/support/api/categories/?department_id=${departmentId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length > 0) {
+                    categorySelect.innerHTML = '<option value="">Bir kategori seçin</option>';
+                    data.forEach(item => {
+                        categorySelect.innerHTML += `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    categorySelect.disabled = false;
+                    
+                    // Animasyon ekle
+                    categorySelect.style.opacity = "0";
+                    setTimeout(() => {
+                        categorySelect.style.transition = "opacity 0.3s ease";
+                        categorySelect.style.opacity = "1";
+                    }, 10);
+                } else {
+                    categorySelect.innerHTML = '<option value="">Mevcut kategori bulunmuyor</option>';
+                    categorySelect.disabled = true;
+                }
+            })
+            .catch(error => {
+                console.error("Kategoriler yüklenirken hata:", error);
+                categorySelect.innerHTML = '<option value="">Kategoriler yüklenemedi</option>';
+            });
+    });
+
+    // Öncelik seçimi
+    priorityItems.forEach(item => {
+        item.addEventListener("click", function() {
+            // Tümünden active class'ını kaldır
+            priorityItems.forEach(i => i.classList.remove("active"));
+            
+            // Tıklanana active class'ını ekle
+            this.classList.add("active");
+            
+            // Gizli input'u güncelle
+            const value = this.getAttribute("data-value");
+            priorityInput.value = value;
+        });
+    });
+
+    // Form gönderimi
+    const ticketForm = document.getElementById("ticket-form");
+    ticketForm.addEventListener("submit", function(e) {
+        // Yüklenme animasyonunu göster
+        submitBtn.disabled = true;
+        loadingIcon.style.display = "inline-block";
+        
+        // Ek doğrulama buraya eklenebilir
+        
+        // Form normal şekilde gönderilecek
+    });
+});
+
+// Floating label efekti ekle
+document.querySelectorAll('.form-control').forEach(input => {
+    input.addEventListener('focus', function() {
+        this.parentElement.classList.add('focused');
+    });
+    
+    input.addEventListener('blur', function() {
+        if (!this.value) {
+            this.parentElement.classList.remove('focused');
+        }
+    });
+});
+</script>
+
+{% endblock %}

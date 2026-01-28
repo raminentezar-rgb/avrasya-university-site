@@ -1,0 +1,1294 @@
+{% extends 'aday_ogrenci/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Avrasya Üniversitesi - EĞİTİM ÜCRETLERİ{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>EĞİTİM ÜCRETLERİ</h1>
+            <p>2025-2026 Eğitim-Öğretim Yılı Yeni Kayıt Eğitim Ücretleri</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'aday_ogrenci/aday_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی سمت راست -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- اعلان مهم -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="important-notice">
+                            <div class="notice-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="notice-content">
+                                <h5 class="notice-title">📌 Önemli Not</h5>
+                                <p class="notice-text mb-0">
+                                    Aşağıda "<strong>*</strong>" işaretli bölüm/programlarımızdan Ücretli kontenjanlarımızı 
+                                    <strong>ilk 3 tercihinden birinde tercih ederek</strong> yerleşen öğrencilerimize 
+                                    <strong>%10 TERCIH İNDİRİMİ</strong> uygulanacaktır.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فیلترها -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="filter-section">
+                            <h5 class="filter-title mb-3">🔍 Eğitim Ücretlerini Filtrele</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <select class="form-select filter-select" id="facultyFilter">
+                                        <option value="all">Fakülte/Yüksekokul (Tümü)</option>
+                                        <option value="Fen Edebiyat Fakültesi">Fen Edebiyat Fakültesi</option>
+                                        <option value="İktisadi ve İdari Bilimler Fakültesi">İktisadi ve İdari Bilimler Fakültesi</option>
+                                        <option value="İletişim Fakültesi">İletişim Fakültesi</option>
+                                        <option value="Mühendislik ve Mimarlık Fakültesi">Mühendislik ve Mimarlık Fakültesi</option>
+                                        <option value="Sağlık Bilimleri Fakültesi">Sağlık Bilimleri Fakültesi</option>
+                                        <option value="Spor Bilimleri Fakültesi">Spor Bilimleri Fakültesi</option>
+                                        <option value="Uygulamalı Bilimler Yüksekokulu">Uygulamalı Bilimler Yüksekokulu</option>
+                                        <option value="Meslek Yüksekokulu">Meslek Yüksekokulu</option>
+                                        <option value="Sağlık Hizmetleri Meslek Yüksekokulu">Sağlık Hizmetleri Meslek Yüksekokulu</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-select filter-select" id="priceFilter">
+                                        <option value="all">Ücret Aralığı (Tümü)</option>
+                                        <option value="low">100,000 - 200,000 ₺</option>
+                                        <option value="medium">200,001 - 250,000 ₺</option>
+                                        <option value="high">250,001 - 350,000 ₺</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول Eğitim Ücretleri -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-card">
+                            <div class="table-header">
+                                <h4 class="table-title">💰 2025-2026 Eğitim Ücretleri</h4>
+                                <p class="table-subtitle">Tüm bölüm/programların yıllık eğitim ücretleri (KDV Dahil)</p>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table tuition-table" id="tuitionTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="30%">Fakülte/Yüksekokul</th>
+                                            <th width="35%">Bölüm/Program Adı</th>
+                                            <th width="15%">Tam Ücretli</th>
+                                            <th width="15%">%50 İndirimli</th>
+                                            <th width="15%">%10 Tercih İnd.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Fen Edebiyat Fakültesi -->
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-price="275000" data-tercihindirim="true">
+                                            <td><strong>Fen Edebiyat Fakültesi</strong></td>
+                                            <td>İngiliz Dili ve Edebiyatı*</td>
+                                            <td><span class="price-full">275,000.00 ₺</span></td>
+                                            <td><span class="price-discount">137,500.00 ₺</span></td>
+                                            <td><span class="price-special">247,500.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-price="275000" data-tercihindirim="true">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>İngilizce Mütercim ve Tercümanlık (İngilizce)*</td>
+                                            <td><span class="price-full">275,000.00 ₺</span></td>
+                                            <td><span class="price-discount">137,500.00 ₺</span></td>
+                                            <td><span class="price-special">247,500.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-price="308000" data-tercihindirim="true">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Moleküler Biyoloji ve Genetik (İngilizce)*</td>
+                                            <td><span class="price-full">308,000.00 ₺</span></td>
+                                            <td><span class="price-discount">154,000.00 ₺</span></td>
+                                            <td><span class="price-special">277,200.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-price="308000" data-tercihindirim="false">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Psikoloji</td>
+                                            <td><span class="price-full">308,000.00 ₺</span></td>
+                                            <td><span class="price-na">-</span></td>
+                                            <td><span class="price-na">-</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-price="275000" data-tercihindirim="true">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Türk Dili ve Edebiyatı*</td>
+                                            <td><span class="price-full">275,000.00 ₺</span></td>
+                                            <td><span class="price-discount">137,500.00 ₺</span></td>
+                                            <td><span class="price-special">247,500.00 ₺</span></td>
+                                        </tr>
+                                        
+                                        <!-- İktisadi ve İdari Bilimler Fakültesi -->
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-price="220000" data-tercihindirim="true">
+                                            <td><strong>İktisadi ve İdari Bilimler Fakültesi</strong></td>
+                                            <td>İşletme (İngilizce)*</td>
+                                            <td><span class="price-full">220,000.00 ₺</span></td>
+                                            <td><span class="price-na">-</span></td>
+                                            <td><span class="price-special">198,000.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-price="275000" data-tercihindirim="true">
+                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
+                                            <td>Siyaset Bilimi ve Kamu Yönetimi*</td>
+                                            <td><span class="price-full">275,000.00 ₺</span></td>
+                                            <td><span class="price-discount">137,500.00 ₺</span></td>
+                                            <td><span class="price-special">247,500.00 ₺</span></td>
+                                        </tr>
+                                        
+                                        <!-- İletişim Fakültesi -->
+                                        <tr data-faculty="İletişim Fakültesi" data-price="198000" data-tercihindirim="true">
+                                            <td><strong>İletişim Fakültesi</strong></td>
+                                            <td>Görsel İletişim Tasarımı*</td>
+                                            <td><span class="price-full">198,000.00 ₺</span></td>
+                                            <td><span class="price-discount">99,000.00 ₺</span></td>
+                                            <td><span class="price-special">178,200.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="İletişim Fakültesi" data-price="198000" data-tercihindirim="true">
+                                            <td>İletişim Fakültesi</td>
+                                            <td>Yeni Medya ve İletişim*</td>
+                                            <td><span class="price-full">198,000.00 ₺</span></td>
+                                            <td><span class="price-discount">99,000.00 ₺</span></td>
+                                            <td><span class="price-special">178,200.00 ₺</span></td>
+                                        </tr>
+                                        
+                                        <!-- Mühendislik ve Mimarlık Fakültesi -->
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-price="275000" data-tercihindirim="true">
+                                            <td><strong>Mühendislik ve Mimarlık Fakültesi</strong></td>
+                                            <td>Bilgisayar Mühendisliği*</td>
+                                            <td><span class="price-full">275,000.00 ₺</span></td>
+                                            <td><span class="price-discount">137,500.00 ₺</span></td>
+                                            <td><span class="price-special">247,500.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-price="308000" data-tercihindirim="true">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>İç Mimarlık ve Çevre Tasarımı*</td>
+                                            <td><span class="price-full">308,000.00 ₺</span></td>
+                                            <td><span class="price-discount">154,000.00 ₺</span></td>
+                                            <td><span class="price-special">277,200.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-price="220000" data-tercihindirim="true">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>İnşaat Mühendisliği*</td>
+                                            <td><span class="price-full">220,000.00 ₺</span></td>
+                                            <td><span class="price-discount">110,000.00 ₺</span></td>
+                                            <td><span class="price-special">198,000.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-price="220000" data-tercihindirim="true">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>Mimarlık*</td>
+                                            <td><span class="price-full">220,000.00 ₺</span></td>
+                                            <td><span class="price-discount">110,000.00 ₺</span></td>
+                                            <td><span class="price-special">198,000.00 ₺</span></td>
+                                        </tr>
+                                        
+                                        <!-- Sağlık Bilimleri Fakültesi -->
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-price="275000" data-tercihindirim="true">
+                                            <td><strong>Sağlık Bilimleri Fakültesi</strong></td>
+                                            <td>Beslenme ve Diyetetik*</td>
+                                            <td><span class="price-full">275,000.00 ₺</span></td>
+                                            <td><span class="price-discount">137,500.00 ₺</span></td>
+                                            <td><span class="price-special">247,500.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-price="308000" data-tercihindirim="true">
+                                            <td>Sağlık Bilimleri Fakültesi</td>
+                                            <td>Ebelik*</td>
+                                            <td><span class="price-full">308,000.00 ₺</span></td>
+                                            <td><span class="price-na">-</span></td>
+                                            <td><span class="price-special">277,200.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-price="308000" data-tercihindirim="false">
+                                            <td>Sağlık Bilimleri Fakültesi</td>
+                                            <td>Hemşirelik</td>
+                                            <td><span class="price-full">308,000.00 ₺</span></td>
+                                            <td><span class="price-na">-</span></td>
+                                            <td><span class="price-na">-</span></td>
+                                        </tr>
+                                        
+                                        <!-- Meslek Yüksekokulu -->
+                                        <tr data-faculty="Meslek Yüksekokulu" data-price="198000" data-tercihindirim="true">
+                                            <td><strong>Meslek Yüksekokulu</strong></td>
+                                            <td>Aşçılık*</td>
+                                            <td><span class="price-full">198,000.00 ₺</span></td>
+                                            <td><span class="price-discount">99,000.00 ₺</span></td>
+                                            <td><span class="price-special">178,200.00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Meslek Yüksekokulu" data-price="110000" data-tercihindirim="true">
+                                            <td>Meslek Yüksekokulu</td>
+                                            <td>Otomotiv Teknolojisi*</td>
+                                            <td><span class="price-full">110,000.00 ₺</span></td>
+                                            <td><span class="price-na">-</span></td>
+                                            <td><span class="price-special">99,000.00 ₺</span></td>
+                                        </tr>
+                                        
+                                        <!-- Uygulamalı Bilimler Yüksekokulu -->
+                                        <tr data-faculty="Uygulamalı Bilimler Yüksekokulu" data-price="275000" data-tercihindirim="true">
+                                            <td><strong>Uygulamalı Bilimler Yüksekokulu</strong></td>
+                                            <td>Gastronomi ve Mutfak Sanatları*</td>
+                                            <td><span class="price-full">275,000.00 ₺</span></td>
+                                            <td><span class="price-discount">137,500.00 ₺</span></td>
+                                            <td><span class="price-special">247,500.00 ₺</span></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="table-footer">
+                                <div class="legend">
+                                    <h6>Renk Açıklamaları:</h6>
+                                    <div class="legend-items">
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #dc3545;"></span>
+                                            <span class="legend-text">Tam Ücretli</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #198754;"></span>
+                                            <span class="legend-text">%50 İndirimli</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #6f42c1;"></span>
+                                            <span class="legend-text">%10 Tercih İndirimli</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #6c757d;"></span>
+                                            <span class="legend-text">Uygulanmıyor</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ödeme Koşulları -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="payment-card">
+                            <div class="payment-header">
+                                <h4 class="payment-title">💳 Ödeme Koşulları</h4>
+                            </div>
+                            <div class="payment-body">
+                                <div class="payment-conditions">
+                                    <ol>
+                                        <li>
+                                            <strong>Bölüm ücretinin tamamı nakit ödeme:</strong>
+                                            <p>
+                                                Üniversitenin aşağıda belirtilen IBAN numaralarına dekontun açıklama kısmına 
+                                                öğrencinin <strong>Adı Soyadı</strong> ve <strong>T.C. Kimlik numarası</strong> 
+                                                yazılarak yapılmalıdır. Nakit ödemeler gişelerden veya internet bankacılığı 
+                                                aracılığı ile yapılabilmektedir.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <strong>Taksitli ödeme imkanı:</strong>
+                                            <p>
+                                                Bölüm ücretini tamamı nakit ödeme yapamayanlar için en az 1/3 (üçte biri) 
+                                                anlaşmalı bankalarımıza nakit olarak veya muhasebe biriminden kredi kartına 
+                                                tek çekim yapılmaktadır, geri kalan 2/3 (üçte ikisi) kayıt anında anlaşmalı 
+                                                kredi kartlarına <strong>9 eşit taksitle</strong> ödeyebilir.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <strong>Faizsiz kredi imkanı:</strong>
+                                            <p>
+                                                Bölüm ücretinin 2/3 lük kısmını taksitli ödemek isteyenler ve aşağıda belirtilen 
+                                                kredi kartlarına sahip olmayanlar, Albaraka Türk Katılım Bankası ile otomatik 
+                                                katılım sistemi (OTS) anlaşması yaparak <strong>faizsiz kredi</strong> kullanabilirler. 
+                                                (9 taksit yapma imkanı vardır.) Faizsiz krediden çalışan öğrenci, veli veya emekli veli 
+                                                bankaya bir gelir belgesi beyan ederek yararlanabilir.
+                                            </p>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banka Bilgileri -->
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="bank-info-card">
+                            <div class="bank-info-header">
+                                <h5 class="bank-info-title">🏦 Nakit Ödeme Yapılan Bankalar</h5>
+                            </div>
+                            <div class="bank-info-body">
+                                <div class="bank-item">
+                                    <h6>Albaraka Türk Katılım Bankası</h6>
+                                    <div class="bank-details">
+                                        <p><strong>Alıcı Adı:</strong> T.C. Avrasya Üniversitesi</p>
+                                        <p><strong>Şube:</strong> Değirmendere Şubesi</p>
+                                        <p><strong>IBAN No:</strong> <span class="iban">TR78 0020 3000 0210 7500 0000 01</span></p>
+                                    </div>
+                                </div>
+                                <div class="bank-item">
+                                    <h6>Garanti Bankası</h6>
+                                    <div class="bank-details">
+                                        <p><strong>Alıcı Adı:</strong> T.C. Avrasya Üniversitesi</p>
+                                        <p><strong>Şube:</strong> Trabzon Merkez Şubesi</p>
+                                        <p><strong>IBAN No:</strong> <span class="iban">TR82 0006 2000 1580 0006 2949 19</span></p>
+                                    </div>
+                                </div>
+                                <div class="bank-notice">
+                                    <p><strong>⚠️ Dikkat:</strong> Dekontun açıklama kısmına <strong>Öğrencinin Adı Soyadı ve T.C. Kimlik numarası</strong> yazılmalıdır.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="bank-info-card">
+                            <div class="bank-info-header">
+                                <h5 class="bank-info-title">💳 9 Taksit Yapılan Kredi Kartları</h5>
+                            </div>
+                            <div class="bank-info-body">
+                                <div class="credit-cards">
+                                    <div class="credit-card-item">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>Akbank - Axess</span>
+                                    </div>
+                                    <div class="credit-card-item">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>Halkbankası - Paraf</span>
+                                    </div>
+                                    <div class="credit-card-item">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>İş Bankası - Maximum</span>
+                                    </div>
+                                    <div class="credit-card-item">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>Vakıfbank - World</span>
+                                    </div>
+                                    <div class="credit-card-item">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>Yapıkredi - World</span>
+                                    </div>
+                                    <div class="credit-card-item">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>Albaraka Türk - World</span>
+                                    </div>
+                                    <div class="credit-card-item">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>Garanti Bankası - Bonus (Tüm kartlar)</span>
+                                    </div>
+                                </div>
+                                <div class="bank-notice warning">
+                                    <p><strong>❗ Not:</strong> Bu kartların haricindeki bütün kredi kartlarına tek çekim yapılmaktadır.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İletişim Bilgileri -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="contact-card">
+                            <div class="contact-content">
+                                <div class="contact-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>📞 Bilgi İçin</h5>
+                                    <div class="contact-details">
+                                        <div class="contact-item">
+                                            <i class="fas fa-phone"></i>
+                                            <div>
+                                                <strong>Telefon:</strong>
+                                                <a href="tel:+904623340550">0462 334 05 50</a>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-envelope"></i>
+                                            <div>
+                                                <strong>E-posta:</strong>
+                                                <a href="mailto:muhasebe@avrasya.edu.tr">muhasebe@avrasya.edu.tr</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF İndirme Bölümü -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-12">
+                        <div class="download-card">
+                            <div class="download-content">
+                                <div class="download-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="download-text">
+                                    <h4>Resmi Eğitim Ücretleri Belgesini İndir</h4>
+                                    <p>Tüm eğitim ücretleri ve ödeme koşullarını içeren resmi PDF belgesini indirebilirsiniz.</p>
+                                    <div class="download-info">
+                                        <span><i class="fas fa-file-alt"></i> 2025-YKS-egitim-ucretleri-01.08.2025.pdf</span>
+                                        <span><i class="fas fa-hdd"></i> 350KB</span>
+                                        <span><i class="fas fa-calendar-alt"></i> 01.08.2025</span>
+                                    </div>
+                                </div>
+                                <div class="download-btn-wrapper">
+                                    <a href="{% static 'docs/2025-YKS-egitim-ucretleri-01.08.2025.pdf' %}" class="btn btn-download" download>
+                                        <i class="fas fa-download"></i> PDF'yi İndir
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Layout - از استایل‌های قبلی استفاده می‌کنیم */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* اعلان مهم */
+.important-notice {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 5px solid #ffc107;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.notice-icon {
+    font-size: 1.5rem;
+    font-family: 'Metropolis', sans-serif;
+    color: #d4a017;
+    margin-top: 2px;
+}
+
+.notice-title {
+    color: #856404;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 5px;
+}
+
+.notice-text {
+    color: #856404;
+    font-size: 0.95rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+/* فیلتر بخش */
+.filter-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.filter-title {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.filter-select {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    font-family: 'Metropolis', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 0.25rem rgba(29, 97, 169, 0.25);
+}
+
+/* جدول */
+.table-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.table-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    padding: 25px;
+    color: white;
+}
+
+.table-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.table-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.tuition-table {
+    margin: 0;
+    font-size: 0.95rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.tuition-table thead th {
+    background: #f8f9fa;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    padding: 15px 12px;
+    border-bottom: 2px solid var(--secondary-medium-blue);
+    text-align: center;
+}
+
+.tuition-table tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    border-color: #e9ecef;
+}
+
+.tuition-table tbody tr:hover {
+    background-color: rgba(141, 212, 227, 0.1);
+}
+
+.tuition-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* قیمت استایل‌ها */
+.price-full {
+    color: #dc3545;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    display: block;
+    text-align: center;
+    padding: 5px 10px;
+    background: rgba(220, 53, 69, 0.1);
+    border-radius: 6px;
+}
+
+.price-discount {
+    color: #198754;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    display: block;
+    text-align: center;
+    padding: 5px 10px;
+    background: rgba(25, 135, 84, 0.1);
+    border-radius: 6px;
+}
+
+.price-special {
+    color: #6f42c1;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    display: block;
+    text-align: center;
+    padding: 5px 10px;
+    background: rgba(111, 66, 193, 0.1);
+    border-radius: 6px;
+}
+
+.price-na {
+    color: #6c757d;
+    font-style: italic;
+    font-family: 'Metropolis', sans-serif;
+    display: block;
+    text-align: center;
+    padding: 5px 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+/* لِجِند */
+.legend {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.legend h6 {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 10px;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.legend-text {
+    font-size: 0.9rem;
+    font-family: 'Metropolis', sans-serif;
+    color: var(--text-dark);
+}
+
+/* پرداخت کارت */
+.payment-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    overflow: hidden;
+}
+
+.payment-header {
+    background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+    padding: 20px 25px;
+    color: white;
+}
+
+.payment-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin: 0;
+    color: white;
+}
+
+.payment-body {
+    padding: 30px;
+}
+
+.payment-conditions ol {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.payment-conditions li {
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.payment-conditions li:last-child {
+    margin-bottom: 0;
+}
+
+.payment-conditions li strong {
+    color: var(--primary-dark-blue);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.payment-conditions li p {
+    color: var(--text-light);
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* بانک اطلاعات کارت */
+.bank-info-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    height: 100%;
+}
+
+.bank-info-header {
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    padding: 20px;
+    border-bottom: 1px solid #ced4da;
+}
+
+.bank-info-title {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.2rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.bank-info-body {
+    padding: 25px;
+}
+
+.bank-item {
+    margin-bottom: 25px;
+}
+
+.bank-item:last-child {
+    margin-bottom: 0;
+}
+
+.bank-item h6 {
+    color: var(--secondary-medium-blue);
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.bank-details p {
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.bank-details p strong {
+    color: var(--text-dark);
+    min-width: 100px;
+    display: inline-block;
+}
+
+.iban {
+     font-family: 'Courier New', monospace; 
+    
+    background: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.bank-notice {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.bank-notice.warning {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.bank-notice p {
+    margin-bottom: 0;
+    color: #856404;
+    font-size: 0.9rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.bank-notice.warning p {
+    color: #721c24;
+}
+
+/* کارت اعتباری */
+.credit-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.credit-card-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.credit-card-item:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.credit-card-item i {
+    color: var(--secondary-medium-blue);
+}
+
+.credit-card-item span {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-family: 'Metropolis', sans-serif;
+}
+
+/* تماس کارت */
+.contact-card {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+}
+
+.contact-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    font-family: 'Metropolis', sans-serif;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-text h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    
+    color: var(--accent-light-blue);
+    width: 24px;
+}
+
+.contact-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item strong {
+    font-size: 0.9rem;
+    
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-item a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--accent-light-blue);
+    text-decoration: underline;
+}
+
+/* دانلود کارت */
+.download-card {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+}
+
+.download-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.download-icon {
+    font-size: 3rem;
+    font-family: 'Metropolis', sans-serif;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.download-text {
+    flex: 1;
+}
+
+.download-text h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.download-text p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+}
+
+.download-info {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+     font-family: 'Metropolis', sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.download-info span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-download {
+    background: white;
+    color: var(--primary-dark-blue);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: 'Metropolis', sans-serif;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background: #f8f9fa;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    color: var(--primary-dark-blue);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .main-container {
+        padding: 15px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .download-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .download-info {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+    }
+    
+    .content-wrapper {
+        margin-top: 0;
+    }
+    
+    .bank-info-card {
+        margin-bottom: 20px;
+    }
+    
+    .contact-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .credit-cards {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .table-header {
+        padding: 20px;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+         font-family: 'Metropolis', sans-serif;
+    }
+    
+    .tuition-table thead th,
+    .tuition-table tbody td {
+        padding: 10px 8px;
+    }
+    
+    .important-notice {
+        padding: 15px;
+    }
+    
+    .payment-header {
+        padding: 15px 20px;
+    }
+    
+    .payment-body {
+        padding: 20px;
+    }
+    
+    .bank-info-header {
+        padding: 15px;
+    }
+    
+    .bank-info-body {
+        padding: 20px;
+    }
+    
+    .contact-card {
+        padding: 20px;
+    }
+    
+    .download-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 15px;
+    }
+    
+    .tuition-table {
+        font-size: 0.8rem;
+         font-family: 'Metropolis', sans-serif;
+    }
+    
+    .price-full, .price-discount, .price-special, .price-na {
+        font-size: 0.8rem;
+         font-family: 'Metropolis', sans-serif;
+        padding: 4px 8px;
+    }
+    
+    .legend-items {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .credit-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-download {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+         font-family: 'Metropolis', sans-serif;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // فیلتر کردن جدول
+    function filterTable() {
+        const facultyValue = document.getElementById('facultyFilter').value;
+        const priceValue = document.getElementById('priceFilter').value;
+        
+        const rows = document.querySelectorAll('#tuitionTable tbody tr');
+        let visibleCount = 0;
+        
+        rows.forEach(row => {
+            const faculty = row.getAttribute('data-faculty');
+            const price = parseInt(row.getAttribute('data-price'));
+            
+            let showRow = true;
+            
+            if (facultyValue !== 'all' && faculty !== facultyValue) {
+                showRow = false;
+            }
+            
+            if (priceValue !== 'all') {
+                let minPrice, maxPrice;
+                switch(priceValue) {
+                    case 'low':
+                        minPrice = 100000;
+                        maxPrice = 200000;
+                        break;
+                    case 'medium':
+                        minPrice = 200001;
+                        maxPrice = 250000;
+                        break;
+                    case 'high':
+                        minPrice = 250001;
+                        maxPrice = 350000;
+                        break;
+                }
+                
+                if (price < minPrice || price > maxPrice) {
+                    showRow = false;
+                }
+            }
+            
+            if (showRow) {
+                row.style.display = '';
+                visibleCount++;
+                // عنوان‌های مهم را برجسته کن
+                if (row.querySelector('td strong')) {
+                    row.style.borderTop = '2px solid var(--secondary-medium-blue)';
+                }
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        // پیام زمانی که هیچ رکوردی یافت نشد
+        const tableBody = document.querySelector('#tuitionTable tbody');
+        let noResultsRow = tableBody.querySelector('.no-results');
+        
+        if (visibleCount === 0) {
+            if (!noResultsRow) {
+                noResultsRow = document.createElement('tr');
+                noResultsRow.className = 'no-results';
+                noResultsRow.innerHTML = `
+                    <td colspan="5" class="text-center py-4">
+                        <i class="fas fa-search me-2"></i>
+                        Seçtiğiniz kriterlere uygun program bulunamadı.
+                    </td>
+                `;
+                tableBody.appendChild(noResultsRow);
+            }
+        } else if (noResultsRow) {
+            noResultsRow.remove();
+        }
+    }
+    
+    // گوش دادن به تغییرات فیلتر
+    document.querySelectorAll('.filter-select').forEach(select => {
+        select.addEventListener('change', filterTable);
+    });
+    
+    // کپی کردن IBAN
+    document.querySelectorAll('.iban').forEach(iban => {
+        iban.addEventListener('click', function() {
+            const text = this.textContent.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = this.textContent;
+                this.textContent = 'Kopyalandı!';
+                this.style.background = '#198754';
+                this.style.color = 'white';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = '#f8f9fa';
+                    this.style.color = '';
+                }, 2000);
+            });
+        });
+        
+        iban.style.cursor = 'pointer';
+        iban.title = 'Kopyalamak için tıklayın';
+    });
+    
+    // انیمیشن دکمه دانلود
+    const downloadBtn = document.querySelector('.btn-download');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> İndiriliyor...';
+            this.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> İndirildi!';
+                this.style.background = '#198754';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.opacity = '1';
+                    this.style.background = 'white';
+                }, 2000);
+            }, 1000);
+        });
+    }
+    
+    // راه�اندازی اولیه
+    filterTable();
+    
+    // افکت‌های hover روی ردیف‌های جدول
+    const tableRows = document.querySelectorAll('.tuition-table tbody tr');
+    tableRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'rgba(141, 212, 227, 0.15)';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            const isEven = Array.from(tableRows).indexOf(this) % 2 === 1;
+            this.style.backgroundColor = isEven ? '#f8f9fa' : 'white';
+        });
+    });
+    
+    // برجسته کردن برنامه‌هایی با تخفیف ویژه
+    const specialRows = document.querySelectorAll('[data-tercihindirim="true"]');
+    specialRows.forEach(row => {
+        const starIcon = document.createElement('i');
+        starIcon.className = 'fas fa-star text-warning ms-2';
+        starIcon.style.fontSize = '0.8rem';
+        
+        const programCell = row.querySelector('td:nth-child(2)');
+        if (programCell) {
+            programCell.appendChild(starIcon.cloneNode(true));
+        }
+    });
+});
+</script>
+{% endblock %}

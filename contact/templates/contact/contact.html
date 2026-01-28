@@ -1,0 +1,22 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+{% load crispy_forms_tags %}
+<h2>İletişim
+</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button type="submit" class="btn btn-primary mt-3">Gönder</button>
+</form>
+
+{% for message in messages %}
+  <div class="alert alert-success mt-3">{{ message }}</div>
+{% endfor %}
+
+
+{% endblock %}

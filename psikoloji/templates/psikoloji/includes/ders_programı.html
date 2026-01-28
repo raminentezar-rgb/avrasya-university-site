@@ -1,0 +1,1465 @@
+{% extends 'psikoloji/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Psikoloji Bölümü Ders Programı{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Hero Section -->
+<section class="research-hero" style="background: linear-gradient(135deg, #1d5da9 0%, #3a7bd5 100%);">
+    <div class="container">
+        <div class="research-hero-content text-center py-5">
+            <h1 class="text-white fw-bold mb-3">Psikoloji Bölümü Ders Programı</h1>
+            <p class="text-white-80 mb-0 fs-5"></p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid erasmus-container mt-4">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'psikoloji/pis_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی سمت راست -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="course-schedule-container">
+                <!-- اطلاعیه مهم -->
+                <div class="info-alert mb-4">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <i class="fas fa-info-circle me-3 fs-4"></i>
+                        <div>
+                            <strong>Önemli Not:</strong> ATA 1001 Atatürk İlkeleri ve İnkılap Tarihi I, YDİ 1001 İngilizce I, YDİ 1001 Temel Bilgi Teknolojileri I dersleri uzaktan öğretim yöntemiyle "Online Eğitim Sistemi" üzerinden verilmektedir.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فیلترهای برنامه درسی -->
+                <div class="schedule-filters mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="filter-card">
+                                <div class="filter-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h5>Dönem Seçin</h5>
+                                <select class="form-select" id="semesterFilter">
+                                    <option value="all">Tüm Dönemler</option>
+                                    <option value="1">1. Yarıyıl (Güz)</option>
+                                    <option value="2">2. Yarıyıl (Bahar)</option>
+                                    <option value="3">3. Yarıyıl (Güz)</option>
+                                    <option value="4">4. Yarıyıl (Bahar)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="filter-card">
+                                <div class="filter-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h5>Gün Seçin</h5>
+                                <select class="form-select" id="dayFilter">
+                                    <option value="all">Tüm Günler</option>
+                                    <option value="monday">Pazartesi</option>
+                                    <option value="tuesday">Salı</option>
+                                    <option value="wednesday">Çarşamba</option>
+                                    <option value="thursday">Perşembe</option>
+                                    <option value="friday">Cuma</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="filter-card">
+                                <div class="filter-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h5>Ders Türü</h5>
+                                <select class="form-select" id="typeFilter">
+                                    <option value="all">Tüm Dersler</option>
+                                    <option value="mandatory">Zorunlu Dersler</option>
+                                    <option value="elective">Seçmeli Dersler</option>
+                                    <option value="online">Online Dersler</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- برنامه درسی کامل -->
+                <div class="full-schedule mb-5">
+                    <div class="schedule-header">
+                        <h2><i class="fas fa-table me-2"></i> Psikoloji Bölümü Ders Programı</h2>
+                        <p class="text-muted">2025-2026 Bahar Yarıyılı - Tam Zaman Çizelgesi</p>
+                    </div>
+
+                    <!-- جدول برنامه درسی -->
+                    <div class="table-responsive">
+                        <table class="table schedule-table">
+                            <thead>
+                                <tr>
+                                    <th class="time-column">Zaman</th>
+                                    <th>Pazartesi</th>
+                                    <th>Salı</th>
+                                    <th>Çarşamba</th>
+                                    <th>Perşembe</th>
+                                    <th>Cuma</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Satır 1: 08:00-09:50 -->
+                                <tr>
+                                    <td class="time-cell">
+                                        <div class="time-range">08:00-09:50</div>
+                                    </td>
+                                    <td class="course-cell" data-day="monday" data-time="morning">
+                                        <div class="course-card" data-semester="1" data-type="mandatory">
+                                            <div class="course-code">PSY 1003</div>
+                                            <div class="course-name">Psikolojiye Giriş I</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-info">Zorunlu</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Prof. Dr. Ahmet Yılmaz</small>
+                                                <small><i class="fas fa-building me-1"></i> D-201</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="tuesday" data-time="morning">
+                                        <div class="course-card" data-semester="2" data-type="mandatory">
+                                            <div class="course-code">PSY 2001</div>
+                                            <div class="course-name">Gelişim Psikolojisi II</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-info">Zorunlu</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Doç. Dr. Ayşe Demir</small>
+                                                <small><i class="fas fa-building me-1"></i> D-205</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="wednesday" data-time="morning">
+                                        <div class="course-card" data-semester="3" data-type="mandatory">
+                                            <div class="course-code">PSY 3001</div>
+                                            <div class="course-name">Kişilik Kuramları</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-info">Zorunlu</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Dr. Öğr. Üyesi Mehmet Kaya</small>
+                                                <small><i class="fas fa-building me-1"></i> D-301</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="thursday" data-time="morning">
+                                        <div class="course-card" data-semester="4" data-type="mandatory">
+                                            <div class="course-code">PSY 4001</div>
+                                            <div class="course-name">Psikoterapi Teknikleri</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-info">Zorunlu</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Prof. Dr. Fatma Şahin</small>
+                                                <small><i class="fas fa-building me-1"></i> D-401</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="friday" data-time="morning">
+                                        <div class="course-card" data-semester="2" data-type="elective">
+                                            <div class="course-code">PSY 2005</div>
+                                            <div class="course-name">Endüstri ve Örgüt Psikolojisi</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-success">Seçmeli</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Doç. Dr. Ali Öztürk</small>
+                                                <small><i class="fas fa-building me-1"></i> D-210</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Satır 2: 10:00-11:50 -->
+                                <tr>
+                                    <td class="time-cell">
+                                        <div class="time-range">10:00-11:50</div>
+                                    </td>
+                                    <td class="course-cell" data-day="monday" data-time="morning">
+                                        <div class="course-card" data-semester="1" data-type="mandatory">
+                                            <div class="course-code">PSY 1005</div>
+                                            <div class="course-name">Araştırma Yöntemleri I</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-info">Zorunlu</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Doç. Dr. Zeynep Aydın</small>
+                                                <small><i class="fas fa-building me-1"></i> D-202</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="tuesday" data-time="morning">
+                                        <!-- Boş ders -->
+                                    </td>
+                                    <td class="course-cell" data-day="wednesday" data-time="morning">
+                                        <div class="course-card" data-semester="3" data-type="mandatory">
+                                            <div class="course-code">PSY 3003</div>
+                                            <div class="course-name">Psikopatoloji I</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-info">Zorunlu</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Prof. Dr. Emine Yıldız</small>
+                                                <small><i class="fas fa-building me-1"></i> D-302</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="thursday" data-time="morning">
+                                        <!-- Boş ders -->
+                                    </td>
+                                    <td class="course-cell" data-day="friday" data-time="morning">
+                                        <div class="course-card" data-semester="2" data-type="mandatory">
+                                            <div class="course-code">PSY 2003</div>
+                                            <div class="course-name">Sosyal Psikoloji II</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-info">Zorunlu</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Dr. Öğr. Üyesi Canan Arslan</small>
+                                                <small><i class="fas fa-building me-1"></i> D-207</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Satır 3: 13:00-14:50 -->
+                                <tr>
+                                    <td class="time-cell">
+                                        <div class="time-range">13:00-14:50</div>
+                                    </td>
+                                    <td class="course-cell" data-day="monday" data-time="afternoon">
+                                        <div class="course-card" data-semester="4" data-type="elective">
+                                            <div class="course-code">PSY 4005</div>
+                                            <div class="course-name">Klinik Görüşme Teknikleri</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-success">Seçmeli</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Prof. Dr. Hasan Çelik</small>
+                                                <small><i class="fas fa-building me-1"></i> D-405</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="tuesday" data-time="afternoon">
+                                        <div class="course-card" data-semester="3" data-type="elective">
+                                            <div class="course-code">PSY 3007</div>
+                                            <div class="course-name">Nöropsikoloji</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-success">Seçmeli</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Doç. Dr. Selim Özkan</small>
+                                                <small><i class="fas fa-building me-1"></i> D-308</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="wednesday" data-time="afternoon">
+                                        <!-- Boş ders -->
+                                    </td>
+                                    <td class="course-cell" data-day="thursday" data-time="afternoon">
+                                        <div class="course-card" data-semester="1" data-type="online">
+                                            <div class="course-code">ATA 1001</div>
+                                            <div class="course-name">Atatürk İlkeleri ve İnkılap Tarihi I</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 2</span>
+                                                <span class="badge bg-warning">Online</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-laptop me-1"></i> Uzaktan Eğitim</small>
+                                                <small><i class="fas fa-globe me-1"></i> Online Sistem</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="friday" data-time="afternoon">
+                                        <div class="course-card" data-semester="1" data-type="online">
+                                            <div class="course-code">YDİ 1001</div>
+                                            <div class="course-name">İngilizce I</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 3</span>
+                                                <span class="badge bg-warning">Online</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-laptop me-1"></i> Uzaktan Eğitim</small>
+                                                <small><i class="fas fa-globe me-1"></i> Online Sistem</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Satır 4: 15:00-16:50 -->
+                                <tr>
+                                    <td class="time-cell">
+                                        <div class="time-range">15:00-16:50</div>
+                                    </td>
+                                    <td class="course-cell" data-day="monday" data-time="afternoon">
+                                        <div class="course-card" data-semester="4" data-type="mandatory">
+                                            <div class="course-code">PSY 4003</div>
+                                            <div class="course-name">Psikolojik Testler</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-info">Zorunlu</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Prof. Dr. Sibel Yılmaz</small>
+                                                <small><i class="fas fa-building me-1"></i> D-403</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="tuesday" data-time="afternoon">
+                                        <!-- Boş ders -->
+                                    </td>
+                                    <td class="course-cell" data-day="wednesday" data-time="afternoon">
+                                        <div class="course-card" data-semester="2" data-type="elective">
+                                            <div class="course-code">PSY SEÇ 2001</div>
+                                            <div class="course-name">Gelişimsel Psikopatoloji</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-success">Seçmeli</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Dr. Öğr. Üyesi Burcu Demir</small>
+                                                <small><i class="fas fa-building me-1"></i> D-209</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="thursday" data-time="afternoon">
+                                        <div class="course-card" data-semester="3" data-type="elective">
+                                            <div class="course-code">PSY SEÇ 3001</div>
+                                            <div class="course-name">Aile ve Çift Terapisi</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 5</span>
+                                                <span class="badge bg-success">Seçmeli</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-chalkboard-teacher me-1"></i> Doç. Dr. Elif Korkmaz</small>
+                                                <small><i class="fas fa-building me-1"></i> D-310</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="course-cell" data-day="friday" data-time="afternoon">
+                                        <div class="course-card" data-semester="1" data-type="online">
+                                            <div class="course-code">BİL 1001</div>
+                                            <div class="course-name">Temel Bilgi Teknolojileri I</div>
+                                            <div class="course-info">
+                                                <span class="badge bg-primary">AKTS: 3</span>
+                                                <span class="badge bg-warning">Online</span>
+                                            </div>
+                                            <div class="course-details">
+                                                <small><i class="fas fa-laptop me-1"></i> Uzaktan Eğitim</small>
+                                                <small><i class="fas fa-globe me-1"></i> Online Sistem</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- اطلاعات تکمیلی -->
+                <div class="additional-info">
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h5>Toplam AKTS</h5>
+                                <p class="info-number">240</p>
+                                <p class="info-text">Mezuniyet için gerekli toplam kredi</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h5>Zorunlu Dersler</h5>
+                                <p class="info-number">42</p>
+                                <p class="info-text">Programdaki zorunlu ders sayısı</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h5>Seçmeli Dersler</h5>
+                                <p class="info-number">18</p>
+                                <p class="info-text">Programdaki seçmeli ders sayısı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- نکات مهم -->
+                <div class="important-notes mt-5">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-exclamation-circle me-2"></i> Önemli Notlar</h4>
+                    </div>
+                    <div class="notes-content">
+                        <ul>
+                            <li>Ders programında değişiklik olabilir. Lütfen düzenli olarak fakülte duyurularını takip ediniz.</li>
+                            <li>Online dersler (ATA 1001, YDİ 1001, BİL 1001) üniversitenin online eğitim platformu üzerinden yapılacaktır.</li>
+                            <li>Laboratuvar dersleri ilgili bölüm laboratuvarlarında yapılacaktır.</li>
+                            <li>Ders kayıtları akademik takvimde belirtilen tarihlerde yapılmalıdır.</li>
+                            <li>Her ders için %70 devam zorunluluğu bulunmaktadır.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+ /* استایل‌های عمومی محتوای جامعه */
+    .community-content-container {
+        margin-top: 30px;
+    }
+    
+    .community-event-section {
+        margin-bottom: 60px;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        border: 1px solid rgba(141, 212, 227, 0.2);
+        transition: transform 0.3s ease;
+    }
+    
+    .community-event-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+    
+    .event-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid var(--secondary-medium-blue);
+    }
+    
+    .event-title {
+        color: var(--primary-dark-blue);
+        font-size: 1.8rem;
+        font-weight: 700;
+        font-family: 'Metropolis', sans-serif;
+        margin: 0;
+    }
+    
+    .event-content {
+        margin-bottom: 30px;
+        line-height: 1.8;
+    }
+    
+    .event-description {
+        color: var(--text-dark);
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+    
+    .video-link {
+        color: var(--secondary-medium-blue);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .video-link:hover {
+        color: var(--primary-dark-blue);
+        text-decoration: underline;
+    }
+    
+    .video-link i {
+        font-size: 1.2rem;
+        color: #FF0000; /* YouTube red */
+    }
+    
+    /* استایل‌های گالری */
+    .event-gallery {
+        margin: 30px 0;
+    }
+    
+    .gallery-grid {
+        display: grid;
+        gap: 25px;
+    }
+    
+    .gallery-grid.one-column {
+        grid-template-columns: 1fr;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .gallery-grid.two-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallery-grid.three-columns {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .gallery-item {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 250px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+    
+    .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+    
+    .gallery-overlay i {
+        color: white;
+        font-size: 2.5rem;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .event-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--secondary-medium-blue), transparent);
+        margin: 40px 0;
+    }
+    
+    /* استایل‌های فوتر */
+    .community-footer {
+        margin-top: 60px;
+        padding: 40px;
+        background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+        border-radius: 12px;
+        text-align: center;
+        color: white;
+    }
+    
+    .footer-logo {
+        margin-bottom: 20px;
+    }
+    
+    .footer-logo img {
+        filter: brightness(0) invert(1);
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+    }
+    
+    .footer-logo img:hover {
+        opacity: 1;
+    }
+    
+    .footer-info p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin: 0;
+        line-height: 1.6;
+    }
+    
+    /* Lightbox styles */
+    .lightbox-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .lightbox-modal.active {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+    }
+    
+    .lightbox-content img {
+        max-width: 100%;
+        max-height: 80vh;
+        border-radius: 8px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        font-size: 24px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+    }
+    
+    /* Container and Sidebar Styles */
+    .erasmus-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .sidebar-wrapper {
+        position: sticky;
+        top: 120px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        padding: 20px;
+        height: fit-content;
+        border: 1px solid rgba(141, 212, 227, 0.2);
+    }
+    
+    .lab-main-content {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        border: 1px solid rgba(141, 212, 227, 0.2);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    /* Responsive */
+    @media (max-width: 1400px) {
+        .erasmus-container {
+            padding: 0 15px;
+        }
+    }
+    
+    @media (max-width: 1200px) {
+        .lab-main-content {
+            padding: 25px;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .sidebar-wrapper {
+            position: relative;
+            top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-grid.two-columns,
+        .gallery-grid.three-columns {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .event-title {
+            font-size: 1.6rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .community-event-section {
+            padding: 20px;
+        }
+        
+        .event-title {
+            font-size: 1.4rem;
+        }
+        
+        .event-description {
+            font-size: 1rem;
+        }
+        
+        .gallery-grid.two-columns,
+        .gallery-grid.three-columns {
+            grid-template-columns: 1fr;
+        }
+        
+        .gallery-item {
+            height: 200px;
+        }
+        
+        .community-footer {
+            padding: 30px 20px;
+        }
+        
+        .lab-main-content {
+            padding: 20px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .event-title {
+            font-size: 1.2rem;
+        }
+        
+        .gallery-item {
+            height: 180px;
+        }
+        
+        .lab-main-content {
+            padding: 15px;
+        }
+        
+        .erasmus-container {
+            padding: 0 10px;
+        }
+    }
+
+
+
+
+
+    /* استایل‌های اصلی برنامه درسی */
+    .course-schedule-container {
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 12px;
+    }
+
+    /* اطلاعیه */
+    .info-alert .alert {
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border-left: 4px solid #1d5da9;
+    }
+
+    /* فیلترها */
+    .schedule-filters .filter-card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        height: 100%;
+        transition: transform 0.3s ease;
+        border: 1px solid rgba(29, 93, 169, 0.1);
+    }
+
+    .schedule-filters .filter-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .filter-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #1d5da9 0%, #3a7bd5 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .filter-card h5 {
+        color: #1d5da9;
+        font-weight: 600;
+        margin-bottom: 15px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .filter-card .form-select {
+        border: 2px solid #e3f2fd;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .filter-card .form-select:focus {
+        border-color: #1d5da9;
+        box-shadow: 0 0 0 3px rgba(29, 93, 169, 0.2);
+    }
+
+    /* هدر برنامه */
+    .schedule-header {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        border-left: 5px solid #1d5da9;
+    }
+
+    .schedule-header h2 {
+        color: #1d5da9;
+        font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 10px;
+    }
+
+    /* جدول برنامه درسی */
+    .schedule-table {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        border: 1px solid rgba(29, 93, 169, 0.1);
+    }
+
+    .schedule-table thead {
+        background: linear-gradient(135deg, #1d5da9 0%, #3a7bd5 100%);
+    }
+
+    .schedule-table th {
+        color: white;
+        font-weight: 600;
+        padding: 20px 15px;
+        text-align: center;
+        border: none;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .schedule-table .time-column {
+        width: 120px;
+        background: #1565c0;
+    }
+
+    .schedule-table tbody tr {
+        transition: background-color 0.3s ease;
+    }
+
+    .schedule-table tbody tr:hover {
+        background-color: #f8fafc;
+    }
+
+    .schedule-table td {
+        padding: 15px;
+        vertical-align: top;
+        border: 1px solid #e3f2fd;
+    }
+
+    /* سلول زمان */
+    .time-cell {
+        background: #f0f7ff;
+        text-align: center;
+        font-weight: 600;
+        color: #1d5da9;
+    }
+
+    .time-range {
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+        border: 2px solid #e3f2fd;
+        font-size: 0.9rem;
+    }
+
+    /* کارت دروس */
+    .course-cell {
+        min-width: 180px;
+    }
+
+    .course-card {
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        height: 100%;
+        cursor: pointer;
+        border-left: 4px solid #1d5da9;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-color: #3a7bd5;
+    }
+
+    .course-card.zorunlu {
+        border-left-color: #1d5da9;
+    }
+
+    .course-card.seçmeli {
+        border-left-color: #28a745;
+    }
+
+    .course-card.online {
+        border-left-color: #ffc107;
+    }
+
+    .course-code {
+        font-weight: 700;
+        color: #1d5da9;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        font-family: 'Poppins', monospace;
+    }
+
+    .course-name {
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        line-height: 1.4;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .course-info {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .course-info .badge {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        border-radius: 6px;
+    }
+
+    .course-details {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    .course-details small {
+        display: block;
+        margin-bottom: 3px;
+    }
+
+    /* اطلاعات تکمیلی */
+    .additional-info {
+        margin: 40px 0;
+    }
+
+    .info-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+        border: 1px solid rgba(29, 93, 169, 0.1);
+        height: 100%;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #1d5da9 0%, #3a7bd5 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: white;
+        font-size: 1.8rem;
+    }
+
+    .info-card h5 {
+        color: #1d5da9;
+        font-weight: 600;
+        margin-bottom: 10px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .info-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #1d5da9;
+        margin-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .info-text {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    /* نکات مهم */
+    .important-notes {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(29, 93, 169, 0.1);
+    }
+
+    .notes-header {
+        background: linear-gradient(135deg, #1d5da9 0%, #3a7bd5 100%);
+        padding: 20px 30px;
+        color: white;
+    }
+
+    .notes-header h4 {
+        margin: 0;
+        font-weight: 600;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .notes-content {
+        padding: 30px;
+    }
+
+    .notes-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .notes-content li {
+        padding: 10px 0;
+        padding-left: 30px;
+        position: relative;
+        color: #495057;
+        line-height: 1.6;
+        font-family: 'Poppins', sans-serif;
+        border-bottom: 1px solid #f0f7ff;
+    }
+
+    .notes-content li:last-child {
+        border-bottom: none;
+    }
+
+    .notes-content li:before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #1d5da9;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    /* انیمیشن‌ها */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .course-card {
+        animation: fadeInUp 0.5s ease;
+    }
+
+    /* استایل برای حالت‌های فیلتر */
+    .course-card.hidden {
+        display: none;
+    }
+
+    .course-card.highlight {
+        animation: highlightPulse 2s infinite;
+    }
+
+    @keyframes highlightPulse {
+        0%, 100% {
+            box-shadow: 0 4px 12px rgba(29, 93, 169, 0.2);
+        }
+        50% {
+            box-shadow: 0 4px 20px rgba(29, 93, 169, 0.4);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .schedule-table {
+            font-size: 0.9rem;
+        }
+        
+        .course-name {
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .schedule-table {
+            display: block;
+            overflow-x: auto;
+        }
+        
+        .filter-card h5 {
+            font-size: 1rem;
+        }
+        
+        .info-number {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .course-schedule-container {
+            padding: 15px;
+        }
+        
+        .schedule-filters .row {
+            flex-direction: column;
+        }
+        
+        .filter-card {
+            margin-bottom: 15px;
+        }
+        
+        .schedule-table th,
+        .schedule-table td {
+            padding: 10px;
+        }
+        
+        .time-range {
+            font-size: 0.8rem;
+            padding: 8px;
+        }
+        
+        .course-card {
+            padding: 12px;
+        }
+        
+        .info-card {
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .notes-content {
+            padding: 20px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .schedule-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .schedule-header {
+            padding: 20px;
+        }
+        
+        .course-code {
+            font-size: 0.8rem;
+        }
+        
+        .course-name {
+            font-size: 0.8rem;
+        }
+        
+        .course-info .badge {
+            font-size: 0.7rem;
+        }
+        
+        .info-number {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // فیلترهای برنامه درسی
+        const semesterFilter = document.getElementById('semesterFilter');
+        const dayFilter = document.getElementById('dayFilter');
+        const typeFilter = document.getElementById('typeFilter');
+        const courseCards = document.querySelectorAll('.course-card');
+        
+        function applyFilters() {
+            const semesterValue = semesterFilter.value;
+            const dayValue = dayFilter.value;
+            const typeValue = typeFilter.value;
+            
+            courseCards.forEach(card => {
+                const cardSemester = card.getAttribute('data-semester');
+                const cardDay = card.closest('.course-cell').getAttribute('data-day');
+                const cardType = card.getAttribute('data-type');
+                
+                let show = true;
+                
+                // فیلتر ترم
+                if (semesterValue !== 'all' && cardSemester !== semesterValue) {
+                    show = false;
+                }
+                
+                // فیلتر روز
+                if (dayValue !== 'all' && cardDay !== dayValue) {
+                    show = false;
+                }
+                
+                // فیلتر نوع درس
+                if (typeValue !== 'all' && cardType !== typeValue) {
+                    show = false;
+                }
+                
+                // نمایش یا مخفی کردن کارت
+                if (show) {
+                    card.classList.remove('hidden');
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    
+                    // افکت هایلایت
+                    card.classList.add('highlight');
+                    setTimeout(() => {
+                        card.classList.remove('highlight');
+                    }, 2000);
+                } else {
+                    card.classList.add('hidden');
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(10px)';
+                }
+                
+                // مدیریت نمایش سلول‌های خالی
+                const parentCell = card.closest('.course-cell');
+                const visibleCards = parentCell.querySelectorAll('.course-card:not(.hidden)');
+                if (visibleCards.length === 0) {
+                    parentCell.innerHTML = '<div class="empty-cell text-center text-muted p-3"><i class="fas fa-clock fa-2x mb-2"></i><br><small>Boş</small></div>';
+                }
+            });
+        }
+        
+        // رویداد تغییر فیلترها
+        semesterFilter.addEventListener('change', applyFilters);
+        dayFilter.addEventListener('change', applyFilters);
+        typeFilter.addEventListener('change', applyFilters);
+        
+        // کلیک بر روی کارت دروس برای نمایش جزئیات
+        courseCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const courseCode = this.querySelector('.course-code').textContent;
+                const courseName = this.querySelector('.course-name').textContent;
+                
+                // نمایش مدال با اطلاعات کامل درس
+                showCourseDetailsModal({
+                    code: courseCode,
+                    name: courseName,
+                    info: this.querySelector('.course-info').innerHTML,
+                    details: this.querySelector('.course-details').innerHTML
+                });
+            });
+        });
+        
+        // تابع نمایش مدال جزئیات درس
+        function showCourseDetailsModal(course) {
+            // ایجاد مدال
+            const modalHtml = `
+                <div class="modal fade" id="courseModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background: linear-gradient(135deg, #1d5da9 0%, #3a7bd5 100%); color: white;">
+                                <h5 class="modal-title">${course.code} - ${course.name}</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>Ders Bilgileri</h6>
+                                        <div class="mb-3">${course.info}</div>
+                                        
+                                        <h6>Ders İçeriği</h6>
+                                        <p>Bu ders psikoloji alanındaki temel kavramları ve teorileri kapsamaktadır. Öğrenciler alanla ilgili temel bilgi ve becerileri kazanacaktır.</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Detaylar</h6>
+                                        <div class="mb-3">${course.details}</div>
+                                        
+                                        <h6>Değerlendirme</h6>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check text-success me-2"></i> Vize Sınavı: %40</li>
+                                            <li><i class="fas fa-check text-success me-2"></i> Final Sınavı: %60</li>
+                                            <li><i class="fas fa-check text-success me-2"></i> Devam Zorunluluğu: %70</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fas fa-download me-2"></i> Ders Programını İndir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // اضافه کردن مدال به DOM
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            // نمایش مدال
+            const modal = new bootstrap.Modal(document.getElementById('courseModal'));
+            modal.show();
+            
+            // حذف مدال پس از بسته شدن
+            document.getElementById('courseModal').addEventListener('hidden.bs.modal', function () {
+                this.remove();
+            });
+        }
+        
+        // انیمیشن اسکرول
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // اعمال انیمیشن به کارت‌ها
+        const animatedElements = document.querySelectorAll('.filter-card, .info-card, .course-card');
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // پرینت برنامه درسی
+        const printButton = document.createElement('button');
+        printButton.className = 'btn btn-outline-primary d-print-none';
+        printButton.innerHTML = '<i class="fas fa-print me-2"></i> Programı Yazdır';
+        printButton.style.position = 'fixed';
+        printButton.style.bottom = '20px';
+        printButton.style.right = '20px';
+        printButton.style.zIndex = '1000';
+        printButton.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+        
+        printButton.addEventListener('click', function() {
+            window.print();
+        });
+        
+        document.body.appendChild(printButton);
+        
+        // استایل‌های پرینت
+        const printStyles = `
+            @media print {
+                .sidebar-wrapper, .schedule-filters, .info-alert, .additional-info, .important-notes, 
+                .d-print-none, .filter-card select, .schedule-header p {
+                    display: none !important;
+                }
+                
+                .schedule-table {
+                    box-shadow: none !important;
+                    border: 2px solid #000 !important;
+                }
+                
+                .course-card {
+                    border: 1px solid #000 !important;
+                    box-shadow: none !important;
+                    break-inside: avoid;
+                }
+                
+                .time-range {
+                    border: 1px solid #000 !important;
+                }
+                
+                body {
+                    font-size: 12pt !important;
+                    color: #000 !important;
+                    background: white !important;
+                }
+                
+                .container-fluid {
+                    max-width: 100% !important;
+                    padding: 0 !important;
+                }
+                
+                .schedule-header h2 {
+                    color: #000 !important;
+                    text-align: center;
+                    font-size: 18pt !important;
+                }
+                
+                .col-lg-9 {
+                    flex: 0 0 100% !important;
+                    max-width: 100% !important;
+                }
+            }
+        `;
+        
+        const styleSheet = document.createElement("style");
+        styleSheet.textContent = printStyles;
+        document.head.appendChild(styleSheet);
+        
+        // بارگذاری اولیه
+        applyFilters();
+    });
+</script>
+{% endblock %}

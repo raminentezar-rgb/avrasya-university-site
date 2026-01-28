@@ -1,0 +1,1095 @@
+{% extends 'lee/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - {{ duyuru.baslik }}{% endblock %}
+
+{% block head %}
+{{ block.super }}
+<!-- Bootstrap Icons CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block content %}
+<style>
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css');
+
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+    --success-green: #28a745;
+    --warning-orange: #ffc107;
+    --danger-red: #dc3545;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    animation: fadeIn 0.8s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* ناوبری */
+.duyuru-navigation .breadcrumb {
+    background: rgba(141, 212, 227, 0.1);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin: 0;
+    word-break: break-word;
+}
+
+.duyuru-navigation .breadcrumb-item a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    word-break: break-word;
+}
+
+.duyuru-navigation .breadcrumb-item a:hover {
+    color: var(--primary-dark-blue);
+}
+
+.duyuru-navigation .breadcrumb-item.active {
+    color: var(--text-dark);
+    font-weight: 600;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+/* کارت اصلی اطلاعیه */
+.duyuru-detay-card {
+    animation: fadeInUp 0.6s ease;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.duyuru-detay-header {
+    padding-bottom: 25px;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.3);
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.duyuru-category-badges {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.duyuru-category {
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    white-space: nowrap;
+}
+
+.duyuru-date-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.duyuru-date, .duyuru-time {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* FIX: عنوان طولانی */
+.duyuru-detay-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 20px 0 15px;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .duyuru-detay-title {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 576px) {
+    .duyuru-detay-title {
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+}
+
+.duyuru-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.duyuru-meta-item {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* محتوای اطلاعیه */
+.duyuru-detay-content {
+    min-height: 300px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.content-body p {
+    margin-bottom: 1.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.content-body h2, .content-body h3, .content-body h4 {
+    color: var(--primary-dark-blue);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.content-body ul, .content-body ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.content-body li {
+    margin-bottom: 0.5rem;
+    word-wrap: break-word;
+}
+
+.empty-content {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.02), rgba(29, 97, 169, 0.03));
+    border-radius: 16px;
+    border: 2px dashed rgba(141, 212, 227, 0.4);
+    max-width: 100%;
+}
+
+/* فایل‌های ضمیمه */
+.duyuru-attachments {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.02), rgba(29, 97, 169, 0.03));
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.section-header {
+    margin-bottom: 25px;
+    max-width: 100%;
+}
+
+.section-sub-title {
+    color: var(--primary-dark-blue);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.section-sub-description {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 0;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.attachments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 100%;
+}
+
+.attachment-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .attachment-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+.attachment-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-light-blue);
+}
+
+.attachment-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(9, 36, 66, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--primary-dark-blue);
+    flex-shrink: 0;
+}
+
+.attachment-info {
+    flex: 1;
+    min-width: 0; /* مهم برای flexbox و متن‌های طولانی */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.attachment-info h6 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.attachment-info small {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    word-wrap: break-word;
+}
+
+.attachment-desc {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    margin: 8px 0 0 0;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.attachment-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.btn-download {
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.3);
+    color: white;
+}
+
+.file-size {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* اطلاعیه‌های مرتبط */
+.duyuru-related {
+    padding-top: 30px;
+    max-width: 100%;
+}
+
+.related-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .related-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.related-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-light-blue);
+}
+
+.related-card-header {
+    padding: 15px 20px;
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.05));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.related-category {
+    background: var(--secondary-medium-blue);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.related-important {
+    color: var(--warning-orange);
+    font-size: 1.1rem;
+}
+
+.related-card-body {
+    padding: 20px;
+    min-height: 0;
+}
+
+.related-card-body h5 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-card-body h5 a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.related-card-body h5 a:hover {
+    color: var(--secondary-medium-blue);
+}
+
+.related-desc {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-card-footer {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(141, 212, 227, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.related-card-footer small {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.related-link {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.related-link:hover {
+    color: var(--primary-dark-blue);
+    transform: translateX(5px);
+}
+
+/* دکمه‌های ناوبری */
+.duyuru-navigation-buttons {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.02), rgba(29, 97, 169, 0.03));
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 100%;
+}
+
+.btn-navigation {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    background: var(--pure-white);
+    border: 2px solid rgba(141, 212, 227, 0.3);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .btn-navigation {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .duyuru-navigation-buttons .d-flex {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+.btn-navigation:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-light-blue);
+}
+
+.btn-navigation i {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.btn-navigation-prev i {
+    color: var(--secondary-medium-blue);
+}
+
+.btn-navigation-home i {
+    color: var(--primary-dark-blue);
+}
+
+.btn-navigation div {
+    min-width: 0;
+    flex: 1;
+}
+
+.btn-navigation div small {
+    display: block;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    word-wrap: break-word;
+}
+
+.btn-navigation div div {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* برای همه المان‌های متنی */
+* {
+    box-sizing: border-box;
+}
+
+/* تنظیمات عمومی برای متن‌های طولانی */
+.long-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+/* برای breadcrumb */
+.breadcrumb {
+    flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .duyuru-detay-title {
+        font-size: 2rem;
+    }
+    
+    .related-cards {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 30px;
+    }
+    
+    .duyuru-detay-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .duyuru-detay-header {
+        text-align: center;
+    }
+    
+    .duyuru-category-badges {
+        justify-content: center;
+    }
+    
+    .duyuru-date-info {
+        justify-content: center;
+        margin-top: 15px;
+    }
+    
+    .duyuru-meta {
+        justify-content: center;
+    }
+    
+    .duyuru-detay-title {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    
+    .attachment-info {
+        text-align: center;
+    }
+    
+    .attachment-actions {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 576px) {
+    .duyuru-detay-title {
+        font-size: 1.4rem;
+    }
+    
+    .section-sub-title {
+        font-size: 1.3rem;
+    }
+    
+    .duyuru-attachments {
+        padding: 20px;
+    }
+    
+    .empty-content {
+        padding: 40px 20px;
+    }
+    
+    .empty-content-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .content-wrapper, .duyuru-detay-card, .attachment-card, 
+    .related-card, .btn-navigation, .btn-download {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .attachment-card:hover, .related-card:hover, 
+    .btn-navigation:hover, .btn-download:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+</style>
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>{{ duyuru.baslik }}</h1>
+            <p></p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'lee/lee_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9">
+            <div class="content-wrapper long-text">
+                <!-- ناوبری -->
+                <div class="duyuru-navigation mb-4">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'lee:lee' %}">
+                                    <i class="bi bi-house me-1"></i>Ana Sayfa
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'lee:duyurular' %}">Duyurular</a>
+                            </li>
+                            <li class="breadcrumb-item active" title="{{ duyuru.baslik }}">
+                                {{ duyuru.baslik|truncatechars:50 }}
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <!-- کارت اصلی اطلاعیه -->
+                <div class="duyuru-detay-card">
+                    <!-- هدر اطلاعیه -->
+                    <div class="duyuru-detay-header">
+                        <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-3">
+                            <div class="duyuru-category-badges">
+                                <span class="duyuru-category" style="background: var(--secondary-medium-blue);">
+                                    <i class="bi bi-tag me-1"></i>
+                                    {{ duyuru.kategori|default:"Genel" }}
+                                </span>
+                                {% if duyuru.onemli %}
+                                <span class="duyuru-category ms-2" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">
+                                    <i class="bi bi-exclamation-triangle me-1"></i>
+                                    Önemli
+                                </span>
+                                {% endif %}
+                            </div>
+                            <div class="duyuru-date-info">
+                                <span class="duyuru-date">
+                                    <i class="bi bi-calendar-event me-1"></i>
+                                    {{ duyuru.yayin_tarihi|date:"d F Y" }}
+                                </span>
+                                <span class="duyuru-time ms-3">
+                                    <i class="bi bi-clock me-1"></i>
+                                    {{ duyuru.yayin_tarihi|time:"H:i" }}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <h1 class="duyuru-detay-title" title="{{ duyuru.baslik }}">
+                            {{ duyuru.baslik }}
+                        </h1>
+                        
+                        <div class="duyuru-meta mt-3">
+                            <span class="duyuru-meta-item">
+                                <i class="bi bi-person-circle me-1"></i>
+                                LEE Fakültesi
+                            </span>
+                            <span class="duyuru-meta-item ms-3">
+                                <i class="bi bi-eye me-1"></i>
+                                0 görüntülenme
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- محتوای اطلاعیه -->
+                    <div class="duyuru-detay-content mt-5">
+                        {% if duyuru.icerik %}
+                            <div class="content-body long-text">
+                                {{ duyuru.icerik|linebreaks }}
+                            </div>
+                        {% else %}
+                            <div class="empty-content">
+                                <div class="empty-content-icon">
+                                    <i class="bi bi-file-text"></i>
+                                </div>
+                                <h4>İçerik Bulunmamaktadır</h4>
+                                <p>Bu duyuru için henüz içerik eklenmemiştir.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- فایل‌های ضمیمه -->
+                    {% if duyuru.dosya or duyuru.mevcut_dosyalar or duyuru.dosyalar.all %}
+                    <div class="duyuru-attachments mt-5">
+                        <div class="section-header mb-4">
+                            <h3 class="section-sub-title long-text">
+                                <i class="bi bi-paperclip me-2"></i>
+                                İndirilebilir Dosyalar
+                            </h3>
+                            <p class="section-sub-description long-text">Duyuruyla ilgili ek dosyalar</p>
+                        </div>
+                        
+                        <div class="attachments-container">
+                            <!-- فایل اصلی اطلاعیه -->
+                            {% if duyuru.dosya %}
+                            <div class="attachment-card">
+                                <div class="attachment-icon">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </div>
+                                <div class="attachment-info long-text">
+                                    <h6 title="{{ duyuru.dosya_adi|default:'Dosya' }}">
+                                        {{ duyuru.dosya_adi|default:"Dosya"|truncatechars:80 }}
+                                    </h6>
+                                    <small>Ana dosya</small>
+                                </div>
+                                <div class="attachment-actions">
+                                    <a href="{{ duyuru.dosya.url }}" class="btn-download" download>
+                                        <i class="bi bi-download me-1"></i>İndir
+                                    </a>
+                                    <span class="file-size">PDF</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            <!-- فایل‌های ضمیمه از اطلاعیه اصلی -->
+                            {% with dosyalar=duyuru.mevcut_dosyalar %}
+                                {% if dosyalar %}
+                                    {% for dosya in dosyalar %}
+                                    <div class="attachment-card">
+                                        <div class="attachment-icon" style="background: rgba(29, 97, 169, 0.1);">
+                                            <i class="bi {{ dosya.icon }}" style="color: var(--secondary-medium-blue);"></i>
+                                        </div>
+                                        <div class="attachment-info long-text">
+                                            <h6 title="{{ dosya.adi }}">
+                                                {{ dosya.adi|truncatechars:80 }}
+                                            </h6>
+                                            <small>{{ dosya.tur }}</small>
+                                            {% if dosya.aciklama %}
+                                                <p class="attachment-desc long-text">{{ dosya.aciklama|truncatewords:10 }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="attachment-actions">
+                                            <a href="{{ dosya.url }}" class="btn-download" download>
+                                                <i class="bi bi-download me-1"></i>İndir
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            
+                            <!-- فایل‌های ضمیمه اختصاصی اپ LEE -->
+                            {% with lee_dosyalar=duyuru.dosyalar.all %}
+                                {% if lee_dosyalar %}
+                                    {% for dosya in lee_dosyalar %}
+                                    <div class="attachment-card">
+                                        <div class="attachment-icon" style="background: rgba(141, 212, 227, 0.1);">
+                                            <i class="bi {{ dosya.get_icon }}" style="color: var(--accent-light-blue);"></i>
+                                        </div>
+                                        <div class="attachment-info long-text">
+                                            <h6 title="{{ dosya.dosya_adi }}">
+                                                {{ dosya.dosya_adi|truncatechars:80 }}
+                                            </h6>
+                                            <small>{{ dosya.get_tur_display }}</small>
+                                            {% if dosya.aciklama %}
+                                                <p class="attachment-desc long-text">{{ dosya.aciklama|truncatewords:10 }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="attachment-actions">
+                                            <a href="{{ dosya.dosya.url }}" class="btn-download" download>
+                                                <i class="bi bi-download me-1"></i>İndir
+                                            </a>
+                                            <span class="file-size">{{ dosya.dosya.size|filesizeformat }}</span>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- اطلاعیه‌های مرتبط -->
+                    {% if ilgili_duyurular %}
+                    <div class="duyuru-related mt-5">
+                        <div class="section-header mb-4">
+                            <h3 class="section-sub-title long-text">
+                                <i class="bi bi-link-45deg me-2"></i>
+                                İlgili Duyurular
+                            </h3>
+                            <p class="section-sub-description long-text">Benzer konulardaki diğer duyurular</p>
+                        </div>
+                        
+                        <div class="related-cards">
+                            {% for ilgili in ilgili_duyurular %}
+                            <div class="related-card long-text">
+                                <div class="related-card-header">
+                                    <span class="related-category">{{ ilgili.get_kategori_display }}</span>
+                                    {% if ilgili.onemli %}
+                                    <span class="related-important">
+                                        <i class="bi bi-star-fill"></i>
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                <div class="related-card-body">
+                                    <h5 title="{{ ilgili.baslik }}">
+                                        <a href="{% url 'lee:duyuru_detay' ilgili.id %}">
+                                            {{ ilgili.baslik|truncatechars:80 }}
+                                        </a>
+                                    </h5>
+                                    <p class="related-desc long-text">{{ ilgili.kisa_ozet|truncatechars:120 }}</p>
+                                </div>
+                                <div class="related-card-footer">
+                                    <small>
+                                        <i class="bi bi-calendar me-1"></i>
+                                        {{ ilgili.yayin_tarihi|date:"d.m.Y" }}
+                                    </small>
+                                    <a href="{% url 'lee:duyuru_detay' ilgili.id %}" class="related-link">
+                                        Görüntüle
+                                        <i class="bi bi-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- دکمه‌های ناوبری -->
+                    <div class="duyuru-navigation-buttons mt-5 pt-4 border-top">
+                        <div class="d-flex justify-content-between flex-wrap gap-3">
+                            <a href="{% url 'lee:duyurular' %}" class="btn-navigation btn-navigation-prev">
+                                <i class="bi bi-arrow-left me-2"></i>
+                                <div class="long-text">
+                                    <small>Önceki Sayfa</small>
+                                    <div>Tüm Duyurular</div>
+                                </div>
+                            </a>
+                            <a href="{% url 'lee:lee' %}" class="btn-navigation btn-navigation-home">
+                                <i class="bi bi-house me-2"></i>
+                                <div class="long-text">
+                                    <small>Ana Sayfa</small>
+                                    <div>LEE Fakültesi</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // انیمیشن کارت‌ها هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده عناصر برای انیمیشن
+    const animatedElements = document.querySelectorAll('.attachment-card, .related-card');
+    animatedElements.forEach((element, index) => {
+        element.style.animationDelay = `${index * 0.1}s`;
+        element.style.animation = 'fadeInUp 0.6s ease forwards';
+        observer.observe(element);
+    });
+    
+    // هایلایت لینک‌های محتوا
+    const contentLinks = document.querySelectorAll('.content-body a');
+    contentLinks.forEach(link => {
+        link.style.color = 'var(--secondary-medium-blue)';
+        link.style.textDecoration = 'none';
+        link.style.fontWeight = '600';
+        link.addEventListener('mouseenter', function() {
+            this.style.textDecoration = 'underline';
+        });
+        link.addEventListener('mouseleave', function() {
+            this.style.textDecoration = 'none';
+        });
+    });
+    
+    // کپی لینک صفحه
+    const copyUrlBtn = document.createElement('button');
+    copyUrlBtn.innerHTML = '<i class="bi bi-link-45deg me-1"></i>Linki Kopyala';
+    copyUrlBtn.className = 'btn-download mt-3';
+    copyUrlBtn.style.display = 'block';
+    copyUrlBtn.style.marginLeft = 'auto';
+    copyUrlBtn.style.marginRight = 'auto';
+    
+    copyUrlBtn.addEventListener('click', function() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="bi bi-check2 me-1"></i>Link Kopyalandı!';
+            this.style.background = 'linear-gradient(135deg, var(--success-green), #20c997)';
+            
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.style.background = 'linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue))';
+            }, 2000);
+        });
+    });
+    
+    // اضافه کردن دکمه کپی لینک به هدر
+    const headerActions = document.querySelector('.duyuru-category-badges');
+    if (headerActions) {
+        const copyBtnContainer = document.createElement('div');
+        copyBtnContainer.className = 'mt-3';
+        copyBtnContainer.appendChild(copyUrlBtn);
+        headerActions.parentNode.insertBefore(copyBtnContainer, headerActions.nextSibling);
+    }
+    
+    // شمارنده مشاهده (نمایشی)
+    const viewCount = document.querySelector('.duyuru-meta-item:nth-child(2)');
+    if (viewCount) {
+        setTimeout(() => {
+            viewCount.innerHTML = '<i class="bi bi-eye me-1"></i>1 görüntülenme';
+        }, 1000);
+    }
+    
+    // اضافه کردن tooltip برای متن‌های طولانی
+    const longTexts = document.querySelectorAll('.duyuru-detay-title, .attachment-info h6, .related-card-body h5');
+    longTexts.forEach(text => {
+        if (text.scrollWidth > text.clientWidth) {
+            text.setAttribute('title', text.textContent.trim());
+        }
+    });
+});
+</script>
+{% endblock %}

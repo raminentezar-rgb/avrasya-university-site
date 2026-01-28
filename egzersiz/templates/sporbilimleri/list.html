@@ -1,0 +1,189 @@
+{% extends 'core/base.html' %}
+{% block title %} Egzersiz ve Spor Bilimleri - Avrasya Üniversitesi{% endblock %}
+{% block content %}
+{% load static %}
+<div class="row">
+  <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'sporbilimleri/sidebar.html' %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3"> Egzersiz ve Spor Bilimleri Duyuruları</h1>
+
+                        <p class="lead mb-4">
+                           
+                        </p>
+                        {% comment %} <div class="d-flex gap-3">
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-calendar me-1"></i>1999'dan Beri
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-building me-1"></i>5 Bölüm
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-award me-1"></i>25 Yıllık Deneyim
+                            </span>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-megaphone  display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <div class="container mt-12">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">Tüm Duyurular</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'sporbilimleri:liste' %}">gzersiz ve Spor Bilimleri Tasarımı</a></li>
+            <li class="breadcrumb-item active">Duyurular</li>
+          </ol>
+        </nav>
+        
+        <div class="row align-items-center mb-4">
+          <div class="col-md-8">
+            <h1 class="text-primary mb-2">
+              <i class="bi bi-activity"></i>gzersiz ve Spor Bilimleri Duyuruları
+            </h1>
+            <p class="text-muted">gzersiz ve Spor Bilimleri ait tüm duyurulara buradan ulaşabilirsiniz.</p>
+          </div>
+          <div class="col-md-4 text-end">
+            <div class="card bg-light border-0">
+              <div class="card-body py-2">
+                <h6 class="card-title mb-0">Toplam Duyuru</h6>
+                <h4 class="text-primary mb-0">{{ toplam_duyuru }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- فرم جستجو -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <form method="get" action="{% url 'sporbilimleri:liste' %}" class="row g-3">
+          <div class="col-md-8">
+            <label for="q" class="form-label">gzersiz ve Spor Bilimleri Duyurularında Ara</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="q" 
+              name="q" 
+              value="{{ search_query }}"
+              placeholder="Psikoloji duyurularında ara..."
+            >
+          </div>
+          <div class="col-md-3">
+            <label for="tarih" class="form-label">Tarihe Göre Filtrele</label>
+            <input 
+              type="date" 
+              class="form-control" 
+              id="tarih" 
+              name="tarih" 
+              value="{{ tarih_query }}"
+            >
+          </div>
+          <div class="col-md-1 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </form>
+        
+        {% if search_query or tarih_query %}
+          <div class="mt-3">
+            <a href="{% url 'sporbilimleri:liste' %}" class="btn btn-outline-secondary btn-sm">
+              <i class="bi bi-x-circle"></i> Filtreleri Temizle
+            </a>
+            <small class="text-muted ms-2">
+              {% if search_query %}Aranan: "{{ search_query }}"{% endif %}
+              {% if tarih_query %} | Tarih: {{ tarih_query }}{% endif %}
+            </small>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- لیست اطلاعیه‌ها -->
+    <div class="row">
+      {% for duyuru in duyurular %}
+        <div class="col-md-6 mb-4">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <span class="badge bg-primary">{{ duyuru.get_fakulte_display }}</span>
+                  <span class="badge bg-success">gzersiz ve Spor Bilimleri </span>
+                </div>
+                <small class="text-muted">
+                  <i class="bi bi-calendar-event"></i> 
+                  {{ duyuru.yayin_tarihi|date:'d F Y' }}
+                </small>
+              </div>
+              
+              <h5 class="card-title text-primary">{{ duyuru.baslik }}</h5>
+              
+              {% if duyuru.ozet %}
+                <p class="card-text">{{ duyuru.ozet|truncatewords:30 }}</p>
+              {% else %}
+                <p class="card-text">{{ duyuru.icerik|truncatewords:30 }}</p>
+              {% endif %}
+              
+              {% with dosyalar=duyuru.mevcut_dosyalar %}
+                {% if dosyalar %}
+                  <div class="mt-3">
+                    <h6 class="text-secondary">İlgili Dosyalar:</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                      {% for dosya in dosyalar %}
+                        <a href="{{ dosya.url }}" class="btn btn-outline-primary btn-sm" download title="{{ dosya.adi }}">
+                          <i class="bi {{ dosya.icon }}"></i> 
+                          {{ dosya.tur }}
+                        </a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endwith %}
+              
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <a href="{% url 'sporbilimleri:detay' duyuru.slug %}" class="btn btn-primary">
+                  Devamını Oku
+                </a>
+                <small class="text-muted">
+                  {{ duyuru.yayin_tarihi|timesince }} önce
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12">
+          <div class="alert alert-info text-center">
+            <i class="bi bi-info-circle"></i>
+            {% if search_query or tarih_query %}
+              Arama kriterlerinize uygun gzersiz ve Spor Bilimleri duyurusu bulunamadı.
+            {% else %}
+              gzersiz ve Spor Bilimleri için henüz duyuru bulunmamaktadır.
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <style>
+    .badge.bg-success {
+      background-color: #198754 !important;
+    }
+  </style>
+{% endblock %}

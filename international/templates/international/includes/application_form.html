@@ -1,0 +1,1673 @@
+{% extends 'international/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Uluslararası Öğrenciler{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section با گرادیانت زیبا -->
+
+<section class="research-hero">
+    <div class="container">
+        <div class="hero-content text-center"  style="margin-top: -20px; ">
+            <h1 class="hero-title mb-3" style="color: red">Your Journey Starts Here</h1>
+            <p class="hero-subtitle mb-4"  >Join Avrasya University's International Community</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">150+</span>
+                    <span class="stat-label">Nationalities</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Satisfaction Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container py-5">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'international/international_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- Header با انیمیشن -->
+                <div class="text-center mb-6">
+                    <div class="application-badge">
+                        <span class="badge-text">2025 Admissions Open</span>
+                    </div>
+                    <h1 class="main-title mb-3" style="color: var(--primary-blue); font-family: 'Metropolis', sans-serif; font-weight: 800;">Online Application Form</h1>
+                    <p class="lead-text mb-4" style="color: var(--light-text);">Complete your application in just a few simple steps. Our team is ready to assist you!</p>
+                    
+                    <!-- Progress Bar -->
+                    {% comment %} <div class="application-progress mb-5">
+                        <div class="progress-container">
+                            <div class="progress-step active" data-step="1">
+                                <div class="step-icon">1</div>
+                                <span class="step-label">Application Type</span>
+                            </div>
+                            <div class="progress-step" data-step="2">
+                                <div class="step-icon">2</div>
+                                <span class="step-label">Personal Info</span>
+                            </div>
+                            <div class="progress-step" data-step="3">
+                                <div class="step-icon">3</div>
+                                <span class="step-label">Academic Info</span>
+                            </div>
+                            <div class="progress-step" data-step="4">
+                                <div class="step-icon">4</div>
+                                <span class="step-label">Documents</span>
+                            </div>
+                            <div class="progress-step" data-step="5">
+                                <div class="step-icon">5</div>
+                                <span class="step-label">Submit</span>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+
+                <!-- Application Type Cards با افکت مدرن -->
+                <div class="application-type-section mb-6">
+                    {% comment %} <h2 class="section-title-with-icon mb-4" style="color: var(--primary-blue);">
+                        <i class="fas fa-rocket me-2"></i>Choose Your Application Path
+                    </h2> {% endcomment %}
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-md-6 col-lg-5">
+                            <div class="app-card card-individual">
+                                <div class="card-icon">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div class="card-image">
+                                    <img src="{% static 'core/img/student/LOGIN.png' %}" 
+                                         alt="Individual Application" 
+                                         class="img-fluid">
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 style="color: var(--primary-blue);">Individual Application</h3>
+                                    <p class="card-description" style="color: var(--light-text);">Apply directly as an individual student. Perfect for self-sponsored applicants who want full control over their application process.</p>
+                                    <div class="features-list">
+                                        <div class="feature-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Direct communication with university</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Real-time application tracking</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Priority support</span>
+                                        </div>
+                                    </div>
+                                    <a href="https://obs.avrasya.edu.tr/oibs/foa_app/" 
+                                       target="_blank" 
+                                       class="app-button btn-individual">
+                                        <i class="fas fa-arrow-right me-2"></i>Start Individual Application
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5">
+                            <div class="app-card card-agency">
+                                <div class="card-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="card-image">
+                                    <img src="{% static 'core/img/student/agency.png' %}" 
+                                         alt="Agency Application" 
+                                         class="img-fluid">
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 style="color: var(--primary-blue);">Agency Application</h3>
+                                    <p class="card-description" style="color: var(--light-text);">Apply through our registered education partners. Get expert guidance and support throughout your application journey.</p>
+                                    <div class="features-list">
+                                        <div class="feature-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Expert guidance and counseling</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Document preparation assistance</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Visa support services</span>
+                                        </div>
+                                    </div>
+                                    <a href="https://obs.avrasya.edu.tr/oibs/foa_app/agency/" 
+                                       target="_blank" 
+                                       class="app-button btn-agency">
+                                        <i class="fas fa-arrow-right me-2"></i>Start Agency Application
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Application Form با طراحی مدرن -->
+                <div class="application-form-container">
+                    <div class="form-header">
+                        <h2 class="form-title" style="color: var(--primary-blue); font-family: 'Metropolis', sans-serif; font-weight: 800;">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Complete Application Form
+                        </h2>
+                        <p class="form-subtitle" style="color: var(--light-text);">Fill in your details below. Estimated completion time: 10-15 minutes</p>
+                    </div>
+
+                    <form id="applicationForm" class="modern-form">
+                        <!-- Personal Information با آکاردئون -->
+                        <div class="form-section card-section">
+                            <div class="section-header" onclick="toggleSection('personalInfo')">
+                                <div class="header-content">
+                                    <div class="section-number">01</div>
+                                    <div class="section-title-content">
+                                        <h3 style="color: var(--primary-blue);">Personal Information</h3>
+                                        <p style="color: var(--light-text);">Basic details about yourself</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-down toggle-icon" id="personalInfoIcon"></i>
+                            </div>
+                            <div class="section-body" id="personalInfoBody" style="display: block;">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <input type="text" id="firstName" class="form-control" required>
+                                            <label for="firstName" style="color: var(--light-text);">First Name *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <input type="text" id="lastName" class="form-control" required>
+                                            <label for="lastName" style="color: var(--light-text);">Last Name *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <input type="date" id="dob" class="form-control" required>
+                                            <label for="dob" style="color: var(--light-text);">Date of Birth *</label>
+                                            <div class="form-icon">
+                                                {% comment %} <i class="fas fa-calendar-alt"></i> {% endcomment %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <select id="gender" class="form-select" required>
+                                                <option value=""></option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                            <label for="gender" style="color: var(--light-text);">Gender *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-venus-mars"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <input type="email" id="email" class="form-control" required>
+                                            <label for="email" style="color: var(--light-text);">Email Address *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <input type="tel" id="phone" class="form-control" required>
+                                            <label for="phone" style="color: var(--light-text);">Phone Number *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-phone"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Address Information -->
+                        <div class="form-section card-section">
+                            <div class="section-header" onclick="toggleSection('addressInfo')">
+                                <div class="header-content">
+                                    <div class="section-number">02</div>
+                                    <div class="section-title-content">
+                                        <h3 style="color: var(--primary-blue);">Address Information</h3>
+                                        <p style="color: var(--light-text);">Where you currently reside</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-down toggle-icon" id="addressInfoIcon"></i>
+                            </div>
+                            <div class="section-body" id="addressInfoBody" style="display: none;">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <select id="country" class="form-select" required>
+                                                <option value=""></option>
+                                                <option value="tr">Turkey</option>
+                                                <option value="us">United States</option>
+                                                <option value="gb">United Kingdom</option>
+                                                <option value="de">Germany</option>
+                                                <option value="fr">France</option>
+                                            </select>
+                                            <label for="country" style="color: var(--light-text);">Country *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-globe"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <input type="text" id="city" class="form-control" required>
+                                            <label for="city" style="color: var(--light-text);">City *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-city"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group floating-label">
+                                            <textarea id="address" class="form-control" rows="3" required></textarea>
+                                            <label for="address" style="color: var(--light-text);">Full Address *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Academic Information -->
+                        <div class="form-section card-section">
+                            <div class="section-header" onclick="toggleSection('academicInfo')">
+                                <div class="header-content">
+                                    <div class="section-number">03</div>
+                                    <div class="section-title-content">
+                                        <h3 style="color: var(--primary-blue);">Academic Information</h3>
+                                        <p style="color: var(--light-text);">Your educational background and goals</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-down toggle-icon" id="academicInfoIcon"></i>
+                            </div>
+                            <div class="section-body" id="academicInfoBody" style="display: none;">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <select id="program" class="form-select" required>
+                                                <option value=""></option>
+                                                <option value="computer">Computer Engineering</option>
+                                                <option value="business">Business Administration</option>
+                                                <option value="medicine">Medicine</option>
+                                                <option value="law">Law</option>
+                                                <option value="architecture">Architecture</option>
+                                            </select>
+                                            <label for="program" style="color: var(--light-text);">Desired Program *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <select id="semester" class="form-select" required>
+                                                <option value=""></option>
+                                                <option value="fall2024">Fall 2024</option>
+                                                <option value="spring2025">Spring 2025</option>
+                                                <option value="fall2025">Fall 2025</option>
+                                            </select>
+                                            <label for="semester" style="color: var(--light-text);">Start Date *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <select id="educationLevel" class="form-select" required>
+                                                <option value=""></option>
+                                                <option value="highschool">High School Diploma</option>
+                                                <option value="bachelor">Bachelor's Degree</option>
+                                                <option value="master">Master's Degree</option>
+                                                <option value="phd">PhD</option>
+                                            </select>
+                                            <label for="educationLevel" style="color: var(--light-text);">Education Level *</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-university"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group floating-label">
+                                            <select id="englishLevel" class="form-select">
+                                                <option value=""></option>
+                                                <option value="beginner">Beginner (A1-A2)</option>
+                                                <option value="intermediate">Intermediate (B1-B2)</option>
+                                                <option value="advanced">Advanced (C1-C2)</option>
+                                                <option value="native">Native Speaker</option>
+                                            </select>
+                                            <label for="englishLevel" style="color: var(--light-text);">English Proficiency</label>
+                                            <div class="form-icon">
+                                                <i class="fas fa-language"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Documents Upload -->
+                        <div class="form-section card-section">
+                            <div class="section-header" onclick="toggleSection('documentsInfo')">
+                                <div class="header-content">
+                                    <div class="section-number">04</div>
+                                    <div class="section-title-content">
+                                        <h3 style="color: var(--primary-blue);">Required Documents</h3>
+                                        <p style="color: var(--light-text);">Upload your academic documents</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-down toggle-icon" id="documentsInfoIcon"></i>
+                            </div>
+                            <div class="section-body" id="documentsInfoBody" style="display: none;">
+                                <div class="upload-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    <p>Please upload clear scanned copies of the following documents. Maximum file size: 5MB per document. Supported formats: PDF, JPG, PNG</p>
+                                </div>
+                                
+                                <div class="upload-grid">
+                                    <div class="upload-card">
+                                        <div class="upload-icon">
+                                            <i class="fas fa-passport"></i>
+                                        </div>
+                                        <div class="upload-content">
+                                            <h4 style="color: var(--primary-blue);">Passport Copy</h4>
+                                            <p style="color: var(--light-text);">Clear scan of passport information page</p>
+                                            <div class="upload-area" data-type="passport">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Drag & drop or click to upload</p>
+                                                <input type="file" class="file-input" accept=".pdf,.jpg,.png" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="upload-card">
+                                        <div class="upload-icon">
+                                            <i class="fas fa-certificate"></i>
+                                        </div>
+                                        <div class="upload-content">
+                                            <h4 style="color: var(--primary-blue);">Diploma/Certificate</h4>
+                                            <p style="color: var(--light-text);">High school or previous degree certificate</p>
+                                            <div class="upload-area" data-type="diploma">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Drag & drop or click to upload</p>
+                                                <input type="file" class="file-input" accept=".pdf,.jpg,.png" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="upload-card">
+                                        <div class="upload-icon">
+                                            <i class="fas fa-file-alt"></i>
+                                        </div>
+                                        <div class="upload-content">
+                                            <h4 style="color: var(--primary-blue);">Academic Transcript</h4>
+                                            <p style="color: var(--light-text);">Official academic transcripts</p>
+                                            <div class="upload-area" data-type="transcript">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Drag & drop or click to upload</p>
+                                                <input type="file" class="file-input" accept=".pdf,.jpg,.png" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="upload-card">
+                                        <div class="upload-icon">
+                                            <i class="fas fa-camera"></i>
+                                        </div>
+                                        <div class="upload-content">
+                                            <h4 style="color: var(--primary-blue);">Passport Photo</h4>
+                                            <p style="color: var(--light-text);">Passport-sized photo, white background</p>
+                                            <div class="upload-area" data-type="photo">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Drag & drop or click to upload</p>
+                                                <input type="file" class="file-input" accept=".jpg,.jpeg,.png" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Submit -->
+                        <div class="form-section card-section">
+                            <div class="terms-section">
+                                <div class="terms-header">
+                                    <h4 style="color: var(--primary-blue);"><i class="fas fa-shield-alt me-2"></i>Terms & Conditions</h4>
+                                </div>
+                                <div class="terms-content">
+                                    <div class="form-check custom-checkbox">
+                                        <input type="checkbox" id="termsCheck" class="form-check-input" required>
+                                        <label for="termsCheck" class="form-check-label" style="color: var(--dark-text);">
+                                            I agree to the <a href="#" class="terms-link">Terms and Conditions</a> and <a href="#" class="terms-link">Privacy Policy</a> of Avrasya University. I understand that all information provided is accurate to the best of my knowledge.
+                                        </label>
+                                    </div>
+                                    <div class="form-check custom-checkbox mt-3">
+                                        <input type="checkbox" id="newsletterCheck" class="form-check-input">
+                                        <label for="newsletterCheck" class="form-check-label" style="color: var(--dark-text);">
+                                            I would like to receive updates, news, and information about scholarships and events from Avrasya University via email.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="submit-section">
+                                <button type="submit" class="submit-button">
+                                    <span class="button-text">Submit Application</span>
+                                    <span class="button-icon">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </span>
+                                </button>
+                                <p class="submit-note" style="color: var(--light-text);">
+                                    <i class="fas fa-lock me-2"></i>
+                                    Your information is secure and encrypted
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Success Steps -->
+                <div class="success-steps-section mt-6">
+                    <h2 class="section-title-with-icon mb-4" style="color: var(--primary-blue);">
+                        <i class="fas fa-trophy me-2"></i>What Happens Next?
+                    </h2>
+                    <div class="steps-timeline">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4 style="color: var(--primary-blue);">Application Review</h4>
+                                <p style="color: var(--light-text);">Our admissions team reviews your application within 3-5 business days</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4 style="color: var(--primary-blue);">Interview Schedule</h4>
+                                <p style="color: var(--light-text);">If shortlisted, we'll schedule an online interview at your convenience</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4 style="color: var(--primary-blue);">Admission Decision</h4>
+                                <p style="color: var(--light-text);">Receive your admission decision within 2 weeks of interview</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4 style="color: var(--primary-blue);">Welcome Package</h4>
+                                <p style="color: var(--light-text);">Get your official acceptance letter and welcome package</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-blue: #192f59;
+    --secondary-blue: #092442;
+    --accent-orange: #e49516;
+    --accent-gold: #f79f10;
+    --light-bg: #f7f9fc;
+    --dark-text: #1b2434;
+    --light-text: #666;
+    --white: #ffffff;
+    --border-color: rgba(141, 212, 227, 0.2);
+    --shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* متغیرهای رنگ پیشرفته */
+:root {
+    --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, #2d4a8a 100%);
+    --gradient-orange: linear-gradient(135deg, var(--accent-orange) 0%, #f7b731 100%);
+    --gradient-blue: linear-gradient(135deg, #3494E6 0%, #2c3e50 100%);
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+/* Hero Section پیشرفته */
+.application-hero {
+    background: var(--gradient-primary);
+    color: var(--white);
+    padding: 80px 0 120px;
+    position: relative;
+    overflow: hidden;
+    margin-top: -110px;
+    
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    font-family: 'Metropolis', sans-serif;
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-top: 60px;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-orange);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Application Badge */
+.application-badge {
+    display: inline-block;
+    background: var(--gradient-orange);
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.badge-text {
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Progress Bar */
+.application-progress {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.progress-container::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background: rgba(255,255,255,0.2);
+    z-index: 1;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 10px;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+.progress-step.active .step-icon {
+    background: var(--accent-orange);
+    border-color: var(--accent-orange);
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(228, 149, 22, 0.4);
+}
+
+.step-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Application Cards */
+.app-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    position: relative;
+    height: 100%;
+    border: 1px solid rgba(25, 47, 89, 0.1);
+}
+
+.app-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(25, 47, 89, 0.15);
+}
+
+.card-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 2;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card-individual .card-icon {
+    color: var(--accent-orange);
+    background: linear-gradient(135deg, rgba(228, 149, 22, 0.1) 0%, rgba(228, 149, 22, 0.05) 100%);
+}
+
+.card-agency .card-icon {
+    color: var(--primary-blue);
+    background: linear-gradient(135deg, rgba(25, 47, 89, 0.1) 0%, rgba(25, 47, 89, 0.05) 100%);
+}
+
+.card-image {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.app-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.card-content {
+    padding: 30px;
+}
+
+.card-content h3 {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.card-description {
+    color: var(--light-text);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.features-list {
+    margin-bottom: 25px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: var(--dark-text);
+}
+
+.feature-item i {
+    color: #4CAF50;
+    margin-right: 10px;
+    font-size: 0.9rem;
+}
+
+.app-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-individual {
+    background: var(--gradient-orange);
+    color: white;
+}
+
+.btn-individual:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(228, 149, 22, 0.3);
+}
+
+.btn-agency {
+    background: var(--gradient-blue);
+    color: white;
+}
+
+.btn-agency:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(25, 47, 89, 0.3);
+}
+
+/* Modern Form */
+.modern-form {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.2);
+}
+
+.form-title {
+    color: var(--primary-blue);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.form-subtitle {
+    color: var(--light-text);
+    font-size: 1.1rem;
+}
+
+/* Form Sections */
+.card-section {
+    background: white;
+    border-radius: 15px;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    margin-bottom: 25px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card-section:hover {
+    border-color: rgba(141, 212, 227, 0.4);
+    box-shadow: 0 5px 20px rgba(141, 212, 227, 0.1);
+}
+
+.section-header {
+    padding: 25px 30px;
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.05) 0%, rgba(141, 212, 227, 0.02) 100%);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.section-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(25, 47, 89, 0.1);
+    line-height: 1;
+}
+
+.section-title-content h3 {
+    color: var(--primary-blue);
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.section-title-content p {
+    color: var(--light-text);
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+}
+
+.toggle-icon {
+    color: var(--accent-orange);
+    transition: transform 0.3s ease;
+}
+
+.section-body {
+    padding: 30px;
+    display: none;
+}
+
+.section-body.active {
+    display: block;
+}
+
+/* Floating Label Form */
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.floating-label {
+    position: relative;
+}
+
+.floating-label label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: var(--light-text);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: white;
+    padding: 0 5px;
+}
+
+.floating-label input:focus ~ label,
+.floating-label input:valid ~ label,
+.floating-label select:focus ~ label,
+.floating-label select:valid ~ label,
+.floating-label textarea:focus ~ label,
+.floating-label textarea:valid ~ label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.8rem;
+    color: var(--accent-orange);
+}
+
+.form-control, .form-select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid rgba(141, 212, 227, 0.3);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    color: var(--dark-text);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 0 3px rgba(228, 149, 22, 0.1);
+    outline: none;
+}
+
+.form-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--light-text);
+}
+
+/* Upload Cards */
+.upload-info {
+    background: linear-gradient(135deg, rgba(25, 47, 89, 0.05) 0%, rgba(141, 212, 227, 0.05) 100%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.upload-info i {
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.upload-info p {
+    color: var(--dark-text);
+    margin: 0;
+}
+
+.upload-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.upload-card {
+    background: white;
+    border: 2px dashed rgba(141, 212, 227, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.upload-card:hover {
+    border-color: var(--accent-orange);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(228, 149, 22, 0.1);
+}
+
+.upload-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(228, 149, 22, 0.1) 0%, rgba(141, 212, 227, 0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+}
+
+.upload-content h4 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.upload-content p {
+    color: var(--light-text);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.upload-area {
+    border: 2px dashed rgba(141, 212, 227, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.upload-area:hover {
+    border-color: var(--accent-orange);
+    background: rgba(228, 149, 22, 0.05);
+}
+
+.upload-area i {
+    font-size: 2rem;
+    color: var(--light-text);
+    margin-bottom: 10px;
+}
+
+.file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Terms Section */
+.terms-section {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.05) 0%, rgba(25, 47, 89, 0.02) 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.terms-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+}
+
+.custom-checkbox {
+    margin-bottom: 15px;
+}
+
+.custom-checkbox .form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-top: 0.3rem;
+}
+
+.custom-checkbox .form-check-input:checked {
+    background-color: var(--accent-orange);
+    border-color: var(--accent-orange);
+}
+
+.terms-link {
+    color: var(--accent-orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+/* Submit Button */
+.submit-section {
+    text-align: center;
+}
+
+.submit-button {
+    background: var(--gradient-orange);
+    color: white;
+    border: none;
+    padding: 20px 50px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(228, 149, 22, 0.3);
+}
+
+.button-icon {
+    transition: transform 0.3s ease;
+}
+
+.submit-button:hover .button-icon {
+    transform: translateX(5px);
+}
+
+.submit-note {
+    color: var(--light-text);
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+/* Success Steps */
+.success-steps-section {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.05) 0%, rgba(25, 47, 89, 0.02) 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 40px;
+}
+
+.section-title-with-icon {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.steps-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.step-item {
+    text-align: center;
+    padding: 25px;
+    background: white;
+    border-radius: 15px;
+    position: relative;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.step-item:hover {
+    border-color: rgba(228, 149, 22, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-orange);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 20px;
+}
+
+.step-content h4 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.step-content p {
+    color: var(--light-text);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Utility Classes */
+.mb-6 { margin-bottom: 4rem !important; }
+.mt-6 { margin-top: 4rem !important; }
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-stats {
+        gap: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .steps-timeline {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .progress-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .progress-container::before {
+        display: none;
+    }
+    
+    .progress-step {
+        flex-direction: row;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .step-icon {
+        margin-bottom: 0;
+    }
+    
+    .upload-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .steps-timeline {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .form-header {
+        padding: 20px;
+    }
+    
+    .section-header {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .section-number {
+        font-size: 2rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content-wrapper {
+    animation: fadeIn 0.6s ease;
+}
+
+
+/* Sidebar */
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid var(--border-color);
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+</style>
+
+<script>
+// تابع برای toggle کردن بخش‌های فرم
+function toggleSection(sectionId) {
+    const body = document.getElementById(sectionId + 'Body');
+    const icon = document.getElementById(sectionId + 'Icon');
+    
+    if (body.style.display === 'none' || !body.style.display) {
+        body.style.display = 'block';
+        body.classList.add('active');
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        body.style.display = 'none';
+        body.classList.remove('active');
+        icon.style.transform = 'rotate(0deg)';
+    }
+}
+
+// باز کردن بخش اول به صورت پیش‌فرض
+document.addEventListener('DOMContentLoaded', function() {
+    // باز کردن بخش اول
+    const firstSection = document.getElementById('personalInfoBody');
+    const firstIcon = document.getElementById('personalInfoIcon');
+    if (firstSection && firstIcon) {
+        firstSection.style.display = 'block';
+        firstSection.classList.add('active');
+    }
+    
+    // File Upload Animation
+    const uploadAreas = document.querySelectorAll('.upload-area');
+    uploadAreas.forEach(area => {
+        const input = area.querySelector('.file-input');
+        
+        area.addEventListener('click', () => input.click());
+        
+        area.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            area.style.borderColor = 'var(--accent-orange)';
+            area.style.background = 'rgba(228, 149, 22, 0.1)';
+        });
+        
+        area.addEventListener('dragleave', () => {
+            area.style.borderColor = '';
+            area.style.background = '';
+        });
+        
+        area.addEventListener('drop', (e) => {
+            e.preventDefault();
+            area.style.borderColor = '';
+            area.style.background = '';
+            
+            if (e.dataTransfer.files.length) {
+                input.files = e.dataTransfer.files;
+                showUploadSuccess(area);
+            }
+        });
+        
+        input.addEventListener('change', () => {
+            if (input.files.length) {
+                showUploadSuccess(area);
+            }
+        });
+    });
+
+    // Form Validation
+    const form = document.getElementById('applicationForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate all required fields
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                    
+                    // Add error message
+                    if (!field.nextElementSibling?.classList.contains('error-message')) {
+                        const error = document.createElement('div');
+                        error.className = 'error-message text-danger mt-1';
+                        error.textContent = 'This field is required';
+                        field.parentNode.appendChild(error);
+                    }
+                } else {
+                    field.classList.remove('is-invalid');
+                    const error = field.parentNode.querySelector('.error-message');
+                    if (error) error.remove();
+                }
+            });
+            
+            if (isValid) {
+                // Show success animation
+                const submitBtn = form.querySelector('.submit-button');
+                const originalText = submitBtn.querySelector('.button-text').textContent;
+                
+                submitBtn.querySelector('.button-text').textContent = 'Submitting...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    showApplicationSuccess();
+                    
+                    // Reset button
+                    setTimeout(() => {
+                        submitBtn.querySelector('.button-text').textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                }, 1500);
+            } else {
+                // Shake form for attention
+                form.classList.add('shake');
+                setTimeout(() => form.classList.remove('shake'), 500);
+            }
+        });
+        
+        // Real-time validation
+        form.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.classList.remove('is-invalid');
+                    const error = this.parentNode.querySelector('.error-message');
+                    if (error) error.remove();
+                }
+            });
+        });
+    }
+    
+    // Progress Step Animation
+    const progressSteps = document.querySelectorAll('.progress-step');
+    progressSteps.forEach((step, index) => {
+        setTimeout(() => {
+            step.style.opacity = '1';
+            step.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+    
+    // Card Hover Effects
+    const cards = document.querySelectorAll('.app-card');
+    cards.forEach(card => {
+        card.style.transition = 'all 0.4s ease';
+    });
+});
+
+function showUploadSuccess(area) {
+    area.innerHTML = '<i class="fas fa-check-circle text-success"></i><p class="mt-2">File uploaded successfully!</p>';
+    area.style.borderColor = '#4CAF50';
+    area.style.background = 'rgba(76, 175, 80, 0.1)';
+    
+    // Revert after 3 seconds
+    setTimeout(() => {
+        area.innerHTML = '<i class="fas fa-cloud-upload-alt"></i><p>Drag & drop or click to upload</p><input type="file" class="file-input">';
+        area.style.borderColor = '';
+        area.style.background = '';
+        
+        // Re-attach event listeners
+        const newInput = area.querySelector('.file-input');
+        newInput.addEventListener('change', function() {
+            if (this.files.length) showUploadSuccess(area);
+        });
+    }, 3000);
+}
+
+function showApplicationSuccess() {
+    // Create success modal
+    const modal = document.createElement('div');
+    modal.className = 'application-success-modal';
+    modal.innerHTML = `
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Application Submitted Successfully!</h3>
+            <p>Thank you for your application. We've sent a confirmation email with your application details.</p>
+            <p class="application-number">Application ID: <strong>AVU-${Date.now().toString().slice(-8)}</strong></p>
+            <div class="success-actions">
+                <button onclick="window.location.href='https://obs.avrasya.edu.tr/oibs/foa_app/'" class="btn-primary">
+                    Track Your Application
+                </button>
+                <button onclick="this.closest('.application-success-modal').remove()" class="btn-outline">
+                    Close
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Add styles for modal
+    const style = document.createElement('style');
+    style.textContent = `
+        .application-success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(25, 47, 89, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .success-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: slideUp 0.5s ease;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: white;
+            font-size: 2.5rem;
+        }
+        
+        .success-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+        
+        .success-content p {
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+        
+        .application-number {
+            background: rgba(141, 212, 227, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: inline-block;
+            color: var(--primary-blue);
+        }
+        
+        .success-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn-primary {
+            background: var(--accent-orange);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    `;
+    
+    document.head.appendChild(style);
+}
+
+
+
+
+
+
+</script>
+
+{% endblock %}

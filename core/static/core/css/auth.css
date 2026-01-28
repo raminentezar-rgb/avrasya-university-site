@@ -1,0 +1,518 @@
+/* core/static/css/auth.css */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto:400,500,700');
+        @import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        @font-face {
+            font-family: 'Metropolis';
+            src: url('{% static "core/fonts/Metropolis-Black.woff2" %}') format('woff2'),
+                url('{% static "core/fonts/Metropolis-Black.woff" %}') format('woff');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }   
+:root {
+    --primary-dark-blue: #1d61a9;
+    --secondary-medium-blue: #8dd4e3;
+    --text-light: #6c757d;
+    --text-dark: #343a40;
+}
+
+/* استایل‌های مشترک برای تمام صفحات احراز هویت */
+.auth-hero {
+    background: linear-gradient(135deg, rgba(29, 97, 169, 0.9) 0%, rgba(9, 36, 66, 0.9) 100%);
+    color: white;
+    padding: 140px 0 60px;
+    text-align: center;
+    margin-top: -60px;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("{% static 'core/img/student/about-banner.png' %}") center/cover no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.auth-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    font-family: 'Metropolis', sans-serif;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.auth-hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.auth-container {
+    padding: 40px 0 80px;
+    min-height: calc(100vh - 200px);
+}
+
+.auth-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.logo-circle {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue) 0%, var(--primary-dark-blue) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 36px;
+    box-shadow: 0 10px 30px rgba(29, 97, 169, 0.3);
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-circle:hover {
+    transform: scale(1.05);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.auth-header h2 {
+    color: var(--primary-dark-blue);
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 20px 0 10px;
+}
+
+.auth-header p {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+/* فرم‌ها */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    border: 2px solid #e1e5eb;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.input-with-icon input:focus {
+    outline: none;
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.2);
+    background: white;
+}
+
+.input-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 2;
+}
+
+.input-icon:hover {
+    color: var(--secondary-medium-blue);
+}
+
+/* دکمه‌ها */
+.btn-auth {
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-auth::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn-auth:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(40, 40);
+        opacity: 0;
+    }
+}
+
+.btn-auth-primary {
+    background: linear-gradient(135deg, var(--secondary-medium-blue) 0%, var(--primary-dark-blue) 100%);
+    color: white;
+    box-shadow: 0 6px 20px rgba(29, 97, 169, 0.2);
+}
+
+.btn-auth-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(29, 97, 169, 0.3);
+}
+
+.btn-auth-secondary {
+    background: white;
+    color: var(--secondary-medium-blue);
+    border: 2px solid var(--secondary-medium-blue);
+    box-shadow: 0 4px 15px rgba(141, 212, 227, 0.1);
+}
+
+.btn-auth-secondary:hover {
+    background: linear-gradient(135deg, var(--secondary-medium-blue) 0%, var(--primary-dark-blue) 100%);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(29, 97, 169, 0.2);
+}
+
+/* جداکننده */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e1e5eb;
+}
+
+.divider span {
+    padding: 0 20px;
+    background: white;
+}
+
+/* کارت‌های اطلاعات */
+.auth-info-card {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.1) 0%, rgba(29, 97, 169, 0.05) 100%);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.auth-info-card h5 {
+    color: var(--primary-dark-blue);
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.auth-info-card h5 i {
+    margin-right: 10px;
+}
+
+/* لینک‌ها */
+.auth-link {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.auth-link:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+    transform: translateX(3px);
+}
+
+.auth-link i {
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.auth-link:hover i {
+    transform: translateX(5px);
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .auth-hero {
+        padding: 120px 0 50px;
+        margin-top: -40px;
+    }
+    
+    .auth-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .auth-card {
+        padding: 30px 20px;
+    }
+    
+    .logo-circle {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 576px) {
+    .auth-hero h1 {
+        font-size: 1.9rem;
+    }
+    
+    .auth-hero p {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    
+    .btn-auth {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+}
+
+
+/* استایل‌های کامپوننت‌های اضافی */
+.auth-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    z-index: 9999;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    max-width: 350px;
+    border-left: 4px solid;
+}
+
+.auth-toast.show {
+    transform: translateX(0);
+}
+
+.auth-toast-success {
+    border-left-color: #28a745;
+}
+
+.auth-toast-error {
+    border-left-color: #dc3545;
+}
+
+.auth-toast-warning {
+    border-left-color: #ffc107;
+}
+
+.auth-toast-info {
+    border-left-color: #17a2b8;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+}
+
+.toast-content i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.auth-toast-success .toast-content i {
+    color: #28a745;
+}
+
+.auth-toast-error .toast-content i {
+    color: #dc3545;
+}
+
+.auth-toast-warning .toast-content i {
+    color: #ffc107;
+}
+
+.auth-toast-info .toast-content i {
+    color: #17a2b8;
+}
+
+.toast-content span {
+    flex: 1;
+    font-size: 14px;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-light);
+    margin-left: 10px;
+    padding: 0;
+    line-height: 1;
+}
+
+.toast-close:hover {
+    color: var(--text-dark);
+}
+
+/* انیمیشن‌های ورود */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(29, 97, 169, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(29, 97, 169, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(29, 97, 169, 0);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+/* استایل برای فیلدهای فرم */
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(141, 212, 227, 0.25);
+    border-color: var(--secondary-medium-blue);
+}
+
+/* ویدجت کمک */
+.help-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.help-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--secondary-medium-blue) 0%, var(--primary-dark-blue) 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 25px rgba(29, 97, 169, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.help-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(29, 97, 169, 0.4);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .auth-card {
+        background: #2d3748;
+        color: #e2e8f0;
+        border-color: #4a5568;
+    }
+    
+    .auth-form label {
+        color: #cbd5e0;
+    }
+    
+    .input-with-icon input {
+        background: #4a5568;
+        border-color: #718096;
+        color: #e2e8f0;
+    }
+    
+    .input-with-icon input:focus {
+        background: #2d3748;
+        border-color: var(--secondary-medium-blue);
+    }
+}

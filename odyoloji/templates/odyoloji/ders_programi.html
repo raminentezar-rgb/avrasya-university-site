@@ -1,0 +1,309 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Odyoloji Bölümü Gelişimi Ders Programı{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+ <div class="col-lg-3 mb-4">
+        {% include 'odyoloji/sidebar.html' %}
+    </div>
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Odyoloji Bölümü Gelişimi Ders Programı</h1>
+                        <p class="lead mb-4">
+                            Bölümümüzün güncel ders programları ve akademik dokümanları
+                        </p>
+                        <div class="d-flex gap-3">
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-files me-1"></i>{{ toplam_dosya }} Dosya
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-calendar me-1"></i>{{ akademik_yillar.0 }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-journal-text display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtreler -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5 class="mb-0 text-primary">
+                            <i class="bi bi-funnel me-2"></i>Ders Programları
+                        </h5>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <span class="text-muted">
+                            Toplam <strong>{{ toplam_dosya }}</strong> dosya
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. Sınıf -->
+        {% if siniflar.1 %}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-1-circle me-2"></i>1. Sınıf Ders Programları
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for dosya in siniflar.1 %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi {{ dosya.get_dosya_icon }} display-4 text-primary mb-3"></i>
+                                <h6 class="card-title">{{ dosya.baslik }}</h6>
+                                <p class="card-text small text-muted">
+                                    {{ dosya.akademik_yil }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center small text-muted">
+                                    <span>{{ dosya.get_dosya_turu_display }}</span>
+                                    <span>{{ dosya.get_dosya_boyutu }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="{{ dosya.dosya.url }}" target="_blank" class="btn btn-primary btn-sm w-100">
+                                    <i class="bi bi-download me-1"></i> İndir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 2. Sınıf -->
+        {% if siniflar.2 %}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-2-circle me-2"></i>2. Sınıf Ders Programları
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for dosya in siniflar.2 %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi {{ dosya.get_dosya_icon }} display-4 text-success mb-3"></i>
+                                <h6 class="card-title">{{ dosya.baslik }}</h6>
+                                <p class="card-text small text-muted">
+                                    {{ dosya.akademik_yil }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center small text-muted">
+                                    <span>{{ dosya.get_dosya_turu_display }}</span>
+                                    <span>{{ dosya.get_dosya_boyutu }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="{{ dosya.dosya.url }}" target="_blank" class="btn btn-success btn-sm w-100">
+                                    <i class="bi bi-download me-1"></i> İndir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 3. Sınıf -->
+        {% if siniflar.3 %}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="bi bi-3-circle me-2"></i>3. Sınıf Ders Programları
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for dosya in siniflar.3 %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi {{ dosya.get_dosya_icon }} display-4 text-warning mb-3"></i>
+                                <h6 class="card-title">{{ dosya.baslik }}</h6>
+                                <p class="card-text small text-muted">
+                                    {{ dosya.akademik_yil }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center small text-muted">
+                                    <span>{{ dosya.get_dosya_turu_display }}</span>
+                                    <span>{{ dosya.get_dosya_boyutu }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="{{ dosya.dosya.url }}" target="_blank" class="btn btn-warning btn-sm w-100">
+                                    <i class="bi bi-download me-1"></i> İndir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 4. Sınıf -->
+        {% if siniflar.4 %}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-4-circle me-2"></i>4. Sınıf Ders Programları
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for dosya in siniflar.4 %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi {{ dosya.get_dosya_icon }} display-4 text-info mb-3"></i>
+                                <h6 class="card-title">{{ dosya.baslik }}</h6>
+                                <p class="card-text small text-muted">
+                                    {{ dosya.akademik_yil }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center small text-muted">
+                                    <span>{{ dosya.get_dosya_turu_display }}</span>
+                                    <span>{{ dosya.get_dosya_boyutu }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="{{ dosya.dosya.url }}" target="_blank" class="btn btn-info btn-sm w-100">
+                                    <i class="bi bi-download me-1"></i> İndir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Tüm Sınıflar -->
+        {% if siniflar.tum %}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-collection me-2"></i>Tüm Sınıflar
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for dosya in siniflar.tum %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi {{ dosya.get_dosya_icon }} display-4 text-secondary mb-3"></i>
+                                <h6 class="card-title">{{ dosya.baslik }}</h6>
+                                <p class="card-text small text-muted">
+                                    {{ dosya.akademik_yil }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center small text-muted">
+                                    <span>{{ dosya.get_dosya_turu_display }}</span>
+                                    <span>{{ dosya.get_dosya_boyutu }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="{{ dosya.dosya.url }}" target="_blank" class="btn btn-secondary btn-sm w-100">
+                                    <i class="bi bi-download me-1"></i> İndir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Lisansüstü -->
+        {% if siniflar.lisansustu %}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-mortarboard me-2"></i>Lisansüstü Programlar
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for dosya in siniflar.lisansustu %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi {{ dosya.get_dosya_icon }} display-4 text-dark mb-3"></i>
+                                <h6 class="card-title">{{ dosya.baslik }}</h6>
+                                <p class="card-text small text-muted">
+                                    {{ dosya.akademik_yil }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center small text-muted">
+                                    <span>{{ dosya.get_dosya_turu_display }}</span>
+                                    <span>{{ dosya.get_dosya_boyutu }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="{{ dosya.dosya.url }}" target="_blank" class="btn btn-dark btn-sm w-100">
+                                    <i class="bi bi-download me-1"></i> İndir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Eğer dosya yoksa -->
+        {% if toplam_dosya == 0 %}
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center py-5">
+                <i class="bi bi-folder-x display-1 text-muted mb-3"></i>
+                <h4 class="text-muted">Henüz dosya bulunmuyor</h4>
+                <p class="text-muted">En kısa sürede ders programları yüklenecektir.</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+
+.dosya-kart {
+    border-left: 4px solid transparent;
+}
+
+.dosya-kart:hover {
+    border-left-color: #0d6efd;
+}
+</style>
+{% endblock %}

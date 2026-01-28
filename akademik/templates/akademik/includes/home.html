@@ -1,0 +1,721 @@
+{% extends 'akademik/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Akademik{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>AVRASYA ÜNİVERSİTESİ_AKADEMİK</h1>
+            <p></p>
+        </div>
+    </div>
+</section>
+
+
+<div class="sidebar-layout">
+    <!-- سایدبار در سمت چپ -->
+    <div class="sidebar-left">
+        {% include 'akademik/akademik_sidebar.html' %}
+    </div>
+    
+    <!-- محتوای اصلی در سمت راست -->
+    <div class="content-right">
+        <!-- Hero Section -->
+        {% comment %} <section class="akademik-hero">
+            <div class="hero-background">
+                <div class="hero-content">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h1 class="hero-title">AVRASYA ÜNİVERSİTESİ</h1>
+                            <h3 class="hero-subtitle">AKADEMİK</h3>
+                            <p class="hero-description">
+                                Öğretim üyeleri, öğrencileri ve idari kadrosu ile akademik mükemmeliyet vizyonuna sahip olan 
+                                Avrasya Üniversitesi hem mühendislik/fen bilimleri, hem de beşeri/sosyal bilimlerinin 
+                                tümünde üstün nitelikli eğitim vererek, yıllardır Türkiye'nin en saygın eğitim kurumu kimliğini 
+                                korumayı başarmıştır.
+                            </p>
+                            <div class="hero-badges">
+                                <span class="hero-badge">
+                                    <i class="fas fa-book me-2"></i>30+ Lisans Programı
+                                </span>
+                                <span class="hero-badge">
+                                    <i class="fas fa-graduation-cap me-2"></i>80+ Lisansüstü Program
+                                </span>
+                                <span class="hero-badge">
+                                    <i class="fas fa-globe me-2"></i>400+ Değişim Anlaşması
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="hero-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> {% endcomment %}
+
+        <!-- Academic Highlights -->
+        <section class="academic-highlights">
+            {% comment %} <div class="section-header">
+                <h2 class="section-title">Akademik Birimlerimiz</h2>
+                <div class="title-underline"></div>
+            </div> {% endcomment %}
+            
+            <div class="row">
+                <!-- Enstitüler -->
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="academic-unit-card">
+                        <div class="unit-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="unit-content">
+                            <h4 class="unit-title">Enstitüler</h4>
+                            <p class="unit-description">
+                                Lisansüstü eğitim ve araştırma faaliyetlerinin yürütüldüğü, 
+                                akademik derinlik ve uzmanlaşmanın merkezi olan enstitülerimiz.
+                            </p>
+                            <div class="unit-stats">
+                                <div class="stat-item">
+                                    <strong>2-4</strong>
+                                    <span>Yıl</span>
+                                </div>
+                                <div class="stat-item">
+                                    <strong>120+</strong>
+                                    <span>AKTS</span>
+                                </div>
+                            </div>
+                            <a href="{% url 'lee:lee' %}" class="unit-link">
+                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fakülteler -->
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="academic-unit-card">
+                        <div class="unit-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="unit-content">
+                            <h4 class="unit-title">Fakülteler</h4>
+                            <p class="unit-description">
+                                6 farklı fakültemizde lisans düzeyinde kaliteli eğitim ve 
+                                multidisipliner araştırma olanakları sunuyoruz.
+                            </p>
+                            <div class="unit-stats">
+                                <div class="stat-item">
+                                    <strong>4</strong>
+                                    <span>Yıl</span>
+                                </div>
+                                <div class="stat-item">
+                                    <strong>240</strong>
+                                    <span>AKTS</span>
+                                </div>
+                            </div>
+                            <a href="{% url 'fakulteler:fakulteler' %}" class="unit-link">
+                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yüksekokullar -->
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="academic-unit-card">
+                        <div class="unit-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="unit-content">
+                            <h4 class="unit-title">Yüksekokullar</h4>
+                            <p class="unit-description">
+                                Uygulamalı bilimler alanında nitelikli eğitim veren, 
+                                sektörle entegre çalışan yüksekokullarımız.
+                            </p>
+                            <div class="unit-stats">
+                                <div class="stat-item">
+                                    <strong>4</strong>
+                                    <span>Yıl</span>
+                                </div>
+                                <div class="stat-item">
+                                    <strong>240</strong>
+                                    <span>AKTS</span>
+                                </div>
+                            </div>
+                            <a href="{% url 'yuksekokullari:yuksekokullari' %}" class="unit-link">
+                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meslek Yüksekokullar -->
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="academic-unit-card">
+                        <div class="unit-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="unit-content">
+                            <h4 class="unit-title">Meslek Yüksekokullar</h4>
+                            <p class="unit-description">
+                                Pratik becerilere odaklanan, sektörün ihtiyaçlarına yönelik 
+                                teknik elemanlar yetiştiren meslek yüksekokullarımız.
+                            </p>
+                            <div class="unit-stats">
+                                <div class="stat-item">
+                                    <strong>2</strong>
+                                    <span>Yıl</span>
+                                </div>
+                                <div class="stat-item">
+                                    <strong>120</strong>
+                                    <span>AKTS</span>
+                                </div>
+                            </div>
+                            <a href="{% url 'meslekyuksekokullari:meslekyuksekokullari' %}" class="unit-link">
+                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Information -->
+        <section class="additional-info">
+            <div class="info-card">
+                <div class="info-header">
+                    <h3 class="info-title">
+                        <i class="fas fa-info-circle me-2"></i>Akademik Hakkında
+                    </h3>
+                </div>
+                
+                <div class="info-content">
+                    <p class="info-text">
+                        Eğitim dili İngilizce olan Avrasya Üniversitesi'nde 30'un üzerinde lisans programı vardır. 
+                        Avrasya Üniversitesi, lisans eğitiminde öğrencilerin bir yandan kendi bölümlerinde zengin 
+                        ve derinlikli bir eğitim alırken, diğer yandan farklı disiplinlerden seçebilecekleri derslerle 
+                        ilgi ve becerilerini keşfedip, geliştirme fırsatı bulmalarını sağlayan bir eğitim geleneğini 
+                        benimsemiştir. Avrasya Üniversitesi'nde bazıları disiplinlerarası olmak üzere 80'in üzerinde 
+                        lisansüstü programı bulunmaktadır.
+                    </p>
+
+                    <p class="info-text">
+                        Uluslararasılaşmayı önemseyen Avrasya Üniversitesi'nde, yurtdışındaki seçkin üniversiteler 
+                        ile olmak üzere 400'ün üzerinde öğrenci değişim anlaşması vardır.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="quick-stats">
+            <div class="stats-card">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-item">
+                            <h3 class="stat-number">30+</h3>
+                            <p class="stat-label">Lisans Programı</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-item">
+                            <h3 class="stat-number">80+</h3>
+                            <p class="stat-label">Lisansüstü Program</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-item">
+                            <h3 class="stat-number">400+</h3>
+                            <p class="stat-label">Değişim Anlaşması</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-item">
+                            <h3 class="stat-number">6</h3>
+                            <p class="stat-label">Fakülte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+/* چیدمان سایدبار و محتوا */
+.sidebar-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    
+}
+
+.sidebar-left {
+    flex: 0 0 300px;
+    position: sticky;
+    top: 120px;
+}
+
+.content-right {
+    flex: 1;
+    min-width: 0;
+}
+
+/* استایل هیرو */
+.akademik-hero {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 40px;
+}
+
+.hero-background {
+    background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent-light-blue);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hero-badge {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.hero-badge:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.hero-icon {
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.8);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* بخش آکادمیک */
+.academic-highlights {
+    margin-bottom: 40px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    margin-top: 50px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    
+}
+
+.title-underline {
+    width: 80px;
+    height: 4px;
+    background: var(--secondary-medium-blue);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* کارت‌های واحدهای آکادمیک */
+.academic-unit-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.academic-unit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.academic-unit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.academic-unit-card:hover::before {
+    transform: scaleX(1);
+}
+
+.unit-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: white;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+}
+
+.unit-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.unit-title {
+    color: var(--primary-dark-blue);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.unit-description {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.unit-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.unit-stats .stat-item {
+    text-align: center;
+}
+
+.unit-stats strong {
+    color: var(--secondary-medium-blue);
+    font-size: 1.5rem;
+    display: block;
+}
+
+.unit-stats span {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.unit-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.7rem 1.5rem;
+    background: transparent;
+    color: var(--secondary-medium-blue);
+    border: 2px solid var(--secondary-medium-blue);
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.unit-link:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.3);
+}
+
+/* بخش اطلاعات اضافی */
+.additional-info {
+    margin-bottom: 40px;
+}
+
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.info-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary-medium-blue);
+}
+
+.info-title {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin: 0;
+}
+
+.info-text {
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.info-text:last-child {
+    margin-bottom: 0;
+}
+
+/* آمار سریع */
+.quick-stats {
+    margin-bottom: 40px;
+}
+
+.stats-card {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    color: white;
+    box-shadow: 0 10px 30px rgba(29, 97, 169, 0.3);
+}
+
+.quick-stats .stat-item {
+    padding: 1rem;
+}
+
+.quick-stats .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--accent-light-blue);
+}
+
+.quick-stats .stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* رسپانسیو */
+@media (max-width: 1200px) {
+    .sidebar-layout {
+        gap: 20px;
+    }
+    
+    .sidebar-left {
+        flex: 0 0 280px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-layout {
+        flex-direction: column;
+    }
+    
+    .sidebar-left {
+        flex: none;
+        width: 100%;
+        margin-bottom: 30px;
+        position: relative;
+        top: 0;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .hero-badges {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .hero-icon {
+        font-size: 4rem;
+        margin-top: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-layout {
+        padding: 15px;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .academic-unit-card {
+        padding: 1.5rem;
+    }
+    
+    .info-card {
+        padding: 1.5rem;
+    }
+    
+    .stats-card {
+        padding: 1.5rem;
+    }
+    
+    .quick-stats .stat-number {
+        font-size: 2rem;
+    }
+    
+    .unit-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-background {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .academic-unit-card {
+        padding: 1.25rem;
+    }
+    
+    .unit-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .unit-title {
+        font-size: 1.2rem;
+    }
+    
+    .quick-stats .stat-number {
+        font-size: 1.8rem;
+    }
+}
+</style>
+
+<script>
+// انیمیشن برای عناصر هنگام اسکرول
+document.addEventListener('DOMContentLoaded', function() {
+    // انیمیشن برای کارت‌های آکادمیک
+    const academicCards = document.querySelectorAll('.academic-unit-card');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    academicCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+    
+    // انیمیشن برای آمار
+    const statNumbers = document.querySelectorAll('.quick-stats .stat-number');
+    statNumbers.forEach(stat => {
+        stat.style.opacity = '0';
+        stat.style.transform = 'scale(0.8)';
+        stat.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    const statsObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                statNumbers.forEach(stat => {
+                    stat.style.opacity = '1';
+                    stat.style.transform = 'scale(1)';
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    const statsCard = document.querySelector('.stats-card');
+    if (statsCard) {
+        statsObserver.observe(statsCard);
+    }
+});
+</script>
+{% endblock %}

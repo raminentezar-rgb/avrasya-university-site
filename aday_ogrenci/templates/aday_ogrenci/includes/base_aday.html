@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Avrasya Üniversitesi - Aday Öğrenci{% endblock %}</title>
+    {% load static %}
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .aday-header {
+            background: linear-gradient(135deg, #2ED1F2  0%, #2ED1F2  100%);
+        }
+        .icon-card {
+            transition: all 0.3s ease;
+        }
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* استایل‌های منوی کشویی */
+        .dropdown:hover > .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #0d6efd;
+        }
+        
+        .dropdown-submenu {
+            position: relative;
+        }
+        
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            border-radius: 0 6px 6px 6px;
+            display: none;
+        }
+        
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: #0d6efd !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="aday-header text-white shadow">
+        <div class="container">
+            <div class="row align-items-center py-3">
+                <div class="col-md-6">
+                    <a class="nav-link" href="{% url 'aday_ogrenci:basvuru' %}" class="text-white text-decoration-none">
+                        <h1 class="h4 mb-0">
+                            <i class="bi bi-pencil-square me-1"></i>Online Başvuru
+                        </h1>
+                    </a>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a class="nav-link" href="{% url 'aday_ogrenci:aday_iletisim' %}">
+                        <i class="bi bi-telephone me-1"></i>İletişim
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <header class="shadow-sm bg-white sticky-top">
+        <div class="container py-3 d-flex justify-content-between align-items-center">
+            <a href="/" class="navbar-brand d-flex align-items-center">
+                <img src="{% static 'core/img/logo.png' %}" alt="Avrasya" height="60">
+                <span class="ms-3 fw-bold text-primary"></span>
+            </a>
+            <nav>
+                <ul class="nav">
+                    <!-- منوی Anasayfa با زیرمنو -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/" role="button">
+                            Anasayfa
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Üniversite Tanıtımı</a></li>
+                            <li><a class="dropdown-item" href="#">Rektör'ün Mesajı</a></li>
+                            <li><a class="dropdown-item" href="#">Misyon ve Vizyon</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Kampüs Yaşamı</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Yurtlar</a></li>
+                                    <li><a class="dropdown-item" href="#">Yemekhane</a></li>
+                                    <li><a class="dropdown-item" href="#">Spor Tesisleri</a></li>
+                                    <li><a class="dropdown-item" href="#">Kütüphane</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- منوی Aday Öğrenci با زیرمنو -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'aday_ogrenci:aday_anasayfa' %}" role="button">
+                            Aday Öğrenci
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'aday_ogrenci:basvuru' %}">Online Başvuru</a></li>
+                            <li><a class="dropdown-item" href="{% url 'aday_ogrenci:aday_iletisim' %}">İletişim</a></li>
+                            <li><a class="dropdown-item" href="{% url 'aday_ogrenci:kontenjanlar' %}">Kontenjanlar</a></li>
+                            <li><a class="dropdown-item" href="{% url 'aday_ogrenci:egitim_ucretleri' %}">Eğitim Ücretleri</a></li>
+                            <li><a class="dropdown-item" href="{% url 'aday_ogrenci:taban_puanlar' %}">Taban Puanlar</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Burs Olanakları</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Başarı Bursları</a></li>
+                                    <li><a class="dropdown-item" href="#">Sporcu Bursları</a></li>
+                                    <li><a class="dropdown-item" href="#">Sanat Bursları</a></li>
+                                    <li><a class="dropdown-item" href="#">İhtiyaç Bursları</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- منوی Akademik با زیرمنو -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'akademik:akademik' %}" role="button">
+                            Akademik
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Lisans Programları</a></li>
+                            <li><a class="dropdown-item" href="#">Yüksek Lisans</a></li>
+                            <li><a class="dropdown-item" href="#">Doktora</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Akademik Takvim</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">2024-2025 Güz Dönemi</a></li>
+                                    <li><a class="dropdown-item" href="#">2024-2025 Bahar Dönemi</a></li>
+                                    <li><a class="dropdown-item" href="#">2025-2026 Güz Dönemi</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Akademik Danışmanlık</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Danışman Atama</a></li>
+                                    <li><a class="dropdown-item" href="#">Danışman Görüşme Saatleri</a></li>
+                                    <li><a class="dropdown-item" href="#">Akademik Danışmanlık Kılavuzu</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- منوی Haberler با زیرمنو -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/news/" role="button">
+                            Haberler
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Üniversite Haberleri</a></li>
+                            <li><a class="dropdown-item" href="#">Etkinlikler</a></li>
+                            <li><a class="dropdown-item" href="#">Duyurular</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Arşiv</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">2024 Haberleri</a></li>
+                                    <li><a class="dropdown-item" href="#">2023 Haberleri</a></li>
+                                    <li><a class="dropdown-item" href="#">2022 Haberleri</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- منوی Akademik Kadro با زیرمنو -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/people/" role="button">
+                            Akademik Kadro
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Profesörler</a></li>
+                            <li><a class="dropdown-item" href="#">Doçentler</a></li>
+                            <li><a class="dropdown-item" href="#">Doktor Öğretim Üyeleri</a></li>
+                            <li><a class="dropdown-item" href="#">Öğretim Görevlileri</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Araştırma Görevlileri</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Tam Zamanlı</a></li>
+                                    <li><a class="dropdown-item" href="#">Yarı Zamanlı</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- منوی Fakülteler با زیرمنو -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/faculties/" role="button">
+                            Fakülteler
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Mühendislik Fakültesi</a></li>
+                            <li><a class="dropdown-item" href="#">Tıp Fakültesi</a></li>
+                            <li><a class="dropdown-item" href="#">Hukuk Fakültesi</a></li>
+                            <li><a class="dropdown-item" href="#">İktisadi ve İdari Bilimler Fakültesi</a></li>
+                            <li><a class="dropdown-item" href="#">Fen-Edebiyat Fakültesi</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Diğer Fakülteler</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Güzel Sanatlar</a></li>
+                                    <li><a class="dropdown-item" href="#">İlahiyat</a></li>
+                                    <li><a class="dropdown-item" href="#">Eğitim</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- منوی Hakkımızda با زیرمنو -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/about/" role="button">
+                            Hakkımızda
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tarihçe</a></li>
+                            <li><a class="dropdown-item" href="#">Yönetim</a></li>
+                            <li><a class="dropdown-item" href="#">Kalite Politikası</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Belgeler</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Stratejik Plan</a></li>
+                                    <li><a class="dropdown-item" href="#">Yıllık Faaliyet Raporları</a></li>
+                                    <li><a class="dropdown-item" href="#">Kurumsal Değerlendirme</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- منوی İletişim با زیرمنو -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/contact/" role="button">
+                            İletişim
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">İletişim Formu</a></li>
+                            <li><a class="dropdown-item" href="#">Yol Tarifi</a></li>
+                            <li><a class="dropdown-item" href="#">İletişim Bilgileri</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Birimler</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Öğrenci İşleri</a></li>
+                                    <li><a class="dropdown-item" href="#">Mali İşler</a></li>
+                                    <li><a class="dropdown-item" href="#">Kütüphane</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Aday Öğrenci İşleri</h5>
+                    <p class="mb-1">Tel: +90 (462) 334 05 50</p>
+                    <p class="mb-1">E-posta: aday@avrasya.edu.tr</p>
+                    <p>Çalışma Saatleri: 09:00 - 17:30</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Hızlı Bağlantılar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'aday_ogrenci:kontenjanlar' %}" class="text-light">Kontenjanlar</a></li>
+                        <li><a href="{% url 'aday_ogrenci:egitim_ucretleri' %}" class="text-light">Eğitim Ücretleri</a></li>
+                        <li><a href="{% url 'aday_ogrenci:taban_puanlar' %}" class="text-light">Taban Puanlar</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Sosyal Medya</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-light"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center py-3 bg-secondary">
+            © 2025 Avrasya Üniversitesi - Aday Öğrenci Portalı
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

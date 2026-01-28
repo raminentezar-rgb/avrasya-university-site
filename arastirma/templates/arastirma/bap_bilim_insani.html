@@ -1,0 +1,51 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}Bilim İnsanı Portalı - Avrasya University{% endblock %}
+
+{% block content %}
+<section class="research-hero" style="background: linear-gradient(135deg, #8dd4e3 0%, #1d61a9 100%); padding: 100px 0 60px;">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Bilim İnsanı Portalı</h1>
+            <p>Araştırmacılar için kaynaklar ve araçlar</p>
+        </div>
+    </div>
+</section>
+
+<section class="research-section">
+    <div class="container">
+        <div class="sidebar-layout">
+            <!-- سایدبار در سمت چپ -->
+            <div class="sidebar-left">
+                {% include 'arastirma/includes/bap_sidebar.html' %}
+            </div>
+            
+            <!-- محتوای اصلی در سمت راست -->
+            <div class="content-right">
+                <div class="research-card">
+                    <h3>Bilim İnsanı Portalı</h3>
+                    <p>Araştırmacılarımız için hazırlanan bu portaldan proje başvuruları, fon olanakları ve araştırma kaynaklarına ulaşabilirsiniz.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="resource-card text-center p-4">
+                                <i class="fas fa-file-alt fa-3x text-primary mb-3"></i>
+                                <h5>Proje Başvuruları</h5>
+                                <p>Yeni proje başvuruları yapın ve mevcut projelerinizi yönetin</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="resource-card text-center p-4">
+                                <i class="fas fa-money-bill-wave fa-3x text-success mb-3"></i>
+                                <h5>Fon Olanakları</h5>
+                                <p>Ulusal ve uluslararası fon olanaklarını görüntüleyin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

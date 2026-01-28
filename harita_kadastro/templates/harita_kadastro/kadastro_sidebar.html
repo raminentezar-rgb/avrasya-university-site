@@ -1,0 +1,481 @@
+{% load static %}
+<!-- سایدبار مخصوص صفحات Akademik -->
+<aside class="policy-sidebar-new">
+    <div class="sidebar-header-new">
+        <a href="{% url 'harita_kadastro:harita_kadastro' %}"><h2>Harita ve Kadastro</h2></a>
+
+        <div class="sidebar-subtitle">
+            <h3></h3>
+            <p></p>
+        </div>  
+    </div>
+    
+    <nav class="sidebar-nav-new">
+        <div class="nav-section">
+            <ul class="nav-list">
+
+                <!-- Kontenjanlar -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'harita_kadastro:liste' %}" class="main-link">Duyurular</a>
+                        </span>
+                        
+                </li>
+
+
+                <!-- Egitim Ucretleri -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'harita_kadastro:etkinlik_listesi' %}" class="main-link">Etkinlikleri</a>
+                        </span>
+                        <span class="nav-check submenu-toggle">
+                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                        </span>
+                
+                </li>
+
+                
+
+
+                <!-- Kontenjanlar -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'harita_kadastro:kalite_yonetimi' %}" class="main-link">Kalite Yönetimi</a>
+                        </span>
+                        
+                </li>
+
+                
+
+                <!-- Egitim Ucretleri -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'harita_kadastro:idari_faaliyetler_2024_2025' %}" class="main-link">İdari Faaliyetler</a>
+                        </span>
+                        <span class="nav-check submenu-toggle">
+                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                        </span>
+                
+                </li>
+
+                <!-- Taban Puanlar -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'harita_kadastro:diger_faaliyetler_2024_2025' %}" class="main-link">Diğer Faaliyetler</a>
+                        </span>
+                        <span class="nav-check submenu-toggle">
+                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Taban Puanlar -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'harita_kadastro:toplumsal_katki' %}" class="main-link">Toplumsal Katkı</a>
+                        </span>
+                        <span class="nav-check submenu-toggle">
+                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Taban Puanlar -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'core:iletisim' %}" class="main-link">Öğrenci</a>
+                        </span>
+                        <span class="nav-check submenu-toggle">
+                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Taban Puanlar -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'harita_kadastro:ders_programi' %}" class="main-link">Ders Programı</a>
+                        </span>
+                        <span class="nav-check submenu-toggle">
+                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Taban Puanlar -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx" class="main-link">Bologna</a>
+                        </span>
+                        <span class="nav-check submenu-toggle">
+                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Taban Puanlar -->
+                <li class="nav-item has-submenu">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-text">
+                            <a href="{% url 'core:iletisim' %}" class="main-link">İletişim</a>
+
+                        </span>
+                        <span class="nav-check submenu-toggle">
+                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                        </span>
+                    </div>
+                </li>
+
+                
+        </div>
+    </nav>
+    
+    <div class="sidebar-contact-new">
+        <div class="contact-title">İletişim</div>
+        <div class="contact-info">
+            <strong>Öğrenci İşleri Koordinatörlüğü</strong>
+            <p>ogrenciisleri@avrasya.edu.tr</p>
+        </div>
+    </div>
+</aside>
+
+<style>
+/* استایل‌های جدید برای منوی آبشاری */
+.has-submenu {
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.nav-link-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.submenu-toggle {
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 5px;
+}
+
+.has-submenu.active .submenu-toggle {
+    transform: rotate(180deg);
+}
+
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(141, 212, 227, 0.05);
+    border-radius: 0 0 8px 8px;
+    margin: 0 -10px;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.has-submenu.active .submenu {
+    max-height: 500px;
+    padding: 15px 0;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.submenu li {
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s ease;
+    transition-delay: 0.1s;
+}
+
+.has-submenu.active .submenu li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* تأخیر برای آیتم‌های منو */
+.has-submenu.active .submenu li:nth-child(1) { transition-delay: 0.1s; }
+.has-submenu.active .submenu li:nth-child(2) { transition-delay: 0.15s; }
+.has-submenu.active .submenu li:nth-child(3) { transition-delay: 0.2s; }
+.has-submenu.active .submenu li:nth-child(4) { transition-delay: 0.25s; }
+.has-submenu.active .submenu li:nth-child(5) { transition-delay: 0.3s; }
+.has-submenu.active .submenu li:nth-child(6) { transition-delay: 0.35s; }
+
+.submenu a {
+    display: block;
+    padding: 10px 25px;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all 0.4s ease;
+    border-left: 3px solid transparent;
+    position: relative;
+    left: 0;
+}
+
+.submenu a:hover {
+    background: rgba(141, 212, 227, 0.1);
+    color: var(--secondary-medium-blue);
+    border-left: 3px solid var(--secondary-medium-blue);
+    padding-left: 30px;
+    left: 5px;
+}
+
+/* آیکون‌های چرخان */
+.submenu-toggle i {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 12px;
+    color: var(--secondary-medium-blue);
+}
+
+.has-submenu.active .submenu-toggle i {
+    transform: rotate(180deg);
+}
+
+/* استایل برای لینک اصلی */
+.main-link {
+    color: var(--text-dark) !important;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    flex: 1;
+    padding: 8px 0;
+}
+
+.main-link:hover {
+    color: var(--secondary-medium-blue) !important;
+    transform: translateX(5px);
+}
+
+/* حفظ وضعیت منوی فعال */
+.has-submenu.active {
+    background: rgba(141, 212, 227, 0.1);
+    margin: 0 -10px;
+    padding: 10px 10px;
+    border-radius: 8px;
+    transition: all 0.5s ease;
+}
+
+.has-submenu.active .nav-text {
+    color: var(--secondary-medium-blue);
+    font-weight: 600;
+}
+
+/* انیمیشن‌های ظریف برای باز شدن */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.has-submenu.active .submenu {
+    animation: slideInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* استایل برای موبایل */
+@media (max-width: 992px) {
+    .submenu a {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+    
+    .submenu a:hover {
+        padding-left: 25px;
+    }
+    
+    .has-submenu.active .submenu {
+        padding: 12px 0;
+    }
+}
+
+/* جلوگیری از باز شدن همزمان چند منو */
+.nav-list > .has-submenu {
+    margin-bottom: 0;
+    transition: all 0.5s ease;
+}
+
+.nav-list > .has-submenu:last-child {
+    border-bottom: none;
+}
+
+/* افکت‌های ظریف برای تعامل */
+.nav-link-wrapper {
+    transition: all 0.3s ease;
+}
+
+.has-submenu:hover .nav-link-wrapper {
+    transform: translateX(3px);
+}
+
+/* تأخیر برای بسته شدن */
+.has-submenu:not(.active) .submenu {
+    transition: all 0.4s ease;
+}
+
+.has-submenu:not(.active) .submenu li {
+    transition: all 0.3s ease;
+    transition-delay: 0s;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت منوهای آبشاری
+    const submenuItems = document.querySelectorAll('.has-submenu');
+    
+    // تابع برای تنظیم منوی فعال بر اساس URL
+    function setActiveMenuFromURL() {
+        const currentPath = window.location.pathname;
+        let activeFound = false;
+        
+        submenuItems.forEach(item => {
+            const mainLink = item.querySelector('.main-link');
+            const subLinks = item.querySelectorAll('.submenu a');
+            
+            // بررسی لینک اصلی
+            if (mainLink && mainLink.getAttribute('href') === currentPath) {
+                item.classList.add('active');
+                activeFound = true;
+            }
+            
+            // بررسی لینک‌های فرعی
+            subLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    item.classList.add('active');
+                    activeFound = true;
+                    // علامت‌گذاری لینک فعال
+                    link.style.color = 'var(--secondary-medium-blue)';
+                    link.style.fontWeight = '600';
+                    link.style.borderLeft = '3px solid var(--secondary-medium-blue)';
+                    link.style.background = 'rgba(141, 212, 227, 0.1)';
+                }
+            });
+        });
+        
+        return activeFound;
+    }
+    
+    // رویداد کلیک برای باز کردن/بستن منو
+    submenuItems.forEach(item => {
+        const toggle = item.querySelector('.submenu-toggle');
+        const mainLink = item.querySelector('.main-link');
+        
+        // کلیک روی آیکون
+        if (toggle) {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isActive = item.classList.contains('active');
+                
+                // بستن سایر منوها
+                submenuItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // تغییر وضعیت منوی فعلی
+                if (!isActive) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
+        // کلیک روی لینک اصلی
+        if (mainLink) {
+            mainLink.addEventListener('click', function(e) {
+                // اگر منو بسته است، آن را باز کن
+                if (!item.classList.contains('active')) {
+                    e.preventDefault();
+                    
+                    // بستن سایر منوها
+                    submenuItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // باز کردن منوی فعلی
+                    item.classList.add('active');
+                    
+                    // رفتن به لینک پس از تأخیر بیشتر
+                    setTimeout(() => {
+                        window.location.href = mainLink.getAttribute('href');
+                    }, 400);
+                }
+            });
+        }
+    });
+    
+    // بستن منوها با کلیک خارج از آنها
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.has-submenu')) {
+            submenuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+    });
+    
+    // هاور برای دسکتاپ - با تأخیر
+    if (window.innerWidth > 992) {
+        let hoverTimeout;
+        
+        submenuItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                clearTimeout(hoverTimeout);
+                
+                hoverTimeout = setTimeout(() => {
+                    // بستن سایر منوها
+                    submenuItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // باز کردن منوی فعلی
+                    item.classList.add('active');
+                }, 150); // تأخیر 150ms برای هاور
+            });
+            
+            item.addEventListener('mouseleave', function(e) {
+                clearTimeout(hoverTimeout);
+                
+                // تأخیر برای بسته شدن
+                hoverTimeout = setTimeout(() => {
+                    // فقط اگر روی زیرمنو هاور نباشد، بسته شود
+                    if (!e.relatedTarget || !e.relatedTarget.closest('.has-submenu')) {
+                        item.classList.remove('active');
+                    }
+                }, 200); // تأخیر 200ms برای بسته شدن
+            });
+        });
+    }
+    
+    // تنظیم منوی فعال هنگام بارگذاری
+    setTimeout(setActiveMenuFromURL, 100);
+    
+    // همچنین هنگام تغییر URL (برای SPAها)
+    window.addEventListener('popstate', setActiveMenuFromURL);
+});
+</script>

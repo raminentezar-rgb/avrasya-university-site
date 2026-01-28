@@ -1,0 +1,108 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}Laboratuvarlar - Avrasya University{% endblock %}
+
+{% block content %}
+<section class="research-hero" style="background: linear-gradient(135deg, #092442 0%, #1d61a9 100%); padding: 100px 0 60px;">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Laboratuvarlar</h1>
+            <p>Modern Araştırma Laboratuvarlarımız</p>
+        </div>
+    </div>
+</section>
+
+<section class="research-section">
+    <div class="container">
+        <div class="sidebar-layout">
+            <!-- سایدبار در سمت چپ -->
+            <div class="sidebar-left">
+                {% include 'arastirma/includes/lab_sidebar.html' %}
+            </div>
+            
+            <!-- محتوای اصلی در سمت راست -->
+            <div class="content-right">
+                <!-- آمار -->
+                <div class="research-card mb-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="stat-box text-center">
+                                <h3>{{ labs|length }}</h3>
+                                <p>Toplam Laboratuvar</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-box text-center">
+                                <h3>{{ active_labs_count }}</h3>
+                                <p>Aktif Laboratuvar</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-box text-center">
+                                <h3>{{ faculties_count }}</h3>
+                                <p>Fakülte/Bölüm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فیلترها -->
+                <div class="research-card mb-4">
+                    <h5 class="mb-3">Laboratuvar Filtreleme</h5>
+                    <form method="get" class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" name="faculty" class="form-control" placeholder="Fakülte ara..." 
+                                   value="{{ request.GET.faculty }}" onchange="this.form.submit()">
+                        </div>
+                    </form>
+                </div>
+
+                <!-- لیست آزمایشگاه‌ها -->
+                {% for lab in labs %}
+                <div class="research-card mb-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h3>{{ lab.name }}</h3>
+                            <div class="lab-meta mb-3">
+                                <span class="badge {% if lab.is_active %}badge-success{% else %}badge-secondary{% endif %}">
+                                    {% if lab.is_active %}Aktif{% else %}Pasif{% endif %}
+                                </span>
+                                <span class="text-muted ml-3">
+                                    <i class="fas fa-university"></i> {{ lab.faculty }}
+                                </span>
+                                <span class="text-muted ml-3">
+                                    <i class="fas fa-user-tie"></i> {{ lab.director }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-equipment">
+                        <h6>Ekipmanlar</h6>
+                        <p class="small text-muted">
+                            {{ lab.equipment|truncatewords:20 }}
+                        </p>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar"></i> Oluşturulma: {{ lab.created_at|date:"d M Y" }}
+                        </small>
+                        <a href="{% url 'arastirma:lab_detail' lab.id %}" class="btn btn-primary">
+                            Detayları Gör <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-5">
+                    <i class="fas fa-microscope fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">Laboratuvar bulunamadı</h4>
+                    <p class="text-muted">Seçtiğiniz kriterlere uygun laboratuvar bulunmamaktadır.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

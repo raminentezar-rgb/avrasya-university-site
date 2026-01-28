@@ -1,0 +1,497 @@
+<!-- dekanlar.html -->
+{% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load static %}
+
+{% block title %}Avrasya Üniversitesi - Dekanlar{% endblock %}
+
+{% block about_content %}
+<!-- Hero Section -->
+<div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+    <div class="card-body text-white py-5">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3">DEKANLAR</h1>
+                <p class="lead mb-4">
+                    Fakültelerimizin akademik ve idari yönetiminden sorumlu 
+                            deneyimli dekanlarımız
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-building me-2"></i>
+                    <span>Avrasya Üniversitesi</span>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="bi bi-journal-text display-1 opacity-75"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Deans Grid Section -->
+<section class="deans-grid-section">
+    <div class="container-fluid">
+        <div class="row">
+            {% for dean in deans %}
+            <div class="col-xl-4 col-lg-6 mb-4">
+                <div class="dean-profile-card card border-0 shadow-lg h-100">
+                    <div class="card-header-faculty" style="background: {{ dean.color }};">
+                        <div class="faculty-icon">
+                            <i class="{{ dean.icon }}"></i>
+                        </div>
+                        <h5 class="faculty-name">{{ dean.faculty }}</h5>
+                    </div>
+                    <div class="card-body text-center p-4">
+                        <div class="dean-photo-wrapper mb-3">
+                            <img src="{{ dean.image }}" alt="{{ dean.name }}" class="dean-photo img-fluid rounded-circle">
+                            <div class="photo-overlay"></div>
+                            {% if dean.title == "Dekan V." %}
+                            <div class="dean-badge vekil">
+                                <span>V.</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <h4 class="dean-name mb-2">{{ dean.name }}</h4>
+                        <p class="dean-title text-muted mb-3">{{ dean.title }}</p>
+                        
+                        <div class="dean-expertise">
+                            <span class="expertise-badge">{{ dean.expertise }}</span>
+                        </div>
+                        
+                        {% comment %} <div class="dean-stats mt-4">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="stat">
+                                        <h6 class="stat-number">{{ dean.stats.programs }}</h6>
+                                        <p class="stat-label">Program</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat">
+                                        <h6 class="stat-number">{{ dean.stats.students }}+</h6>
+                                        <p class="stat-label">Öğrenci</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat">
+                                        <h6 class="stat-number">{{ dean.stats.years }}+</h6>
+                                        <p class="stat-label">Yıl</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Faculty Overview Section -->
+<section class="faculty-overview mt-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-primary text-white py-4">
+                        <h3 class="mb-0 text-center">
+                            <i class="bi bi-building me-2"></i>
+                            Fakülte Bilgileri
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="text-primary mb-4">Akademik Yapı</h5>
+                                <div class="faculty-structure">
+                                    <div class="structure-item">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <span>6 Farklı Fakülte</span>
+                                    </div>
+                                    <div class="structure-item">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <span>30+ Lisans Programı</span>
+                                    </div>
+                                    <div class="structure-item">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <span>15+ Yüksek Lisans Programı</span>
+                                    </div>
+                                    <div class="structure-item">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <span>5000+ Aktif Öğrenci</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="text-primary mb-4">Dekanlık Görevleri</h5>
+                                <div class="dean-responsibilities">
+                                    <div class="responsibility-item">
+                                        <i class="bi bi-gear-fill text-primary me-2"></i>
+                                        <span>Akademik Program Yönetimi</span>
+                                    </div>
+                                    <div class="responsibility-item">
+                                        <i class="bi bi-people-fill text-primary me-2"></i>
+                                        <span>Öğretim Üyesi Koordinasyonu</span>
+                                    </div>
+                                    <div class="responsibility-item">
+                                        <i class="bi bi-graph-up-arrow text-primary me-2"></i>
+                                        <span>Akademik Gelişim Planlaması</span>
+                                    </div>
+                                    <div class="responsibility-item">
+                                        <i class="bi bi-award-fill text-primary me-2"></i>
+                                        <span>Kalite Güvence Süreçleri</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Hero Section Styles */
+.deans-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e3a8a 100%);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-card {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    padding: 4rem 2rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+.hero-stats {
+    margin-top: 2rem;
+}
+
+.stat-item {
+    padding: 0 2rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0;
+    color: #fff;
+}
+
+/* Dean Profile Cards */
+.dean-profile-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.dean-profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+}
+
+.card-header-faculty {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header-faculty::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+}
+
+.faculty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.faculty-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* Dean Photo Styles */
+.dean-photo-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.dean-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.dean-profile-card:hover .dean-photo {
+    transform: scale(1.05);
+    border-color: #1e3a8a;
+}
+
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: linear-gradient(45deg, transparent 0%, rgba(30, 58, 138, 0.1) 100%);
+}
+
+.dean-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.dean-badge.vekil {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+/* Dean Info Styles */
+.dean-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+}
+
+.dean-title {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.expertise-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Stats Styles */
+.dean-stats {
+    border-top: 1px solid #e9ecef;
+    padding-top: 1.5rem;
+}
+
+.stat {
+    padding: 0.5rem;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Faculty Overview Styles */
+.structure-item, .responsibility-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f8f9fa;
+    font-size: 0.95rem;
+}
+
+.structure-item:last-child, .responsibility-item:last-child {
+    border-bottom: none;
+}
+
+/* Color Themes for Faculties */
+.faculty-communication { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
+.faculty-engineering { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.faculty-health { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+.faculty-sports { background: linear-gradient(135deg, #059669, #047857); }
+.faculty-economics { background: linear-gradient(135deg, #374151, #111827); }
+.faculty-science { background: linear-gradient(135deg, #6b7280, #4b5563); }
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.8s ease-out 0.3s both;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 3rem 1rem;
+    }
+    
+    .stat-item {
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .dean-photo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .dean-name {
+        font-size: 1.1rem;
+    }
+    
+    .faculty-icon {
+        font-size: 2rem;
+    }
+}
+
+/* Card Hover Effects */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+</style>
+
+<script>
+// Add dynamic data for deans
+document.addEventListener('DOMContentLoaded', function() {
+    const deansData = [
+        {
+            name: "Prof. Dr. Mahir KADAKAL",
+            title: "Dekan V.",
+            faculty: "Fen Edebiyat Fakültesi",
+            image: "{% static 'avrasya_universitesi_yonetim/images/mahirkadakal.png' %}",
+            color: "linear-gradient(135deg, #6b7280, #4b5563)",
+            icon: "bi bi-atom",
+            expertise: "Akademik Liderlik",
+            stats: { programs: 8, students: 1200, years: 15 }
+        },
+        {
+            name: "Prof. Dr. Yavuz ÖZORAN",
+            title: "Dekan V.",
+            faculty: "Sağlık Bilimleri Fakültesi",
+            image: "{% static 'avrasya_universitesi_yonetim/images/a10.jpg' %}",
+            color: "linear-gradient(135deg, #dc2626, #b91c1c)",
+            icon: "bi bi-heart-pulse",
+            expertise: "Sağlık Yönetimi",
+            stats: { programs: 6, students: 800, years: 12 }
+        },
+        {
+            name: "Prof. Dr. Orhan DURGUN",
+            title: "Dekan",
+            faculty: "Mühendislik ve Mimarlık Fakültesi",
+            image: "{% static 'avrasya_universitesi_yonetim/images/a28.jpg' %}",
+            color: "linear-gradient(135deg, #f59e0b, #d97706)",
+            icon: "bi bi-cpu",
+            expertise: "Mühendislik",
+            stats: { programs: 10, students: 1500, years: 18 }
+        },
+        {
+            name: "Prof. Dr. Cemal BIYIK",
+            title: "Dekan",
+            faculty: "İletişim Fakültesi",
+            image: "{% static 'avrasya_universitesi_yonetim/images/bos-a.jpg' %}",
+            color: "linear-gradient(135deg, #0ea5e9, #0369a1)",
+            icon: "bi bi-megaphone",
+            expertise: "İletişim Bilimleri",
+            stats: { programs: 5, students: 600, years: 10 }
+        },
+        {
+            name: "Prof. Dr. Birol DOĞAN",
+            title: "Dekan",
+            faculty: "Spor Bilimleri Fakültesi",
+            image: "{% static 'avrasya_universitesi_yonetim/images/bos-a.jpg' %}",
+            color: "linear-gradient(135deg, #059669, #047857)",
+            icon: "bi bi-trophy",
+            expertise: "Spor Bilimleri",
+            stats: { programs: 4, students: 400, years: 8 }
+        },
+        {
+            name: "Prof. Dr. Ümit UZMAN",
+            title: "Dekan",
+            faculty: "İ.İ.B. Fakültesi",
+            image: "{% static 'avrasya_universitesi_yonetim/images/umit-uzman.jpeg' %}",
+            color: "linear-gradient(135deg, #374151, #111827)",
+            icon: "bi bi-graph-up",
+            expertise: "İşletme ve Ekonomi",
+            stats: { programs: 7, students: 1100, years: 14 }
+        }
+    ];
+
+    // Apply colors to faculty headers
+    document.querySelectorAll('.card-header-faculty').forEach((header, index) => {
+        if (deansData[index]) {
+            header.style.background = deansData[index].color;
+        }
+    });
+});
+</script>
+{% endblock %}

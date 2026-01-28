@@ -1,0 +1,882 @@
+{% extends 'kutuphane/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Kütüphane{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Kütüphane</h1>
+            <p></p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'kutuphane/kutuphane_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- بخش خوش آمدگویی -->
+                <div class="page-intro">
+                    <h2 class="section-title">Kütüphanemize Hoşgeldiniz</h2>
+                    {% comment %} <div class="section-divider"></div> {% endcomment %}
+                </div>
+
+                <!-- بخش خدمات اصلی -->
+                <div class="services-section">
+                    <div class="row g-4">
+                        <!-- Veritabanları -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h6><a href="https://katalog.avrasya.edu.tr/vetisbt/">VERİTABANLARI</a></h6>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kütüphane Kataloğu -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h6><a href="https://katalog.avrasya.edu.tr/yordam/">KÜTÜPHANE KATALOĞU</a></h6>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Akademik Kurumsal Arşiv -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-drivers-license"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h6><a href="https://acikerisim.avrasya.edu.tr/">AKADEMİK KURUMSAL ARŞİV</a></h6>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kurum Dışı Erişim -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-cloud-upload"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h6><a href="https://katalog.avrasya.edu.tr/vetisbt/?dil=tr&p=1&veritabani=">Kurum Dışı Erişim</a></h6>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فاصله بین بخش‌ها -->
+                    <div class="space-section"></div>
+
+                    <!-- بخش خدمات اضافی -->
+                    <div class="row g-4">
+                        <!-- TURNITIN -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-share-square"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h6><a href="https://www.turnitin.com/login_page.asp?err=3400&lang=tr">TURNITIN</a></h6>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ITHENTICATE -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h6><a href="https://app.ithenticate.com/en_us/login">ITHENTICATE</a></h6>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TO-KAT -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-file-text"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h6><a href="https://www.toplukatalog.gov.tr/">TO-KAT</a></h6>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ekual Tarama -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-etsy"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h6><a href="https://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=eds">Ekual Tarama</a></h6>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بخش سوالات متداول با تب‌ها -->
+                <div class="faq-section">
+                    <div class="page-intro">
+                        <h2 class="section-title">Sıkça Sorulanlar</h2>
+                        
+                    </div>
+
+                    <!-- تب‌های سوالات متداول -->
+                    <div class="faq-tabs-section">
+                        <div class="faq-tab-container">
+                            <!-- تب‌های سربرگ -->
+                            <div class="faq-tab-header">
+                                <ul class="faq-tab-menu">
+                                    <li class="faq-tab-menu-item active" data-tab="tab-internet">
+                                        <i class="fas fa-wifi"></i>
+                                        <span>İnternet</span>
+                                    </li>
+                                    <li class="faq-tab-menu-item" data-tab="tab-uzaktan">
+                                        <i class="fas fa-laptop-house"></i>
+                                        <span>Uzaktan Erişim</span>
+                                    </li>
+                                    <li class="faq-tab-menu-item" data-tab="tab-calisma">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Çalışma Saatleri</span>
+                                    </li>
+                                    <li class="faq-tab-menu-item" data-tab="tab-bilgi">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Bilgi</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- محتوای تب‌ها -->
+                            <div class="faq-tab-content-wrapper">
+                                <!-- تب İnternet -->
+                                <div id="tab-internet" class="faq-tab-content active">
+                                    <div class="faq-tab-content-header">
+                                        <h3><i class="fas fa-wifi"></i> İnternet</h3>
+                                    </div>
+                                    <div class="faq-tab-content-body">
+                                        <div class="faq-question">
+                                            <h4>Kütüphaneden internete bağlanabilir miyim?</h4>
+                                            <div class="faq-answer">
+                                                <p>
+                                                    Kendi bilgisayarınızla kablosuz bağlantı yapabilirsiniz. 
+                                                    Kütüphane binalarında üniversitemizin Wi-fi hizmeti bulunmaktadır.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- تب Uzaktan Erişim -->
+                                <div id="tab-uzaktan" class="faq-tab-content">
+                                    <div class="faq-tab-content-header">
+                                        <h3><i class="fas fa-laptop-house"></i> Uzaktan Erişim</h3>
+                                    </div>
+                                    <div class="faq-tab-content-body">
+                                        <div class="faq-question">
+                                            <h4>Veritabanlarını, elektronik dergi ve kaynakları evimdeki bilgisayarımdan kullanabilir miyim?</h4>
+                                            <div class="faq-answer">
+                                                <p>
+                                                    Evet, uzaktan erişim için kütüphane veritabanlarına 
+                                                    kurum dışı erişim sağlayabilirsiniz.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- تب Çalışma Saatleri -->
+                                <div id="tab-calisma" class="faq-tab-content">
+                                    <div class="faq-tab-content-header">
+                                        <h3><i class="fas fa-clock"></i> Çalışma Saatleri</h3>
+                                    </div>
+                                    <div class="faq-tab-content-body">
+                                        <div class="faq-question">
+                                            <h4>Kütüphane hangi saatlerde açık?</h4>
+                                            <div class="faq-answer">
+                                                <div class="working-hours">
+                                                    <div class="working-day">
+                                                        <strong>Haftaiçi her gün:</strong>
+                                                        <p>08.00-12.00 / 13.00-17.00 (Talep olması halinde 20.00 ye kadar açık olacaktır.)</p>
+                                                    </div>
+                                                    <div class="working-day">
+                                                        <strong>Cumartesi günü:</strong>
+                                                        <p>08.00-13.00 (Talep olması halinde 17.00 ye kadar açık olacaktır.)</p>
+                                                    </div>
+                                                    <div class="working-day">
+                                                        <strong>Sınav dönemlerinde:</strong>
+                                                        <p>Talep gelmesi halinde 00.00 a kadar açıktır.</p>
+                                                    </div>
+                                                    <div class="request-link">
+                                                        <a href="#" class="btn-request">
+                                                            <i class="fas fa-hand-point-right"></i>
+                                                            Talep oluşturmak için tıklayınız
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- تب Bilgi -->
+                                <div id="tab-bilgi" class="faq-tab-content">
+                                    <div class="faq-tab-content-header">
+                                        <h3><i class="fas fa-info-circle"></i> Bilgi</h3>
+                                    </div>
+                                    <div class="faq-tab-content-body">
+                                        <div class="faq-question">
+                                            <h4>Kütüphane ile ilgili bilgi almak için nereye başvurabilirim?</h4>
+                                            <div class="faq-answer">
+                                                <div class="contact-options">
+                                                    <div class="contact-option">
+                                                        <i class="fas fa-phone"></i>
+                                                        <div>
+                                                            <strong>Telefon</strong>
+                                                            <p>+90 462 334 05 50</p>
+                                                            <p class="extensions">Dahili: 1213 - 1215</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="contact-option">
+                                                        <i class="fas fa-envelope"></i>
+                                                        <div>
+                                                            <strong>E-posta</strong>
+                                                            <p><a href="mailto:kutuphane@avrasya.edu.tr">kutuphane@avrasya.edu.tr</a></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="contact-option">
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <div>
+                                                            <strong>Kütüphanemize Gelin</strong>
+                                                            <p>T.C. Avrasya Üniversitesi Rektörlüğü<br>
+                                                            Adnan Kahveci Mahallesi Rize caddesi, No:226<br>
+                                                            TRABZON / TÜRKİYE</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+.section-divider {
+    max-width: 80px;
+    margin: 27px auto;
+    border-top: 2px solid #f9b038;
+    position: relative;
+}
+
+.section-divider::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    border-top: 4px solid #f9b038;
+}
+
+/* خدمات */
+.services-section {
+    margin-top: 40px;
+}
+
+.service-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: all 0.3s ease;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-light-blue);
+}
+
+.service-icon {
+    margin-bottom: 20px;
+}
+
+.service-icon i {
+    font-size: 71px;
+    line-height: 71px;
+    width: 71px;
+    color: var(--primary-dark-blue);
+    display: inline-block;
+    background: var(--neutral-cream);
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.service-content h6 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+}
+
+.service-content h6 a {
+    color: var(--primary-dark-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.service-content h6 a:hover {
+    color: var(--secondary-medium-blue);
+}
+
+.service-content hr {
+    width: 50px;
+    margin: 15px auto;
+    border: none;
+    height: 2px;
+    background: var(--accent-light-blue);
+}
+
+.space-section {
+    height: 71px;
+}
+
+/* تب‌های سوالات متداول */
+.faq-section {
+    margin-top: 60px;
+}
+
+.faq-tabs-section {
+    margin-top: 30px;
+}
+
+.faq-tab-container {
+    background: var(--pure-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.faq-tab-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    padding: 0;
+}
+
+.faq-tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.faq-tab-menu-item {
+    flex: 1;
+    min-width: 180px;
+    padding: 22px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.faq-tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.faq-tab-menu-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-bottom: 4px solid var(--accent-light-blue);
+}
+
+.faq-tab-menu-item i {
+    font-size: 1.2rem;
+}
+
+.faq-tab-content-wrapper {
+    padding: 0;
+}
+
+.faq-tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.faq-tab-content.active {
+    display: block;
+}
+
+.faq-tab-content-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.faq-tab-content-header h3 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.faq-tab-content-header h3 i {
+    color: var(--secondary-medium-blue);
+}
+
+.faq-tab-content-body {
+    padding: 30px;
+}
+
+.faq-question {
+    margin-bottom: 30px;
+}
+
+.faq-question h4 {
+    color: var(--primary-dark-blue);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.faq-answer {
+    background: rgba(141, 212, 227, 0.08);
+    border-radius: 12px;
+    padding: 25px;
+    border-left: 5px solid var(--secondary-medium-blue);
+}
+
+.faq-answer p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 0;
+    font-size: 1.05rem;
+}
+
+/* استایل مخصوص تب Çalışma Saatleri */
+.working-hours {
+    background: var(--pure-white);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.working-day {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.working-day:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.working-day strong {
+    color: var(--primary-dark-blue);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.working-day p {
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.request-link {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-request {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(29, 97, 169, 0.3);
+}
+
+.btn-request:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(29, 97, 169, 0.4);
+    color: white;
+}
+
+/* استایل مخصوص تب Bilgi */
+.contact-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.contact-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.contact-option:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-light-blue);
+}
+
+.contact-option i {
+    color: var(--secondary-medium-blue);
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.contact-option strong {
+    color: var(--primary-dark-blue);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.contact-option p {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.contact-option a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.contact-option a:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+.extensions {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .faq-tab-menu {
+        flex-wrap: wrap;
+    }
+    
+    .faq-tab-menu-item {
+        flex: 1 0 45%;
+        min-width: auto;
+        padding: 18px 15px;
+        font-size: 1rem;
+    }
+    
+    .faq-tab-content-header {
+        padding: 20px;
+    }
+    
+    .faq-tab-content-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .faq-tab-content-body {
+        padding: 20px;
+    }
+    
+    .contact-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .service-card {
+        padding: 20px 15px;
+    }
+    
+    .service-icon i {
+        font-size: 50px;
+        line-height: 50px;
+        width: 50px;
+        padding: 15px;
+    }
+    
+    .faq-tab-menu-item {
+        flex: 1 0 100%;
+        justify-content: flex-start;
+        padding: 15px 20px;
+    }
+    
+    .space-section {
+        height: 40px;
+    }
+    
+    .faq-question h4 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .page-intro {
+        margin-bottom: 30px;
+    }
+    
+    .service-card {
+        margin-bottom: 15px;
+    }
+    
+    .faq-tab-content-header {
+        padding: 15px;
+    }
+    
+    .faq-tab-content-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .faq-tab-content-body {
+        padding: 15px;
+    }
+    
+    .faq-answer {
+        padding: 20px;
+    }
+    
+    .contact-option {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // افزودن انیمیشن hover به کارت‌های خدمات
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.08)';
+        });
+    });
+
+    // مدیریت تب‌های سوالات متداول
+    const faqTabMenuItems = document.querySelectorAll('.faq-tab-menu-item');
+    const faqTabContents = document.querySelectorAll('.faq-tab-content');
+    
+    faqTabMenuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // حذف کلاس active از همه تب‌ها
+            faqTabMenuItems.forEach(tab => tab.classList.remove('active'));
+            faqTabContents.forEach(content => content.classList.remove('active'));
+            
+            // اضافه کردن کلاس active به تب انتخاب شده
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+    // انیمیشن hover برای گزینه‌های تماس
+    const contactOptions = document.querySelectorAll('.contact-option');
+    
+    contactOptions.forEach(option => {
+        option.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        option.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // انیمیشن hover برای دکمه درخواست
+    const requestBtn = document.querySelector('.btn-request');
+    if (requestBtn) {
+        requestBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+            this.style.boxShadow = '0 6px 20px rgba(29, 97, 169, 0.4)';
+        });
+        
+        requestBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 4px 15px rgba(29, 97, 169, 0.3)';
+        });
+    }
+});
+</script>
+{% endblock %}

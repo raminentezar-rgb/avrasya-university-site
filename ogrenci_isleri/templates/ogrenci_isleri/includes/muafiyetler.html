@@ -1,0 +1,939 @@
+{% extends 'ogrenci_isleri/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Muafiyetler
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Muafiyetler</h1>
+            <p>Önceden Kazanılmış Yeterliliklerin Tanınması, Kredi Transferi ve İntibak İşlemleri</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'ogrenci_isleri/orenci_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <div class="page-intro">
+                    <h2 class="section-title">Muafiyet ve İntibak İşlemleri</h2>
+                    <p class="section-subtitle">
+                        Avrasya Üniversitesi öğrencilerinin önceden kazanılmış yeterliliklerinin tanınması, 
+                        kredi transferi ve intibak işlemleri hakkında detaylı bilgi ve sık sorulan soruların cevapları.
+                    </p>
+                </div>
+
+                <!-- تب‌های اصلی -->
+                <div class="ogrenci-isleri-tab-section">
+                    <div class="tab-container">
+                        <div class="tab-header">
+                            <ul class="tab-menu">
+                                <li class="tab-menu-item active" data-tab="tab-genel">
+                                    <i class="fas fa-info-circle"></i> Genel Bilgiler
+                                </li>
+                                <li class="tab-menu-item" data-tab="tab-basvuru">
+                                    <i class="fas fa-file-signature"></i> Başvuru Süreci
+                                </li>
+                                <li class="tab-menu-item" data-tab="tab-sartlar">
+                                    <i class="fas fa-check-circle"></i> Şartlar ve Kurallar
+                                </li>
+                                <li class="tab-menu-item" data-tab="tab-sss">
+                                    <i class="fas fa-question-circle"></i> S.S.S.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content-wrapper">
+                            <!-- Genel Bilgiler Tab -->
+                            <div id="tab-genel" class="tab-content active">
+                                <div class="tab-content-header">
+                                    <h3><i class="fas fa-info-circle"></i> Genel Bilgiler</h3>
+                                </div>
+                                <div class="tab-content-body">
+                                    <p>
+                                        Avrasya Üniversitesi'ne ilk defa kayıt yaptıran öğrencilerin, önceden 
+                                        kayıtlı bulundukları yükseköğretim kurumlarında başarılı oldukları 
+                                        derslerde kazanılmış yeterliliklerin tanınması, kredi transferi ve 
+                                        intibak işlemleri bu sayfada belirtilen kurallar çerçevesinde yapılır.
+                                    </p>
+                                    
+                                    <div class="highlight-box">
+                                        <h4><i class="fas fa-exclamation-circle"></i> Önemli Hatırlatmalar</h4>
+                                        <ul class="responsibilities-list">
+                                            <li>
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <strong>Başvuru Süreleri:</strong> Akademik takvimde belirtilen süreler içinde başvuru yapılmalıdır.
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-ban"></i>
+                                                <strong>Muafiyet Verilmeyen Dersler:</strong> Seminer, tez, bitirme çalışması, tasarım projesi derslerinden muafiyet başvurusu kabul edilmez.
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-graduation-cap"></i>
+                                                <strong>Devam Zorunluluğu:</strong> Muafiyet talebi karara bağlanıncaya kadar öğrenciler, muafiyet talebinde bulunduğu derslere devam ederler.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Başvuru Süreci Tab -->
+                            <div id="tab-basvuru" class="tab-content">
+                                <div class="tab-content-header">
+                                    <h3><i class="fas fa-file-signature"></i> Başvuru Süreci</h3>
+                                </div>
+                                <div class="tab-content-body">
+                                    <div class="highlight-box">
+                                        <h4><i class="fas fa-map-marker-alt"></i> Başvuru Yerleri</h4>
+                                        <p>
+                                            <strong>1. Fakülte/Enstitü/Yüksekokul'a Başvuru:</strong><br>
+                                            Önceden kayıtlı bulunduğu yükseköğretim kurumunda başarılı olunan derslerde kazanılmış yeterliliklere ilişkin başvurular doğrudan ilgili fakülte dekanlığına/enstitü/yüksekokul veya meslek yüksekokulu müdürlüğüne yapılır.
+                                        </p>
+                                        <p>
+                                            <strong>2. Öğrenci İşleri Müdürlüğü'ne Başvuru:</strong><br>
+                                            Bir yükseköğretim kurumu dışında kazanılmış yeterliliklerin tanınmasına ilişkin başvurular Öğrenci İşleri Müdürlüğü'ne yapılır.
+                                        </p>
+                                    </div>
+
+                                    <div class="highlight-box">
+                                        <h4><i class="fas fa-clipboard-list"></i> Gerekli Belgeler</h4>
+                                        <ul class="responsibilities-list">
+                                            <li>
+                                                <i class="fas fa-file-alt"></i>
+                                                Daha önce öğrenim görülen YÖK denkliği bulunan yükseköğretim kurumu tarafından onaylanmış (mühürlü, kaşeli ve imzalı) ders içerikleri
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-file-certificate"></i>
+                                                Onaylı öğrenim belgesi (transkript)
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-edit"></i>
+                                                Başarılı olunan derslere karşılık Avrasya Üniversitesi'nde kayıtlı bulunduğu programın ders planındaki hangi derslerinden muaf olmak istediğini belirten dilekçe
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Şartlar ve Kurallar Tab -->
+                            <div id="tab-sartlar" class="tab-content">
+                                <div class="tab-content-header">
+                                    <h3><i class="fas fa-check-circle"></i> Şartlar ve Kurallar</h3>
+                                </div>
+                                <div class="tab-content-body">
+                                    <div class="mission-vision-container">
+                                        <div class="mission-box">
+                                            <div class="mv-icon">
+                                                <i class="fas fa-balance-scale"></i>
+                                            </div>
+                                            <h4>Muafiyet Şartları</h4>
+                                            <p>
+                                                • Muaf olabilmek için başvurulan derslerden başarılı olma şartı aranır.<br>
+                                                • Eşdeğer sayılması istenen dersin içeriği ve öğrenme kazanımlarını en az %70 oranında karşılaması gerekir.<br>
+                                                • Türk Dili, Atatürk İlkeleri ve İnkılâp Tarihi ve Yabancı Dil dersleri için kredi uyumuna bakılmaz.<br>
+                                                • Sadece bu derslerden muafiyet için en az DD (koşullu başarılı) notu yeterlidir.
+                                            </p>
+                                        </div>
+                                        
+                                        <div class="vision-box">
+                                            <div class="mv-icon">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </div>
+                                            <h4>Kredi Transferi Kuralları</h4>
+                                            <p>
+                                                • Birden fazla dersin bir derse eşdeğer sayılması durumunda, bu derslerin AGNO'su dikkate alınarak intibak yapılır.<br>
+                                                • Bir dersin birden fazla derse eşdeğer sayılması durumunda dersin notu, intibak edilen tüm dersler için geçerlidir.<br>
+                                                • Muafiyetine karar verilen dersler not döküm belgesine not olarak işlenir.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="highlight-box">
+                                        <h4><i class="fas fa-calculator"></i> İntibak ve Not Dönüşümü</h4>
+                                        <p>
+                                            <strong>İntibak Hesaplaması:</strong> Öğrencilerin intibakları, muaf ve başarılı oldukları derslerin kredilerinin toplamının, öğretim planına göre krediler toplamının yarısından en az bir fazla olduğu yarıyıla yapılır.
+                                        </p>
+                                        <p>
+                                            <strong>Not Dönüşümü:</strong> 100'lük sistemde alınan notların 4'lük sisteme dönüştürülmesinde Yükseköğretim Kurulu tarafından yapılan düzenleme doğrultusundaki "4'lük Sistemdeki Notların 100'lük Sistemdeki Karşılıkları" tablosu esas alınır.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- S.S.S. Tab -->
+                            <div id="tab-sss" class="tab-content">
+                                <div class="tab-content-header">
+                                    <h3><i class="fas fa-question-circle"></i> Sık Sorulan Sorular</h3>
+                                </div>
+                                <div class="tab-content-body">
+                                    <div class="accordion" id="muafiyetAccordion">
+                                        <!-- Soru 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                                    Muafiyet için kim başvurabilir?
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#muafiyetAccordion">
+                                                <div class="accordion-body">
+                                                    Avrasya Üniversitesi öğrencisi olmaya hak kazanmış adayların başvuruları kabul edilir.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Soru 2 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                                    Muafiyet başvurusu ne zaman yapılır?
+                                                </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#muafiyetAccordion">
+                                                <div class="accordion-body">
+                                                    Başvuru akademik takvimde belirtilen süreler içinde yapılır. Bu süreler dışında yapılan başvurular kabul edilmez.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Soru 3 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingThree">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                                    Muafiyet kararları ne kadar sürede sonuçlanır?
+                                                </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#muafiyetAccordion">
+                                                <div class="accordion-body">
+                                                    Öğrencilerin muafiyet ve intibakları ile ilgili işlemler fakülte/enstitü/müdürlüğe başvuru süresinin bitiminden itibaren iki hafta içinde sonuçlandırılır.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Soru 4 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingFour">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                                    Yabancı Dil ve Temel Bilgi Teknolojisi derslerinden nasıl muaf olunur?
+                                                </button>
+                                            </h2>
+                                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#muafiyetAccordion">
+                                                <div class="accordion-body">
+                                                    Yabancı Dil, Temel Bilgi Teknolojisi Kullanımı gibi üniversitece muafiyet sınavı düzenlenen derslerden muaf olabilmek için, o yıla ait akademik takvimde ilan edilen tarihlerde yapılan Muafiyet Sınavlarına girmeniz gerekir.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Soru 5 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingFive">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                                                    Kararlara itiraz edilebilir mi?
+                                                </button>
+                                            </h2>
+                                            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#muafiyetAccordion">
+                                                <div class="accordion-body">
+                                                    Evet, itiraz edilebilir. İtiraz, muafiyet işleminin kesinleşip öğrenciye bildirildiği tarihten itibaren en geç 15 gün içinde ilgili birime yapılır.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="highlight-box mt-4">
+                                        <h4><i class="fas fa-exclamation-triangle"></i> Önemli Not</h4>
+                                        <p>
+                                            Öğrenciler, ileriki yarıyıllarda muafiyet ve intibak talebinde bulunamaz. Tüm muafiyet ve intibak işlemleri kayıt döneminde tamamlanmalıdır.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İletişim Bilgileri -->
+                <div class="contact-info-section mt-5">
+                    <div class="contact-header">
+                        <h4><i class="fas fa-headset"></i> İletişim ve Destek</h4>
+                    </div>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-university"></i>
+                            <div>
+                                <strong>İlgili Birimler:</strong>
+                                <p>Fakülte Dekanlıkları / Enstitü Müdürlükleri / Yüksekokul Müdürlükleri / Öğrenci İşleri Müdürlüğü</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Başvuru Süreleri:</strong>
+                                <p>Akademik takvimde belirtilen tarihler arasında</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-file-contract"></i>
+                            <div>
+                                <strong>İlgili Yönetmelik:</strong>
+                                <p>
+                                    <a href="https://avrasya.edu.tr/yonetmelik-ve-yonergeler/" class="external-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> Muafiyet ve İntibak Yönetmeliği
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 30px auto 0;
+    line-height: 1.6;
+}
+
+/* طراحی تب‌ها */
+.ogrenci-isleri-tab-section {
+    margin-top: 20px;
+}
+
+.tab-container {
+    background: var(--pure-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    padding: 0;
+}
+
+.tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.tab-menu-item {
+    flex: 1;
+    min-width: 180px;
+    padding: 22px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.tab-menu-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-bottom: 4px solid var(--accent-light-blue);
+}
+
+.tab-menu-item i {
+    font-size: 1.2rem;
+}
+
+.tab-content-wrapper {
+    padding: 0;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-content-header h3 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tab-content-header h3 i {
+    color: var(--secondary-medium-blue);
+}
+
+.tab-content-body {
+    padding: 30px;
+}
+
+.tab-content-body p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.05));
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    border-left: 5px solid var(--secondary-medium-blue);
+}
+
+.highlight-box h4 {
+    color: var(--primary-dark-blue);
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.3rem;
+}
+
+.highlight-box h4 i {
+    color: var(--secondary-medium-blue);
+}
+
+.responsibilities-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.responsibilities-list li {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-light-blue);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.responsibilities-list li:hover {
+    background: rgba(141, 212, 227, 0.1);
+    transform: translateX(5px);
+}
+
+.responsibilities-list li i {
+    color: var(--secondary-medium-blue);
+}
+
+.external-link {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.external-link:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+/* Misyon & Vizyon */
+.mission-vision-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.mission-box, .vision-box {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.mission-box:hover, .vision-box:hover {
+    transform: translateY(-5px);
+}
+
+.mv-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 28px;
+}
+
+.mission-box h4, .vision-box h4 {
+    color: var(--primary-dark-blue);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.mission-box p, .vision-box p {
+    color: var(--text-dark);
+    line-height: 1.7;
+}
+
+/* Accordion */
+.accordion-item {
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    border-radius: 8px !important;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 20px;
+    border: none;
+    border-radius: 0 !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    color: white;
+    box-shadow: none;
+}
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23092442'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-body {
+    padding: 20px;
+    background: var(--pure-white);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* İletişim */
+.contact-info-section {
+    margin-top: 10px;
+}
+
+.contact-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.3);
+}
+
+.contact-header h4 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.contact-details {
+    margin-bottom: 40px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(141, 212, 227, 0.08);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(141, 212, 227, 0.15);
+}
+
+.contact-item i {
+    color: var(--secondary-medium-blue);
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.contact-item strong {
+    color: var(--primary-dark-blue);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.contact-item p {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 1.05rem;
+}
+
+.contact-item a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-content {
+    animation: fadeIn 0.5s ease;
+}
+
+.mission-box, .vision-box, .contact-item {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.mission-box { animation-delay: 0.1s; }
+.vision-box { animation-delay: 0.2s; }
+.contact-item:nth-child(1) { animation-delay: 0.1s; }
+.contact-item:nth-child(2) { animation-delay: 0.2s; }
+.contact-item:nth-child(3) { animation-delay: 0.3s; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .mission-vision-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .tab-menu {
+        flex-wrap: wrap;
+    }
+    
+    .tab-menu-item {
+        flex: 1 0 45%;
+        min-width: auto;
+        padding: 18px 15px;
+        font-size: 1rem;
+    }
+    
+    .tab-content-header {
+        padding: 20px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .tab-content-body {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .tab-menu-item {
+        flex: 1 0 100%;
+        justify-content: flex-start;
+        padding: 15px 20px;
+    }
+    
+    .mission-vision-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .highlight-box {
+        padding: 20px;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .page-intro {
+        margin-bottom: 30px;
+    }
+    
+    .tab-content-header {
+        padding: 15px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .tab-content-body {
+        padding: 15px;
+    }
+    
+    .tab-content-body p {
+        font-size: 1rem;
+    }
+    
+    .mission-box, .vision-box {
+        padding: 20px;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .tab-content, .mission-box, .vision-box, .contact-item {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .mission-box:hover, .vision-box:hover, .contact-item:hover {
+        transform: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت تب‌ها
+    const tabMenuItems = document.querySelectorAll('.tab-menu-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabMenuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // حذف کلاس active از همه تب‌ها
+            tabMenuItems.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // اضافه کردن کلاس active به تب انتخاب شده
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // Highlight کردن آیتم‌های لیست هنگام hover
+    const listItems = document.querySelectorAll('.responsibilities-list li');
+    
+    listItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.borderLeftColor = 'var(--secondary-medium-blue)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.borderLeftColor = 'var(--accent-light-blue)';
+        });
+    });
+    
+    // Bootstrap Accordion برای S.S.S
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // بستن سایر آکاردئون‌ها
+            accordionButtons.forEach(otherButton => {
+                if (otherButton !== this && !otherButton.classList.contains('collapsed')) {
+                    otherButton.click();
+                }
+            });
+        });
+    });
+    
+    // انیمیشن‌های هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده عناصر برای انیمیشن
+    const animatedElements = document.querySelectorAll('.mission-box, .vision-box, .contact-item');
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    // اضافه کردن امکان کپی لینک
+    const externalLinks = document.querySelectorAll('.external-link');
+    externalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (!this.target || this.target !== '_blank') {
+                e.preventDefault();
+                const url = this.href;
+                
+                // در صورت نیاز می‌توانید کپی به کلیپ‌بورد اضافه کنید
+                navigator.clipboard.writeText(url).then(() => {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Bağlantı kopyalandı!';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        window.open(url, '_blank');
+                    }, 1000);
+                });
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

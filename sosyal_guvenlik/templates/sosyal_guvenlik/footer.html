@@ -1,0 +1,259 @@
+{% load static %}
+<!-- فوتر مخصوص صفحه تحقیقات -->
+<footer class="footer" style="background: linear-gradient(135deg, var(--primary-dark-blue) 0%, #0a2a4a 100%); margin-top: 0; position: relative; overflow: hidden;">
+    <!-- Background Pattern -->
+    <div class="footer-bg-pattern" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-image: url('data:image/svg+xml,<svg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\" fill-rule=\"evenodd\"><circle fill=\"%238dd4e3\" cx=\"30\" cy=\"30\" r=\"2\"/></g></svg>');"></div>
+    
+    <!-- Decorative Elements -->
+    <div class="footer-decoration" style="position: absolute; bottom: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(141, 212, 227, 0.1) 0%, transparent 70%);"></div>
+    
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="footer_content">
+            <div class="row">
+                <!-- About Column -->
+                <div class="col-lg-4 footer_col mb-4 mb-lg-0">
+                    <div class="logo_container">
+                        <div class="logo">
+                            <a href="{% url 'sosyal_guvenlik:sosyal_guvenlik' %}" class="navbar-brand d-flex align-items-center">
+                                <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="Avrasya University" style="height: 80px; filter: brightness(0) invert(1);">
+                                <span class="ms-3 fw-bold text-primary"></span>
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="footer_about_text" style="color: rgba(255,255,255,0.8); margin-top: 20px; line-height: 1.7;">
+                        Avrasya Üniversitesi Sosyal Güvenlik - Bilimin geleceğini şekillendiriyoruz.
+                    </p>
+                    
+                    <!-- Social Media Links -->
+                    <div class="footer_social mt-4">
+                        <h6 style="color: white; margin-bottom: 15px; font-weight: 600;">Bizi Takip Edin</h6>
+                        <div class="social-icons d-flex">
+                            <a href="#" class="social-icon" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin-right: 10px; transition: all 0.3s ease;">
+                                <i class="fab fa-facebook-f" style="color: white; font-size: 16px;"></i>
+                            </a>
+                            <a href="#" class="social-icon" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin-right: 10px; transition: all 0.3s ease;">
+                                <i class="fab fa-twitter" style="color: white; font-size: 16px;"></i>
+                            </a>
+                            <a href="#" class="social-icon" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin-right: 10px; transition: all 0.3s ease;">
+                                <i class="fab fa-instagram" style="color: white; font-size: 16px;"></i>
+                            </a>
+                            <a href="#" class="social-icon" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                                <i class="fab fa-linkedin-in" style="color: white; font-size: 16px;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-4 footer_col mb-4 mb-lg-0">
+                    <div class="footer_column_title" style="color: white; font-weight: 600; margin-bottom: 20px; position: relative; padding-bottom: 10px;">
+                        Hızlı Erişim
+                        <div style="position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--secondary-medium-blue);"></div>
+                    </div>
+                    <div class="footer_column_content">
+                        <div class="row">
+                            <div class="col-6">
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'sosyal_guvenlik:sosyal_guvenlik' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                            Fakülte
+                                        </a>
+                                    </li>
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'sosyal_guvenlik:liste' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                            Duyurular
+                                        </a>
+                                    </li>
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'sosyal_guvenlik:etkinlik_listesi' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                            Etkinlikleri
+                                        </a>
+                                    </li>
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'sosyal_guvenlik:kalite_yonetimi' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                            Kalite Yönetimi
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'sosyal_guvenlik:idari_faaliyetler_2024_2025' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                            İdari Faaliyetle
+                                        </a>
+                                    </li>
+
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'sosyal_guvenlik:diger_faaliyetler_2024_2025' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                            Diğer Faaliyetler
+                                        </a>
+                                    </li>
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'sosyal_guvenlik:toplumsal_katki' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                           Toplumsal Katkı
+                                        </a>
+                                    </li>
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'sosyal_guvenlik:ders_programi' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                            Ders Programı
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="col-6">
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li class="footer_list_item" style="margin-bottom: 12px;">
+                                        <a href="{% url 'core:iletisim' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
+                                            <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
+                                            İletişim
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_column_title" style="color: white; font-weight: 600; margin-bottom: 20px; position: relative; padding-bottom: 10px;">
+                        İletişim
+                        <div style="position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--secondary-medium-blue);"></div>
+                    </div>
+                    <div class="footer_column_content">
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li class="footer_contact_item" style="color: rgba(255,255,255,0.8); margin-bottom: 20px; display: flex; align-items: flex-start;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(141, 212, 227, 0.2); display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
+                                    <i class="fas fa-map-marker-alt" style="color: var(--secondary-medium-blue);"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: white; display: block; margin-bottom: 5px;">Adres</strong>
+                                    <span>Yenişehir Mahallesi, Avrasya Üniversitesi</span>
+                                </div>
+                            </li>
+                            <li class="footer_contact_item" style="color: rgba(255,255,255,0.8); margin-bottom: 20px; display: flex; align-items: flex-start;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(141, 212, 227, 0.2); display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
+                                    <i class="fas fa-phone" style="color: var(--secondary-medium-blue);"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: white; display: block; margin-bottom: 5px;">Telefon</strong>
+                                    <span>+90 462 000 0000</span>
+                                </div>
+                            </li>
+                            <li class="footer_contact_item" style="color: rgba(255,255,255,0.8); margin-bottom: 20px; display: flex; align-items: flex-start;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(141, 212, 227, 0.2); display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
+                                    <i class="fas fa-envelope" style="color: var(--secondary-medium-blue);"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: white; display: block; margin-bottom: 5px;">E-posta</strong>
+                                    <span>arastirma@avrasya.edu.tr</span>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <!-- Newsletter Subscription -->
+                        <div class="footer_newsletter mt-4">
+                            <h6 style="color: white; margin-bottom: 15px; font-weight: 600;">Bültenimize Abone Olun</h6>
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="E-posta adresiniz" style="border-radius: 6px 0 0 6px; border: none; padding: 10px 15px; font-size: 14px;">
+                                <button class="btn btn-primary" type="button" style="border-radius: 0 6px 6px 0; background: var(--secondary-medium-blue); border: none; padding: 10px 15px;">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer_bar" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; padding: 25px 0;">
+            <div class="footer_copyright d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <span style="color: rgba(255,255,255,0.7); margin-bottom: 10px; margin-md-bottom: 0;">
+                    © {% now "Y" %} Avrasya University - Tüm hakları saklıdır.
+                </span>
+                <div class="footer_links">
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; margin-right: 20px; font-size: 14px; transition: color 0.3s ease;">Gizlilik Politikası</a>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; margin-right: 20px; font-size: 14px; transition: color 0.3s ease;">Kullanım Şartları</a>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">Site Haritası</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    /* استایل‌های جدید برای فوتر */
+    .footer_list_item a:hover,
+    .footer_links a:hover {
+        color: var(--secondary-medium-blue) !important;
+        transform: translateX(5px);
+    }
+    
+    .social-icon:hover {
+        background: var(--secondary-medium-blue) !important;
+        transform: translateY(-3px);
+    }
+    
+    .footer_newsletter .btn:hover {
+        background: var(--primary-dark-blue) !important;
+    }
+    
+    /* انیمیشن‌های ظریف */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .footer_col {
+        animation: fadeInUp 0.6s ease-out;
+    }
+    
+    .footer_col:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+    
+    .footer_col:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+    
+    /* استایل‌های ریسپانسیو */
+    @media (max-width: 768px) {
+        .footer {
+            text-align: center;
+        }
+        
+        .footer_social .social-icons {
+            justify-content: center;
+        }
+        
+        .footer_contact_item {
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .footer_links {
+            text-align: center;
+        }
+        
+        .footer_links a {
+            display: block;
+            margin: 5px 0 !important;
+        }
+    }
+</style>

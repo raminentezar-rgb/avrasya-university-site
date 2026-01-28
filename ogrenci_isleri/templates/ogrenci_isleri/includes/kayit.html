@@ -1,0 +1,727 @@
+{% extends 'ogrenci_isleri/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Kayıt İşlemleri{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Kayıt İşlemleri</h1>
+            <p></p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'ogrenci_isleri/orenci_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <div class="page-intro">
+                    <h1 class="section-title">Kayıt İşlemleri</h1>
+                    <p class="section-subtitle">Avrasya Üniversitesi'ne hoş geldiniz. Kayıt işlemleriniz için gerekli tüm bilgiler ve belgeler bu sayfada bulunmaktadır.</p>
+                </div>
+                
+                <!-- تب‌ها برای بخش‌های مختلف -->
+                <div class="ogrenci-isleri-tab-section">
+                    <div class="tab-container">
+                        <div class="tab-header">
+                            <ul class="tab-menu">
+                                <li class="tab-menu-item active" data-tab="tab-1">
+                                    <i class="fas fa-user-graduate"></i> Kayıt İşlemleri
+                                </li>
+                                <li class="tab-menu-item" data-tab="tab-2">
+                                    <i class="fas fa-file-alt"></i> Gerekli Belgeler
+                                </li>
+                                <li class="tab-menu-item" data-tab="tab-3">
+                                    <i class="fas fa-credit-card"></i> Ödeme Koşulları
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content-wrapper">
+                            <!-- تب 1: Kayıt İşlemleri -->
+                            <div id="tab-1" class="tab-content active">
+                                <div class="tab-content-header">
+                                    <h3><i class="fas fa-user-graduate"></i> Kayıt İşlemleri</h3>
+                                </div>
+                                <div class="tab-content-body">
+                                    <h2><strong>Sevgili öğrencimiz,</strong></h2>
+                                    
+                                    <div class="highlight-box">
+                                        <h4><i class="fas fa-calendar-day"></i> Yüzyüze Kayıt için</h4>
+                                        <p>2025 YKS yerleştirme sonuçlarına göre Üniversitemize kayıt olmaya hak kazanan öğrencilerimiz <strong>kesin kayıt işlemlerini</strong> <strong>01-05 Eylül 2025</strong> tarih ve <strong>09:00–17:00</strong> saatleri arasında <strong>Avrasya Üniversitesi Ömer Yıldız Yerleşkesine</strong> aşağıda belirtilen evraklar ile başvuru yaparak gerçekleştirmeleri gerekmektedir.</p>
+                                    </div>
+                                    
+                                    <div class="highlight-box">
+                                        <h4><i class="fas fa-laptop"></i> Online Kayıt için</h4>
+                                        <p>Online kayıt işlemleri <strong>01-05 Eylül 2025 tarihleri</strong> arasında aşağıda belirtilen evrakları pdf formatında <strong><a href="https://avrasya.edu.tr/kayit-suresi-sona-ermistir/" class="external-link">onlinekayıt</a></strong> sistemine yüklenerek kesin kayıt süreci tamamlanacaktır.</p>
+                                        <div style="text-align: center; margin-top: 20px;">
+                                            <a class="btn btn-primary" href="{% url 'ogrenci_isleri:formlar' %}" target="_blank" style="padding: 12px 30px; background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue)); border: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem;">
+                                                <i class="fas fa-id-card" style="margin-right: 10px;"></i>Online Kayıt YKS 2025
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <h2 style="margin-top: 40px;"><strong>Geçici Kayıt</strong></h2>
+                                    <p>Bir yükseköğretim programına kayıt hakkı kazanan ancak ortaöğretim kurumlarından mezun olamayarak bütünleme veya tek ders sınava girecek adayların da belirlenen tarihlerde yükseköğretim kurumlarına geçici kayıtları yapılacaktır. Bu adayların mezun olduklarına ilişkin belgelerini, <strong>31 Aralık 2025 tarihi mesai bitimine kadar</strong> yükseköğretim kurumuna ibraz etmeleri halinde Açık Öğretim Liseleri öğrencilerinden bir yükseköğretim kurumuna yerleşen adayların ise mezun olduklarına ilişkin belgelerini <strong>30 Ocak 2026 tarihi mesai bitimine kadar</strong> yükseköğretim kurumuna ibraz etmeleri halinde, asıl kayıtları yapılacaktır. Bu tarihe kadar mezun olduklarını belgelemeyenlerin geçici kayıtları silinecek ve bu durumda olup belirlenen tarihlerde geçici kayıtlarını yaptırmayan adayların kayıtları yapılmayacaktır.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- تب 2: Gerekli Belgeler -->
+                            <div id="tab-2" class="tab-content">
+                                <div class="tab-content-header">
+                                    <h3><i class="fas fa-file-alt"></i> Kayıt için Gerekli Belgeler</h3>
+                                </div>
+                                <div class="tab-content-body">
+                                    <p>Aşağıda belirtilen belgeleri hazırlayarak kayıt işlemlerinizi tamamlayabilirsiniz:</p>
+                                    
+                                    <ol class="responsibilities-list" style="counter-reset: item; padding-left: 0;">
+                                        <li style="position: relative; padding-left: 50px;">
+                                            <span style="position: absolute; left: 15px; font-weight: bold; color: var(--secondary-medium-blue);">1.</span>
+                                            Avrasya Üniversitesi Kayıt Dosyası Kapak Formu (<strong><a href="https://avrasya.edu.tr/wp-content/uploads/2025/08/Avrasya_Universitesi_basvuru_ve_kayit_dosyasi_kapak_formu_osym-27.08.2025.pdf" class="external-link">Görüntülemek için tıklayınız</a></strong>)
+                                        </li>
+                                        <li style="position: relative; padding-left: 50px;">
+                                            <span style="position: absolute; left: 15px; font-weight: bold; color: var(--secondary-medium-blue);">2.</span>
+                                            2025 YKS Yerleştirme Sonuç Belgesi
+                                        </li>
+                                        <li style="position: relative; padding-left: 50px;">
+                                            <span style="position: absolute; left: 15px; font-weight: bold; color: var(--secondary-medium-blue);">3.</span>
+                                            Lise Diploması aslı veya diploma hazırlanmamış ise yeni tarihli mezuniyet belgesi (Üniversite ya da noter tarafından Aslı onaylı belgesi kabul edilir.)
+                                        </li>
+                                        <li style="position: relative; padding-left: 50px;">
+                                            <span style="position: absolute; left: 15px; font-weight: bold; color: var(--secondary-medium-blue);">4.</span>
+                                            2 adet fotoğraf (4,5×6 ebadında, son 6 ay içerisinde adayı kolaylıkla tanıtabilecek şekilde çekilmiş)
+                                        </li>
+                                        <li style="position: relative; padding-left: 50px;">
+                                            <span style="position: absolute; left: 15px; font-weight: bold; color: var(--secondary-medium-blue);">5.</span>
+                                            Nüfus Cüzdanı Fotokopisi
+                                        </li>
+                                        <li style="position: relative; padding-left: 50px;">
+                                            <span style="position: absolute; left: 15px; font-weight: bold; color: var(--secondary-medium-blue);">6.</span>
+                                            Eğitim Ücretinin ödendiğine dair dekont (Bir yıllık)
+                                        </li>
+                                        <li style="position: relative; padding-left: 50px;">
+                                            <span style="position: absolute; left: 15px; font-weight: bold; color: var(--secondary-medium-blue);">7.</span>
+                                            Beyanname (<a href="https://avrasya.edu.tr/wp-content/uploads/2021/08/BEYANNAME_16.08.2019-1.pdf" class="external-link"><strong>görüntülemek için tıklayınız</strong></a>)
+                                        </li>
+                                        <li style="position: relative; padding-left: 50px;">
+                                            <span style="position: absolute; left: 15px; font-weight: bold; color: var(--secondary-medium-blue);">8.</span>
+                                            Eğitim ve Ödeme Sözleşmesi (<a href="https://avrasya.edu.tr/wp-content/uploads/2025/08/ogrenci-sozlesmesi-27.08.2025.pdf" class="external-link"><strong>görüntülemek için tıklayınız</strong></a>)
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                            
+                            <!-- تب 3: Ödeme Koşulları -->
+                            <div id="tab-3" class="tab-content">
+                                <div class="tab-content-header">
+                                    <h3><i class="fas fa-credit-card"></i> Ödeme Koşulları</h3>
+                                </div>
+                                <div class="tab-content-body">
+                                    <h2><strong>ÖDEME KOŞULLARI</strong></h2>
+                                    
+                                    <div class="highlight-box">
+                                        <h4><i class="fas fa-money-bill-wave"></i> Nakit Ödeme</h4>
+                                        <p>Bölüm ücretinin tamamını nakit olarak ödemek isteyenler; Üniversitemizin aşağıda belirtilen Iban numaralarına dekontun açıklama kısmına öğrencinin Adı Soyadı ve Öğrenci numarası yazılarak yapılmalıdır. Nakit ödemeler gişelerden veya internet bankacılığı aracılığı ile yapılabilmektedir.</p>
+                                    </div>
+                                    
+                                    <div class="highlight-box">
+                                        <h4><i class="fas fa-credit-card"></i> Kredi Kartı ile Taksitli Ödeme</h4>
+                                        <p>Bölüm ücretinin kredi kartına taksitli ödemek isteyenler ve anlaşmalı kredi kartlarına vade farksız faizsiz 9 taksit yaptırabilirler. Anlaşmalı banka kartlarına sahip olmayanlar, <strong>Albaraka Türk Katılım Bankası</strong> ile otomatik katılım sistemi (OTS) anlaşması yaparak 9 taksite varan faizsiz kredi kullanabilirler. Faizsiz krediden, çalışan öğrenci veya veli Üniversitemiz muhasebe biriminden alacak olduğu proforma fatura ile kendisine ait bir gelir belgesi ekleyerek bankaya başvuru yaparak yararlanabilir.</p>
+                                    </div>
+                                    
+                                    <h3 style="margin-top: 30px; color: var(--primary-dark-blue);">Proforma Fatura İçin Gerekli Bilgiler</h3>
+                                    <p>Proforma fatura düzenlemesi için muhasebe birimine bildirilmesi gereken bilgiler şunlardır:</p>
+                                    
+                                    <ul class="responsibilities-list" style="padding-left: 20px;">
+                                        <li><i class="fas fa-check-circle"></i> Öğrencinin Yerleşme sonuç belgesi</li>
+                                        <li><i class="fas fa-check-circle"></i> Krediyi kullanacak kişinin Adı Soyadı ve TC kimlik no</li>
+                                        <li><i class="fas fa-check-circle"></i> Kredi çekilecek miktar</li>
+                                        <li><i class="fas fa-check-circle"></i> Kredi Taksit Sayısı (En fazla 9 taksit)</li>
+                                    </ul>
+                                    
+                                    <p>Yukarıda yazılı bilgileri eksiksiz olarak <a href="mailto:muhasebe@avrasya.edu.tr" class="external-link">muhasebe@avrasya.edu.tr</a> mail adresine gönderen öğrenciye proforma düzenlenip geri dönüş sağlanacaktır.</p>
+                                    
+                                    <div class="mission-vision-container" style="margin-top: 40px;">
+                                        <div class="mission-box">
+                                            <div class="mv-icon">
+                                                <i class="fas fa-university"></i>
+                                            </div>
+                                            <h4>NAKİT ÖDEME YAPILAN BANKALAR</h4>
+                                            <p><strong>Alıcı Adı:</strong> T.C. Avrasya Üniversitesi</p>
+                                            <p><strong>Banka Adı:</strong> Albaraka Türk Katılım Bankası Değirmendere Şubesi</p>
+                                            <p><strong>İban No:</strong> TR78 0020 3000 0210 7500 0000 01</p>
+                                            <hr style="margin: 15px 0; border-color: rgba(141, 212, 227, 0.3);">
+                                            <p><strong>Alıcı Adı:</strong> T.C. Avrasya Üniversitesi</p>
+                                            <p><strong>Banka Adı:</strong> Garanti Bankası Trabzon Merkez Şubesi</p>
+                                            <p><strong>İban No:</strong> TR82 0006 2000 1580 0006 2949 19</p>
+                                            <p style="margin-top: 15px; padding: 10px; background-color: rgba(141, 212, 227, 0.1); border-radius: 8px;">
+                                                <strong>Not:</strong> Dekontun açıklama kısmına Öğrencinin Adı Soyadı ve T.C. Kimlik numarası yazılmalıdır.
+                                            </p>
+                                        </div>
+                                        
+                                        <div class="vision-box">
+                                            <div class="mv-icon">
+                                                <i class="fas fa-credit-card"></i>
+                                            </div>
+                                            <h4>9 TAKSİT YAPILAN BANKA KREDİ KARTLARI</h4>
+                                            <p>Akbank – Axess / Halkbankası - Paraf / İş Bankası - Maximum<br>
+                                            Yapıkredi – World / Vakıfbank – World – Ziraat Bankası / Garanti ve Bonus özellikli bütün kredi kartları</p>
+                                            
+                                            <div style="margin-top: 25px; padding: 15px; background-color: rgba(255, 0, 0, 0.05); border-radius: 8px; border-left: 4px solid #e74c3c;">
+                                                <p style="margin: 0; color: #c0392b;">
+                                                    <strong>Önemli Notlar:</strong><br>
+                                                    • Bu kartların haricindeki bütün kredi kartlarına tek çekim yapılmaktadır.<br>
+                                                    • Ticari kartlara BDDK kararı gereğince taksit yapılamamaktadır.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 30px auto 0;
+    line-height: 1.6;
+}
+
+/* طراحی تب‌ها */
+.ogrenci-isleri-tab-section {
+    margin-top: 20px;
+}
+
+.tab-container {
+    background: var(--pure-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    padding: 0;
+}
+
+.tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.tab-menu-item {
+    flex: 1;
+    min-width: 180px;
+    padding: 22px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.tab-menu-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-bottom: 4px solid var(--accent-light-blue);
+}
+
+.tab-menu-item i {
+    font-size: 1.2rem;
+}
+
+.tab-content-wrapper {
+    padding: 0;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-content-header h3 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tab-content-header h3 i {
+    color: var(--secondary-medium-blue);
+}
+
+.tab-content-body {
+    padding: 30px;
+}
+
+.tab-content-body p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.tab-content-body h2 {
+    color: var(--primary-dark-blue);
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.tab-content-body h3 {
+    color: var(--secondary-medium-blue);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.05));
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    border-left: 5px solid var(--secondary-medium-blue);
+}
+
+.highlight-box h4 {
+    color: var(--primary-dark-blue);
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.3rem;
+}
+
+.highlight-box h4 i {
+    color: var(--secondary-medium-blue);
+}
+
+.responsibilities-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.responsibilities-list li {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-light-blue);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.responsibilities-list li:hover {
+    background: rgba(141, 212, 227, 0.1);
+    transform: translateX(5px);
+}
+
+.responsibilities-list li i {
+    color: var(--secondary-medium-blue);
+}
+
+.external-link {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.external-link:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+/* دکمه */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+/* Misyon & Vizyon */
+.mission-vision-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.mission-box, .vision-box {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.mission-box:hover, .vision-box:hover {
+    transform: translateY(-5px);
+}
+
+.mv-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 28px;
+}
+
+.mission-box h4, .vision-box h4 {
+    color: var(--primary-dark-blue);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.mission-box p, .vision-box p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-content {
+    animation: fadeIn 0.5s ease;
+}
+
+.mission-box, .vision-box {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.mission-box { animation-delay: 0.1s; }
+.vision-box { animation-delay: 0.2s; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .mission-vision-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .tab-menu {
+        flex-wrap: wrap;
+    }
+    
+    .tab-menu-item {
+        flex: 1 0 45%;
+        min-width: auto;
+        padding: 18px 15px;
+        font-size: 1rem;
+    }
+    
+    .tab-content-header {
+        padding: 20px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .tab-content-body {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .tab-menu-item {
+        flex: 1 0 100%;
+        justify-content: flex-start;
+        padding: 15px 20px;
+    }
+    
+    .mission-vision-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .highlight-box {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .page-intro {
+        margin-bottom: 30px;
+    }
+    
+    .tab-content-header {
+        padding: 15px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .tab-content-body {
+        padding: 15px;
+    }
+    
+    .tab-content-body p {
+        font-size: 1rem;
+    }
+    
+    .mission-box, .vision-box {
+        padding: 20px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .tab-content, .mission-box, .vision-box,
+    .responsibilities-list li {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .mission-box:hover, .vision-box:hover,
+    .responsibilities-list li:hover, .btn:hover {
+        transform: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت تب‌ها
+    const tabMenuItems = document.querySelectorAll('.tab-menu-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabMenuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // حذف کلاس active از همه تب‌ها
+            tabMenuItems.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // اضافه کردن کلاس active به تب انتخاب شده
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // Highlight کردن آیتم‌های لیست هنگام hover
+    const listItems = document.querySelectorAll('.responsibilities-list li');
+    
+    listItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.borderLeftColor = 'var(--secondary-medium-blue)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.borderLeftColor = 'var(--accent-light-blue)';
+        });
+    });
+    
+    // انیمیشن‌های هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده عناصر برای انیمیشن
+    const animatedElements = document.querySelectorAll('.mission-box, .vision-box');
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+</script>
+{% endblock %}

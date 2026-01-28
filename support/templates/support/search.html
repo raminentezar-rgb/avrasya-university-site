@@ -1,0 +1,444 @@
+
+{% extends "support/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="page-header" style="margin-top: -100px; position: relative; ">
+    <div class="page-header-content">
+        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">Öğrenci Destek Merkezi</h1>
+        <p >Üniversite hakkındaki sorularınıza hızlı cevaplar</p>
+    </div>
+    
+    <!-- قسمت احراز هویت در گوشه بالا راست -->
+    <div class="auth-buttons" style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; align-items: center;">
+        {% if user.is_authenticated %}
+            <!-- اگر کاربر لاگین کرده باشد -->
+            <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: white; font-weight: 500;">
+                    <i class="fas fa-user-circle"></i> {{ user.username }}
+                </span>
+                
+                <!-- دکمه داشبورد -->
+                {% if user.profile.role == 'student' %}
+                    <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Taleplerim
+                    </a>
+                {% elif user.profile.role == 'staff' %}
+                    <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                {% else %}
+                    <a href="/" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                {% endif %}
+                
+                <!-- فرم logout -->
+                <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                    </button>
+                </form>
+            </div>
+        {% else %}
+            <!-- اگر کاربر لاگین نکرده باشد -->
+            <div class="guest-buttons" style="display: flex; gap: 10px;">
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                </a>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm" style="background-color: white; color: var(--primary-dark-blue);">
+                    <i class="fas fa-user-plus"></i> Kayıt Ol
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="support-container">
+    <!-- Navigasyon -->
+    <div class="breadcrumb">
+        <a href="/" class="breadcrumb-item">Ana Sayfa</a>
+        <span class="breadcrumb-divider">/</span>
+        <span class="breadcrumb-item active">Destek Merkezi</span>
+    </div>
+    
+    <!-- Ana Arama -->
+    <div class="support-section">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2 class="support-title" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">Nasıl Yardımcı Olabiliriz?</h2>
+            <p class="support-subtitle">Üniversite hakkında her türlü sorunuzu sorun</p>
+            
+            <form method="get" style="margin-bottom: 2rem;">
+                <div style="position: relative;">
+                    <input type="text" name="q" value="{{ query }}" 
+                           class="form-control" 
+                           placeholder="Arama: kayıt, harç, yurt, sınavlar, burs ve..."
+                           style="padding-left: 3rem; padding-right: 1rem; font-size: 1.1rem; height: 60px; text-align: left;">
+                    <i class="fas fa-search" style="position: absolute; left: 1.5rem; top: 50%; transform: translateY(-50%); color: var(--text-light);"></i>
+                    <button type="submit" class="btn btn-primary" 
+                            style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); height: 50px;">
+                        Ara
+                    </button>
+                </div>
+            </form>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+                <a href="{% url 'support:create_ticket' %}" class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i> Yeni Talep Oluştur
+                </a>
+                <a href="{% url 'support:faq_list' %}" class="btn btn-secondary">
+                    <i class="fas fa-list"></i> Tüm SSS
+                </a>
+                <a href="{% url 'support:my_tickets' %}" class="btn btn-secondary">
+                    <i class="fas fa-ticket-alt"></i> Taleplerim
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    {% if query %}
+    <!-- Arama Sonuçları -->
+    <div class="support-section">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="card-title">"{{ query }}" için Arama Sonuçları</h2>
+            <div>
+                <span class="status-badge">{{ total_results }} sonuç</span>
+                {% if results_by_type.faqs %}
+                <span class="status-badge" style="background: #2ecc71;">{{ results_by_type.faqs|length }} SSS</span>
+                {% endif %}
+                {% if results_by_type.knowledge %}
+                <span class="status-badge" style="background: #3498db;">{{ results_by_type.knowledge|length }} içerik</span>
+                {% endif %}
+            </div>
+        </div>
+        
+        {% if page_obj %}
+            <!-- Sonuç Filtreleri -->
+            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                <button class="btn-filter active" data-filter="all">Tüm Sonuçlar</button>
+                <button class="btn-filter" data-filter="faq">SSS</button>
+                <button class="btn-filter" data-filter="guide">Rehberler</button>
+                <button class="btn-filter" data-filter="policy">Yönetmelikler</button>
+            </div>
+            
+            <!-- Sonuç Listesi -->
+            <div class="search-results">
+                {% for item in page_obj %}
+                <div class="result-item" data-type="{{ item.type }}">
+                    <div class="result-type">
+                        {% if item.type == 'faq' %}
+                        <span class="badge-faq"><i class="fas fa-question-circle"></i> SSS</span>
+                        {% elif item.type == 'guide' %}
+                        <span class="badge-guide"><i class="fas fa-book"></i> Rehber</span>
+                        {% elif item.type == 'policy' %}
+                        <span class="badge-policy"><i class="fas fa-gavel"></i> Yönetmelik</span>
+                        {% endif %}
+                    </div>
+                    
+                    <h3 class="result-title">
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                    </h3>
+                    
+                    <p class="result-content">{{ item.content|truncatechars:250 }}</p>
+                    
+                    <div class="result-meta">
+                        {% if item.category %}
+                        <span><i class="fas fa-folder"></i> {{ item.category }}</span>
+                        {% endif %}
+                        {% if item.department %}
+                        <span><i class="fas fa-building"></i> {{ item.department }}</span>
+                        {% endif %}
+                        <span><i class="fas fa-calendar"></i> {{ item.created_at|date:"d/m/Y" }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Sayfalama -->
+            {% if page_obj.has_other_pages %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}" class="page-link">
+                    <i class="fas fa-chevron-left"></i> Önceki
+                </a>
+                {% endif %}
+                
+                <span class="current-page">
+                    Sayfa {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                </span>
+                
+                {% if page_obj.has_next %}
+                <a href="?q={{ query }}&page={{ page_obj.next_page_number }}" class="page-link">
+                    Sonraki <i class="fas fa-chevron-right"></i>
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+        {% else %}
+            <!-- Boş Durum -->
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3 class="empty-title">Sonuç bulunamadı</h3>
+                <p class="empty-description">
+                    "{{ query }}" için herhangi bir sonuç bulamadık.
+                </p>
+                
+                <!-- Öneriler -->
+                <div class="suggestions" style="margin-top: 2rem; text-align: center;">
+                    <h4>Öneriler:</h4>
+                    <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="?q=kayıt" class="btn btn-outline">Kayıt</a>
+                        <a href="?q=harç" class="btn btn-outline">Harç</a>
+                        <a href="?q=yurt" class="btn btn-outline">Yurt</a>
+                        <a href="?q=sınav" class="btn btn-outline">Sınavlar</a>
+                        <a href="?q=burs" class="btn btn-outline">Burs</a>
+                    </div>
+                </div>
+                
+                <a href="{% url 'support:create_ticket' %}" class="btn btn-primary" style="margin-top: 2rem;">
+                    <i class="fas fa-question-circle"></i> Sorunuzu Sorun
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    <!-- Popüler Kategoriler -->
+    {% if not query %}
+    <div class="support-section">
+        <h2 class="section-title">Popüler Konular</h2>
+        <div class="topics-grid">
+            {% for topic in popular_topics %}
+            <a href="?q={{ topic.name }}" class="topic-card">
+                <div class="topic-icon">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <div class="topic-info">
+                    <h3>{{ topic.name }}</h3>
+                    <p>{{ topic.ticket_count }} soru</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Hızlı Rehber -->
+    <div class="support-section quick-guide">
+        <h2 class="section-title">Hızlı Yanıtlar</h2>
+        <div class="row">
+            <div class="col-3">
+                <div class="quick-item">
+                    <h4><i class="fas fa-calendar-alt"></i> Üniversite Takvimi</h4>
+                    <p>Kayıt, sınav ve tatil takvimi</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="quick-item">
+                    <h4><i class="fas fa-file-invoice-dollar"></i> Harç Ödeme</h4>
+                    <p>Ödeme yöntemleri, taksitler, indirimler</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="quick-item">
+                    <h4><i class="fas fa-user-graduate"></i> Ders Kaydı</h4>
+                    <p>Ders ekleme/silme, önkoşullar, kontenjan</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="quick-item">
+                    <h4><i class="fas fa-headset"></i> Acil İletişim</h4>
+                    <p>Bölümlerin iletişim numaraları</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های موجود قبلی */
+.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.result-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #eaeaea;
+    transition: all 0.3s;
+}
+
+.result-item:hover {
+    border-color: var(--primary-blue);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.result-type {
+    margin-bottom: 0.5rem;
+}
+
+.badge-faq {
+    background: #e8f6f3;
+    color: #1abc9c;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.badge-guide {
+    background: #ebf5fb;
+    color: #3498db;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.badge-policy {
+    background: #f5eef8;
+    color: #9b59b6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.result-title {
+    margin-bottom: 0.5rem;
+}
+
+.result-title a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.result-title a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.result-content {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.result-meta {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.result-meta i {
+    margin-right: 0.25rem;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.topic-card {
+    background: white;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-blue);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.topic-icon {
+    background: #f8f9fa;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--primary-blue);
+}
+
+.quick-guide .quick-item {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.quick-guide h4 {
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+.quick-guide p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* استایل‌های جدید برای دکمه‌های احراز هویت */
+.auth-buttons {
+    z-index: 1000;
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.user-info {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+</style>
+
+<script>
+// Sonuç Filtreleme
+document.querySelectorAll('.btn-filter').forEach(button => {
+    button.addEventListener('click', function() {
+        // Tüm butonlardan active sınıfını kaldır
+        document.querySelectorAll('.btn-filter').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Tıklanan butona active sınıfını ekle
+        this.classList.add('active');
+        
+        const filter = this.dataset.filter;
+        const items = document.querySelectorAll('.result-item');
+        
+        items.forEach(item => {
+            if (filter === 'all' || item.dataset.type === filter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,690 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Galeri - {{ category.name }} | Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<!-- Category Header -->
+<section class="category-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'gallery:main' %}">Galeri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+                    </ol>
+                </nav>
+                
+                <div class="category-hero">
+                    <div class="category-info">
+                        <h1>{{ category.name }}</h1>
+                        {% if category.description %}
+                            <p class="category-description">{{ category.description }}</p>
+                        {% endif %}
+                        <div class="category-stats">
+                            <span><i class="fas fa-images"></i> {{ images.count }} Fotoğraf</span>
+                            <span><i class="fas fa-calendar-alt"></i> {{ category.order }}. Sırada</span>
+                        </div>
+                    </div>
+                    
+                    {% if category.cover_image %}
+                    <div class="category-cover">
+                        <img src="{{ category.cover_image.url }}" alt="{{ category.name }}" loading="lazy">
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="category-gallery">
+    <div class="container">
+        <div class="gallery-controls">
+            <div class="gallery-info">
+                <h3><i class="fas fa-camera"></i> {{ images.count }} Fotoğraf</h3>
+            </div>
+            <div class="gallery-sort">
+                <select class="form-select" id="sortSelect">
+                    <option value="order">Varsayılan Sıralama</option>
+                    <option value="-upload_date">En Yeni</option>
+                    <option value="upload_date">En Eski</option>
+                    <option value="title">A'dan Z'ye</option>
+                    <option value="-title">Z'den A'ya</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row gallery-grid" id="galleryContainer">
+            {% for image in images %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4 gallery-item">
+                <div class="gallery-card">
+                    <a href="{% url 'gallery:image_detail' image.id %}" class="gallery-link">
+                        <div class="gallery-image">
+                            <img src="{{ image.image.url }}" alt="{{ image.title }}" loading="lazy">
+                            <div class="image-hover">
+                                <i class="fas fa-expand-alt"></i>
+                                <span>Görüntüle</span>
+                            </div>
+                        </div>
+                        <div class="gallery-content">
+                            <h4>{{ image.title }}</h4>
+                            <p class="image-date">{{ image.upload_date|date:"d.m.Y" }}</p>
+                            {% if image.description %}
+                                <p class="image-desc">{{ image.description|truncatechars:80 }}</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="empty-gallery">
+                    <i class="fas fa-images"></i>
+                    <h4>Bu kategoride henüz fotoğraf bulunmuyor</h4>
+                    <p>Fotoğraflar yakında eklenecektir.</p>
+                    <a href="{% url 'gallery:main' %}" class="btn btn-primary">
+                        <i class="fas fa-arrow-left"></i> Galeriye Dön
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if images.has_other_pages %}
+        <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if images.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ images.previous_page_number }}" aria-label="Previous">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for i in images.paginator.page_range %}
+                    {% if images.number == i %}
+                        <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if images.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ images.next_page_number }}" aria-label="Next">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Other Categories -->
+<section class="other-categories">
+    <div class="container">
+        <div class="section-title">
+            <h2>Diğer Kategoriler</h2>
+            <p class="section-subtitle">Keşfetmek için diğer galerilerimizi ziyaret edin</p>
+        </div>
+
+        {% if categories %}
+        <div class="row">
+            {% for cat in categories %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="other-category-card">
+                    <a href="{{ cat.get_absolute_url }}">
+                        <div class="other-category-image">
+                            {% if cat.cover_image %}
+                                <img src="{{ cat.cover_image.url }}" alt="{{ cat.name }}" loading="lazy">
+                            {% else %}
+                                <div class="other-category-placeholder">
+                                    <i class="fas fa-images"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="other-category-info">
+                            <h5>{{ cat.name }}</h5>
+                            <span>{{ cat.images.count }} fotoğraf</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-folder-open"></i>
+            <h4>Henüz başka kategori bulunmuyor</h4>
+            <p>Diğer kategoriler yakında eklenecektir.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+/* Category Header */
+.category-header {
+    padding: 100px 0 50px;
+    background: linear-gradient(135deg, var(--neutral-cream) 0%, var(--pure-white) 100%);
+    margin-top: 150px;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.breadcrumb-item a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-light);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: var(--accent-light-blue);
+}
+
+.category-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.category-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.category-info h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+}
+
+.category-description {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.category-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.category-stats span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--neutral-cream);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--secondary-medium-blue);
+}
+
+.category-stats i {
+    color: var(--accent-light-blue);
+}
+
+.category-cover {
+    flex: 0 0 400px;
+    max-width: 100%;
+}
+
+.category-cover img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Gallery Controls */
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.gallery-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin: 0;
+}
+
+.gallery-info i {
+    color: var(--accent-light-blue);
+    margin-right: 10px;
+}
+
+.gallery-sort .form-select {
+    width: 200px;
+    border: 2px solid var(--neutral-cream);
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.gallery-sort .form-select:focus {
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 3px rgba(29, 97, 169, 0.1);
+    outline: none;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    transition: all 0.3s ease;
+}
+
+.gallery-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+}
+
+.gallery-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(29, 97, 169, 0.15);
+}
+
+.gallery-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.gallery-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.image-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(9, 36, 66, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-hover i {
+    font-size: 32px;
+    color: var(--pure-white);
+    margin-bottom: 10px;
+}
+
+.image-hover span {
+    color: var(--pure-white);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.gallery-card:hover .gallery-image img {
+    transform: scale(1.1);
+}
+
+.gallery-card:hover .image-hover {
+    opacity: 1;
+}
+
+.gallery-content {
+    padding: 20px;
+}
+
+.gallery-content h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.image-date {
+    font-size: 12px;
+    color: var(--accent-light-blue);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.image-desc {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Empty Gallery */
+.empty-gallery {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.empty-gallery i {
+    font-size: 64px;
+    color: var(--neutral-cream);
+    margin-bottom: 20px;
+}
+
+.empty-gallery h4 {
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.empty-gallery p {
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background: var(--secondary-medium-blue);
+    border: none;
+    padding: 10px 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.3);
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 40px;
+}
+
+.page-link {
+    color: var(--secondary-medium-blue);
+    border: 2px solid var(--neutral-cream);
+    margin: 0 5px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.page-link:hover {
+    background: var(--secondary-medium-blue);
+    color: var(--pure-white);
+    border-color: var(--secondary-medium-blue);
+}
+
+.page-item.active .page-link {
+    background: var(--secondary-medium-blue);
+    border-color: var(--secondary-medium-blue);
+    color: var(--pure-white);
+}
+
+/* Other Categories */
+.other-categories {
+    padding: 80px 0;
+    background: var(--neutral-cream);
+}
+
+.other-categories .section-title {
+    margin-bottom: 40px;
+}
+
+.other-categories .section-title h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+}
+
+.other-category-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.other-category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.other-category-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.other-category-image {
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+}
+
+.other-category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.other-category-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pure-white);
+}
+
+.other-category-placeholder i {
+    font-size: 32px;
+    opacity: 0.8;
+}
+
+.other-category-card:hover .other-category-image img {
+    transform: scale(1.1);
+}
+
+.other-category-info {
+    padding: 15px;
+}
+
+.other-category-info h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 5px;
+}
+
+.other-category-info span {
+    font-size: 11px;
+    color: var(--accent-light-blue);
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .category-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .category-info {
+        min-width: 100%;
+    }
+    
+    .category-cover {
+        flex: 0 0 100%;
+    }
+    
+    .category-cover img {
+        height: 200px;
+    }
+    
+    .gallery-controls {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .gallery-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .category-header {
+        padding: 80px 0 30px;
+    }
+    
+    .category-info h1 {
+        font-size: 32px;
+    }
+    
+    .category-stats {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .gallery-image {
+        height: 160px;
+    }
+    
+    .other-categories {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .category-info h1 {
+        font-size: 28px;
+    }
+    
+    .category-description {
+        font-size: 14px;
+    }
+    
+    .gallery-image {
+        height: 150px;
+    }
+    
+    .other-category-card {
+        margin-bottom: 20px;
+    }
+}
+
+
+
+/* Empty State for Categories */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: var(--neutral-cream);
+    margin-bottom: 20px;
+}
+
+.empty-state h4 {
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: var(--text-light);
+    margin-bottom: 0;
+}
+</style>
+
+<script>
+// Sorting functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const sortSelect = document.getElementById('sortSelect');
+    const galleryContainer = document.getElementById('galleryContainer');
+    const galleryItems = Array.from(galleryContainer.querySelectorAll('.gallery-item'));
+    
+    sortSelect.addEventListener('change', function() {
+        const sortValue = this.value;
+        
+        galleryItems.sort((a, b) => {
+            const aData = a.querySelector('.gallery-content h4').textContent;
+            const bData = b.querySelector('.gallery-content h4').textContent;
+            const aDate = a.querySelector('.image-date').textContent;
+            const bDate = b.querySelector('.image-date').textContent;
+            
+            switch(sortValue) {
+                case '-upload_date':
+                    return new Date(bDate.split('.').reverse().join('-')) - new Date(aDate.split('.').reverse().join('-'));
+                case 'upload_date':
+                    return new Date(aDate.split('.').reverse().join('-')) - new Date(bDate.split('.').reverse().join('-'));
+                case 'title':
+                    return aData.localeCompare(bData);
+                case '-title':
+                    return bData.localeCompare(aData);
+                default:
+                    return 0; // Default order
+            }
+        });
+        
+        // Clear and re-append sorted items
+        galleryContainer.innerHTML = '';
+        galleryItems.forEach(item => galleryContainer.appendChild(item));
+    });
+});
+</script>
+{% endblock %}

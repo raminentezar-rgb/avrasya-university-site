@@ -1,0 +1,319 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}Araştırma Merkezleri - Avrasya University{% endblock %}
+
+{% block content %}
+<section class="research-hero" style="background: linear-gradient(135deg, #1d61a9 0%, #092442 100%); padding: 100px 0 60px;">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Araştırma Merkezleri</h1>
+            <p>Üniversitemizin Araştırma Merkezleri</p>
+        </div>
+    </div>
+</section>
+
+<section class="research-section">
+    <div class="container">
+        <div class="sidebar-layout">
+            <!-- سایدبار در سمت چپ -->
+            <div class="sidebar-left">
+                {% include 'arastirma/includes/merkezleri_sidebar.html' %}
+            </div>
+            
+            <!-- محتوای اصلی در سمت راست -->
+            <div class="content-right">
+                <!-- کارت‌های مراکز تحقیقاتی -->
+                <div class="row">
+                    <!-- ردیف اول -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:kadin' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1 kopya.png' %}" alt="Kadın Çalışmaları Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Kadın Çalışmaları Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:bagimlilikla_mucadele' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1 kopya 2.png' %}" alt="Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:uzaktan_egitim' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1.png' %}" alt="Uzaktan Eğitim Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Uzaktan Eğitim Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جداکننده بین ردیف‌ها -->
+                {% comment %} <div class="row-separator"></div> {% endcomment %}
+
+                <!-- ردیف دوم -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:girisimcilik_yenilikcilik' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 3.png' %}" alt="Girişimcilik ve Yenilikçilik Uygulama Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Girişimcilik ve Yenilikçilik Uygulama Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:gida_egitim' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 4.png' %}" alt="Gıda Eğitim Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Gıda Eğitim Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:goc_calismalari' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 6.png' %}" alt="Göç Çalışmaları Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Göç Çalışmaları Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جداکننده بین ردیف‌ها -->
+                {% comment %} <div class="row-separator"></div> {% endcomment %}
+
+                <!-- ردیف سوم -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:turkce_ogretimi' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 5.png' %}" alt="Türkçe Öğretimi Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Türkçe Öğretimi Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:kariyer_gelistirme' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 2.png' %}" alt="Kariyer Geliştirme Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Kariyer Geliştirme Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:ulastirma_uygulama' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 7.png' %}" alt="Ulaştırma Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Ulaştırma Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جداکننده بین ردیف‌ها -->
+                {% comment %} <div class="row-separator"></div> {% endcomment %}
+
+                <!-- ردیف چهارم -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:teknoloji_transfer' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 8.png' %}" alt="Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="research-center-card">
+                            <div class="card-image">
+                                <a href="{% url 'arastirma:surekli_egitim' %}">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 9.png' %}" alt="Sürekli Eğitim Uygulama ve Araştırma Merkezi">
+                                <div class="card-title-overlay">
+                                    <h4>Sürekli Eğitim Uygulama ve Araştırma Merkezi</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.research-center-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.research-center-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.card-image {
+    height: 280px; /* افزایش ارتفاع از 200px به 280px */
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.research-center-card:hover .card-image img {
+    transform: scale(1.1);
+    filter: brightness(0.8);
+}
+
+.card-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+    color: white; /* تضمین رنگ سفید برای متن */
+    padding: 25px 15px 20px; /* افزایش padding برای ارتفاع بیشتر */
+    transition: all 0.4s ease;
+    transform: translateY(0);
+}
+
+.research-center-card:hover .card-title-overlay {
+    background: linear-gradient(to top, rgba(29, 97, 169, 0.9) 0%, rgba(29, 97, 169, 0.7) 50%, rgba(29, 97, 169, 0.5) 100%);
+    padding-top: 30px;
+    padding-bottom: 25px;
+}
+
+.card-title-overlay h4 {
+    font-size: 0.85rem; /* کمی بزرگتر برای خوانایی بهتر */
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+    text-align: center;
+    transition: all 0.4s ease;
+    color: white !important; /* تضمین رنگ سفید */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* سایه برای خوانایی بهتر */
+}
+
+.research-center-card:hover .card-title-overlay h4 {
+    transform: scale(1.05);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* سایه قوی‌تر هنگام هاور */
+}
+
+/* استایل جداکننده زیبا بین ردیف‌ها */
+.row-separator {
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(141, 212, 227, 0.3) 20%, 
+        rgba(29, 97, 169, 0.5) 50%, 
+        rgba(141, 212, 227, 0.3) 80%, 
+        transparent 100%);
+    margin: 40px 0;
+    position: relative;
+    border-radius: 2px;
+}
+
+.row-separator::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 6px;
+    background: linear-gradient(135deg, #8dd4e3 0%, #1d61a9 100%);
+    border-radius: 3px;
+}
+
+/* افزایش فاصله بین کارت‌ها */
+.mb-4 {
+    margin-bottom: 2rem !important;
+}
+
+/* فاصله بیشتر برای ردیف‌ها */
+.row {
+    margin-bottom: 10px;
+}
+
+/* استایل برای موبایل */
+@media (max-width: 768px) {
+    .row-separator {
+        margin: 30px 0;
+    }
+    
+    .row-separator::before {
+        width: 40px;
+    }
+    
+    .mb-4 {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .card-image {
+        height: 220px; /* ارتفاع کمتر در موبایل */
+    }
+    
+    .card-title-overlay h4 {
+        font-size: 0.75rem;
+    }
+}
+
+/* برای صفحه‌نمایش بزرگ */
+@media (min-width: 1200px) {
+    .card-image {
+        height: 300px; /* ارتفاع بیشتر در صفحه‌نمایش بزرگ */
+    }
+}
+</style>
+{% endblock %}

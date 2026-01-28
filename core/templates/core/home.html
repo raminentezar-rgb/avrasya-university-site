@@ -1,0 +1,2794 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Anasayfa {% endblock %}
+
+{% block content %}
+
+
+<script>
+// حذف container از main با جاوااسکریپت
+document.addEventListener('DOMContentLoaded', function() {
+    const main = document.querySelector('main.container');
+    if (main) {
+        main.classList.remove('container');
+        main.style.padding = '0';
+        main.style.margin = '0';
+        main.style.maxWidth = '100%';
+    }
+});
+</script>
+
+
+
+<!-- Slider Section -->
+<section id="slider" class="mb-4">
+<div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+<div class="carousel-inner">
+{% for s in sliders %}
+<div class="carousel-item {% if forloop.first %}active{% endif %}">
+    
+    {% if s.content_type == 'image' and s.image %}
+        <!-- نمایش تصویر -->
+        <img src="{{ s.image.url }}" class="d-block w-100" alt="{{ s.title }}" >
+    
+    {% elif s.content_type == 'video' and s.video %}
+        <!-- نمایش ویدیو آپلودی -->
+        <video class="d-block w-100" autoplay muted loop style="max-height: 600px; object-fit: cover;">
+            <source src="{{ s.video.url }}" type="video/mp4">
+            مرورگر شما از تگ ویدیو پشتیبانی نمی‌کند.
+        </video>
+    
+    {% elif s.content_type == 'video' and s.video_url %}
+        <!-- نمایش ویدیو از لینک خارجی -->
+        <div class="embed-responsive embed-responsive-16by9" style="height: 600px;">
+            <iframe class="embed-responsive-item w-100 h-100" 
+                    src="{{ s.video_url }}" 
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+    
+    {% else %}
+        <!-- تصویر پیش‌فرض -->
+        <img src="{% static 'core/img/default_slider.jpg' %}" class="d-block w-100" alt="Default" style="max-height: 600px; object-fit: cover;">
+    {% endif %}
+    
+    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+        <h5>{{ s.title }}</h5>
+        {% if s.link %}
+        <a href="{{ s.link }}" class="btn btn-sm btn-primary mt-2">Daha Fazla</a>
+        {% endif %}
+    </div>
+</div>
+{% empty %}
+<div class="carousel-item active">
+    <img src="{% static 'core/img/default_slider.jpg' %}" class="d-block w-100" alt="Default" style="max-height: 600px; object-fit: cover;">
+</div>
+{% endfor %}
+</div>
+<button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+<span class="visually-hidden">Next</span>
+</button>
+</div>
+</section>
+
+
+
+
+
+
+
+<!-- Quick Access Cards - جدید و جذاب -->
+<section id="quick-access" class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Kart 1: Akademik -->
+            {% comment %} <div class="col-lg-3 col-md-6">
+                <div class="card access-card h-100 border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="icon-wrapper mb-3">
+                            <i class="bi bi-journals"></i> 
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Akademik</h5>
+                        <p class="card-text text-muted small mb-4">
+                            Fakülteler, bölümler ve akademik programlar
+                        </p>
+                        <a href="/page/akademik/" class="btn btn-outline-primary btn-sm">
+                            Keşfet <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+
+            <!-- Kart 2: Mezunlar -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card access-card h-100 border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="icon-wrapper mb-3">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Aday Öğrenci</h5>
+
+                        <p class="card-text text-muted small mb-4">
+                            uygulamalı eğitim programları 
+                        </p>
+                        <a href="{% url 'aday_ogrenci:aday_anasayfa' %}" class="btn btn-outline-primary btn-sm">
+                            Katıl <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kart 3: Kütüphane -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card access-card h-100 border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="icon-wrapper mb-3">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Kütüphane</h5>
+                        <p class="card-text text-muted small mb-4">
+                            Dijital kütüphane ve online kaynaklar
+                        </p>
+                        <a href="{% url 'kutuphane:kutuphane' %}" class="btn btn-outline-primary btn-sm">
+                            Erişim <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Kart 7: Başvuru -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card access-card h-100 border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="icon-wrapper mb-3">
+                            <i class="bi bi-pencil-square"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Kayıt</h5>
+                        <p class="card-text text-muted small mb-4">
+                            Online başvuru ve kayıt işlemleri
+                        </p>
+                        <a href="/application/" class="btn btn-outline-primary btn-sm">
+                            Başvur <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kart 8: İletişim -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card access-card h-100 border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="icon-wrapper mb-3">
+                            <i class="bi bi-telephone-outbound"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">İletişim</h5>
+                        <p class="card-text text-muted small mb-4">
+                            Bize ulaşın ve sorularınızı yöneltin
+                        </p>
+                        <a href="/contact/" class="btn btn-outline-primary btn-sm">
+                            İletişim <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kart 4: Kampüs Yaşamı -->
+            {% comment %} <div class="col-lg-3 col-md-6">
+                <div class="card access-card h-100 border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="icon-wrapper mb-3">
+                            <i class="bi bi-house-door"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Kampüs Yaşamı</h5>
+                        <p class="card-text text-muted small mb-4">
+                            Sosyal olanaklar ve öğrenci yaşamı
+                        </p>
+                        <a href="/campus-life/" class="btn btn-outline-primary btn-sm">
+                            Keşfet <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+
+        <!-- İkinci Satır -->
+        {% comment %} <div class="row g-4 mt-2"> {% endcomment %}
+            <!-- Kart 5: Uluslararası -->
+            {% comment %} <div class="col-lg-3 col-md-6">
+                <div class="card access-card h-100 border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="icon-wrapper mb-3">
+                            <i class="bi bi-airplane"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Uluslararası</h5>
+                        <p class="card-text text-muted small mb-4">
+                            Değişim programları ve işbirlikleri
+                        </p>
+                        <a href="/international/" class="btn btn-outline-primary btn-sm">
+                            Detaylar <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+
+            
+            <!-- Kart 6: Araştırma -->
+            
+                {% comment %} <div class="col-lg-3 col-md-6">
+                    <div class="card access-card h-100 border-0 text-center">
+                        <div class="card-body p-4">
+                            <div class="icon-wrapper mb-3">
+                                <i class="bi bi-search-heart"></i>
+                            </div>
+                            <h5 class="card-title text-primary mb-3">Araştırma</h5>
+                            <p class="card-text text-muted small mb-4">
+                                Bilimsel araştırmalar ve projeler
+                            </p>
+                            <a href="/research/" class="btn btn-outline-primary btn-sm">
+                                İncele <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- اضافه کردن این کد در بخش مناسب از home.html -->
+<section id="announcements" class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="fw-bold text-primary mb-3">AKADEMİK</h2>
+                <p class="lead text-muted">Avrasya Üniversitesi'ni daha yakından tanıyın</p>
+            </div>
+        </div>
+        
+        <div class="row g-3">
+            <!-- Kart 1: En Yeşil, En Sürdürülebilir Üniversitelerinden -->
+            <div class="col-lg-3 col-md-6">
+                <div class="kesfet-card position-relative overflow-hidden rounded shadow-sm">
+                    <img src="{% static 'core/img/student/event-7.jpg' %}" alt="Sürdürülebilir Üniversite" class="img-fluid w-100">
+                    <div class="kesfet-overlay d-flex align-items-end">
+                        <div class="kesfet-content p-3 w-100">
+                            <h5 class="text-white mb-2">ENSTİTÜLER</h5>
+                            <a href="{% url 'enstituler:enstituler' %}" class="btn btn-sm btn-outline-light">Keşfet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kart 2: Yurt Dışı Üniversite Anlaşmaları -->
+            <div class="col-lg-3 col-md-6">
+                <div class="kesfet-card position-relative overflow-hidden rounded shadow-sm">
+                    <img src="{% static 'core/img/student/intructor-account.jpg' %}" alt="Yurt Dışı Anlaşmalar" class="img-fluid w-100">
+                    <div class="kesfet-overlay d-flex align-items-end">
+                        <div class="kesfet-content p-3 w-100">
+                            <h5 class="text-white mb-2">FAKÜLTELER</h5>
+                            <a href="{% url 'fakulteler:fakulteler' %}" class="btn btn-sm btn-outline-light">Keşfet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kart 3: Üniversite Sanayi İş Birliği -->
+            <div class="col-lg-3 col-md-6">
+                <div class="kesfet-card position-relative overflow-hidden rounded shadow-sm">
+                    <img src="{% static 'core/img/student/learner-account.jpg' %}" alt="Sanayi İş Birliği" class="img-fluid w-100">
+                    <div class="kesfet-overlay d-flex align-items-end">
+                        <div class="kesfet-content p-3 w-100">
+                            <h5 class="text-white mb-2">YÜKSEKOKULLAR</h5>
+                            <a href="{% url 'yuksekokullari:yuksekokullari' %}" class="btn btn-sm btn-outline-light">Keşfet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kart 4: Akreditasyonlarımız -->
+            <div class="col-lg-3 col-md-6">
+                <div class="kesfet-card position-relative overflow-hidden rounded shadow-sm">
+                    <img src="{% static 'core/img/student/event-4.jpg' %}" alt="Akreditasyonlar" class="img-fluid w-100">
+                    <div class="kesfet-overlay d-flex align-items-end">
+                        <div class="kesfet-content p-3 w-100">
+                            <h5 class="text-white mb-2">MESLEK YÜKSEKOKULLARI</h5>
+                            <a href="{% url 'meslekyuksekokullari:meslekyuksekokullari' %}" class="btn btn-sm btn-outline-light">Keşfet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Announcements Section - جدید -->
+<section id="announcements" class="py-5 bg-white">
+    <div class="container">
+        <div class="row align-items-center mb-4">
+            <div class="col-md-8">
+                <h2 class="fw-bold text-primary mb-2">Duyurular</h2>
+                <p class="text-muted">Üniversitemizden güncel haber ve duyurular</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="{% url 'duyurular:liste' %}" class="btn btn-outline-primary">
+                    Tüm Duyurular <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for duyuru in latest_announcements %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card announcement-card h-100 border-0 shadow-sm-hover">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="card-title text-primary mb-1 small">{{ duyuru.baslik|truncatewords:8 }}</h6>
+                            <span class="badge bg-warning text-dark ms-1">
+                                <i class="bi bi-megaphone"></i>
+                            </span>
+                        </div>
+                        
+                        <p class="card-text text-muted small mb-2">
+                            <i class="bi bi-calendar-event me-1"></i>
+                            {{ duyuru.yayin_tarihi|date:'d M Y' }}
+                        </p>
+                        
+                        <p class="card-text text-dark small">
+                            {% if duyuru.ozet %}
+                                {{ duyuru.ozet|truncatewords:12 }}
+                            {% else %}
+                                {{ duyuru.icerik|truncatewords:12 }}
+                            {% endif %}
+                        </p>
+                        
+                        <!-- File badges -->
+                        <!-- File badges -->
+                        {% with dosyalar=duyuru.mevcut_dosyalar %}
+                            {% if dosyalar %}
+                            <div class="file-badges mb-2">
+                                {% for dosya in dosyalar|slice:":2" %}
+                                <span class="badge bg-light text-dark border me-1 small">
+                                    <i class="bi {{ dosya.icon }} me-1"></i> {{ dosya.tur }}
+                                </span>
+                                {% endfor %}
+                                {% if dosyalar|length > 2 %}
+                                <span class="badge bg-light text-dark border small">
+                                    +{{ dosyalar|length|add:"-2" }}
+                                </span>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <a href="{{ duyuru.get_absolute_url }}" class="btn btn-primary btn-sm">
+                                Detay <i class="bi bi-arrow-right"></i>
+                            </a>
+                            {% if duyuru.mevcut_dosyalar %}
+                            <small class="text-muted small">
+                                <i class="bi bi-paperclip"></i> {{ duyuru.mevcut_dosyalar|length }}
+                            </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="text-center py-4">
+                    <i class="bi bi-megaphone display-1 text-muted"></i>
+                    <h4 class="text-muted mt-3">Henüz duyuru bulunmuyor</h4>
+                    <p class="text-muted">En kısa sürede güncel duyurular paylaşılacaktır.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Quick stats -->
+         {% if latest_announcements %}
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="bg-light rounded p-3">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <h4 class="text-primary fw-bold mb-1">{{ total_announcements }}</h4>
+                            <p class="text-muted mb-0 small">Toplam Duyuru</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-primary fw-bold mb-1">{{ this_month_announcements }}</h4>
+                            <p class="text-muted mb-0 small">Bu Ayki Duyurular</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-primary fw-bold mb-1">{{ with_files_count }}</h4>
+                            <p class="text-muted mb-0 small">Dosya Ekli</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-primary fw-bold mb-1">{{ recent_week_count }}</h4>
+                            <p class="text-muted mb-0 small">Son 7 Gün</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %} 
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- News Section -->
+
+<section id="news" class="py-5 bg-white">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="fw-bold text-primary mb-3">HABERLER</h2>
+                <p class="lead text-muted">Son Gelişmeler ve Yenilikç Çözümlerden Haberdar Olun</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- اسلایدر اصلی اخبار (سمت چپ) -->
+            <div class="col-lg-8">
+                <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for n in latest_news %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="news-slider-card">
+                                {% if n.image %}
+                                <img src="{{ n.image.url }}" class="news-slider-image" alt="{{ n.title }}">
+                                {% else %}
+                                <div class="news-slider-image bg-light d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-newspaper display-1 text-muted"></i>
+                                </div>
+                                {% endif %}
+                                <div class="news-slider-overlay">
+                                    <div class="news-slider-content">
+                                        <span class="news-date-badge">{{ n.published_at|date:'d' }}</span>
+                                        <h3 class="news-slider-title">{{ n.title }}</h3>
+                                        <p class="news-slider-summary">
+                                            {{ n.summary|truncatewords:20|default:n.content|truncatewords:20 }}
+                                        </p>
+                                        <a href="{{ n.get_absolute_url }}" class="btn btn-primary">
+                                            Devamını Oku <i class="bi bi-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- کنترل‌های اسلایدر -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- لیست اخبار اخیر (سمت راست) -->
+            <div class="col-lg-4">
+                <div class="recent-news-sidebar">
+                    <h4 class="sidebar-title mb-4">SON HABERLER</h4>
+                    
+                    <div class="recent-news-list">
+                        {% for n in latest_news|slice:":3" %}
+                        <div class="recent-news-item">
+                            <div class="recent-news-content">
+                                <h6 class="recent-news-title">
+                                    <a href="{{ n.get_absolute_url }}">{{ n.title }}</a>
+                                </h6>
+                                <div class="recent-news-meta">
+                                    <span class="news-category">HABER</span>
+                                    <span class="news-date">{{ n.published_at|date:'d M Y' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% if not forloop.last %}
+                        <hr class="my-3">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{% url 'news:list' %}" class="btn btn-outline-primary btn-sm">
+                            Tüm Haberler <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- About Section -->
+<section id="about" class="py-5 bg-white">
+        <div class="container text-center">
+        <h2 class="fw-bold mb-3 text-primary">Avrasya Üniversitesi Hakkında</h2>
+        <p class="lead text-muted">
+        Avrasya Üniversitesi, yenilikçi eğitim anlayışı, güçlü akademik kadrosu ve çağdaş altyapısıyla geleceğe yön veren bireyler yetiştirmektedir.
+        </p>
+        <a href="{% url 'avrasya_universitesi_hakkinda:anasayfa' %}" class="btn btn-outline-primary mt-3">Devamını Oku</a>
+        </div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- Etkinlikler -->
+<section id="news" class="py-5 bg-light">
+   
+   <div class="container">
+        <div class="row align-items-center mb-4">
+            <div class="col-md-8">
+                <h2 class="fw-bold text-primary mb-2 ">Etkinlikler</h2>
+                <p class="text-muted">Yaklaşan etkinlikler ve organizasyonlar</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="{% url 'etkinlikler:liste' %}" class="btn btn-outline-primary">
+                    Tüm Etkinlikler <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for etkinlik in latest_events %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card event-card h-100 border-0 shadow-sm">
+                    {% if etkinlik.afis %}
+                    <img src="{{ etkinlik.afis.url }}" class="card-img-top" alt="{{ etkinlik.baslik }}" style="height: 180px; object-fit: cover;">
+                    {% else %}
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+                        <i class="bi bi-calendar-event display-4 text-muted"></i>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2 small">{{ etkinlik.get_etkinlik_turu_display }}</span>
+                        <h6 class="card-title text-dark">{{ etkinlik.baslik|truncatewords:6 }}</h6>
+                        
+                        <div class="event-info small text-muted mb-2">
+                            <div class="d-flex align-items-center mb-1">
+                                <i class="bi bi-calendar-event me-1"></i>
+                                {{ etkinlik.baslangic_tarihi|date:'d M Y' }}
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-1"></i>
+                                {{ etkinlik.yer|truncatewords:3 }}
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ etkinlik.get_absolute_url }}" class="btn btn-primary btn-sm">
+                                Detay
+                            </a>
+                            {% if etkinlik.yaklasan_etkinlik %}
+                            <span class="badge bg-warning text-dark small">
+                                <i class="bi bi-clock"></i> {{ etkinlik.gun_kaldi }}g
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="text-center py-4">
+                    <i class="bi bi-calendar-event display-1 text-muted"></i>
+                    <h4 class="text-muted mt-3">Yaklaşan etkinlik bulunmuyor</h4>
+                    <p class="text-muted">En kısa sürede yeni etkinlikler duyurulacaktır.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div> <!-- محتوای موجود -->
+     
+</section>
+
+<!-- Quick Links -->
+{% comment %} <section id="links" class="py-5 bg-primary text-light">
+    <!-- محتوای موجود -->
+</section> {% endcomment %}
+
+
+
+
+
+
+<!-- اضافه کردن این کد در بخش مناسب از home.html - قبل از بخش Keşfet -->
+<section id="full-width-hero" class="mb-5">
+    <div class="container-fluid p-0">
+        <div class="hero-image position-relative">
+            <img src="{% static 'core/img/akademik/avrasya5.png' %}" alt="Avrasya Üniversitesi" class="img-fluid w-100">
+            
+            <!-- Overlay Content -->
+            <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero-content text-white">
+                                <h1 class="hero-title display-4 fw-bold mb-4">
+                                    Geleceğinizi <span class="text-warning">Avrasya'da</span> Şekillendirin
+                                </h1>
+                                <p class="hero-subtitle lead mb-4">
+                                    Kaliteli eğitim, modern kampüs ve güçlü akademik kadro ile 
+                                    sizleri geleceğe hazırlıyoruz.
+                                </p>
+                                <div class="hero-buttons">
+                                    <a href="{% url 'aday_ogrenci:basvuru' %}" class="btn btn-warning btn-lg me-3">
+                                        <i class="bi bi-pencil-square me-2"></i>
+                                        Hemen Başvur
+                                    </a>
+                                    <a href="{% url 'aday_ogrenci:aday_iletisim' %}" class="btn btn-outline-light btn-lg">
+                                        <i class="bi bi-telephone me-2"></i>
+                                        Bize Ulaşın
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="fw-bold text-primary mb-3">Öğrenci ve Mezun Görüşleri</h2>
+                <p class="lead text-muted">Avrasya Üniversitesi'nde eğitim deneyimlerini paylaşıyorlar</p>
+            </div>
+        </div>
+        
+        <!-- Testimonials Carousel -->
+        <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="row g-4">
+                        <!-- Testimonial 1 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Ayşe Yılmaz" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Ayşe Yılmaz</h5>
+                                            <p class="text-muted small mb-0">Bilgisayar Mühendisliği, 2022 Mezunu</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Avrasya Üniversitesi'nde geçirdiğim 4 yıl, hem akademik hem de kişisel gelişimim açısından çok değerliydi. Alanında uzman hocalarımızın rehberliği sayesinde mezun olduğumda iş hayatına hazırdım."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-6.jpg' %}" alt="Mehmet Demir" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Mehmet Demir</h5>
+                                            <p class="text-muted small mb-0">İşletme, 4. Sınıf Öğrencisi</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Kampüs hayatı ve sosyal olanaklar açısından Avrasya Üniversitesi gerçekten çok zengin. Ders dışında katıldığım kulüp faaliyetleri sayesinde birçok deneyim kazandım."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-4.jpg' %}" alt="Zeynep Kaya" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Zeynep Kaya</h5>
+                                            <p class="text-muted small mb-0">Tıp Fakültesi, 2021 Mezunu</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Tıp eğitimim boyunca hem teorik hem de pratik anlamda çok iyi bir eğitim aldım. Hastane stajlarımızda deneyimli doktorlardan öğrendiğimiz bilgiler meslek hayatımda bana çok yardımcı oldu."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="row g-4">
+                        <!-- Testimonial 4 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Ahmet Korkmaz" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Ahmet Korkmaz</h5>
+                                            <p class="text-muted small mb-0">Elektrik-Elektronik Müh., 2020 Mezunu</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Üniversitenin sağladığı laboratuvar imkanları ve teknik ekipmanlar sayesinde pratik becerilerimizi geliştirme fırsatı bulduk. Mezuniyet sonrası iş bulma sürecim oldukça hızlı geçti."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 5 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Elif Yıldız" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Elif Yıldız</h5>
+                                            <p class="text-muted small mb-0">Psikoloji, 3. Sınıf Öğrencisi</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Akademik kadronun öğrenciye yaklaşımı gerçekten çok sıcak ve destekleyici. Danışman hocalarımız her konuda bize rehberlik ediyor. Kampüs ortamı da oldukça güvenli ve huzurlu."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 6 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Can Aydın" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Can Aydın</h5>
+                                            <p class="text-muted small mb-0">Mimarlık, 2023 Mezunu</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Stüdyo derslerinde aldığımız pratik eğitim ve proje tabanlı öğrenme sayesinde portfolyom oldukça zenginleşti. Mezun olduktan sonra bir mimarlık ofisinde işe başladım."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <div class="row g-4">
+                        <!-- Testimonial 7 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-7.jpg' %}" alt="Deniz Arslan" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Deniz Arslan</h5>
+                                            <p class="text-muted small mb-0">Kimya Mühendisliği, 2021 Mezunu</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Laboratuvar çalışmaları ve endüstriyel staj imkanları ile teorik bilgilerimizi pratiğe dökme fırsatı bulduk. Üniversitenin sanayi işbirlikleri sayesinde mezuniyet öncesi iş teklifi aldım."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 8 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Buse Şahin" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Buse Şahin</h5>
+                                            <p class="text-muted small mb-0">Hukuk Fakültesi, 2022 Mezunu</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Hukuk kliniği uygulamaları ve mahkeme ziyaretleri sayesinde teorik hukuk bilgimizi pratikle pekiştirdik. Mezun olduktan sonra avukatlık stajıma başladım ve oldukça hazırlıklıydım."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 9 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Okan Kılıç" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Okan Kılıç</h5>
+                                            <p class="text-muted small mb-0">İnşaat Mühendisliği, 4. Sınıf Öğrencisi</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Teknik geziler ve saha uygulamaları ile teorik bilgilerimizi gerçek projelerde test etme fırsatı buluyoruz. Öğretim üyelerimizin sektör deneyimleri bize büyük katkı sağlıyor."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 4 -->
+                <div class="carousel-item">
+                    <div class="row g-4">
+                        <!-- Testimonial 10 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-4.jpg' %}" alt="Sema Yücel" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Sema Yücel</h5>
+                                            <p class="text-muted small mb-0">İngilizce Öğretmenliği, 2020 Mezunu</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Pedagojik formasyon eğitimi ve staj deneyimleri sayesinde mezun olduğumda kendimi sınıf ortamına hazır hissediyordum. Şu anda bir devlet okulunda İngilizce öğretmeni olarak çalışıyorum."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 11 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-6.jpg' %}" alt="Tolga Akgün" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Tolga Akgün</h5>
+                                            <p class="text-muted small mb-0">Makine Mühendisliği, 2023 Mezunu</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "CAD/CAM laboratuvarları ve modern makine parkuru ile pratik becerilerimizi geliştirdik. Bitirme projem sayesinde bir otomotiv firmasında işe başladım."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 12 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card testimonial-card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'core/img/student/testimonial-7.jpg' %}" alt="Nur Güler" class="student-avatar rounded-circle me-3">
+                                        <div>
+                                            <h5 class="mb-1">Nur Güler</h5>
+                                            <p class="text-muted small mb-0">Hemşirelik, 2. Sınıf Öğrencisi</p>
+                                        </div>
+                                    </div>
+                                    <div class="rating mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                    </div>
+                                    <p class="card-text text-dark">
+                                        "Klinik uygulamalar ve simülasyon laboratuvarları sayesinde mesleki becerilerimizi güvenli bir ortamda geliştiriyoruz. Hocalarımızın tecrübelerini bizimle paylaşması çok değerli."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-primary rounded-circle p-3" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-primary rounded-circle p-3" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators position-relative mt-4">
+                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active bg-primary" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1" class="bg-primary" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2" class="bg-primary" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="3" class="bg-primary" aria-label="Slide 4"></button>
+            </div>
+        </div>
+        
+        <!-- Stats Section -->
+        {% comment %} <div class="row mt-5 pt-4">
+            <div class="col-12">
+                <div class="bg-white rounded p-4 shadow-sm">
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-4">
+                            <div class="stat-item">
+                                <h3 class="text-primary fw-bold mb-1">%94</h3>
+                                <p class="text-muted mb-0">Memnuniyet Oranı</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stat-item">
+                                <h3 class="text-primary fw-bold mb-1">%87</h3>
+                                <p class="text-muted mb-0">Mezun İstihdam Oranı</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stat-item">
+                                <h3 class="text-primary fw-bold mb-1">4.5/5</h3>
+                                <p class="text-muted mb-0">Ortalama Puan</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stat-item">
+                                <h3 class="text-primary fw-bold mb-1">1500+</h3>
+                                <p class="text-muted mb-0">Paylaşılan Görüş</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        
+        <!-- CTA Section -->
+        {% comment %} <div class="row mt-4">
+            <div class="col-12 text-center">
+                <p class="mb-3">Siz de deneyimlerinizi paylaşmak ister misiniz?</p>
+                <a href="#" class="btn btn-primary me-2">
+                    <i class="bi bi-pencil-square me-1"></i>Görüş Bildir
+                </a>
+                <a href="#" class="btn btn-outline-primary">
+                    <i class="bi bi-play-btn me-1"></i>Tüm Görüşleri Gör
+                </a>
+            </div>
+        </div> {% endcomment %}
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- نسخه ساده بدون متن -->
+{% comment %} <section id="full-width-banner" class="mb-5">
+    <div class="container-fluid p-0">
+        <div class="banner-image">
+            <img src="{% static 'core/img/akademik/avrasya12.jpg' %}" alt="Avrasya Üniversitesi" class="img-fluid w-100">
+        </div>
+    </div>
+</section> {% endcomment %}
+
+
+
+
+
+{% comment %} <section id="links" class="py-5 bg-primary text-light">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-3 mb-3"><a href="/page/akademik/" class="text-light text-decoration-none">Akademik</a></div>
+            <div class="col-md-3 mb-3"><a href="/events/" class="text-light text-decoration-none">Etkinlikler</a></div>
+            <div class="col-md-3 mb-3"><a href="/page/ogrenci/" class="text-light text-decoration-none">Öğrenci Bilgileri</a></div>
+            <div class="col-md-3 mb-3"><a href="/contact/" class="text-light text-decoration-none">İletişim</a></div>
+        </div>
+    </div>  
+</section> {% endcomment %}
+
+
+
+<!-- اضافه کردن این کد در انتهای فایل home.html -->
+<section id="campus-cards" class="py-5 bg-white">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="fw-bold text-primary mb-3">Kampüslerimiz</h2>
+                <p class="lead text-muted">Avrasya Üniversitesi'nin tüm yerleşkeleri ve iletişim bilgileri</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Peliti Yerleşkesi -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="campus-card-container">
+                    <div class="campus-card">
+                        <div class="campus-card-front">
+                            <div class="campus-image-container">
+                                <img src="{% static 'core/img/akademik/peelitli.png' %}" alt="Pelitli Yerleşkesi" class="campus-image">
+                                <div class="image-overlay"></div>
+                            </div>
+                            <h3 class="campus-name">PELİTLİ</h3>
+                            <p class="campus-location">Ortahisar / TR4820N</p>
+                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                        </div>
+                        <div class="campus-card-back">
+                            <h3 class="back-campus-name">PELİTLİ YERLEŞKESİ</h3>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        Arrasyon Üniversitesi<br>
+                                        Restolveğin Peliti Mühelfesi<br>
+                                        Otirmiyeti: Birhem, No:26/A<br>
+                                        Ortarlıson/TR4820N
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        0 462 334 05 50<br>
+                                        0 462 334 04 44
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Yalıncak Yerleşkesi -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="campus-card-container">
+                    <div class="campus-card">
+                        <div class="campus-card-front">
+                            <div class="campus-image-container">
+                                <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" alt="Yalıncak Yerleşkesi" class="campus-image">
+                                <div class="image-overlay"></div>
+                            </div>
+                            <h3 class="campus-name">YALINCAK</h3>
+                            <p class="campus-location">Ortahisar / Trabzon</p>
+                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                        </div>
+                        <div class="campus-card-back">
+                            <h3 class="back-campus-name">YALINCAK YERLEŞKESİ</h3>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        Yalıncak Mahallesi<br>
+                                        Bize Cad. No: 126/1<br>
+                                        Ortahtar / Trabzon
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        0-462 335 50 00<br>
+                                        0-462 335 00 18
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kaşüstü Yerleşkesi -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="campus-card-container">
+                    <div class="campus-card">
+                        <div class="campus-card-front">
+                            <div class="campus-image-container">
+                                <img src="{% static 'core/img/akademik/kasustu-1024x683-1.jpg' %}" alt="Kaşüstü Yerleşkesi" class="campus-image">
+                                <div class="image-overlay"></div>
+                            </div>
+                            <h3 class="campus-name">KAŞÜSTÜ</h3>
+                            <p class="campus-location">Yomra / Trabzon</p>
+                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                        </div>
+                        <div class="campus-card-back">
+                            <h3 class="back-campus-name">KAŞÜSTÜ YERLEŞKESİ</h3>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        Koşüstü, Limramet Road<br>
+                                        02180 Yormu/Trabzon
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        0 402 334 05 50<br>
+                                        0 402 334 04 44
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Yomra Yerleşkesi -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="campus-card-container">
+                    <div class="campus-card">
+                        <div class="campus-card-front">
+                            <div class="campus-image-container">
+                                <img src="{% static 'core/img/akademik/yomra.png' %}" alt="Yomra Yerleşkesi" class="campus-image">
+                                <div class="image-overlay"></div>
+                            </div>
+                            <h3 class="campus-name">YOMRA</h3>
+                            <p class="campus-location">Yomra / Trabzon</p>
+                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                        </div>
+                        <div class="campus-card-back">
+                            <h3 class="back-campus-name">YOMRA YERLEŞKESİ</h3>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        Sencok, Nüzümet Cd.<br>
+                                        BİZGÖ<br>
+                                        Yomro/Tirabzon
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        0-482 334 05 50<br>
+                                        0-482 334 04 44
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- اضافه کردن این کد در بخش مناسب از home.html -->
+<section id="logo-partners" class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h3 class="fw-bold text-primary mb-3">Diğer Bağlantılar</h3>
+                <p class="text-muted">Uluslararası iş birliklerimiz ve akreditasyonlarımız</p>
+            </div>
+        </div>
+        
+        <div class="logo-slider-container position-relative">
+            <div class="logo-slider-track">
+                <!-- First set of 8 logos -->
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="ELFA" class="logo-img">
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/osym.png' %}" alt="ELFA" class="logo-img">
+                        {% comment %} <div class="logo-placeholder bg-primary text-white rounded d-flex align-items-center justify-content-center">
+                            <span class="fw-bold">CFA</span>
+                        </div> {% endcomment %}
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/yok.png' %}" alt="BREEAM" class="logo-img">
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="BREEAM" class="logo-img">
+                        {% comment %} <div class="logo-placeholder bg-success text-white rounded d-flex align-items-center justify-content-center">
+                            <span class="fw-bold">IEEE</span>
+                        </div> {% endcomment %}
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="Erasmus+" class="logo-img">
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/osym.png' %}" alt="Erasmus+" class="logo-img">
+                        {% comment %} <div class="logo-placeholder bg-warning text-dark rounded d-flex align-items-center justify-content-center">
+                            <span class="fw-bold">ESI</span>
+                        </div> {% endcomment %}
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/yok.png' %}" alt="IAMU" class="logo-img">
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="IAMU" class="logo-img">
+                        {% comment %} <div class="logo-placeholder bg-info text-white rounded d-flex align-items-center justify-content-center">
+                            <span class="fw-bold">ABET</span>
+                        </div> {% endcomment %}
+                    </a>
+                </div>
+                
+                <!-- Duplicate set for seamless loop -->
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="ELFA" class="logo-img">
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/osym.png' %}" alt="ELFA" class="logo-img">
+                        {% comment %} <div class="logo-placeholder bg-primary text-white rounded d-flex align-items-center justify-content-center">
+                            <span class="fw-bold">CFA</span>
+                        </div> {% endcomment %}
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/yok.png' %}" alt="BREEAM" class="logo-img">
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="BREEAM" class="logo-img">
+                        {% comment %} <div class="logo-placeholder bg-success text-white rounded d-flex align-items-center justify-content-center">
+                            <span class="fw-bold">IEEE</span>
+                        </div> {% endcomment %}
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="Erasmus+" class="logo-img">
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/osym.png' %}" alt="Erasmus+" class="logo-img">
+                        {% comment %} <div class="logo-placeholder bg-warning text-dark rounded d-flex align-items-center justify-content-center">
+                            <span class="fw-bold">ESI</span>
+                        </div> {% endcomment %}
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/yok.png' %}" alt="IAMU" class="logo-img">
+                    </a>
+                </div>
+                <div class="logo-item">
+                    <a href="#" class="logo-link">
+                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="IAMU" class="logo-img">
+                        {% comment %} <div class="logo-placeholder bg-info text-white rounded d-flex align-items-center justify-content-center">
+                            <span class="fw-bold">ABET</span>
+                        </div> {% endcomment %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+/* تغییر رنگ‌های آبی به #1e3a8a */
+.text-primary {
+    color: #1e3a8a !important;
+}
+
+.btn-primary {
+    background-color: #1e3a8a !important;
+    border-color: #1e3a8a !important;
+}
+
+.btn-primary:hover {
+    background-color: #152c6d !important;
+    border-color: #152c6d !important;
+}
+
+.btn-outline-primary {
+    color: #1e3a8a !important;
+    border-color: #1e3a8a !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #1e3a8a !important;
+    border-color: #1e3a8a !important;
+    color: white !important;
+}
+
+/* استایل‌های دیگر */
+.news-slider-title {
+    color: white;
+}
+
+.sidebar-title {
+    color: #1e3a8a;
+    border-bottom: 3px solid #1e3a8a;
+}
+
+.news-category {
+    background: #1e3a8a;
+    color: white;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: #1e3a8a;
+}
+
+
+
+/* استایل‌های کارت‌های چرخشی */
+.campus-name {
+    color: #1e3a8a;
+}
+
+.campus-card-back {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+}
+
+/* استایل‌های مگا منو */
+.mega-menu-content h6 {
+    color: #1e3a8a;
+    border-bottom: 2px solid #1e3a8a;
+}
+
+.mega-menu-content .dropdown-item:hover {
+    border-left: 3px solid #1e3a8a;
+    color: #1e3a8a;
+}
+
+/* استایل‌های هدر */
+.aday-header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+}
+
+/* استایل‌های آیکون‌ها */
+.icon-wrapper {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%);
+}
+
+.access-card:hover .icon-wrapper {
+    background: linear-gradient(135deg, #152c6d 0%, #152c6d 100%);
+}
+
+/* استایل‌های بنر */
+.hero-title span {
+    color: #1e3a8a;
+}
+
+/* استایل‌های دکمه‌ها در بنر */
+.btn-warning {
+    background-color: #1e3a8a !important;
+    border-color: #1e3a8a !important;
+}
+
+.btn-warning:hover {
+    background-color: #152c6d !important;
+    border-color: #152c6d !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* استایل‌های بخش اخبار اسلایدری */
+.news-slider-card {
+    position: relative;
+    height: 450px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.news-slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-slider-card:hover .news-slider-image {
+    transform: scale(1.05);
+}
+
+.news-slider-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 2rem;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.news-slider-content {
+    max-width: 80%;
+}
+
+.news-date-badge {
+    background: #fd7e14;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.news-slider-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    color: white;
+}
+
+.news-slider-summary {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    opacity: 0.9;
+    color: white;
+}
+
+/* سایدبار اخبار اخیر */
+.recent-news-sidebar {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    height: 100%;
+}
+
+.sidebar-title {
+    color: #1e3a8a;
+    font-weight: 700;
+    font-size: 1.3rem;
+    border-bottom: 3px solid #fd7e14;
+    padding-bottom: 0.5rem;
+}
+
+.recent-news-item {
+    padding: 0.5rem 0;
+}
+
+.recent-news-title {
+    margin-bottom: 0.5rem;
+}
+
+.recent-news-title a {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.recent-news-title a:hover {
+    color: #fd7e14;
+}
+
+.recent-news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.news-category {
+    background: #1e3a8a;
+    color: white;
+    padding: 0.2rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.news-date {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* کنترل‌های اسلایدر */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 1rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* رسپانسیو برای موبایل */
+@media (max-width: 768px) {
+    .news-slider-card {
+        height: 350px;
+    }
+    
+    .news-slider-content {
+        max-width: 100%;
+    }
+    
+    .news-slider-title {
+        font-size: 1.2rem;
+    }
+    
+    .news-slider-summary {
+        font-size: 0.9rem;
+    }
+    
+    .recent-news-sidebar {
+        margin-top: 2rem;
+        padding: 1.5rem;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+        margin: 0 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .news-slider-card {
+        height: 300px;
+    }
+    
+    .news-slider-overlay {
+        padding: 1.5rem;
+    }
+    
+    .news-slider-title {
+        font-size: 1.1rem;
+    }
+    
+    .news-date-badge {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* استایل‌های کارت‌های چرخشی */
+    .campus-card-container {
+        perspective: 1000px;
+        margin-bottom: 2rem;
+        height: 380px;
+    }
+    
+    .campus-card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .campus-card-container:hover .campus-card {
+        transform: rotateY(180deg);
+    }
+    
+    .campus-card-front, .campus-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .campus-card-front {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .campus-image-container {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .campus-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .campus-card-container:hover .campus-image {
+        transform: scale(1.05);
+    }
+    
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(30, 58, 138, 0.2), rgba(30, 58, 138, 0.6));
+    }
+    
+    .campus-name {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary-blue, #1e3a8a);
+        margin: 1.5rem 0 0.5rem;
+        padding: 0 1rem;
+    }
+    
+    .campus-location {
+        color: #6b7280;
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .campus-card-back {
+        background: linear-gradient(135deg, var(--primary-blue, #1e3a8a) 0%, var(--secondary-blue, #3b82f6) 100%);
+        color: white;
+        transform: rotateY(180deg);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .back-campus-name {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .contact-info {
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+    }
+    
+    .contact-icon {
+        width: 35px;
+        height: 35px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+    
+    .contact-text {
+        flex: 1;
+        line-height: 1.5;
+        font-size: 0.9rem;
+    }
+    
+    .flip-hint {
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+    
+    /* Fallback for missing images */
+    .campus-image-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--primary-blue, #1e3a8a);
+        z-index: -1;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+        .campus-card-container {
+            height: 360px;
+        }
+        
+        .campus-image-container {
+            height: 180px;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .campus-card-container {
+            height: 340px;
+        }
+        
+        .campus-image-container {
+            height: 160px;
+        }
+        
+        .campus-name, .back-campus-name {
+            font-size: 1.4rem;
+        }
+        
+        .campus-card-back {
+            padding: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .campus-card-container {
+            height: 320px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .campus-image-container {
+            height: 150px;
+        }
+        
+        .campus-name, .back-campus-name {
+            font-size: 1.3rem;
+        }
+        
+        .contact-text {
+            font-size: 0.85rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .campus-card-container {
+            height: 300px;
+        }
+        
+        .campus-image-container {
+            height: 140px;
+        }
+        
+        .campus-name, .back-campus-name {
+            font-size: 1.2rem;
+        }
+        
+        .campus-card-back {
+            padding: 1rem;
+        }
+        
+        .contact-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 0.8rem;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+/*لوگوها*/
+    .logo-slider-container {
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.logo-slider-track {
+    display: flex;
+    animation: slideLogos 30s linear infinite;
+    gap: 40px;
+}
+
+.logo-item {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 80px;
+}
+
+.logo-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+}
+
+.logo-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(253, 126, 20, 0.2);
+    border-color: #fd7e14;
+}
+
+.logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.logo-link:hover .logo-img {
+    filter: grayscale(0%);
+}
+
+.logo-placeholder {
+    width: 100%;
+    height: 100%;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover .logo-placeholder {
+    transform: scale(1.1);
+}
+
+@keyframes slideLogos {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-120px * 7 - 40px * 7));
+    }
+}
+
+/* Pause animation on hover */
+.logo-slider-container:hover .logo-slider-track {
+    animation-play-state: paused;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .logo-item {
+        width: 100px;
+        height: 70px;
+    }
+    
+    .logo-slider-track {
+        gap: 30px;
+    }
+    
+    @keyframes slideLogos {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100px * 7 - 30px * 7));
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-item {
+        width: 80px;
+        height: 60px;
+    }
+    
+    .logo-slider-track {
+        gap: 20px;
+    }
+    
+    .logo-placeholder {
+        font-size: 1rem;
+    }
+    
+    @keyframes slideLogos {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-80px * 7 - 20px * 7));
+        }
+    }
+}
+
+/*بنر تمام عرض جهت جدا کردن*/
+
+.banner-image {
+    height: 35vh;
+    min-height: 250px;
+    max-height: 350px;
+    overflow: hidden;
+}
+
+.banner-image img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 768px) {
+    .banner-image {
+        height: 25vh;
+        min-height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .banner-image {
+        height: 20vh;
+        min-height: 150px;
+    }
+}
+
+
+
+
+/*بنر تمام عرض جهت جدا کردن*/
+
+
+
+.hero-image {
+    height: 85vh;
+    min-height: 600px;
+    max-height: 800px;
+    overflow: hidden;
+}
+
+.hero-image img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.7);
+}
+
+.hero-overlay {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.6) 50%,
+        transparent 100%
+    );
+}
+
+.hero-content {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-title {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.btn-warning {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #e56f10 !important;
+    border-color: #e56f10 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(253, 126, 20, 0.3);
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* انیمیشن */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .hero-image {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .hero-overlay {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0.5) 50%,
+            rgba(0, 0, 0, 0.3) 100%
+        );
+    }
+    
+    .hero-content {
+        text-align: center;
+        padding-top: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-buttons .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-buttons .me-3 {
+        margin-right: 0 !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-image {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+
+
+
+    
+
+    /*TASAVIRE BEHAM*/  /*TASAVIRE BEHAM*/  /*TASAVIRE BEHAM*/  /*TASAVIRE BEHAM*/
+
+.kesfet-card {
+    height: 280px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.kesfet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+
+.kesfet-card img {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.kesfet-card:hover img {
+    transform: scale(1.05);
+}
+
+.kesfet-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.kesfet-card:hover .kesfet-overlay {
+    opacity: 1;
+}
+
+.kesfet-content {
+    background: rgba(0,0,0,0.7);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.kesfet-card:hover .kesfet-content {
+    transform: translateY(0);
+    background: #fd7e14;
+}
+
+/* برای موبایل */
+@media (max-width: 768px) {
+    .kesfet-card {
+        height: 200px;
+        margin-bottom: 15px;
+    }
+}
+
+
+/* TASAVIRE SADEH *//*/* TASAVIRE SADEH *//*/* TASAVIRE SADEH *//*/* TASAVIRE SADEH *//*/* TASAVIRE SADEH *//*/* TASAVIRE SADEH *//*/* TASAVIRE SADEH *//*
+
+
+
+
+/* TASAVIRE SADEH *//* TASAVIRE SADEH *//* TASAVIRE SADEH *//* TASAVIRE SADEH *//* TASAVIRE SADEH *//* TASAVIRE SADEH *//* TASAVIRE SADEH *//* TASAVIRE SADEH *//* TASAVIRE SADEH *//* TASAVIRE SADEH */
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+h2 {
+    color: #2ED1F2 ;
+    
+}    
+/* تغییر رنگ دکمه‌ها به نارنجی */
+.btn-primary {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-primary:hover {
+    background-color: #e56f10 !important;
+    border-color: #d9680f !important;
+}
+
+.btn-outline-primary {
+    color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+}
+
+/* بقیه استایل‌های موجود بدون تغییر */
+.announcement-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #1e3a8a;
+}
+
+.announcement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.shadow-sm-hover {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.file-badges .badge {
+    font-size: 0.7rem;
+    padding: 0.35em 0.65em;
+}
+
+.news-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #1e3a8a;
+}
+
+.news-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important;
+}
+
+.event-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #28a745;
+}
+
+.event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important;
+}
+
+.event-info {
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+}
+
+.access-card {
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 1px solid rgba(13, 110, 253, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.access-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.access-card:hover::before {
+    left: 100%;
+}
+
+.access-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(13, 110, 253, 0.15);
+    border-color: rgba(13, 110, 253, 0.3);
+}
+
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #2ED1F2 0%, #084298 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.access-card:hover .icon-wrapper {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #0a58ca 0%, #084298 100%);
+}
+
+.icon-wrapper i {
+    font-size: 2rem;
+    color: white;
+}
+
+.access-card .btn {
+    transition: all 0.3s ease;
+    border-width: 2px;
+    font-weight: 500;
+}
+
+.access-card:hover .btn {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white;
+    transform: translateX(5px);
+}
+
+/* انیمیشن‌های ظاهر شدن */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.access-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.access-card:nth-child(1) { animation-delay: 0.1s; }
+.access-card:nth-child(2) { animation-delay: 0.2s; }
+.access-card:nth-child(3) { animation-delay: 0.3s; }
+.access-card:nth-child(4) { animation-delay: 0.4s; }
+.access-card:nth-child(5) { animation-delay: 0.5s; }
+.access-card:nth-child(6) { animation-delay: 0.6s; }
+.access-card:nth-child(7) { animation-delay: 0.7s; }
+.access-card:nth-child(8) { animation-delay: 0.8s; }
+
+/* طراحی واکنش‌گرا */
+@media (max-width: 768px) {
+    .access-card {
+        margin-bottom: 1rem;
+    }
+    
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.5rem;
+    }
+
+
+    .testimonial-card {
+    transition: all 0.3s ease;
+    border-top: 4px solid #fd7e14;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card::before {
+    content: """;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 4rem;
+    color: rgba(253, 126, 20, 0.1);
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.rating {
+    font-size: 0.9rem;
+}
+
+.stat-item {
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: scale(1.05);
+}
+
+.student-avatar {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 3px solid #fd7e14;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    opacity: 0.8;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+.carousel-indicators {
+    margin-bottom: 0;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+    .testimonial-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+    
+    .student-avatar {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+</style>
+ 
+<script>
+
+
+
+
+
+
+
+ // Fallback for images if they don't load
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('.campus-image');
+        images.forEach(img => {
+            img.onerror = function() {
+                this.style.display = 'none';
+                this.parentElement.style.background = 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)';
+                this.parentElement.innerHTML = '<i class="fas fa-university" style="font-size: 3rem; color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>';
+            };
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+// تنظیم اسلایدشو برای تغییر خودکار هر 5 ثانیه
+document.addEventListener('DOMContentLoaded', function() {
+    var testimonialsCarousel = new bootstrap.Carousel(document.getElementById('testimonialsCarousel'), {
+        interval: 5000, // تغییر هر 5 ثانیه
+        wrap: true,
+        pause: false
+    });
+});
+
+
+
+
+// تابع شمارنده پویا
+function animateCounter(elementId, targetNumber, duration = 2000) {
+    const element = document.getElementById(elementId);
+    let currentNumber = 0;
+    const increment = targetNumber / (duration / 16); // 60fps
+    
+    function updateCounter() {
+        currentNumber += increment;
+        if (currentNumber < targetNumber) {
+            element.textContent = Math.floor(currentNumber).toLocaleString();
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = targetNumber.toLocaleString();
+        }
+    }
+    
+    updateCounter();
+}
+
+// Intersection Observer برای فعال‌سازی شمارنده‌ها هنگام اسکرول
+const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // شروع شمارنده‌ها هنگام نمایش بخش آمار
+            animateCounter('studentCount', 6499);
+            animateCounter('graduateCount', 16330);
+            animateCounter('programCount', 62);
+            animateCounter('academicCount', 514);
+            
+            // توقف مشاهده پس از شروع انیمیشن
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// مشاهده بخش آمار
+const statsSection = document.getElementById('stats');
+if (statsSection) {
+    observer.observe(statsSection);
+}
+
+// تنظیم اسلایدشو برای تغییر خودکار هر 5 ثانیه
+document.addEventListener('DOMContentLoaded', function() {
+    var testimonialsCarousel = new bootstrap.Carousel(document.getElementById('testimonialsCarousel'), {
+        interval: 5000, // تغییر هر 5 ثانیه
+        wrap: true,
+        pause: false
+    });
+});
+
+</script>
+
+
+{% endblock %}

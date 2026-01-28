@@ -1,0 +1,924 @@
+{% load static %}
+<!-- templates/core/mega_navbar.html - نسخه شفاف ثابت -->
+
+<!-- نوار بالایی سیستم‌ها -->
+<div class="top-systems-bar">
+    <div class="container">
+        <div class="systems-links">
+            <a href="https://obs.avrasya.edu.tr/" target="_blank">OBS</a>
+            <a href="https://avukalite.avrasya.edu.tr/" target="_blank">Kalite</a>
+            <a href="https://ebys.avrasya.edu.tr/" target="_blank">EBYS</a>
+            <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/" target="_blank">Bologna</a>
+            <a href="https://kampus.avrasya.edu.tr/" target="_blank">Online Eğitim</a>
+            <a href="https://login.microsoftonline.com/" target="_blank">Mail</a>
+            <a href="#">Kütüphane</a>
+        </div>
+        <div class="language-switcher">
+            <span>TR</span>
+            <span class="divider">|</span>
+            <a href="#">EN</a>
+        </div>
+    </div>
+</div>
+
+<!-- منوی اصلی شفاف -->
+<nav class="glass-navbar navbar-expand-lg">
+    <div class="nav-container">
+        <!-- لوگو -->
+        <a class="navbar-brand" href="{% url 'core:index' %}">
+            <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="Avrasya University" class="nav-logo">
+            <span class="logo-text">AVRASYA ÜNİVERSİTESİ</span>
+        </a>
+
+        <!-- دکمه‌های سریع -->
+        <div class="quick-access">
+            <a href="https://adaylar.bogazici.edu.tr" target="_blank" class="quick-btn">
+                <i class="fas fa-user-plus"></i>
+                <span>Aday Öğrenci</span>
+            </a>
+            <a href="https://ogrenciler.bogazici.edu.tr" target="_blank" class="quick-btn">
+                <i class="fas fa-user-graduate"></i>
+                <span>Öğrenci</span>
+            </a>
+            <a href="https://mezun.bogazici.edu.tr" target="_blank" class="quick-btn">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Mezun</span>
+            </a>
+            <a href="https://personel.bogazici.edu.tr/" target="_blank" class="quick-btn">
+                <i class="fas fa-user-tie"></i>
+                <span>Personel</span>
+            </a>
+        </div>
+
+        <!-- آیکون‌های کناری -->
+        <div class="nav-icons">
+            <a href="#" class="nav-icon" title="Harita">
+                <i class="fas fa-map-marker-alt"></i>
+            </a>
+            <a href="#" class="nav-icon" title="Paylaş">
+                <i class="fas fa-share-alt"></i>
+            </a>
+            <a href="#" class="nav-icon" title="Kullanıcı">
+                <i class="fas fa-user-circle"></i>
+            </a>
+            <a href="#" class="nav-icon" title="Dil">
+                <i class="fas fa-globe"></i>
+            </a>
+        </div>
+
+        <!-- دکمه همبرگر برای موبایل -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- منوی اصلی با مگا منو -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav main-nav">
+            <!-- Anasayfa Mega Menu -->
+            <li class="nav-item mega-menu-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-home"></i>
+                    Anasayfa
+                </a>
+                <div class="mega-dropdown">
+                    <div class="container">
+                        <ul class="list-unstyled">
+                                            <li><a class="dropdown-item" href="/">Ana Sayfa</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'avrasya_universitesi_hakkinda:anasayfa' %}">Hakkımızda</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'avrasya_universitesi_yonetim:mutevelli_heyeti' %}">Yönetim</a>
+                                            <li><a class="dropdown-item" href="/#news">Son Haberler</a></li>
+                                            <li><a class="dropdown-item" href="/#events">Etkinlikler</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'gallery:main' %}">Galeri</a></li>
+                                        </ul> محتوای مگا منوی Anasayfa شما -->
+                        <!-- کد فعلی شما بدون تغییر -->
+                    </div>
+                </div>
+            </li>
+
+            <!-- Aday Öğrenci Mega Menu -->
+            <li class="nav-item mega-menu-item">
+                <a class="nav-link" href="{% url 'aday_ogrenci:aday_anasayfa' %}">
+                    <i class="fas fa-user-plus"></i>
+                    Aday Öğrenci
+                </a>
+                <div class="mega-dropdown">
+                    <div class="container">
+                        <!-- محتوای مگا منوی Aday Öğrenci شما -->
+                    </div>
+                </div>
+            </li>
+
+            <!-- Aday Öğrenci Mega Menu -->
+            <li class="nav-item mega-menu-item">
+                <a class="nav-link" href="{% url 'aday_ogrenci:aday_anasayfa' %}">
+                    <i class="fas fa-user-plus"></i>
+                    Aday Öğrenci
+                </a>
+                <div class="mega-dropdown">
+                    <div class="container">
+                        <!-- محتوای مگا منوی Aday Öğrenci شما -->
+                    </div>
+                </div>
+            </li>
+
+            <!-- Aday Öğrenci Mega Menu -->
+            <li class="nav-item mega-menu-item">
+                <a class="nav-link" href="{% url 'aday_ogrenci:aday_anasayfa' %}">
+                    <i class="fas fa-user-plus"></i>
+                    Aday Öğrenci
+                </a>
+                <div class="mega-dropdown">
+                    <div class="container">
+                        <!-- محتوای مگا منوی Aday Öğrenci شما -->
+                    </div>
+                </div>
+            </li>
+
+            <!-- Aday Öğrenci Mega Menu -->
+            <li class="nav-item mega-menu-item">
+                <a class="nav-link" href="{% url 'aday_ogrenci:aday_anasayfa' %}">
+                    <i class="fas fa-user-plus"></i>
+                    Aday Öğrenci
+                </a>
+                <div class="mega-dropdown">
+                    <div class="container">
+                        <!-- محتوای مگا منوی Aday Öğrenci شما -->
+                    </div>
+                </div>
+            </li>
+
+            <!-- بقیه منوها به همین شکل -->
+        </ul>
+    </div>
+</nav>
+
+<style>
+    /* ============================================
+   GLASS NAVBAR STYLES - طراحی شفاف مانند بوغازچی
+============================================= */
+
+/* نوار بالایی سیستم‌ها */
+.top-systems-bar {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.95) 0%, rgba(29, 97, 169, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.top-systems-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.systems-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.systems-links a {
+    color: var(--accent-light-blue);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.systems-links a:hover {
+    color: var(--pure-white);
+    background: rgba(141, 212, 227, 0.2);
+    transform: translateY(-1px);
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--pure-white);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.language-switcher .divider {
+    color: var(--accent-light-blue);
+    opacity: 0.5;
+}
+
+.language-switcher a {
+    color: var(--accent-light-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.language-switcher a:hover {
+    color: var(--pure-white);
+}
+
+/* منوی اصلی شفاف */
+.glass-navbar {
+    position: fixed;
+    top: 40px; /* ارتفاع نوار بالایی */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 1400px;
+    background: rgba(9, 36, 66, 0.1);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(141, 212, 227, 0.15);
+    border-radius: 12px;
+    padding: 10px 25px;
+    margin-top: 15px;
+    z-index: 1020;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 32px rgba(9, 36, 66, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.glass-navbar.scrolled {
+    top: 10px;
+    width: 98%;
+    background: rgba(9, 36, 66, 0.15);
+    backdrop-filter: blur(30px);
+    box-shadow: 
+        0 12px 40px rgba(9, 36, 66, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* لوگو */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: translateY(-2px);
+}
+
+.nav-logo {
+    height: 50px;
+    width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.logo-text {
+    font-family: 'Metropolis', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--pure-white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* دکمه‌های سریع */
+.quick-access {
+    display: flex;
+    gap: 10px;
+    margin: 0 30px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.quick-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.1);
+    border-radius: 8px;
+    color: var(--pure-white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 80px;
+    backdrop-filter: blur(5px);
+}
+
+.quick-btn i {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: var(--accent-light-blue);
+    transition: all 0.3s ease;
+}
+
+.quick-btn span {
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.quick-btn:hover {
+    background: rgba(29, 97, 169, 0.4);
+    border-color: rgba(141, 212, 227, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.3);
+}
+
+.quick-btn:hover i {
+    color: var(--pure-white);
+    transform: scale(1.1);
+}
+
+/* آیکون‌های کناری */
+.nav-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.1);
+    border-radius: 50%;
+    color: var(--pure-white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+.nav-icon i {
+    font-size: 18px;
+    color: var(--accent-light-blue);
+    transition: all 0.3s ease;
+}
+
+.nav-icon:hover {
+    background: rgba(29, 97, 169, 0.4);
+    border-color: rgba(141, 212, 227, 0.4);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.3);
+}
+
+.nav-icon:hover i {
+    color: var(--pure-white);
+    transform: scale(1.1);
+}
+
+.nav-icon[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(9, 36, 66, 0.9);
+    color: var(--pure-white);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+/* دکمه همبرگر */
+.navbar-toggler {
+    display: none;
+    background: rgba(29, 97, 169, 0.3);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    border-radius: 6px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler i {
+    color: var(--pure-white);
+    font-size: 20px;
+}
+
+.navbar-toggler:hover {
+    background: rgba(29, 97, 169, 0.5);
+    transform: scale(1.05);
+}
+
+/* منوی اصلی */
+.main-nav {
+    display: flex;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.nav-item {
+    position: static;
+}
+
+.nav-link {
+    color: var(--pure-white) !important;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 15px 20px !important;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link i {
+    font-size: 16px;
+    color: var(--accent-light-blue);
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-light-blue) !important;
+    text-shadow: 0 2px 8px rgba(141, 212, 227, 0.5);
+}
+
+.nav-link:hover i {
+    color: var(--pure-white);
+    transform: scale(1.1);
+}
+
+/* نشانگر فعال */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--accent-light-blue);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.nav-item:hover .nav-link::after {
+    width: 80%;
+}
+
+/* مگا منو - بهینه‌شده */
+.mega-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(15px);
+    width: 90vw;
+    max-width: 1400px;
+    background: rgba(9, 36, 66, 0.98);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(141, 212, 227, 0.25);
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 
+        0 20px 50px rgba(9, 36, 66, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1010;
+    overflow: hidden;
+}
+
+.mega-dropdown .container {
+    padding: 30px;
+}
+
+.mega-dropdown::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mega-menu-item:hover .mega-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.mega-menu-item:hover .mega-dropdown::before {
+    opacity: 1;
+}
+
+/* تضمین نمایش مگا منو هنگام hover روی محتوا */
+.mega-dropdown:hover {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+
+/* انیمیشن ظاهر شدن */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.mega-menu-item:hover .mega-dropdown {
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+/* فاصله پل برای اتصال */
+.mega-menu-item {
+    position: relative;
+}
+
+.mega-menu-item::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: transparent;
+    z-index: 1005;
+}
+
+/* رسپانسیو */
+@media (max-width: 1200px) {
+    .quick-access {
+        margin: 0 15px;
+    }
+    
+    .quick-btn {
+        min-width: 70px;
+        padding: 8px 10px;
+    }
+    
+    .quick-btn span {
+        font-size: 10px;
+    }
+    
+    .nav-link {
+        padding: 15px 15px !important;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 992px) {
+    .glass-navbar {
+        width: 98%;
+        padding: 10px 15px;
+    }
+    
+    .navbar-toggler {
+        display: flex;
+    }
+    
+    .quick-access,
+    .nav-icons {
+        display: none;
+    }
+    
+    .nav-container {
+        justify-content: space-between;
+    }
+    
+    .logo-text {
+        font-size: 16px;
+    }
+    
+    #mainNavbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(9, 36, 66, 0.98);
+        backdrop-filter: blur(30px);
+        border: 1px solid rgba(141, 212, 227, 0.2);
+        border-radius: 0 0 15px 15px;
+        padding: 20px;
+        margin-top: 10px;
+        box-shadow: 0 20px 50px rgba(9, 36, 66, 0.5);
+    }
+    
+    .main-nav {
+        flex-direction: column;
+    }
+    
+    .nav-item {
+        width: 100%;
+    }
+    
+    .nav-link {
+        padding: 15px !important;
+        border-bottom: 1px solid rgba(141, 212, 227, 0.1);
+    }
+    
+    .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+    
+    .mega-dropdown {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        background: rgba(29, 97, 169, 0.1);
+        border: none;
+        box-shadow: none;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+    
+    .mega-dropdown .container {
+        padding: 15px;
+    }
+    
+    .mega-menu-item.active .mega-dropdown {
+        display: block;
+    }
+    
+    .mega-menu-item::after {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-systems-bar .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .systems-links {
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .systems-links a {
+        font-size: 11px;
+        padding: 2px 6px;
+    }
+    
+    .glass-navbar {
+        top: 70px; /* ارتفاع بیشتر برای نوار دوخطی */
+    }
+    
+    .nav-logo {
+        height: 40px;
+    }
+    
+    .logo-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .glass-navbar {
+        width: 100%;
+        border-radius: 0;
+        margin-top: 0;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .top-systems-bar {
+        padding: 5px 0;
+    }
+    
+    .systems-links {
+        gap: 8px;
+    }
+    
+    .systems-links a {
+        font-size: 10px;
+        padding: 2px 4px;
+    }
+}
+
+/* اسکرول نرم برای منو */
+html {
+    scroll-behavior: smooth;
+}
+
+/* تنظیم محتوای اصلی برای عدم همپوشانی */
+body {
+    padding-top: 140px; /* فضای برای نوار بالایی و منو */
+}
+
+@media (max-width: 992px) {
+    body {
+        padding-top: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 150px;
+    }
+}
+
+</style>
+
+<script>
+
+// ============================================
+// GLASS NAVBAR FUNCTIONALITY
+// ============================================
+
+$(document).ready(function() {
+    // کنترل اسکرول برای منوی ثابت
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('.glass-navbar').addClass('scrolled');
+        } else {
+            $('.glass-navbar').removeClass('scrolled');
+        }
+    });
+
+    // کنترل مگا منو در دسکتاپ
+    $('.mega-menu-item').hover(
+        function() {
+            // باز کردن مگا منو
+            $(this).addClass('active');
+            $(this).find('.mega-dropdown').stop(true, true).fadeIn(300);
+        },
+        function() {
+            // بستن با تاخیر برای جلوگیری از قطع
+            var $dropdown = $(this).find('.mega-dropdown');
+            var $item = $(this);
+            
+            setTimeout(function() {
+                if (!$dropdown.is(':hover') && !$item.is(':hover')) {
+                    $dropdown.stop(true, true).fadeOut(200);
+                    $item.removeClass('active');
+                }
+            }, 300);
+        }
+    );
+
+    // نگه داشتن مگا منو هنگام hover روی آن
+    $('.mega-dropdown').hover(
+        function() {
+            $(this).stop(true, true).fadeIn(300);
+            $(this).closest('.mega-menu-item').addClass('active');
+        },
+        function() {
+            $(this).stop(true, true).fadeOut(200);
+            $(this).closest('.mega-menu-item').removeClass('active');
+        }
+    );
+
+    // کنترل مگا منو در موبایل
+    $('.mega-menu-item .nav-link').click(function(e) {
+        if ($(window).width() < 992) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var $parent = $(this).closest('.mega-menu-item');
+            var $dropdown = $parent.find('.mega-dropdown');
+            
+            // بستن سایر منوها
+            $('.mega-menu-item').not($parent).removeClass('active');
+            $('.mega-dropdown').not($dropdown).slideUp(300);
+            
+            // باز/بستن منوی جاری
+            $parent.toggleClass('active');
+            $dropdown.slideToggle(300);
+        }
+    });
+
+    // بستن منوها با کلیک خارج
+    $(document).click(function(e) {
+        if (!$(e.target).closest('.mega-menu-item, .mega-dropdown').length) {
+            if ($(window).width() < 992) {
+                $('.mega-menu-item').removeClass('active');
+                $('.mega-dropdown').slideUp(300);
+            }
+        }
+    });
+
+    // بستن منو هنگام اسکرول در موبایل
+    $(window).scroll(function() {
+        if ($(window).width() < 992) {
+            $('.mega-menu-item').removeClass('active');
+            $('.mega-dropdown').slideUp(300);
+        }
+    });
+
+    // انیمیشن برای دکمه‌ها
+    $('.quick-btn, .nav-icon').hover(
+        function() {
+            $(this).css('transform', 'translateY(-3px) scale(1.05)');
+        },
+        function() {
+            $(this).css('transform', 'translateY(0) scale(1)');
+        }
+    );
+
+    // جستجو
+    $('.search-open').click(function() {
+        $('.search-box').toggleClass('active');
+        if ($('.search-box').hasClass('active')) {
+            $('#search-input').focus();
+        }
+    });
+
+    // بستن جستجو با کلیک خارج
+    $(document).click(function(e) {
+        if (!$(e.target).closest('.search-box, .search-open').length) {
+            $('.search-box').removeClass('active');
+        }
+    });
+
+    // ESC برای بستن جستجو
+    $(document).keyup(function(e) {
+        if (e.keyCode === 27) {
+            $('.search-box').removeClass('active');
+        }
+    });
+});
+
+// انیمیشن شمارنده‌ها
+function initCounters() {
+    $('.counter').each(function() {
+        var $this = $(this);
+        var target = parseInt($this.data('target'));
+        var duration = parseInt($this.data('duration')) || 2000;
+        
+        $({ count: 0 }).animate({ count: target }, {
+            duration: duration,
+            easing: 'swing',
+            step: function() {
+                $this.text(Math.floor(this.count));
+            },
+            complete: function() {
+                $this.text(target);
+            }
+        });
+    });
+}
+
+// فعال کردن شمارنده‌ها هنگام اسکرول
+$(window).scroll(function() {
+    $('.counter-section').each(function() {
+        if ($(this).isInViewport() && !$(this).hasClass('animated')) {
+            $(this).addClass('animated');
+            initCounters();
+        }
+    });
+});
+
+// Helper: بررسی عنصر در viewport
+$.fn.isInViewport = function() {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
+</script>

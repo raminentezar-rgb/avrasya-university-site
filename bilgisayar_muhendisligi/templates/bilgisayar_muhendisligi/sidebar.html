@@ -1,0 +1,339 @@
+<!-- Sidebar Menu -->
+<div class="col-lg-12 mb-4">
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <a href="{% url 'bilgisayar_muhendisligi:bilgisayar_muhendisligi' %}" class="text-white text-decoration-none">
+                <h5 class="mb-0"><i class="bi bi-laptop me-2"></i>Bilgisayar Mühendisliği Bölümü</h5>
+            </a>
+        </div>
+        <div class="card-body p-0">
+            <div class="list-group list-group-flush" id="facultyMenu">
+                <!-- Genel Bilgiler -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#genelBilgilerCollapse">
+                        <span><i class="bi bi-info-circle me-2"></i>Genel Bilgiler</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="genelBilgilerCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'bilgisayar_muhendisligi:tarihce' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-clock-history me-2"></i>Tarihçe
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:misyon_visyon' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-bullseye me-2"></i>Misyon & Vizyon
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kalite Yönetimi -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#kaliteYonetimiCollapse">
+                        <span><i class="bi bi-award me-2"></i>Kalite Yönetimi</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="kaliteYonetimiCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'bilgisayar_muhendisligi:akreditasyon_belgesi' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-file-earmark-check me-2"></i>MÜDEK Akreditasyon Belgesi
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:komisyon_sorumlular' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-people me-2"></i>Komisyon/Sorumlular
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:program_ogretim_amaclari' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-target me-2"></i>Program Öğretim Amaçları
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:program_ogrenim_ciktilari' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-list-check me-2"></i>Program Öğrenim Çıktıları
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:anketler' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-clipboard-data me-2"></i>Anketler
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:ders_plani' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-journal-text me-2"></i>Ders Planı
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yönetimi -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#yonetimCollapse">
+                        <span><i class="bi bi-person-gear me-2"></i>Yönetimi</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="yonetimCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'bilgisayar_muhendisligi:bilgisayar_yonetimi' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-diagram-3 me-2"></i>Bölüm Yönetim
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İdari Faaliyetler -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#idariFaaliyetlerCollapse">
+                        <span><i class="bi bi-briefcase me-2"></i>İdari Faaliyetler</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="idariFaaliyetlerCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'bilgisayar_muhendisligi:idari_faaliyetler_2024_2025' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-calendar-check me-2"></i>İdari Faaliyetler (2024-2025)
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:idari_faaliyetler_2023_2024' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-calendar-week me-2"></i>İdari Faaliyetler (2023-2024)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diğer Faaliyetler -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#digerFaaliyetlerCollapse">
+                        <span><i class="bi bi-activity me-2"></i>Diğer Faaliyetler</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="digerFaaliyetlerCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'bilgisayar_muhendisligi:diger_faaliyetler_2024_2025' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-graph-up me-2"></i>Diğer Faaliyetler (2024-2025)
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:diger_faaliyetler_2023_2024' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-graph-down me-2"></i>Diğer Faaliyetler (2023-2024)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Öğrenci -->
+                <div class="list-group-item border-0 p-0">
+                    <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                            data-bs-toggle="collapse" data-bs-target="#ogrenciCollapse">
+                        <span><i class="bi bi-mortarboard me-2"></i>Öğrenci</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse" id="ogrenciCollapse" data-bs-parent="#facultyMenu">
+                        <div class="list-group list-group-flush">
+                            <a href="{% url 'bilgisayar_muhendisligi:ogrenci_isleri' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-person-lines-fill me-2"></i>Öğrenci İşleri
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:cift_anadal' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-layers me-2"></i>Çift Anadal ve Yandal Protokolleri
+                            </a>
+                            <a href="{% url 'bilgisayar_muhendisligi:erasmus' %}" class="list-group-item list-group-item-action border-0 small">
+                                <i class="bi bi-globe me-2"></i>ERASMUS+ İkili Anlaşmalar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diğer Menüler -->
+                <a href="{% url 'bilgisayar_muhendisligi:liste' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-megaphone me-2"></i>Duyurular</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'bilgisayar_muhendisligi:etkinlik_listesi' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-calendar-event me-2"></i>Etkinlikler</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'bilgisayar_muhendisligi:ders_programi' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-calendar-week me-2"></i>Ders Programı</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'bilgisayar_muhendisligi:iletisim' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-telephone me-2"></i>İletişim</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx" 
+                   class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center"
+                   target="_blank">
+                    <span><i class="bi bi-file-text me-2"></i>Bologna</span>
+                    <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی برای صفحه تاریخچه */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.timeline-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-left: 4px solid #fd7e14;
+}
+
+.timeline-content h5 {
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* استایل‌های کارت‌ها */
+.stat-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* استایل‌های آیکون‌ها */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.icon-circle i {
+    font-size: 1.5rem;
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #fd7e14;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رنگ‌های دکمه */
+.btn-primary {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-primary:hover {
+    background-color: #e56f10 !important;
+    border-color: #d9680f !important;
+}
+
+.btn-outline-primary {
+    color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.5rem;
+    }
+}
+</style>

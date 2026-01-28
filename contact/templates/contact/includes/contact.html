@@ -1,0 +1,57 @@
+{% extends 'contact/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}İletişim - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<div class="research-hero" style="background-image: url('{% static 'core/img/student/about-banner.png' %}'); background-size: cover; background-position: center; padding: 80px 0; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 35, 71, 0.7);"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="research-hero-content text-center text-white">
+            <h1 style="font-family: 'Metropolis', sans-serif; font-weight: 800; font-size: 3rem;">İletişim Formu</h1>
+            <p class="lead">Size yardımcı olmaktan mutluluk duyarız.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-lg" style="border-radius: 15px; overflow: hidden; margin-top: -50px;">
+                <div class="card-body p-5">
+                    <div class="section-title mb-4">
+                        <h2 style="color: #002347; font-weight: 700;">Bize Mesaj Gönderin</h2>
+                        <div style="width: 50px; height: 3px; background: #ffb606; margin-top: 10px;"></div>
+                    </div>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">{{ form.name|as_crispy_field }}</div>
+                            <div class="col-md-6">{{ form.email|as_crispy_field }}</div>
+                        </div>
+                        {{ form.subject|as_crispy_field }}
+                        {{ form.message|as_crispy_field }}
+                        
+                        <button type="submit" class="btn btn-warning btn-lg w-100 mt-3" style="background-color: #ffb606; border: none; color: #002347; font-weight: 700;">
+                            <i class="fas fa-paper-plane mr-2"></i> Mesajı Gönder
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mt-5 mt-lg-0">
+            <div class="p-4" style="background: #f8f9fa; border-radius: 15px; border-left: 5px solid #002347;">
+                <h4 style="color: #002347; font-weight: 700;">İletişim Bilgileri</h4>
+                <ul class="list-unstyled mt-4">
+                    <li class="mb-3"><i class="fas fa-map-marker-alt mr-2 text-warning"></i> Trabzon, Türkiye</li>
+                    <li class="mb-3"><i class="fas fa-phone mr-2 text-warning"></i> +90 462 ...</li>
+                    <li class="mb-3"><i class="fas fa-envelope mr-2 text-warning"></i> ramin.entezar@avrasya.edu.tr</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

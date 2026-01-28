@@ -1,0 +1,191 @@
+<!-- anasayfa.html -->
+{% extends 'avrasya_universitesi_hakkinda/about_base.html' %}
+{% load static %}
+
+{% block title %}Avrasya Üniversitesi - Hakkında{% endblock %}
+
+{% block about_content %}
+<!-- Hero Section -->
+<div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+    <div class="card-body text-white py-5">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3">AVRASYA ÜNİVERSİTESİ</h1>
+                <h3 class="mb-4">HAKKIMIZDA</h3>
+                <p class="lead mb-4">
+                    Avrasya Üniversitesi, 21. yüzyılın eğitim anlayışını benimseyen, 
+                    bilimsel araştırmaları ve toplumsal katkıyı ön planda tutan, 
+                    uluslararası standartlarda eğitim veren bir yükseköğretim kurumudur.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <span class="badge bg-light text-dark fs-6 p-2">
+                        <i class="bi bi-award me-1"></i>Akredite Programlar
+                    </span>
+                    <span class="badge bg-light text-dark fs-6 p-2">
+                        <i class="bi bi-globe me-1"></i>Uluslararası İşbirlikleri
+                    </span>
+                    <span class="badge bg-light text-dark fs-6 p-2">
+                        <i class="bi bi-people me-1"></i>Deneyimli Akademik Kadro
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="bi bi-info-circle display-1 opacity-75"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- President Section -->
+{% comment %} <div class="card president-card border-0 shadow-sm mb-5">
+    <div class="card-body p-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center">
+                <img src="{% static 'images/rektor.jpg' %}" alt="Rektör Prof. Dr. Ahmet Yılmaz" class="img-fluid rounded shadow president-image">
+                <h5 class="mt-3 mb-1">Prof. Dr. Ahmet Yılmaz</h5>
+                <p class="text-muted">Rektör</p>
+            </div>
+            <div class="col-md-8">
+                <h3 class="text-primary mb-3">Rektörün Mesajı</h3>
+                <p class="mb-3">
+                    Sevgili Öğrenciler, Değerli Akademik ve İdari Personel,
+                </p>
+                <p class="mb-3">
+                    Avrasya Üniversitesi olarak, bilgiyi üreten, paylaşan ve toplum yararına 
+                    kullanan bireyler yetiştirmeyi hedefliyoruz. Üniversitemiz, öğrencilerimize 
+                    sadece mesleki bilgi ve beceri kazandırmakla kalmayıp, aynı zamanda 
+                    eleştirel düşünce, yaratıcılık ve etik değerlerle donanmış bireyler 
+                    olarak yetişmelerine olanak sağlamaktadır.
+                </p>
+                <p class="mb-0">
+                    Geleceğin dünyasında söz sahibi olacak gençlerimizi, 
+                    üniversitemizin sunduğu imkanlarla buluşturmaktan gurur duyuyoruz.
+                </p>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+<!-- Quick Links -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h3 class="text-primary mb-4 border-bottom pb-2">
+            <i class="bi bi-link-45deg me-2"></i>Hızlı Erişim
+        </h3>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card info-card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="icon-wrapper bg-primary mb-3">
+                    <i class="bi bi-lightbulb text-white"></i>
+                </div>
+                <h5 class="card-title text-primary mb-3">Felsefemiz</h5>
+                <p class="card-text text-muted small">
+                    Üniversitemizin temel felsefesi ve eğitim anlayışı hakkında bilgi edinin.
+                </p>
+                <a href="{% url 'avrasya_universitesi_hakkinda:felsefemiz' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card info-card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="icon-wrapper bg-success mb-3">
+                    <i class="bi bi-bullseye text-white"></i>
+                </div>
+                <h5 class="card-title text-primary mb-3">Misyon & Vizyon</h5>
+                <p class="card-text text-muted small">
+                    Üniversitemizin misyon, vizyon ve temel değerleri hakkında bilgi edinin.
+                </p>
+                <a href="{% url 'avrasya_universitesi_hakkinda:misyon_vizyon' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card info-card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="icon-wrapper bg-info mb-3">
+                    <i class="bi bi-clock-history text-white"></i>
+                </div>
+                <h5 class="card-title text-primary mb-3">Tarihçe</h5>
+                <p class="card-text text-muted small">
+                    Kuruluşumuzdan bugüne üniversitemizin tarihsel gelişimini keşfedin.
+                </p>
+                <a href="{% url 'avrasya_universitesi_hakkinda:tarihce' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card info-card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="icon-wrapper bg-warning mb-3">
+                    <i class="bi bi-award text-white"></i>
+                </div>
+                <h5 class="card-title text-primary mb-3">Akreditasyon</h5>
+                <p class="card-text text-muted small">
+                    Ulusal ve uluslararası akreditasyonlarımız hakkında bilgi edinin.
+                </p>
+                <a href="{% url 'avrasya_universitesi_hakkinda:akreditasyon' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- University Facts -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h3 class="text-primary mb-4 border-bottom pb-2">
+                    <i class="bi bi-building me-2"></i>Üniversitemiz Hakkında
+                </h3>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-4">
+                            Avrasya Üniversitesi, 2007 yılında kurulmuş olup, 
+                            modern kampüsü, teknolojik altyapısı ve deneyimli akademik kadrosuyla 
+                            Türkiye'nin önde gelen vakıf üniversiteleri arasında yer almaktadır.
+                        </p>
+                        
+                        <p class="mb-4">
+                            Üniversitemiz, mühendislik, sağlık bilimleri, sosyal bilimler ve 
+                            temel bilimler alanlarında lisans ve lisansüstü programlar sunmaktadır.
+                        </p>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card bg-light border-0">
+                            <div class="card-body">
+                                <h5 class="text-primary mb-3">Hızlı Bilgiler</h5>
+                                <div class="row text-center">
+                                    <div class="col-6 mb-3">
+                                        <h4 class="text-primary fw-bold">15+</h4>
+                                        <p class="text-muted mb-0">Yıllık Deneyim</p>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <h4 class="text-primary fw-bold">30+</h4>
+                                        <p class="text-muted mb-0">Lisans Programı</p>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <h4 class="text-primary fw-bold">80+</h4>
+                                        <p class="text-muted mb-0">Lisansüstü Program</p>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <h4 class="text-primary fw-bold">400+</h4>
+                                        <p class="text-muted mb-0">Akademik Personel</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

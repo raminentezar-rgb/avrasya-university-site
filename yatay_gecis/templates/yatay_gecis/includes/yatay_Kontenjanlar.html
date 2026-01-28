@@ -1,0 +1,2429 @@
+{% extends 'yatay_gecis/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Yatay Geçiş{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Yatay Geçiş Kontenjanları</h1>
+            <p>T.C. AVRASYA ÜNİVERSİTESİ 2025-2026 Eğitim-Öğretim Yılı - Tüm Yatay Geçiş Detayları</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'yatay_gecis/yatay_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی - کارت‌ها -->
+        <!-- محتوای اصلی سمت راست -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- آمار کلی -->
+                {% comment %} <div class="overview-cards mb-5">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="stat-card" style="border-color: var(--secondary-medium-blue);">
+                                <div class="stat-icon" style="background: rgba(29, 97, 169, 0.1); color: var(--secondary-medium-blue);">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" style="color: var(--secondary-medium-blue);">9</div>
+                                    <div class="stat-label">Sayfa Bilgi</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card" style="border-color: var(--accent-light-blue);">
+                                <div class="stat-icon" style="background: rgba(141, 212, 227, 0.1); color: var(--accent-light-blue);">
+                                    <i class="fas fa-list-alt"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" style="color: var(--accent-light-blue);">80+</div>
+                                    <div class="stat-label">Program</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card" style="border-color: var(--primary-dark-blue);">
+                                <div class="stat-icon" style="background: rgba(9, 36, 66, 0.1); color: var(--primary-dark-blue);">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" style="color: var(--primary-dark-blue);">8</div>
+                                    <div class="stat-label">Fakülte/YO</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card" style="border-color: var(--text-light);">
+                                <div class="stat-icon" style="background: rgba(102, 102, 102, 0.1); color: var(--text-light);">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" style="color: var(--text-light);">6</div>
+                                    <div class="stat-label">Yıl Verisi</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+
+                <!-- بخش 1: Taban Puan ile Yatay Geçiş Kontenjanları -->
+                <section id="section1" class="section-container mb-5">
+                    <div class="section-header">
+                        <div class="section-title-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="section-title-content">
+                            <h2>Taban Puan ile Yatay Geçiş Kontenjanları</h2>
+                            <p class="section-subtitle">2025-2026 Eğitim-Öğretim Yılı Güz Dönemi (YS)</p>
+                        </div>
+                        <div class="section-badge">
+                            <span class="badge badge-primary">Sayfa 1-3</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card table-section-card">
+                        <div class="card-header" style="background: var(--primary-dark-blue); color: white;">
+                            <h5 class="mb-0" style= "color:white;" i class="fas fa-table me-2"></i>DGS Kontenjan Tablosu (2019-2024)</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive-lg">
+                                <table class="table table-hover">
+                                    <thead style="background: var(--secondary-medium-blue); color: white;">
+                                        <tr>
+                                            <th rowspan="2" style="border-color: rgba(255,255,255,0.2);">FAKÜLTE/YO</th>
+                                            <th rowspan="2" style="border-color: rgba(255,255,255,0.2);">Bölüm Adı</th>
+                                            <th rowspan="2" style="border-color: rgba(255,255,255,0.2);">Bütün (YSK)</th>
+                                            <th colspan="2" class="text-center" style="border-color: rgba(255,255,255,0.2);">2019</th>
+                                            <th colspan="2" class="text-center" style="border-color: rgba(255,255,255,0.2);">2020</th>
+                                            <th colspan="2" class="text-center" style="border-color: rgba(255,255,255,0.2);">2021</th>
+                                            <th colspan="2" class="text-center" style="border-color: rgba(255,255,255,0.2);">2022</th>
+                                            <th colspan="2" class="text-center" style="border-color: rgba(255,255,255,0.2);">2023</th>
+                                            <th colspan="2" class="text-center" style="border-color: rgba(255,255,255,0.2);">2024</th>
+                                        </tr>
+                                        <tr>
+                                            <th style="border-color: rgba(255,255,255,0.2);">DGS</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">YGK</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">DGS</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">YGK</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">DGS</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">YGK</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">DGS</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">YGK</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">DGS</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">YGK</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">DGS</th>
+                                            <th style="border-color: rgba(255,255,255,0.2);">YGK</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Fen Edebiyat Fakültesi -->
+                                        <tr class="faculty-header">
+                                            <td colspan="15" style="background: var(--neutral-cream);">
+                                                <strong><i class="" style="color: var(--secondary-medium-blue);"></i>FEN EDEBİYAT FAKÜLTESİ</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>İngiliz Dili ve Edebiyatı</td>
+                                            <td><strong>60</strong></td>
+                                            <td>35</td>
+                                            <td><span class="badge badge-secondary">31</span></td>
+                                            <td>30</td>
+                                            <td><span class="badge badge-secondary">11</span></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">11</span></td>
+                                            <td>40</td>
+                                            <td><span class="badge badge-secondary">18</span></td>
+                                            <td>70</td>
+                                            <td><span class="badge badge-secondary">21</span></td>
+                                            <td>70</td>
+                                            <td><span class="badge badge-secondary">21</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>İngilizce Mütercim ve Tercümanlık</td>
+                                            <td><strong>60</strong></td>
+                                            <td>30</td>
+                                            <td><span class="badge badge-secondary">9</span></td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-light text-dark">-</span></td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-light text-dark">-</span></td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-light text-dark">-</span></td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-light text-dark">-</span></td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-light text-dark">-</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Psikoloji</td>
+                                            <td><strong>60</strong></td>
+                                            <td>60</td>
+                                            <td><span class="badge badge-secondary">18</span></td>
+                                            <td>10</td>
+                                            <td><span class="badge badge-secondary">24</span></td>
+                                            <td>80</td>
+                                            <td><span class="badge badge-secondary">24</span></td>
+                                            <td>80</td>
+                                            <td><span class="badge badge-secondary">24</span></td>
+                                            <td>80</td>
+                                            <td><span class="badge badge-secondary">24</span></td>
+                                            <td>80</td>
+                                            <td><span class="badge badge-secondary">24</span></td>
+                                        </tr>
+                                        
+                                        <!-- İktisadi ve İdari Bilimler Fakültesi -->
+                                        <tr class="faculty-header">
+                                            <td colspan="15" style="background: var(--neutral-cream);">
+                                                <strong><i class="" style="color: var(--secondary-medium-blue);"></i>İKTİSADİ VE İDARİ BİLİMLER FAKÜLTESİ</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
+                                            <td>Siyaset Bilimi ve Kamu Yönetimi</td>
+                                            <td><strong>60</strong></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                        </tr>
+                                        
+                                        <!-- Mühendislik ve Mimarlık Fakültesi -->
+                                        <tr class="faculty-header">
+                                            <td colspan="15" style="background: var(--neutral-cream);">
+                                                <strong><i class="" style="color: var(--secondary-medium-blue);"></i>MÜHENDİSLİK VE MİMARLIK FAKÜLTESİ</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>Bilgisayar Mühendisliği</td>
+                                            <td><strong>60</strong></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-secondary">6</span></td>
+                                            <td>25</td>
+                                            <td><span class="badge badge-secondary">8</span></td>
+                                            <td>38</td>
+                                            <td><span class="badge badge-secondary">11</span></td>
+                                            <td>40</td>
+                                            <td><span class="badge badge-secondary">12</span></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            {% comment %} <div class="table-footer mt-3" style="border-top: 1px solid var(--accent-light-blue);">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="legend-box">
+                                            <h6 style="color: var(--primary-dark-blue);"><i class="fas fa-key me-2"></i>Gösterge:</h6>
+                                            <div class="legend-item">
+                                                <span class="legend-color" style="background: var(--secondary-medium-blue);"></span>
+                                                <span class="legend-text">DGS Kontenjanı</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <span class="legend-color" style="background: var(--accent-light-blue);"></span>
+                                                <span class="legend-text">Yatay Geçiş Kontenjanı</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <span class="legend-color" style="background: var(--primary-dark-blue);"></span>
+                                                <span class="legend-text">Bütün Kontenjan (YSK)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="alert alert-light">
+                                            <small style="color: var(--text-light);"><i class="fas fa-info-circle me-2" style="color: var(--secondary-medium-blue);"></i>Bu tablo 2020-2024 yılları arasındaki tüm DGS ve yatay geçiş kontenjanlarını göstermektedir.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                </section>
+
+                <br><br><br>
+
+                <!-- بخش 2: Kurumlararası Yatay Geçiş -->
+                <section id="section2" class="section-container mb-5">
+                    <div class="section-header">
+                        <div class="section-title-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="section-title-content">
+                            <h2>Kurumlararası Yatay Geçiş Kontenjanları</h2>
+                            <p class="section-subtitle">2025-2026 Güz Dönemi | Yurt İçi / Yurt Dışı</p>
+                        </div>
+                        <div class="section-badge">
+                            <span class="badge badge-primary">Sayfa 5-7</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header" style="background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%); color: white;">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h5 class="mb-0"  style= "color:white;"><i class=""></i>Lisans Programları</h5>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-outline-light active" data-view="all">Tümü</button>
+                                        <button type="button" class="btn btn-sm btn-outline-light" data-view="2">2. Sınıf</button>
+                                        <button type="button" class="btn btn-sm btn-outline-light" data-view="3">3. Sınıf</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="kurumlararasiTable">
+                                    <thead style="background: var(--neutral-cream);">
+                                        <tr>
+                                            <th style="color: var(--primary-dark-blue);">Fakülte/YO</th>
+                                            <th style="color: var(--primary-dark-blue);">Program</th>
+                                            <th style="color: var(--primary-dark-blue);">Genel Kont.</th>
+                                            <th style="color: var(--primary-dark-blue);">
+                                                <div>2. Sınıf / 3. Yarıyıl</div>
+                                                <div class="small">Yurt İçi / Yurt Dışı</div>
+                                            </th>
+                                            <th style="color: var(--primary-dark-blue);">
+                                                <div>3. Sınıf / 5. Yarıyıl</div>
+                                                <div class="small">Yurt İçi / Yurt Dışı</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-year="2">
+                                            <td><strong style="color: var(--primary-dark-blue);">Fen-Edebiyat Fakültesi</strong></td>
+                                            <td>İngiliz Dili ve Edebiyatı Pr.</td>
+                                            <td><span class="badge badge-dark">50</span></td>
+                                            <td>
+                                                <span class="badge badge-primary">12</span>
+                                                <span class="badge badge-light text-dark">6</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-primary">12</span>
+                                                <span class="badge badge-light text-dark">6</span>
+                                            </td>
+                                        </tr>
+                                        <tr data-year="2">
+                                            <td>Fen-Edebiyat Fakültesi</td>
+                                            <td>Psikoloji Pr.</td>
+                                            <td><span class="badge badge-dark">65</span></td>
+                                            <td>
+                                                <span class="badge badge-primary">18</span>
+                                                <span class="badge badge-light text-dark">9</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-primary">18</span>
+                                                <span class="badge badge-light text-dark">9</span>
+                                            </td>
+                                        </tr>
+                                        <tr data-year="3">
+                                            <td><strong style="color: var(--primary-dark-blue);">Mühendislik ve Mimarlık Fakültesi</strong></td>
+                                            <td>Bilgisayar Mühendisliği Pr.</td>
+                                            <td><span class="badge badge-dark">40</span></td>
+                                            <td>
+                                                <span class="badge badge-primary">12</span>
+                                                <span class="badge badge-light text-dark">6</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-primary">12</span>
+                                                <span class="badge badge-light text-dark">6</span>
+                                            </td>
+                                        </tr>
+                                        <tr data-year="2">
+                                            <td><strong style="color: var(--primary-dark-blue);">Sağlık Bilimleri Fakültesi</strong></td>
+                                            <td>Hemşirelik Pr.</td>
+                                            <td><span class="badge badge-dark">60</span></td>
+                                            <td>
+                                                <span class="badge badge-primary">18</span>
+                                                <span class="badge badge-light text-dark">9</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-primary">18</span>
+                                                <span class="badge badge-light text-dark">9</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <br><br><br>
+
+                <!-- بخش 3: Meslek Yüksekokulu Kontenjanları -->
+                <section id="section3" class="section-container mb-5">
+                    <div class="section-header">
+                        <div class="section-title-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="section-title-content">
+                            <h2>Meslek Yüksekokulu Kontenjanları</h2>
+                            <p class="section-subtitle">Sayfa 2-3 | Sağlık Hizmetleri MYO</p>
+                        </div>
+                        <div class="section-badge">
+                            <span class="badge badge-primary">Önlisans</span>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header" style="background: var(--primary-dark-blue); color: white;">
+                                    <h5 class="mb-0"  style= "color:white;"><i class=""></i>Sağlık Programları</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="program-list">
+                                        <div class="program-item" style="border-color: rgba(141, 212, 227, 0.3);">
+                                            <div class="program-name" style="color: var(--text-dark);">Ağız ve Diş Sağlığı</div>
+                                            <div class="program-stats">
+                                                <span class="stat" style="color: var(--text-light);">2024: <strong style="color: var(--primary-dark-blue);">60</strong></span>
+                                                <span class="stat">YG: <span class="badge badge-secondary">22</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="program-item" style="border-color: rgba(141, 212, 227, 0.3);">
+                                            <div class="program-name" style="color: var(--text-dark);">Anestezi</div>
+                                            <div class="program-stats">
+                                                <span class="stat" style="color: var(--text-light);">2024: <strong style="color: var(--primary-dark-blue);">80</strong></span>
+                                                <span class="stat">YG: <span class="badge badge-secondary">24</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="program-item" style="border-color: rgba(141, 212, 227, 0.3);">
+                                            <div class="program-name" style="color: var(--text-dark);">Çocuk Gelişimi</div>
+                                            <div class="program-stats">
+                                                <span class="stat" style="color: var(--text-light);">2024: <strong style="color: var(--primary-dark-blue);">35</strong></span>
+                                                <span class="stat">YG: <span class="badge badge-secondary">11</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="program-item" style="border-color: rgba(141, 212, 227, 0.3);">
+                                            <div class="program-name" style="color: var(--text-dark);">İlk ve Acil Yardım</div>
+                                            <div class="program-stats">
+                                                <span class="stat" style="color: var(--text-light);">2024: <strong style="color: var(--primary-dark-blue);">80</strong></span>
+                                                <span class="stat">YG: <span class="badge badge-secondary">24</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header" style="background: var(--secondary-medium-blue); color: white;">
+                                    <h5 class="mb-0" style= "color:white;"><i class=""></i>Laboratuvar Programları</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="program-list">
+                                        <div class="program-item" style="border-color: rgba(141, 212, 227, 0.3);">
+                                            <div class="program-name" style="color: var(--text-dark);">Tıbbi Laboratuvar Teknikleri</div>
+                                            <div class="program-stats">
+                                                <span class="stat" style="color: var(--text-light);">2024: <strong style="color: var(--primary-dark-blue);">35</strong></span>
+                                                <span class="stat">YG: <span class="badge badge-secondary">11</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="program-item" style="border-color: rgba(141, 212, 227, 0.3);">
+                                            <div class="program-name" style="color: var(--text-dark);">Patoloji Laboratuvar Teknikleri</div>
+                                            <div class="program-stats">
+                                                <span class="stat" style="color: var(--text-light);">2024: <strong style="color: var(--primary-dark-blue);">45</strong></span>
+                                                <span class="stat">YG: <span class="badge badge-secondary">14</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="program-item" style="border-color: rgba(141, 212, 227, 0.3);">
+                                            <div class="program-name" style="color: var(--text-dark);">Tıbbi Görüntüleme Teknikleri</div>
+                                            <div class="program-stats">
+                                                <span class="stat" style="color: var(--text-light);">2024: <strong style="color: var(--primary-dark-blue);">55</strong></span>
+                                                <span class="stat">YG: <span class="badge badge-secondary">17</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="program-item" style="border-color: rgba(141, 212, 227, 0.3);">
+                                            <div class="program-name" style="color: var(--text-dark);">Diş Protez Teknolojisi</div>
+                                            <div class="program-stats">
+                                                <span class="stat" style="color: var(--text-light);">2024: <strong style="color: var(--primary-dark-blue);">60</strong></span>
+                                                <span class="stat">YG: <span class="badge badge-secondary">18</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <br><br><br>
+                <!-- بخش 4: Kurumiçi Yatay Geçiş -->
+                <section id="section4" class="section-container mb-5">
+                    <div class="section-header">
+                        <div class="section-title-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="section-title-content">
+                            <h2>Kurumiçi Yatay Geçiş Kontenjanları</h2>
+                            <p class="section-subtitle">2024-2025 Bahar Dönemi / 2025-2026 Güz Dönemi</p>
+                        </div>
+                        <div class="section-badge">
+                            <span class="badge badge-primary">Sayfa 8-9</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header" style="background: var(--primary-dark-blue); color: white;">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h5 class="mb-0" style= "color:white;"><i class=""></i>Lisans ve Önlisans Programları</h5>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <div class="period-toggle">
+                                        <span class="period-label me-2">Görüntüle:</span>
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-outline-light active" data-period="all">Tüm Dönemler</button>
+                                            <button type="button" class="btn btn-outline-light" data-period="bahar">Bahar</button>
+                                            <button type="button" class="btn btn-outline-light" data-period="guz">Güz</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="kurumiciTable">
+                                    <thead style="background: var(--neutral-cream);">
+                                        <tr>
+                                            <th style="color: var(--primary-dark-blue);">Fakülte/YO</th>
+                                            <th style="color: var(--primary-dark-blue);">Program</th>
+                                            <th style="color: var(--primary-dark-blue);">2024 Kont.</th>
+                                            <th style="color: var(--primary-dark-blue);">Yatay Geçiş (%15)</th>
+                                            <th style="color: var(--primary-dark-blue);" data-period="bahar">2024-2025 Bahar</th>
+                                            <th style="color: var(--primary-dark-blue);" data-period="guz">2025-2026 Güz</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong style="color: var(--primary-dark-blue);">Fen Edebiyat Fakültesi</strong></td>
+                                            <td>İngiliz Dili ve Edebiyatı</td>
+                                            <td><span class="badge badge-dark">50</span></td>
+                                            <td><span class="badge badge-primary">8</span></td>
+                                            <td><span class="badge badge-secondary">4</span></td>
+                                            <td><span class="badge badge-secondary">4</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Psikoloji</td>
+                                            <td><span class="badge badge-dark">65</span></td>
+                                            <td><span class="badge badge-primary">10</span></td>
+                                            <td><span class="badge badge-secondary">5</span></td>
+                                            <td><span class="badge badge-secondary">5</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong style="color: var(--primary-dark-blue);">Sağlık Bilimleri Fakültesi</strong></td>
+                                            <td>Hemşirelik</td>
+                                            <td><span class="badge badge-dark">60</span></td>
+                                            <td><span class="badge badge-primary">9</span></td>
+                                            <td><span class="badge badge-secondary">4</span></td>
+                                            <td><span class="badge badge-secondary">5</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong style="color: var(--primary-dark-blue);">Meslek Yüksekokulu</strong></td>
+                                            <td>Bilgisayar Programcılığı</td>
+                                            <td><span class="badge badge-dark">60</span></td>
+                                            <td><span class="badge badge-primary">9</span></td>
+                                            <td><span class="badge badge-secondary">4</span></td>
+                                            <td><span class="badge badge-secondary">5</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            {% comment %} <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="card" style="border-color: var(--accent-light-blue);">
+                                        <div class="card-body">
+                                            <h6 class="card-title" style="color: var(--secondary-medium-blue);"><i class="fas fa-calculator me-2"></i>Kontenjan Hesaplama</h6>
+                                            <p class="card-text small" style="color: var(--text-light);">Kurumiçi yatay geçiş kontenjanı, programın genel kontenjanının %15'i oranında hesaplanır.</p>
+                                            <div class="input-group input-group-sm mb-2">
+                                                <span class="input-group-text" style="background: var(--neutral-cream); color: var(--text-dark); border-color: var(--accent-light-blue);">Genel Kontenjan</span>
+                                                <input type="number" class="form-control" id="genelKontenjan" value="60" min="1" max="200" style="border-color: var(--accent-light-blue);">
+                                                <button class="btn btn-outline-primary" type="button" id="hesaplaBtn" style="border-color: var(--secondary-medium-blue); color: var(--secondary-medium-blue);">Hesapla</button>
+                                            </div>
+                                            <div id="hesaplamaSonuc" class="alert" style="background: var(--neutral-cream); border-color: var(--accent-light-blue); color: var(--text-dark); padding: 10px;">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <small>Yatay Geçiş (%15):</small>
+                                                        <div class="h5" style="color: var(--secondary-medium-blue);">9</div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <small>Bölünmüş:</small>
+                                                        <div class="h6">
+                                                            <span style="color: var(--text-dark);">Bahar: 4</span><br>
+                                                            <span style="color: var(--text-dark);">Güz: 5</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" style="border-color: var(--accent-light-blue);">
+                                        <div class="card-body">
+                                            <h6 class="card-title" style="color: var(--secondary-medium-blue);"><i class="fas fa-lightbulb me-2"></i>Önemli Notlar</h6>
+                                            <ul class="list-unstyled small">
+                                                <li class="mb-2" style="color: var(--text-dark);"><i class="fas fa-check-circle me-2" style="color: var(--secondary-medium-blue);"></i>Kontenjanlar her akademik yıl için yeniden hesaplanır</li>
+                                                <li class="mb-2" style="color: var(--text-dark);"><i class="fas fa-check-circle me-2" style="color: var(--secondary-medium-blue);"></i>Bahar ve Güz dönemleri eşit veya yakın olarak bölünür</li>
+                                                <li class="mb-2" style="color: var(--text-dark);"><i class="fas fa-check-circle me-2" style="color: var(--secondary-medium-blue);"></i>Kesirli çıkan kontenjanlar yukarı yuvarlanır</li>
+                                                <li style="color: var(--text-dark);"><i class="fas fa-check-circle me-2" style="color: var(--secondary-medium-blue);"></i>Kontenjanlar ÖSYM tarafından onaylanır</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                </section>
+                <br><br><br>
+                <!-- بخش 5: DGS Detay Tablosu -->
+                <section id="section5" class="section-container mb-5">
+                    <div class="section-header">
+                        <div class="section-title-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="section-title-content">
+                            <h2>DGS Yatay Geçiş Detay Tablosu</h2>
+                            <p class="section-subtitle">Sayfa 4 | %30 Kontenjan ile Yatay Geçiş</p>
+                        </div>
+                        <div class="section-badge">
+                            <span class="badge badge-primary">Özel Kontenjan</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead style="background: var(--neutral-cream);">
+                                        <tr>
+                                            <th style="color: var(--primary-dark-blue);">FAKÜLTE/YO Adı</th>
+                                            <th style="color: var(--primary-dark-blue);">Bölüm Adı</th>
+                                            <th style="color: var(--primary-dark-blue);">2024 DGS</th>
+                                            <th style="color: var(--primary-dark-blue);">Yatay Geçiş</th>
+                                            <th style="color: var(--primary-dark-blue);">2023 DGS</th>
+                                            <th style="color: var(--primary-dark-blue);">Yatay Geçiş</th>
+                                            <th style="color: var(--primary-dark-blue);">2022 DGS</th>
+                                            <th style="color: var(--primary-dark-blue);">Yatay Geçiş</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong style="color: var(--primary-dark-blue);">Fen Edebiyat Fakültesi</strong></td>
+                                            <td>İngiliz Dili ve Edebiyatı</td>
+                                            <td><strong>4</strong></td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                            <td>4</td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                            <td>4</td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
+                                            <td>Siyaset Bilimi ve Kamu Yönetimi</td>
+                                            <td><strong>2</strong></td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                            <td>2</td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                            <td>2</td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong style="color: var(--primary-dark-blue);">Mühendislik و Mimarlık Fakültesi</strong></td>
+                                            <td>Bilgisayar Mühendisliği</td>
+                                            <td><strong>2</strong></td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                            <td>2</td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                            <td>2</td>
+                                            <td><span class="badge badge-primary">1</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong style="color: var(--primary-dark-blue);">Sağlık Bilimleri Fakültesi</strong></td>
+                                            <td>Hemşirelik</td>
+                                            <td><strong>5</strong></td>
+                                            <td><span class="badge badge-primary">2</span></td>
+                                            <td>5</td>
+                                            <td><span class="badge badge-primary">2</span></td>
+                                            <td>5</td>
+                                            <td><span class="badge badge-primary">2</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="alert mt-3" style="background: rgba(141, 212, 227, 0.1); border-color: var(--accent-light-blue); color: var(--text-dark);">
+                                <i class="fas fa-info-circle me-2" style="color: var(--secondary-medium-blue);"></i>
+                                <strong>Not:</strong> Bu tablo Bahar Dönemi %30 kontenjan ile yatay geçiş bilgilerini göstermektedir. Programlar 2. sınıf (3. yarıyıl) kontenjanlarıdır.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PDF Download Section -->
+                <section class="section-container mb-5">
+                    <div class="download-mega-card" style="background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <div class="download-content-extended">
+                                    <div class="download-icon-big">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div class="download-text-extended">
+                                        <h3 style="color: white;">Tam Kontenjan Belgesini İndir</h3>
+                                        <p style="color: rgba(255, 255, 255, 0.9);">9 sayfalık resmi kontenjan belgesinin tamamını PDF formatında indirebilirsiniz. Belge tüm yatay geçiş türlerini ve tüm programları kapsamaktadır.</p>
+                                        <div class="document-info">
+                                            <div class="info-item">
+                                                <i class="fas fa-file-alt" style="color: var(--accent-light-blue);"></i>
+                                                <span style="color: rgba(255, 255, 255, 0.9);">Lisans-onlisans-yatay-gecis-kontenjanlari-1-1.pdf</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="fas fa-hdd" style="color: var(--accent-light-blue);"></i>
+                                                <span style="color: rgba(255, 255, 255, 0.9);">850KB</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="fas fa-calendar-alt" style="color: var(--accent-light-blue);"></i>
+                                                <span style="color: rgba(255, 255, 255, 0.9);">2025 Güncel</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="fas fa-layer-group" style="color: var(--accent-light-blue);"></i>
+                                                <span style="color: rgba(255, 255, 255, 0.9);">9 Sayfa</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="download-actions">
+                                    <a href="{% static 'docs/Lisans-onlisans-yatay-gecis-kontenjanlari-1-1.pdf' %}" class="btn btn-lg btn-light mb-3 w-100" download style="color: var(--primary-dark-blue);">
+                                        <i class="fas fa-download me-2"></i>Tam Belgeyi İndir
+                                    </a>
+                                    <button class="btn btn-lg btn-outline-light w-100" id="printPage">
+                                        <i class="fas fa-print me-2"></i>Sayfayı Yazdır
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    font-family: 'Metropolis', sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 30px auto 0;
+}
+
+/* Grid کارت‌ها - Full Image Design */
+.yatay-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* کارت استایل‌ها - Full Image */
+.yatay-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 400px;
+    background: var(--primary-dark-blue);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.yatay-card:hover {
+    transform: translateY(-20px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(29, 97, 169, 0.3);
+}
+
+.yatay-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.yatay-card-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.yatay-card:hover .yatay-card-bg img {
+    transform: scale(1.15) rotate(2deg);
+    filter: brightness(1.2);
+}
+
+.yatay-card-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(9, 36, 66, 0.85) 0%,
+        rgba(29, 97, 169, 0.7) 50%,
+        rgba(141, 212, 227, 0.4) 100%
+    );
+    transition: all 0.6s ease;
+}
+
+.yatay-card:hover .yatay-card-gradient {
+    background: linear-gradient(
+        135deg,
+        rgba(9, 36, 66, 0.95) 0%,
+        rgba(29, 97, 169, 0.8) 50%,
+        rgba(141, 212, 227, 0.5) 100%
+    );
+}
+
+.yatay-card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    z-index: 2;
+    color: white;
+    transition: all 0.6s ease;
+}
+
+.yatay-card:hover .yatay-card-content {
+    transform: translateY(-10px);
+}
+
+.yatay-card-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    transition: all 0.5s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.yatay-card:hover .yatay-card-icon {
+    transform: translateY(-15px) scale(1.1);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: var(--accent-light-blue);
+    box-shadow: 0 10px 25px rgba(141, 212, 227, 0.3);
+}
+
+.yatay-card-icon i {
+    font-size: 28px;
+    color: white;
+    transition: all 0.5s ease;
+}
+
+.yatay-card:hover .yatay-card-icon i {
+    color: var(--accent-light-blue);
+    transform: rotate(15deg);
+}
+
+.yatay-card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-family: 'Metropolis', sans-serif;
+    line-height: 1.3;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease 0.1s;
+    color: white;
+}
+
+.yatay-card:hover .yatay-card-title {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.yatay-card-description {
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    opacity: 0.9;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease 0.2s;
+    color: white;
+}
+
+.yatay-card:hover .yatay-card-description {
+    transform: translateY(0);
+    opacity: 0.9;
+}
+
+.yatay-card-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease 0.3s, background 0.3s ease, transform 0.3s ease;
+}
+
+.yatay-card-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.yatay-card-buttons .yatay-card-button {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.yatay-card:hover .yatay-card-button {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.yatay-card-button:hover {
+    background: var(--secondary-medium-blue);
+    border-color: var(--secondary-medium-blue);
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 20px rgba(29, 97, 169, 0.4);
+}
+
+.yatay-card-button i {
+    transition: transform 0.3s ease;
+}
+
+.yatay-card-button:hover i {
+    transform: translateX(5px);
+}
+
+/* بخش فرم تماس */
+.contact-form-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 20px;
+    padding: 50px;
+    margin-top: 60px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+}
+
+.contact-form-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-form-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 32px;
+    box-shadow: 0 10px 30px rgba(29, 97, 169, 0.3);
+    animation: phoneRing 2s ease-in-out infinite;
+}
+
+@keyframes phoneRing {
+    0%, 100% { transform: rotate(0) scale(1); }
+    10%, 30%, 50%, 70%, 90% { transform: rotate(-5deg) scale(1.05); }
+    20%, 40%, 60%, 80% { transform: rotate(5deg) scale(1.05); }
+}
+
+.contact-form-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.contact-form-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.contact-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-form {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-label i {
+    color: var(--secondary-medium-blue);
+    font-size: 16px;
+    width: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    color: var(--text-dark);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 3px rgba(29, 97, 169, 0.1);
+    background: white;
+    transform: translateY(-2px);
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+.form-error {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    min-height: 20px;
+}
+
+.form-control:invalid:not(:placeholder-shown) + .form-error {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* استایل‌های چک‌باکس */
+.form-checkboxes {
+    margin: 30px 0;
+    padding: 25px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-check {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-check:last-child {
+    margin-bottom: 0;
+}
+
+.form-check-input {
+    position: absolute;
+    opacity: 0;
+}
+
+.form-check-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    cursor: pointer;
+    padding-left: 35px;
+    position: relative;
+}
+
+.form-check-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.form-check-input:checked + .form-check-label::before {
+    background: var(--secondary-medium-blue);
+    border-color: var(--secondary-medium-blue);
+}
+
+.form-check-input:checked + .form-check-label::after {
+    content: '✓';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-check-input:focus + .form-check-label::before {
+    box-shadow: 0 0 0 3px rgba(29, 97, 169, 0.2);
+}
+
+.kvkk-link {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.kvkk-link:hover {
+    border-bottom-color: var(--secondary-medium-blue);
+}
+
+/* دکمه ارسال */
+.form-submit {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.submit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    color: white;
+    border: none;
+    padding: 18px 45px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(29, 97, 227, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.submit-button:hover::before {
+    left: 100%;
+}
+
+.submit-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(29, 97, 227, 0.4);
+}
+
+.submit-button:active {
+    transform: translateY(-2px);
+}
+
+.submit-button i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.submit-button:hover i {
+    transform: translateX(5px) rotate(15deg);
+}
+
+/* پیام موفقیت */
+.form-success-message {
+    display: none;
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 25px;
+    align-items: center;
+    gap: 20px;
+    animation: slideInUp 0.6s ease;
+}
+
+.form-success-message i {
+    color: #10b981;
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.form-success-message h4 {
+    color: #065f46;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-success-message p {
+    color: #047857;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* انیمیشن ورود کارت‌ها */
+@keyframes cardFloatIn {
+    from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.8) rotateX(-15deg);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
+    }
+}
+
+.yatay-card {
+    animation: cardFloatIn 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    opacity: 0;
+    animation-fill-mode: both;
+}
+
+/* تأخیر‌های انیمیشن برای هر کارت */
+.yatay-card:nth-child(1) { animation-delay: 0.1s; }
+.yatay-card:nth-child(2) { animation-delay: 0.2s; }
+.yatay-card:nth-child(3) { animation-delay: 0.3s; }
+.yatay-card:nth-child(4) { animation-delay: 0.4s; }
+.yatay-card:nth-child(5) { animation-delay: 0.5s; }
+.yatay-card:nth-child(6) { animation-delay: 0.6s; }
+.yatay-card:nth-child(7) { animation-delay: 0.7s; }
+.yatay-card:nth-child(8) { animation-delay: 0.8s; }
+.yatay-card:nth-child(9) { animation-delay: 0.9s; }
+.yatay-card:nth-child(10) { animation-delay: 1.0s; }
+.yatay-card:nth-child(11) { animation-delay: 1.1s; }
+.yatay-card:nth-child(12) { animation-delay: 1.2s; }
+.yatay-card:nth-child(13) { animation-delay: 1.3s; }
+
+/* انیمیشن فرم */
+@keyframes fadeInUpForm {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-form-section {
+    animation: fadeInUpForm 0.8s ease 0.5s forwards;
+    opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .yatay-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .yatay-card {
+        height: 380px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .yatay-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .yatay-card {
+        height: 360px;
+    }
+    
+    .yatay-card-content {
+        padding: 25px;
+    }
+    
+    .yatay-card-title {
+        font-size: 1.4rem;
+    }
+    
+    .yatay-card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+    }
+    
+    .yatay-card-icon i {
+        font-size: 24px;
+    }
+    
+    .contact-form-section {
+        padding: 35px;
+    }
+    
+    .contact-form {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .yatay-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+    }
+    
+    .yatay-card {
+        height: 340px;
+    }
+    
+    .yatay-card-content {
+        padding: 20px;
+    }
+    
+    .yatay-card-title {
+        font-size: 1.3rem;
+    }
+    
+    .yatay-card-description {
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .yatay-card-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 20px;
+    }
+    
+    .contact-form-section {
+        padding: 25px;
+    }
+    
+    .contact-form {
+        padding: 25px;
+    }
+    
+    .contact-form-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+    
+    .contact-form-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .yatay-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .yatay-card {
+        height: 320px;
+        max-width: 100%;
+    }
+    
+    .contact-form-section {
+        padding: 20px;
+    }
+    
+    .contact-form {
+        padding: 20px;
+    }
+    
+    .form-check-label {
+        font-size: 0.9rem;
+    }
+    
+    .submit-button {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 30px;
+    }
+    
+    .contact-form-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .contact-form-title {
+        font-size: 1.6rem;
+    }
+    
+    .contact-form-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* انیمیشن‌های اضافی */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.contact-form-icon {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* انیمیشن برای موبایل (کاهش motion) */
+@media (prefers-reduced-motion: reduce) {
+    .yatay-card,
+    .yatay-card *,
+    .contact-form-section,
+    .contact-form-icon,
+    .submit-button,
+    .form-control {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .yatay-card:hover {
+        transform: none;
+    }
+    
+    .submit-button:hover {
+        transform: none;
+    }
+}
+
+/* Main Layout */
+.main-container {
+    max-width: 1600px;
+    margin: 40px auto;
+    padding: 0 25px;
+}
+
+/* Sticky Sidebar */
+.sticky-sidebar {
+    position: sticky;
+    top: 120px;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+    z-index: 100;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* Overview Cards */
+.overview-cards .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.overview-cards .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+/* Section Containers */
+.section-container {
+    position: relative;
+    
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.3);
+}
+
+.section-title-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue) 0%, var(--primary-dark-blue) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.section-title-content {
+    flex: 1;
+}
+
+.section-title-content h2 {
+    color: var(--primary-dark-blue);
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.section-badge .badge {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.badge-primary {
+    background: var(--secondary-medium-blue) !important;
+    color: white !important;
+}
+
+.badge-secondary {
+    background: var(--accent-light-blue) !important;
+    color: var(--primary-dark-blue) !important;
+}
+
+.badge-light {
+    background: var(--neutral-cream) !important;
+    color: var(--text-dark) !important;
+}
+
+.badge-dark {
+    background: var(--primary-dark-blue) !important;
+    color: white !important;
+}
+
+/* Table Section Cards */
+.table-section-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.table-responsive-lg {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.table-responsive-lg table {
+    margin-bottom: 0;
+}
+
+.table-responsive-lg thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.faculty-header td {
+    font-size: 1.1rem;
+    padding: 15px !important;
+    color: var(--primary-dark-blue);
+}
+
+.faculty-header i {
+    color: var(--secondary-medium-blue);
+}
+
+.table-footer {
+    padding: 20px;
+    background: var(--neutral-cream);
+    border-top: 1px solid var(--accent-light-blue);
+}
+
+.legend-box {
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.legend-box h6 {
+    color: var(--primary-dark-blue);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.legend-text {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+/* Program Lists */
+.program-list .program-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid;
+}
+
+.program-list .program-item:last-child {
+    border-bottom: none;
+}
+
+.program-name {
+    font-weight: 500;
+    flex: 1;
+}
+
+.program-stats {
+    display: flex;
+    gap: 15px;
+}
+
+.program-stats .stat {
+    font-size: 0.9rem;
+}
+
+.program-stats .stat strong {
+    color: var(--primary-dark-blue);
+}
+
+/* Cards */
+.card {
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card .card-header {
+    border-radius: 12px 12px 0 0 !important;
+    border: none;
+    
+}
+
+/* Download Mega Card */
+.download-mega-card {
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(9, 36, 66, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.download-mega-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="rgba(255,255,255,0.05)"><path d="M50,10 L90,50 L50,90 L10,50 Z"/></svg>');
+    background-size: contain;
+    opacity: 0.3;
+}
+
+.download-content-extended {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.download-icon-big {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.9);
+    flex-shrink: 0;
+}
+
+.download-text-extended h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+}
+
+.download-text-extended p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.document-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+.download-actions .btn {
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.download-actions .btn-light {
+    background: white;
+    border: none;
+}
+
+.download-actions .btn-light:hover {
+    background: var(--neutral-cream);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.download-actions .btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Table Hover Effects */
+.table-hover tbody tr:hover {
+    background-color: rgba(141, 212, 227, 0.1) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .main-container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .sticky-sidebar {
+        position: relative;
+        top: 0;
+        height: auto;
+        margin-bottom: 30px;
+    }
+    
+    .document-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-container {
+        padding: 0 15px;
+    }
+    
+    .overview-cards .col-md-3 {
+        margin-bottom: 15px;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .section-title-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .download-mega-card {
+        padding: 30px;
+    }
+    
+    .download-text-extended h3 {
+        font-size: 1.6rem;
+    }
+    
+    .download-content-extended {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .download-actions .btn {
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 0 10px;
+        margin: 20px auto;
+    }
+    
+    .overview-cards .stat-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .section-title-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .section-title-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .table-responsive-lg {
+        font-size: 0.85rem;
+    }
+    
+    .program-stats {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .download-mega-card {
+        padding: 20px;
+    }
+    
+    .download-text-extended h3 {
+        font-size: 1.4rem;
+    }
+    
+    .download-text-extended p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .stat-number {
+        font-size: 1.6rem;
+    }
+    
+    .section-title-content h2 {
+        font-size: 1.2rem;
+    }
+    
+    .table-responsive-lg {
+        font-size: 0.8rem;
+    }
+    
+    .faculty-header td {
+        font-size: 1rem;
+        padding: 10px !important;
+    }
+    
+    .download-mega-card .row {
+        flex-direction: column;
+    }
+    
+    .download-actions {
+        margin-top: 20px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // انیمیشن پارالاکس ماوس برای کارت‌ها
+    const cards = document.querySelectorAll('.yatay-card');
+    
+    cards.forEach(card => {
+        // افکت پارالاکس
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateY = (x - centerX) / 15;
+            const rotateX = (centerY - y) / 15;
+            
+            const bg = this.querySelector('.yatay-card-bg img');
+            
+            this.style.transform = `translateY(-20px) scale(1.03) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            bg.style.transform = `scale(1.15) rotate(2deg) translate(${rotateY * 0.5}px, ${rotateX * 0.5}px)`;
+            
+            // حرکت جزئی محتوا
+            const content = this.querySelector('.yatay-card-content');
+            content.style.transform = `translateY(-10px) translate(${rotateY * 0.1}px, ${rotateX * 0.1}px)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(-20px) scale(1.03) rotateX(0) rotateY(0)';
+            
+            const bg = this.querySelector('.yatay-card-bg img');
+            bg.style.transform = 'scale(1.15) rotate(2deg)';
+            
+            const content = this.querySelector('.yatay-card-content');
+            content.style.transform = 'translateY(-10px)';
+        });
+    });
+    
+    // مدیریت فرم تماس
+    const callBackForm = document.getElementById('callBackForm');
+    const successMessage = document.getElementById('successMessage');
+    
+    if (callBackForm) {
+        callBackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // اعتبارسنجی فرم
+            let isValid = true;
+            const requiredFields = callBackForm.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                const errorElement = field.parentElement.querySelector('.form-error');
+                
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#dc2626';
+                    if (errorElement) {
+                        errorElement.textContent = 'Bu alanı doldurunuz.';
+                        errorElement.style.opacity = '1';
+                        errorElement.style.transform = 'translateY(0)';
+                    }
+                } else {
+                    field.style.borderColor = '#10b981';
+                    if (errorElement) {
+                        errorElement.style.opacity = '0';
+                        errorElement.style.transform = 'translateY(-10px)';
+                    }
+                }
+                
+                // اعتبارسنجی خاص برای ایمیل
+                if (field.type === 'email' && field.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value.trim())) {
+                        isValid = false;
+                        field.style.borderColor = '#dc2626';
+                        if (errorElement) {
+                            errorElement.textContent = 'Geçerli bir e-posta adresi giriniz.';
+                            errorElement.style.opacity = '1';
+                            errorElement.style.transform = 'translateY(0)';
+                        }
+                    }
+                }
+            });
+            
+            if (isValid) {
+                // شبیه‌سازی ارسال فرم
+                const submitButton = callBackForm.querySelector('.submit-button');
+                const originalText = submitButton.innerHTML;
+                
+                // نمایش وضعیت loading
+                submitButton.innerHTML = `
+                    <span class="submit-text">Gönderiliyor...</span>
+                    <i class="fas fa-spinner fa-spin"></i>
+                `;
+                submitButton.disabled = true;
+                
+                // شبیه‌سازی تاخیر سرور
+                setTimeout(() => {
+                    // پنهان کردن فرم
+                    callBackForm.style.opacity = '0';
+                    callBackForm.style.transform = 'translateY(-20px)';
+                    callBackForm.style.transition = 'all 0.5s ease';
+                    
+                    // نمایش پیام موفقیت
+                    setTimeout(() => {
+                        callBackForm.style.display = 'none';
+                        successMessage.style.display = 'flex';
+                        
+                        // انیمیشن پیام موفقیت
+                        setTimeout(() => {
+                            successMessage.style.opacity = '1';
+                            successMessage.style.transform = 'translateY(0)';
+                        }, 50);
+                    }, 300);
+                    
+                    // ریست فرم پس از 5 ثانیه (برای دمو)
+                    setTimeout(() => {
+                        callBackForm.reset();
+                        callBackForm.style.display = 'block';
+                        callBackForm.style.opacity = '1';
+                        callBackForm.style.transform = 'translateY(0)';
+                        successMessage.style.display = 'none';
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                        
+                        // ریست کردن استایل فیلدها
+                        callBackForm.querySelectorAll('.form-control').forEach(field => {
+                            field.style.borderColor = '#e2e8f0';
+                        });
+                    }, 5000);
+                }, 1500);
+            }
+        });
+        
+        // اعتبارسنجی real-time
+        const formInputs = callBackForm.querySelectorAll('.form-control');
+        formInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const errorElement = this.parentElement.querySelector('.form-error');
+                
+                if (this.value.trim()) {
+                    this.style.borderColor = '#10b981';
+                    if (errorElement) {
+                        errorElement.style.opacity = '0';
+                        errorElement.style.transform = 'translateY(-10px)';
+                    }
+                } else {
+                    this.style.borderColor = '#e2e8f0';
+                }
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.style.borderColor = '#e2e8f0';
+                }
+            });
+        });
+    }
+    
+    // انیمیشن لود تدریجی تصاویر کارت‌ها
+    const images = document.querySelectorAll('.yatay-card-bg img');
+    
+    images.forEach(img => {
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+            this.style.transition = 'opacity 0.5s ease';
+        });
+        
+        if (img.complete) {
+            img.style.opacity = '1';
+        } else {
+            img.style.opacity = '0';
+        }
+    });
+    
+    // فعال‌سازی انیمیشن‌ها هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // مشاهده فرم برای انیمیشن
+    const formSection = document.querySelector('.contact-form-section');
+    if (formSection) {
+        observer.observe(formSection);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Tablo görünümü değiştirme
+    const viewButtons = document.querySelectorAll('[data-view]');
+    viewButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const view = this.getAttribute('data-view');
+            const table = document.getElementById('kurumlararasiTable');
+            
+            // Aktif butonu güncelle
+            viewButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Satırları filtrele
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                if (view === 'all') {
+                    row.style.display = '';
+                } else {
+                    const year = row.getAttribute('data-year');
+                    row.style.display = year === view ? '' : 'none';
+                }
+            });
+        });
+    });
+    
+    // Dönem filtreleme
+    const periodButtons = document.querySelectorAll('[data-period]');
+    periodButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const period = this.getAttribute('data-period');
+            const table = document.getElementById('kurumiciTable');
+            
+            // Aktif butonu güncelle
+            periodButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Sütunları göster/gizle
+            const headers = table.querySelectorAll('th[data-period]');
+            const cells = table.querySelectorAll('td:nth-child(n+5)');
+            
+            headers.forEach((header, index) => {
+                const headerPeriod = header.getAttribute('data-period');
+                if (period === 'all' || headerPeriod === period) {
+                    header.style.display = '';
+                } else {
+                    header.style.display = 'none';
+                }
+            });
+            
+            cells.forEach((cell, index) => {
+                const colIndex = Math.floor(index / table.querySelectorAll('tbody tr').length) + 5;
+                const header = table.querySelector(`th:nth-child(${colIndex})`);
+                if (header) {
+                    const headerPeriod = header.getAttribute('data-period');
+                    if (period === 'all' || headerPeriod === period) {
+                        cell.style.display = '';
+                    } else {
+                        cell.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+    
+    // Kontenjan hesaplama
+    const hesaplaBtn = document.getElementById('hesaplaBtn');
+    const genelKontenjanInput = document.getElementById('genelKontenjan');
+    const hesaplamaSonuc = document.getElementById('hesaplamaSonuc');
+    
+    function hesaplaKontenjan() {
+        const genel = parseInt(genelKontenjanInput.value) || 60;
+        const yatayGecis = Math.ceil(genel * 0.15);
+        const bahar = Math.floor(yatayGecis / 2);
+        const guz = yatayGecis - bahar;
+        
+        hesaplamaSonuc.innerHTML = `
+            <div class="row">
+                <div class="col-6">
+                    <small>Yatay Geçiş (%15):</small>
+                    <div class="h5" style="color: var(--secondary-medium-blue);">${yatayGecis}</div>
+                </div>
+                <div class="col-6">
+                    <small>Bölünmüş:</small>
+                    <div class="h6">
+                        <span style="color: var(--text-dark);">Bahar: ${bahar}</span><br>
+                        <span style="color: var(--text-dark);">Güz: ${guz}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    if (hesaplaBtn && genelKontenjanInput) {
+        hesaplaBtn.addEventListener('click', hesaplaKontenjan);
+        genelKontenjanInput.addEventListener('input', hesaplaKontenjan);
+        hesaplaKontenjan(); // İlk yüklemede hesapla
+    }
+    
+    // Sayfayı yazdır
+    const printBtn = document.getElementById('printPage');
+    if (printBtn) {
+        printBtn.addEventListener('click', function() {
+            window.print();
+        });
+    }
+    
+    // Smooth scrolling for sidebar links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Tablo satır hover efekti
+    document.querySelectorAll('table tbody tr').forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'rgba(141, 212, 227, 0.1)';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            if (this.classList.contains('faculty-header')) {
+                this.style.backgroundColor = 'var(--neutral-cream)';
+            } else {
+                this.style.backgroundColor = '';
+            }
+        });
+    });
+    
+    // Sayfa yüklendiğinde aktif bölümü göster
+    const hash = window.location.hash;
+    if (hash) {
+        const targetElement = document.querySelector(hash);
+        if (targetElement) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    }
+});
+</script>
+{% endblock %}

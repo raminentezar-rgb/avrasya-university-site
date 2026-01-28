@@ -1,0 +1,42 @@
+# 0002_duyurudosya_remove_duyuru_excel_dosyasi_and_more.py
+
+from django.db import migrations, models
+import django.db.models.deletion
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('duyurular', '0001_initial'),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='DuyuruDosya',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('dosya', models.FileField(upload_to='duyurular/dosyalar/%Y/%m/%d/', verbose_name='Dosya')),
+                ('dosya_adi', models.CharField(blank=True, max_length=255, verbose_name='Dosya Adı')),
+                ('tur', models.CharField(choices=[('word', 'Word Belgesi'), ('pdf', 'PDF Belgesi'), ('excel', 'Excel Dosyası'), ('resim', 'Resim'), ('arsiv', 'Arşiv Dosyası'), ('diger', 'Diğer')], default='diger', max_length=10, verbose_name='Dosya Türü')),
+                ('aciklama', models.TextField(blank=True, verbose_name='Açıklama')),
+                ('olusturulma_tarihi', models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')),
+                ('duyuru', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dosyalar', to='duyurular.duyuru', verbose_name='Duyuru')),
+            ],
+            options={
+                'verbose_name': 'Duyuru Dosyası',
+                'verbose_name_plural': 'Duyuru Dosyaları',
+                'ordering': ['tur', 'dosya_adi'],
+            },
+        ),
+        migrations.RemoveField(
+            model_name='duyuru',
+            name='excel_dosyasi',
+        ),
+        migrations.RemoveField(
+            model_name='duyuru',
+            name='pdf_dosyasi',
+        ),
+        migrations.RemoveField(
+            model_name='duyuru',
+            name='word_dosyasi',
+        ),
+    ]

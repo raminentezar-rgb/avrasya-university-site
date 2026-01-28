@@ -1,0 +1,1359 @@
+{% extends 'kutuphane/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Çalışma Takvimi
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Çalışma Takvimi</h1>
+            <p>Avrasya Üniversitesi Kütüphaneleri çalışma saatleri ve talep formu</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'kutuphane/kutuphane_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- بخش سربرگ -->
+                <div class="page-header-section">
+                    <h2 class="page-title">AVRASYA ÜNİVERSİTESİ</h2>
+                    <p class="page-subtitle">Kütüphane ve Dokümantasyon Daire Başkanlığı</p>
+                </div>
+                
+                <!-- محتوای اصلی -->
+                <div class="calisma-takvimi-content">
+                    <!-- بخش معرفی -->
+                    <div class="intro-section">
+                        <div class="intro-text">
+                            <p class="lead-text">Pelitli, Kaşüstü, Yomra ve Yalıncak Yerleşkelerimizde hizmet veren kütüphanelerimiz ders çalışma ve araştırma açısından tüm donanımlara sahiptir.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- بخش ساعات کاری -->
+                    <div class="calisma-saatleri-section">
+                        <h3 class="section-title"><i class="far fa-clock"></i> Çalışma Saatleri</h3>
+                        
+                        <div class="saatler-listesi">
+                            <div class="saat-item">
+                                <div class="saat-icon">
+                                    <i class="fas fa-calendar-day"></i>
+                                </div>
+                                <div class="saat-content">
+                                    <h4>Haftaiçi her gün</h4>
+                                    <div class="saat-detay">
+                                        <span class="saat-aralik">08.00–12.00</span>
+                                        <span class="saat-ayrac">/</span>
+                                        <span class="saat-aralik">13.00–17.00</span>
+                                    </div>
+                                    <p class="saat-not">(Talep olması halinde 20.00 ye kadar açık olacaktır.)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="saat-item">
+                                <div class="saat-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="saat-content">
+                                    <h4>Cumartesi günü</h4>
+                                    <div class="saat-detay">
+                                        <span class="saat-aralik">08.00–13.00</span>
+                                    </div>
+                                    <p class="saat-not">(Talep olması halinde 17.00 ye kadar açık olacaktır.)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="saat-item">
+                                <div class="saat-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="saat-content">
+                                    <h4>Sınav dönemleri</h4>
+                                    <div class="saat-detay">
+                                        <span class="saat-aralik">Talep gelmesi halinde 00.00 a kadar açıktır.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- بخش فرم درخواست -->
+                    <div class="talep-formu-section">
+                        <div class="talep-baslik">
+                            <h3><i class="fas fa-edit"></i> Talebinizi aşağıdaki formu doldurarak iletebilirsiniz.</h3>
+                        </div>
+                        
+                        <form id="talepFormu" class="talep-formu">
+                            <!-- نام و نام خانوادگی -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="adSoyad" class="form-label">
+                                        <i class="fas fa-user"></i> Adınız Soyadınız
+                                    </label>
+                                    <input type="text" id="adSoyad" class="form-input" required>
+                                    <div class="form-error">The field is required.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- ایمیل -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">
+                                        <i class="fas fa-envelope"></i> Mail Adresiniz
+                                    </label>
+                                    <input type="email" id="email" class="form-input" required>
+                                    <div class="form-error">The field is required.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- متن درخواست -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="talep" class="form-label">
+                                        <i class="fas fa-comment-alt"></i> Talebiniz
+                                    </label>
+                                    <textarea id="talep" class="form-textarea" rows="3" placeholder="Cumartesi 17.00 ye kadar..." required></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- انتخاب نوع درخواست -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-calendar-check"></i> Talep Gününüzü Seçiniz
+                                    </label>
+                                    
+                                    <div class="talep-secenekleri">
+                                        <!-- گزینه 1 -->
+                                        <div class="talep-secenek">
+                                            <input type="radio" id="talep1" name="talepGunu" value="haftaici-20" class="talep-radio" required>
+                                            <label for="talep1" class="talep-label">
+                                                <div class="talep-icon">
+                                                    <i class="fas fa-moon"></i>
+                                                </div>
+                                                <div class="talep-info">
+                                                    <div class="talep-title">Haftaiçi 20.00 ye kadar</div>
+                                                    <div class="talep-desc">Hafta içi günlerde 20.00'ye kadar açık olması talebi</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <!-- گزینه 2 -->
+                                        <div class="talep-secenek">
+                                            <input type="radio" id="talep2" name="talepGunu" value="cumartesi-17" class="talep-radio" required>
+                                            <label for="talep2" class="talep-label">
+                                                <div class="talep-icon">
+                                                    <i class="fas fa-sun"></i>
+                                                </div>
+                                                <div class="talep-info">
+                                                    <div class="talep-title">Cumartesi 17.00 ye kadar</div>
+                                                    <div class="talep-desc">Cumartesi günleri 17.00'ye kadar açık olması talebi</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <!-- گزینه 3 -->
+                                        <div class="talep-secenek">
+                                            <input type="radio" id="talep3" name="talepGunu" value="sinav-00" class="talep-radio" required>
+                                            <label for="talep3" class="talep-label">
+                                                <div class="talep-icon">
+                                                    <i class="fas fa-book-open"></i>
+                                                </div>
+                                                <div class="talep-info">
+                                                    <div class="talep-title">Sınav dönemlerinde 00.00 a kadar</div>
+                                                    <div class="talep-desc">Sınav dönemlerinde 00.00'a kadar açık olması talebi</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- دکمه ارسال -->
+                            <div class="form-row">
+                                <button type="submit" class="talep-gonder-btn">
+                                    <i class="fas fa-paper-plane"></i> Talebi Gönder
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- نکات مهم -->
+                        <div class="talep-notlari">
+                            <div class="talep-not">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Talepleriniz değerlendirildikten sonra size e-posta ile bilgi verilecektir.</span>
+                            </div>
+                            <div class="talep-not">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Minimum 5 kişilik talep olması durumunda ek çalışma saatleri açılacaktır.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- اسلایدر تصاویر کتبخانه -->
+<div class="kutuphane-slider-section">
+    <div class="container">
+        <div class="slider-header">
+            <h2><i class="fas fa-images"></i> Avrasya Üniversitesi Kütüphaneleri</h2>
+            <p>Modern çalışma ortamları ve zengin kaynak koleksiyonu</p>
+        </div>
+        
+        <div class="kutuphane-slider">
+            <div class="slider-container">
+                <div class="slider-track">
+                    <!-- تصویر 1: Pelitli Yerleşkesi -->
+                    <div class="slider-item">
+                        <div class="slider-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pelitli Yerleşkesi Kütüphanesi" class="slider-img">
+                        </div>
+                        <div class="slider-caption">
+                            <h5>Pelitli Yerleşkesi Kütüphanesi</h5>
+                            <p>Modern çalışma alanları ve geniş kitap koleksiyonu</p>
+                        </div>
+                    </div>
+                    
+                    <!-- تصویر 2: Kaşüstü Yerleşkesi -->
+                    <div class="slider-item">
+                        <div class="slider-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Kaşüstü Yerleşkesi Kütüphanesi" class="slider-img">
+                        </div>
+                        <div class="slider-caption">
+                            <h5>Kaşüstü Yerleşkesi Kütüphanesi</h5>
+                            <p>Sessiz okuma salonları ve grup çalışma odaları</p>
+                        </div>
+                    </div>
+                    
+                    <!-- تصویر 3: Yomra Yerleşkesi -->
+                    <div class="slider-item">
+                        <div class="slider-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Yomra Yerleşkesi Kütüphanesi" class="slider-img">
+                        </div>
+                        <div class="slider-caption">
+                            <h5>Yomra Yerleşkesi Kütüphanesi</h5>
+                            <p>Teknolojik altyapı ve online kaynak erişimi</p>
+                        </div>
+                    </div>
+                    
+                    <!-- تصویر 4: Yalıncak Yerleşkesi -->
+                    <div class="slider-item">
+                        <div class="slider-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Yalıncak Yerleşkesi Kütüphanesi" class="slider-img">
+                        </div>
+                        <div class="slider-caption">
+                            <h5>Yalıncak Yerleşkesi Kütüphanesi</h5>
+                            <p>Konforlu çalışma ortamı ve ödünç kitap hizmeti</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- دکمه‌های کنترل -->
+            <button class="slider-btn slider-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn slider-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <!-- نقاط ناوبری -->
+            <div class="slider-dots">
+                <span class="slider-dot active" data-slide="0"></span>
+                <span class="slider-dot" data-slide="1"></span>
+                <span class="slider-dot" data-slide="2"></span>
+                <span class="slider-dot" data-slide="3"></span>
+            </div>
+        </div>
+        
+        <!-- اطلاعات تماس -->
+        <div class="contact-info-slider">
+            <div class="contact-item-slider">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                    <strong>Telefon:</strong>
+                    <p>+90 462 334 05 50</p>
+                </div>
+            </div>
+            <div class="contact-item-slider">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <strong>E-posta:</strong>
+                    <p>kutuphane@avrasya.edu.tr</p>
+                </div>
+            </div>
+            <div class="contact-item-slider">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                    <strong>WhatsApp:</strong>
+                    <p>+90 535 333 4 555</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+    --error-red: #dc3545;
+    --success-green: #28a745;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    margin-bottom: 40px;
+}
+
+/* بخش سربرگ */
+.page-header-section {
+    text-align: center;
+    
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid var(--accent-light-blue);
+}
+
+.page-title {
+    color: var(--primary-dark-blue);
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.page-subtitle {
+    color: var(--secondary-medium-blue);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* بخش معرفی */
+.intro-section {
+    margin-bottom: 40px;
+}
+
+.lead-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.1), rgba(29, 97, 169, 0.05));
+    border-radius: 12px;
+    border-left: 5px solid var(--secondary-medium-blue);
+}
+
+/* بخش ساعات کاری */
+.calisma-saatleri-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.3);
+}
+
+.section-title i {
+    color: var(--secondary-medium-blue);
+}
+
+.saatler-listesi {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.saat-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    padding: 25px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid rgba(141, 212, 227, 0.3);
+    transition: all 0.3s ease;
+}
+
+.saat-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-light-blue);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.saat-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.saat-content {
+    flex: 1;
+}
+
+.saat-content h4 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 15px 0;
+    font-size: 1.4rem;
+}
+
+.saat-detay {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.saat-aralik {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--secondary-medium-blue);
+    background: rgba(141, 212, 227, 0.1);
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.saat-ayrac {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--text-light);
+}
+
+.saat-not {
+    color: var(--text-light);
+    font-style: italic;
+    margin: 15px 0 0 0;
+    padding-left: 10px;
+    border-left: 3px solid var(--accent-light-blue);
+}
+
+/* بخش فرم درخواست */
+.talep-formu-section {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.02), rgba(29, 97, 169, 0.03));
+    border-radius: 16px;
+    padding: 40px;
+    border: 2px solid rgba(141, 212, 227, 0.3);
+}
+
+.talep-baslik {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.talep-baslik h3 {
+    color: var(--primary-dark-blue);
+    font-size: 1.6rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.talep-baslik h3 i {
+    color: var(--secondary-medium-blue);
+}
+
+.talep-formu {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-row {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-label i {
+    color: var(--secondary-medium-blue);
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid rgba(141, 212, 227, 0.5);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--pure-white);
+    font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 3px rgba(141, 212, 227, 0.2);
+}
+
+.form-error {
+    color: var(--error-red);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    display: none;
+}
+
+.form-input:invalid:not(:placeholder-shown) + .form-error {
+    display: block;
+}
+
+/* گزینه‌های انتخاب */
+.talep-secenekleri {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.talep-secenek {
+    position: relative;
+}
+
+.talep-radio {
+    display: none;
+}
+
+.talep-label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: var(--pure-white);
+    border: 2px solid rgba(141, 212, 227, 0.4);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.talep-radio:checked + .talep-label {
+    background: rgba(141, 212, 227, 0.1);
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 3px rgba(141, 212, 227, 0.2);
+}
+
+.talep-label:hover {
+    border-color: var(--accent-light-blue);
+    transform: translateY(-2px);
+}
+
+.talep-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.talep-info {
+    flex: 1;
+}
+
+.talep-title {
+    color: var(--primary-dark-blue);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.talep-desc {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* دکمه ارسال */
+.talep-gonder-btn {
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+    color: white;
+    border: none;
+    padding: 20px 50px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px auto 0;
+    width: 100%;
+    max-width: 300px;
+}
+
+.talep-gonder-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(29, 97, 169, 0.3);
+}
+
+/* نکات فرم */
+.talep-notlari {
+    margin-top: 40px;
+    padding: 25px;
+    background: rgba(141, 212, 227, 0.08);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-light-blue);
+}
+
+.talep-not {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.talep-not:last-child {
+    margin-bottom: 0;
+}
+
+.talep-not i {
+    color: var(--secondary-medium-blue);
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.talep-not span {
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* طراحی اسلایدر */
+.kutuphane-slider-section {
+    background: linear-gradient(135deg, #0a1e3c, var(--primary-dark-blue));
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.kutuphane-slider-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%238dd4e3' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.1;
+}
+
+.slider-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.slider-header h2 {
+    color: white;
+    font-size: 2.3rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.slider-header h2 i {
+    color: var(--accent-light-blue);
+}
+
+.slider-header p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.kutuphane-slider {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    padding: 0 60px;
+    z-index: 1;
+}
+
+.slider-container {
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slider-item {
+    min-width: 100%;
+    position: relative;
+}
+
+.slider-img-wrapper {
+    height: 450px;
+    overflow: hidden;
+}
+
+.slider-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.slider-item:hover .slider-img {
+    transform: scale(1.05);
+}
+
+.slider-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(9, 36, 66, 0.9), transparent);
+    padding: 25px;
+    color: white;
+}
+
+.slider-caption h5 {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.slider-caption p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+}
+
+.slider-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-prev {
+    left: 0;
+}
+
+.slider-next {
+    right: 0;
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background: var(--accent-light-blue);
+    transform: scale(1.2);
+}
+
+.slider-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* اطلاعات تماس در اسلایدر */
+.contact-info-slider {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-item-slider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 250px;
+    transition: all 0.3s ease;
+}
+
+.contact-item-slider:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.contact-item-slider i {
+    font-size: 1.8rem;
+    color: var(--accent-light-blue);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-item-slider strong {
+    display: block;
+    color: white;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.contact-item-slider p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.saat-item, .talep-formu-section, .lead-text {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.saat-item:nth-child(1) { animation-delay: 0.1s; }
+.saat-item:nth-child(2) { animation-delay: 0.2s; }
+.saat-item:nth-child(3) { animation-delay: 0.3s; }
+.lead-text { animation-delay: 0.4s; }
+.talep-formu-section { animation-delay: 0.5s; }
+
+.slider-item {
+    animation: slideIn 0.5s ease;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .saat-aralik {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 30px;
+    }
+    
+    .page-title {
+        font-size: 2.2rem;
+    }
+    
+    .slider-header h2 {
+        font-size: 2rem;
+    }
+    
+    .slider-img-wrapper {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 15px;
+    }
+    
+    .page-title {
+        font-size: 1.8rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .lead-text {
+        font-size: 1.1rem;
+        padding: 20px;
+    }
+    
+    .saat-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .saat-icon {
+        margin: 0 auto;
+    }
+    
+    .saat-detay {
+        justify-content: center;
+    }
+    
+    .talep-formu-section {
+        padding: 30px;
+    }
+    
+    .talep-baslik h3 {
+        font-size: 1.4rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .slider-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .slider-img-wrapper {
+        height: 350px;
+    }
+    
+    .kutuphane-slider {
+        padding: 0 40px;
+    }
+    
+    .slider-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .contact-info-slider {
+        gap: 20px;
+    }
+    
+    .contact-item-slider {
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 1.6rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .saat-item {
+        padding: 20px;
+    }
+    
+    .saat-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    
+    .saat-content h4 {
+        font-size: 1.2rem;
+    }
+    
+    .saat-aralik {
+        font-size: 1.1rem;
+    }
+    
+    .talep-formu-section {
+        padding: 20px;
+    }
+    
+    .talep-label {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .talep-icon {
+        margin: 0 auto;
+    }
+    
+    .slider-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .slider-img-wrapper {
+        height: 300px;
+    }
+    
+    .slider-caption {
+        padding: 15px;
+    }
+    
+    .slider-caption h5 {
+        font-size: 1.3rem;
+    }
+    
+    .kutuphane-slider {
+        padding: 0 20px;
+    }
+    
+    .contact-info-slider {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contact-item-slider {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .saat-item, .talep-formu-section, .lead-text,
+    .slider-item, .slider-track, .saat-item:hover,
+    .talep-label:hover, .talep-gonder-btn:hover,
+    .contact-item-slider:hover, .slider-btn:hover {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت فرم درخواست
+    const talepFormu = document.getElementById('talepFormu');
+    if (talepFormu) {
+        talepFormu.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // اعتبارسنجی
+            const adSoyad = document.getElementById('adSoyad').value;
+            const email = document.getElementById('email').value;
+            const talep = document.getElementById('talep').value;
+            const talepGunu = document.querySelector('input[name="talepGunu"]:checked');
+            
+            if (!adSoyad || !email || !talep || !talepGunu) {
+                showError('Lütfen tüm alanları doldurunuz.');
+                return;
+            }
+            
+            // شبیه‌سازی ارسال
+            const gonderBtn = document.querySelector('.talep-gonder-btn');
+            const originalText = gonderBtn.innerHTML;
+            
+            gonderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
+            gonderBtn.disabled = true;
+            
+            setTimeout(() => {
+                gonderBtn.innerHTML = '<i class="fas fa-check"></i> Talebiniz Gönderildi!';
+                gonderBtn.style.background = 'linear-gradient(135deg, #28a745, #1e7e34)';
+                
+                // بازنشانی فرم
+                setTimeout(() => {
+                    talepFormu.reset();
+                    gonderBtn.innerHTML = originalText;
+                    gonderBtn.disabled = false;
+                    gonderBtn.style.background = 'linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue))';
+                    
+                    showSuccess('Talebiniz başarıyla gönderilmiştir. En kısa sürede size dönüş yapılacaktır.');
+                }, 2000);
+            }, 1500);
+        });
+    }
+    
+    // نمایش پیام خطا
+    function showError(message) {
+        alert(message);
+    }
+    
+    // نمایش پیام موفقیت
+    function showSuccess(message) {
+        // ساخت عنصر پیام موفقیت
+        const successDiv = document.createElement('div');
+        successDiv.className = 'success-message';
+        successDiv.innerHTML = `
+            <i class="fas fa-check-circle"></i>
+            <span>${message}</span>
+        `;
+        
+        // استایل‌دهی پیام موفقیت
+        successDiv.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 10000;
+            animation: slideInRight 0.5s ease;
+        `;
+        
+        document.body.appendChild(successDiv);
+        
+        // حذف خودکار پیام
+        setTimeout(() => {
+            successDiv.style.animation = 'slideOutRight 0.5s ease';
+            setTimeout(() => {
+                document.body.removeChild(successDiv);
+            }, 500);
+        }, 5000);
+        
+        // اضافه کردن استایل‌های انیمیشن
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // مدیریت اسلایدر
+    const sliderTrack = document.querySelector('.slider-track');
+    const sliderItems = document.querySelectorAll('.slider-item');
+    const sliderDots = document.querySelectorAll('.slider-dot');
+    const prevBtn = document.querySelector('.slider-prev');
+    const nextBtn = document.querySelector('.slider-next');
+    
+    let currentSlide = 0;
+    const totalSlides = sliderItems.length;
+    
+    // به‌روزرسانی موقعیت اسلایدر
+    function updateSlider() {
+        sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // به‌روزرسانی نقاط
+        sliderDots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    // رفتن به اسلاید بعدی
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    }
+    
+    // رفتن به اسلاید قبلی
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    }
+    
+    // افزودن رویداد به دکمه‌ها
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+    }
+    
+    // افزودن رویداد به نقاط
+    sliderDots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            currentSlide = parseInt(this.getAttribute('data-slide'));
+            updateSlider();
+        });
+    });
+    
+    // اسلایدر خودکار
+    let sliderInterval = setInterval(nextSlide, 5000);
+    
+    // توقف اسلایدر خودکار هنگام hover
+    const slider = document.querySelector('.kutuphane-slider');
+    if (slider) {
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(sliderInterval);
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+            sliderInterval = setInterval(nextSlide, 5000);
+        });
+    }
+    
+    // انیمیشن‌های هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده عناصر برای انیمیشن
+    const animatedElements = document.querySelectorAll('.saat-item, .talep-formu-section, .lead-text');
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    // اعتبارسنجی فیلدها در لحظه
+    const formInputs = document.querySelectorAll('.form-input, .form-textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.style.borderColor = 'rgba(141, 212, 227, 0.5)';
+                const errorDiv = this.nextElementSibling;
+                if (errorDiv && errorDiv.classList.contains('form-error')) {
+                    errorDiv.style.display = 'none';
+                }
+            }
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                this.style.borderColor = 'var(--error-red)';
+                const errorDiv = this.nextElementSibling;
+                if (errorDiv && errorDiv.classList.contains('form-error')) {
+                    errorDiv.style.display = 'block';
+                }
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #092442; color: white; padding: 20px; text-align: center; }
+        .content { padding: 30px; background: #f9f9f9; }
+        .info-box { background: white; border: 1px solid #ddd; padding: 20px; margin: 20px 0; }
+        .reference { font-size: 18px; font-weight: bold; color: #092442; }
+        .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
+        .warning { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Avrasya Üniversitesi</h1>
+            <h2>Kayıt Başvurusu Onayı</h2>
+        </div>
+        
+        <div class="content">
+            <p>Sayın {{ registration.ad_soyad }},</p>
+            <p>Kayıt başvurunuz başarıyla alınmıştır.</p>
+            
+            <div class="info-box">
+                <h3>Başvuru Detayları</h3>
+                <p><strong>Kayıt No:</strong> <span class="reference">{{ registration.kayit_no }}</span></p>
+                <p><strong>TC Kimlik No:</strong> {{ registration.tc_kimlik }}</p>
+                <p><strong>Fakülte/Bölüm:</strong> {{ registration.fakulte_bolum }}</p>
+                <p><strong>Başvuru Tarihi:</strong> {{ registration.basvuru_tarihi|date:"d.m.Y H:i" }}</p>
+                <p><strong>Kayıt Durumu:</strong> {{ registration.get_kayit_durumu_display }}</p>
+                {% if registration.ogrenci_no %}
+                <p><strong>Öğrenci No:</strong> {{ registration.ogrenci_no }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="warning">
+                <h4>Önemli Hatırlatma!</h4>
+                <p>Kayıt işleminizin tamamlanması için orijinal belgelerinizi <strong>31 Ekim 2025</strong> tarihine kadar Öğrenci İşleri Daire Başkanlığı'na teslim etmeniz gerekmektedir.</p>
+            </div>
+            
+            <p>Başvurunuz incelendikten sonra size e-posta ile bilgi verilecektir.</p>
+            <p>İyi günler dileriz.</p>
+            <p>Avrasya Üniversitesi Öğrenci İşleri</p>
+        </div>
+        
+        <div class="footer">
+            <p>Bu e-posta otomatik olarak gönderilmiştir. Lütfen yanıtlamayınız.</p>
+            <p>© 2025 Avrasya Üniversitesi. Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+</body>
+</html>

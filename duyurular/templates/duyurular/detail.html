@@ -1,0 +1,778 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{ duyuru.baslik }} - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<div class="super_container">
+    <!-- Page Content -->
+    <div class="page_section">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">Duyurular</a></li>
+                            <li class="breadcrumb-item active" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                {{ duyuru.baslik }}
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <article class="news-article">
+                        <!-- Article Header -->
+                        <header class="article-header">
+                            <div class="article-meta">
+                                <div class="meta-badges">
+                                    <span class="meta-badge faculty">{{ duyuru.get_fakulte_display }}</span>
+                                    {% if duyuru.bolumler.exists %}
+                                        {% for bolum in duyuru.bolumler.all %}
+                                            <span class="meta-badge department">{{ bolum.ad }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="publish-date">
+                                    <i class="far fa-calendar"></i>
+                                    {{ duyuru.yayin_tarihi|date:'d F Y - H:i' }}
+                                </div>
+                            </div>
+                            
+                            <h1 class="article-title">{{ duyuru.baslik }}</h1>
+                            
+                            <div class="article-stats">
+                                <div class="stat">
+                                    <i class="far fa-clock"></i>
+                                    <span>{{ duyuru.yayin_tarihi|timesince }} önce</span>
+                                </div>
+                                {% with dosyalar=duyuru.mevcut_dosyalar %}
+                                {% if dosyalar %}
+                                <div class="stat">
+                                    <i class="fas fa-paperclip"></i>
+                                    <span>{{ dosyalar|length }} dosya</span>
+                                </div>
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                        </header>
+
+                        <!-- Article Content -->
+                        <div class="article-content">
+                            <div class="content-body">
+                                {{ duyuru.icerik|linebreaks }}
+                            </div>
+                        </div>
+
+                        <!-- File Attachments -->
+                        {% with dosyalar=duyuru.mevcut_dosyalar %}
+                            {% if dosyalar %}
+                            <section class="attachments-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-download"></i>
+                                    İndirilebilir Dosyalar
+                                </h3>
+                                <div class="attachments-grid">
+                                    {% for dosya in dosyalar %}
+                                    <div class="attachment-card">
+                                        <div class="attachment-icon">
+                                            <i class="fas {{ dosya.icon }} fa-2x"></i>
+                                        </div>
+                                        <div class="attachment-info">
+                                            <h4 class="attachment-name" title="{{ dosya.adi }}">{{ dosya.adi }}</h4>
+                                            <p class="attachment-type">{{ dosya.tur }}</p>
+                                            {% if dosya.aciklama %}
+                                                <p class="attachment-desc">{{ dosya.aciklama }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <a href="{{ dosya.url }}" class="download-btn" download>
+                                            <i class="fas fa-download"></i>
+                                            İndir
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </section>
+                            {% endif %}
+                        {% endwith %}
+
+                        <!-- Related Articles -->
+                        {% if ilgili_duyurular %}
+                        <section class="related-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-link"></i>
+                                İlgili Duyurular
+                            </h3>
+                            <div class="related-grid">
+                                {% for ilgili in ilgili_duyurular %}
+                                <article class="related-card">
+                                    <div class="related-badge">{{ ilgili.get_fakulte_display }}</div>
+                                    <h4 class="related-title" title="{{ ilgili.baslik }}">
+                                        <a href="{{ ilgili.get_absolute_url }}">{{ ilgili.baslik }}</a>
+                                    </h4>
+                                    <div class="related-meta">
+                                        <i class="far fa-calendar"></i>
+                                        {{ ilgili.yayin_tarihi|date:'d M Y' }}
+                                    </div>
+                                    <a href="{{ ilgili.get_absolute_url }}" class="related-link">
+                                        Detaylı Görüntüle
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </article>
+                                {% endfor %}
+                            </div>
+                        </section>
+                        {% endif %}
+                    </article>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="article-sidebar">
+                        <!-- Navigation -->
+                        <div class="sidebar-widget">
+                            <h4 class="widget-title">
+                                <i class="fas fa-compass"></i>
+                                Navigasyon
+                            </h4>
+                            <div class="navigation-links">
+                                <a href="{% url 'duyurular:liste' %}" class="nav-link1">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Tüm Duyurulara Dön
+                                </a>
+                                <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=duyuru.fakulte %}" class="nav-link1">
+                                    <i class="fas fa-filter"></i>
+                                    {{ duyuru.get_fakulte_display }} Duyuruları
+                                </a>
+                                {% if duyuru.bolumler.exists %}
+                                    {% for bolum in duyuru.bolumler.all %}
+                                    <a href="{% url 'duyurular:bolum_liste' bolum_kodu=bolum.kod %}" class="nav-link1">
+                                        <i class="fas fa-bookmark"></i>
+                                        {{ bolum.ad }} Duyuruları
+                                    </a>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Quick Info -->
+                        <div class="sidebar-widget">
+                            <h4 class="widget-title">
+                                <i class="fas fa-info-circle"></i>
+                                Duyuru Bilgileri
+                            </h4>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <span class="info-label">Yayın Tarihi:</span>
+                                    <span class="info-value">{{ duyuru.yayin_tarihi|date:'d.m.Y' }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Fakülte:</span>
+                                    <span class="info-value">{{ duyuru.get_fakulte_display }}</span>
+                                </div>
+                                {% if duyuru.bolumler.exists %}
+                                <div class="info-item">
+                                    <span class="info-label">Bölümler:</span>
+                                    <span class="info-value">
+                                        {% for bolum in duyuru.bolumler.all %}
+                                            {{ bolum.ad }}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                </div>
+                                {% endif %}
+                                {% with dosyalar=duyuru.mevcut_dosyalar %}
+                                {% if dosyalar %}
+                                <div class="info-item">
+                                    <span class="info-label">Ek Dosya:</span>
+                                    <span class="info-value">{{ dosyalar|length }} adet</span>
+                                </div>
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+
+                        <!-- Share -->
+                        <div class="sidebar-widget">
+                            <h4 class="widget-title">
+                                <i class="fas fa-share-alt"></i>
+                                Paylaş
+                            </h4>
+                            <div class="share-buttons">
+                                <button class="share-btn facebook" onclick="shareOnFacebook()">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="share-btn twitter" onclick="shareOnTwitter()">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button class="share-btn linkedin" onclick="shareOnLinkedIn()">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </button>
+                                <button class="share-btn copy" onclick="copyToClipboard()">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+
+
+
+    
+/* Article Styles */
+.news-article {
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    margin-top: 100px;
+}
+
+.article-header {
+    padding: 40px 40px 20px;
+    border-bottom: 2px solid var(--neutral-cream);
+    
+    
+}
+
+.article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.meta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.meta-badge {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.meta-badge.faculty {
+    background: var(--accent-light-blue);
+    color: var(--primary-dark-blue);
+}
+
+.meta-badge.department {
+    background: var(--neutral-cream);
+    color: var(--text-dark);
+    border: 1px solid var(--accent-light-blue);
+}
+
+.publish-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.article-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    line-height: 1.3;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.article-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.article-content {
+    padding: 30px 40px;
+}
+
+.content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+}
+
+.content-body p {
+    margin-bottom: 1.5em;
+}
+
+.content-body h2,
+.content-body h3,
+.content-body h4 {
+    color: var(--primary-dark-blue);
+    margin: 2em 0 1em;
+    font-weight: 600;
+}
+
+.content-body ul,
+.content-body ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+.content-body li {
+    margin-bottom: 0.5em;
+}
+
+/* Sections */
+.section-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--neutral-cream);
+}
+
+/* Attachments */
+.attachments-section {
+    padding: 30px 40px;
+    border-top: 2px solid var(--neutral-cream);
+    border-bottom: 2px solid var(--neutral-cream);
+    background: var(--neutral-cream);
+}
+
+.attachments-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.attachment-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.attachment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-light-blue);
+}
+
+.attachment-icon {
+    color: var(--secondary-medium-blue);
+    flex-shrink: 0;
+}
+
+.attachment-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.attachment-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.attachment-type {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 5px;
+}
+
+.attachment-desc {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--secondary-medium-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.download-btn:hover {
+    background: var(--primary-dark-blue);
+    transform: translateY(-1px);
+    color: white;
+}
+
+/* Related Articles */
+.related-section {
+    padding: 30px 40px;
+}
+
+.related-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.related-card {
+    padding: 20px;
+    background: var(--neutral-cream);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-light-blue);
+}
+
+.related-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--accent-light-blue);
+    color: var(--primary-dark-blue);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.related-title {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.related-title a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.related-title a:hover {
+    color: var(--secondary-medium-blue);
+}
+
+.related-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.related-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.related-link:hover {
+    color: var(--primary-dark-blue);
+    gap: 12px;
+}
+
+/* Sidebar */
+.article-sidebar {
+    position: sticky;
+    top: 100px;
+    margin-top: 100px;
+}
+
+.sidebar-widget {
+    background: var(--pure-white);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.widget-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--neutral-cream);
+}
+
+/* Navigation Links */
+.navigation-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.nav-link1 {
+    
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(9, 36, 66, 0.9);
+    color: #f6f2e7;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    
+}
+
+.nav-link1:hover {
+    background: var(--accent-light-blue);
+    color: #f6f2e7;
+    transform: translateX(4px);
+    border-color: var(--accent-light-blue);
+}
+
+/* Info List */
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--neutral-cream);
+    gap: 10px;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    text-align: right;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex: 1;
+}
+
+/* Share Buttons */
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.share-btn {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.share-btn.facebook {
+    background: #3b5998;
+    color: white;
+}
+
+.share-btn.twitter {
+    background: #1da1f2;
+    color: white;
+}
+
+.share-btn.linkedin {
+    background: #0077b5;
+    color: white;
+}
+
+.share-btn.copy {
+    background: var(--secondary-medium-blue);
+    color: white;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .article-header {
+        padding: 30px 20px 15px;
+    }
+    
+    .article-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .article-title {
+        font-size: 1.8rem;
+    }
+    
+    .article-content {
+        padding: 20px;
+    }
+    
+    .attachments-section,
+    .related-section {
+        padding: 20px;
+    }
+    
+    .attachment-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .attachment-info {
+        text-align: center;
+    }
+    
+    .sidebar-widget {
+        padding: 20px;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .info-value {
+        text-align: left;
+    }
+}
+
+@media (max-width: 576px) {
+    .article-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+    
+    .share-buttons {
+        flex-wrap: wrap;
+    }
+}
+
+
+</style>
+
+<script>
+function shareOnFacebook() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent('{{ duyuru.baslik }}');
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`, '_blank');
+}
+
+function shareOnTwitter() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('{{ duyuru.baslik }}');
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+}
+
+function shareOnLinkedIn() {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyToClipboard() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        // Show success message
+        const btn = event.target.closest('.share-btn');
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        btn.style.background = '#28a745';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalHtml;
+            btn.style.background = '';
+        }, 2000);
+    });
+}
+</script>
+{% endblock %}

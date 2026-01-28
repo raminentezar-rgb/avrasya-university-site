@@ -1,0 +1,730 @@
+{% extends 'yatay_gecis/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Yatay Geçişte İstenilen Belgeler{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Yatay Geçişte İstenilen Belgeler</h1>
+            <p>Avrasya Üniversitesi'ne yatay geçiş yapmak için gerekli tüm belgeleri aşağıda bulabilirsiniz. Lütfen başvuru türünüze göre gerekli belgeleri hazırlayınız.</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'yatay_gecis/yatay_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- مقدمه -->
+                <div class="page-intro">
+                    <h2 class="section-title">Yatay Geçiş Belgeleri</h2>
+                    <p class="section-subtitle">Yatay geçiş başvurularınız için gerekli belgeleri başvuru türünüze göre aşağıda bulabilirsiniz. Belgelerin eksiksiz ve doğru şekilde hazırlanması başvuru sürecinizin hızlanması için önemlidir.</p>
+                </div>
+
+                <!-- بخش‌های اصلی -->
+                <div class="belgeler-container">
+                    <!-- Ortalamaya Göre Başvurular -->
+                    <div class="belge-section">
+                        <div class="belge-section-header">
+                            <div class="belge-icon">
+                                <i class="far fa-file-alt"></i>
+                            </div>
+                            <h3>ORTALAMAYA GÖRE YAPILAN BAŞVURULARDA İSTENİLEN BELGELER</h3>
+                        </div>
+                        
+                        <!-- Yurtiçi Başvurular -->
+                        <div class="belge-subsection">
+                            <h4><i class="fas fa-map-marker-alt me-2"></i>YURTİÇİNDEN Yapılacak Başvurularda</h4>
+                            <div class="belge-list-container">
+                                <ul class="belge-list">
+                                    <li><i class="fas fa-check-circle"></i> Yatay Geçiş Başvuru Formu</li>
+                                    <li><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Başvuru Dosyası Kapak Formu</li>
+                                    <li><i class="fas fa-check-circle"></i> Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi</li>
+                                    <li><i class="fas fa-check-circle"></i> Lise-Önlisans diplomasının aslı onaylı örneği</li>
+                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri</li>
+                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi</li>
+                                    <li><i class="fas fa-check-circle"></i> Öğrenci Belgesi (Aslı Onaylı)</li>
+                                    <li><i class="fas fa-check-circle"></i> "Yatay geçiş yapmasında sakınca yoktur" şeklinde Üniversiteden alınan onaylı yazı</li>
+                                    <li><i class="fas fa-check-circle"></i> Disiplin Cezası almadığına dair belge</li>
+                                    <li><i class="fas fa-check-circle"></i> Nüfus Cüzdanı Fotokopisi</li>
+                                    <li><i class="fas fa-check-circle"></i> 2 adet fotoğraf</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Yurtdışı Başvurular -->
+                        <div class="belge-subsection">
+                            <h4><i class="fas fa-globe-americas me-2"></i>YURTDIŞINDAN Yapılacak Başvurularda</h4>
+                            <div class="belge-list-container">
+                                <ul class="belge-list">
+                                    <li><i class="fas fa-check-circle"></i> Yatay Geçiş Başvuru Formu</li>
+                                    <li><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Başvuru Dosyası Kapak Formu</li>
+                                    <li><i class="fas fa-check-circle"></i> Öğrencinin ÖSYM sınavına girdiği yıla ait ÖSS sonuç belgesinin fotokopisi veya Son 3 aylık tarihi içeren Yükseköğretim Kurulu Başkanlığından alınan denklik belgesi.</li>
+                                    <li><i class="fas fa-check-circle"></i> Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi</li>
+                                    <li><i class="fas fa-check-circle"></i> Lise diplomasının aslı onaylı örneği</li>
+                                    <li><i class="fas fa-check-circle"></i> Yurtdışı liselerden mezun olan adayların Milli Eğitim Bakanlığı Talim Terbiye Kurulu Başkanlığından alacakları denklik belgesi.</li>
+                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri</li>
+                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi</li>
+                                    <li><i class="fas fa-check-circle"></i> Öğrenci Belgesi (Aslı Onaylı)</li>
+                                    <li><i class="fas fa-check-circle"></i> "Yatay geçiş yapmasında sakınca yoktur" şeklinde Üniversiteden alınan onaylı yazı</li>
+                                    <li><i class="fas fa-check-circle"></i> Disiplin Cezası almadığına dair belge</li>
+                                    <li><i class="fas fa-check-circle"></i> Nüfus Cüzdanı Fotokopisi</li>
+                                    <li><i class="fas fa-check-circle"></i> 2 adet fotoğraf</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ek Madde 1 Başvuruları -->
+                    <div class="belge-section">
+                        <div class="belge-section-header">
+                            <div class="belge-icon">
+                                <i class="far fa-file-alt"></i>
+                            </div>
+                            <h3>EK MADDE 1'E GÖRE YAPILAN BAŞVURULARDA İSTENİLEN BELGELER</h3>
+                        </div>
+                        
+                        <!-- Yurtiçi Başvurular -->
+                        <div class="belge-subsection">
+                            <h4><i class="fas fa-map-marker-alt me-2"></i>YURTİÇİNDEN Yapılacak Başvurularda</h4>
+                            <div class="belge-list-container">
+                                <ul class="belge-list">
+                                    <li><i class="fas fa-check-circle"></i> Yatay Geçiş Başvuru Formu</li>
+                                    <li><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Başvuru Dosyası Kapak Formu</li>
+                                    <li><i class="fas fa-check-circle"></i> Ek Madde – 1 ile geçiş yapıp yapmadığını gösteren belge.</li>
+                                    <li><i class="fas fa-check-circle"></i> "Yatay geçiş yapmasında sakınca yoktur" şeklinde Üniversiteden alınan onaylı yazı</li>
+                                    <li><i class="fas fa-check-circle"></i> Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi</li>
+                                    <li><i class="fas fa-check-circle"></i> Lise diplomasının aslı onaylı örneği</li>
+                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri</li>
+                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi</li>
+                                    <li><i class="fas fa-check-circle"></i> Öğrenci Belgesi (Aslı Onaylı)</li>
+                                    <li><i class="fas fa-check-circle"></i> Disiplin Cezası almadığına dair belge</li>
+                                    <li><i class="fas fa-check-circle"></i> Nüfus Cüzdanı Fotokopisi</li>
+                                    <li><i class="fas fa-check-circle"></i> 2 adet fotoğraf</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Başvuru Yeri -->
+                        <div class="belge-address-section">
+                            <div class="address-header">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h4>BAŞVURU YERİ</h4>
+                            </div>
+                            <p class="address-description">Aşağıda belirtilen belgelerin şahsen veya posta yolu ile;</p>
+                            <div class="address-card">
+                                <div class="address-card-header">
+                                    <i class="fas fa-university"></i>
+                                    <h5>Avrasya Üniversitesi Öğrenci İşleri Daire Başkanlığı</h5>
+                                </div>
+                                <div class="address-card-body">
+                                    <p><i class="fas fa-map-pin"></i> Pelitli Yerleşkesi Adnan Kahveci Mah. Rize Cad. No:226 Ortahisar/TRABZON</p>
+                                    <p class="address-note">adresine iletilmesi gerekmektedir.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Kurumiçi Yatay Geçiş -->
+                    <div class="belge-section">
+                        <div class="belge-section-header">
+                            <div class="belge-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h3>KURUMİÇİ YATAY GEÇİŞ İSTENİLEN BELGELER</h3>
+                        </div>
+                        
+                        <div class="belge-list-container">
+                            <ul class="belge-list">
+                                <li><i class="fas fa-check-circle"></i> Yatay Geçiş Başvuru Formu</li>
+                                <li><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Başvuru Dosyası Kapak Formu</li>
+                                <li><i class="fas fa-check-circle"></i> Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi</li>
+                                <li><i class="fas fa-check-circle"></i> Lise diplomasının aslı onaylı örneği</li>
+                                <li><i class="fas fa-check-circle"></i> Transkript aslı</li>
+                                <li><i class="fas fa-check-circle"></i> Öğrenci Belgesi (Aslı Onaylı)</li>
+                                <li><i class="fas fa-check-circle"></i> Nüfus Cüzdanı Fotokopisi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- بخش نکات مهم -->
+                <div class="important-notes">
+                    <div class="notes-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Önemli Notlar</h4>
+                    </div>
+                    <div class="notes-content">
+                        <div class="note-item">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Tüm belgelerin eksiksiz ve okunaklı olması gerekmektedir.</p>
+                        </div>
+                        <div class="note-item">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Onaylı belgelerin resmi kurum mührü ve imzası bulunmalıdır.</p>
+                        </div>
+                        <div class="note-item">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Başvuru sürecindeki değişiklikler için Üniversite web sitesini takip ediniz.</p>
+                        </div>
+                        <div class="note-item">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Fotokopi belgelerin asıllarının da hazır bulundurulması önerilir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis',  sans-serif;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 30px auto 0;
+    line-height: 1.6;
+}
+
+/* بخش‌های اصلی */
+.belgeler-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.belge-section {
+    background: var(--neutral-cream);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(9, 36, 66, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.belge-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.belge-section-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    color: white;
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.belge-section-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.belge-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+/* زیربخش‌ها */
+.belge-subsection {
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(9, 36, 66, 0.1);
+}
+
+.belge-subsection:last-child {
+    border-bottom: none;
+}
+
+.belge-subsection h4 {
+    color: var(--primary-dark-blue);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.belge-list-container {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.belge-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 12px;
+}
+
+@media (max-width: 768px) {
+    .belge-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.belge-list li {
+    padding: 12px 15px;
+    background: rgba(141, 212, 227, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-light-blue);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.belge-list li:hover {
+    background: rgba(141, 212, 227, 0.2);
+    transform: translateX(5px);
+}
+
+.belge-list li i {
+    color: var(--secondary-medium-blue);
+    font-size: 16px;
+    min-width: 20px;
+}
+
+/* بخش آدرس */
+.belge-address-section {
+    padding: 25px 30px;
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.05));
+}
+
+.address-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.address-header i {
+    color: var(--secondary-medium-blue);
+    font-size: 24px;
+}
+
+.address-header h4 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.address-description {
+    color: var(--text-light);
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+}
+
+.address-card {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--accent-light-blue);
+    max-width: 600px;
+}
+
+.address-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.3);
+}
+
+.address-card-header i {
+    color: var(--primary-dark-blue);
+    font-size: 28px;
+}
+
+.address-card-header h5 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.address-card-body p {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+.address-card-body i {
+    color: var(--secondary-medium-blue);
+    margin-top: 3px;
+    min-width: 20px;
+}
+
+.address-note {
+    color: var(--text-light) !important;
+    font-style: italic;
+    margin-top: 15px !important;
+    font-size: 0.95rem !important;
+}
+
+/* بخش نکات مهم */
+.important-notes {
+    margin-top: 50px;
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    border-radius: 16px;
+    padding: 30px;
+    border-left: 6px solid #ff9800;
+}
+
+.notes-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.notes-header i {
+    color: #ff9800;
+    font-size: 28px;
+}
+
+.notes-header h4 {
+    color: #e65100;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.notes-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .notes-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.note-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.note-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.note-item i {
+    color: #ff9800;
+    font-size: 20px;
+    margin-top: 2px;
+    min-width: 24px;
+}
+
+.note-item p {
+    margin: 0;
+    color: #5d4037;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.belge-section {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.belge-section:nth-child(1) { animation-delay: 0.1s; }
+.belge-section:nth-child(2) { animation-delay: 0.3s; }
+.belge-section:nth-child(3) { animation-delay: 0.5s; }
+.important-notes { animation: fadeInUp 0.6s ease 0.7s forwards; opacity: 0; }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .belge-section-header {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .belge-section-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .belge-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .belge-subsection {
+        padding: 20px;
+    }
+    
+    .belge-list-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .belge-subsection h4 {
+        font-size: 1.2rem;
+    }
+    
+    .address-card {
+        padding: 20px;
+    }
+    
+    .address-card-header h5 {
+        font-size: 1.1rem;
+    }
+    
+    .notes-header h4 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .page-intro {
+        margin-bottom: 40px;
+    }
+    
+    .belge-section-header {
+        padding: 15px;
+    }
+    
+    .belge-list-container {
+        padding: 15px;
+    }
+    
+    .belge-list li {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+    
+    .address-card-body p {
+        font-size: 0.95rem;
+    }
+    
+    .important-notes {
+        padding: 20px;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .belge-section,
+    .belge-list li,
+    .note-item,
+    .address-card {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .belge-section:hover {
+        transform: none;
+    }
+    
+    .belge-list li:hover {
+        transform: none;
+    }
+    
+    .note-item:hover {
+        transform: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Highlight کردن آیتم‌های لیست هنگام hover
+    const listItems = document.querySelectorAll('.belge-list li');
+    
+    listItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.borderLeftColor = 'var(--secondary-medium-blue)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.borderLeftColor = 'var(--accent-light-blue)';
+        });
+    });
+    
+    // انیمیشن‌های هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده بخش‌ها برای انیمیشن
+    const sections = document.querySelectorAll('.belge-section, .important-notes');
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+    
+    // اضافه کردن امکان کپی آدرس
+    const addressElement = document.querySelector('.address-card-body p:first-child');
+    if (addressElement) {
+        addressElement.style.cursor = 'pointer';
+        addressElement.title = 'Adresi kopyalamak için tıklayın';
+        
+        addressElement.addEventListener('click', function() {
+            const addressText = this.textContent.replace('Pelitli Yerleşkesi', '').trim();
+            
+            // کپی آدرس به کلیپ‌بورد
+            navigator.clipboard.writeText(addressText).then(() => {
+                // نمایش پیام موفقیت
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Adres panoya kopyalandı!';
+                this.style.color = 'var(--secondary-medium-blue)';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.color = '';
+                }, 2000);
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

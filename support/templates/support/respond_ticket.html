@@ -1,0 +1,822 @@
+{% extends "support/base.html" %}
+{% block content %}
+
+<div class="support-hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1><i class="fas fa-reply"></i> Talep Yanıtla</h1>
+            <p>Öğrencilere net ve yardımcı yanıtlar vererek yardımcı olun</p>
+        </div>
+    </div>
+</div>
+
+<div class="container support-container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Talep Özeti -->
+            <div class="ticket-summary-card mb-4">
+                <div class="summary-header">
+                    <h2><i class="fas fa-ticket-alt"></i> Talep Özeti</h2>
+                    <div class="ticket-meta">
+                        <span class="badge badge-primary">#{{ ticket.id|stringformat:"04d" }}</span>
+                        <span class="status-badge status-{{ ticket.status }}">
+                            {{ ticket.get_status_display }}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="summary-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label>Öğrenci</label>
+                                    <h4>{{ ticket.user.get_full_name|default:ticket.user.username }}</h4>
+                                    <small>{{ ticket.user.email }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label>Bölüm</label>
+                                    <h4>{{ ticket.department.name }}</h4>
+                                    <small>{{ ticket.category.name|default:"Kategori belirtilmemiş" }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-flag"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label>Öncelik</label>
+                                    <span class="priority-badge priority-{{ ticket.priority }}">
+                                        {{ ticket.get_priority_display }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label>Oluşturulma Tarihi</label>
+                                    <h4>{{ ticket.created_at|date:"d.m.Y" }}</h4>
+                                    <small>{{ ticket.created_at|date:"H:i" }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Öğrenci Mesajı -->
+            <div class="message-card mb-4">
+                <div class="message-header">
+                    <div class="message-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="message-info">
+                        <h5>{{ ticket.user.get_full_name|default:ticket.user.username }}</h5>
+                        <small>{{ ticket.created_at|date:"d.m.Y H:i" }}</small>
+                    </div>
+                    <div class="message-subject">
+                        <h4>{{ ticket.subject }}</h4>
+                    </div>
+                </div>
+                
+                <div class="message-body">
+                    <div class="message-content">
+                        {{ ticket.message|linebreaks }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yanıt Formu -->
+            <div class="response-card">
+                <div class="response-header">
+                    <h2><i class="fas fa-edit"></i> Yanıt Gönder</h2>
+                    <p>Yanıtınız öğrenciye e-posta olarak gönderilecektir</p>
+                </div>
+                
+                <form method="post" class="response-form">
+                    {% csrf_token %}
+                    
+                    <!-- Cevap Şablonları -->
+                    <div class="template-section mb-4">
+                        <h6><i class="fas fa-magic"></i> Hızlı Yanıt Şablonları</h6>
+                        <div class="template-buttons">
+                            <button type="button" class="btn-template" data-template="onay">
+                                <i class="fas fa-check"></i> Onaylandı
+                            </button>
+                            <button type="button" class="btn-template" data-template="bilgi">
+                                <i class="fas fa-info-circle"></i> Bilgi İstendi
+                            </button>
+                            <button type="button" class="btn-template" data-template="cozuldu">
+                                <i class="fas fa-check-double"></i> Çözüldü
+                            </button>
+                            <button type="button" class="btn-template" data-template="teknik">
+                                <i class="fas fa-tools"></i> Teknik Destek
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-comment-dots"></i> Yanıtınız *
+                        </label>
+                        <div class="editor-container">
+                            <div class="editor-toolbar">
+                                <button type="button" class="btn-editor" data-command="bold"><i class="fas fa-bold"></i></button>
+                                <button type="button" class="btn-editor" data-command="italic"><i class="fas fa-italic"></i></button>
+                                <button type="button" class="btn-editor" data-command="underline"><i class="fas fa-underline"></i></button>
+                                <button type="button" class="btn-editor" data-command="list"><i class="fas fa-list"></i></button>
+                                <button type="button" class="btn-editor" data-command="link"><i class="fas fa-link"></i></button>
+                            </div>
+                            <textarea name="response" id="response" rows="10" 
+                                      class="form-control editor-textarea"
+                                      placeholder="Detaylı yanıtınızı buraya yazın... Öğrenciye net ve anlaşılır bilgiler verin."
+                                      required></textarea>
+                        </div>
+                        <div class="editor-stats">
+                            <span id="char-count">0</span> karakter
+                        </div>
+                    </div>
+
+                    <!-- Ek Dosya -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-paperclip"></i> Dosya Ekle (İsteğe Bağlı)
+                        </label>
+                        <div class="file-upload-area">
+                            <input type="file" id="file-upload" class="file-input" multiple>
+                            <label for="file-upload" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Dosyaları buraya sürükleyin veya tıklayın</span>
+                                <small>PDF, DOC, JPG, PNG (Max 10MB)</small>
+                            </label>
+                            <div class="file-preview" id="file-preview"></div>
+                        </div>
+                    </div>
+
+                    <!-- Durum Güncelleme -->
+                    <div class="status-section">
+                        <h6><i class="fas fa-sync-alt"></i> Talep Durumunu Güncelle</h6>
+                        <div class="status-options">
+                            <div class="status-option" data-value="pending">
+                                <div class="status-indicator pending"></div>
+                                <div class="status-content">
+                                    <h6>Beklemede</h6>
+                                    <p>İnceleme sürecinde</p>
+                                </div>
+                            </div>
+                            <div class="status-option" data-value="in_progress">
+                                <div class="status-indicator in_progress"></div>
+                                <div class="status-content">
+                                    <h6>Devam Ediyor</h6>
+                                    <p>Çözüm için çalışılıyor</p>
+                                </div>
+                            </div>
+                            <div class="status-option" data-value="resolved">
+                                <div class="status-indicator resolved"></div>
+                                <div class="status-content">
+                                    <h6>Çözüldü</h6>
+                                    <p>Sorun çözüldü</p>
+                                </div>
+                            </div>
+                            <div class="status-option" data-value="closed">
+                                <div class="status-indicator closed"></div>
+                                <div class="status-content">
+                                    <h6>Kapandı</h6>
+                                    <p>Talep kapatıldı</p>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="status" id="status-input" value="{{ ticket.status }}">
+                    </div>
+
+                    <!-- Form Aksiyonları -->
+                    <div class="form-actions">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'support:department_dashboard' %}" 
+                               class="btn btn-outline-primary">
+                                <i class="fas fa-arrow-left"></i> Panoya Dön
+                            </a>
+                            
+                            <div class="action-buttons">
+                                <button type="button" class="btn btn-outline-secondary" id="save-draft">
+                                    <i class="fas fa-save"></i> Taslak Kaydet
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-submit">
+                                    <i class="fas fa-paper-plane"></i> Yanıtı Gönder
+                                    <i class="fas fa-spinner fa-spin loading-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Talep Özeti Kartı */
+.ticket-summary-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.summary-header {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    padding: 1.5rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-header h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ticket-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.ticket-meta .badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.summary-body {
+    padding: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--light-blue);
+    border-radius: var(--radius-md);
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-blue);
+    font-size: 1.25rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.info-content label {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.info-content h4 {
+    color: var(--text-dark);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.info-content small {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/* Mesaj Kartı */
+.message-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--light-blue);
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+    gap: 1rem;
+}
+
+.message-avatar {
+    width: 50px;
+    height: 50px;
+    background: var(--secondary-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.message-info {
+    flex: 1;
+}
+
+.message-info h5 {
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.message-info small {
+    color: var(--text-light);
+}
+
+.message-subject {
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.message-subject h4 {
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+}
+
+.message-body {
+    padding: 1.5rem;
+}
+
+.message-content {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* Yanıt Formu */
+.response-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.response-header {
+    background: var(--light-blue);
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.response-header h2 {
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.response-header p {
+    color: var(--text-light);
+    margin: 0;
+}
+
+.response-form {
+    padding: 2rem;
+}
+
+/* Şablon Butonları */
+.template-section {
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    border: 1px dashed rgba(141, 212, 227, 0.5);
+}
+
+.template-section h6 {
+    color: var(--primary-blue);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.template-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.btn-template {
+    padding: 0.75rem 1.25rem;
+    background: white;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-template:hover {
+    background: var(--secondary-blue);
+    color: white;
+    border-color: var(--secondary-blue);
+    transform: translateY(-2px);
+}
+
+/* Editör */
+.editor-container {
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.editor-toolbar {
+    background: #f8fafc;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-editor {
+    width: 36px;
+    height: 36px;
+    background: white;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    border-radius: 6px;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-editor:hover {
+    background: var(--secondary-blue);
+    color: white;
+    border-color: var(--secondary-blue);
+}
+
+.editor-textarea {
+    border: none !important;
+    padding: 1rem !important;
+    min-height: 200px !important;
+    resize: vertical;
+}
+
+.editor-stats {
+    text-align: right;
+    margin-top: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/* Dosya Yükleme */
+.file-upload-area {
+    border: 2px dashed rgba(141, 212, 227, 0.5);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.file-upload-area:hover {
+    border-color: var(--secondary-blue);
+    background: rgba(141, 212, 227, 0.05);
+}
+
+.file-input {
+    display: none;
+}
+
+.file-upload-label {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file-upload-label i {
+    font-size: 3rem;
+    color: var(--secondary-blue);
+}
+
+.file-upload-label span {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.file-upload-label small {
+    color: var(--text-light);
+}
+
+.file-preview {
+    margin-top: 1rem;
+    display: none;
+}
+
+.file-preview.active {
+    display: block;
+}
+
+/* Durum Seçenekleri */
+.status-section {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+}
+
+.status-section h6 {
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 992px) {
+    .status-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .status-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+.status-option {
+    background: white;
+    border: 2px solid rgba(141, 212, 227, 0.3);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.status-option:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.status-option.active {
+    border-color: var(--secondary-blue);
+    background: rgba(29, 97, 169, 0.05);
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.status-indicator.pending { background: #f39c12; }
+.status-indicator.in_progress { background: #3498db; }
+.status-indicator.resolved { background: #9b59b6; }
+.status-indicator.closed { background: #e74c3c; }
+
+.status-content h6 {
+    margin: 0 0 0.25rem 0;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.status-content p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/* Form Aksiyonları */
+.form-actions {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-submit .loading-icon {
+    display: none;
+    margin-left: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .summary-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .ticket-meta {
+        justify-content: center;
+    }
+    
+    .message-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .action-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .form-actions .d-flex {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const responseTextarea = document.getElementById('response');
+    const charCount = document.getElementById('char-count');
+    const templateButtons = document.querySelectorAll('.btn-template');
+    const statusOptions = document.querySelectorAll('.status-option');
+    const statusInput = document.getElementById('status-input');
+    const fileUpload = document.getElementById('file-upload');
+    const filePreview = document.getElementById('file-preview');
+    const saveDraftBtn = document.getElementById('save-draft');
+    const submitBtn = document.querySelector('.btn-submit');
+    const loadingIcon = submitBtn.querySelector('.loading-icon');
+    
+    // Karakter sayacı
+    responseTextarea.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+    });
+    
+    // Şablon butonları
+    const templates = {
+        onay: "Sayın öğrencimiz,\n\nTalebiniz başarıyla alınmıştır. İlgili birimimize iletilmiştir. En kısa sürede size dönüş yapılacaktır.\n\nSaygılarımızla,\nAvrasya Üniversitesi",
+        bilgi: "Sayın öğrencimiz,\n\nTalebinizi değerlendirebilmek için aşağıdaki ek bilgilere ihtiyacımız var:\n\n1. \n2. \n3. \n\nBu bilgileri sağladığınızda sorununuzu hızlıca çözebiliriz.\n\nSaygılarımızla,\nAvrasya Üniversitesi",
+        cozuldu: "Sayın öğrencimiz,\n\nTalebinizle ilgili sorun çözülmüştür. Herhangi bir başka sorunuz olursa bizimle iletişime geçmekten çekinmeyin.\n\nSaygılarımızla,\nAvrasya Üniversitesi",
+        teknik: "Sayın öğrencimiz,\n\nTeknik sorununuz ilgili ekibimize iletilmiştir. En kısa sürede size dönüş yapılacak ve sorununuz çözülecektir.\n\nSaygılarımızla,\nAvrasya Üniversitesi"
+    };
+    
+    templateButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const templateKey = this.dataset.template;
+            responseTextarea.value = templates[templateKey];
+            charCount.textContent = responseTextarea.value.length;
+        });
+    });
+    
+    // Durum seçenekleri
+    statusOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            statusOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+            statusInput.value = this.dataset.value;
+        });
+    });
+    
+    // Dosya yükleme
+    fileUpload.addEventListener('change', function() {
+        filePreview.innerHTML = '';
+        
+        if (this.files.length > 0) {
+            filePreview.classList.add('active');
+            
+            Array.from(this.files).forEach(file => {
+                const fileElement = document.createElement('div');
+                fileElement.className = 'file-item';
+                fileElement.innerHTML = `
+                    <div class="file-info">
+                        <i class="fas fa-file"></i>
+                        <div>
+                            <strong>${file.name}</strong>
+                            <small>${(file.size / 1024 / 1024).toFixed(2)} MB</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-remove-file">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                filePreview.appendChild(fileElement);
+                
+                // Dosya kaldırma butonu
+                fileElement.querySelector('.btn-remove-file').addEventListener('click', function() {
+                    fileElement.remove();
+                    if (filePreview.children.length === 0) {
+                        filePreview.classList.remove('active');
+                    }
+                });
+            });
+        } else {
+            filePreview.classList.remove('active');
+        }
+    });
+    
+    // Taslak kaydet
+    saveDraftBtn.addEventListener('click', function() {
+        const response = responseTextarea.value;
+        if (response.trim()) {
+            localStorage.setItem('draft_response', response);
+            alert('Taslak başarıyla kaydedildi!');
+        } else {
+            alert('Lütfen önce bir yanıt yazın.');
+        }
+    });
+    
+    // Taslak yükle
+    const draft = localStorage.getItem('draft_response');
+    if (draft) {
+        if (confirm('Kayıtlı bir taslak bulundu. Yüklemek ister misiniz?')) {
+            responseTextarea.value = draft;
+            charCount.textContent = draft.length;
+        }
+    }
+    
+    // Form gönderimi
+    document.querySelector('.response-form').addEventListener('submit', function(e) {
+        const response = responseTextarea.value.trim();
+        if (!response) {
+            e.preventDefault();
+            alert('Lütfen yanıtınızı yazın.');
+            return;
+        }
+        
+        // Yükleme animasyonu
+        submitBtn.disabled = true;
+        loadingIcon.style.display = 'inline-block';
+        
+        // Taslağı temizle
+        localStorage.removeItem('draft_response');
+    });
+    
+    // Editör araçları
+    document.querySelectorAll('.btn-editor').forEach(button => {
+        button.addEventListener('click', function() {
+            const command = this.dataset.command;
+            document.execCommand(command, false, null);
+            responseTextarea.focus();
+        });
+    });
+});
+</script>
+
+{% endblock %}

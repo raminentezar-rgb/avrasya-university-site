@@ -1,0 +1,1268 @@
+{% extends 'aday_ogrenci/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Avrasya Üniversitesi - YURT OLANAKLARI{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>YURT OLANAKLARI</h1>
+            <p>Modern ve Konforlu Yaşam Alanlarında Evinizde Hissedin</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid yurt-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'aday_ogrenci/aday_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی سمت راست -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="yurt-main-content">
+                <!-- معرفی یورت -->
+                <div class="yurt-intro-section">
+                    <div class="intro-content">
+                        <h2 class="section-title">Avrasya Üniversitesi Yurt İmkanları</h2>
+                        <p class="intro-text">
+                            Avrasya Üniversitesi öğrenci yurtları, Trabzon şehir merkezine 10 dakika, havaalanına ise 5 dakika uzaklıktadır. Modern ve güvenli yapısıyla öğrencilerimize konforlu bir yaşam alanı sunmaktadır.
+                        </p>
+                    </div>
+                    
+                    <!-- آمار یورت -->
+                    <div class="yurt-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">440+</div>
+                            <div class="stat-label">Öğrenci Kapasitesi</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Yurt Binası</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">7/24</div>
+                            <div class="stat-label">Güvenlik</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Ortak Alan</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- یورت‌های دانشگاه -->
+                <div class="yurt-types-section">
+                    <h2 class="section-title">Yurtlarımız</h2>
+                    <div class="yurt-types-grid">
+                        <!-- یورت دخترانه -->
+                        <div class="yurt-type-card">
+                            <div class="yurt-type-header">
+                                <div class="yurt-type-icon">
+                                    <i class="fas fa-female"></i>
+                                </div>
+                                <h3>Kız Öğrenci Yurdu</h3>
+                                <span class="yurt-location">Ömer Yıldız Yerleşkesi</span>
+                            </div>
+                            <div class="yurt-type-content">
+                                <p class="yurt-description">
+                                    Ömer Yıldız Yerleşkesi'nde bulunan kız öğrenci yurdu, 10 blokta toplam 400 kişilik kapasiteye sahiptir. 2 ve 3 kişilik odalarla öğrencilerimizin konforu ön planda tutulmaktadır.
+                                </p>
+                                <div class="yurt-capacity">
+                                    <div class="capacity-item">
+                                        <span class="capacity-label">Kapasite:</span>
+                                        <span class="capacity-value">400 Öğrenci</span>
+                                    </div>
+                                    <div class="capacity-item">
+                                        <span class="capacity-label">Oda Tipleri:</span>
+                                        <span class="capacity-value">2 ve 3 Kişilik</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- یورت پسرانه Pelitli -->
+                        <div class="yurt-type-card">
+                            <div class="yurt-type-header">
+                                <div class="yurt-type-icon">
+                                    <i class="fas fa-male"></i>
+                                </div>
+                                <h3>Erkek Öğrenci Yurdu</h3>
+                                <span class="yurt-location">Pelitli Yerleşkesi</span>
+                            </div>
+                            <div class="yurt-type-content">
+                                <p class="yurt-description">
+                                    Pelitli Yerleşkesi'nde yer alan erkek öğrenci yurdu, 4 katlı 10 dairede toplam 40 oda kapasitesine sahiptir. Modern altyapısı ve güvenli ortamıyla öğrenciler için ideal bir yaşam alanı sunmaktadır.
+                                </p>
+                                <div class="yurt-capacity">
+                                    <div class="capacity-item">
+                                        <span class="capacity-label">Kapasite:</span>
+                                        <span class="capacity-value">40 Oda</span>
+                                    </div>
+                                    <div class="capacity-item">
+                                        <span class="capacity-label">Bina:</span>
+                                        <span class="capacity-value">4 Katlı 10 Daire</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- یورت پسرانه Ömer Yıldız -->
+                        <div class="yurt-type-card">
+                            <div class="yurt-type-header">
+                                <div class="yurt-type-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>Erkek Öğrenci Yurdu</h3>
+                                <span class="yurt-location">Ömer Yıldız Yerleşkesi</span>
+                            </div>
+                            <div class="yurt-type-content">
+                                <p class="yurt-description">
+                                    Talebe göre Ömer Yıldız Yerleşkesi'nde de erkek öğrenci yurdu hizmete açılmaktadır. Böylece öğrenciler için daha geniş konaklama imkânı sağlanmaktadır.
+                                </p>
+                                <div class="yurt-capacity">
+                                    <div class="capacity-item">
+                                        <span class="capacity-label">Durum:</span>
+                                        <span class="capacity-value">Talebe Göre Açılır</span>
+                                    </div>
+                                    <div class="capacity-item">
+                                        <span class="capacity-label">Yerleşke:</span>
+                                        <span class="capacity-value">Ömer Yıldız</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- امکانات یورت -->
+                <div class="yurt-facilities-section">
+                    <h2 class="section-title">Yurt Olanakları</h2>
+                    <div class="facilities-grid">
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h4>Deniz Manzaralı Odalar</h4>
+                            <p>Modern odalarımız Karadeniz'in muhteşem manzarasına bakmaktadır.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h4>Restoran ve Kafeterya</h4>
+                            <p>Sağlıklı ve lezzetli yemek seçenekleri sunan modern restoran.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <h4>Fitness Salonu</h4>
+                            <p>Modern fitness ekipmanları ile donatılmış spor salonu.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h4>Sauna</h4>
+                            <p>Rahatlatıcı sauna imkanı ile günün yorgunluğunu atın.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-cut"></i>
+                            </div>
+                            <h4>Kuaför</h4>
+                            <p>Profesyonel kuaför hizmetleri yurt içinde mevcuttur.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h4>Etüt Salonu</h4>
+                            <p>Sessiz ve konforlu etüt salonları ile ders çalışma imkanı.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <h4>Yüksek Hızlı İnternet</h4>
+                            <p>Kampüs geneli ücretsiz yüksek hızlı WiFi erişimi.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-satellite-dish"></i>
+                            </div>
+                            <h4>Uydu Yayını</h4>
+                            <p>Dünya kanallarına erişim sağlayan uydu TV sistemi.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>7/24 Güvenlik</h4>
+                            <p>Kamera sistemi ve güvenlik personeli ile güvenli ortam.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-snowflake"></i>
+                            </div>
+                            <h4>Klima Sistemi</h4>
+                            <p>Merkezi klima sistemi ile yıl boyu konforlu sıcaklık.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-washing-machine"></i>
+                            </div>
+                            <h4>Çamaşırhane</h4>
+                            <p>Modern çamaşır makineleri ile ücretsiz çamaşırhane hizmeti.</p>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <h4>TV Salonu</h4>
+                            <p>Geniş ekran TV ile ortak dinlenme ve eğlence salonu.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- گالری تصاویر یورت -->
+                <div class="yurt-gallery-section">
+                    <h2 class="section-title">Yurt Galerisi</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="https://avrasya.edu.tr/wp-content/uploads/2025/08/WhatsApp-Image-2025-01-07-at-11.25.35-800x541.jpeg" 
+                                 alt="Yurt Odası">
+                            <div class="image-caption">Modern Yurt Odaları</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://avrasya.edu.tr/wp-content/uploads/2025/08/genel8-1024x683-2-800x533.jpg" 
+                                 alt="Yurt Ortak Alan">
+                            <div class="image-caption">Ortak Yaşam Alanları</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://avrasya.edu.tr/wp-content/uploads/2021/09/PHOTO-2021-09-02-10-14-37-800x450.jpg" 
+                                 alt="Yurt Dış Görünüm">
+                            <div class="image-caption">Yurt Binası Dış Görünüm</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://avrasya.edu.tr/wp-content/uploads/2021/09/PHOTO-2021-09-02-10-14-11-800x533.jpg" 
+                                 alt="Yurt İç Mekan">
+                            <div class="image-caption">Modern İç Mekan Tasarımı</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://avrasya.edu.tr/wp-content/uploads/2021/09/PHOTO-2021-09-02-10-13-14-2-800x533.jpg" 
+                                 alt="Yurt Mutfak">
+                            <div class="image-caption">Ortak Mutfak Alanı</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://avrasya.edu.tr/wp-content/uploads/2021/09/PHOTO-2021-09-02-10-13-14-1-800x533.jpg" 
+                                 alt="Yurt Çalışma Alanı">
+                            <div class="image-caption">Etüt ve Çalışma Salonu</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- دانلود فایل قیمت‌ها -->
+                <div class="pricing-section">
+                    <div class="pricing-card">
+                        <div class="pricing-content">
+                            <h3>2025-2026 Yurt Ücretleri</h3>
+                            <p>Güncel yurt ücretlerini ve kayıt koşullarını öğrenmek için aşağıdaki butona tıklayarak PDF dosyasını indirebilirsiniz.</p>
+                            <div class="pricing-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Detaylı fiyat listesi</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Ödeme planları</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Kayıt prosedürleri</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://avrasya.edu.tr/wp-content/uploads/2025/08/avu-yurt-fiyatlari-2025.pdf" 
+                               class="btn-download-pdf" target="_blank">
+                                <i class="fas fa-download"></i>
+                                <span>PDF İndir</span>
+                            </a>
+                            <p class="file-info">avu-yurt-fiyatlari-2025.pdf</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ویدیو معرفی -->
+                <div class="video-section">
+                    <h2 class="section-title">Yurt Tanıtım Videosu</h2>
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/c_VvosqZZMo" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-description">
+                            <h4>Yurt Yaşamını Keşfedin</h4>
+                            <p>Öğrencilerimizin yurtlardaki günlük yaşamını, sosyal aktivitelerini ve konforlu ortamlarını tanıtan videomuzu izleyin.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- دکمه‌های اقدام -->
+                <div class="action-buttons-section">
+                    <h3>Yurt Kayıt İşlemleri</h3>
+                    <div class="action-buttons">
+                        <a href="https://avrasya.edu.tr/iletisim" class="btn-action">
+                            <i class="fas fa-phone-alt"></i> İletişim
+                        </a>
+                        <a href="https://avrasya.edu.tr/ogrenci-isleri" class="btn-action">
+                            <i class="fas fa-user-graduate"></i> Öğrenci İşleri
+                        </a>
+                        <a href="https://www.google.com/maps?q=Avrasya+Üniversitesi+Yurtları" class="btn-action" target="_blank">
+                            <i class="fas fa-map-marker-alt"></i> Konum
+                        </a>
+                        <a href="https://avrasya.edu.tr/wp-content/uploads/2025/08/avu-yurt-fiyatlari-2025.pdf" class="btn-action" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Fiyat Listesi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox -->
+<div class="yurt-lightbox" id="yurtLightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeYurtLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="lightbox-prev" onclick="changeYurtImage(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img id="yurt-lightbox-img" src="" alt="">
+        <button class="lightbox-next" onclick="changeYurtImage(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-caption">
+            <h4 id="yurt-lightbox-title"></h4>
+            <p id="yurt-lightbox-desc"></p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Container */
+.yurt-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.yurt-main-content {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* معرفی یورت */
+.yurt-intro-section {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid var(--secondary-medium-blue);
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--secondary-medium-blue);
+    border-radius: 2px;
+}
+
+.intro-content {
+    max-width: 900px;
+    margin: 0 auto 40px;
+}
+
+.intro-text {
+    color: var(--text-dark);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* آمار */
+.yurt-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.stat-item {
+    background: linear-gradient(135deg, var(--secondary-medium-blue) 0%, var(--accent-light-blue) 100%);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(29, 97, 169, 0.3);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.stat-label {
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* انواع یورت */
+.yurt-types-section {
+    margin-bottom: 60px;
+}
+
+.yurt-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.yurt-type-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.yurt-type-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: var(--secondary-medium-blue);
+}
+
+.yurt-type-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    padding: 25px;
+    color: white;
+    text-align: center;
+}
+
+.yurt-type-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.yurt-type-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.yurt-location {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    display: block;
+}
+
+.yurt-type-content {
+    padding: 25px;
+}
+
+.yurt-description {
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.yurt-capacity {
+    background: rgba(141, 212, 227, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.capacity-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.capacity-item:last-child {
+    margin-bottom: 0;
+}
+
+.capacity-label {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.capacity-value {
+    color: var(--secondary-medium-blue);
+    font-weight: 600;
+}
+
+/* امکانات یورت */
+.yurt-facilities-section {
+    margin-bottom: 60px;
+}
+
+.facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.facility-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    transition: all 0.3s ease;
+}
+
+.facility-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    border-color: var(--secondary-medium-blue);
+}
+
+.facility-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue) 0%, var(--accent-light-blue) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.facility-card h4 {
+    color: var(--primary-dark-blue);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.facility-card p {
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* گالری */
+.yurt-gallery-section {
+    margin-bottom: 60px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .image-caption {
+    transform: translateY(0);
+}
+
+/* بخش قیمت‌ها */
+.pricing-section {
+    margin-bottom: 60px;
+}
+
+.pricing-card {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    border-radius: 12px;
+    padding: 40px;
+    color: white;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.pricing-content h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.pricing-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-item {
+    color: white;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.feature-item i {
+    color: var(--accent-light-blue);
+}
+
+.pricing-action {
+    text-align: center;
+}
+
+.btn-download-pdf {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    color: var(--secondary-medium-blue);
+    padding: 25px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    width: 100%;
+}
+
+.btn-download-pdf:hover {
+    background: transparent;
+    color: white;
+    border-color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+}
+
+.btn-download-pdf i {
+    font-size: 2.5rem;
+}
+
+.file-info {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    color: white;
+}
+
+/* بخش ویدیو */
+.video-section {
+    margin-bottom: 60px;
+}
+
+.video-container {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-description {
+    padding: 25px;
+    background: rgba(141, 212, 227, 0.1);
+}
+
+.video-description h4 {
+    color: var(--primary-dark-blue);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.video-description p {
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* دکمه‌های اقدام */
+.action-buttons-section {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.action-buttons-section h3 {
+    color: var(--primary-dark-blue);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--secondary-medium-blue);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-action:hover {
+    background: transparent;
+    color: var(--secondary-medium-blue);
+    border-color: var(--secondary-medium-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(29, 97, 169, 0.3);
+}
+
+/* Lightbox */
+.yurt-lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    margin: 2.5% auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#yurt-lightbox-img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+}
+
+.lightbox-caption h4 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.lightbox-caption p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .yurt-types-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    
+    .facilities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    
+    .pricing-card {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .yurt-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .yurt-types-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-action {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .yurt-container {
+        padding: 15px;
+    }
+    
+    .yurt-main-content {
+        padding: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .intro-text {
+        font-size: 1rem;
+    }
+    
+    .yurt-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-item {
+        padding: 20px;
+    }
+    
+    .facilities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-card {
+        padding: 30px 20px;
+    }
+    
+    .pricing-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .pricing-content p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .yurt-main-content {
+        padding: 15px;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .yurt-type-content {
+        padding: 20px;
+    }
+    
+    .lightbox-content {
+        width: 95%;
+        height: 95%;
+    }
+    
+    #yurt-lightbox-img {
+        max-width: 95%;
+        max-height: 70%;
+    }
+    
+    .lightbox-caption {
+        padding: 15px 20px;
+        bottom: 20px;
+    }
+    
+    .lightbox-caption h4 {
+        font-size: 1.1rem;
+    }
+}
+</style>
+
+<script>
+// آرایه تصاویر گالری
+const yurtImages = [
+    {
+        src: 'https://avrasya.edu.tr/wp-content/uploads/2025/08/WhatsApp-Image-2025-01-07-at-11.25.35-800x541.jpeg',
+        title: 'Modern Yurt Odaları',
+        description: 'Deniz manzaralı konforlu yurt odalarımız'
+    },
+    {
+        src: 'https://avrasya.edu.tr/wp-content/uploads/2025/08/genel8-1024x683-2-800x533.jpg',
+        title: 'Ortak Yaşam Alanları',
+        description: 'Öğrencilerimizin sosyalleştiği modern ortak alanlar'
+    },
+    {
+        src: 'https://avrasya.edu.tr/wp-content/uploads/2021/09/PHOTO-2021-09-02-10-14-37-800x450.jpg',
+        title: 'Yurt Binası Dış Görünüm',
+        description: 'Modern mimarisiyle dikkat çeken yurt binamız'
+    },
+    {
+        src: 'https://avrasya.edu.tr/wp-content/uploads/2021/09/PHOTO-2021-09-02-10-14-11-800x533.jpg',
+        title: 'Modern İç Mekan Tasarımı',
+        description: 'Fonksiyonel ve estetik iç mekan tasarımı'
+    },
+    {
+        src: 'https://avrasya.edu.tr/wp-content/uploads/2021/09/PHOTO-2021-09-02-10-13-14-2-800x533.jpg',
+        title: 'Ortak Mutfak Alanı',
+        description: 'Tam donanımlı modern mutfaklar'
+    },
+    {
+        src: 'https://avrasya.edu.tr/wp-content/uploads/2021/09/PHOTO-2021-09-02-10-13-14-1-800x533.jpg',
+        title: 'Etüt ve Çalışma Salonu',
+        description: 'Sessiz ve konforlu çalışma ortamları'
+    }
+];
+
+let currentImageIndex = 0;
+
+// باز کردن Lightbox برای تصاویر
+document.querySelectorAll('.gallery-item').forEach((item, index) => {
+    item.addEventListener('click', function() {
+        currentImageIndex = index;
+        openYurtLightbox();
+    });
+});
+
+function openYurtLightbox() {
+    const lightbox = document.getElementById('yurtLightbox');
+    const img = document.getElementById('yurt-lightbox-img');
+    const title = document.getElementById('yurt-lightbox-title');
+    const desc = document.getElementById('yurt-lightbox-desc');
+    
+    if (yurtImages[currentImageIndex]) {
+        img.src = yurtImages[currentImageIndex].src;
+        title.textContent = yurtImages[currentImageIndex].title;
+        desc.textContent = yurtImages[currentImageIndex].description;
+        
+        lightbox.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeYurtLightbox() {
+    document.getElementById('yurtLightbox').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function changeYurtImage(direction) {
+    currentImageIndex += direction;
+    
+    if (currentImageIndex < 0) {
+        currentImageIndex = yurtImages.length - 1;
+    } else if (currentImageIndex >= yurtImages.length) {
+        currentImageIndex = 0;
+    }
+    
+    const img = document.getElementById('yurt-lightbox-img');
+    const title = document.getElementById('yurt-lightbox-title');
+    const desc = document.getElementById('yurt-lightbox-desc');
+    
+    if (yurtImages[currentImageIndex]) {
+        img.src = yurtImages[currentImageIndex].src;
+        title.textContent = yurtImages[currentImageIndex].title;
+        desc.textContent = yurtImages[currentImageIndex].description;
+    }
+}
+
+// بستن Lightbox با کلیک خارج از تصویر
+document.getElementById('yurtLightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'yurtLightbox') {
+        closeYurtLightbox();
+    }
+});
+
+// کنترل کیبورد
+document.addEventListener('keydown', (e) => {
+    if (document.getElementById('yurtLightbox').style.display === 'block') {
+        switch(e.key) {
+            case 'Escape':
+                closeYurtLightbox();
+                break;
+            case 'ArrowLeft':
+                changeYurtImage(-1);
+                break;
+            case 'ArrowRight':
+                changeYurtImage(1);
+                break;
+        }
+    }
+});
+
+// انیمیشن عناصر هنگام اسکرول
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // اعمال انیمیشن به کارت‌ها
+    const elements = document.querySelectorAll('.yurt-type-card, .facility-card, .gallery-item');
+    elements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(element);
+    });
+});
+
+// انیمیشن آمار
+const statNumbers = document.querySelectorAll('.stat-number');
+const statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            statNumbers.forEach(stat => {
+                stat.style.opacity = '1';
+                stat.style.transform = 'scale(1)';
+            });
+        }
+    });
+}, { threshold: 0.5 });
+
+const statsSection = document.querySelector('.yurt-stats');
+if (statsSection) {
+    statsObserver.observe(statsSection);
+    statNumbers.forEach(stat => {
+        stat.style.opacity = '0';
+        stat.style.transform = 'scale(0.8)';
+        stat.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+}
+</script>
+{% endblock %}
