@@ -1,0 +1,626 @@
+<!-- list.html -->
+{% extends 'core/base.html' %}
+{% block title %}Haberler - Avrasya Üniversitesi{% endblock %}
+{% block content %}
+{% load static %}
+{% load i18n %}
+
+<!-- News List Content -->
+<div class="page_section" style="padding-top: 200px; padding-bottom: 80px;">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="news-header-section text-center">
+                    <h1 class="news-main-title">{% trans "Haberler" %}</h1>
+                    <p class="news-subtitle">{% trans "Avrasya Üniversitesi'nden en güncel haberler ve duyurular" %}</p>
+                    <div class="news-header-divider"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="search-filter-section">
+                    <div class="search-container">
+                        <form method="get" action="{% url 'news:list' %}">
+                            <div class="search-input-group">
+                                <div class="search-field">
+                                    <label for="q" class="search-label">
+                                        <i class="fas fa-search"></i>
+                                        {% trans "Konuya Göre Ara" %}
+                                    </label>
+                                    <input type="text" class="search-input" id="q" name="q" 
+                                           value="{{ search_query }}" 
+                                           placeholder="Haber başlığı, özet veya içerikte ara...">
+                                </div>
+                                <div class="date-filter-field">
+                                    <label for="date" class="search-label">
+                                        <i class="far fa-calendar"></i>
+                                        {% trans "Tarihe Göre Filtrele" %}
+                                    </label>
+                                    <input type="date" class="search-input" id="date" name="date" 
+                                           value="{{ date_filter }}">
+                                </div>
+                                <button type="submit" class="search-button">
+                                    <i class="fas fa-search"></i>
+                                    Ara
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Results Alert -->
+        {% if search_query or date_filter %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="search-results-info">
+                    <div class="results-info-content">
+                        <div class="results-text">
+                            {% if search_query and date_filter %}
+                            <span class="result-criteria">
+                                <strong>Aranan:</strong> "{{ search_query }}" 
+                                <span class="separator">|</span>
+                                <strong>Tarih:</strong> {{ date_filter }}
+                            </span>
+                            {% elif search_query %}
+                            <span class="result-criteria">
+                                <strong>Aranan:</strong> "{{ search_query }}"
+                            </span>
+                            {% elif date_filter %}
+                            <span class="result-criteria">
+                                <strong>Filtrelenen Tarih:</strong> {{ date_filter }}
+                            </span>
+                            {% endif %}
+                            <span class="results-count">{{ items.count }} sonuç bulundu</span>
+                        </div>
+                        <a href="{% url 'news:list' %}" class="clear-filters-btn">
+                            <i class="fas fa-times"></i>
+                            Filtreyi Temizle
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- News Grid -->
+        <div class="row">
+            {% for it in items %}
+            <div class="col-xl-4 col-lg-6 mb-4">
+                <div class="news-card">
+                    {% if it.main_image %}
+                    <div class="news-card-image">
+                        <img src="{{ it.main_image.url }}" alt="{{ it.title }}">
+                        <div class="news-card-overlay"></div>
+                    </div>
+                    {% else %}
+                    <div class="news-card-image placeholder">
+                        <div class="placeholder-icon">
+                            <i class="far fa-newspaper"></i>
+                        </div>
+                        <div class="news-card-overlay"></div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="news-card-content">
+                        <div class="news-card-header">
+                            <h3 class="news-card-title">{{ it.title }}</h3>
+                            <div class="news-card-meta">
+                                <i class="far fa-clock"></i>
+                                <span class="news-date">{{ it.published_at|date:'d F Y' }}</span>
+                                <span class="news-time">{{ it.published_at|date:'H:i' }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="news-card-body">
+                            <p class="news-card-excerpt">
+                                {% if it.summary %}
+                                    {{ it.summary|truncatewords:20 }}
+                                {% else %}
+                                    {{ it.content|truncatewords:20 }}
+                                {% endif %}
+                            </p>
+                        </div>
+                        
+                        <div class="news-card-footer">
+                            <a href="{{ it.get_absolute_url }}" class="news-read-more">
+                                <span>{% trans "Devamını Oku" %}</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="no-news-found">
+                    <div class="no-news-icon">
+                        <i class="far fa-newspaper"></i>
+                    </div>
+                    <h3 class="no-news-title">
+                        {% if search_query or date_filter %}
+                        Arama kriterlerinize uygun haber bulunamadı
+                        {% else %}
+                        Henüz haber bulunmamaktadır
+                        {% endif %}
+                    </h3>
+                    <p class="no-news-text">
+                        {% if search_query or date_filter %}
+                        Lütfen farklı kelimelerle arama yapmayı deneyin veya filtreyi temizleyin.
+                        {% else %}
+                        En kısa sürede güncel haberler paylaşılacaktır.
+                        {% endif %}
+                    </p>
+                    {% if search_query or date_filter %}
+                    <a href="{% url 'news:list' %}" class="btn-primary">
+                        <i class="fas fa-times"></i>
+                        Filtreyi Temizle
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- View All Button -->
+        {% if items %}
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <a href="{% url 'news:list' %}" class="view-all-news">
+                    <i class="fas fa-list"></i>
+                    {% trans "Tüm Haberleri Görüntüle" %}
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Styles for news list page -->
+<style>
+/* Header Section */
+.news-header-section {
+    margin-bottom: 50px;
+}
+
+.news-main-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-top: 300px;
+    color: var(--primary-dark-blue);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.news-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.news-header-divider {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* Search and Filter Section */
+.search-filter-section {
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.search-input-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.search-field,
+.date-filter-field {
+    position: relative;
+}
+
+.search-label {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-label i {
+    color: var(--secondary-medium-blue);
+    font-size: 12px;
+}
+
+.search-input {
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    border: 2px solid var(--neutral-cream);
+    border-radius: 12px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: var(--pure-white);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 3px rgba(29, 97, 169, 0.1);
+}
+
+.search-button {
+    height: 50px;
+    padding: 0 30px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+    color: var(--pure-white);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(29, 97, 169, 0.3);
+}
+
+/* Search Results Info */
+.search-results-info {
+    background: linear-gradient(135deg, var(--neutral-cream), #f8f9fa);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid var(--secondary-medium-blue);
+}
+
+.results-info-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.results-text {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.result-criteria {
+    color: var(--primary-dark-blue);
+    font-size: 14px;
+}
+
+.separator {
+    color: var(--accent-light-blue);
+    margin: 0 10px;
+}
+
+.results-count {
+    background: var(--secondary-medium-blue);
+    color: var(--pure-white);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.clear-filters-btn {
+    background: var(--pure-white);
+    color: var(--secondary-medium-blue);
+    border: 2px solid var(--secondary-medium-blue);
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.clear-filters-btn:hover {
+    background: var(--secondary-medium-blue);
+    color: var(--pure-white);
+    transform: translateY(-1px);
+}
+
+/* News Cards */
+.news-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.news-card-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.news-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+.news-card-image.placeholder {
+    background: linear-gradient(135deg, var(--neutral-cream), #e8ecef);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-icon {
+    font-size: 3rem;
+    color: var(--accent-light-blue);
+}
+
+.news-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(9, 36, 66, 0.1) 100%);
+}
+
+.news-card:hover .news-card-image img {
+    transform: scale(1.05);
+}
+
+.news-card-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 220px);
+}
+
+.news-card-header {
+    margin-bottom: 15px;
+}
+
+.news-card-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    line-height: 1.4;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.news-card-meta i {
+    color: var(--secondary-medium-blue);
+}
+
+.news-date {
+    font-weight: 500;
+}
+
+.news-time {
+    opacity: 0.8;
+}
+
+.news-card-body {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.news-card-excerpt {
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-card-footer {
+    margin-top: auto;
+}
+
+.news-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    padding: 8px 0;
+}
+
+.news-read-more:hover {
+    color: var(--primary-dark-blue);
+    gap: 12px;
+}
+
+/* No News Found */
+.no-news-found {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+}
+
+.no-news-icon {
+    font-size: 4rem;
+    color: var(--neutral-cream);
+    margin-bottom: 20px;
+}
+
+.no-news-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 15px;
+}
+
+.no-news-text {
+    color: var(--text-light);
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+/* View All Button */
+.view-all-news {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+    color: var(--pure-white);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.view-all-news:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(29, 97, 169, 0.4);
+    color: var(--pure-white);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .search-input-group {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .news-main-title {
+        font-size: 2.5rem;
+    }
+    
+    .news-card-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page_section {
+        padding-top: 160px !important;
+    }
+    
+    .news-main-title {
+        font-size: 2rem;
+    }
+    
+    .search-filter-section {
+        padding: 20px;
+    }
+    
+    .results-info-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .results-text {
+        justify-content: center;
+    }
+    
+    .news-card-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .news-main-title {
+        font-size: 1.8rem;
+    }
+    
+    .news-subtitle {
+        font-size: 1rem;
+    }
+    
+    .search-input-group {
+        gap: 12px;
+    }
+    
+    .news-card-content {
+        padding: 15px;
+    }
+    
+    .news-card-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.news-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.news-card:nth-child(1) { animation-delay: 0.1s; }
+.news-card:nth-child(2) { animation-delay: 0.2s; }
+.news-card:nth-child(3) { animation-delay: 0.3s; }
+.news-card:nth-child(4) { animation-delay: 0.4s; }
+.news-card:nth-child(5) { animation-delay: 0.5s; }
+.news-card:nth-child(6) { animation-delay: 0.6s; }
+</style>
+{% endblock %}

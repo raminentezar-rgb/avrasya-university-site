@@ -1,0 +1,2201 @@
+{% extends 'turk_dili_edebiyati/base.html' %}
+{% load static %}
+{% load i18n %} <!-- اضافه شده -->
+{% block title %}{% trans "Avrasya Üniversitesi -Türk Dili ve Edebiyatı Etkinlikleri" %}{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>{% trans "Türk Dili ve Edebiyatı Etkinlikleri" %}</h1>
+            <p></p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'turk_dili_edebiyati/turk_sidebar.html' %}
+            </div>
+        </div>
+        
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- Header Section -->
+                <div class="etkinlik-detail-header mb-5">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1 me-4">
+                            <div class="etkinlik-badge mb-3">{{ etkinlik.get_etkinlik_turu_display }}</div>
+                            <h1 class="etkinlik-main-title">{{ etkinlik.baslik }}</h1>
+                            
+                            <!-- Status Badges -->
+                            <div class="etkinlik-status mt-3">
+                                {% if etkinlik.kayit_gerekiyor %}
+                                <span class="status-badge kayit-gerekli">
+                                    <i class="fas fa-user-check"></i> {% trans "Kayıt Gerekli" %}
+                                </span>
+                                {% endif %}
+                                
+                                {% if etkinlik.ucretli %}
+                                <span class="status-badge ucretli">
+                                    <i class="fas fa-tag"></i> {% trans "Ücretli" %}
+                                </span>
+                                {% else %}
+                                <span class="status-badge ucretsiz">
+                                    <i class="fas fa-gift"></i> {% trans "Ücretsiz" %}
+                                </span>
+                                {% endif %}
+                                
+                                {% if etkinlik.yaklasan_etkinlik %}
+                                <span class="status-badge yaklasan">
+                                    <i class="fas fa-clock"></i> {% trans "Yaklaşan Etkinlik" %}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="etkinlik-actions">
+                            {% if etkinlik.katilim_linki %}
+                            <a href="{{ etkinlik.katilim_linki }}" target="_blank" class="katilim-btn">
+                                <i class="fas fa-external-link-alt"></i> {% trans "Katıl" %}
+                            </a>
+                            {% endif %}
+                            
+                            <a href="{% url 'turk_dili_edebiyati:etkinlik_listesi' %}" class="geri-don-btn">
+                                <i class="fas fa-arrow-left"></i> {% trans "Geri Dön" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="etkinlik-detail-content">
+                    <div class="row">
+                        <!-- Left Column - Details -->
+                        <div class="col-lg-8">
+                            <!-- Afiş Image -->
+                            {% if etkinlik.afis %}
+                            <div class="etkinlik-poster mb-5">
+                                <div class="poster-container">
+                                    <img src="{{ etkinlik.afis.url }}" alt="{{ etkinlik.baslik }}" class="poster-image">
+                                    <div class="poster-overlay">
+                                        <div class="poster-badge">{{ etkinlik.get_etkinlik_turu_display }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Kısa Açıklama -->
+                            {% if etkinlik.kisa_aciklama %}
+                            <div class="etkinlik-ozet mb-5">
+                                <div class="ozet-header">
+                                    <h3><i class="fas fa-file-alt"></i> {% trans "Etkinlik Özeti" %}</h3>
+                                </div>
+                                <div class="ozet-content">
+                                    <p>{{ etkinlik.kisa_aciklama }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Detaylı Açıklama -->
+                            <div class="etkinlik-detay mb-5">
+                                <div class="detay-header">
+                                    <h3><i class="fas fa-info-circle"></i> {% trans "Detaylı Bilgiler" %}</h3>
+                                </div>
+                                <div class="detay-content formatted-content">
+                                    {{ etkinlik.detayli_aciklama|linebreaks }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - Sidebar -->
+                        <div class="col-lg-4">
+                            <div class="etkinlik-sidebar">
+                                <!-- Event Info Card -->
+                                <div class="sidebar-card info-card">
+                                    <div class="card-header">
+                                        <h4><i class="fas fa-calendar-day"></i> {% trans "Etkinlik Bilgileri" %}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-clock"></i> {% trans "Tarih & Saat" %}
+                                            </div>
+                                            <div class="info-value">
+                                                <div>{{ etkinlik.baslangic_tarihi|date:'d F Y' }}</div>
+                                                <div class="text-muted">{{ etkinlik.baslangic_tarihi|date:'H:i' }}</div>
+                                                {% if etkinlik.bitis_tarihi %}
+                                                <div class="bitis-tarihi">
+                                                    <small>{% trans "Bitiş:" %} {{ etkinlik.bitis_tarihi|date:'d F Y H:i' }}</small>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-map-marker-alt"></i> {% trans "Yer" %}
+                                            </div>
+                                            <div class="info-value">
+                                                {{ etkinlik.yer }}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-tag"></i> {% trans "Tür" %}
+                                            </div>
+                                            <div class="info-value">
+                                                {{ etkinlik.get_etkinlik_turu_display }}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-user-friends"></i> {% trans "Katılım" %}
+                                            </div>
+                                            <div class="info-value">
+                                                {% if etkinlik.kayit_gerekiyor %}
+                                                <span class="badge-kayit">{% trans "Kayıt Gerekli" %}</span>
+                                                {% else %}
+                                                <span class="badge-acik">{% trans "Açık Katılım" %}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="info-item">
+                                            <div class="info-label">
+                                                <i class="fas fa-money-bill"></i> {% trans "Ücret" %}
+                                            </div>
+                                            <div class="info-value">
+                                                {% if etkinlik.ucretli %}
+                                                <span class="text-danger">{% trans "Ücretli" %}</span>
+                                                {% else %}
+                                                <span class="text-success">{% trans "Ücretsiz" %}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Actions -->
+                                <div class="sidebar-card actions-card">
+                                    <div class="card-header">
+                                        <h4><i class="fas fa-bolt"></i> {% trans "Hızlı Erişim" %}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="action-buttons">
+                                            {% if etkinlik.katilim_linki %}
+                                            <a href="{{ etkinlik.katilim_linki }}" target="_blank" class="action-btn primary">
+                                                <i class="fas fa-external-link-alt"></i>
+                                                <span>{% trans "Etkinliğe Katıl" %}</span>
+                                            </a>
+                                            {% endif %}
+                                            
+                                            <a href="{% url 'turk_dili_edebiyati:etkinlik_listesi' %}" class="action-btn secondary">
+                                                <i class="fas fa-list"></i>
+                                                <span>{% trans "Tüm Etkinlikler" %}</span>
+                                            </a>
+                                            
+                                            <a href="{% url 'turk_dili_edebiyati:yaklasan_etkinlikler' %}" class="action-btn tertiary">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>{% trans "Yaklaşanlar" %}</span>
+                                            </a>
+                                            
+                                            <!-- Share Buttons -->
+                                            <div class="share-section mt-3">
+                                                <small class="text-muted d-block mb-2">{% trans "Paylaş:" %}</small>
+                                                <div class="share-buttons">
+                                                    <button class="share-btn" onclick="shareOnFacebook()">
+                                                        <i class="fab fa-facebook-f"></i>
+                                                    </button>
+                                                    <button class="share-btn" onclick="shareOnTwitter()">
+                                                        <i class="fab fa-twitter"></i>
+                                                    </button>
+                                                    <button class="share-btn" onclick="shareOnLinkedIn()">
+                                                        <i class="fab fa-linkedin-in"></i>
+                                                    </button>
+                                                    <button class="share-btn" onclick="copyToClipboard()">
+                                                        <i class="fas fa-link"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Related Events -->
+                                <div class="sidebar-card related-card">
+                                    <div class="card-header">
+                                        <h4><i class="fas fa-calendar-star"></i> {% trans "Benzer Etkinlikler" %}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted small mb-3">{% trans "Aynı kategorideki diğer etkinlikler:" %}</p>
+                                        <div class="related-events">
+                                            <!-- Buraya ilgili etkinlikler gelecek -->
+                                            <p class="text-center py-3 text-muted">
+                                                {% trans "İlgili etkinlik bulunmuyor" %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+        
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 30px auto 0;
+    line-height: 1.6;
+}
+
+/* طراحی تب‌ها */
+.ogrenci-isleri-tab-section {
+    margin-top: 20px;
+}
+
+.tab-container {
+    background: var(--pure-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    padding: 0;
+}
+
+.tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.tab-menu-item {
+    flex: 1;
+    min-width: 180px;
+    padding: 22px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.tab-menu-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-bottom: 4px solid var(--accent-light-blue);
+}
+
+.tab-menu-item i {
+    font-size: 1.2rem;
+}
+
+.tab-content-wrapper {
+    padding: 0;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-content-header h3 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tab-content-header h3 i {
+    color: var(--secondary-medium-blue);
+}
+
+.tab-content-body {
+    padding: 30px;
+}
+
+.tab-content-body p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.05));
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    border-left: 5px solid var(--secondary-medium-blue);
+}
+
+.highlight-box h4 {
+    color: var(--primary-dark-blue);
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.3rem;
+}
+
+.highlight-box h4 i {
+    color: var(--secondary-medium-blue);
+}
+
+.responsibilities-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.responsibilities-list li {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-light-blue);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.responsibilities-list li:hover {
+    background: rgba(141, 212, 227, 0.1);
+    transform: translateX(5px);
+}
+
+.responsibilities-list li i {
+    color: var(--secondary-medium-blue);
+}
+
+.external-link {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.external-link:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+/* Misyon & Vizyon */
+.mission-vision-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.mission-box, .vision-box {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.mission-box:hover, .vision-box:hover {
+    transform: translateY(-5px);
+}
+
+.mv-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 28px;
+}
+
+.mission-box h4, .vision-box h4 {
+    color: var(--primary-dark-blue);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.mission-box p, .vision-box p {
+    color: var(--text-dark);
+    line-height: 1.7;
+}
+
+/* Personel */
+.personnel-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.personnel-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease;
+}
+
+.personnel-card:hover {
+    transform: translateY(-5px);
+}
+
+.personnel-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+}
+
+.personnel-info h4 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 8px 0;
+    font-size: 1.3rem;
+}
+
+.personnel-title {
+    color: var(--secondary-medium-blue);
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+/* İletişim */
+.contact-info-section {
+    margin-top: 10px;
+}
+
+.contact-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.3);
+}
+
+.contact-header h4 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.contact-details {
+    margin-bottom: 40px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(141, 212, 227, 0.08);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(141, 212, 227, 0.15);
+}
+
+.contact-item i {
+    color: var(--secondary-medium-blue);
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.contact-item strong {
+    color: var(--primary-dark-blue);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.contact-item p {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 1.05rem;
+}
+
+.contact-item a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+.personnel-contact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.person-contact-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 2px solid rgba(141, 212, 227, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.person-contact-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-light-blue);
+}
+
+.person-contact-card h5 {
+    color: var(--primary-dark-blue);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.person-contact-card h5 i {
+    color: var(--secondary-medium-blue);
+}
+
+.person-contact-card .contact-details p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+}
+
+.person-contact-card .contact-details i {
+    color: var(--secondary-medium-blue);
+    min-width: 20px;
+}
+
+.person-contact-card .contact-details a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.person-contact-card .contact-details a:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-content {
+    animation: fadeIn 0.5s ease;
+}
+
+.personnel-card, .mission-box, .vision-box, .person-contact-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.personnel-card:nth-child(1) { animation-delay: 0.1s; }
+.personnel-card:nth-child(2) { animation-delay: 0.2s; }
+.mission-box { animation-delay: 0.1s; }
+.vision-box { animation-delay: 0.2s; }
+.person-contact-card:nth-child(1) { animation-delay: 0.1s; }
+.person-contact-card:nth-child(2) { animation-delay: 0.2s; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .mission-vision-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .tab-menu {
+        flex-wrap: wrap;
+    }
+    
+    .tab-menu-item {
+        flex: 1 0 45%;
+        min-width: auto;
+        padding: 18px 15px;
+        font-size: 1rem;
+    }
+    
+    .tab-content-header {
+        padding: 20px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .tab-content-body {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .tab-menu-item {
+        flex: 1 0 100%;
+        justify-content: flex-start;
+        padding: 15px 20px;
+    }
+    
+    .mission-vision-container, .personnel-container, .personnel-contact {
+        grid-template-columns: 1fr;
+    }
+    
+    .highlight-box {
+        padding: 20px;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .personnel-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .page-intro {
+        margin-bottom: 30px;
+    }
+    
+    .tab-content-header {
+        padding: 15px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .tab-content-body {
+        padding: 15px;
+    }
+    
+    .tab-content-body p {
+        font-size: 1rem;
+    }
+    
+    .personnel-card, .mission-box, .vision-box, .person-contact-card {
+        padding: 20px;
+    }
+    
+    .personnel-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .tab-content, .personnel-card, .mission-box, .vision-box, .person-contact-card,
+    .responsibilities-list li, .contact-item {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .personnel-card:hover, .mission-box:hover, .vision-box:hover,
+    .person-contact-card:hover, .responsibilities-list li:hover {
+        transform: none;
+    }
+}
+
+
+
+/* استایل‌های جدید برای بخش Etkinlikler */
+
+/* دکمه‌ها */
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 15px rgba(29, 97, 169, 0.2);
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(29, 97, 169, 0.3);
+    color: white;
+}
+
+.btn-secondary-custom {
+    background: transparent;
+    color: var(--secondary-medium-blue);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 2px solid var(--secondary-medium-blue);
+}
+
+.btn-secondary-custom:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* هدر بخش‌ها */
+.section-header {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.header-line {
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), transparent);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+/* کارت‌های Etkinlik */
+.etkinlik-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.etkinlik-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent-light-blue);
+}
+
+.etkinlik-card-header {
+    padding: 25px 25px 15px;
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.05));
+    border-bottom: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.etkinlik-card-body {
+    padding: 20px 25px 25px;
+}
+
+/* بج‌ها */
+.etkinlik-badge {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.yaklasan-badge {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #212529;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+.kayit-badge {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* عناوین */
+.etkinlik-title {
+    color: var(--primary-dark-blue);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* متا اطلاعات */
+.etkinlik-meta {
+    margin-bottom: 15px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.meta-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* توضیحات */
+.etkinlik-aciklama {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+/* فوتر کارت */
+.etkinlik-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.etkinlik-detay-btn {
+    background: transparent;
+    color: var(--secondary-medium-blue);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--secondary-medium-blue);
+}
+
+.etkinlik-detay-btn:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateX(5px);
+}
+
+/* حالت خالی */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.05), rgba(29, 97, 169, 0.08));
+    border-radius: 12px;
+    border: 2px dashed rgba(141, 212, 227, 0.5);
+}
+
+.empty-state-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--accent-light-blue), var(--secondary-medium-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 36px;
+}
+
+.empty-state h4 {
+    color: var(--primary-dark-blue);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.empty-state p {
+    color: var(--text-light);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* کارت‌های Geçmiş Etkinlikler */
+.gecmis-etkinlik-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.gecmis-etkinlik-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6c757d, #adb5bd);
+    opacity: 0.7;
+}
+
+.gecmis-etkinlik-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.gecmis-etkinlik-badge {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.gecmis-etkinlik-title {
+    color: var(--primary-dark-blue);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.gecmis-etkinlik-meta {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.gecmis-etkinlik-text {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    height: 60px;
+    overflow: hidden;
+}
+
+.gecmis-detay-btn {
+    color: #6c757d;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+}
+
+.gecmis-detay-btn:hover {
+    color: var(--secondary-medium-blue);
+    background: rgba(29, 97, 169, 0.05);
+    border-color: var(--secondary-medium-blue);
+}
+
+/* آیکون بزرگ */
+.icon-box-large {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+}
+
+/* رسپانسیو */
+@media (max-width: 992px) {
+    .etkinlik-card-header,
+    .etkinlik-card-body {
+        padding: 20px;
+    }
+    
+    .etkinlik-title {
+        font-size: 1.3rem;
+    }
+    
+    .gecmis-etkinlik-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .etkinlik-footer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .etkinlik-detay-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .empty-state {
+        padding: 40px 20px;
+    }
+    
+    .empty-state-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .etkinlik-card-header,
+    .etkinlik-card-body {
+        padding: 15px;
+    }
+    
+    .etkinlik-title {
+        font-size: 1.2rem;
+    }
+    
+    .btn-primary-custom,
+    .btn-secondary-custom {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+    }
+    
+    .gecmis-etkinlik-card {
+        padding: 15px;
+    }
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-navigation {
+    padding: 15px 0;
+}
+
+.breadcrumb-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    margin-right: 10px;
+    font-size: 0.95rem;
+}
+
+.breadcrumb-item a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-light);
+    pointer-events: none;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+    content: '›';
+    margin-left: 10px;
+    color: var(--text-light);
+}
+
+/* Header Section */
+.etkinlik-detail-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.08));
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.etkinlik-main-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.etkinlik-badge {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.etkinlik-status {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.kayit-gerekli {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #212529;
+}
+
+.ucretli {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+}
+
+.ucretsiz {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+}
+
+.yaklasan {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.etkinlik-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 150px;
+}
+
+.katilim-btn {
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 15px rgba(29, 97, 169, 0.2);
+}
+
+.katilim-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(29, 97, 169, 0.3);
+    color: white;
+}
+
+.geri-don-btn {
+    background: transparent;
+    color: var(--secondary-medium-blue);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--secondary-medium-blue);
+}
+
+.geri-don-btn:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Afiş Section */
+.etkinlik-poster {
+    position: relative;
+}
+
+.poster-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.poster-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.poster-container:hover .poster-image {
+    transform: scale(1.02);
+}
+
+.poster-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(9, 36, 66, 0.9);
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.poster-overlay .poster-badge {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Özet Section */
+.etkinlik-ozet {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.1), rgba(29, 97, 169, 0.05));
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.ozet-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    color: white;
+    padding: 20px 30px;
+}
+
+.ozet-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ozet-content {
+    padding: 30px;
+}
+
+.ozet-content p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Detay Section */
+.etkinlik-detay {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.detay-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.detay-header h3 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detay-content {
+    padding: 30px;
+}
+
+.formatted-content {
+    color: var(--text-dark);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.formatted-content p {
+    margin-bottom: 20px;
+}
+
+.formatted-content ul,
+.formatted-content ol {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.formatted-content li {
+    margin-bottom: 8px;
+}
+
+.formatted-content strong {
+    color: var(--primary-dark-blue);
+}
+
+/* Sidebar */
+.etkinlik-sidebar {
+    position: sticky;
+    top: 120px;
+}
+
+.sidebar-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.card-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    padding: 20px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.card-header h4 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Info Items */
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: var(--text-dark);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.info-value {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    text-align: right;
+    flex: 1;
+}
+
+.bitis-tarihi {
+    color: var(--text-light);
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.badge-kayit {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #212529;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-acik {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+.action-btn i {
+    font-size: 1.2rem;
+    width: 24px;
+}
+
+.action-btn.primary {
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+    color: white;
+}
+
+.action-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(29, 97, 169, 0.3);
+}
+
+.action-btn.secondary {
+    background: transparent;
+    color: var(--secondary-medium-blue);
+    border: 2px solid var(--secondary-medium-blue);
+}
+
+.action-btn.secondary:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.action-btn.tertiary {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    color: var(--primary-dark-blue);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.action-btn.tertiary:hover {
+    background: rgba(141, 212, 227, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Share Buttons */
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.share-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(141, 212, 227, 0.2);
+    color: var(--secondary-medium-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.share-btn:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Related Events */
+.related-card .card-body {
+    padding: 20px;
+}
+
+.related-events {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .etkinlik-main-title {
+        font-size: 1.8rem;
+    }
+    
+    .etkinlik-detail-header {
+        padding: 20px;
+    }
+    
+    .etkinlik-actions {
+        min-width: 120px;
+    }
+    
+    .poster-image {
+        height: 300px;
+    }
+    
+    .etkinlik-sidebar {
+        position: relative;
+        top: 0;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .etkinlik-detail-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .etkinlik-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 100%;
+    }
+    
+    .katilim-btn,
+    .geri-don-btn {
+        flex: 1;
+        min-width: 150px;
+    }
+    
+    .etkinlik-main-title {
+        font-size: 1.6rem;
+    }
+    
+    .ozet-header,
+    .detay-header,
+    .card-header {
+        padding: 15px 20px;
+    }
+    
+    .ozet-content,
+    .detay-content,
+    .card-body {
+        padding: 20px;
+    }
+    
+    .poster-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .etkinlik-main-title {
+        font-size: 1.4rem;
+    }
+    
+    .etkinlik-detail-header {
+        padding: 15px;
+    }
+    
+    .etkinlik-badge {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .status-badge {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .katilim-btn,
+    .geri-don-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .ozet-header h3,
+    .detay-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .formatted-content {
+        font-size: 1rem;
+    }
+    
+    .action-btn {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت تب‌ها
+    const tabMenuItems = document.querySelectorAll('.tab-menu-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabMenuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // حذف کلاس active از همه تب‌ها
+            tabMenuItems.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // اضافه کردن کلاس active به تب انتخاب شده
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // Highlight کردن آیتم‌های لیست هنگام hover
+    const listItems = document.querySelectorAll('.responsibilities-list li');
+    
+    listItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.borderLeftColor = 'var(--secondary-medium-blue)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.borderLeftColor = 'var(--accent-light-blue)';
+        });
+    });
+    
+    // انیمیشن‌های هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده عناصر برای انیمیشن
+    const animatedElements = document.querySelectorAll('.personnel-card, .mission-box, .vision-box, .person-contact-card');
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    // اضافه کردن امکان کپی آدرس
+    const addressElement = document.querySelector('.contact-item:nth-child(1) p');
+    if (addressElement) {
+        addressElement.style.cursor = 'pointer';
+        addressElement.title = 'Adresi kopyalamak için tıklayın';
+        
+        addressElement.addEventListener('click', function() {
+            const addressText = this.textContent.trim();
+            
+            // کپی آدرس به کلیپ‌بورد
+            navigator.clipboard.writeText(addressText).then(() => {
+                // نمایش پیام موفقیت
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Adres panoya kopyalandı!';
+                this.style.color = 'var(--secondary-medium-blue)';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.color = '';
+                }, 2000);
+            });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // انیمیشن کارت‌ها هنگام اسکرول
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // مشاهده کارت‌های etkinlik
+    const etkinlikCards = document.querySelectorAll('.etkinlik-card, .gecmis-etkinlik-card');
+    etkinlikCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(card);
+    });
+    
+    // کلیک روی کارت‌های etkinlik (برای دسکتاپ)
+    if (window.innerWidth > 768) {
+        etkinlikCards.forEach(card => {
+            const link = card.querySelector('a[href*="etkinlik_detay"]');
+            if (link) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function(e) {
+                    // فقط اگر روی دکمه کلیک نشده باشد
+                    if (!e.target.closest('a, button')) {
+                        link.click();
+                    }
+                });
+            }
+        });
+    }
+    
+    // نمایش تاریخ به صورت خوانا
+    const dateElements = document.querySelectorAll('.meta-item span');
+    dateElements.forEach(el => {
+        const text = el.textContent;
+        if (text.includes('F')) {
+            // تبدیل ماه‌های انگلیسی به ترکی (می‌توانید این را کامل کنید)
+            const monthMap = {
+                'January': 'Ocak',
+                'February': 'Şubat',
+                'March': 'Mart',
+                'April': 'Nisan',
+                'May': 'Mayıs',
+                'June': 'Haziran',
+                'July': 'Temmuz',
+                'August': 'Ağustos',
+                'September': 'Eylül',
+                'October': 'Ekim',
+                'November': 'Kasım',
+                'December': 'Aralık'
+            };
+            
+            Object.keys(monthMap).forEach(engMonth => {
+                if (text.includes(engMonth)) {
+                    el.textContent = text.replace(engMonth, monthMap[engMonth]);
+                }
+            });
+        }
+    });
+});
+/* Animations */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(23, 162, 184, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(23, 162, 184, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(23, 162, 184, 0);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .poster-image,
+    .katilim-btn,
+    .geri-don-btn,
+    .action-btn,
+    .share-btn,
+    .status-badge.yaklasan {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize animations
+    const animatedElements = document.querySelectorAll('.sidebar-card, .etkinlik-ozet, .etkinlik-detay');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animatedElements.forEach(el => observer.observe(el));
+    
+    // Copy to clipboard function
+    function copyToClipboard() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            // Show success message
+            const copyBtn = document.querySelector('[onclick="copyToClipboard()"]');
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+            copyBtn.style.background = 'var(--secondary-medium-blue)';
+            copyBtn.style.color = 'white';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.style.background = '';
+                copyBtn.style.color = '';
+            }, 2000);
+        });
+    }
+    
+    // Share functions
+    window.shareOnFacebook = function() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    };
+    
+    window.shareOnTwitter = function() {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(document.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    };
+    
+    window.shareOnLinkedIn = function() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    };
+    
+    // Date formatting for Turkish months
+    const dateElements = document.querySelectorAll('.info-value div');
+    dateElements.forEach(el => {
+        const text = el.textContent;
+        if (text.includes('F')) {
+            const monthMap = {
+                'January': 'Ocak',
+                'February': 'Şubat',
+                'March': 'Mart',
+                'April': 'Nisan',
+                'May': 'Mayıs',
+                'June': 'Haziran',
+                'July': 'Temmuz',
+                'August': 'Ağustos',
+                'September': 'Eylül',
+                'October': 'Ekim',
+                'November': 'Kasım',
+                'December': 'Aralık'
+            };
+            
+            Object.keys(monthMap).forEach(engMonth => {
+                if (text.includes(engMonth)) {
+                    el.textContent = text.replace(engMonth, monthMap[engMonth]);
+                }
+            });
+        }
+    });
+    
+    // Poster image lazy loading
+    const posterImage = document.querySelector('.poster-image');
+    if (posterImage) {
+        posterImage.loading = 'lazy';
+    }
+    
+    // Print functionality
+    const printBtn = document.createElement('button');
+    printBtn.innerHTML = '<i class="fas fa-print"></i> Yazdır';
+    printBtn.className = 'action-btn tertiary mt-3';
+    printBtn.onclick = () => window.print();
+    
+    const actionsDiv = document.querySelector('.action-buttons');
+    if (actionsDiv) {
+        actionsDiv.appendChild(printBtn);
+    }
+});
+
+
+
+ // اضافه کردن امکان کپی آدرس
+    const addressElement = document.querySelector('.contact-item:nth-child(1) p');
+    if (addressElement) {
+        addressElement.style.cursor = 'pointer';
+        addressElement.title = '{% trans "Adresi kopyalamak için tıklayın" %}';
+        
+        addressElement.addEventListener('click', function() {
+            const addressText = this.textContent.trim();
+            
+            // کپی آدرس به کلیپ‌بورد
+            navigator.clipboard.writeText(addressText).then(() => {
+                // نمایش پیام موفقیت
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> {% trans "Adres panoya kopyalandı!" %}';
+                this.style.color = 'var(--secondary-medium-blue)';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.color = '';
+                }, 2000);
+            });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ... کدهای JavaScript ...
+    
+    // Share functions
+    window.shareOnFacebook = function() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    };
+    
+    window.shareOnTwitter = function() {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(document.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    };
+    
+    window.shareOnLinkedIn = function() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    };
+    
+    // Copy to clipboard function
+    function copyToClipboard() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            // Show success message
+            const copyBtn = document.querySelector('[onclick="copyToClipboard()"]');
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+            copyBtn.style.background = 'var(--secondary-medium-blue)';
+            copyBtn.style.color = 'white';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.style.background = '';
+                copyBtn.style.color = '';
+            }, 2000);
+        });
+    }
+    
+    // Print functionality
+    const printBtn = document.createElement('button');
+    printBtn.innerHTML = '<i class="fas fa-print"></i> {% trans "Yazdır" %}';
+    printBtn.className = 'action-btn tertiary mt-3';
+    printBtn.onclick = () => window.print();
+    
+    const actionsDiv = document.querySelector('.action-buttons');
+    if (actionsDiv) {
+        actionsDiv.appendChild(printBtn);
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,1020 @@
+{% load static %}
+{% load i18n %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+<!-- هدر مخصوص صفحه تحقیقات -->
+<style>
+    /* استایل‌های مخصوص هدر تحقیقات */
+    .research-header {
+        position: fixed;
+        top: 45px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1400px;
+        height: 104px;
+        background: rgba(9, 36, 66, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 1000;
+        transition: all 200ms ease;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(9, 36, 66, 0.3);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+    }
+    
+    .research-header.scrolled {
+        top: 15px;
+    }
+    
+    .research-header-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        padding: 0 20px;
+        position: relative;
+    }
+    
+    .research-logo_container {
+        display: inline-block;
+        padding-left: 30px;
+    }
+    
+    /* اصلاح اندازه لوگو - بزرگتر شده */
+    .research-logo_container img {
+         
+        /* افزایش از 40px به 60px */
+        height: 80px;
+        width: auto;
+        transition: all 0.3s ease;
+    }
+    
+    .research-main_nav_container {
+        display: inline-block;
+        margin-left: 80px;
+        padding-right: 50px;
+        background: transparent;
+        position: relative;
+    }
+    
+    .research-main_nav {
+        margin-top: 7px;
+    }
+    
+    .research-main_nav_list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 25px; /* کاهش gap برای فشرده‌تر شدن */
+        align-items: center;
+    }
+    
+    .research-main_nav_item {
+        display: inline-block;
+        position: relative;
+        white-space: nowrap; /* جلوگیری از شکستن خط */
+    }
+    
+    .research-main_nav_item > a {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px; /* کاهش سایز فونت */
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--pure-white);
+        transition: all 200ms ease;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+        padding: 10px 8px; /* کاهش padding */
+        display: block;
+        position: relative;
+        line-height: 1.2;
+        text-align: center;
+    }
+    
+    .research-main_nav_item > a:hover {
+        color: var(--accent-light-blue);
+        text-shadow: 0 2px 4px rgba(141, 212, 227, 0.3);
+    }
+    
+    .research-main_nav_item > a.active {
+        color: var(--accent-light-blue);
+    }
+
+    /* استایل‌های مگا منو تحقیقات */
+    .research-mega-menu {
+        position: static !important;
+    }
+
+    .research-mega-menu-content {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        max-width: 1200px;
+        background: rgba(9, 36, 66, 5);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(9, 36, 66, 0.4);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1001;
+        padding: 25px; /* کاهش padding */
+        margin-top: 15px;
+    }
+
+    /* حل مشکل gap بین منو و زیرمنو */
+    .research-main_nav_item::before {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: -10px;
+        right: -10px;
+        height: 20px;
+        background: transparent;
+        z-index: 1002;
+    }
+
+    .research-main_nav_item:hover .research-mega-menu-content {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* ایجاد یک پل نامرئی بین منو و زیرمنو */
+    .research-mega-menu-content::before {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background: transparent;
+    }
+
+    .research-mega-menu-content h6 {
+        color: var(--accent-light-blue) !important;
+        font-weight: 700;
+        font-size: 16px; /* کاهش سایز فونت */
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--accent-light-blue);
+    }
+
+    .research-dropdown-item {
+        display: block;
+        padding: 6px 0; /* کاهش padding */
+        color: white;
+        text-decoration: none;
+        font-size: 14px; /* کاهش سایز فونت */
+        transition: all 0.2s ease;
+        border-left: 3px solid transparent;
+        font-family: 'Open Sans', sans-serif;
+        line-height: 1.3;
+        white-space: nowrap; /* جلوگیری از شکستن خط */
+    }
+
+    .research-dropdown-item:hover {
+        background: transparent;
+        color: var(--accent-light-blue);
+        border-left-color: var(--accent-light-blue);
+        padding-left: 8px; /* کاهش padding */
+        transform: translateX(3px); /* کاهش transform */
+    }
+
+    .research-mega-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -12px; /* کاهش margin */
+    }
+
+    .research-mega-col {
+        flex: 1;
+        min-width: 180px; /* کاهش min-width */
+        padding: 0 12px; /* کاهش padding */
+        margin-bottom: 15px;
+    }
+
+    .research-list-unstyled {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* تاخیر در بسته شدن منو */
+    .research-main_nav_item {
+        transition: all 0.3s ease 0.1s;
+    }
+
+    .research-mega-menu-content {
+        transition: all 0.3s ease 0.1s;
+    }
+    
+    .research-header_side {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px; /* کاهش gap */
+    }
+    
+    .research-header_icon_container {
+        display: flex;
+        align-items: center;
+        gap: 0px;
+        cursor: pointer;
+        padding: 8px; /* کاهش padding */
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+    
+    .research-header_icon_container:hover {
+        background: rgba(141, 212, 227, 0.1);
+    }
+    
+    .research-header_icon {
+        width: 24px; /* کاهش سایز */
+        height: 24px; /* کاهش سایز */
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+        filter: brightness(0) invert(1);
+    }
+    
+    .research-hamburger_container {
+        display: none;
+        cursor: pointer;
+        margin-left: 15px; /* کاهش margin */
+    }
+
+    {% comment %} /* تنظیمات خاص برای آیتم‌های دوکلمه‌ای */
+    .research-main_nav_item:nth-child(1) > a { /* Araştırma Politikaları */
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+    
+    .research-main_nav_item:nth-child(3) > a { /* Laboratuvarlar */
+        font-size: 13px;
+        padding: 10px 6px;
+    }
+    
+    .research-main_nav_item:nth-child(4) > a { /* Araştırma Merkezleri */
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+    
+    .research-main_nav_item:nth-child(5) > a { /* Fikri ve Sınai Mülkiyet */
+        font-size: 11px;
+        padding: 10px 4px;
+    }
+    
+    .research-main_nav_item:nth-child(6) > a { /* Araştırma Çıktıları */
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+     {% endcomment %}
+    
+    /* استایل‌های مخصوص Language Selector در هدر تحقیقات */
+    .research-language-selector {
+        position: relative;
+        margin-left: 15px;
+    }
+
+    .research-current-language {
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .research-current-language:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .research-language-flag .flag-icon {
+        width: 20px;
+        height: 15px;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        vertical-align: middle;
+    }
+
+    .research-language-code {
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+        margin-left: 5px;
+    }
+
+    /* Language Dropdown Menu در هدر تحقیقات */
+    .research-language-dropdown {
+        min-width: 200px !important;
+        background: rgba(247, 243, 233, 0.98) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(9, 36, 66, 0.3);
+        margin-top: 10px !important;
+        transform-origin: top right;
+        right: 0 !important;
+        left: auto !important;
+        animation: researchSlideInDown 0.3s ease forwards;
+        position: absolute;
+        z-index: 1100;
+    }
+
+    .research-language-dropdown .dropdown-item {
+        border-radius: 6px;
+        margin-bottom: 2px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        color: var(--text-dark);
+    }
+
+    .research-language-dropdown .dropdown-item:hover {
+        background: rgba(29, 97, 169, 0.1);
+        transform: translateX(5px);
+    }
+
+    .research-language-dropdown .flag-icon {
+        width: 24px;
+        height: 18px;
+        border-radius: 3px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        margin-right: 12px;
+    }
+
+    .research-language-info {
+        flex: 1;
+    }
+
+    .research-language-name {
+        font-weight: 500;
+        color: var(--text-dark);
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+
+    .research-language-dropdown .language-code.text-muted {
+        font-size: 11px;
+        color: #666;
+        display: block;
+    }
+
+    /* Animation مخصوص هدر تحقیقات */
+    @keyframes researchSlideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* When header is scrolled */
+    .research-header.scrolled .research-current-language {
+        background: rgba(30, 144, 255, 0.1);
+        border-color: rgba(30, 144, 255, 0.2);
+    }
+
+    .research-header.scrolled .research-language-code {
+        color: #1e90ff;
+    }
+
+    .research-header.scrolled .research-current-language:hover {
+        background: rgba(30, 144, 255, 0.2);
+        border-color: rgba(30, 144, 255, 0.3);
+    }
+
+    /* Style for active language in dropdown */
+    .research-language-dropdown .active-language {
+        background-color: rgba(29, 97, 169, 0.08) !important;
+        border-left: 3px solid var(--accent-light-blue);
+    }
+
+    .research-language-dropdown .active-language .research-language-name {
+        color: var(--secondary-medium-blue);
+        font-weight: 600;
+    }
+
+    .research-language-dropdown .active-language .text-primary {
+        color: var(--accent-light-blue) !important;
+        font-weight: bold;
+    }
+
+    /* Highlight Turkish as default */
+    .research-language-dropdown .dropdown-item:first-child {
+        background-color: rgba(29, 97, 169, 0.05);
+    }
+
+    /* Ensure dropdown menu appears on hover for desktop */
+    @media (min-width: 992px) {
+        .research-language-selector:hover .research-language-dropdown {
+            display: block !important;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: researchSlideInDown 0.3s ease forwards;
+        }
+        
+        .research-language-selector .research-language-dropdown {
+            display: none;
+        }
+    }
+
+    /* responsive */
+    @media (max-width: 1400px) {
+        .research-header {
+            width: 95%;
+            height: 120px;
+        }
+        
+        .research-mega-menu-content {
+            width: 95vw;
+        }
+        
+        .research-main_nav_list {
+            gap: 20px;
+        }
+        
+        .research-main_nav_item > a {
+            font-size: 12px;
+            padding: 10px 6px;
+        }
+        
+        /* اصلاح اندازه لوگو در حالت responsive */
+        .research-logo_container img {
+            height: 55px;
+        }
+        
+        .research-language-selector {
+            margin-left: 10px;
+        }
+    }
+    
+    @media (max-width: 1200px) {
+        .research-main_nav_container {
+            padding-right: 20px;
+            margin-left: 30px;
+        }
+        
+        .research-main_nav_list {
+            gap: 15px;
+        }
+        
+        .research-mega-menu-content {
+            padding: 20px;
+        }
+        
+        .research-mega-col {
+            min-width: 160px;
+        }
+        
+        .research-main_nav_item > a {
+            font-size: 11px;
+            padding: 10px 4px;
+        }
+        
+        /* اصلاح اندازه لوگو در حالت responsive */
+        .research-logo_container img {
+            height: 50px;
+        }
+        
+        .research-language-selector {
+            margin-left: 5px;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .research-main_nav_container {
+            display: none;
+        }
+        
+        .research-hamburger_container {
+            display: block;
+        }
+        
+        .research-header_side {
+            display: none;
+        }
+        
+        .research-mega-menu-content {
+            display: none;
+        }
+        
+        .research-main_nav_item::before {
+            display: none;
+        }
+        
+        /* اصلاح اندازه لوگو در موبایل */
+        .research-logo_container img {
+            height: 45px;
+        }
+        
+        /* نمایش Language Selector در موبایل */
+        .research-language-selector {
+            display: block;
+            margin-left: auto;
+            margin-right: 15px;
+        }
+        
+        .research-current-language {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        
+        .research-language-code {
+            font-size: 14px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .research-header {
+            height: 100px;
+            top: 15px;
+        }
+        
+        .research-logo_container {
+            padding-left: 15px;
+        }
+        
+        /* اصلاح اندازه لوگو در موبایل کوچک */
+        .research-logo_container img {
+            height: 40px;
+        }
+
+        .research-logo_container .logo span {
+            font-size: 16px; 
+            /* کاهش سایز فونت در موبایل */
+        }
+
+        /* استایل برای کلمه Araştırma */
+        .research-logo_container .logo span {
+            display: block;
+            font-size: 18px; /* افزایش سایز فونت */
+            font-weight: bold;
+            color: white;
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        .research-language-selector {
+            margin-right: 10px;
+        }
+    }
+
+      /* استایل‌های مخصوص هدر تحقیقات */
+    
+    /* کلاس جدید برای زمانی که هدر در حالت اسکرول است */
+    .research-header.scrolled .research-main_nav_item > a {
+        color: #1e90ff; /* آبی پررنگ - می‌توانید تغییر دهید */
+        text-shadow: 0 2px 4px rgba(30, 144, 255, 0.4);
+    }
+    
+    /* حفظ رنگ آبی در هاور حتی در حالت اسکرول */
+    .research-header.scrolled .research-main_nav_item > a:hover {
+        color: var(--accent-light-blue) !important;
+        text-shadow: 0 2px 4px rgba(141, 212, 227, 0.3) !important;
+    }
+    
+    /* حفظ رنگ آبی برای لینک فعال در حالت اسکرول */
+    .research-header.scrolled .research-main_nav_item > a.active {
+        color: var(--accent-light-blue) !important;
+    }
+
+    /* تضمین کنتراست بهتر */
+    .research-header.scrolled {
+        background: rgba(9, 36, 66, 0); /* پس‌زمینه تیره‌تر در اسکرول */
+        {% comment %} border: 1px solid rgba(30, 144, 255, 0.5); /* حاشیه آبی */ {% endcomment %}
+        box-shadow: 0 8px 32px rgba(30, 144, 255, 0.2); /* سایه آبی */
+    }
+
+    /* (اختیاری) انیمیشن ملایم برای تغییر رنگ */
+    .research-main_nav_item > a {
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+</style>
+
+<header class="research-header">
+    <div class="research-header-content">
+        <!-- Logo -->
+        <div class="research-logo_container">
+            <div class="logo">
+                <a href="{% url 'maliye:maliye' %}" class="navbar-brand d-flex align-items-center">
+                    <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="{% trans "Avrasya University" %}" style="height: 80px;">
+                    <span class="ms-3 fw-bold text-primary"></span>
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="research-main_nav_container">
+            <div class="research-main_nav">
+                <ul class="research-main_nav_list">
+                    <!-- Ana Sayfa Menu -->
+                    <li class="research-main_nav_item research-mega-menu">
+                        <a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a>
+                    </li>
+                    
+                    <!-- Aday Öğrenci Menu -->
+                    <li class="research-main_nav_item research-mega-menu">
+                        <a href="{% url 'maliye:maliye' %}">{% trans "Genel Bilgiler" %}</a>
+                        {% comment %} <div class="research-mega-menu-content">
+                            <div class="research-mega-row">
+                                <div class="research-mega-col">
+                                    <h6>{% trans "ADAY ÖĞRENCİ" %}</h6>
+                                    <ul class="research-list-unstyled">
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:kontenjanlar' %}">{% trans "KONTENJANLAR" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:egitim_ucretleri' %}">{% trans "EĞİTİM ÜCRETLERİ" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:taban_puanlar' %}">{% trans "TABAN PUANLAR" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:dikey_gecis' %}">{% trans "DİKEY GEÇİŞ" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'yatay_gecis:yatay_gecis' %}">{% trans "YATAY GEÇİŞ" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:foto_galeri' %}">{% trans "FOTO GALERİ" %}</a></li>
+                                    </ul>
+                                </div>
+                                <div class="research-mega-col">
+                                    <h6>&nbsp;</h6>
+                                    <ul class="research-list-unstyled">
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:laboratuvarlar' %}">{% trans "LABORATUVARLAR" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:kampus_yasam' %}">{% trans "KAMPÜSTE YAŞAM" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:yurt_olanaklari' %}">{% trans "YURT OLANAKLARI" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:cap_yan_dal' %}">{% trans "ÇAP/YANDAL" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:yabanci_ogrenci' %}">{% trans "YABANCI UYRUKLU ÖĞRENCİ" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:basvuru' %}">{% trans "ERASMUS" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                    </li>
+                    
+                    <!-- Öğrenci İşleri Menu -->
+                    <li class="research-main_nav_item research-mega-menu">
+                        <a href="{% url 'maliye:kalite_yonetimi' %}">{% trans "Kalite Yönetimi" %}</a>
+                    </li>
+
+                    <!-- Akademik Menu -->
+                    <li class="research-main_nav_item research-mega-menu">
+                        <a href="{% url 'core:iletisim' %}">{% trans "Öğrenci" %}</a>
+                    </li>
+
+                    <!-- Araştırma Menu -->
+                    <li class="research-main_nav_item research-mega-menu">
+                        <a href="{% url 'maliye:ders_programi' %}">{% trans "Ders Programı" %}</a>
+                    </li>
+
+                    <!-- İletişim Menu -->
+                    <li class="research-main_nav_item research-mega-menu">
+                        <a href="{% url 'core:iletisim' %}">{% trans "İletişim" %}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Language Selector Dropdown - اضافه شده -->
+        <div class="research-language-selector">
+            <!-- Current Language Display -->
+            <div class="research-current-language" id="research-language-toggle">
+                <div class="research-language-flag me-2">
+                    {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}
+                        <span class="flag-icon flag-icon-tr"></span>
+                    {% elif CURRENT_LANG == 'fa' %}
+                        <span class="flag-icon flag-icon-ir"></span>
+                    {% elif CURRENT_LANG == 'ar' %}
+                        <span class="flag-icon flag-icon-sa"></span>
+                    {% elif CURRENT_LANG == 'ru' %}
+                        <span class="flag-icon flag-icon-ru"></span>
+                    {% elif CURRENT_LANG == 'de' %}
+                        <span class="flag-icon flag-icon-de"></span>
+                    {% else %}
+                        <span class="flag-icon flag-icon-gb"></span>
+                    {% endif %}
+                </div>
+                <span class="research-language-code">
+                    {% if CURRENT_LANG %}{{ CURRENT_LANG|upper }}{% else %}TR{% endif %}
+                </span>
+            </div>
+            
+            <!-- Language Options Dropdown Menu -->
+            <div class="research-language-dropdown" id="research-language-dropdown">
+                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}active-language{% endif %}" 
+                     onclick="changeLanguage('tr')">
+                    <span class="flag-icon flag-icon-tr me-3"></span>
+                    <div class="research-language-info">
+                        <div class="research-language-name">{% trans "Türkçe" %}</div>
+                        <div class="language-code text-muted small">TR</div>
+                    </div>
+                    {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}
+                    <span class="ms-auto text-primary">✓</span>
+                    {% endif %}
+                </div>
+                
+                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'en' %}active-language{% endif %}" 
+                     onclick="changeLanguage('en')">
+                    <span class="flag-icon flag-icon-gb me-3"></span>
+                    <div class="research-language-info">
+                        <div class="research-language-name">{% trans "English" %}</div>
+                        <div class="language-code text-muted small">EN</div>
+                    </div>
+                    {% if CURRENT_LANG == 'en' %}
+                    <span class="ms-auto text-primary">✓</span>
+                    {% endif %}
+                </div>
+                
+                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'fa' %}active-language{% endif %}" 
+                     onclick="changeLanguage('fa')">
+                    <span class="flag-icon flag-icon-ir me-3"></span>
+                    <div class="research-language-info">
+                        <div class="research-language-name">{% trans "فارسی" %}</div>
+                        <div class="language-code text-muted small">FA</div>
+                    </div>
+                    {% if CURRENT_LANG == 'fa' %}
+                    <span class="ms-auto text-primary">✓</span>
+                    {% endif %}
+                </div>
+                
+                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'ar' %}active-language{% endif %}" 
+                     onclick="changeLanguage('ar')">
+                    <span class="flag-icon flag-icon-sa me-3"></span>
+                    <div class="research-language-info">
+                        <div class="research-language-name">{% trans "العربية" %}</div>
+                        <div class="language-code text-muted small">AR</div>
+                    </div>
+                    {% if CURRENT_LANG == 'ar' %}
+                    <span class="ms-auto text-primary">✓</span>
+                    {% endif %}
+                </div>
+                
+                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'ru' %}active-language{% endif %}" 
+                     onclick="changeLanguage('ru')">
+                    <span class="flag-icon flag-icon-ru me-3"></span>
+                    <div class="research-language-info">
+                        <div class="research-language-name">{% trans "Русский" %}</div>
+                        <div class="language-code text-muted small">RU</div>
+                    </div>
+                    {% if CURRENT_LANG == 'ru' %}
+                    <span class="ms-auto text-primary">✓</span>
+                    {% endif %}
+                </div>
+                
+                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'de' %}active-language{% endif %}" 
+                     onclick="changeLanguage('de')">
+                    <span class="flag-icon flag-icon-de me-3"></span>
+                    <div class="research-language-info">
+                        <div class="research-language-name">{% trans "Deutsch" %}</div>
+                        <div class="language-code text-muted small">DE</div>
+                    </div>
+                    {% if CURRENT_LANG == 'de' %}
+                    <span class="ms-auto text-primary">✓</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Hamburger Menu -->
+        <div class="research-hamburger_container">
+            <i class="fas fa-bars" style="color: white; font-size: 24px;"></i>
+        </div>
+        
+        <!-- Hidden Language Form -->
+        <form action="{% url 'core:set_language' %}" method="post" id="research-lang-form" class="d-none">
+            {% csrf_token %}
+            <input type="hidden" name="language" id="research-lang-code" value="">
+        </form>
+    </div>
+</header>
+
+<!-- Space for fixed header -->
+<div style="height: 200px;"></div>
+
+<script>
+    // اسکریپت برای هدر ثابت
+    document.addEventListener('DOMContentLoaded', function() {
+        const header = document.querySelector('.research-header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // حل مشکل transition بین منوها
+        const navItems = document.querySelectorAll('.research-main_nav_item');
+        
+        navItems.forEach(item => {
+            const megaMenu = item.querySelector('.research-mega-menu-content');
+            
+            // وقتی ماوس وارد منو می‌شود
+            item.addEventListener('mouseenter', function() {
+                // بستن سایر منوها
+                navItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // باز کردن منوی جاری
+                item.classList.add('active');
+            });
+            
+            // وقتی ماوس از منو خارج می‌شود
+            item.addEventListener('mouseleave', function(e) {
+                // بررسی کنید که آیا ماوس به منوی همسایه رفته یا نه
+                const relatedTarget = e.relatedTarget;
+                if (!relatedTarget || !item.contains(relatedTarget)) {
+                    setTimeout(() => {
+                        if (!item.matches(':hover')) {
+                            item.classList.remove('active');
+                        }
+                    }, 100);
+                }
+            });
+            
+            // وقتی ماوس وارد مگا منو می‌شود
+            if (megaMenu) {
+                megaMenu.addEventListener('mouseenter', function() {
+                    item.classList.add('active');
+                });
+                
+                megaMenu.addEventListener('mouseleave', function(e) {
+                    const relatedTarget = e.relatedTarget;
+                    if (!relatedTarget || !item.contains(relatedTarget)) {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        });
+        
+        // مدیریت Language Selector در هدر تحقیقات
+        const langToggle = document.getElementById('research-language-toggle');
+        const langDropdown = document.getElementById('research-language-dropdown');
+        
+        if (langToggle && langDropdown) {
+            // برای دسکتاپ: نمایش dropdown روی هاور
+            if (window.innerWidth >= 992) {
+                langToggle.addEventListener('mouseenter', function() {
+                    langDropdown.style.display = 'block';
+                    setTimeout(() => {
+                        langDropdown.style.opacity = '1';
+                        langDropdown.style.transform = 'translateY(0)';
+                    }, 10);
+                });
+                
+                langToggle.addEventListener('mouseleave', function(e) {
+                    if (!langToggle.contains(e.relatedTarget) && !langDropdown.contains(e.relatedTarget)) {
+                        langDropdown.style.opacity = '0';
+                        langDropdown.style.transform = 'translateY(-10px)';
+                        setTimeout(() => {
+                            langDropdown.style.display = 'none';
+                        }, 300);
+                    }
+                });
+                
+                langDropdown.addEventListener('mouseleave', function(e) {
+                    if (!langToggle.contains(e.relatedTarget) && !langDropdown.contains(e.relatedTarget)) {
+                        langDropdown.style.opacity = '0';
+                        langDropdown.style.transform = 'translateY(-10px)';
+                        setTimeout(() => {
+                            langDropdown.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            } else {
+                // برای موبایل: نمایش dropdown روی کلیک
+                langToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (langDropdown.style.display === 'block') {
+                        langDropdown.style.display = 'none';
+                    } else {
+                        langDropdown.style.display = 'block';
+                        langDropdown.style.opacity = '1';
+                        langDropdown.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                // بستن dropdown با کلیک بیرون
+                document.addEventListener('click', function(e) {
+                    if (!langToggle.contains(e.target) && !langDropdown.contains(e.target)) {
+                        langDropdown.style.display = 'none';
+                    }
+                });
+            }
+            
+            // تنظیم اولیه برای dropdown
+            langDropdown.style.display = 'none';
+            langDropdown.style.opacity = '0';
+            langDropdown.style.transform = 'translateY(-10px)';
+            langDropdown.style.transition = 'all 0.3s ease';
+        }
+        
+        // Function to get current language from cookie
+        function getCurrentLanguage() {
+            const cookieValue = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('django_language='))
+                ?.split('=')[1];
+            
+            return cookieValue || 'tr'; // Default to Turkish
+        }
+        
+        // Update UI based on cookie language
+        function updateResearchLanguageFromCookie() {
+            const lang = getCurrentLanguage();
+            const currentLangDisplay = document.querySelector('.research-language-code');
+            const currentFlag = document.querySelector('.research-language-flag .flag-icon');
+            
+            if (!currentLangDisplay || !currentFlag) return;
+            
+            // Update flag and code
+            currentFlag.className = 'flag-icon';
+            switch(lang) {
+                case 'tr':
+                    currentFlag.classList.add('flag-icon-tr');
+                    currentLangDisplay.textContent = 'TR';
+                    break;
+                case 'en':
+                    currentFlag.classList.add('flag-icon-gb');
+                    currentLangDisplay.textContent = 'EN';
+                    break;
+                case 'fa':
+                    currentFlag.classList.add('flag-icon-ir');
+                    currentLangDisplay.textContent = 'FA';
+                    break;
+                case 'ar':
+                    currentFlag.classList.add('flag-icon-sa');
+                    currentLangDisplay.textContent = 'AR';
+                    break;
+                case 'ru':
+                    currentFlag.classList.add('flag-icon-ru');
+                    currentLangDisplay.textContent = 'RU';
+                    break;
+                case 'de':
+                    currentFlag.classList.add('flag-icon-de');
+                    currentLangDisplay.textContent = 'DE';
+                    break;
+                default:
+                    currentFlag.classList.add('flag-icon-tr');
+                    currentLangDisplay.textContent = 'TR';
+            }
+            
+            // Update active items in dropdown
+            document.querySelectorAll('.research-language-dropdown .dropdown-item').forEach(item => {
+                item.classList.remove('active-language');
+                item.querySelector('.text-primary')?.remove();
+                
+                // Check if this item matches current language
+                const onclickAttr = item.getAttribute('onclick');
+                if (onclickAttr && onclickAttr.includes(`'${lang}'`)) {
+                    item.classList.add('active-language');
+                    const checkmark = document.createElement('span');
+                    checkmark.className = 'ms-auto text-primary';
+                    checkmark.innerHTML = '✓';
+                    item.appendChild(checkmark);
+                }
+            });
+        }
+        
+        // Update language UI on page load
+        updateResearchLanguageFromCookie();
+        
+        // Re-update on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 992 && langDropdown) {
+                langDropdown.style.display = 'none';
+            }
+        });
+    });
+    
+    // تابع تغییر زبان برای هدر تحقیقات
+    function changeLanguage(lang) {
+        const form = document.getElementById('research-lang-form');
+        const langInput = document.getElementById('research-lang-code');
+        
+        // Set selected language
+        langInput.value = lang;
+        
+        // Optional: Add loading indicator
+        const currentLang = document.querySelector('.research-current-language');
+        if (currentLang) {
+            currentLang.style.opacity = '0.7';
+        }
+        
+        // Submit form
+        form.submit();
+    }
+</script>

@@ -1,0 +1,402 @@
+<!-- iletisim/templates/iletisim/duyuru_detay.html -->
+{% extends 'core/base.html' %}
+{% block title %}{{ duyuru.baslik }} - İletişim Fakültesi{% endblock %}
+
+{% block content %}
+<div class="row">
+     <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'iletisim/sidebar.html' %}
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'iletisim:iletisim' %}">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'iletisim:duyurular' %}">Duyurular</a></li>
+                <li class="breadcrumb-item active">{{ duyuru.baslik|truncatewords:5 }}</li>
+            </ol>
+        </nav>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <!-- هدر اطلاعیه -->
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge bg-primary">{{ duyuru.get_kategori_display }}</span>
+                        {% if duyuru.onemli %}
+                        <span class="badge bg-warning">
+                            <i class="bi bi-exclamation-triangle me-1"></i>Önemli
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <h1 class="text-primary mb-3">{{ duyuru.baslik }}</h1>
+                    
+                    <div class="d-flex align-items-center text-muted">
+                        <i class="bi bi-calendar-event me-2"></i>
+                        <span>{{ duyuru.yayin_tarihi|date:"d F Y H:i" }}</span>
+                    </div>
+                </div>
+
+                <!-- محتوای اطلاعیه -->
+                <div class="content mb-5">
+                    {% if duyuru.icerik %}
+                        {{ duyuru.icerik|linebreaks }}
+                    {% else %}
+                        <p class="text-muted">İçerik bulunmamaktadır.</p>
+                    {% endif %}
+                </div>
+
+                <!-- فایل‌های ضمیمه -->
+                {% if duyuru.dosya or duyuru.mevcut_dosyalar %}
+                <div class="mt-4 pt-3 border-top">
+                    <h5 class="text-secondary mb-3">
+                        <i class="bi bi-paperclip me-2"></i>İndirilebilir Dosyalar
+                    </h5>
+                    
+                    <!-- فایل اصلی اطلاعیه -->
+                    {% if duyuru.dosya %}
+                    <div class="mb-3">
+                        <a href="{{ duyuru.dosya.url }}" class="btn btn-outline-primary" download>
+                            <i class="bi bi-download me-2"></i>
+                            {{ duyuru.dosya_adi }}
+                        </a>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- فایل‌های ضمیمه از اطلاعیه اصلی -->
+                    {% with dosyalar=duyuru.mevcut_dosyalar %}
+                        {% if dosyalar %}
+                        <div class="row">
+                            {% for dosya in dosyalar %}
+                            <div class="col-md-6 mb-3">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body text-center">
+                                        <i class="bi {{ dosya.icon }} display-4 text-primary mb-2"></i>
+                                        <h6 class="card-title">{{ dosya.adi }}</h6>
+                                        <p class="text-muted small">{{ dosya.tur }}</p>
+                                        {% if dosya.aciklama %}
+                                            <p class="card-text small">{{ dosya.aciklama|truncatewords:10 }}</p>
+                                        {% endif %}
+                                        <a href="{{ dosya.url }}" class="btn btn-primary btn-sm" download>
+                                            <i class="bi bi-download"></i> İndir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                {% endif %}
+
+                <!-- اطلاعیه‌های مرتبط -->
+                {% if ilgili_duyurular %}
+                <div class="mt-5 pt-4 border-top">
+                    <h4 class="text-secondary mb-3">
+                        <i class="bi bi-link me-2"></i>İlgili Duyurular
+                    </h4>
+                    <div class="row">
+                        {% for ilgili in ilgili_duyurular %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <span class="badge bg-primary small">{{ ilgili.get_kategori_display }}</span>
+                                        {% if ilgili.onemli %}
+                                        <span class="badge bg-warning small">Önemli</span>
+                                        {% endif %}
+                                    </div>
+                                    <h6 class="card-title">
+                                        <a href="{% url 'iletisim:duyuru_detay' ilgili.id %}" class="text-decoration-none text-dark">
+                                            {{ ilgili.baslik|truncatewords:8 }}
+                                        </a>
+                                    </h6>
+                                    <small class="text-muted">
+                                        <i class="bi bi-calendar-event me-1"></i>
+                                        {{ ilgili.yayin_tarihi|date:"d M Y" }}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- دکمه‌های ناوبری -->
+                <div class="mt-4 d-flex justify-content-between">
+                    <a href="{% url 'iletisim:duyurular' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-2"></i>Tüm Duyurular
+                    </a>
+                    <a href="{% url 'iletisim:iletisim' %}" class="btn btn-outline-primary">
+                        <i class="bi bi-house me-2"></i>Ana Sayfa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.content p {
+    margin-bottom: 1rem;
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.5em 0.8em;
+}
+
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.list-group-item.active {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    font-weight: 700;
+}
+
+/* استایل‌های واکنش‌گرا */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .content {
+        font-size: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* استایل‌های مخصوص ارتباطات */
+.communication-highlight {
+    background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+}
+
+.communication-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #6f42c1;
+}
+
+.communication-term {
+    background-color: #e8f4f8;
+    border-left: 4px solid #17a2b8;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.media-note {
+    background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+    color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت لینک‌های فایل برای نمایش بهتر
+    const fileLinks = document.querySelectorAll('a[download]');
+    fileLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const fileName = this.textContent.trim();
+            console.log(`İletişim dosyası indiriliyor: ${fileName}`);
+            // می‌توانید اینجا analytics یا tracking اضافه کنید
+        });
+    });
+    
+    // هایلایت کردن کلمات کلیدی در محتوا (مخصوص ارتباطات)
+    const contentElement = document.querySelector('.content');
+    if (contentElement) {
+        const communicationKeywords = [
+            'iletişim', 'medya', 'haber', 'gazetecilik', 'radyo', 
+            'televizyon', 'sosyal medya', 'reklam', 'halkla ilişkiler',
+            'seminer', 'workshop', 'konferans', 'sunum', 'proje',
+            'staj', 'kariyer', 'network', 'dijital', 'içerik'
+        ];
+        let contentHtml = contentElement.innerHTML;
+        
+        communicationKeywords.forEach(keyword => {
+            const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
+            contentHtml = contentHtml.replace(regex, '<mark class="communication-mark">$1</mark>');
+        });
+        
+        contentElement.innerHTML = contentHtml;
+    }
+    
+    // اضافه کردن استایل برای هایلایت ارتباطات
+    const style = document.createElement('style');
+    style.textContent = `
+        .communication-mark {
+            background-color: #6f42c1;
+            color: white;
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .media-alert {
+            background: linear-gradient(135deg, #e83e8c 0%, #dc3545 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 5px solid #6f42c1;
+        }
+        
+        .event-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .communication-card {
+            background: linear-gradient(135deg, #6f42c1 0%, #6610f2 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // اضافه کردن هشدار برای اطلاعیه‌های مهم رسانه‌ای
+    if (document.querySelector('.badge.bg-warning')) {
+        const mediaAlert = document.createElement('div');
+        mediaAlert.className = 'media-alert';
+        mediaAlert.innerHTML = `
+            <h6 class="mb-2"><i class="bi bi-broadcast me-2"></i>Önemli İletişim Duyurusu</h6>
+            <p class="mb-0 small">Bu duyuru medya, etkinlik veya önemli iletişim faaliyetleri ile ilgilidir.</p>
+        `;
+        const contentSection = document.querySelector('.content');
+        if (contentSection) {
+            contentSection.parentNode.insertBefore(mediaAlert, contentSection);
+        }
+    }
+    
+    // اضافه کردن نکات رسانه‌ای برای محتوای خاص
+    const eventTerms = ['seminer', 'workshop', 'konferans', 'etkinlik', 'sunum'];
+    eventTerms.forEach(term => {
+        if (contentElement && contentElement.textContent.toLowerCase().includes(term)) {
+            const eventNote = document.createElement('div');
+            eventNote.className = 'event-note';
+            eventNote.innerHTML = `
+                <h6 class="mb-2"><i class="bi bi-calendar-event me-2"></i>Etkinlik Notu</h6>
+                <p class="mb-0 small">Bu içerik bir iletişim etkinliği hakkında bilgi içermektedir. Katılım için kayıt gerekebilir.</p>
+            `;
+            contentElement.parentNode.insertBefore(eventNote, contentElement.nextSibling);
+            break;
+        }
+    });
+    
+    // اضافه کردن کارت ارتباطات برای اطلاعیه‌های مربوط به پروژه‌ها
+    const projectTerms = ['proje', 'staj', 'kariyer', 'network', 'işbirliği'];
+    projectTerms.forEach(term => {
+        if (contentElement && contentElement.textContent.toLowerCase().includes(term)) {
+            const communicationCard = document.createElement('div');
+            communicationCard.className = 'communication-card';
+            communicationCard.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-chat-square-text display-6 me-3"></i>
+                    <div>
+                        <h5 class="mb-1">İletişim Projesi</h5>
+                        <p class="mb-0 small">Bu duyuru bir iletişim projesi veya kariyer fırsatı hakkında bilgi içermektedir.</p>
+                    </div>
+                </div>
+            `;
+            contentElement.parentNode.insertBefore(communicationCard, contentElement);
+            break;
+        }
+    });
+    
+    // اضافه کردن قابلیت اشتراک‌گذاری
+    const shareButtons = document.createElement('div');
+    shareButtons.className = 'mt-4 pt-3 border-top';
+    shareButtons.innerHTML = `
+        <h6 class="text-secondary mb-3">
+            <i class="bi bi-share me-2"></i>Bu Duyuruyu Paylaş
+        </h6>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm share-btn" data-platform="twitter">
+                <i class="bi bi-twitter me-1"></i>Twitter
+            </button>
+            <button class="btn btn-outline-primary btn-sm share-btn" data-platform="linkedin">
+                <i class="bi bi-linkedin me-1"></i>LinkedIn
+            </button>
+            <button class="btn btn-outline-primary btn-sm share-btn" data-platform="facebook">
+                <i class="bi bi-facebook me-1"></i>Facebook
+            </button>
+        </div>
+    `;
+    
+    const navigationSection = document.querySelector('.mt-4.d-flex');
+    if (navigationSection) {
+        navigationSection.parentNode.insertBefore(shareButtons, navigationSection);
+    }
+    
+    // مدیریت دکمه‌های اشتراک‌گذاری
+    document.querySelectorAll('.share-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const platform = this.getAttribute('data-platform');
+            const title = encodeURIComponent('{{ duyuru.baslik }}');
+            const url = encodeURIComponent(window.location.href);
+            
+            let shareUrl = '';
+            switch(platform) {
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+            }
+            
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        });
+    });
+});
+</script>
+{% endblock %}

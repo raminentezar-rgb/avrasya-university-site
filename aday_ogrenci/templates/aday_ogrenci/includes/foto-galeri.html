@@ -1,0 +1,1159 @@
+
+{% extends 'aday_ogrenci/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Avrasya Üniversitesi - FOTO GALERİ{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>FOTO GALERI </h1>
+            <p class="hero-subtitle"></p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid foto-galeri-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'aday_ogrenci/aday_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی سمت راست -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="gallery-main-content">
+                <!-- گالری اصلی با اسلایدر -->
+                <div class="main-gallery-section">
+                    <div class="gallery-slider-container">
+                        <!-- اسلایدر اصلی -->
+                        <div class="main-slider-wrapper">
+                            <div class="main-slider" id="mainSlider">
+                                <!-- Slide 1 - Pelitli -->
+                                <div class="slider-item active">
+                                    <img src="{% static 'core/img/gallery/pelitli/Pelitli-Gece-scaled.jpg' %}" 
+                                         alt="Pelitli Yerleşkesi Gece" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Pelitli Yerleşkesi</h3>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 2 - Pelitli -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/pelitli/resimler-scaled.jpg' %}" 
+                                         alt="Pelitli Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Pelitli Yerleşkesi</h3>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 3 - Ömer Yıldız -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız6.jpg' %}" 
+                                         alt="Yalıncak Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yalıncak Yerleşkesi</h3>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 4 - Ömer Yıldız -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız2.jpg' %}" 
+                                         alt="Yalıncak Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yalıncak Yerleşkesi</h3>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 5 - Ömer Yıldız -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız4.jpg' %}" 
+                                         alt="Yalıncak Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yalıncak Yerleşkesi</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 6 - Ömer Yıldız -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız1.jpg' %}" 
+                                         alt="Yalıncak Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yalıncak Yerleşkesi</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 7 - Ömer Yıldız -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız3.jpg' %}" 
+                                         alt="Yalıncak Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yalıncak Yerleşkesi</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 8 - Ömer Yıldız -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız5.jpg' %}" 
+                                         alt="Yalıncak Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yalıncak Yerleşkesi</h3>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 9 - Kasüstü -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/kasustu/kasustu4.jpg' %}" 
+                                         alt="Kasüstü" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Kasüstü</h3>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 10 - Kasüstü -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/kasustu/kasustu1.jpg' %}" 
+                                         alt="Kasüstü" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Kasüstü</h3>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 11 - Kasüstü -->
+                                {% comment %} <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/kasustu/kasustu7.jpg' %}" 
+                                         alt="Kasüstü" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Kasüstü</h3>
+                                    </div>
+                                </div> {% endcomment %}
+
+                                <!-- Slide 12 - Kasüstü -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/kasustu/kasustu5.jpg' %}" 
+                                         alt="Kasüstü" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Kasüstü</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 13 - Kasüstü -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/kasustu/kasustu6.jpg' %}" 
+                                         alt="Kasüstü" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Kasüstü</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 14 - Kasüstü -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/kasustu/kasustu3.jpg' %}" 
+                                         alt="Kasüstü" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Kasüstü</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 15 - Yomra -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/yomra/yomra1.jpg' %}" 
+                                         alt="Yomra Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yomra Yerleşkesi</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 16 - Yomra -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/yomra/yomra2.jpg' %}" 
+                                         alt="Yomra Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yomra Yerleşkesi</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 17 - Yomra -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/yomra/yomra3.jpg' %}" 
+                                         alt="Yomra Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yomra Yerleşkesi</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 18 - Yomra -->
+                                <div class="slider-item">
+                                    <img src="{% static 'core/img/gallery/yomra/yomra4.jpg' %}" 
+                                         alt="Yomra Yerleşkesi" 
+                                         class="slider-image">
+                                    <div class="slider-overlay">
+                                        <h3>Yomra Yerleşkesi</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- کنترل‌های اسلایدر -->
+                            <button class="slider-control prev" onclick="prevSlide()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slider-control next" onclick="nextSlide()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            
+                            <!-- نقاط اسلایدر -->
+                            <div class="slider-dots">
+                                <span class="dot active" onclick="goToSlide(0)"></span>
+                                <span class="dot" onclick="goToSlide(1)"></span>
+                                <span class="dot" onclick="goToSlide(2)"></span>
+                                <span class="dot" onclick="goToSlide(3)"></span>
+                                <span class="dot" onclick="goToSlide(4)"></span>
+                                <span class="dot" onclick="goToSlide(5)"></span>
+                                <span class="dot" onclick="goToSlide(6)"></span>
+                                <span class="dot" onclick="goToSlide(7)"></span>
+                                <span class="dot" onclick="goToSlide(8)"></span>
+                                <span class="dot" onclick="goToSlide(9)"></span>
+                                <span class="dot" onclick="goToSlide(10)"></span>
+                                <span class="dot" onclick="goToSlide(11)"></span>
+                                <span class="dot" onclick="goToSlide(12)"></span>
+                                <span class="dot" onclick="goToSlide(13)"></span>
+                                <span class="dot" onclick="goToSlide(14)"></span>
+                                <span class="dot" onclick="goToSlide(15)"></span>
+                                <span class="dot" onclick="goToSlide(16)"></span>
+                                <span class="dot" onclick="goToSlide(17)"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- دکمه مشاهده همه عکس‌ها -->
+                    <div class="view-all-btn-container">
+                        <button class="btn-view-all" onclick="showAllGallery()">
+                            <i class="fas fa-images"></i> Tüm Fotoğrafları Gör
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- گالری کوچک زیر اسلایدر -->
+                <div class="thumbnail-gallery" id="thumbnailGallery">
+                    <div class="thumbnail-container">
+                        <!-- Thumbnail 1: Slide 1 -->
+                        <div class="thumbnail-item active" onclick="goToSlide(0)">
+                            <img src="{% static 'core/img/gallery/pelitli/Pelitli-Gece-scaled.jpg' %}" 
+                                 alt="Pelitli Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 2: Slide 2 -->
+                        <div class="thumbnail-item" onclick="goToSlide(1)">
+                            <img src="{% static 'core/img/gallery/pelitli/resimler-scaled.jpg' %}" 
+                                 alt="Pelitli Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 3: Slide 3 -->
+                        <div class="thumbnail-item" onclick="goToSlide(2)">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız6.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 4: Slide 4 -->
+                        <div class="thumbnail-item" onclick="goToSlide(3)">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız2.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 5: Slide 5 -->
+                        <div class="thumbnail-item" onclick="goToSlide(4)">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız4.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 6: Slide 6 -->
+                        <div class="thumbnail-item" onclick="goToSlide(5)">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız1.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 7: Slide 7 -->
+                        <div class="thumbnail-item" onclick="goToSlide(6)">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız3.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 8: Slide 8 -->
+                        <div class="thumbnail-item" onclick="goToSlide(7)">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız5.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 9: Slide 9 -->
+                        <div class="thumbnail-item" onclick="goToSlide(8)">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu4.jpg' %}" 
+                                 alt="Kasüstü">
+                        </div>
+                        <!-- Thumbnail 10: Slide 10 -->
+                        <div class="thumbnail-item" onclick="goToSlide(9)">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu1.jpg' %}" 
+                                 alt="Kasüstü">
+                        </div>
+                        <!-- Thumbnail 11: Slide 11 -->
+                        {% comment %} <div class="thumbnail-item" onclick="goToSlide(10)">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu7.jpg' %}" 
+                                 alt="Kasüstü">
+                        </div> {% endcomment %}
+                        <!-- Thumbnail 12: Slide 12 -->
+                        <div class="thumbnail-item" onclick="goToSlide(11)">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu5.jpg' %}" 
+                                 alt="Kasüstü">
+                        </div>
+                        <!-- Thumbnail 13: Slide 13 -->
+                        <div class="thumbnail-item" onclick="goToSlide(12)">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu6.jpg' %}" 
+                                 alt="Kasüstü">
+                        </div>
+                        <!-- Thumbnail 14: Slide 14 -->
+                        <div class="thumbnail-item" onclick="goToSlide(13)">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu3.jpg' %}" 
+                                 alt="Kasüstü">
+                        </div>
+                        <!-- Thumbnail 15: Slide 15 -->
+                        <div class="thumbnail-item" onclick="goToSlide(14)">
+                            <img src="{% static 'core/img/gallery/yomra/yomra1.jpg' %}" 
+                                 alt="Yomra Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 16: Slide 16 -->
+                        <div class="thumbnail-item" onclick="goToSlide(15)">
+                            <img src="{% static 'core/img/gallery/yomra/yomra2.jpg' %}" 
+                                 alt="Yomra Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 17: Slide 17 -->
+                        <div class="thumbnail-item" onclick="goToSlide(16)">
+                            <img src="{% static 'core/img/gallery/yomra/yomra3.jpg' %}" 
+                                 alt="Yomra Yerleşkesi">
+                        </div>
+                        <!-- Thumbnail 18: Slide 18 -->
+                        <div class="thumbnail-item" onclick="goToSlide(17)">
+                            <img src="{% static 'core/img/gallery/yomra/yomra4.jpg' %}" 
+                                 alt="Yomra Yerleşkesi">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- گالری کامل (پنهان) -->
+                <div class="full-gallery" id="fullGallery" style="display: none;">
+                    <div class="full-gallery-header">
+                        <h3>Tüm Fotoğraflar</h3>
+                        <button class="btn-close-gallery" onclick="hideAllGallery()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="full-gallery-grid">
+                        <!-- تصویر 1: Slide 1 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/pelitli/Pelitli-Gece-scaled.jpg' %}" 
+                                 alt="Pelitli Yerleşkesi Gece"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 2: Slide 2 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/pelitli/resimler-scaled.jpg' %}" 
+                                 alt="Pelitli Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 3: Slide 3 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız6.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 4: Slide 4 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız2.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 5: Slide 5 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız4.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 6: Slide 6 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız1.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 7: Slide 7 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız3.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 8: Slide 8 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/omer Yıldız/omer Yıldız5.jpg' %}" 
+                                 alt="Yalıncak Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 9: Slide 9 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu4.jpg' %}" 
+                                 alt="Kasüstü"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 10: Slide 10 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu1.jpg' %}" 
+                                 alt="Kasüstü"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 11: Slide 11 -->
+                        {% comment %} <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu7.jpg' %}" 
+                                 alt="Kasüstü"
+                                 onclick="openLightbox(this)">
+                        </div> {% endcomment %}
+                        <!-- تصویر 12: Slide 12 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu5.jpg' %}" 
+                                 alt="Kasüstü"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 13: Slide 13 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu6.jpg' %}" 
+                                 alt="Kasüstü"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 14: Slide 14 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/kasustu/kasustu3.jpg' %}" 
+                                 alt="Kasüstü"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 15: Slide 15 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/yomra/yomra1.jpg' %}" 
+                                 alt="Yomra Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 16: Slide 16 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/yomra/yomra2.jpg' %}" 
+                                 alt="Yomra Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 17: Slide 17 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/yomra/yomra3.jpg' %}" 
+                                 alt="Yomra Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                        <!-- تصویر 18: Slide 18 -->
+                        <div class="full-gallery-item">
+                            <img src="{% static 'core/img/gallery/yomra/yomra4.jpg' %}" 
+                                 alt="Yomra Yerleşkesi"
+                                 onclick="openLightbox(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="lightbox-prev" onclick="changeLightboxImage(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-next" onclick="changeLightboxImage(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<style>
+/* Container */
+.foto-galeri-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.gallery-main-content {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* Hero Title Styling */
+.hero-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f79f10 !important;
+    margin-top: 20px;
+    display: block;
+}
+
+/* Main Slider */
+.main-slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.main-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slider-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slider-item.active {
+    opacity: 1;
+}
+
+.slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.slider-item.active .slider-image:hover {
+    transform: scale(1.02);
+}
+
+.slider-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.slider-overlay h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    color: white;
+}
+
+/* Slider Controls */
+.slider-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-control:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-control.prev {
+    left: 20px;
+}
+
+.slider-control.next {
+    right: 20px;
+}
+
+/* Slider Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    background: white;
+}
+
+/* View All Button */
+.view-all-btn-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.btn-view-all {
+    background: var(--secondary-medium-blue);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-view-all:hover {
+    background: var(--primary-dark-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(29, 97, 169, 0.3);
+}
+
+/* Thumbnail Gallery */
+.thumbnail-gallery {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.thumbnail-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.thumbnail-item {
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary-medium-blue);
+}
+
+.thumbnail-item.active {
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 5px 15px rgba(29, 97, 169, 0.3);
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Full Gallery */
+.full-gallery {
+    margin-top: 40px;
+    animation: fadeIn 0.5s ease;
+}
+
+.full-gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--secondary-medium-blue);
+}
+
+.full-gallery-header h3 {
+    color: var(--primary-dark-blue);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.btn-close-gallery {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-close-gallery:hover {
+    color: var(--secondary-medium-blue);
+}
+
+.full-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.full-gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    height: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.full-gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.full-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    margin: 2.5% auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+    color: #f79f10;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .foto-galeri-container {
+        padding: 15px;
+    }
+    
+    .gallery-main-content {
+        padding: 25px;
+    }
+    
+    .main-slider-wrapper {
+        height: 400px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+    }
+    
+    .gallery-main-content {
+        margin-top: 0;
+    }
+    
+    .main-slider-wrapper {
+        height: 350px;
+    }
+    
+    .slider-overlay h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .foto-galeri-container {
+        padding: 10px;
+    }
+    
+    .gallery-main-content {
+        padding: 20px;
+    }
+    
+    .main-slider-wrapper {
+        height: 300px;
+    }
+    
+    .slider-control {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .btn-view-all {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+    
+    .full-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-main-content {
+        padding: 15px;
+    }
+    
+    .main-slider-wrapper {
+        height: 250px;
+    }
+    
+    .slider-overlay {
+        padding: 20px;
+    }
+    
+    .slider-overlay h3 {
+        font-size: 18px;
+    }
+    
+    .thumbnail-item {
+        width: 100px;
+        height: 70px;
+    }
+    
+    .full-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+</style>
+
+<script>
+// اسلایدر متغیرها
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slider-item');
+const dots = document.querySelectorAll('.dot');
+const thumbnails = document.querySelectorAll('.thumbnail-item');
+let slideInterval;
+
+// آرایه تصاویر برای Lightbox - با ترتیب دقیق اسلایدرها
+const lightboxImages = [
+    "{% static 'core/img/gallery/pelitli/Pelitli-Gece-scaled.jpg' %}",
+    "{% static 'core/img/gallery/pelitli/resimler-scaled.jpg' %}",
+    "{% static 'core/img/gallery/omer Yıldız/omer Yıldız6.jpg' %}",
+    "{% static 'core/img/gallery/omer Yıldız/omer Yıldız2.jpg' %}",
+    "{% static 'core/img/gallery/omer Yıldız/omer Yıldız4.jpg' %}",
+    "{% static 'core/img/gallery/omer Yıldız/omer Yıldız1.jpg' %}",
+    "{% static 'core/img/gallery/omer Yıldız/omer Yıldız3.jpg' %}",
+    "{% static 'core/img/gallery/omer Yıldız/omer Yıldız5.jpg' %}",
+    "{% static 'core/img/gallery/kasustu/kasustu4.jpg' %}",
+    "{% static 'core/img/gallery/kasustu/kasustu1.jpg' %}",
+    "{% static 'core/img/gallery/kasustu/kasustu5.jpg' %}",
+    "{% static 'core/img/gallery/kasustu/kasustu6.jpg' %}",
+    "{% static 'core/img/gallery/kasustu/kasustu3.jpg' %}",
+    "{% static 'core/img/gallery/yomra/yomra1.jpg' %}",
+    "{% static 'core/img/gallery/yomra/yomra2.jpg' %}",
+    "{% static 'core/img/gallery/yomra/yomra3.jpg' %}",
+    "{% static 'core/img/gallery/yomra/yomra4.jpg' %}"
+];
+
+let currentLightboxIndex = 0;
+
+// تابع نمایش اسلاید
+function showSlide(n) {
+    // پنهان کردن همه اسلایدها
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    thumbnails.forEach(thumb => thumb.classList.remove('active'));
+    
+    // تنظیم اسلاید فعلی
+    currentSlide = (n + slides.length) % slides.length;
+    
+    // نمایش اسلاید فعلی
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+    thumbnails[currentSlide].classList.add('active');
+}
+
+// اسلاید بعدی
+function nextSlide() {
+    showSlide(currentSlide + 1);
+    resetSlideTimer();
+}
+
+// اسلاید قبلی
+function prevSlide() {
+    showSlide(currentSlide - 1);
+    resetSlideTimer();
+}
+
+// رفتن به اسلاید خاص
+function goToSlide(n) {
+    showSlide(n);
+    resetSlideTimer();
+}
+
+// تایمر اسلاید خودکار
+function startSlideTimer() {
+    slideInterval = setInterval(() => {
+        nextSlide();
+    }, 5000); // تغییر هر 5 ثانیه
+}
+
+function resetSlideTimer() {
+    clearInterval(slideInterval);
+    startSlideTimer();
+}
+
+// نمایش گالری کامل
+function showAllGallery() {
+    document.getElementById('fullGallery').style.display = 'block';
+    document.getElementById('thumbnailGallery').style.display = 'none';
+    document.querySelector('.view-all-btn-container').style.display = 'none';
+    document.querySelector('.main-slider-wrapper').style.display = 'none';
+}
+
+// پنهان کردن گالری کامل
+function hideAllGallery() {
+    document.getElementById('fullGallery').style.display = 'none';
+    document.getElementById('thumbnailGallery').style.display = 'block';
+    document.querySelector('.view-all-btn-container').style.display = 'block';
+    document.querySelector('.main-slider-wrapper').style.display = 'block';
+}
+
+// باز کردن Lightbox
+function openLightbox(imgElement) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    
+    // پیدا کردن ایندکس تصویر کلیک شده
+    const imgSrc = imgElement.src;
+    currentLightboxIndex = lightboxImages.findIndex(img => img === imgSrc);
+    
+    if (currentLightboxIndex === -1) currentLightboxIndex = 0;
+    
+    lightboxImg.src = lightboxImages[currentLightboxIndex];
+    lightbox.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+// تغییر تصویر در Lightbox
+function changeLightboxImage(direction) {
+    currentLightboxIndex += direction;
+    
+    if (currentLightboxIndex < 0) {
+        currentLightboxIndex = lightboxImages.length - 1;
+    } else if (currentLightboxIndex >= lightboxImages.length) {
+        currentLightboxIndex = 0;
+    }
+    
+    document.getElementById('lightbox-img').src = lightboxImages[currentLightboxIndex];
+}
+
+// بستن Lightbox
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// کلیک روی تصویر اسلایدر برای Lightbox
+slides.forEach((slide, index) => {
+    slide.addEventListener('click', () => {
+        currentLightboxIndex = index;
+        document.getElementById('lightbox-img').src = lightboxImages[currentLightboxIndex];
+        document.getElementById('lightbox').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+// بستن Lightbox با کلیک خارج از تصویر
+document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') {
+        closeLightbox();
+    }
+});
+
+// کنترل کیبورد
+document.addEventListener('keydown', (e) => {
+    if (document.getElementById('lightbox').style.display === 'block') {
+        switch(e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                changeLightboxImage(-1);
+                break;
+            case 'ArrowRight':
+                changeLightboxImage(1);
+                break;
+        }
+    } else {
+        switch(e.key) {
+            case 'ArrowLeft':
+                prevSlide();
+                break;
+            case 'ArrowRight':
+                nextSlide();
+                break;
+        }
+    }
+});
+
+// شروع تایمر هنگام لود صفحه
+document.addEventListener('DOMContentLoaded', () => {
+    startSlideTimer();
+    
+    // اضافه کردن نقاط اسلایدر متناسب با تعداد اسلایدها
+    const sliderDotsContainer = document.querySelector('.slider-dots');
+    // حذف نقاط قبلی
+    sliderDotsContainer.innerHTML = '';
+    
+    // ایجاد نقاط جدید برای هر اسلاید
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement('span');
+        dot.className = i === 0 ? 'dot active' : 'dot';
+        dot.onclick = () => goToSlide(i);
+        sliderDotsContainer.appendChild(dot);
+    }
+});
+
+// اضافه کردن افکت hover به thumbnail
+thumbnails.forEach(thumb => {
+    thumb.addEventListener('mouseenter', () => {
+        thumb.style.transform = 'translateY(-5px)';
+    });
+    
+    thumb.addEventListener('mouseleave', () => {
+        if (!thumb.classList.contains('active')) {
+            thumb.style.transform = 'translateY(0)';
+        }
+    });
+});
+</script>
+{% endblock %}
+[file content end]

@@ -1,0 +1,367 @@
+{% extends 'core/base.html' %}
+{% block title %}Sağlık Bilimleri Fakültesi - Avrasya Üniversitesi{% endblock %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'saglik_bilimleri/sidebar.html' %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Sağlık Bilimleri Fakültesi</h1>
+                        <p class="lead mb-4">
+                            İnsan sağlığına adanmış, nitelikli sağlık profesyonelleri yetiştiriyoruz.
+                        </p>
+                        <div class="d-flex gap-3">
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-hospital me-1"></i>9 Bölüm
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-person me-1"></i>25+ Akademisyen
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-clipboard-pulse me-1"></i>2+ Klinik
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-heart-pulse display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- اطلاعیه‌های مهم -->
+        {% comment %} <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">
+                    <i class="bi bi-exclamation-triangle me-2"></i>Önemli Duyurular
+                </h4>
+            </div>
+            <div class="card-body">
+                {% with onemli_duyurular=duyurular|slice:":3" %}
+                    {% if onemli_duyurular %}
+                        {% for duyuru in onemli_duyurular %}
+                        <div class="mb-3 pb-3 {% if not forloop.last %}border-bottom{% endif %}">
+                            <h6 class="mb-1">
+                                <a href="{% url 'saglik_bilimleri:duyuru_detay' duyuru.id %}" class="text-decoration-none">
+                                    {{ duyuru.baslik }}
+                                </a>
+                            </h6>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>
+                                {{ duyuru.yayin_tarihi|date:"d F Y" }}
+                            </small>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted mb-0">Henüz önemli duyuru bulunmamaktadır.</p>
+                    {% endif %}
+                {% endwith %}
+                
+                <div class="text-center mt-3">
+                    <a href="{% url 'saglik_bilimleri:duyurular' %}" class="btn btn-outline-primary btn-sm">
+                        Tüm Duyuruları Gör
+                    </a>
+                </div>
+            </div>
+        </div> {% endcomment %}
+
+        <!-- بخش‌های دانشکده -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h3 class="text-primary mb-4 border-bottom pb-2">
+                    <i class="bi bi-hospital me-2"></i>Akademik Bölümlerimiz
+                </h3>
+            </div>
+            
+            <!-- Beslenme ve Diyetetik -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-success mb-3">
+                            <i class="bi bi-egg-fried text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Beslenme ve Diyetetik</h5>
+                        <p class="card-text text-muted small mb-3">
+                            Hasta bakımı ve sağlık hizmetlerinde uzmanlaşma
+                        </p>
+                        <a href="{% url 'beslenme_diyetetik:beslenme_diyetetik' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ebelik -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-info mb-3">
+                            <i class="bi bi-motherboard text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Ebelik</h5>
+                        <p class="card-text text-muted small mb-3">
+                            Doğum ve yenidoğan bakımında uzmanlaşma
+                        </p>
+                        <a href="{% url 'ebelik:ebelik' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ergoterapi -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-warning mb-3">
+                            <i class="bi bi-hand-index text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Ergoterapi</h5>
+                        <p class="card-text text-muted small mb-3">
+                            Hareket ve fonksiyon bozukluklarının tedavisi
+                        </p>
+                        <a href="{% url 'ergoterapi:ergoterapi' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fizyoterapi ve Rehabilitasyon -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-primary mb-3">
+                            <i class="bi bi-person-standing text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Fizyoterapi ve Rehabilitasyon</h5>
+                        <p class="card-text text-muted small mb-3">
+                            Fiziksel fonksiyonların iyileştirilmesi ve rehabilitasyon
+                        </p>
+                        <a href="{% url 'fizyoterapi_rehabilitasyon:fizyoterapi_rehabilitasyon' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hemşirelik -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-danger mb-3">
+                            <i class="bi bi-heart-pulse text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Hemşirelik</h5>
+                        <p class="card-text text-muted small mb-3">
+                            Hasta bakımı ve sağlık hizmetlerinde uzmanlaşma
+                        </p>
+                        <a href="{% url 'hemsirelik:hemsirelik' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Odyoloji -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-secondary mb-3">
+                            <i class="bi bi-ear text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Odyoloji</h5>
+                        <p class="card-text text-muted small mb-3">
+                            İşitme ve denge bozukluklarının teşhis ve tedavisi
+                        </p>
+                        <a href="{% url 'odyoloji:odyoloji' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sağlık Yönetimi -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-dark mb-3">
+                            <i class="bi bi-clipboard-data text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Sağlık Yönetimi</h5>
+                        <p class="card-text text-muted small mb-3">
+                            Sağlık kuruluşlarının yönetimi ve organizasyonu
+                        </p>
+                        <a href="{% url 'saglik_yonetimi:saglik_yonetimi' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sosyal Hizmet -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-success mb-3">
+                            <i class="bi bi-people text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Sosyal Hizmet</h5>
+                        <p class="card-text text-muted small mb-3">
+                            Toplum ve bireylerin sosyal refahını geliştirme
+                        </p>
+                        <a href="{% url 'sosyal_hizmet:sosyal_hizmet' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Çocuk Gelişimi -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card department-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-info mb-3">
+                            <i class="bi bi-balloon-heart text-white"></i>
+                        </div>
+                        <h5 class="card-title text-primary mb-3">Çocuk Gelişimi</h5>
+                        <p class="card-text text-muted small mb-3">
+                            Çocukların fiziksel, zihinsel ve duygusal gelişimi
+                        </p>
+                        <a href="{% url 'cocuk_gelisimi:cocuk_gelisimi' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی */
+.department-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.department-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+}
+
+.icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.department-card:hover .icon-wrapper {
+    transform: scale(1.1);
+}
+
+.icon-wrapper i {
+    font-size: 1.8rem;
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #fd7e14;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رنگ‌های دکمه */
+.btn-primary {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-primary:hover {
+    background-color: #e56f10 !important;
+    border-color: #d9680f !important;
+}
+
+.btn-outline-primary {
+    color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<script>
+// مدیریت منوهای آبشاری
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('#facultyMenu [data-bs-toggle="collapse"]');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menuItems.forEach(otherItem => {
+                if (otherItem !== item && !otherItem.classList.contains('collapsed')) {
+                    const targetId = otherItem.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        otherItem.classList.add('collapsed');
+                        targetElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

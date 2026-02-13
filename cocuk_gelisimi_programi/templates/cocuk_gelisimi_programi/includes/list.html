@@ -1,0 +1,1041 @@
+{% extends 'cocuk_gelisimi_programi/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Çocuk Gelişimi Programı Duyuruları{% endblock %}
+
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Çocuk Gelişimi Programı Duyuruları</h1>
+            <p>Akademik Duyurular ve Haberler</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'cocuk_gelisimi_programi/cocuk_gelisimi_programi_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9">
+          <!-- Breadcrumb Navigation -->
+      <div class="content-wrapper">
+          <nav aria-label="breadcrumb" class="mb-4">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                      <a href="{% url 'duyurular:liste' %}" class="text-decoration-none">
+                          <i class="bi bi-house-door me-1"></i>Tüm Duyurular
+                      </a>
+                  </li>
+                  <li class="breadcrumb-item">
+                      <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu='FEF' %}" class="text-decoration-none">
+                          <i class="bi bi-building me-1"></i>SHMYO
+                      </a>
+                  </li>
+                  <li class="breadcrumb-item active text-primary fw-semibold" aria-current="page">
+                      <i class="bi bi-book me-1"></i> Çocuk Gelişimi Programı
+                  </li>
+              </ol>
+          </nav>
+          
+          <!-- Page Header Section -->
+          <div class="duyuru-header mb-5">
+              <div class="row align-items-center">
+                  <div class="col-lg-8 mb-4 mb-lg-0">
+                      <div class="header-gradient p-4 rounded-4">
+                          <h1 class="section-title mb-2">
+                              <i class="bi bi-book me-2"></i> Çocuk Gelişimi Programı Duyuruları
+                          </h1>
+                          <p class="section-subtitle mb-0">
+                              Çocuk Gelişimi Programı'na ait akademik duyurular, etkinlikler ve önemli haberler
+                          </p>
+                      </div>
+                  </div>
+                  <div class="col-lg-4">
+                      <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                          <div class="card-body text-center p-4">
+                              <div class="icon-wrapper mx-auto mb-3" style="background: linear-gradient(135deg, rgba(141, 212, 227, 0.2) 0%, rgba(29, 97, 169, 0.3) 100%);">
+                                  <i class="bi bi-megaphone text-primary"></i>
+                              </div>
+                              <h3 class="text-primary fw-bold mb-1">{{ toplam_duyuru }}</h3>
+                              <p class="text-muted mb-0">Toplam Duyuru</p>
+                              <small class="text-muted">Aktif ve geçmiş duyurular</small>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Search and Filter Section -->
+          <div class="duyuru-filter-section mb-5">
+              <div class="section-header">
+                  <h3 class="section-sub-title mb-3">
+                      <i class="bi bi-funnel me-2"></i>Duyuru Filtreleme
+                  </h3>
+                  <p class="section-sub-description mb-4">
+                      Çocuk Gelişimi Programı duyurularında arama yapın veya tarihe göre filtreleyin
+                  </p>
+              </div>
+              
+              <form method="get" action="{% url 'cocuk_gelisimi_programi:liste' %}" class="row g-3">
+                  <div class="col-lg-8">
+                      <div class="input-group input-group-lg">
+                          <span class="input-group-text bg-white border-end-0">
+                              {% comment %} <i class="bi bi-search text-primary"></i> {% endcomment %}
+                          </span>
+                          <input 
+                              type="text" 
+                              class="form-control border-start-0 ps-0" 
+                              id="q" 
+                              name="q" 
+                              value="{{ search_query }}"
+                              placeholder="Çocuk Gelişimi Programı duyurularında ara..."
+                              style="height: 56px;"
+                          >
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="input-group input-group-lg">
+                          <span class="input-group-text bg-white border-end-0">
+                              {% comment %} <i class="bi bi-calendar3 text-primary"></i> {% endcomment %}
+                          </span>
+                          <input 
+                              type="date" 
+                              class="form-control border-start-0 ps-0" 
+                              id="tarih" 
+                              name="tarih" 
+                              value="{{ tarih_query }}"
+                              style="height: 56px;"
+                          >
+                      </div>
+                  </div>
+                  <div class="col-lg-1 d-flex align-items-start">
+                      <button type="submit" class="btn btn-primary btn-lg w-100 h-100">
+                          <i class="bi bi-search"></i>
+                      </button>
+                  </div>
+              </form>
+              
+              {% if search_query or tarih_query %}
+              <div class="mt-4 p-3 bg-light rounded-3">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between">
+                      <div>
+                          <span class="badge bg-primary me-2">Aktif Filtreler</span>
+                          {% if search_query %}
+                          <span class="badge bg-secondary me-2">
+                              <i class="bi bi-search me-1"></i>"{{ search_query }}"
+                          </span>
+                          {% endif %}
+                          {% if tarih_query %}
+                          <span class="badge bg-secondary me-2">
+                              <i class="bi bi-calendar3 me-1"></i>{{ tarih_query }}
+                          </span>
+                          {% endif %}
+                      </div>
+                      <a href="{% url 'cocuk_gelisimi_programi:liste' %}" class="btn btn-outline-danger btn-sm">
+                          <i class="bi bi-x-circle me-1"></i> Filtreleri Temizle
+                      </a>
+                  </div>
+              </div>
+              {% endif %}
+          </div>
+          
+          <!-- Announcements List -->
+          <div class="duyuru-list-section">
+              <div class="section-header mb-4">
+                  <h3 class="section-sub-title mb-3">
+                      <i class="bi bi-bell me-2"></i>Çocuk Gelişimi Programı Duyuruları
+                  </h3>
+                  {% if duyurular %}
+                  <p class="section-sub-description mb-0">
+                      Toplam <span class="fw-bold text-primary">{{ duyurular|length }}</span> Çocuk Gelişimi Programı duyurusu listeleniyor
+                  </p>
+                  {% endif %}
+              </div>
+              
+              {% if duyurular %}
+              <div class="row g-4">
+                  {% for duyuru in duyurular %}
+                  <div class="col-lg-6">
+                      <div class="duyuru-card {% if duyuru.onemli %}duyuru-card-onemli{% endif %}">
+                          <div class="duyuru-card-header">
+                              <div class="d-flex justify-content-between align-items-center mb-3">
+                                  <div class="d-flex flex-wrap gap-2">
+                                      <span class="duyuru-category">
+                                          <i class="bi bi-building me-1"></i>{{ duyuru.get_fakulte_display }}
+                                      </span>
+                                      <span class="duyuru-category" style="background: linear-gradient(135deg, #8dd4e3 0%, #4a9db8 100%);">
+                                          <i class="bi bi-book me-1"></i>Çocuk Gelişimi Programı
+                                      </span>
+                                  </div>
+                                  <div class="duyuru-date">
+                                      <i class="bi bi-calendar-event me-2"></i>
+                                      {{ duyuru.yayin_tarihi|date:'d F Y' }}
+                                  </div>
+                              </div>
+                              
+                              {% if duyuru.onemli %}
+                              <div class="duyuru-priority">
+                                  <span class="priority-dot"></span>
+                                  <span class="priority-text">Önemli Duyuru</span>
+                              </div>
+                              {% endif %}
+                          </div>
+                          
+                          <div class="duyuru-card-body">
+                              <h3 class="duyuru-title">
+                                  <a href="{% url 'cocuk_gelisimi_programi:detay' duyuru.slug %}">
+                                      {{ duyuru.baslik }}
+                                  </a>
+                              </h3>
+                              
+                              <div class="duyuru-description">
+                                  {% if duyuru.ozet %}
+                                      {{ duyuru.ozet|truncatewords:40 }}
+                                  {% else %}
+                                      {{ duyuru.icerik|truncatewords:40 }}
+                                  {% endif %}
+                              </div>
+                              
+                              {% with dosyalar=duyuru.mevcut_dosyalar %}
+                              {% if dosyalar %}
+                              <div class="mt-3">
+                                  <div class="d-flex align-items-center mb-2">
+                                      <i class="bi bi-paperclip me-2 text-primary"></i>
+                                      <small class="text-muted">Ekli Dosyalar:</small>
+                                  </div>
+                                  <div class="d-flex flex-wrap gap-2">
+                                      {% for dosya in dosyalar %}
+                                      <a href="{{ dosya.url }}" 
+                                        class="btn btn-outline-primary btn-sm d-flex align-items-center" 
+                                        download 
+                                        title="{{ dosya.adi }}">
+                                          <i class="bi {{ dosya.icon }} me-1"></i>
+                                          <span class="text-truncate" style="max-width: 120px;">
+                                              {{ dosya.tur }}
+                                          </span>
+                                      </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                              {% endif %}
+                              {% endwith %}
+                          </div>
+                          
+                          <div class="duyuru-card-footer">
+                              <div class="d-flex justify-content-between align-items-center">
+                                  <a href="{% url 'cocuk_gelisimi_programi:detay' duyuru.slug %}" class="duyuru-read-more">
+                                      Devamını Oku
+                                      <i class="bi bi-arrow-right ms-2"></i>
+                                  </a>
+                                  
+                                  <div class="duyuru-meta">
+                                      <span class="meta-item">
+                                          <i class="bi bi-clock me-1"></i>
+                                          {{ duyuru.yayin_tarihi|timesince }} önce
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+              </div>
+              {% else %}
+              <div class="duyuru-empty-state">
+                  <div class="empty-state-icon">
+                      <i class="bi bi-book"></i>
+                  </div>
+                  <h4 class="mb-3">Çocuk Gelişimi Programı Duyurusu Bulunamadı</h4>
+                  <p class="mb-4">
+                      {% if search_query or tarih_query %}
+                      Arama kriterlerinize uygun Çocuk Gelişimi Programı duyurusu bulunamadı. Lütfen farklı anahtar kelimelerle tekrar deneyin.
+                      {% else %}
+                      Çocuk Gelişimi Programı bölümü için henüz duyuru paylaşılmamıştır. Yeni duyuruları takip etmek için lütfen daha sonra tekrar ziyaret edin.
+                      {% endif %}
+                  </p>
+                  <div class="duyuru-filter-buttons justify-content-center">
+                      <a href="{% url 'cocuk_gelisimi_programi:liste' %}" class="filter-btn active">
+                          <i class="bi bi-arrow-clockwise me-2"></i>Tüm Duyuruları Göster
+                      </a>
+                      <a href="{% url 'duyurular:liste' %}" class="filter-btn">
+                          <i class="bi bi-grid me-2"></i>Tüm Fakülte Duyuruları
+                      </a>
+                  </div>
+              </div>
+              {% endif %}
+          </div>
+      </div>
+          
+            
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: #1d61a9ff;
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: #f7f3e9ff;
+    --pure-white: rgba(255, 255, 255, 1);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+    --success-green: #28a745;
+    --warning-orange: #ffc107;
+    --danger-red: #dc3545;
+    --light-gray: #f8f9fa;
+    --medium-gray: #e9ecef;
+    --dark-gray: #8dc2ffff;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #092442 0%, #235c99ff 100%);
+    --gradient-secondary: linear-gradient(135deg, rgba(29, 97, 169, 1) 0%, #8dd4e3ff 100%);
+    --gradient-danger: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%);
+    --gradient-warning: linear-gradient(135deg, #ffc107 0%, #ffd54f 100%);
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    padding: 25px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    transition: all 0.3s ease;
+}
+
+.sidebar-wrapper:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    animation: fadeIn 0.8s ease;
+}
+
+/* هدر صفحه */
+.header-gradient {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05) 0%, rgba(29, 97, 169, 0.1) 100%);
+    border-left: 4px solid var(--secondary-medium-blue);
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: var(--gradient-secondary);
+    border-radius: 4px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.duyuru-count-badge {
+    background: var(--gradient-secondary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(29, 97, 169, 0.25);
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.duyuru-count-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(29, 97, 169, 0.35);
+}
+
+/* بخش‌های فرعی */
+.section-header {
+    margin-bottom: 30px;
+}
+
+.icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.icon-wrapper.danger {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(255, 107, 107, 0.2) 100%);
+    color: var(--danger-red);
+}
+
+.section-sub-title {
+    color: var(--primary-dark-blue);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.section-sub-description {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.onemli-badge {
+    background: var(--gradient-danger);
+    color: white;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* کارت اطلاعیه */
+.duyuru-card {
+    background: var(--pure-white);
+    border-radius: 20px;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    height: 100%;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+    margin-bottom: 0;
+}
+
+.duyuru-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-light-blue);
+}
+
+.duyuru-card-onemli {
+    border: 2px solid rgba(220, 53, 69, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 248, 248, 0.98) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.duyuru-card-onemli::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--gradient-danger);
+}
+
+.duyuru-card-onemli:hover {
+    border-color: rgba(220, 53, 69, 0.4);
+    transform: translateY(-8px);
+}
+
+.duyuru-card-header {
+    padding: 25px 25px 15px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.1);
+    flex-shrink: 0;
+}
+
+.duyuru-card-body {
+    padding: 20px 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.duyuru-card-footer {
+    padding: 20px 25px;
+    border-top: 1px solid rgba(141, 212, 227, 0.1);
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.03) 0%, rgba(141, 212, 227, 0.08) 100%);
+    flex-shrink: 0;
+}
+
+.duyuru-priority {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.priority-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--danger-red);
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.priority-text {
+    color: var(--danger-red);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.duyuru-category {
+    color: white;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    background: var(--gradient-secondary);
+    box-shadow: 0 3px 10px rgba(29, 97, 169, 0.2);
+}
+
+.duyuru-card-onemli .duyuru-category {
+    background: var(--gradient-danger);
+}
+
+.duyuru-date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    background: rgba(141, 212, 227, 0.1);
+    padding: 6px 12px;
+    border-radius: 15px;
+}
+
+.duyuru-title {
+    color: var(--primary-dark-blue);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    flex-shrink: 0;
+}
+
+.duyuru-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.duyuru-title a:hover {
+    color: var(--secondary-medium-blue);
+}
+
+.duyuru-description {
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.duyuru-meta {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.duyuru-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    flex-shrink: 0;
+}
+
+.stat-item, .meta-item {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(141, 212, 227, 0.1);
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+.duyuru-read-more {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    padding: 8px 0;
+    border-radius: 8px;
+}
+
+.duyuru-read-more:hover {
+    color: var(--primary-dark-blue);
+    transform: translateX(5px);
+    background: rgba(141, 212, 227, 0.1);
+    padding: 8px 16px;
+}
+
+.duyuru-important {
+    color: var(--warning-orange);
+    font-size: 1.3rem;
+    background: rgba(255, 193, 7, 0.1);
+    padding: 6px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.duyuru-important:hover {
+    transform: rotate(15deg);
+}
+
+/* فیلترها */
+.duyuru-filter-section {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.02), rgba(29, 97, 169, 0.05));
+    border-radius: 16px;
+    padding: 30px;
+    margin: 40px 0;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.duyuru-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.filter-btn {
+    background: var(--pure-white);
+    color: var(--text-dark);
+    border: 2px solid rgba(141, 212, 227, 0.3);
+    padding: 14px 28px;
+    border-radius: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn:hover {
+    background: rgba(141, 212, 227, 0.1);
+    border-color: var(--accent-light-blue);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn.active {
+    background: var(--gradient-secondary);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 6px 20px rgba(29, 97, 169, 0.3);
+    transform: translateY(-2px);
+}
+
+.filter-btn i {
+    font-size: 1.1rem;
+}
+
+/* حالت خالی */
+.duyuru-empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.02), rgba(29, 97, 169, 0.05));
+    border-radius: 20px;
+    border: 2px dashed rgba(141, 212, 227, 0.4);
+}
+
+.empty-state-icon {
+    width: 100px;
+    height: 100px;
+    background: var(--gradient-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    color: white;
+    font-size: 40px;
+    box-shadow: 0 8px 25px rgba(29, 97, 169, 0.2);
+}
+
+.duyuru-empty-state h4 {
+    color: var(--primary-dark-blue);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.duyuru-empty-state p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+}
+
+/* Sayfalama */
+.duyuru-pagination .page-link {
+    color: var(--secondary-medium-blue);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    padding: 10px 18px;
+    margin: 0 5px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.duyuru-pagination .page-link:hover {
+    background: rgba(141, 212, 227, 0.1);
+    border-color: var(--accent-light-blue);
+    transform: translateY(-2px);
+}
+
+.duyuru-pagination .page-item.active .page-link {
+    background: var(--gradient-secondary);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 15px rgba(29, 97, 169, 0.2);
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.duyuru-card:nth-child(1) { animation-delay: 0.1s; }
+.duyuru-card:nth-child(2) { animation-delay: 0.2s; }
+.duyuru-card:nth-child(3) { animation-delay: 0.3s; }
+.duyuru-card:nth-child(4) { animation-delay: 0.4s; }
+.duyuru-card:nth-child(5) { animation-delay: 0.5s; }
+.duyuru-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .duyuru-card {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 30px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .duyuru-filter-buttons {
+        justify-content: center;
+    }
+    
+    .duyuru-card {
+        min-height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 15px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .duyuru-header {
+        text-align: center;
+    }
+    
+    .duyuru-count {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .duyuru-filter-buttons {
+        flex-direction: column;
+    }
+    
+    .filter-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .duyuru-card {
+        margin-bottom: 20px;
+        min-height: 300px;
+    }
+    
+    .duyuru-empty-state {
+        padding: 50px 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .section-sub-title {
+        font-size: 1.3rem;
+    }
+    
+    .duyuru-title {
+        font-size: 1.1rem;
+    }
+    
+    .duyuru-filter-section {
+        padding: 20px;
+    }
+    
+    .empty-state-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+    }
+    
+    .duyuru-card {
+        min-height: 280px;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .duyuru-card, .filter-btn, .duyuru-read-more, .duyuru-count-badge, .duyuru-important {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .duyuru-card:hover, .filter-btn:hover {
+        transform: none;
+    }
+    
+    .priority-dot {
+        animation: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // انیمیشن کارت‌ها هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.05,
+        rootMargin: '0px 0px -30px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده کارت‌ها برای انیمیشن
+    const duyuruCards = document.querySelectorAll('.duyuru-card');
+    duyuruCards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // هایلایت فیلترهای فعال
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (!this.classList.contains('active')) {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // انیمیشن تغییر محتوا
+                const contentWrapper = document.querySelector('.content-wrapper');
+                contentWrapper.style.opacity = '0.7';
+                contentWrapper.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    contentWrapper.style.opacity = '1';
+                    contentWrapper.style.transform = 'translateY(0)';
+                }, 300);
+            }
+        });
+    });
+    
+    // افکت hover روی کارت‌ها
+    duyuruCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            const title = this.querySelector('.duyuru-title a');
+            const readMore = this.querySelector('.duyuru-read-more');
+            
+            if (title) {
+                title.style.color = 'var(--secondary-medium-blue)';
+            }
+            if (readMore) {
+                readMore.style.transform = 'translateX(5px)';
+                readMore.style.paddingLeft = '16px';
+                readMore.style.paddingRight = '16px';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const title = this.querySelector('.duyuru-title a');
+            const readMore = this.querySelector('.duyuru-read-more');
+            
+            if (title) {
+                title.style.color = 'var(--primary-dark-blue)';
+            }
+            if (readMore) {
+                readMore.style.transform = 'translateX(0)';
+                readMore.style.paddingLeft = '0';
+                readMore.style.paddingRight = '0';
+            }
+        });
+    });
+    
+    // شمارنده اطلاعیه‌ها
+    const updateDuyuruCount = () => {
+        const normalCards = document.querySelectorAll('.duyuru-card:not(.duyuru-card-onemli)').length;
+        const importantCards = document.querySelectorAll('.duyuru-card-onemli').length;
+        const totalCount = normalCards + importantCards;
+        
+        const countBadge = document.querySelector('.duyuru-count-badge');
+        if (countBadge) {
+            countBadge.innerHTML = `<i class="bi bi-megaphone me-1"></i>${totalCount} Duyuru`;
+            countBadge.title = `${importantCards} önemli, ${normalCards} normal duyuru`;
+        }
+    };
+    
+    // شبیه‌سازی بازدیدها
+    const simulateViews = () => {
+        const viewCounts = document.querySelectorAll('.stat-item:nth-child(1) span, .meta-item:nth-child(2) span');
+        viewCounts.forEach((span, index) => {
+            const baseViews = 100 + index * 10;
+            const randomViews = Math.floor(Math.random() * 50);
+            const totalViews = baseViews + randomViews;
+            span.textContent = totalViews.toLocaleString() + ' görüntüleme';
+        });
+    };
+    
+    // به‌روزرسانی اولیه
+    updateDuyuruCount();
+    simulateViews();
+    
+    // دکمه refresh در حالت خالی
+    const refreshBtn = document.querySelector('.duyuru-empty-state .btn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            this.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Yenileniyor...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Yenile';
+                this.disabled = false;
+                
+                // شبیه‌سازی بارگذاری مجدد
+                const event = new CustomEvent('refreshDuyurular');
+                document.dispatchEvent(event);
+            }, 1500);
+        });
+    }
+    
+    // رویداد refresh
+    document.addEventListener('refreshDuyurular', function() {
+        console.log('Duyurular yenileniyor...');
+        // اینجا می‌توانید درخواست AJAX برای بارگذاری مجدد داده‌ها اضافه کنید
+    });
+});
+</script>
+{% endblock %}

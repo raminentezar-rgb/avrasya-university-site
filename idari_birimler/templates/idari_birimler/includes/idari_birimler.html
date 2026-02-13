@@ -1,0 +1,677 @@
+{% extends 'idari_birimler/base.html' %}
+{% load static %}
+
+{% block title %}Avrasya Üniversitesi - İdari Birimler{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+{% comment %} <section class="idari-hero-section">
+    <div class="container">
+        <div class="idari-hero-content">
+            <h1 class="idari-hero-title">Avrasya Üniversitesi - İdari Birimler</h1>
+            <p class="idari-hero-subtitle">Avrasya Üniversitesi'nde sınırları zorluyor, yeniliğe imza atıyoruz</p>
+        </div>
+    </div>
+</section> {% endcomment %}
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Avrasya Üniversitesi - İdari Birimler</h1>
+            <p>Avrasya Üniversitesi'nde sınırları zorluyor, yeniliğe imza atıyoruz</p>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Quick Access Cards -->
+    <div class="row mb-5">
+        {% comment %} <div class="col-12 mb-5">
+            <h2 class="idari-section-title text-center mb-4">Hızlı Erişim</h2>
+            <p class="text-center text-muted mb-5">Üniversitemizin idari birimlerine hızlıca ulaşmak için kartları kullanabilirsiniz</p>
+        </div> {% endcomment %}
+        
+        <!-- Cards Grid -->
+        <div class="row justify-content-center g-4">
+            <!-- Card 1 -->
+             <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="idari-card">
+                    <a href="{% url 'idari_birimler:bilgi_islem' %}" target="_blank" class="idari-card-link">
+                        <div class="idari-card-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="idari-card-content">
+                            <h3 class="idari-card-title">Bilgi İşlem Daire Başkanlığı</h3>
+                            <p class="idari-card-desc">Teknoloji altyapısı ve bilgi sistemleri</p>
+                        </div>
+                        <div class="idari-card-hover">
+                            <span>Detayları Gör</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+            
+            
+            <!-- Card 2 -->
+            
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="idari-card">
+                    <a href="{% url 'idari_birimler:kurumsal_iletisim' %}" class="idari-card-link">
+                        <div class="idari-card-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="idari-card-content">
+                            <h3 class="idari-card-title">Kurumsal İletişim ve Halkla İlişkiler Daire Başkanlığı</h3>
+                            <p class="idari-card-desc">Kurumsal iletişim ve halkla ilişkiler hizmetleri</p>
+                        </div>
+                        <div class="idari-card-hover">
+                            <span>Detayları Gör</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="idari-card">
+                    <a href="{% url 'idari_birimler:idari_mali' %}" class="idari-card-link">
+                        <div class="idari-card-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="idari-card-content">
+                            <h3 class="idari-card-title">İdari ve Mali İşler Daire Başkanlığı</h3>
+                            <p class="idari-card-desc">Mali işler ve idari yönetim</p>
+                        </div>
+                        <div class="idari-card-hover">
+                            <span>Detayları Gör</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="idari-card">
+                    <a href="{% url 'idari_birimler:kutuphane_dokumantasyon' %}" class="idari-card-link">
+                        <div class="idari-card-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="idari-card-content">
+                            <h3 class="idari-card-title">Kütüphane ve Dökümantasyon Daire Başkanlığı</h3>
+                            <p class="idari-card-desc">Kütüphane hizmetleri ve doküman yönetimi</p>
+                        </div>
+                        <div class="idari-card-hover">
+                            <span>Detayları Gör</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="idari-card">
+                    <a href="{% url 'idari_birimler:ogrenci_isleri_daire_baskanligi' %}" class="idari-card-link">
+                        <div class="idari-card-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="idari-card-content">
+                            <h3 class="idari-card-title">Öğrenci İşleri Daire Başkanlığı</h3>
+                            <p class="idari-card-desc">Öğrenci kayıt, kayıt yenileme ve belge işlemleri</p>
+                        </div>
+                        <div class="idari-card-hover">
+                            <span>Detayları Gör</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="idari-card">
+                    <a href="{% url 'idari_birimler:personel_daire_baskanligi' %}" class="idari-card-link">
+                        <div class="idari-card-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="idari-card-content">
+                            <h3 class="idari-card-title">Personel Daire Başkanlığı</h3>
+                            <p class="idari-card-desc">Personel yönetimi ve insan kaynakları</p>
+                        </div>
+                        <div class="idari-card-hover">
+                            <span>Detayları Gör</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Card 7 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="idari-card">
+                    <a href="{% url 'idari_birimler:yapi_isleri_mudurlugu' %}" class="idari-card-link">
+                        <div class="idari-card-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="idari-card-content">
+                            <h3 class="idari-card-title">Yapı İşleri ve Teknik Daire Başkanlığı</h3>
+                            <p class="idari-card-desc">Teknik altyapı ve bakım hizmetleri</p>
+                        </div>
+                        <div class="idari-card-hover">
+                            <span>Detayları Gör</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Card 8 -->
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="idari-card">
+                    <a href="{% url 'idari_birimler:yazi_isleri' %}" class="idari-card-link">
+                        <div class="idari-card-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="idari-card-content">
+                            <h3 class="idari-card-title">Yazı İşleri Müdürlüğü</h3>
+                            <p class="idari-card-desc">Resmi yazışma ve evrak yönetimi</p>
+                        </div>
+                        <div class="idari-card-hover">
+                            <span>Detayları Gör</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Links -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="idari-bottom-links">
+                    <a href="#" class="idari-bottom-link">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Müşteri Girişi | Natto</span>
+                    </a>
+                    <a href="#" class="idari-bottom-link">
+                        <i class="fas fa-code"></i>
+                        <span>CodeWithSteps</span>
+                    </a>
+                    <a href="#" class="idari-bottom-link">
+                        <i class="fas fa-search"></i>
+                        <span>ARAŞTIRMA</span>
+                    </a>
+                    <a href="#" class="idari-bottom-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>İLETİŞİM</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* استایل‌های سفارشی برای صفحه İdari Birimler */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: #1d61a9;
+    --accent-light-blue: #8dd4e3;
+    --accent-light-blue-soft: rgba(141, 212, 227, 0.1);
+    --pure-white: #FFFFFF;
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+    --shadow-color: rgba(9, 36, 66, 0.1);
+    --card-gradient: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+}
+
+/* Hero Section */
+.idari-hero-section {
+    background: var(--card-gradient);
+    color: var(--pure-white);
+    padding: 4rem 0;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.idari-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.idari-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.idari-hero-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    font-family: 'Metropolis', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fadeInDown 1s ease-out;
+}
+
+.idari-hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+/* Section Title */
+.idari-section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.idari-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-light-blue), var(--secondary-medium-blue));
+    border-radius: 2px;
+}
+
+/* Cards */
+.idari-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    animation: cardEntrance 0.8s ease-out forwards;
+    opacity: 0;
+    margin-top:50px;
+    
+}
+
+/* حذف انیمیشن glowPulse که باعث ناپدید شدن می‌شد */
+.idari-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(29, 97, 169, 0.3);
+    border-color: var(--accent-light-blue);
+    background: linear-gradient(145deg, var(--pure-white), rgba(141, 212, 227, 0.05));
+    
+}
+
+.idari-card:nth-child(1) { animation-delay: 0.1s; }
+.idari-card:nth-child(2) { animation-delay: 0.2s; }
+.idari-card:nth-child(3) { animation-delay: 0.3s; }
+.idari-card:nth-child(4) { animation-delay: 0.4s; }
+.idari-card:nth-child(5) { animation-delay: 0.5s; }
+.idari-card:nth-child(6) { animation-delay: 0.6s; }
+.idari-card:nth-child(7) { animation-delay: 0.7s; }
+.idari-card:nth-child(8) { animation-delay: 0.8s; }
+
+.idari-card-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 30px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    z-index: 1;
+}
+
+.idari-card-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+    color: var(--pure-white);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    background: var(--card-gradient);
+    box-shadow: 0 6px 20px rgba(29, 97, 169, 0.3);
+}
+
+.idari-card:hover .idari-card-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 10px 25px rgba(29, 97, 169, 0.5);
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+}
+
+.idari-card-content {
+    flex: 1;
+}
+
+.idari-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    margin-bottom: 12px;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+    font-family: 'Metropolis', sans-serif;
+    font-weight: 800;
+}
+
+.idari-card:hover .idari-card-title {
+    color: var(--secondary-medium-blue);
+}
+
+.idari-card-desc {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+.idari-card-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-gradient);
+    color: var(--pure-white);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 0 0 16px 16px;
+}
+
+.idari-card:hover .idari-card-hover {
+    transform: translateY(0);
+}
+
+.idari-card-hover span {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.idari-card-hover i {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.idari-card:hover .idari-card-hover i {
+    transform: translateX(5px);
+}
+
+/* افکت درخشش ساده بدون انیمیشن */
+.idari-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    background: radial-gradient(circle at center, rgba(141, 212, 227, 0.05), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.idari-card:hover::after {
+    opacity: 1;
+}
+
+/* Bottom Links */
+.idari-bottom-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.idari-bottom-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--secondary-medium-blue);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(141, 212, 227, 0.1);
+    border: 2px solid transparent;
+}
+
+.idari-bottom-link:hover {
+    transform: translateY(-5px);
+    color: var(--primary-dark-blue);
+    border-color: var(--accent-light-blue);
+    box-shadow: 0 10px 20px rgba(141, 212, 227, 0.2);
+    background: var(--accent-light-blue-soft);
+}
+
+.idari-bottom-link i {
+    font-size: 1.2rem;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* حذف انیمیشن glowPulse */
+/* 
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(141, 212, 227, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(141, 212, 227, 0.5);
+    }
+}
+*/
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .idari-card {
+        height: 300px;
+    }
+    
+    .idari-hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .idari-card {
+        height: 280px;
+        padding: 25px;
+    }
+    
+    .idari-card-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2.2rem;
+    }
+    
+    .idari-card-title {
+        font-size: 1.1rem;
+    }
+    
+    .idari-hero-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .idari-hero-section {
+        padding: 3rem 0;
+        border-radius: 0 0 20px 20px;
+    }
+    
+    .idari-hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .idari-hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .idari-section-title {
+        font-size: 1.8rem;
+    }
+    
+    .idari-card {
+        height: 260px;
+        padding: 20px;
+    }
+    
+    .idari-card-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    
+    .idari-card-title {
+        font-size: 1rem;
+    }
+    
+    .idari-card-desc {
+        font-size: 0.9rem;
+    }
+    
+    .idari-bottom-links {
+        gap: 20px;
+    }
+    
+    .idari-bottom-link {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .idari-card {
+        height: 240px;
+        margin-bottom: 20px;
+    }
+    
+    .idari-card-hover {
+        padding: 12px 20px;
+    }
+    
+    .idari-bottom-links {
+        gap: 15px;
+        justify-content: center;
+    }
+    
+    .idari-bottom-link {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .idari-hero-title {
+        font-size: 1.6rem;
+    }
+    
+    .idari-hero-subtitle {
+        font-size: 1rem;
+    }
+}
+</style>
+
+<script>
+// انیمیشن اسکرول برای کارت‌ها
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.idari-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // انیمیشن برای لینک‌های پایین
+    const bottomLinks = document.querySelectorAll('.idari-bottom-link');
+    bottomLinks.forEach((link, index) => {
+        link.style.animationDelay = `${index * 0.1}s`;
+        link.style.animation = 'fadeInUp 0.5s ease-out forwards';
+        link.style.opacity = '0';
+    });
+});
+</script>
+{% endblock %}

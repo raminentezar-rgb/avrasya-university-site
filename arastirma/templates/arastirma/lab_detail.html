@@ -1,0 +1,95 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}{{ lab.name }} - Avrasya University{% endblock %}
+
+{% block content %}
+<section class="research-hero" style="background: linear-gradient(135deg, #092442 0%, #1d61a9 100%); padding: 100px 0 60px;">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>{{ lab.name }}</h1>
+            <p>{{ lab.faculty }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="research-section">
+    <div class="container">
+        <div class="sidebar-layout">
+            <!-- سایدبار در سمت چپ -->
+            <div class="sidebar-left">
+                {% include 'arastirma/includes/lab_sidebar.html' %}
+            </div>
+            
+            <!-- محتوای اصلی در سمت راست -->
+            <div class="content-right">
+                <div class="research-card">
+                    <!-- هدر آزمایشگاه -->
+                    <div class="lab-header mb-4">
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            {% if lab.is_active %}
+                            <span class="badge badge-success">
+                                <i class="fas fa-check-circle"></i> Aktif
+                            </span>
+                            {% else %}
+                            <span class="badge badge-secondary">
+                                <i class="fas fa-pause-circle"></i> Pasif
+                            </span>
+                            {% endif %}
+                            <span class="badge badge-primary">
+                                <i class="fas fa-university"></i> {{ lab.faculty }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- اطلاعات اصلی -->
+                    <div class="lab-info mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong><i class="fas fa-user-tie"></i> Sorumlu Öğretim Üyesi:</strong><br>
+                                {{ lab.director }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong><i class="fas fa-university"></i> Fakülte/Bölüm:</strong><br>
+                                {{ lab.faculty }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong><i class="fas fa-calendar"></i> Oluşturulma Tarihi:</strong><br>
+                                {{ lab.created_at|date:"d M Y" }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong><i class="fas fa-flask"></i> Durum:</strong><br>
+                                {% if lab.is_active %}Aktif{% else %}Pasif{% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- تجهیزات -->
+                    <div class="lab-equipment mb-4">
+                        <h5>Laboratuvar Ekipmanları</h5>
+                        <div class="equipment-content">
+                            {{ lab.equipment|linebreaks }}
+                        </div>
+                    </div>
+
+                    <!-- ناوبری -->
+                    <div class="lab-navigation mt-5 pt-4 border-top">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="{% url 'arastirma:lab_list' %}" class="btn btn-outline-primary">
+                                    <i class="fas fa-arrow-left"></i> Tüm Laboratuvarlar
+                                </a>
+                            </div>
+                            <div class="col-6 text-right">
+                                <a href="{% url 'arastirma:home' %}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-home"></i> Araştırma Ana Sayfa
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

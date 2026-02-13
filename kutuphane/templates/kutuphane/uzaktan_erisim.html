@@ -1,0 +1,196 @@
+        </h3>
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi -  Uzaktan Erişim
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+   
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'kutuphane/sidebar.html' %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Kütüphane.jpg' %}') center/cover;">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3"> Uzaktan Erişim</h1>
+
+                        <p class="lead mb-4">
+                            
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class=" display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Content -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+        <h3 class="text-primary mb-4 border-bottom pb-2">
+            <i class="bi bi-check-circle me-2"></i>Veritabanlarını, elektronik dergi ve kaynakları evimdeki bilgisayarımdan kullanabilir miyim? 
+
+        </h3>
+        
+        <p class="mb-4">
+             
+            <h2></h2><br>
+
+            Evet, uzaktan erişim için kütüphane veritabanlarına kurum dışı erişim sağlayabilirsiniz.
+
+
+
+        
+
+            
+
+            
+
+
+        </p>
+                
+        
+        
+    </div>
+</div>
+
+
+
+
+<style>
+.president-photo-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+    background: transparent;
+    overflow: hidden;
+}
+
+.president-photo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2) !important;
+}
+
+.president-full-image-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.president-full-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.5s ease;
+}
+
+.president-photo-card:hover .president-full-image {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.president-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #fd7e14 0%, #feb47b 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 6px 20px rgba(253, 126, 20, 0.5);
+    animation: pulse-gold 2s infinite;
+    border: 3px solid white;
+}
+
+@keyframes pulse-gold {
+    0% { 
+        transform: scale(1);
+        box-shadow: 0 6px 20px rgba(253, 126, 20, 0.5);
+    }
+    50% { 
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(253, 126, 20, 0.7);
+    }
+    100% { 
+        transform: scale(1);
+        box-shadow: 0 6px 20px rgba(253, 126, 20, 0.5);
+    }
+}
+
+.info-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+}
+
+.icon-wrapper {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover .icon-wrapper {
+    transform: scale(1.1);
+}
+
+.icon-wrapper i {
+    font-size: 1.8rem;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .president-full-image-container {
+        height: 300px;
+    }
+    
+    .president-badge {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .president-full-image-container {
+        height: 250px;
+    }
+    
+    .president-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        top: 10px;
+        right: 10px;
+    }
+}
+</style>
+{% endblock %}

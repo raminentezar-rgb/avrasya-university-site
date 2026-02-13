@@ -1,0 +1,703 @@
+{% extends "support/base.html" %}
+{% block content %}
+
+
+
+<div class="page-header" style="margin-top: -100px; position: relative; ">
+    <div class="page-header-content">
+        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-chart-line"></i> Bölüm Destek Paneli</h1>
+        <p>Bölümünüzdeki tüm destek taleplerini yönetin ve takip edin</p>
+    </div>
+    
+    <!-- قسمت احراز هویت در گوشه بالا راست -->
+    <div class="auth-buttons" style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; align-items: center;">
+        {% if user.is_authenticated %}
+            <!-- اگر کاربر لاگین کرده باشد -->
+            <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: white; font-weight: 500;">
+                    <i class="fas fa-user-circle"></i> {{ user.username }}
+                </span>
+                
+                <!-- دکمه داشبورد -->
+                {% if user.profile.role == 'student' %}
+                    <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Taleplerim
+                    </a>
+                {% elif user.profile.role == 'staff' %}
+                    <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                {% else %}
+                    <a href="/" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                {% endif %}
+                
+                <!-- فرم logout -->
+                <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                    </button>
+                </form>
+            </div>
+        {% else %}
+            <!-- اگر کاربر لاگین نکرده باشد -->
+            <div class="guest-buttons" style="display: flex; gap: 10px;">
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                </a>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm" style="background-color: white; color: var(--primary-dark-blue);">
+                    <i class="fas fa-user-plus"></i> Kayıt Ol
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container support-container">
+    <!-- İstatistik Kartları -->
+    {% comment %} <div class="row mb-5">
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="stat-card bg-primary">
+                <div class="stat-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ total_tickets|default:"0" }}</h3>
+                    <p>Toplam Talep</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="stat-card bg-warning">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ pending_tickets|default:"0" }}</h3>
+                    <p>Bekleyen Talep</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="stat-card bg-success">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ resolved_tickets|default:"0" }}</h3>
+                    <p>Çözülen Talep</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="stat-card bg-info">
+                <div class="stat-icon">
+                    <i class="fas fa-spinner"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ in_progress_tickets|default:"0" }}</h3>
+                    <p>Devam Eden Talep</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtreleme -->
+    <div class="filter-card mb-4">
+        <div class="filter-header">
+            <h4><i class="fas fa-filter"></i> Talepleri Filtrele</h4>
+        </div>
+        <div class="filter-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Duruma Göre</label>
+                    <select class="form-control" id="status-filter">
+                        <option value="all">Tüm Durumlar</option>
+                        <option value="open">Açık</option>
+                        <option value="pending">Beklemede</option>
+                        <option value="in_progress">Devam Ediyor</option>
+                        <option value="resolved">Çözüldü</option>
+                        <option value="closed">Kapandı</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Tarihe Göre</label>
+                    <select class="form-control" id="date-filter">
+                        <option value="all">Tüm Zamanlar</option>
+                        <option value="today">Bugün</option>
+                        <option value="week">Bu Hafta</option>
+                        <option value="month">Bu Ay</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Arama</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Talep veya öğrenci ara...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+
+    <!-- Talepler Tablosu -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="fas fa-list"></i> Tüm Talepler</h2>
+                <span class="badge badge-primary">{{ tickets|length }} Talep</span>
+            </div>
+        </div>
+
+        {% if tickets %}
+        <div class="table-responsive">
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Talep No</th>
+                        <th>Konu</th>
+                        <th>Öğrenci</th>
+                        <th>Durum</th>
+                        <th>Öncelik</th>
+                        <th>Tarih</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in tickets %}
+                    <tr class="ticket-row" data-status="{{ ticket.status }}" data-priority="{{ ticket.priority }}">
+                        <td>
+                            <div class="ticket-id">
+                                <strong>#{{ ticket.id|stringformat:"04d" }}</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="ticket-subject">
+                                <h6>{{ ticket.subject|truncatechars:60 }}</h6>
+                                <small class="text-muted">{{ ticket.department.name }}</small>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="student-info">
+                                <div class="student-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="student-details">
+                                    <strong>{{ ticket.user.get_full_name|default:ticket.user.username }}</strong>
+                                    <small>{{ ticket.user.email }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge status-{{ ticket.status }}">
+                                <i class="fas {% if ticket.status == 'open' %}fa-envelope-open{% elif ticket.status == 'pending' %}fa-clock{% elif ticket.status == 'in_progress' %}fa-spinner{% elif ticket.status == 'resolved' %}fa-check-circle{% else %}fa-times-circle{% endif %}"></i>
+                                {{ ticket.get_status_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="priority-badge priority-{{ ticket.priority }}">
+                                {% if ticket.priority == 'high' %}<i class="fas fa-exclamation-circle"></i>{% elif ticket.priority == 'medium' %}<i class="fas fa-exclamation"></i>{% else %}<i class="fas fa-info-circle"></i>{% endif %}
+                                {{ ticket.get_priority_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="date-info">
+                                <div>{{ ticket.created_at|date:"d.m.Y" }}</div>
+                                <small>{{ ticket.created_at|date:"H:i" }}</small>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="{% url 'support:reply_ticket' ticket.id %}" class="btn-action btn-reply" title="Yanıtla">
+                                    <i class="fas fa-reply"></i>
+                                </a>
+                                <a href="#" class="btn-action btn-view" title="Detayları Gör">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="#" class="btn-action btn-edit" title="Durumu Güncelle">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Sayfalama -->
+        {% if tickets.has_other_pages %}
+        <div class="pagination-container">
+            <nav aria-label="Sayfalama">
+                <ul class="pagination justify-content-center">
+                    {% if tickets.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ tickets.previous_page_number }}">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% for i in tickets.paginator.page_range %}
+                    <li class="page-item {% if tickets.number == i %}active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                    {% endfor %}
+                    
+                    {% if tickets.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ tickets.next_page_number }}">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+        
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="fas fa-inbox"></i>
+            </div>
+            <h3>Henüz Talep Yok</h3>
+            <p class="text-muted">Bölümünüze atanmış destek talebi bulunmuyor.</p>
+            <a href="#" class="btn btn-primary mt-3">
+                <i class="fas fa-sync-alt"></i> Yenile
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+/* İstatistik Kartları */
+.stat-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.3s ease;
+    border-left: 4px solid;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card.bg-primary {
+    border-left-color: var(--primary-blue);
+    background: linear-gradient(135deg, #f8fafc 0%, #e3f2fd 100%);
+}
+
+.stat-card.bg-warning {
+    border-left-color: #f39c12;
+    background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 100%);
+}
+
+.stat-card.bg-success {
+    border-left-color: #27ae60;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+}
+
+.stat-card.bg-info {
+    border-left-color: #3498db;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.stat-card.bg-primary .stat-icon { color: var(--primary-blue); }
+.stat-card.bg-warning .stat-icon { color: #f39c12; }
+.stat-card.bg-success .stat-icon { color: #27ae60; }
+.stat-card.bg-info .stat-icon { color: #3498db; }
+
+.stat-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--text-dark);
+}
+
+.stat-content p {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Filtre Kartı */
+.filter-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.filter-header {
+    background: var(--light-blue);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.filter-header h4 {
+    margin: 0;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.filter-body {
+    padding: 1.5rem;
+}
+
+/* Dashboard Tablosu */
+.dashboard-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.dashboard-card .card-header {
+    padding: 1.5rem;
+    background: var(--light-blue);
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.dashboard-table thead {
+    background: var(--primary-blue);
+}
+
+.dashboard-table th {
+    padding: 1rem 1.5rem;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dashboard-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.dashboard-table tr:hover {
+    background: rgba(141, 212, 227, 0.05);
+}
+
+/* Öğrenci Bilgisi */
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.student-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--light-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-blue);
+}
+
+.student-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.student-details strong {
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.student-details small {
+    color: var(--text-light);
+    font-size: 0.8rem;
+}
+
+/* Durum Badge'leri */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-open {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+.status-pending {
+    background: rgba(243, 156, 18, 0.1);
+    color: #f39c12;
+    border: 1px solid rgba(243, 156, 18, 0.2);
+}
+
+.status-in_progress {
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.status-resolved {
+    background: rgba(155, 89, 182, 0.1);
+    color: #9b59b6;
+    border: 1px solid rgba(155, 89, 182, 0.2);
+}
+
+.status-closed {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+/* Öncelik Badge'leri */
+.priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.priority-high {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+.priority-medium {
+    background: rgba(243, 156, 18, 0.1);
+    color: #f39c12;
+    border: 1px solid rgba(243, 156, 18, 0.2);
+}
+
+.priority-low {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+/* Tarih Bilgisi */
+.date-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-info div {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.date-info small {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/* İşlem Butonları */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-action {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-reply {
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+}
+
+.btn-reply:hover {
+    background: #3498db;
+    color: white;
+    transform: scale(1.1);
+}
+
+.btn-view {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+}
+
+.btn-view:hover {
+    background: #27ae60;
+    color: white;
+    transform: scale(1.1);
+}
+
+.btn-edit {
+    background: rgba(243, 156, 18, 0.1);
+    color: #f39c12;
+}
+
+.btn-edit:hover {
+    background: #f39c12;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Sayfalama */
+.pagination-container {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--secondary-blue);
+    border-color: var(--secondary-blue);
+    color: white;
+}
+
+.pagination .page-link {
+    color: var(--secondary-blue);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    margin: 0 0.25rem;
+    border-radius: 8px;
+}
+
+.pagination .page-link:hover {
+    background: rgba(29, 97, 169, 0.1);
+    border-color: var(--secondary-blue);
+}
+
+/* Boş Durum */
+.empty-state {
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .dashboard-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .student-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .btn-action {
+        width: 32px;
+        height: 32px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Filtreleme işlevselliği
+    const statusFilter = document.getElementById('status-filter');
+    const dateFilter = document.getElementById('date-filter');
+    const ticketRows = document.querySelectorAll('.ticket-row');
+    
+    function filterTickets() {
+        const status = statusFilter.value;
+        const date = dateFilter.value;
+        
+        ticketRows.forEach(row => {
+            let show = true;
+            
+            // Durum filtresi
+            if (status !== 'all' && row.dataset.status !== status) {
+                show = false;
+            }
+            
+            // Tarih filtresi (basit örnek)
+            if (date !== 'all') {
+                // Tarih filtresi mantığı buraya eklenebilir
+            }
+            
+            row.style.display = show ? '' : 'none';
+        });
+    }
+    
+    statusFilter.addEventListener('change', filterTickets);
+    dateFilter.addEventListener('change', filterTickets);
+    
+    // Talep satırı tıklama
+    ticketRows.forEach(row => {
+        row.addEventListener('click', function(e) {
+            if (!e.target.closest('.action-buttons')) {
+                // Talep detaylarını göster
+                const ticketId = this.querySelector('.ticket-id strong').textContent;
+                window.location.href = `#ticket-${ticketId.slice(1)}`;
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}

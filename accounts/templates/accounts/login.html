@@ -1,0 +1,212 @@
+<!-- login.html با استایل‌های بهبود یافته -->
+{% extends "core/base.html" %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+{% comment %} <div class="auth-hero" style="margin-top: 240px;">
+    <div class="container">
+        <h1>Welcome Back</h1>
+        <p class="lead">Sign in to access your support tickets and university resources</p>
+    </div>
+</div> {% endcomment %}
+
+<div class="container auth-container" style="margin-top: 240px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="logo-container mb-4">
+                        <div class="logo-circle">
+                            <img src="{% static 'core/img/AVRASYA-PNG-LOGO.png' %}" alt="Avrasya University Logo" class="logo-image">
+                            {% comment %} <i class="fas fa-graduation-cap"></i> {% endcomment %}
+                        </div>
+                    </div>
+                    <h2 style=" font-family: Metropolis, sans-serif; font-weight: 800;">Avrasya Üniversitesi'ne giriş yapın</h2>
+                    <p class="text-muted">Devam etmek için kimlik bilgilerinizi girin.</p>
+                </div>
+
+                <form method="post" class="auth-form" id="loginForm">
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        Please enter a correct username and password. Note that both fields may be case-sensitive.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="form-group floating-label">
+                        <label for="id_username">
+                            <i class="fas fa-user"></i> Kullanıcı adı veya E-posta
+                        </label>
+                        <div class="input-with-icon">
+                            <input type="text" name="username" id="id_username" class="form-control" placeholder=" " required>
+                            <span class="input-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group floating-label">
+                        <label for="id_password">
+                            <i class="fas fa-lock"></i> Şifre
+                        </label>
+                        <div class="input-with-icon">
+                            <input type="password" name="password" id="id_password" class="form-control" placeholder=" " required>
+                            <span class="input-icon">
+                                <i class="fas fa-eye toggle-password" data-target="id_password"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-row align-items-center mb-4">
+                        <div class="col">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                <label class="custom-control-label" for="rememberMe">Beni Hatırla</label>
+                            </div>
+                        </div>
+                        <div class="col text-right">
+                            <a href="{% url 'accounts:password_reset' %}" class="auth-link">
+                                Parolanızı mı unuttunuz?
+                            </a>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-auth btn-auth-primary btn-block" id="loginBtn">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Giriş yapmak
+                        <span class="spinner-border spinner-border-sm ml-2 d-none" id="loginSpinner"></span>
+                    </button>
+
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+
+                    <a href="#" class="btn-auth btn-auth-secondary btn-block mb-3">
+                        <i class="fab fa-google mr-2"></i> Google ile devam edin
+                    </a>
+
+                    <div class="auth-links text-center mt-4">
+                        <p class="mb-2">Hesabınız yok mu?</p>
+                        <a href="{% url 'accounts:signup' %}" class="btn-auth btn-auth-outline">
+                            <i class="fas fa-user-plus mr-2"></i> Hesap oluşturmak
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="auth-info-card mt-4">
+                <h5><i class="fas fa-info-circle text-primary mr-2"></i> Giriş Yardımı</h5>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="feature-item mb-3">
+                            <i class="fas fa-id-card feature-icon"></i>
+                            <span>Üniversite kimlik numaranızı veya e-postanızı kullanın</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-item mb-3">
+                            <i class="fas fa-key feature-icon"></i>
+                            <span>Parola büyük/küçük harf duyarlıdır</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="mailto:ogrenci@avrasya.edu.tr" class="auth-link small">
+                    <i class="fas fa-headset mr-1"></i> Yardım mı gerek? IT destek ile iletişime geçin
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto:400,500,700');
+    @import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        @font-face {
+            font-family: 'Metropolis';
+            src: url('{% static "core/fonts/Metropolis-Black.woff2" %}') format('woff2'),
+                url('{% static "core/fonts/Metropolis-Black.woff" %}') format('woff');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }   
+
+
+    /* استایل‌های مخصوص صفحه لاگین */
+    .btn-auth-outline {
+        background: transparent;
+        color: var(--secondary-medium-blue);
+        border: 2px solid var(--secondary-medium-blue);
+        padding: 12px 24px;
+    }
+    
+    .btn-auth-outline:hover {
+        background: var(--secondary-medium-blue);
+        color: white;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // فعال‌سازی floating labels
+        document.querySelectorAll('.floating-label input').forEach(input => {
+            input.placeholder = ' ';
+            
+            if (input.value) {
+                input.parentElement.classList.add('focused');
+            }
+            
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+        
+        // نمایش/مخفی کردن رمز عبور
+        document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const passwordInput = document.getElementById(targetId);
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        });
+        
+        // ارسال فرم
+        const form = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginSpinner = document.getElementById('loginSpinner');
+        
+        form.addEventListener('submit', function() {
+            loginSpinner.classList.remove('d-none');
+            loginBtn.disabled = true;
+        });
+        
+        // انیمیشن برای ورود
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach((input, index) => {
+            input.style.animationDelay = `${index * 0.1}s`;
+            input.classList.add('animate__animated', 'animate__fadeInUp');
+        });
+    });
+</script>
+{% endblock %}

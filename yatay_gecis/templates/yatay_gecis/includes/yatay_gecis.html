@@ -1,0 +1,1406 @@
+{% extends 'yatay_gecis/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Yatay Geçiş{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Yatay Geçiş</h1>
+            <p>Avrasya Üniversitesi'ne, Yükseköğretim Kurulu (YÖK) tarafından hazırlanan Yönetmelik ve Üniversite tarafından belirlenen esaslar çerçevesinde yatay geçiş yapabilirsiniz.</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'yatay_gecis/yatay_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی - کارت‌ها -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- عناوین صفحه -->
+                <div class="page-intro mb-5">
+                    <h2 class="section-title">Yatay Geçiş Başvuru, Kayıt ve Esasları</h2>
+                    <p class="section-subtitle text-center">Aşağıdaki bağlantılardan ilgilendiğiniz konulara ulaşabilirsiniz</p>
+                </div>
+                
+                <!-- Grid کارت‌ها -->
+                <div class="yatay-cards-grid">
+                    <!-- کارت 1: Yatay Geçiş Kontenjanları -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay1.png' %}" alt="Yatay Geçiş Kontenjanları">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            {% comment %} <div class="yatay-card-icon">
+                                <i class="fas fa-list-alt"></i>
+                            </div> {% endcomment %}
+                            <h3 class="yatay-card-title">Yatay Geçiş Kontenjanları</h3>
+                            <p class="yatay-card-description">Programlarımızın yatay geçiş kontenjanlarını görüntüleyin</p>
+                            <a href="{% url 'yatay_gecis:yatay_Kontenjanlar' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 2: Yatay Geçiş Başvuru Formu -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay2.png' %}" alt="Yatay Geçiş Başvuru Formu">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Yatay Geçiş Başvuru Formu</h3>
+                            <p class="yatay-card-description">Başvuru formlarını indirip doldurabilirsiniz</p>
+                            <div class="yatay-card-buttons">
+                                <a href="https://avrasya.edu.tr/wp-content/uploads/2021/01/Yatay-Gecis-Basvuru-Formu.pdf" class="yatay-card-button">
+                                    <span>PDF Formu</span>
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="https://avrasya.edu.tr/wp-content/uploads/2023/01/Avrasya_Universitesi_yatay-gecis_basvuru_ve_kayit_dosyasi_kapak_formu-24.01.2023.docx" class="yatay-card-button">
+                                    <span>Kapak Formu</span>
+                                    <i class="fas fa-file-word"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 3: Başvuru Belgeleri -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay3.png' %}" alt="Başvuru Belgeleri">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Başvuru Belgeleri</h3>
+                            <p class="yatay-card-description">Gerekli belgelerin listesi ve açıklamaları</p>
+                            <a href="{% url 'yatay_gecis:yatay_geciste_istenilen_Bbelgeler' %}" class="yatay-card-button">
+                                <span>Belgeleri Gör</span>
+                                <i class="fas fa-folder-open"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 4: Ortalamaya Göre Başvuru Koşulları -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay4.png' %}" alt="Ortalamaya Göre Başvuru Koşulları">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Ortalamaya Göre Başvuru Koşulları</h3>
+                            <p class="yatay-card-description">Not ortalamanıza göre başvuru şartları</p>
+                            <a href="{% url 'yatay_gecis:ortalama' %}" class="yatay-card-button">
+                                <span>Koşulları Gör</span>
+                                <i class="fas fa-chart-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 5: YÖK Ek Madde 1'e Göre Başvuru Koşulları -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay5.png' %}" alt="YÖK Ek Madde 1">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">YÖK Ek Madde 1'e Göre</h3>
+                            <p class="yatay-card-description">YÖK tarafından belirlenen ek madde şartları</p>
+                            <a href="{% url 'yatay_gecis:ek_madde' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-book"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 6: Yurt Dışından Yurt İçine Yatay Geçişler -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay6.png' %}" alt="Yurt Dışından Yurt İçine Yatay Geçiş">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Yurt Dışından Yatay Geçiş</h3>
+                            <p class="yatay-card-description">Yurtdışından yatay geçiş prosedürleri</p>
+                            <a href="{% url 'yatay_gecis:yatay_gecis' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-globe-americas"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 7: Değerlendirme Biçimi -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay7.png' %}" alt="Değerlendirme Biçimi">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Değerlendirme Biçimi</h3>
+                            <p class="yatay-card-description">Başvuruların nasıl değerlendirileceği</p>
+                            <a href="{% url 'yatay_gecis:degerlendirme_bicimi' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-clipboard-check"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 8: Yatay Geçiş Bursları ve Öğrenim Ücretleri -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay8.png' %}" alt="Yatay Geçiş Bursları">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Burslar ve Ücretler</h3>
+                            <p class="yatay-card-description">Yatay geçiş bursları ve öğrenim ücretleri</p>
+                            <a href="{% url 'yatay_gecis:burslar' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-graduation-cap"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 9: Kayıt Yeri ve Kayıt İşlemleri İçin Gerekli Belgeler -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay9.png' %}" alt="Kayıt İşlemleri">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                           
+                            <h3 class="yatay-card-title">Kayıt İşlemleri ve Belgeler</h3>
+                            <p class="yatay-card-description">Kayıt için gerekli belgeler ve işlemler</p>
+                            <a href="{% url 'yatay_gecis:kayıt_yeri' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-file-signature"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 10: Taban Puanlar -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay10.png' %}" alt="Taban Puanlar">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Taban Puanlar</h3>
+                            <p class="yatay-card-description">Programların taban puanları ve kontenjanları</p>
+                            <a href="{% url 'yatay_gecis:yatay_taban' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-chart-bar"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 11: Öğrenci İşleri Daire Başkanlığı -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay11.png' %}" alt="Öğrenci İşleri">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Öğrenci İşleri</h3>
+                            <p class="yatay-card-description">Öğrenci İşleri Daire Başkanlığı iletişim</p>
+                            <a href="{% url 'yatay_gecis:orenci_isleri_daire_baskanli' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-users"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 12: Başvuru Takvimi -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay12.png' %}" alt="Başvuru Takvimi">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Başvuru Takvimi</h3>
+                            <p class="yatay-card-description">Yatay geçiş başvuru tarihleri ve süreçleri</p>
+                            <a href="{% url 'yatay_gecis:takvim' %}" class="yatay-card-button">
+                                <span>Detayları Gör</span>
+                                <i class="fas fa-calendar-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت 13: Yatay Geçiş Sonuçları -->
+                    <div class="yatay-card">
+                        <div class="yatay-card-bg">
+                            <img src="{% static 'core/img/yatay/yatay13.png' %}" alt="Yatay Geçiş Sonuçları">
+                            <div class="yatay-card-gradient"></div>
+                        </div>
+                        <div class="yatay-card-content">
+                            
+                            <h3 class="yatay-card-title">Yatay Geçiş Sonuçları</h3>
+                            <p class="yatay-card-description">2024-2025 Bahar Dönemi sonuçları</p>
+                            <a href="{% url 'yatay_gecis:bahar' %}" class="yatay-card-button">
+                                <span>Sonuçları Gör</span>
+                                <i class="fas fa-poll"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- بخش فرم تماس -->
+                <div class="contact-form-section mt-5 pt-5">
+                    <div class="contact-form-header">
+                        <div class="contact-form-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h2 class="contact-form-title">Sizi Arayalım</h2>
+                        <p class="contact-form-subtitle">Formumuzu doldurmanızın ardından sizinle en kısa süre içerisinde iletişime geçeceğiz.</p>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <form id="callBackForm" class="contact-form">
+                            <!-- فیلد Ad Soyad -->
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">
+                                    <i class="fas fa-user"></i>
+                                    <span>Ad Soyad*</span>
+                                </label>
+                                <input type="text" 
+                                       id="fullName" 
+                                       name="fullName" 
+                                       class="form-control" 
+                                       placeholder="Lütfen adınızı ve soyadınızı giriniz" 
+                                       required>
+                                <div class="form-error">Please fill out this field.</div>
+                            </div>
+                            
+                            <!-- فیلد E-posta -->
+                            <div class="form-group">
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>E-posta*</span>
+                                </label>
+                                <input type="email" 
+                                       id="email" 
+                                       name="email" 
+                                       class="form-control" 
+                                       placeholder="ornek@email.com" 
+                                       required>
+                                <div class="form-error">Please fill out this field.</div>
+                            </div>
+                            
+                            <!-- فیلد Telefon Numarası -->
+                            <div class="form-group">
+                                <label for="phone" class="form-label">
+                                    <i class="fas fa-phone"></i>
+                                    <span>Telefon Numarası*</span>
+                                </label>
+                                <input type="tel" 
+                                       id="phone" 
+                                       name="phone" 
+                                       class="form-control" 
+                                       placeholder="(5XX) XXX XX XX" 
+                                       required>
+                                <div class="form-error">Please fill out this field.</div>
+                            </div>
+                            
+                            <!-- چک‌باکس‌ها -->
+                            <div class="form-checkboxes">
+                                <div class="form-check">
+                                    <input type="checkbox" 
+                                           id="acceptCommunication" 
+                                           name="acceptCommunication" 
+                                           class="form-check-input" 
+                                           required>
+                                    <label for="acceptCommunication" class="form-check-label">
+                                        Formu göndererek iletişim ile ilgili kanunlar hükmünce reklam ve iletişim bildirimleri almayı kabul ederim.
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check">
+                                    <input type="checkbox" 
+                                           id="acceptKVKK" 
+                                           name="acceptKVKK" 
+                                           class="form-check-input" 
+                                           required>
+                                    <label for="acceptKVKK" class="form-check-label">
+                                        <a href="#" class="kvkk-link">"Kişisel Verilerin Korunması Kanunu"</a> kapsamında Bilgilendirme ve Aydınlatma Metnini okudum. (*) Verileriniz paylaşılmayacaktır.
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- دکمه ارسال -->
+                            <div class="form-submit">
+                                <button type="submit" class="submit-button">
+                                    <span class="submit-text">Formu Gönder</span>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- پیام موفقیت -->
+                            <div class="form-success-message" id="successMessage">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h4>Formunuz Başarıyla Gönderildi!</h4>
+                                    <p>En kısa sürede sizinle iletişime geçeceğiz.</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    font-family: 'Metropolis', sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 30px auto 0;
+}
+
+/* Grid کارت‌ها - Full Image Design */
+.yatay-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* کارت استایل‌ها - Full Image */
+.yatay-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 400px;
+    background: var(--primary-dark-blue);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.yatay-card:hover {
+    transform: translateY(-20px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(29, 97, 169, 0.3);
+}
+
+.yatay-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.yatay-card-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.yatay-card:hover .yatay-card-bg img {
+    transform: scale(1.15) rotate(2deg);
+    filter: brightness(1.2);
+}
+
+.yatay-card-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(9, 36, 66, 0.85) 0%,
+        rgba(29, 97, 169, 0.7) 50%,
+        rgba(141, 212, 227, 0.4) 100%
+    );
+    transition: all 0.6s ease;
+}
+
+.yatay-card:hover .yatay-card-gradient {
+    background: linear-gradient(
+        135deg,
+        rgba(9, 36, 66, 0.95) 0%,
+        rgba(29, 97, 169, 0.8) 50%,
+        rgba(141, 212, 227, 0.5) 100%
+    );
+}
+
+.yatay-card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    z-index: 2;
+    color: white;
+    transition: all 0.6s ease;
+}
+
+.yatay-card:hover .yatay-card-content {
+    transform: translateY(-10px);
+}
+
+.yatay-card-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    transition: all 0.5s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.yatay-card:hover .yatay-card-icon {
+    transform: translateY(-15px) scale(1.1);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: var(--accent-light-blue);
+    box-shadow: 0 10px 25px rgba(141, 212, 227, 0.3);
+}
+
+.yatay-card-icon i {
+    font-size: 28px;
+    color: white;
+    transition: all 0.5s ease;
+}
+
+.yatay-card:hover .yatay-card-icon i {
+    color: var(--accent-light-blue);
+    transform: rotate(15deg);
+}
+
+.yatay-card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-family: 'Metropolis', sans-serif;
+    line-height: 1.3;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease 0.1s;
+    color: white;
+}
+
+.yatay-card:hover .yatay-card-title {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.yatay-card-description {
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    opacity: 0.9;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease 0.2s;
+    color: white;
+}
+
+.yatay-card:hover .yatay-card-description {
+    transform: translateY(0);
+    opacity: 0.9;
+}
+
+.yatay-card-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease 0.3s, background 0.3s ease, transform 0.3s ease;
+}
+
+.yatay-card-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.yatay-card-buttons .yatay-card-button {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.yatay-card:hover .yatay-card-button {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.yatay-card-button:hover {
+    background: var(--secondary-medium-blue);
+    border-color: var(--secondary-medium-blue);
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 20px rgba(29, 97, 169, 0.4);
+}
+
+.yatay-card-button i {
+    transition: transform 0.3s ease;
+}
+
+.yatay-card-button:hover i {
+    transform: translateX(5px);
+}
+
+/* بخش فرم تماس */
+.contact-form-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 20px;
+    padding: 50px;
+    margin-top: 60px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+}
+
+.contact-form-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-form-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 32px;
+    box-shadow: 0 10px 30px rgba(29, 97, 169, 0.3);
+    animation: phoneRing 2s ease-in-out infinite;
+}
+
+@keyframes phoneRing {
+    0%, 100% { transform: rotate(0) scale(1); }
+    10%, 30%, 50%, 70%, 90% { transform: rotate(-5deg) scale(1.05); }
+    20%, 40%, 60%, 80% { transform: rotate(5deg) scale(1.05); }
+}
+
+.contact-form-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    font-family: 'Metropolis', sans-serif;
+}
+
+.contact-form-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.contact-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-form {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-label i {
+    color: var(--secondary-medium-blue);
+    font-size: 16px;
+    width: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    color: var(--text-dark);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 3px rgba(29, 97, 169, 0.1);
+    background: white;
+    transform: translateY(-2px);
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+.form-error {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    min-height: 20px;
+}
+
+.form-control:invalid:not(:placeholder-shown) + .form-error {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* استایل‌های چک‌باکس */
+.form-checkboxes {
+    margin: 30px 0;
+    padding: 25px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-check {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-check:last-child {
+    margin-bottom: 0;
+}
+
+.form-check-input {
+    position: absolute;
+    opacity: 0;
+}
+
+.form-check-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    cursor: pointer;
+    padding-left: 35px;
+    position: relative;
+}
+
+.form-check-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.form-check-input:checked + .form-check-label::before {
+    background: var(--secondary-medium-blue);
+    border-color: var(--secondary-medium-blue);
+}
+
+.form-check-input:checked + .form-check-label::after {
+    content: '✓';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-check-input:focus + .form-check-label::before {
+    box-shadow: 0 0 0 3px rgba(29, 97, 169, 0.2);
+}
+
+.kvkk-link {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.kvkk-link:hover {
+    border-bottom-color: var(--secondary-medium-blue);
+}
+
+/* دکمه ارسال */
+.form-submit {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.submit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    color: white;
+    border: none;
+    padding: 18px 45px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(29, 97, 227, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.submit-button:hover::before {
+    left: 100%;
+}
+
+.submit-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(29, 97, 227, 0.4);
+}
+
+.submit-button:active {
+    transform: translateY(-2px);
+}
+
+.submit-button i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.submit-button:hover i {
+    transform: translateX(5px) rotate(15deg);
+}
+
+/* پیام موفقیت */
+.form-success-message {
+    display: none;
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 25px;
+    align-items: center;
+    gap: 20px;
+    animation: slideInUp 0.6s ease;
+}
+
+.form-success-message i {
+    color: #10b981;
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.form-success-message h4 {
+    color: #065f46;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-success-message p {
+    color: #047857;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* انیمیشن ورود کارت‌ها */
+@keyframes cardFloatIn {
+    from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.8) rotateX(-15deg);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0);
+        filter: blur(0);
+    }
+}
+
+.yatay-card {
+    animation: cardFloatIn 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    opacity: 0;
+    animation-fill-mode: both;
+}
+
+/* تأخیر‌های انیمیشن برای هر کارت */
+.yatay-card:nth-child(1) { animation-delay: 0.1s; }
+.yatay-card:nth-child(2) { animation-delay: 0.2s; }
+.yatay-card:nth-child(3) { animation-delay: 0.3s; }
+.yatay-card:nth-child(4) { animation-delay: 0.4s; }
+.yatay-card:nth-child(5) { animation-delay: 0.5s; }
+.yatay-card:nth-child(6) { animation-delay: 0.6s; }
+.yatay-card:nth-child(7) { animation-delay: 0.7s; }
+.yatay-card:nth-child(8) { animation-delay: 0.8s; }
+.yatay-card:nth-child(9) { animation-delay: 0.9s; }
+.yatay-card:nth-child(10) { animation-delay: 1.0s; }
+.yatay-card:nth-child(11) { animation-delay: 1.1s; }
+.yatay-card:nth-child(12) { animation-delay: 1.2s; }
+.yatay-card:nth-child(13) { animation-delay: 1.3s; }
+
+/* انیمیشن فرم */
+@keyframes fadeInUpForm {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-form-section {
+    animation: fadeInUpForm 0.8s ease 0.5s forwards;
+    opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .yatay-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .yatay-card {
+        height: 380px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .yatay-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .yatay-card {
+        height: 360px;
+    }
+    
+    .yatay-card-content {
+        padding: 25px;
+    }
+    
+    .yatay-card-title {
+        font-size: 1.4rem;
+    }
+    
+    .yatay-card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+    }
+    
+    .yatay-card-icon i {
+        font-size: 24px;
+    }
+    
+    .contact-form-section {
+        padding: 35px;
+    }
+    
+    .contact-form {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .yatay-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+    }
+    
+    .yatay-card {
+        height: 340px;
+    }
+    
+    .yatay-card-content {
+        padding: 20px;
+    }
+    
+    .yatay-card-title {
+        font-size: 1.3rem;
+    }
+    
+    .yatay-card-description {
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .yatay-card-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 20px;
+    }
+    
+    .contact-form-section {
+        padding: 25px;
+    }
+    
+    .contact-form {
+        padding: 25px;
+    }
+    
+    .contact-form-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+    
+    .contact-form-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .yatay-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .yatay-card {
+        height: 320px;
+        max-width: 100%;
+    }
+    
+    .contact-form-section {
+        padding: 20px;
+    }
+    
+    .contact-form {
+        padding: 20px;
+    }
+    
+    .form-check-label {
+        font-size: 0.9rem;
+    }
+    
+    .submit-button {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 30px;
+    }
+    
+    .contact-form-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .contact-form-title {
+        font-size: 1.6rem;
+    }
+    
+    .contact-form-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* انیمیشن‌های اضافی */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.contact-form-icon {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* انیمیشن برای موبایل (کاهش motion) */
+@media (prefers-reduced-motion: reduce) {
+    .yatay-card,
+    .yatay-card *,
+    .contact-form-section,
+    .contact-form-icon,
+    .submit-button,
+    .form-control {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .yatay-card:hover {
+        transform: none;
+    }
+    
+    .submit-button:hover {
+        transform: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // انیمیشن پارالاکس ماوس برای کارت‌ها
+    const cards = document.querySelectorAll('.yatay-card');
+    
+    cards.forEach(card => {
+        // افکت پارالاکس
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateY = (x - centerX) / 15;
+            const rotateX = (centerY - y) / 15;
+            
+            const bg = this.querySelector('.yatay-card-bg img');
+            
+            this.style.transform = `translateY(-20px) scale(1.03) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            bg.style.transform = `scale(1.15) rotate(2deg) translate(${rotateY * 0.5}px, ${rotateX * 0.5}px)`;
+            
+            // حرکت جزئی محتوا
+            const content = this.querySelector('.yatay-card-content');
+            content.style.transform = `translateY(-10px) translate(${rotateY * 0.1}px, ${rotateX * 0.1}px)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(-20px) scale(1.03) rotateX(0) rotateY(0)';
+            
+            const bg = this.querySelector('.yatay-card-bg img');
+            bg.style.transform = 'scale(1.15) rotate(2deg)';
+            
+            const content = this.querySelector('.yatay-card-content');
+            content.style.transform = 'translateY(-10px)';
+        });
+    });
+    
+    // مدیریت فرم تماس
+    const callBackForm = document.getElementById('callBackForm');
+    const successMessage = document.getElementById('successMessage');
+    
+    if (callBackForm) {
+        callBackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // اعتبارسنجی فرم
+            let isValid = true;
+            const requiredFields = callBackForm.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                const errorElement = field.parentElement.querySelector('.form-error');
+                
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#dc2626';
+                    if (errorElement) {
+                        errorElement.textContent = 'Bu alanı doldurunuz.';
+                        errorElement.style.opacity = '1';
+                        errorElement.style.transform = 'translateY(0)';
+                    }
+                } else {
+                    field.style.borderColor = '#10b981';
+                    if (errorElement) {
+                        errorElement.style.opacity = '0';
+                        errorElement.style.transform = 'translateY(-10px)';
+                    }
+                }
+                
+                // اعتبارسنجی خاص برای ایمیل
+                if (field.type === 'email' && field.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value.trim())) {
+                        isValid = false;
+                        field.style.borderColor = '#dc2626';
+                        if (errorElement) {
+                            errorElement.textContent = 'Geçerli bir e-posta adresi giriniz.';
+                            errorElement.style.opacity = '1';
+                            errorElement.style.transform = 'translateY(0)';
+                        }
+                    }
+                }
+            });
+            
+            if (isValid) {
+                // شبیه‌سازی ارسال فرم
+                const submitButton = callBackForm.querySelector('.submit-button');
+                const originalText = submitButton.innerHTML;
+                
+                // نمایش وضعیت loading
+                submitButton.innerHTML = `
+                    <span class="submit-text">Gönderiliyor...</span>
+                    <i class="fas fa-spinner fa-spin"></i>
+                `;
+                submitButton.disabled = true;
+                
+                // شبیه‌سازی تاخیر سرور
+                setTimeout(() => {
+                    // پنهان کردن فرم
+                    callBackForm.style.opacity = '0';
+                    callBackForm.style.transform = 'translateY(-20px)';
+                    callBackForm.style.transition = 'all 0.5s ease';
+                    
+                    // نمایش پیام موفقیت
+                    setTimeout(() => {
+                        callBackForm.style.display = 'none';
+                        successMessage.style.display = 'flex';
+                        
+                        // انیمیشن پیام موفقیت
+                        setTimeout(() => {
+                            successMessage.style.opacity = '1';
+                            successMessage.style.transform = 'translateY(0)';
+                        }, 50);
+                    }, 300);
+                    
+                    // ریست فرم پس از 5 ثانیه (برای دمو)
+                    setTimeout(() => {
+                        callBackForm.reset();
+                        callBackForm.style.display = 'block';
+                        callBackForm.style.opacity = '1';
+                        callBackForm.style.transform = 'translateY(0)';
+                        successMessage.style.display = 'none';
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                        
+                        // ریست کردن استایل فیلدها
+                        callBackForm.querySelectorAll('.form-control').forEach(field => {
+                            field.style.borderColor = '#e2e8f0';
+                        });
+                    }, 5000);
+                }, 1500);
+            }
+        });
+        
+        // اعتبارسنجی real-time
+        const formInputs = callBackForm.querySelectorAll('.form-control');
+        formInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const errorElement = this.parentElement.querySelector('.form-error');
+                
+                if (this.value.trim()) {
+                    this.style.borderColor = '#10b981';
+                    if (errorElement) {
+                        errorElement.style.opacity = '0';
+                        errorElement.style.transform = 'translateY(-10px)';
+                    }
+                } else {
+                    this.style.borderColor = '#e2e8f0';
+                }
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.style.borderColor = '#e2e8f0';
+                }
+            });
+        });
+    }
+    
+    // انیمیشن لود تدریجی تصاویر کارت‌ها
+    const images = document.querySelectorAll('.yatay-card-bg img');
+    
+    images.forEach(img => {
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+            this.style.transition = 'opacity 0.5s ease';
+        });
+        
+        if (img.complete) {
+            img.style.opacity = '1';
+        } else {
+            img.style.opacity = '0';
+        }
+    });
+    
+    // فعال‌سازی انیمیشن‌ها هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // مشاهده فرم برای انیمیشن
+    const formSection = document.querySelector('.contact-form-section');
+    if (formSection) {
+        observer.observe(formSection);
+    }
+});
+</script>
+{% endblock %}

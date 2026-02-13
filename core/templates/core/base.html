@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+<title>Course</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Course Project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'core/main/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/css/auth.css' %}">
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- در فایل base.html یا در head سایت -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+</head>
+<body>
+
+<div class="super_container">
+
+<!-- Top Bar -->
+		<div class="top_bar">
+			<div class="top_bar_container">
+				<div class="top_bar_left">
+					<ul class="top_bar_list">
+						<li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/">OBS</a></li>
+						<li class="top_bar_item"><a href="https://avukalite.avrasya.edu.tr/">Kalite</a></li>
+						<li class="top_bar_item"><a href="https://ebys.avrasya.edu.tr/Giris.aspx">EBYS</a></li>
+						<li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/">Bologna</a></li>
+						<li class="top_bar_item"><a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F">Online Eğitim</a></li>
+						<li class="top_bar_item"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638996701980044877.MjRiNzMxNjQtMjE3YS00YTE5LWIxMTAtNmI1OGE1ODg1MTExYjYxZWRkYTktMTA3ZS00ZTgzLWE0YjMtZGQxYzRkMGU4NDRm&ui_locales=tr-TR&mkt=tr-TR&client-request-id=552d74f3-e879-46b5-8cf9-af6111fc0737&state=aoBhGvBmR_CkgkJYuR98DDaLwkfd6kISsF4I3D3gxShv1udv4H2O4JLpjx6Zg-RxAAPsosdtPe4ZQ8dwmpEHqs9UID2r3kKLbv8VWoK4Aze4XpRbP-K17MWLR9y-wMrih4SoGJ8fwL5t30Iw5ZuTmtBrdIWm20UxdoknRwbcYekQgO-D5WuZ2XY0oAoVD97wKPBPcmFzdzE1ojFkcDKxY4PwfVpR2MFdPCXYmjvISJWcs3sT0oN28WS0pzBx9XF-4_s_EXpkCQ7nNs2pGxv8W7b4owvr_cqeynfqVP2DuKM&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true">Mail</a></li>
+						<li class="top_bar_item"><a href="#">Kütüphane</a></li>
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+
+	<!-- Header -->
+    <header class="header d-flex flex-row">
+        <div class="header_content d-flex flex-row align-items-center">
+            <!-- Logo -->
+            <div class="logo_container">
+                <div class="logo">
+                    <a href="{% url 'core:index' %}">
+                        <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="">
+                    </a>
+                    <span></span>
+                </div>
+            </div>
+
+            <!-- Main Navigation -->
+            <nav class="main_nav_container">
+                <div class="main_nav">
+                    {% include 'core/navbar.html' %}
+                </div>
+            </nav>
+        </div>
+		
+
+
+		
+
+
+
+
+		{% comment %} <!-- Hamburger -->
+		<div class="hamburger_container">
+			<i class="fas fa-bars trans_200"></i>
+		</div> {% endcomment %}
+
+	</header>
+	
+	<!-- Menu -->
+	<div class="menu_container menu_mm">
+
+		<!-- Menu Close Button -->
+		<div class="menu_close_container">
+			<div class="menu_close"></div>
+		</div>
+
+		<!-- Menu Items -->
+		{% comment %} <div class="menu_inner menu_mm">
+			<div class="menu menu_mm">
+				<ul class="menu_list menu_mm">
+					<li class="menu_item menu_mm"><a href="#">Home</a></li>
+					<li class="menu_item menu_mm"><a href="#">About us</a></li>
+					<li class="menu_item menu_mm"><a href="courses.html">Courses</a></li>
+					<li class="menu_item menu_mm"><a href="elements.html">Elements</a></li>
+					<li class="menu_item menu_mm"><a href="news.html">News</a></li>
+					<li class="menu_item menu_mm"><a href="contact.html">Contact</a></li>
+					<li class="menu_item menu_mm"><a href="news.html">News</a></li>
+					<li class="menu_item menu_mm"><a href="contact.html">Contact</a></li>
+				</ul>
+
+				<!-- Menu Social -->
+				
+				<div class="menu_social_container menu_mm">
+					<ul class="menu_social menu_mm">
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-instagram"></i></a></li>
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-twitter"></i></a></li>
+					</ul>
+				</div>
+
+				<div class="menu_copyright menu_mm">Colorlib All rights reserved</div>
+			</div>
+
+		</div> {% endcomment %}
+
+	</div>
+
+    {% block content %}
+    {% endblock content %}
+
+
+
+    <!-- Footer -->
+	 {% include "core/footer.html" %}
+
+	
+
+</div>
+
+<!-- اصلاح مسیر اسکریپت‌ها -->
+<script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'core/main/styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'core/main/styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'core/main/plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/easing/easing.js' %}"></script>
+<script src="{% static 'core/main/js/custom.js' %}"></script>
+
+
+</body>
+<style>
+
+/***********
+1. Fonts
+***********/
+
+
+
+
+
+
+
+
+
+
+
+
+	.header {
+    position: fixed;
+    top: 55px; /* 30px نوار بالایی + 25px فاصله */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px;
+    height: 120px;
+    background: rgba(9, 36, 66, 0.9);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 10;
+    transition: all 200ms ease;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(9, 36, 66, 0.3);
+    border: 1px solid rgba(141, 212, 227, 0.0); 
+    margin-top: 25px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.header.scrolled { 
+    top: 15px;
+}
+
+.header.scrolled + .top_bar {
+    margin-top: 0;
+    border-radius: 0 0 12px 12px;
+}
+</style>
+</html>
+
+
+

@@ -1,0 +1,22 @@
+# fen_edebiyat/admin.py
+from django.contrib import admin
+from .models import FenEdebiyatDuyuru
+
+@admin.register(FenEdebiyatDuyuru)
+class FenEdebiyatDuyuruAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'kategori', 'yayin_tarihi', 'yayinda', 'onemli', 'sira']
+    list_filter = ['kategori', 'yayinda', 'onemli', 'yayin_tarihi']
+    search_fields = ['baslik', 'icerik', 'ozet']
+    list_editable = ['yayinda', 'onemli', 'sira']
+    
+    fieldsets = (
+        ('Temel Bilgiler', {
+            'fields': ('baslik', 'icerik', 'ozet', 'kategori')
+        }),
+        ('Dosya ve Ayarlar', {
+            'fields': ('dosya', 'onemli', 'yayinda', 'sira')
+        }),
+    )
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).order_by('-onemli', '-yayin_tarihi')

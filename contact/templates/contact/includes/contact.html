@@ -1,0 +1,330 @@
+{% extends 'contact/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}İletişim - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<style>
+    /* Custom Contact Page Styles */
+    .contact-header {
+        background-image: linear-gradient(rgba(0, 35, 71, 0.8), rgba(0, 35, 71, 0.8)),
+        url('{% static "core/img/student/about-banner.png" %}');
+        background-size: cover;
+        background-position: center;
+        padding: 100px 0 150px;
+        color: white;
+        text-align: center;
+        position: relative;
+        margin-top: -100px;
+    }
+
+    .contact-card-wrapper {
+        margin-top: -100px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        position: relative;
+        z-index: 10;
+        margin-bottom: 50px;
+    }
+
+    .form-section {
+        padding: 50px;
+        background: #fff;
+    }
+
+    .info-section {
+        background: linear-gradient(135deg, #002347 0%, #8dd4e3 100%);
+        padding: 50px;
+        color: white;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Decorative circles for info section */
+    .circle-decoration {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .circle-1 {
+        width: 200px;
+        height: 200px;
+        top: -50px;
+        right: -50px;
+    }
+
+    .circle-2 {
+        width: 100px;
+        height: 100px;
+        bottom: 50px;
+        left: -20px;
+    }
+
+    .section-label {
+        color: #8dd4e3;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .section-heading {
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 700;
+        color: #002347;
+        margin-bottom: 20px;
+        font-size: 2rem;
+    }
+
+    .info-heading {
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 30px;
+        font-size: 1.8rem;
+    }
+
+    /* Form Styling */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        background: #f8f9fa;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 15px;
+        height: auto;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        background: #fff;
+        border-color: #002347;
+        box-shadow: none;
+    }
+
+    label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+
+    .btn-contact-submit {
+        background: #8dd4e3;
+        color: #ffffff;
+        font-weight: 800;
+        padding: 15px 35px;
+        border-radius: 10px;
+        border: none;
+        width: 100%;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 10px;
+        box-shadow: 0 4px 15px rgba(255, 182, 6, 0.3);
+    }
+
+    .btn-contact-submit:hover {
+        background: #8dd4e3;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 182, 6, 0.4);
+        color: #002347;
+    }
+
+    /* Contact Info Items */
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: #8dd4e3;
+        margin-right: 20px;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+    }
+
+    .contact-item:hover .contact-icon {
+        background: #8dd4e3;
+        color: #002347;
+    }
+
+    .contact-text h5 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: rgba(255, 255, 255, 0.95);
+    }
+
+    .contact-text p {
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .contact-text a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: color 0.3s;
+        text-decoration: none;
+    }
+
+    .contact-text a:hover {
+        color: #8dd4e3;
+    }
+
+    /* Map Section */
+    .map-container {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        height: 400px;
+        margin-bottom: 50px;
+        border: 1px solid #e9ecef;
+    }
+
+    @media (max-width: 991px) {
+
+        .form-section,
+        .info-section {
+            padding: 30px;
+        }
+
+        .contact-card-wrapper {
+            margin-top: -50px;
+        }
+
+        .info-section {
+            border-radius: 0 0 20px 20px;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="contact-header">
+    <div class="container">
+        <h1
+            style="font-family: 'Metropolis', sans-serif; font-weight: 800; font-size: 3.5rem; margin-bottom: 15px; color:#f8f9fa">
+            İletişim</h1>
+        <p class="lead" style="opacity: 0.9; font-weight: 300; color:#f8f9fa">Sorularınız ve önerileriniz için bizimle
+            iletişime
+            geçin.</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="contact-card-wrapper">
+        <div class="row no-gutters">
+            <!-- Left Side: Form -->
+            <div class="col-lg-7">
+                <div class="form-section">
+                    <span class="section-label">Bize Yazın</span>
+                    <h2 class="section-heading">Mesaj Gönderin</h2>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.name|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.email|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.subject|as_crispy_field }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.message|as_crispy_field }}
+                        </div>
+
+                        <button type="submit" class="btn btn-contact-submit">
+                            <i class="fas fa-paper-plane mr-2"></i> Mesajı Gönder
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Side: Info -->
+            <div class="col-lg-5">
+                <div class="info-section">
+                    <div class="circle-decoration circle-1"></div>
+                    <div class="circle-decoration circle-2"></div>
+
+                    <h3 class="info-heading">İletişim Bilgileri</h3>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 40px; position: relative; z-index: 2;">
+                        Aşağıdaki iletişim kanallarından bize doğrudan ulaşabilir veya kampüsümüzü ziyaret
+                        edebilirsiniz.
+                    </p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h5>Adres</h5>
+                            <p>Pelitli, Rize Cd. No:224<br>61080 Ortahisar/Trabzon, Türkiye</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h5>Telefon</h5>
+                            <p><a href="tel:+904623340550">444 91 95</a></p>
+                            <p><a href="tel:+904623340550">+90 462 334 05 50</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h5>E-posta</h5>
+                            <p><a href="mailto:info@avrasya.edu.tr">info@avrasya.edu.tr</a></p>
+                            <p><a href="mailto:ramin.entezar@avrasya.edu.tr">ramin.entezar@avrasya.edu.tr</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Map Embed -->
+    <!-- <div class="map-container">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.696187766155!2d39.77885431541334!3d40.98808697930283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40643c4c9b3a3e1b%3A0x6b4c3c3c3c3c3c3c!2sAvrasya%20%C3%9Cniversitesi!5e0!3m2!1str!2str!4v1620000000000!5m2!1str!2str"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+    </div> -->
+</div>
+{% endblock %}

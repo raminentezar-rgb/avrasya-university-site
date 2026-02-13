@@ -1,0 +1,666 @@
+{% extends 'yatay_gecis/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Taban Puanlar
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Taban Puanlar</h1>
+            <p>2018-2024 Yılları Arası Taban Puanları ve Başarı Sıralamaları</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'yatay_gecis/yatay_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- کارت‌های اطلاعات -->
+                {% comment %} <div class="info-cards mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="info-card" style="background: var(--neutral-cream); border-left: 4px solid var(--secondary-medium-blue);">
+                                <i class="fas fa-info-circle" style="color: var(--secondary-medium-blue);"></i>
+                                <div>
+                                    <h6 style="color: var(--primary-dark-blue); margin-bottom: 5px;">Güncel 2024 YKS Verileri</h6>
+                                    <p style="color: var(--text-light); margin: 0; font-size: 0.9rem;">Tüm programların 2024 YKS taban puanları</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-card" style="background: rgba(141, 212, 227, 0.1); border-left: 4px solid var(--accent-light-blue);">
+                                <i class="fas fa-chart-line" style="color: var(--accent-light-blue);"></i>
+                                <div>
+                                    <h6 style="color: var(--primary-dark-blue); margin-bottom: 5px;">7 Yıllık Veri</h6>
+                                    <p style="color: var(--text-light); margin: 0; font-size: 0.9rem;">2018-2024 arası karşılaştırma</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- کنترل‌های ساده -->
+                <div class="simple-controls mb-4">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" style="background: var(--primary-dark-blue); color: white; border-color: var(--primary-dark-blue);">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <input type="text" class="form-control" id="searchInput" placeholder="Bölüm veya fakülte ara...">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select" id="facultyFilter">
+                                <option value="">Tüm Fakülteler</option>
+                                <option value="Mühendislik ve Mimarlık Fakültesi">Mühendislik ve Mimarlık</option>
+                                <option value="Sağlık Bilimleri Fakültesi">Sağlık Bilimleri</option>
+                                <option value="Fen Edebiyat Fakültesi">Fen Edebiyat</option>
+                                <option value="İktisadi ve İdari Bilimler Fakültesi">İktisadi ve İdari Bilimler</option>
+                                <option value="Uygulamalı Bilimler Yüksekokulu">Uygulamalı Bilimler</option>
+                                <option value="Sağlık Hizmetleri Meslek Yüksekokulu">Sağlık Hizmetleri MYO</option>
+                                <option value="Meslek Yüksekokulu">Meslek Yüksekokulu</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="show2024" checked>
+                                    <label class="form-check-label" for="show2024" style="color: var(--text-dark);">
+                                        2024 YKS Göster
+                                    </label>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm" style="background: var(--neutral-cream); color: var(--text-dark); border: 1px solid var(--accent-light-blue);" id="resetFilters">
+                                        <i class="fas fa-redo"></i> Sıfırla
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- اطلاعات نتیجه -->
+                <div class="result-info mb-3" style="padding: 10px 15px; background: rgba(141, 212, 227, 0.05); border-radius: 8px; border: 1px solid rgba(141, 212, 227, 0.2);">
+                    <span style="color: var(--text-dark);"><strong id="resultCount">0</strong> bölüm listeleniyor</span>
+                    <span class="ms-3" style="color: var(--text-light); font-size: 0.9rem;">
+                        <i class="fas fa-filter"></i> Filtreleme aktif
+                    </span>
+                </div> {% endcomment %}
+
+                <!-- جدول اصلی -->
+                <div class="table-responsive">
+                    <table class="table table-hover" id="scoresTable">
+                        <thead style="background: var(--primary-dark-blue); color: white;">
+                            <tr>
+                                <th style="width: 30%;">Fakülte / Bölüm</th>
+                                <th style="width: 10%;">Puan Türü</th>
+                                <th style="width: 12%; text-align: center;">2024</th>
+                                <th style="width: 12%; text-align: center;">2023</th>
+                                <th style="width: 12%; text-align: center;">2022</th>
+                                <th style="width: 12%; text-align: center;">2021</th>
+                                <th style="width: 12%; text-align: center;">Değişim</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- داده‌ها توسط جاوااسکریپت پر می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- پیام خالی -->
+                <div id="noResults" class="text-center py-5 d-none">
+                    <i class="fas fa-search fa-3x mb-3" style="color: var(--text-light); opacity: 0.5;"></i>
+                    <h5 style="color: var(--text-dark);">Sonuç bulunamadı</h5>
+                    <p style="color: var(--text-light);">Arama kriterlerinize uygun bölüm bulunamadı.</p>
+                </div>
+
+                <!-- دانلود ساده -->
+                <div class="simple-download mt-4">
+                    <div class="d-flex align-items-center p-3" style="background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue)); border-radius: 10px;">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1" style="color: white;">Tam Taban Puan Listesi</h6>
+                            <p class="mb-0" style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">PDF formatında indirin</p>
+                        </div>
+                        <div>
+                            <a href="{% static 'documents/taban-puan-cizelgesi-30.06.2025-1-2.pdf' %}" 
+                               class="btn btn-sm" 
+                               style="background: white; color: var(--primary-dark-blue); border: none;"
+                               download>
+                                <i class="fas fa-download me-1"></i> İndir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های اصلی */
+.main-container {
+    max-width: 1600px;
+    margin: 40px auto;
+    padding: 0 25px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* کارت‌های اطلاعات */
+.info-card {
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    transition: transform 0.2s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-2px);
+}
+
+.info-card i {
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+/* کنترل‌ها */
+.simple-controls .form-control,
+.simple-controls .form-select {
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    padding: 10px 15px;
+    color: var(--text-dark);
+}
+
+.simple-controls .form-control:focus,
+.simple-controls .form-select:focus {
+    border-color: var(--accent-light-blue);
+    box-shadow: 0 0 0 3px rgba(141, 212, 227, 0.1);
+}
+
+/* جدول */
+.table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead th {
+    padding: 16px 12px;
+    font-weight: 600;
+    border: none;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid rgba(141, 212, 227, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(141, 212, 227, 0.05);
+}
+
+.table tbody td {
+    padding: 14px 12px;
+    vertical-align: middle;
+    color: var(--text-dark);
+    border-top: 1px solid rgba(141, 212, 227, 0.1);
+}
+
+/* بج پوان تیپ */
+.score-type-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.badge-say {
+    background: rgba(29, 97, 169, 0.1);
+    color: var(--secondary-medium-blue);
+    border: 1px solid rgba(29, 97, 169, 0.2);
+}
+
+.badge-ea {
+    background: rgba(141, 212, 227, 0.1);
+    color: var(--accent-light-blue);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.badge-söz {
+    background: rgba(247, 243, 233, 0.5);
+    color: var(--text-dark);
+    border: 1px solid rgba(247, 243, 233, 0.7);
+}
+
+.badge-tyt {
+    background: rgba(9, 36, 66, 0.05);
+    color: var(--primary-dark-blue);
+    border: 1px solid rgba(9, 36, 66, 0.1);
+}
+
+/* رنگ‌بندی نمرات */
+.score-cell {
+    font-weight: 600;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.score-high {
+    color: #28a745;
+}
+
+.score-medium {
+    color: var(--secondary-medium-blue);
+}
+
+.score-low {
+    color: var(--text-light);
+}
+
+/* تغییرات */
+.change-up {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.change-down {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.change-neutral {
+    color: var(--text-light);
+}
+
+/* پاسخگو */
+@media (max-width: 1200px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-container {
+        padding: 0 15px;
+    }
+    
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .table {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 0 10px;
+        margin: 20px auto;
+    }
+    
+    .info-cards .col-md-6 {
+        margin-bottom: 10px;
+    }
+    
+    .simple-controls .col-md-8,
+    .simple-controls .col-md-4 {
+        margin-bottom: 10px;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .table thead th:nth-child(4),
+    .table tbody td:nth-child(4),
+    .table thead th:nth-child(5),
+    .table tbody td:nth-child(5) {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 15px;
+    }
+    
+    .table {
+        font-size: 0.8rem;
+    }
+    
+    .table thead th,
+    .table tbody td {
+        padding: 10px 8px;
+    }
+}
+</style>
+
+<script>
+// داده‌های ساده شده
+const scoreData = [
+    // Mühendislik ve Mimarlık Fakültesi
+    {
+        faculty: "Mühendislik ve Mimarlık Fakültesi",
+        department: "Bilgisayar Mühendisliği",
+        scoreType: "SAY",
+        scores: ["294,14628", "323,95375", "299,480", "251,721"]
+    },
+    {
+        faculty: "Mühendislik ve Mimarlık Fakültesi",
+        department: "İç Mimarlık ve Çevre Tasarımı",
+        scoreType: "EA",
+        scores: ["248,87776", "284,07271", "273,174", "227,306"]
+    },
+    {
+        faculty: "Mühendislik ve Mimarlık Fakültesi",
+        department: "İnşaat Mühendisliği",
+        scoreType: "SAY",
+        scores: ["297,70337", "274,6202", "267,347", "274,906"]
+    },
+    {
+        faculty: "Mühendislik ve Mimarlık Fakültesi",
+        department: "Mimarlık",
+        scoreType: "SAY",
+        scores: ["306,02233", "333,54373", "316,828", "266,941"]
+    },
+    
+    // Sağlık Bilimleri Fakültesi
+    {
+        faculty: "Sağlık Bilimleri Fakültesi",
+        department: "Çocuk Gelişimi",
+        scoreType: "EA",
+        scores: ["197,59935", "256,82782", "258,813", "219,395"]
+    },
+    {
+        faculty: "Sağlık Bilimleri Fakültesi",
+        department: "Hemşirelik",
+        scoreType: "SAY",
+        scores: ["268,08215", "282,79085", "267,836", "222,27"]
+    },
+    {
+        faculty: "Sağlık Bilimleri Fakültesi",
+        department: "Beslenme ve Diyetetik",
+        scoreType: "SAY",
+        scores: ["243,21231", "273,00653", "258,224", "229,251"]
+    },
+    {
+        faculty: "Sağlık Bilimleri Fakültesi",
+        department: "Fizyoterapi ve Rehabilitasyon",
+        scoreType: "SAY",
+        scores: ["213,66738", "263,05750", "250,274", "245,269"]
+    },
+    
+    // Fen Edebiyat Fakültesi
+    {
+        faculty: "Fen Edebiyat Fakültesi",
+        department: "İngiliz Dili ve Edebiyatı",
+        scoreType: "DİL",
+        scores: ["174,59157", "262,79807", "223,266", "243,619"]
+    },
+    {
+        faculty: "Fen Edebiyat Fakültesi",
+        department: "Psikoloji",
+        scoreType: "EA",
+        scores: ["261,15126", "284,12261", "273,125", "221,468"]
+    },
+    {
+        faculty: "Fen Edebiyat Fakültesi",
+        department: "Türk Dili ve Edebiyatı",
+        scoreType: "SÖZ",
+        scores: ["177,59327", "183,70646", "160,595", "217,226"]
+    },
+    
+    // İktisadi ve İdari Bilimler Fakültesi
+    {
+        faculty: "İktisadi ve İdari Bilimler Fakültesi",
+        department: "Siyaset Bilimi ve Kamu Yönetimi",
+        scoreType: "EA",
+        scores: ["175,00785", "216,49001", "212,325", "215,53"]
+    },
+    
+    // Uygulamalı Bilimler Yüksekokulu
+    {
+        faculty: "Uygulamalı Bilimler Yüksekokulu",
+        department: "Gastronomi ve Mutfak Sanatları",
+        scoreType: "SÖZ",
+        scores: ["217,57357", "219,18539", "259,800", "219,875"]
+    },
+    
+    // Sağlık Hizmetleri Meslek Yüksekokulu (Önlisans)
+    {
+        faculty: "Sağlık Hizmetleri Meslek Yüksekokulu",
+        department: "Ağız ve Diş Sağlığı",
+        scoreType: "TYT",
+        scores: ["263,15361", "259,21147", "242,776", "190,956"]
+    },
+    {
+        faculty: "Sağlık Hizmetleri Meslek Yüksekokulu",
+        department: "Anestezi",
+        scoreType: "TYT",
+        scores: ["272,97905", "243,97830", "247,711", "177,891"]
+    },
+    {
+        faculty: "Sağlık Hizmetleri Meslek Yüksekokulu",
+        department: "Tıbbi Laboratuvar Teknikleri",
+        scoreType: "TYT",
+        scores: ["248,60263", "263,35536", "252,901", "207,847"]
+    },
+    {
+        faculty: "Sağlık Hizmetleri Meslek Yüksekokulu",
+        department: "Tıbbi Görüntüleme Teknikleri",
+        scoreType: "TYT",
+        scores: ["247,70247", "212,10469", "260,583", "220,441"]
+    },
+    
+    // Meslek Yüksekokulu (Önlisans)
+    {
+        faculty: "Meslek Yüksekokulu",
+        department: "Bilgisayar Programcılığı",
+        scoreType: "TYT",
+        scores: ["180,29793", "246,05969", "230,774", "190,367"]
+    },
+    {
+        faculty: "Meslek Yüksekokulu",
+        department: "Aşçılık",
+        scoreType: "TYT",
+        scores: ["184,50122", "232,08468", "212,826", "209,18"]
+    },
+    {
+        faculty: "Meslek Yüksekokulu",
+        department: "Sivil Havacılık Kabin Hizmetleri",
+        scoreType: "TYT",
+        scores: ["251,81128", "240,50125", "198,149", "197,115"]
+    }
+];
+
+let filteredData = [...scoreData];
+
+document.addEventListener('DOMContentLoaded', function() {
+    // بارگذاری اولیه
+    renderTable();
+    
+    // جستجو
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        filterData();
+        renderTable();
+    });
+    
+    // فیلتر دانشکده
+    document.getElementById('facultyFilter').addEventListener('change', function() {
+        filterData();
+        renderTable();
+    });
+    
+    // نمایش 2024
+    document.getElementById('show2024').addEventListener('change', function() {
+        filterData();
+        renderTable();
+    });
+    
+    // ریست فیلترها
+    document.getElementById('resetFilters').addEventListener('click', function() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('facultyFilter').value = '';
+        document.getElementById('show2024').checked = true;
+        filterData();
+        renderTable();
+    });
+});
+
+function filterData() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const faculty = document.getElementById('facultyFilter').value;
+    const show2024 = document.getElementById('show2024').checked;
+    
+    filteredData = scoreData.filter(item => {
+        // جستجو
+        if (searchTerm && !(
+            item.faculty.toLowerCase().includes(searchTerm) ||
+            item.department.toLowerCase().includes(searchTerm)
+        )) {
+            return false;
+        }
+        
+        // فیلتر دانشکده
+        if (faculty && item.faculty !== faculty) {
+            return false;
+        }
+        
+        // فیلتر 2024
+        if (show2024 && (!item.scores[0] || item.scores[0] === "-")) {
+            return false;
+        }
+        
+        return true;
+    });
+    
+    // به‌روزرسانی تعداد نتایج
+    document.getElementById('resultCount').textContent = filteredData.length;
+}
+
+function renderTable() {
+    const tbody = document.getElementById('tableBody');
+    const noResults = document.getElementById('noResults');
+    
+    tbody.innerHTML = '';
+    
+    if (filteredData.length === 0) {
+        tbody.parentElement.classList.add('d-none');
+        noResults.classList.remove('d-none');
+        return;
+    }
+    
+    tbody.parentElement.classList.remove('d-none');
+    noResults.classList.add('d-none');
+    
+    filteredData.forEach(item => {
+        const row = document.createElement('tr');
+        
+        // تعیین کلاس نمره
+        const getScoreClass = (score) => {
+            if (!score || score === "-") return "score-low";
+            const numScore = parseFloat(score.replace(',', '.'));
+            if (numScore > 280) return "score-high";
+            if (numScore > 230) return "score-medium";
+            return "score-low";
+        };
+        
+        // تعیین بج پوان تیپ
+        const getBadgeClass = (scoreType) => {
+            switch(scoreType) {
+                case 'SAY': return 'badge-say';
+                case 'EA': return 'badge-ea';
+                case 'SÖZ': return 'badge-söz';
+                case 'TYT': return 'badge-tyt';
+                case 'DİL': return 'badge-ea';
+                default: return 'badge-say';
+            }
+        };
+        
+        // محاسبه تغییرات
+        const score2024 = parseFloat(item.scores[0]?.replace(',', '.')) || 0;
+        const score2023 = parseFloat(item.scores[1]?.replace(',', '.')) || 0;
+        let changeHtml = '<span class="change-neutral">-</span>';
+        
+        if (score2023 > 0 && score2024 > 0) {
+            const change = ((score2024 - score2023) / score2023) * 100;
+            const changeClass = change >= 0 ? 'change-up' : 'change-down';
+            const changeSymbol = change >= 0 ? '+' : '';
+            changeHtml = `<span class="${changeClass}">${changeSymbol}${change.toFixed(1)}%</span>`;
+        }
+        
+        row.innerHTML = `
+            <td>
+                <div style="color: var(--primary-dark-blue); font-weight: 500;">${item.department}</div>
+                <div style="color: var(--text-light); font-size: 0.85rem;">${item.faculty}</div>
+            </td>
+            <td>
+                <span class="score-type-badge ${getBadgeClass(item.scoreType)}">${item.scoreType}</span>
+            </td>
+            <td class="score-cell ${getScoreClass(item.scores[0])}" style="text-align: center;">
+                ${item.scores[0] || "-"}
+            </td>
+            <td class="score-cell ${getScoreClass(item.scores[1])}" style="text-align: center;">
+                ${item.scores[1] || "-"}
+            </td>
+            <td class="score-cell ${getScoreClass(item.scores[2])}" style="text-align: center;">
+                ${item.scores[2] || "-"}
+            </td>
+            <td class="score-cell ${getScoreClass(item.scores[3])}" style="text-align: center;">
+                ${item.scores[3] || "-"}
+            </td>
+            <td style="text-align: center;">
+                ${changeHtml}
+            </td>
+        `;
+        
+        tbody.appendChild(row);
+    });
+}
+
+// بارگذاری اولیه
+renderTable();
+</script>
+
+{% endblock %}

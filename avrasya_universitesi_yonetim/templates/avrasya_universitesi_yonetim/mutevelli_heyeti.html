@@ -1,0 +1,104 @@
+<!-- mütevelli_heyeti.html -->
+{% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load static %}
+
+{% block title %}Avrasya Üniversitesi - Mütevelli Heyeti{% endblock %}
+
+{% block about_content %}
+<!-- Hero Section -->
+<div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+    <div class="card-body text-white py-5">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3">MÜTEVELLİ HEYETİ</h1>
+                <p class="lead mb-4">
+                    Üniversitemizin en yüksek karar organı olan Mütevelli Heyeti, 
+                    stratejik yönlendirme ve denetim görevlerini üstlenmektedir.
+                </p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="bi bi-people display-1 opacity-75"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Section -->
+<div class="row">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h3 class="text-primary mb-4 text-center">Mütevelli Heyeti Üyeleri</h3>
+                
+                <!-- Board Chairman - Special Card -->
+                <div class="row justify-content-center mb-5">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, #0d6efd 0%, #6a90c9ff 100%);">
+                            <div class="card-body text-center text-white p-5">
+                                <div class="member-photo mb-4 mx-auto">
+                                    <img src="{% static 'avrasya_universitesi_yonetim/images/DrÖmerYILDIZ.jpg' %}" alt="Dr. Ömer YILDIZ" 
+                                         class="img-fluid rounded-circle border-4 border-white shadow" 
+                                         style="width: 180px; height: 180px; object-fit: cover;">
+                                </div>
+                                <h4 class="card-title mb-2 fs-3">Dr. Ömer YILDIZ</h4>
+                                <p class="mb-0 opacity-90 fs-5">Başkan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Board Members -->
+                <div class="row justify-content-center">
+                    {% for member in members %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm member-card">
+                            <div class="card-body text-center p-4">
+                                <div class="member-photo mb-4 mx-auto">
+                                    <img src="{{ member.image }}" alt="{{ member.name }}" 
+                                         class="img-fluid rounded-circle shadow" 
+                                         style="width: 160px; height: 160px; object-fit: cover;">
+                                </div>
+                                <h5 class="card-title text-primary mb-2 fs-5">{{ member.name }}</h5>
+                                <p class="text-muted mb-0 fs-6">{{ member.title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.member-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+    border-color: #fd7e14;
+}
+
+.border-4 {
+    border-width: 4px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .member-photo img {
+        width: 140px !important;
+        height: 140px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .member-photo img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+}
+</style>
+{% endblock %}

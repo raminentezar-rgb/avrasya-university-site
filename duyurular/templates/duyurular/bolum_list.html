@@ -1,0 +1,1185 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{ bolum.ad }} Duyuruları - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<div class="super_container">
+    <!-- Page Content -->
+    <div class="page_section">
+        <div class="container">
+            <!-- Header Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="page-header">
+                        <div class="breadcrumb-container">
+                            <nav aria-label="breadcrumb" style="margin-top: 200px;">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">Duyurular</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=bolum.fakulte %}">{{ fakulte_adi }}</a></li>
+                                    <li class="breadcrumb-item active">{{ bolum.ad }}</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        
+                        <div class="header-content">
+                            <div class="title-section">
+                                <h1 class="page-title">{{ bolum.ad }} Duyuruları</h1>
+                                <p class="page-subtitle">{{ bolum.ad }} bölümüne ait en güncel duyurular</p>
+                            </div>
+                            <div class="header-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">{{ duyurular|length }}</span>
+                                    <span class="stat-label">Toplam Duyuru</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    {% if duyurular %}
+                        {% for duyuru in duyurular %}
+                        <div class="news-card announcement-card mb-4">
+                            <div class="card-header">
+                                <div class="category-badges">
+                                    <span class="category-badge faculty">{{ duyuru.get_fakulte_display }}</span>
+                                    {% if duyuru.bolumler.exists %}
+                                        {% for bolum in duyuru.bolumler.all %}
+                                            <span class="category-badge department">{{ bolum.ad }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="date-badge">
+                                    <i class="far fa-clock"></i>
+                                    {{ duyuru.yayin_tarihi|date:'d M Y' }}
+                                </div>
+                            </div>
+                            
+                            <div class="card-body">
+                                <h3 class="card-title" title="{{ duyuru.baslik }}">
+                                    <a href="{{ duyuru.get_absolute_url }}">
+                                        {{ duyuru.baslik }}
+                                    </a>
+                                </h3>
+                                
+                                <p class="card-excerpt">
+                                    {{ duyuru.ozet|default:duyuru.icerik|striptags|truncatewords:25 }}
+                                </p>
+
+                                {% with dosyalar=duyuru.mevcut_dosyalar %}
+                                    {% if dosyalar %}
+                                    <div class="file-attachments">
+                                        <div class="attachments-label">
+                                            <i class="fas fa-paperclip"></i>
+                                            Ek Dosyalar ({{ dosyalar|length }})
+                                        </div>
+                                        <div class="attachment-previews">
+                                            {% for dosya in dosyalar|slice:":3" %}
+                                            <a href="{{ dosya.url }}" class="attachment-preview" download title="{{ dosya.adi }}">
+                                                <i class="fas {{ dosya.icon }}"></i>
+                                                <span>{{ dosya.tur }}</span>
+                                            </a>
+                                            {% endfor %}
+                                            {% if dosyalar.count > 3 %}
+                                            <span class="attachment-more">+{{ dosyalar.count|add:"-3" }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+
+                            <div class="card-footer">
+                                <a href="{{ duyuru.get_absolute_url }}" class="read-more-btn">
+                                    Devamını Oku
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <div class="time-ago">
+                                    {{ duyuru.yayin_tarihi|timesince }} önce
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>Duyuru Bulunamadı</h3>
+                        <p>Bu bölüm için henüz duyuru bulunmamaktadır.</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="article-sidebar">
+                        <!-- Department Info -->
+                        <div class="sidebar-widget">
+                            <h4 class="widget-title">
+                                <i class="fas fa-info-circle"></i>
+                                Bölüm Bilgileri
+                            </h4>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <span class="info-label">Bölüm Adı:</span>
+                                    <span class="info-value">{{ bolum.ad }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Fakülte:</span>
+                                    <span class="info-value">{{ fakulte_adi }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Toplam Duyuru:</span>
+                                    <span class="info-value">{{ duyurular|length }}</span>
+                                </div>
+                                {% if bolum.aciklama %}
+                                <div class="info-item">
+                                    <span class="info-label">Açıklama:</span>
+                                    <span class="info-value">{{ bolum.aciklama }}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="sidebar-widget">
+                            <h4 class="widget-title">
+                                <i class="fas fa-compass"></i>
+                                Navigasyon
+                            </h4>
+                            <div class="navigation-links">
+                                <a href="{% url 'duyurular:liste' %}" class="nav-link">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Tüm Duyurulara Dön
+                                </a>
+                                <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=bolum.fakulte %}" class="nav-link">
+                                    <i class="fas fa-filter"></i>
+                                    {{ fakulte_adi }} Duyuruları
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="sidebar-widget">
+                            <h4 class="widget-title">
+                                <i class="fas fa-bolt"></i>
+                                Hızlı İşlemler
+                            </h4>
+                            <div class="navigation-links">
+                                <a href="{% url 'duyurular:liste' %}?bolum={{ bolum.kod }}" class="nav-link">
+                                    <i class="fas fa-search"></i>
+                                    Bu Bölümde Ara
+                                </a>
+                                <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=bolum.fakulte %}" class="nav-link">
+                                    <i class="fas fa-building"></i>
+                                    Fakülte Duyuruları
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+
+
+
+
+
+
+
+
+
+
+
+/* Article Styles */
+.news-article {
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    margin-top: 100px;
+}
+
+.article-header {
+    padding: 40px 40px 20px;
+    border-bottom: 2px solid var(--neutral-cream);
+    
+    
+}
+
+.article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.meta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.meta-badge {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.meta-badge.faculty {
+    background: var(--accent-light-blue);
+    color: var(--primary-dark-blue);
+}
+
+.meta-badge.department {
+    background: var(--neutral-cream);
+    color: var(--text-dark);
+    border: 1px solid var(--accent-light-blue);
+}
+
+.publish-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.article-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    line-height: 1.3;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.article-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.article-content {
+    padding: 30px 40px;
+}
+
+.content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+}
+
+.content-body p {
+    margin-bottom: 1.5em;
+}
+
+.content-body h2,
+.content-body h3,
+.content-body h4 {
+    color: var(--primary-dark-blue);
+    margin: 2em 0 1em;
+    font-weight: 600;
+}
+
+.content-body ul,
+.content-body ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+.content-body li {
+    margin-bottom: 0.5em;
+}
+
+/* Sections */
+.section-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--neutral-cream);
+}
+
+/* Attachments */
+.attachments-section {
+    padding: 30px 40px;
+    border-top: 2px solid var(--neutral-cream);
+    border-bottom: 2px solid var(--neutral-cream);
+    background: var(--neutral-cream);
+}
+
+.attachments-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.attachment-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.attachment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-light-blue);
+}
+
+.attachment-icon {
+    color: var(--secondary-medium-blue);
+    flex-shrink: 0;
+}
+
+.attachment-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.attachment-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.attachment-type {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 5px;
+}
+
+.attachment-desc {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--secondary-medium-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.download-btn:hover {
+    background: var(--primary-dark-blue);
+    transform: translateY(-1px);
+    color: white;
+}
+
+/* Related Articles */
+.related-section {
+    padding: 30px 40px;
+}
+
+.related-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.related-card {
+    padding: 20px;
+    background: var(--neutral-cream);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-light-blue);
+}
+
+.related-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--accent-light-blue);
+    color: var(--primary-dark-blue);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.related-title {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.related-title a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.related-title a:hover {
+    color: var(--secondary-medium-blue);
+}
+
+.related-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.related-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.related-link:hover {
+    color: var(--primary-dark-blue);
+    gap: 12px;
+}
+
+/* Sidebar */
+.article-sidebar {
+    position: sticky;
+    top: 100px;
+    margin-top: 100px;
+}
+
+.sidebar-widget {
+    background: var(--pure-white);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.widget-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--neutral-cream);
+}
+
+/* Navigation Links */
+.navigation-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.nav-link1 {
+    
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(9, 36, 66, 0.9);
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    
+}
+
+.nav-link1:hover {
+    background: var(--accent-light-blue);
+    color: #f6f2e7;
+    transform: translateX(4px);
+    border-color: var(--accent-light-blue);
+}
+
+/* Info List */
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--neutral-cream);
+    gap: 10px;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    text-align: right;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex: 1;
+}
+
+/* Share Buttons */
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.share-btn {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.share-btn.facebook {
+    background: #3b5998;
+    color: white;
+}
+
+.share-btn.twitter {
+    background: #1da1f2;
+    color: white;
+}
+
+.share-btn.linkedin {
+    background: #0077b5;
+    color: white;
+}
+
+.share-btn.copy {
+    background: var(--secondary-medium-blue);
+    color: white;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .article-header {
+        padding: 30px 20px 15px;
+    }
+    
+    .article-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .article-title {
+        font-size: 1.8rem;
+    }
+    
+    .article-content {
+        padding: 20px;
+    }
+    
+    .attachments-section,
+    .related-section {
+        padding: 20px;
+    }
+    
+    .attachment-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .attachment-info {
+        text-align: center;
+    }
+    
+    .sidebar-widget {
+        padding: 20px;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .info-value {
+        text-align: left;
+    }
+}
+
+@media (max-width: 576px) {
+    .article-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+    
+    .share-buttons {
+        flex-wrap: wrap;
+    }
+}
+
+
+
+
+
+
+    
+    
+/* Header Styles */
+.page-header {
+    margin-bottom: 40px;
+}
+
+.breadcrumb-container {
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.breadcrumb-item a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-light);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+.title-section {
+    flex: 1;
+}
+
+.page-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    margin-bottom: 10px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+.header-stats {
+    text-align: center;
+}
+
+.stat-item {
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    min-width: 150px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* News Cards */
+.news-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    overflow: hidden;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-light-blue);
+}
+
+.card-header {
+    padding: 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.category-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+}
+
+.category-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.category-badge.faculty {
+    background: var(--accent-light-blue);
+    color: var(--primary-dark-blue);
+}
+
+.category-badge.department {
+    background: var(--neutral-cream);
+    color: var(--text-dark);
+    border: 1px solid var(--accent-light-blue);
+}
+
+.date-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.card-title a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.4;
+    max-height: 2.8em;
+}
+
+.card-title a:hover {
+    color: var(--secondary-medium-blue);
+}
+
+.card-excerpt {
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.file-attachments {
+    margin-top: auto;
+}
+
+.attachments-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.attachment-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.attachment-preview {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--neutral-cream);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    max-width: 120px;
+    overflow: hidden;
+}
+
+.attachment-preview:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.attachment-preview i {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.attachment-preview span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.attachment-more {
+    padding: 6px 10px;
+    background: transparent;
+    color: var(--text-light);
+    border: 1px dashed var(--text-light);
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.card-footer {
+    padding: 15px 20px 20px;
+    border-top: 1px solid var(--neutral-cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.read-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--secondary-medium-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.read-more-btn:hover {
+    background: var(--primary-dark-blue);
+    transform: translateX(4px);
+    color: white;
+}
+
+.time-ago {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px dashed var(--neutral-cream);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: var(--accent-light-blue);
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    color: var(--primary-dark-blue);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.empty-state p {
+    color: var(--text-light);
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+/* Sidebar */
+.article-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-widget {
+    background: var(--pure-white);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.widget-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--neutral-cream);
+}
+
+/* Navigation Links */
+.navigation-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(9, 36, 66, 0.1);
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.nav-link:hover {
+    background: rgba(9, 36, 66, 0.1);
+    color: #f6f2e7;
+    transform: translateX(4px);
+    border-color: var(--accent-light-blue);
+}
+
+/* Info List */
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--neutral-cream);
+    gap: 10px;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+    flex-shrink: 0;
+    min-width: 100px;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    text-align: right;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .header-stats {
+        align-self: stretch;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .date-badge {
+        align-self: flex-start;
+    }
+    
+    .card-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .read-more-btn {
+        justify-content: center;
+    }
+    
+    .time-ago {
+        text-align: center;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .info-value {
+        text-align: left;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-title {
+        font-size: 1.8rem;
+    }
+    
+    .sidebar-widget {
+        padding: 20px;
+    }
+}
+</style>
+{% endblock %}

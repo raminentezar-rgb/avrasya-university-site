@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Online Ödeme Başvurusu</title>
+</head>
+<body>
+    <h2>Sayın {{ instance.full_name }},</h2>
+    
+    <p>Online ödeme başvurunuz başarıyla alınmıştır.</p>
+    
+    <h3>Başvuru Bilgileri:</h3>
+    <ul>
+        <li><strong>Referans Numarası:</strong> {{ instance.payment_reference }}</li>
+        <li><strong>Tarih:</strong> {{ instance.created_at|date:"d.m.Y H:i" }}</li>
+        <li><strong>Bölüm/Program:</strong> {{ instance.program }}</li>
+        <li><strong>Ödeme Yöntemi:</strong> {{ instance.get_payment_method_display }}</li>
+    </ul>
+    
+    <p>Başvurunuz en kısa sürede incelenecek ve size dönüş yapılacaktır.</p>
+    
+    <p>Teşekkür ederiz,<br>
+    Avrasya Üniversitesi<br>
+    Öğrenci İşleri Daire Başkanlığı</p>
+</body>
+</html>

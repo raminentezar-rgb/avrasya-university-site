@@ -1,0 +1,312 @@
+<!-- muhendislik_mimarlik/templates/muhendislik_mimarlik/duyuru_detay.html -->
+{% extends 'core/base.html' %}
+{% block title %}{{ duyuru.baslik }} - Mühendislik ve Mimarlık Fakültesi{% endblock %}
+{% block content %}
+
+
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'muhendislik_mimarlik/sidebar.html' %}
+    </div>
+    
+
+    <!-- Main Content -->
+     
+    <div class="col-lg-9">
+
+        <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3"> Duyurular</h1>
+                        <p class="lead mb-4">
+                            
+                        </p>
+                        {% comment %} <div class="d-flex gap-3">
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-cpu me-1"></i>8 Bölüm
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-person me-1"></i>70+ Akademisyen
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-eyeglasses me-1"></i>15+ Laboratuvar
+                            </span>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-megaphone me-2 display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-12">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'muhendislik_mimarlik:muhendislik_mimarlik' %}">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'muhendislik_mimarlik:duyurular' %}">Duyurular</a></li>
+                <li class="breadcrumb-item active">{{ duyuru.baslik|truncatewords:5 }}</li>
+            </ol>
+        </nav>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <!-- هدر اطلاعیه -->
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge bg-primary">{{ duyuru.get_kategori_display }}</span>
+                        {% if duyuru.onemli %}
+                        <span class="badge bg-warning">
+                            <i class="bi bi-exclamation-triangle me-1"></i>Önemli
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <h1 class="text-primary mb-3">{{ duyuru.baslik }}</h1>
+                    
+                    <div class="d-flex align-items-center text-muted">
+                        <i class="bi bi-calendar-event me-2"></i>
+                        <span>{{ duyuru.yayin_tarihi|date:"d F Y H:i" }}</span>
+                    </div>
+                </div>
+
+                <!-- محتوای اطلاعیه -->
+                <div class="content mb-5">
+                    {% if duyuru.icerik %}
+                        {{ duyuru.icerik|linebreaks }}
+                    {% else %}
+                        <p class="text-muted">İçerik bulunmamaktadır.</p>
+                    {% endif %}
+                </div>
+
+                <!-- فایل‌های ضمیمه -->
+                {% if duyuru.dosya or duyuru.mevcut_dosyalar %}
+                <div class="mt-4 pt-3 border-top">
+                    <h5 class="text-secondary mb-3">
+                        <i class="bi bi-paperclip me-2"></i>İndirilebilir Dosyalar
+                    </h5>
+                    
+                    <!-- فایل اصلی اطلاعیه -->
+                    {% if duyuru.dosya %}
+                    <div class="mb-3">
+                        <a href="{{ duyuru.dosya.url }}" class="btn btn-outline-primary" download>
+                            <i class="bi bi-download me-2"></i>
+                            {{ duyuru.dosya_adi }}
+                        </a>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- فایل‌های ضمیمه از اطلاعیه اصلی -->
+                    {% with dosyalar=duyuru.mevcut_dosyalar %}
+                        {% if dosyalar %}
+                        <div class="row">
+                            {% for dosya in dosyalar %}
+                            <div class="col-md-6 mb-3">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body text-center">
+                                        <i class="bi {{ dosya.icon }} display-4 text-primary mb-2"></i>
+                                        <h6 class="card-title">{{ dosya.adi }}</h6>
+                                        <p class="text-muted small">{{ dosya.tur }}</p>
+                                        {% if dosya.aciklama %}
+                                            <p class="card-text small">{{ dosya.aciklama|truncatewords:10 }}</p>
+                                        {% endif %}
+                                        <a href="{{ dosya.url }}" class="btn btn-primary btn-sm" download>
+                                            <i class="bi bi-download"></i> İndir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                {% endif %}
+
+                <!-- اطلاعیه‌های مرتبط -->
+                {% if ilgili_duyurular %}
+                <div class="mt-5 pt-4 border-top">
+                    <h4 class="text-secondary mb-3">
+                        <i class="bi bi-link me-2"></i>İlgili Duyurular
+                    </h4>
+                    <div class="row">
+                        {% for ilgili in ilgili_duyurular %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <span class="badge bg-primary small">{{ ilgili.get_kategori_display }}</span>
+                                        {% if ilgili.onemli %}
+                                        <span class="badge bg-warning small">Önemli</span>
+                                        {% endif %}
+                                    </div>
+                                    <h6 class="card-title">
+                                        <a href="{% url 'muhendislik_mimarlik:duyuru_detay' ilgili.id %}" class="text-decoration-none text-dark">
+                                            {{ ilgili.baslik|truncatewords:8 }}
+                                        </a>
+                                    </h6>
+                                    <small class="text-muted">
+                                        <i class="bi bi-calendar-event me-1"></i>
+                                        {{ ilgili.yayin_tarihi|date:"d M Y" }}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- دکمه‌های ناوبری -->
+                <div class="mt-4 d-flex justify-content-between">
+                    <a href="{% url 'muhendislik_mimarlik:duyurular' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-2"></i>Tüm Duyurular
+                    </a>
+                    <a href="{% url 'muhendislik_mimarlik:muhendislik_mimarlik' %}" class="btn btn-outline-primary">
+                        <i class="bi bi-house me-2"></i>Ana Sayfa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی */
+.department-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.department-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+}
+
+.icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.department-card:hover .icon-wrapper {
+    transform: scale(1.1);
+}
+
+.icon-wrapper i {
+    font-size: 1.8rem;
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #fd7e14;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رنگ‌های دکمه */
+.btn-primary {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-primary:hover {
+    background-color: #e56f10 !important;
+    border-color: #d9680f !important;
+}
+
+.btn-outline-primary {
+    color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<script>
+// مدیریت منوهای آبشاری
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('#facultyMenu [data-bs-toggle="collapse"]');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menuItems.forEach(otherItem => {
+                if (otherItem !== item && !otherItem.classList.contains('collapsed')) {
+                    const targetId = otherItem.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        otherItem.classList.add('collapsed');
+                        targetElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

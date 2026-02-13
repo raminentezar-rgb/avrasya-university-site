@@ -1,0 +1,790 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Duyurular - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<div class="super_container">
+    <!-- Page Content -->
+    <div class="page_section">
+        <div class="container">
+            <!-- Header Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="page-header">
+                        <div class="breadcrumb-container">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
+                                    <li class="breadcrumb-item active">Duyurular</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        
+                        <div class="header-content">
+                            <div class="title-section">
+                                <h1 class="page-title">Duyurular</h1>
+                                <p class="page-subtitle">Avrasya Üniversitesi'nden en güncel duyurular ve haberler</p>
+                            </div>
+                            <div class="header-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">{{ toplam_duyuru }}</span>
+                                    <span class="stat-label">Toplam Duyuru</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filter Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="search-filter-card">
+                        <!-- Faculty Filter -->
+                        <div class="filter-section">
+                            <h5 class="filter-title">
+                                <i class="fas fa-filter"></i> Fakülte/Bölüm Filtresi
+                            </h5>
+                            <div class="filter-tags">
+                                <a href="{% url 'duyurular:liste' %}" 
+                                   class="filter-tag {% if not fakulte_filter and not bolum_filter %}active{% endif %}">
+                                    Tümü
+                                </a>
+                                {% for fakulte in fakulteler %}
+                                <a href="?fakulte={{ fakulte.kod }}" 
+                                   class="filter-tag {% if fakulte_filter == fakulte.kod %}active{% endif %}">
+                                    {{ fakulte.adi }}
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Search Form -->
+                        <div class="search-section">
+                            <form method="get" class="search-form">
+                                <div class="search-input-group">
+                                    <div class="search-field">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" 
+                                               name="q" 
+                                               value="{{ search_query }}"
+                                               placeholder="Başlık, özet veya içerikte ara...">
+                                    </div>
+                                    <div class="date-field">
+                                        <i class="far fa-calendar"></i>
+                                        <input type="date" 
+                                               name="tarih" 
+                                               value="{{ tarih_query }}"
+                                               placeholder="Tarihe göre filtrele">
+                                    </div>
+                                    <button type="submit" class="search-btn">
+                                        Ara
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        {% if search_query or tarih_query or fakulte_filter or bolum_filter %}
+                        <div class="active-filters">
+                            <span class="filters-label">Aktif Filtreler:</span>
+                            {% if search_query %}
+                            <span class="active-filter">Aranan: "{{ search_query }}"</span>
+                            {% endif %}
+                            {% if tarih_query %}
+                            <span class="active-filter">Tarih: {{ tarih_query }}</span>
+                            {% endif %}
+                            <a href="{% url 'duyurular:liste' %}" class="clear-filters">
+                                <i class="fas fa-times"></i> Tümünü Temizle
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements Grid -->
+            <div class="row">
+                {% for duyuru in duyurular %}
+                <div class="col-xl-4 col-lg-6 mb-4">
+                    <div class="news-card announcement-card">
+                        <div class="card-header">
+                            <div class="category-badges">
+                                <span class="category-badge faculty">{{ duyuru.get_fakulte_display }}</span>
+                                {% if duyuru.bolumler.exists %}
+                                    {% for bolum in duyuru.bolumler.all|slice:":2" %}
+                                        <span class="category-badge department">{{ bolum.ad }}</span>
+                                    {% endfor %}
+                                    {% if duyuru.bolumler.count > 2 %}
+                                        <span class="category-badge more">+{{ duyuru.bolumler.count|add:"-2" }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="date-badge">
+                                <i class="far fa-clock"></i>
+                                {{ duyuru.yayin_tarihi|date:'d M Y' }}
+                            </div>
+                        </div>
+                        
+                        <div class="card-body">
+                            <h3 class="card-title" title="{{ duyuru.baslik }}">
+                                <a href="{{ duyuru.get_absolute_url }}">
+                                    {{ duyuru.baslik }}
+                                </a>
+                            </h3>
+                            
+                            <p class="card-excerpt">
+                                {% if duyuru.ozet %}
+                                    {{ duyuru.ozet|truncatewords:25 }}
+                                {% else %}
+                                    {{ duyuru.icerik|striptags|truncatewords:25 }}
+                                {% endif %}
+                            </p>
+
+                            {% with dosyalar=duyuru.mevcut_dosyalar %}
+                                {% if dosyalar %}
+                                <div class="file-attachments">
+                                    <div class="attachments-label">
+                                        <i class="fas fa-paperclip"></i>
+                                        Ek Dosyalar ({{ dosyalar|length }})
+                                    </div>
+                                    <div class="attachment-previews">
+                                        {% for dosya in dosyalar|slice:":3" %}
+                                        <a href="{{ dosya.url }}" class="attachment-preview" download title="{{ dosya.adi }}">
+                                            <i class="fas {{ dosya.icon }}"></i>
+                                            <span>{{ dosya.tur }}</span>
+                                        </a>
+                                        {% endfor %}
+                                        {% if dosyalar.count > 3 %}
+                                        <span class="attachment-more">+{{ dosyalar.count|add:"-3" }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="{{ duyuru.get_absolute_url }}" class="read-more-btn">
+                                Devamını Oku
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="time-ago">
+                                {{ duyuru.yayin_tarihi|timesince }} önce
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>Duyuru Bulunamadı</h3>
+                        <p>
+                            {% if search_query or tarih_query or fakulte_filter or bolum_filter %}
+                                Arama kriterlerinize uygun duyuru bulunamadı.
+                            {% else %}
+                                Henüz duyuru bulunmamaktadır.
+                            {% endif %}
+                        </p>
+                        {% if search_query or tarih_query or fakulte_filter or bolum_filter %}
+                        <a href="{% url 'duyurular:liste' %}" class="btn-primary">
+                            Tüm Duyuruları Görüntüle
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Load More Section -->
+            {% if duyurular.has_next %}
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <a href="?page={{ duyurular.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if tarih_query %}&tarih={{ tarih_query }}{% endif %}{% if fakulte_filter %}&fakulte={{ fakulte_filter }}{% endif %}" 
+                       class="load-more-btn">
+                        <i class="fas fa-spinner"></i>
+                        Daha Fazla Yükle
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+/* Header Styles */
+.page-header {
+    margin-bottom: 40px;
+    margin-top: 280px;
+}
+
+.breadcrumb-container {
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.breadcrumb-item a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-light);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+.title-section {
+    flex: 1;
+}
+
+.page-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    margin-bottom: 10px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+.header-stats {
+    text-align: center;
+}
+
+.stat-item {
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    min-width: 150px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Search and Filter Card */
+.search-filter-card {
+    background: var(--pure-white);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.filter-section {
+    margin-bottom: 25px;
+}
+
+.filter-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-tag {
+    padding: 8px 16px;
+    background: var(--neutral-cream);
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.filter-tag:hover,
+.filter-tag.active {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(29, 97, 169, 0.3);
+}
+
+/* Search Form */
+.search-section {
+    margin-bottom: 20px;
+}
+
+.search-form {
+    width: 100%;
+}
+
+.search-input-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.search-field,
+.date-field {
+    flex: 1;
+    position: relative;
+}
+
+.search-field i,
+.date-field i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    z-index: 2;
+}
+
+.search-field input,
+.date-field input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 2px solid var(--neutral-cream);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: var(--pure-white);
+}
+
+.search-field input:focus,
+.date-field input:focus {
+    outline: none;
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 3px rgba(29, 97, 169, 0.1);
+}
+
+.search-btn {
+    padding: 12px 24px;
+    background: var(--secondary-medium-blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background: var(--primary-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(29, 97, 169, 0.3);
+}
+
+/* Active Filters */
+.active-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    background: var(--neutral-cream);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-light-blue);
+}
+
+.filters-label {
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    font-size: 0.9rem;
+}
+
+.active-filter {
+    background: var(--secondary-medium-blue);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+}
+
+.clear-filters {
+    margin-left: auto;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.clear-filters:hover {
+    color: var(--secondary-medium-blue);
+}
+
+/* News Cards */
+.news-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+    overflow: hidden;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-light-blue);
+}
+
+.card-header {
+    padding: 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.category-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+}
+
+.category-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.category-badge.faculty {
+    background: var(--accent-light-blue);
+    color: var(--primary-dark-blue);
+}
+
+.category-badge.department {
+    background: var(--neutral-cream);
+    color: var(--text-dark);
+    border: 1px solid var(--accent-light-blue);
+}
+
+.category-badge.more {
+    background: transparent;
+    color: var(--text-light);
+    border: 1px dashed var(--text-light);
+}
+
+.date-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.card-title a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-dark-blue);
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.4;
+    max-height: 2.8em;
+}
+
+.card-title a:hover {
+    color: var(--secondary-medium-blue);
+}
+
+.card-excerpt {
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.file-attachments {
+    margin-top: auto;
+}
+
+.attachments-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.attachment-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.attachment-preview {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--neutral-cream);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    max-width: 120px;
+    overflow: hidden;
+}
+
+.attachment-preview:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.attachment-preview i {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.attachment-preview span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.attachment-more {
+    padding: 6px 10px;
+    background: transparent;
+    color: var(--text-light);
+    border: 1px dashed var(--text-light);
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.card-footer {
+    padding: 15px 20px 20px;
+    border-top: 1px solid var(--neutral-cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.read-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--secondary-medium-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.read-more-btn:hover {
+    background: var(--primary-dark-blue);
+    transform: translateX(4px);
+    color: white;
+}
+
+.time-ago {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--pure-white);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px dashed var(--neutral-cream);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: var(--accent-light-blue);
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    color: var(--primary-dark-blue);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.empty-state p {
+    color: var(--text-light);
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+/* Load More Button */
+.load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    background: var(--secondary-medium-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.load-more-btn:hover {
+    background: var(--primary-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(29, 97, 169, 0.3);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .header-stats {
+        align-self: stretch;
+    }
+    
+    .search-input-group {
+        flex-direction: column;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .date-badge {
+        align-self: flex-start;
+    }
+    
+    .card-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .read-more-btn {
+        justify-content: center;
+    }
+    
+    .time-ago {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .search-filter-card {
+        padding: 20px;
+    }
+    
+    .filter-tags {
+        justify-content: center;
+    }
+    
+    .active-filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .clear-filters {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    .page-title {
+        font-size: 1.8rem;
+    }
+}
+</style>
+
+
+{% endblock %}

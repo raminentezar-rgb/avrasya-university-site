@@ -1,0 +1,760 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Fen Edebiyat Fakültesi Kalite{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <a href="{% url 'fen_edebiyat:fen_edebiyat' %}" class="text-white text-decoration-none">
+                    <h5 class="mb-0"><i class="bi bi-journals me-2"></i>Fen Edebiyat Fakültesi</h5>
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush" id="facultyMenu">
+                    <!-- Fakülte -->
+                    <div class="list-group-item border-0 p-0">
+                        <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center" 
+                                data-bs-toggle="collapse" data-bs-target="#fakulteCollapse">
+                            <span><i class="bi bi-building me-2"></i>Fakülte</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="fakulteCollapse">
+                            <div class="list-group list-group-flush">
+                                <a href="{% url 'fen_edebiyat:tarihce' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-clock-history me-2"></i>Tarihçe
+                                </a>
+                                <a href="{% url 'fen_edebiyat:misyon_visyon' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-bullseye me-2"></i>Misyon & Vizyon
+                                </a>
+                                <a href="{% url 'fen_edebiyat:dekan_mesaji' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-chat-quote me-2"></i>Dekan Mesajı
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yönetim -->
+                    <div class="list-group-item border-0 p-0">
+                        <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                                data-bs-toggle="collapse" data-bs-target="#yonetimCollapse">
+                            <span><i class="bi bi-people me-2"></i>Yönetim</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="yonetimCollapse">
+                            <div class="list-group list-group-flush">
+                                <a href="{% url 'fen_edebiyat:fakulte_yonetimi' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-person-badge me-2"></i>Fakülte Yönetimi
+                                </a>
+                                <a href="{% url 'fen_edebiyat:bolum_baskanli' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-person-video me-2"></i>Bölüm Başkanları
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Akademik Kadro -->
+                    <div class="list-group-item border-0 p-0">
+                        <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                                data-bs-toggle="collapse" data-bs-target="#akademikKadroCollapse">
+                            <span><i class="bi bi-mortarboard me-2"></i>Akademik Kadro</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="akademikKadroCollapse">
+                            <div class="list-group list-group-flush">
+                                <a href="{% url 'fen_edebiyat:akademik_kadro' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-person-check me-2"></i>Akademik Kadro
+                                </a>
+                                <a href="{% url 'fen_edebiyat:misafir_kadro' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-person-plus me-2"></i>Misafir Öğretim Elemanları
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bölümler -->
+                    <div class="list-group-item border-0 p-0">
+                        <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                                data-bs-toggle="collapse" data-bs-target="#bolumlerCollapse">
+                            <span><i class="bi bi-book me-2"></i>Bölümler</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="bolumlerCollapse">
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-translate me-2"></i>İngiliz Dili ve Edebiyatı
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-heart-pulse me-2"></i>Psikoloji
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-pen me-2"></i>Türk Dili ve Edebiyatı
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-dna me-2"></i>Moleküler Biyoloji ve Genetik
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-globe me-2"></i>Mütercim Tercümanlık
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diğer Menüler -->
+
+                    <a href="{% url 'fen_edebiyat:duyurular' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-megaphone me-2"></i>duyurular</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'fen_edebiyat:kalite' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center active">
+                        <span><i class="bi bi-award me-2"></i>Kalite</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="{% url 'fen_edebiyat:iletisim' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-telephone me-2"></i>İletişim</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-person-circle me-2"></i>Öğrenci</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx" 
+                       class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center"
+                       target="_blank">
+                        <span><i class="bi bi-file-text me-2"></i>Bologna</span>
+                        <i class="bi bi-box-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Kalite Güvence Sistemi</h1>
+                        <p class="lead mb-4">
+                            Fen Edebiyat Fakültesi olarak, eğitim-öğretim ve araştırma faaliyetlerimizde 
+                            sürekli iyileştirme ve mükemmeliyetçilik ilkesiyle hareket ediyoruz.
+                        </p>
+                        <div class="d-flex gap-3">
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-award me-1"></i>Akreditasyon
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-graph-up me-1"></i>Sürekli İyileştirme
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-check-circle me-1"></i>Kalite Standartları
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-award display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quality Principles -->
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm h-100 quality-card">
+                    <div class="card-body text-center p-4">
+                        <div class="quality-icon bg-primary text-white rounded-circle mx-auto mb-3">
+                            <i class="bi bi-bullseye"></i>
+                        </div>
+                        <h5 class="text-primary mb-3">Misyon ve Vizyon</h5>
+                        <p class="text-muted">
+                            Kalite politikamız, fakülte misyon ve vizyonumuzla uyumlu olarak 
+                            sürekli iyileştirme ve mükemmeliyetçilik temelinde şekillenmektedir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm h-100 quality-card">
+                    <div class="card-body text-center p-4">
+                        <div class="quality-icon bg-success text-white rounded-circle mx-auto mb-3">
+                            <i class="bi bi-arrow-repeat"></i>
+                        </div>
+                        <h5 class="text-success mb-3">Sürekli İyileştirme</h5>
+                        <p class="text-muted">
+                            PDCA (Planla-Uygula-Kontrol Et-Önlem Al) döngüsü ile 
+                            eğitim-öğretim süreçlerimizi sürekli olarak iyileştiriyoruz.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card border-0 shadow-sm h-100 quality-card">
+                    <div class="card-body text-center p-4">
+                        <div class="quality-icon bg-warning text-white rounded-circle mx-auto mb-3">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h5 class="text-warning mb-3">Paydaş Katılımı</h5>
+                        <p class="text-muted">
+                            Öğrenci, öğretim elemanı ve mezunlarımızın geri bildirimleri 
+                            kalite süreçlerimizin temel yapı taşını oluşturmaktadır.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accreditation & Certificates -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="mb-0"><i class="bi bi-award-fill me-2"></i>Akreditasyon ve Belgeler</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-start">
+                            <div class="accreditation-icon bg-success text-white rounded-circle me-3 flex-shrink-0">
+                                <i class="bi bi-check-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-success mb-2">FEDEK Akreditasyonu</h5>
+                                <p class="text-muted mb-2">
+                                    Fakültemiz bölümleri Fen Edebiyat, Dil ve Tarih-Coğrafya Fakülteleri 
+                                    Dekanlar Konseyi (FEDEK) tarafından akredite edilmiştir.
+                                </p>
+                                <span class="badge bg-success">Geçerli</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-start">
+                            <div class="accreditation-icon bg-info text-white rounded-circle me-3 flex-shrink-0">
+                                <i class="bi bi-globe"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-info mb-2">Bologna Süreci</h5>
+                                <p class="text-muted mb-2">
+                                    Avrupa Yükseköğretim Alanı ile uyumlu eğitim programları 
+                                    ve AKTS sistemi ile öğrenci hareketliliğini destekliyoruz.
+                                </p>
+                                <span class="badge bg-info">Aktif</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-start">
+                            <div class="accreditation-icon bg-warning text-white rounded-circle me-3 flex-shrink-0">
+                                <i class="bi bi-file-earmark-check"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-warning mb-2">ISO 9001:2015</h5>
+                                <p class="text-muted mb-2">
+                                    Kalite yönetim sistemimiz uluslararası ISO 9001:2015 
+                                    standardına uygun olarak belgelendirilmiştir.
+                                </p>
+                                <span class="badge bg-warning">Sertifikalı</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-start">
+                            <div class="accreditation-icon bg-danger text-white rounded-circle me-3 flex-shrink-0">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-danger mb-2">YÖKAK Değerlendirmesi</h5>
+                                <p class="text-muted mb-2">
+                                    Yükseköğretim Kalite Kurulu (YÖKAK) tarafından yapılan 
+                                    kurumsal dış değerlendirme sürecini başarıyla tamamladık.
+                                </p>
+                                <span class="badge bg-danger">Tamamlandı</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quality Indicators -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-success text-white py-3">
+                <h4 class="mb-0"><i class="bi bi-graph-up me-2"></i>Kalite Göstergeleri</h4>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="indicator-card">
+                            <div class="indicator-number text-primary">95%</div>
+                            <div class="indicator-label">Öğrenci Memnuniyeti</div>
+                            <div class="indicator-progress mt-2">
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-primary" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="indicator-card">
+                            <div class="indicator-number text-success">88%</div>
+                            <div class="indicator-label">Mezun İstihdam Oranı</div>
+                            <div class="indicator-progress mt-2">
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-success" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="indicator-card">
+                            <div class="indicator-number text-warning">92%</div>
+                            <div class="indicator-label">Akademik Kadro Memnuniyeti</div>
+                            <div class="indicator-progress mt-2">
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-warning" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="indicator-card">
+                            <div class="indicator-number text-info">98%</div>
+                            <div class="indicator-label">Program Yeterlilik Uyumu</div>
+                            <div class="indicator-progress mt-2">
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-info" style="width: 98%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quality Processes -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-info text-white py-3">
+                        <h4 class="mb-0"><i class="bi bi-diagram-3 me-2"></i>Kalite Süreçleri</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="quality-process">
+                            <div class="process-step">
+                                <div class="step-number bg-primary">1</div>
+                                <div class="step-content">
+                                    <h6 class="text-primary">Planlama</h6>
+                                    <p class="text-muted small mb-0">
+                                        Stratejik planlar ve hedefler doğrultusunda kalite politikaları belirlenir.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number bg-success">2</div>
+                                <div class="step-content">
+                                    <h6 class="text-success">Uygulama</h6>
+                                    <p class="text-muted small mb-0">
+                                        Belirlenen politikalar eğitim-öğretim süreçlerinde uygulanır.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number bg-warning">3</div>
+                                <div class="step-content">
+                                    <h6 class="text-warning">Değerlendirme</h6>
+                                    <p class="text-muted small mb-0">
+                                        Performans göstergeleri ve paydaş geri bildirimleri değerlendirilir.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number bg-danger">4</div>
+                                <div class="step-content">
+                                    <h6 class="text-danger">İyileştirme</h6>
+                                    <p class="text-muted small mb-0">
+                                        Değerlendirme sonuçlarına göre iyileştirme faaliyetleri planlanır ve uygulanır.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-warning text-white py-3">
+                        <h4 class="mb-0"><i class="bi bi-download me-2"></i>Dokümanlar</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="document-list">
+                            <div class="document-item mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Kalite El Kitabı</h6>
+                                        <small class="text-muted">PDF - 2.4 MB</small>
+                                    </div>
+                                    <a href="#" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="document-item mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Stratejik Plan 2023-2027</h6>
+                                        <small class="text-muted">PDF - 1.8 MB</small>
+                                    </div>
+                                    <a href="#" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="document-item mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">İç Denetim Raporu</h6>
+                                        <small class="text-muted">PDF - 1.2 MB</small>
+                                    </div>
+                                    <a href="#" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="document-item">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">FEDEK Akreditasyon Raporu</h6>
+                                        <small class="text-muted">PDF - 3.1 MB</small>
+                                    </div>
+                                    <a href="#" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quality Committee -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-secondary text-white py-3">
+                <h4 class="mb-0"><i class="bi bi-people-fill me-2"></i>Kalite Komisyonu</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="committee-photo rounded-circle me-3 flex-shrink-0">
+                                <img src="{% static 'fen_edebiyat/images/akademik-kadro/Sermin-Onder.jpg' %}" alt="Prof. Dr. Şermin ÖNDER" class="rounded-circle">
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Prof. Dr. Şermin ÖNDER</h6>
+                                <p class="text-muted small mb-1">Kalite Komisyonu Başkanı</p>
+                                <p class="text-muted small mb-0">Psikoloji Bölümü</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="committee-photo rounded-circle me-3 flex-shrink-0">
+                                <img src="{% static 'fen_edebiyat/images/akademik-kadro/deniz-ugur.jpg' %}" alt="Dr. Öğr. Üyesi Deniz UĞUR" class="rounded-circle">
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Dr. Öğr. Üyesi Deniz UĞUR</h6>
+                                <p class="text-muted small mb-1">Kalite Komisyonu Üyesi</p>
+                                <p class="text-muted small mb-0">Moleküler Biyoloji ve Genetik</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="committee-photo rounded-circle me-3 flex-shrink-0">
+                                <img src="{% static 'fen_edebiyat/images/akademik-kadro/abdullah-hoca.jpg' %}" alt="Dr. Öğr. Üyesi Abdullah ÇELİK" class="rounded-circle">
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Dr. Öğr. Üyesi Abdullah ÇELİK</h6>
+                                <p class="text-muted small mb-1">Kalite Komisyonu Üyesi</p>
+                                <p class="text-muted small mb-0">Türk Dili ve Edebiyatı</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="committee-photo rounded-circle me-3 flex-shrink-0">
+                                <img src="{% static 'fen_edebiyat/images/akademik-kadro/SHIRIN-SADAGHIAN.jpeg' %}" alt="Dr. Öğr. Üyesi Shırın SADAGHIAN" class="rounded-circle">
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Dr. Öğr. Üyesi Shırın SADAGHIAN</h6>
+                                <p class="text-muted small mb-1">Kalite Komisyonu Üyesi</p>
+                                <p class="text-muted small mb-0">İngiliz Dili ve Edebiyatı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی برای صفحه Kalite */
+.quality-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quality-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.quality-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.accreditation-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.indicator-card {
+    padding: 20px 15px;
+}
+
+.indicator-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.indicator-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.quality-process {
+    position: relative;
+}
+
+.process-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 25px;
+    top: 50px;
+    bottom: -25px;
+    width: 2px;
+    background: linear-gradient(to bottom, #dee2e6, transparent);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex-grow: 1;
+}
+
+.committee-photo {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+}
+
+.committee-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.document-item {
+    padding: 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.document-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #fd7e14;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .quality-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .accreditation-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .indicator-number {
+        font-size: 2rem;
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .committee-photo {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* انیمیشن‌های ظریف */
+.quality-card .quality-icon {
+    transition: transform 0.3s ease;
+}
+
+.quality-card:hover .quality-icon {
+    transform: scale(1.1);
+}
+
+.indicator-card {
+    transition: transform 0.3s ease;
+}
+
+.indicator-card:hover {
+    transform: translateY(-2px);
+}
+</style>
+
+<script>
+// مدیریت منوهای آبشاری
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('#facultyMenu [data-bs-toggle="collapse"]');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menuItems.forEach(otherItem => {
+                if (otherItem !== item && !otherItem.classList.contains('collapsed')) {
+                    const targetId = otherItem.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        otherItem.classList.add('collapsed');
+                        targetElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    });
+
+    // انیمیشن برای نشانگرهای پیشرفت
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target.querySelector('.progress-bar');
+                const width = progressBar.style.width;
+                progressBar.style.width = '0%';
+                setTimeout(() => {
+                    progressBar.style.width = width;
+                }, 300);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.indicator-card').forEach(card => {
+        observer.observe(card);
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,850 @@
+<!-- Footer -->
+{% load static %}
+{% load i18n %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<footer class="footer">
+    <div class="container">
+        <!-- Footer Top Section -->
+        <div class="footer-top">
+            <div class="row">
+                <!-- University Info -->
+                <div class="col-lg-4 col-md-6 footer-col">
+                    <div class="footer-logo-section">
+                        <div class="footer-logo">
+                            <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="Avrasya University">
+                        </div>
+                        <div class="footer-about">
+                            <h3 class="footer-title">{% trans "Avrasya Üniversitesi" %}</h3>
+                            <p class="footer-description">
+                                {% trans "Geleceğinizi şekillendirmek için buradayız. Modern eğitim anlayışı ve uluslararası standartlarla öğrencilerimizi geleceğe hazırlıyoruz." %}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="footer-social">
+                        <h4 class="social-title">{% trans "Bizi Takip Edin" %}</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon youtube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 footer-col">
+                    <h4 class="footer-heading">{% trans "Öğrenci İşleri" %}</h4>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'ogrenci_isleri:kayit' %}"><i class="fas fa-chevron-right"></i> {% trans "Kayıt İşlemleri" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Yatay Geçiş" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Dikey Geçiş" %}</a></li>
+                        <li><a href="{% url 'ogrenci_isleri:yurtlar' %}"><i class="fas fa-chevron-right"></i> {% trans "Yurtlar" %}</a></li>
+                        <li><a href="{% url 'ogrenci_isleri:erasmus' %}"><i class="fas fa-chevron-right"></i> {% trans "Erasmus" %}</a></li>
+                        <li><a href="https://obs.avrasya.edu.tr/"><i class="fas fa-chevron-right"></i> {% trans "Kontenjanr" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Taban Puanlar" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Egitim Ucretleri" %}</a></li>
+                        <li><a href="{% url 'ogrenci_isleri:yurtlar' %}"><i class="fas fa-chevron-right"></i> {% trans "Öğrenci Kulüpleri" %}</a></li>
+                        <li><a href="{% url 'ogrenci_isleri:erasmus' %}"><i class="fas fa-chevron-right"></i> {% trans "Muafiyetler" %}</a></li>
+                        <li><a href="https://obs.avrasya.edu.tr/"><i class="fas fa-chevron-right"></i> {% trans "Başvuru Takvimi" %}</a></li>
+                    </ul>
+                </div>
+
+                <!-- Academic Links -->
+                <div class="col-lg-2 col-md-6 footer-col">
+                    <h4 class="footer-heading">{% trans "İdari Birimler" %}</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Kurumsal İletişim ve Halkla İlişkiler" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Bilgi İşlem Daire Başkanlığı" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "İdari ve Mali İşler Daire Başkanlığı" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Kütüphane ve Dökümantasyon" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Öğrenci İşleri Daire Başkanlığı" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Personel Daire Başkanlığı" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Yapı İşleri ve Teknik Daire Başkanlığı" %}</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Yazı İşleri Müdürlüğü" %}</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-4 col-md-6 footer-col">
+                    <h4 class="footer-heading">{% trans "İletişim" %}</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>{% trans "Adres" %}</h5>
+                                <p>Pelitli Mahallesi Rize Caddesi No:226<br>Ortahisar / TRABZON</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>{% trans "Telefon" %}</h5>
+                                <p>+90 462 334 05 50<br>+90 462 334 04 44</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>{% trans "E-posta" %}</h5>
+                                <p>iletisim@avrasya.edu.tr<br>info@avrasya.edu.tr</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>{% trans "Çalışma Saatleri" %}</h5>
+                                <p>Pazartesi - Cuma: 08:30 - 17:30<br>Cumartesi: 09:00 - 13:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Middle Section -->
+        <div class="footer-middle">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="footer-heading">{% trans "Hızlı Erişim" %}</h4>
+                    <div class="quick-access">
+                        <a href="https://avukalite.avrasya.edu.tr/" class="quick-link">
+                            <i class="fas fa-star"></i>
+                            <span>{% trans "Kalite" %}</span>
+                        </a>
+                        <a href="https://ebys.avrasya.edu.tr/Giris.aspx" class="quick-link">
+                            <i class="fas fa-folder"></i>
+                            <span>EBYS</span>
+                        </a>
+                        <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/" class="quick-link">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Bologna</span>
+                        </a>
+                        <a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F" class="quick-link">
+                            <i class="fas fa-laptop"></i>
+                            <span>{% trans "Online Eğitim" %}</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-book"></i>
+                            <span>{% trans "Kütüphane" %}</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-book"></i>
+                            <span>{% trans "Laboratuvarlar" %}</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-book"></i>
+                            <span>{% trans "İnternational" %}</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-book"></i>
+                            <span>{% trans "Kampüslerimiz" %}</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    
+                    <h4 class="footer-heading">{% trans "Akademik" %}</h4>
+                    <div class="quick-access">
+                        <a href="https://avukalite.avrasya.edu.tr/" class="quick-link">
+                            <i class="fas fa-star"></i>
+                            <span>{% trans "Enstitüler" %}</span>
+                        </a>
+                        <a href="https://ebys.avrasya.edu.tr/Giris.aspx" class="quick-link">
+                            <i class="fas fa-folder"></i>
+                            <span>{% trans "Fakülteler" %}</span>
+                        </a>
+                        <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/" class="quick-link">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>{% trans "Yüksekokullar" %}</span>
+                        </a>
+                        <a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F" class="quick-link">
+                            <i class="fas fa-laptop"></i>
+                            <span>{% trans "Meslek Yüksekokullar" %}</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-book"></i>
+                            <span>{% trans "Akademik Takvim" %}</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-book"></i>
+                            <span>{% trans "Ders Programları" %}</span>
+                        </a>
+                        
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        <!-- Footer Bottom Section -->
+        <div class="footer-bottom">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="copyright">
+                        <p>&copy; {% now "Y" %} Avrasya Üniversitesi. {% trans "Tüm hakları saklıdır." %}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="footer-extra">
+                        <a href="#" class="extra-link">{% trans "Gizlilik Politikası" %}</a>
+                        <a href="#" class="extra-link">{% trans "Kullanım Şartları" %}</a>
+                        <a href="#" class="extra-link">{% trans "KVKK Aydınlatma Metni" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    {% comment %} <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button> {% endcomment %}
+</footer>
+
+<style>
+/* ============================================
+   FOOTER STYLES - MODERN REDESIGN
+============================================ */
+
+/* Footer Base Styles */
+.footer {
+    background: linear-gradient(135deg, #0a2746 0%, #092442 100%);
+    color: #ffffff;
+    padding: 70px 0 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+}
+
+/* Footer Top Section */
+.footer-top {
+    padding-bottom: 50px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-col {
+    margin-bottom: 30px;
+}
+
+/* Logo Section */
+.footer-logo-section {
+    margin-bottom: 30px;
+}
+
+.footer-logo {
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    max-width: 180px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+}
+
+.footer-logo img:hover {
+    transform: scale(1.05);
+}
+
+.footer-about .footer-title {
+    font-family: 'Metropolis', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--pure-white);
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-about .footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent-light-blue);
+}
+
+.footer-description {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+}
+
+/* Social Media */
+.footer-social {
+    margin-top: 30px;
+}
+
+.social-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--pure-white);
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon.facebook:hover {
+    background: #1877f2;
+}
+
+.social-icon.twitter:hover {
+    background: #1da1f2;
+}
+
+.social-icon.instagram:hover {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}
+
+.social-icon.linkedin:hover {
+    background: #0077b5;
+}
+
+.social-icon.youtube:hover {
+    background: #ff0000;
+}
+
+/* Footer Headings */
+.footer-heading {
+    font-family: 'Metropolis', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--pure-white);
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background: var(--accent-light-blue);
+}
+
+/* Footer Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.footer-links li a i {
+    font-size: 10px;
+    color: var(--accent-light-blue);
+    transition: all 0.3s ease;
+}
+
+.footer-links li a:hover {
+    color: var(--accent-light-blue);
+    padding-left: 5px;
+}
+
+.footer-links li a:hover i {
+    transform: translateX(3px);
+}
+
+/* Contact Info */
+.contact-info {
+    margin-top: 10px;
+}
+
+.contact-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(141, 212, 227, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-icon i {
+    color: var(--accent-light-blue);
+    font-size: 16px;
+}
+
+.contact-details h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-light-blue);
+    margin-bottom: 5px;
+}
+
+.contact-details p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+/* Footer Middle Section */
+.footer-middle {
+    padding: 40px 0;
+    margin: 40px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Quick Access */
+.quick-access {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 13px;
+}
+
+.quick-link i {
+    color: var(--accent-light-blue);
+    font-size: 14px;
+}
+
+.quick-link:hover {
+    background: rgba(141, 212, 227, 0.1);
+    color: var(--accent-light-blue);
+    transform: translateY(-2px);
+}
+
+/* Newsletter */
+.newsletter p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    max-width: 400px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form input:focus {
+    outline: none;
+    border-color: var(--accent-light-blue);
+    box-shadow: 0 0 0 2px rgba(141, 212, 227, 0.2);
+}
+
+.newsletter-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter-form button {
+    width: 50px;
+    background: var(--secondary-medium-blue);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newsletter-form button:hover {
+    background: var(--accent-light-blue);
+    transform: translateY(-2px);
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    padding-top: 20px;
+}
+
+.copyright p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    margin: 0;
+}
+
+.footer-extra {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.extra-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.extra-link:hover {
+    color: var(--accent-light-blue);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--secondary-medium-blue);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background: var(--accent-light-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top.show {
+    display: flex;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-col {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.footer-col:nth-child(1) { animation-delay: 0.1s; }
+.footer-col:nth-child(2) { animation-delay: 0.2s; }
+.footer-col:nth-child(3) { animation-delay: 0.3s; }
+.footer-col:nth-child(4) { animation-delay: 0.4s; }
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .footer {
+        padding: 60px 0 20px;
+    }
+    
+    .footer-logo img {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 992px) {
+    .footer-top {
+        padding-bottom: 40px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-middle {
+        padding: 30px 0;
+        margin: 30px 0;
+    }
+    
+    .quick-access {
+        justify-content: flex-start;
+    }
+    
+    .footer-extra {
+        justify-content: center;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 50px 0 20px;
+    }
+    
+    .footer-col {
+        margin-bottom: 40px;
+    }
+    
+    .footer-heading {
+        margin-bottom: 20px;
+    }
+    
+    .contact-item {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 100%;
+    }
+    
+    .newsletter-form button {
+        height: 45px;
+    }
+    
+    .footer-bottom .row {
+        text-align: center;
+    }
+    
+    .copyright {
+        margin-bottom: 15px;
+    }
+    
+    .footer-extra {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-logo img {
+        max-width: 120px;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+    
+    .quick-access {
+        justify-content: center;
+    }
+    
+    .quick-link {
+        flex: 0 0 calc(50% - 10px);
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .contact-icon {
+        align-self: flex-start;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .footer {
+        background: linear-gradient(135deg, #081f39 0%, #071b32 100%);
+    }
+    
+    .footer-links li a,
+    .footer-description,
+    .contact-details p,
+    .newsletter p,
+    .copyright p,
+    .extra-link {
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .footer {
+        background: #f5f5f5 !important;
+        color: #000 !important;
+        border-top: 2px solid #ccc;
+    }
+    
+    .social-icons,
+    .back-to-top,
+    .newsletter-form,
+    .quick-link i {
+        display: none !important;
+    }
+}
+</style>
+
+<script>
+// Back to Top Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    });
+    
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Newsletter Form Submission
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            if (emailInput.value) {
+                // Here you can add AJAX submission or form processing
+                alert('{% trans "Aboneliğiniz için teşekkür ederiz!" %}');
+                emailInput.value = '';
+            }
+        });
+    }
+    
+    // Smooth scroll for footer links
+    document.querySelectorAll('.footer-links a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+});
+</script>

@@ -1,0 +1,552 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Spor Bilimleri Fakültesi Akademik Kadro{% endblock %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'spor_bilimleri/sidebar.html' %}
+    </div>
+    
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Spor Bilimleri Fakültesi Akademik Kadro</h1>
+                        <p class="lead mb-4">
+                            
+                        </p>
+                        {% comment %} <div class="d-flex gap-3">
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-mortarboard me-1"></i>Uzman Akademisyenler
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-award me-1"></i>Yüksek Nitelik
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-book me-1"></i>5 Farklı Bölüm
+                            </span>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-mortarboard me-2 display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text bg-primary text-white">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" id="searchInput" class="form-control" placeholder="Akademisyen ara...">
+                        </div>
+                    </div>
+                    {% comment %} <div class="col-md-6">
+                        <select id="departmentFilter" class="form-select">
+                            <option value="">Tüm Bölümler</option>
+                            <option value="ingiliz-dili">İngiliz Dili ve Edebiyatı</option>
+                            <option value="psikoloji">Psikoloji</option>
+                            <option value="turk-dili">Türk Dili ve Edebiyatı</option>
+                            <option value="molekuler-biyoloji">Moleküler Biyoloji ve Genetik</option>
+                            <option value="mtercim-tercumanlik">Mütercim Tercümanlık</option>
+                        </select>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Staff Cards -->
+        <div class="row" id="academicStaff">
+            <!-- Dr. Öğr. Üyesi Ayşe YILMAZ -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 academic-card">
+                    <div class="card-header bg-info text-white text-center py-4">
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'spor_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Prof. Dr. Birol DOĞAN" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Prof. Dr. Birol DOĞAN</h5>
+                        <p class="card-subtitle small opacity-75"></p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope text-info me-2"></i>
+                                <a href="mailto:ayse.yilmaz@ovrosya.edu.tr" class="text-decoration-none">birol.dogan@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone text-info me-2"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a href="" class="btn btn-outline-info btn-sm w-100">
+                            <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prof. Dr. Ferda AYSAN -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 academic-card">
+                    <div class="card-header bg-info text-white text-center py-4">
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'spor_bilimleri/images/akademik-kadro/Dr. Öğr. Üyesi Gül ERTEM.jpg' %}" alt="Dr. Öğr. Üyesi Gül ERTEM" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Gül ERTEM</h5>
+                        <p class="card-subtitle small opacity-75">EGZERSİZ VE SPOR BİLİMLERİ</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope text-info me-2"></i>
+                                <a href="mailto:ayse.yilmaz@ovrosya.edu.tr" class="text-decoration-none">gul.cavusoglu@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone text-info me-2"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c936c2d0a37&dil=0" class="btn btn-outline-info btn-sm w-100">
+                            <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dr. Öğr. Üyesi Ayşe YILMAZ -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 academic-card">
+                    <div class="card-header bg-info text-white text-center py-4">
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'spor_bilimleri/images/akademik-kadro/Ogr.-Gor.-Mehmet-DERELIOGLU.jpg' %}" alt="Dr. Öğr. Üyesi Mehmet DERELİOĞLU" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Mehmet DERELİOĞLU</h5>
+
+                        <p class="card-subtitle small opacity-75">EGZERSİZ VE SPOR BİLİMLERİ</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope text-info me-2"></i>
+                                <a href="mailto:ayse.yilmaz@ovrosya.edu.tr" class="text-decoration-none">mehmet.derelioglu@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone text-info me-2"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c938fe957a6&dil=0" class="btn btn-outline-info btn-sm w-100">
+                            <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Sample Cards -->
+            <!-- Dr. Öğr. Üyesi Ayşe YILMAZ -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 academic-card">
+                    <div class="card-header bg-info text-white text-center py-4">
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'spor_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Erdi TOKUL" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Erdi TOKUL</h5>
+                        <p class="card-subtitle small opacity-75">REKREASYON</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope text-info me-2"></i>
+                                <a href="mailto:ayse.yilmaz@ovrosya.edu.tr" class="text-decoration-none">erdi.tokul@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone text-info me-2"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c931f7965e7&dil=0" class="btn btn-outline-info btn-sm w-100">
+                            <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dr. Öğr. Üyesi Ayşe YILMAZ -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 academic-card">
+                    <div class="card-header bg-info text-white text-center py-4">
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'spor_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Cüneyt SEYDİOĞLU" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Cüneyt SEYDİOĞLU</h5>
+                        <p class="card-subtitle small opacity-75"></p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope text-info me-2"></i>
+                                <a href="mailto:ayse.yilmaz@ovrosya.edu.tr" class="text-decoration-none">cuneyt.seydioglu@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone text-info me-2"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a href="" class="btn btn-outline-info btn-sm w-100">
+                            <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dr. Öğr. Üyesi Ayşe YILMAZ -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 academic-card">
+                    <div class="card-header bg-info text-white text-center py-4">
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'spor_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Tarık SİVRİKAYA" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Tarık SİVRİKAYA</h5>
+                        <p class="card-subtitle small opacity-75"></p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope text-info me-2"></i>
+                                <a href="mailto:ayse.yilmaz@ovrosya.edu.tr" class="text-decoration-none">tarik.sivrikaya@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone text-info me-2"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a href="#" class="btn btn-outline-info btn-sm w-100">
+                            <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="academicStaff">
+
+            <!-- Additional Sample Cards -->
+            <!-- Dr. Öğr. Üyesi Ayşe YILMAZ -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 academic-card">
+                    <div class="card-header bg-info text-white text-center py-4">
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'spor_bilimleri/images/akademik-kadro/Öğr. Gör. Seda Nur TURHAL.jpg' %}" alt="Öğr. Gör. Seda Nur TURHAL" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Öğr. Gör. Seda Nur TURHAL</h5>
+                        <p class="card-subtitle small opacity-75">SPOR YÖNETİCİLİĞİ</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope text-info me-2"></i>
+                                <a href="mailto:ayse.yilmaz@ovrosya.edu.tr" class="text-decoration-none">sedanur.turhal@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone text-info me-2"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c7fa2a6005b&dil=0" class="btn btn-outline-info btn-sm w-100">
+                            <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dr. Öğr. Üyesi Ayşe YILMAZ -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 academic-card">
+                    <div class="card-header bg-info text-white text-center py-4">
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'spor_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Arş. Gör. Erdem ÇAKAN" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Arş. Gör. Erdem ÇAKAN</h5>
+                        <p class="card-subtitle small opacity-75"></p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope text-info me-2"></i>
+                                <a href="mailto:ayse.yilmaz@ovrosya.edu.tr" class="text-decoration-none">erdem.cakan@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone text-info me-2"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a href="" class="btn btn-outline-info btn-sm w-100">
+                            <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dr. Öğr. Üyesi Ayşe YILMAZ -->
+            
+            
+
+        </div>
+            
+        <!-- No Results Message -->
+        <div id="noResults" class="card border-0 shadow-sm text-center py-5 d-none">
+            <div class="card-body">
+                <i class="bi bi-search display-1 text-muted mb-3"></i>
+                <h4 class="text-muted">Sonuç Bulunamadı</h4>
+                <p class="text-muted">Arama kriterlerinize uygun akademisyen bulunamadı.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی برای صفحه Akademik Kadro */
+.academic-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.academic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 4px solid rgba(255,255,255,0.3);
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.contact-info a {
+    color: inherit;
+    transition: color 0.2s;
+}
+
+.contact-info a:hover {
+    color: #0d6efd !important;
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #fd7e14;
+    color: #fd7e14;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #fd7e14;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+}
+</style>
+
+<script>
+// مدیریت فیلتر و جستجو
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const departmentFilter = document.getElementById('departmentFilter');
+    const academicCards = document.querySelectorAll('.academic-card');
+    const noResults = document.getElementById('noResults');
+    
+    function filterCards() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const departmentValue = departmentFilter.value;
+        
+        let visibleCount = 0;
+        
+        academicCards.forEach(card => {
+            const cardElement = card.closest('.col-md-6');
+            const name = card.querySelector('.card-title').textContent.toLowerCase();
+            const department = cardElement.getAttribute('data-department');
+            
+            const matchesSearch = name.includes(searchTerm);
+            const matchesDepartment = !departmentValue || department === departmentValue;
+            
+            if (matchesSearch && matchesDepartment) {
+                cardElement.style.display = 'block';
+                visibleCount++;
+            } else {
+                cardElement.style.display = 'none';
+            }
+        });
+        
+        // نمایش پیام عدم یافتن نتیجه
+        if (visibleCount === 0) {
+            noResults.classList.remove('d-none');
+        } else {
+            noResults.classList.add('d-none');
+        }
+    }
+    
+    searchInput.addEventListener('input', filterCards);
+    departmentFilter.addEventListener('change', filterCards);
+    
+    // مدیریت منوهای آبشاری
+    const menuItems = document.querySelectorAll('#facultyMenu [data-bs-toggle="collapse"]');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menuItems.forEach(otherItem => {
+                if (otherItem !== item && !otherItem.classList.contains('collapsed')) {
+                    const targetId = otherItem.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        otherItem.classList.add('collapsed');
+                        targetElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

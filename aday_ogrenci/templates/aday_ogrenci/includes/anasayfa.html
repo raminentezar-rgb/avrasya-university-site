@@ -1,0 +1,521 @@
+{% extends 'aday_ogrenci/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Avrasya Üniversitesi - Aday Öğrenci{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>{% trans "ADAY ÖĞRENCİ" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi'nde sınırları zorluyor, yeniliğe imza atıyoruz" %}</p>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<!-- Main Content -->
+<div class="container">
+    <!-- Quick Access Cards -->
+    <div class="row mb-5">
+        <div class="col-12 mb-4">
+            <h2 class="section-title text-center mb-4">{% trans "Hızlı Erişim" %}</h2>
+        </div>
+        
+        <!-- Row 1 -->
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:kontenjanlar' %}">
+                    <img src="{% static 'core/img/aday/kontenjanlar.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Kontenjanlar' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "KONTENJANLAR" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:egitim_ucretleri' %}">
+                    <img src="{% static 'core/img/aday/EĞİTİM ÜCRETLERİ.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Eğitim Ücretleri' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "EĞİTİM ÜCRETLERİ" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:taban_puanlar' %}">
+                    <img src="{% static 'core/img/aday/TABAN PUANLAR.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Taban Puanlar' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "TABAN PUANLAR" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:dikey_gecis' %}">
+                    <img src="{% static 'core/img/aday/DİKEY GEÇİŞ.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Dikey Geçiş' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "DİKEY GEÇİŞ" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'yatay_gecis:yatay_gecis' %}">
+                    <img src="{% static 'core/img/aday/Yatay Geçiş.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Yatay Geçiş' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "YATAY GEÇİŞ" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:foto_galeri' %}">
+                    <img src="{% static 'core/img/aday/Foto Galeri.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Foto Galeri' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "FOTO GALERİ" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:laboratuvarlar' %}">
+                    <img src="{% static 'core/img/aday/Laboratuvarlar.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Laboratuvarlar' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "LABORATUVARLAR" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:kampus_yasam' %}">
+                    <img src="{% static 'core/img/akademik/IMG_0536-2-scaled.jpg' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Kampüste Yaşam' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "KAMPÜSTE YAŞAM" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:yurt_olanaklari' %}">
+                    <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Yurt Olanakları' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "YURT OLANAKLARI" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:cap_yan_dal' %}">
+                    <img src="{% static 'core/img/student/avu1.jpg' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Çap/Yandal' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "ÇAP/YANDAL" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:yabanci_ogrenci' %}">
+                    <img src="{% static 'core/img/aday/yabanci.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Yabancı Uyruklu Öğrenci' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "YABANCI UYRUKLU ÖĞRENCİ" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+            <div class="card service-card border-0 shadow-lg h-100">
+                <div class="card-image-container">
+                    <a href="{% url 'aday_ogrenci:basvuru' %}">
+                    <img src="{% static 'core/img/aday/erasmus.png' %}" 
+                         class="card-img" 
+                         alt="{% trans 'Erasmus' %}">
+                    <div class="card-overlay"></div>
+                    <div class="card-title-overlay">
+                        <h5 class="card-title fw-bold">{% trans "ERASMUS" %}</h5>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+
+
+/* استایل‌های سفارشی برای صفحه Öğrenci İşleri */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: #1d61a9;
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: #f6f2e7;
+    --pure-white: #FFFFFF;
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+}
+
+
+
+
+
+
+
+
+
+
+
+.page-hero-section {
+    border-radius: 0 0 2rem 2rem;
+    margin: -2rem -1rem 0 -1rem;
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    margin-top: 220px;
+}
+
+.hero-logo {
+    max-height: 150px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.section-title {
+    position: relative;
+    padding-bottom: 1rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    color: var(--primary-dark-blue);
+    margin-top: 100px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+/* استایل کارت‌های جدید - تمام تصویر */
+.service-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 12px;
+    height: 280px; /* ارتفاع ثابت و یکسان */
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.2) !important;
+}
+
+.card-image-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.6s ease;
+}
+
+.service-card:hover .card-img {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(9, 36, 66, 0.7) 100%);
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.service-card:hover .card-overlay {
+    background: linear-gradient(to bottom, transparent 0%, rgba(29, 97, 169, 0.8) 100%);
+    opacity: 0.9;
+}
+
+/* استایل جدید برای عناوین روی تصویر */
+.card-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 1.5rem;
+    color: var(--pure-white);
+    z-index: 2;
+    text-align: center;
+}
+
+.card-title-overlay .card-title {
+    color: var(--pure-white);
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    line-height: 1.3;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .card-title-overlay .card-title {
+    transform: translateY(-5px);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.service-card {
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+/* تأخیر برای انیمیشن کارت‌ها */
+.service-card:nth-child(1) { animation-delay: 0.1s; }
+.service-card:nth-child(2) { animation-delay: 0.2s; }
+.service-card:nth-child(3) { animation-delay: 0.3s; }
+.service-card:nth-child(4) { animation-delay: 0.4s; }
+.service-card:nth-child(5) { animation-delay: 0.5s; }
+.service-card:nth-child(6) { animation-delay: 0.6s; }
+.service-card:nth-child(7) { animation-delay: 0.7s; }
+.service-card:nth-child(8) { animation-delay: 0.8s; }
+.service-card:nth-child(9) { animation-delay: 0.9s; }
+.service-card:nth-child(10) { animation-delay: 1.0s; }
+.service-card:nth-child(11) { animation-delay: 1.1s; }
+.service-card:nth-child(12) { animation-delay: 1.2s; }
+
+/* رسپانسیو */
+@media (max-width: 1200px) {
+    .page-hero-section {
+        margin: -1rem -0.5rem 0 -0.5rem;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .service-card {
+        height: 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .service-card {
+        height: 220px;
+    }
+    
+    .card-title-overlay .card-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-hero-section {
+        border-radius: 0 0 1rem 1rem;
+        padding: 1.5rem 0;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .service-card {
+        height: 200px;
+    }
+    
+    .card-title-overlay {
+        padding: 1.5rem 1rem;
+    }
+    
+    .card-title-overlay .card-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-hero-section {
+        text-align: center;
+    }
+    
+    .hero-logo {
+        max-height: 100px;
+    }
+    
+    .service-card {
+        height: 180px;
+    }
+    
+    .card-title-overlay {
+        padding: 1rem 0.8rem;
+    }
+    
+    .card-title-overlay .card-title {
+        font-size: 1rem;
+    }
+
+
+
+
+
+
+    
+}
+</style>
+
+<script>
+// انیمیشن اسکرول برای کارت‌ها
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.service-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+});
+</script>
+{% endblock %}

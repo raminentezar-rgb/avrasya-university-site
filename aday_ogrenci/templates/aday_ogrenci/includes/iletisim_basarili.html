@@ -1,0 +1,33 @@
+<!-- aday_ogrenci/templates/aday_ogrenci/iletisim_basarili.html -->
+{% extends 'aday_ogrenci/base_aday.html' %}
+{% load static %}
+
+{% block title %}Mesaj Gönderildi - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body py-5">
+                    <div class="mb-4">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h1 class="display-6 fw-bold text-success mb-3">Mesajınız Gönderildi!</h1>
+                    <p class="lead mb-4">
+                        İletişim formunuz başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.
+                    </p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{% url 'aday_ogrenci:aday_anasayfa' %}" class="btn btn-primary btn-lg me-md-2">
+                            <i class="bi bi-house me-2"></i>Ana Sayfaya Dön
+                        </a>
+                        <a href="{% url 'aday_ogrenci:aday_iletisim' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="bi bi-envelope me-2"></i>Yeni Mesaj Gönder
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

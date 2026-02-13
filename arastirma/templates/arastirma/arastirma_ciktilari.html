@@ -1,0 +1,263 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}Araştırma Çıktıları - Avrasya University{% endblock %}
+
+{% block content %}
+<section class="research-hero" style="background: linear-gradient(135deg, #8dd4e3 0%, #1d61a9 100%); padding: 100px 0 60px;">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Araştırma Çıktıları</h1>
+            <p>Üniversitemizin Bilimsel Yayınları ve Araştırma Sonuçları</p>
+        </div>
+    </div>
+</section>
+
+<section class="research-section">
+    <div class="container">
+        <div class="sidebar-layout">
+            <!-- سایدبار در سمت چپ -->
+            <div class="sidebar-left">
+                {% include 'arastirma/includes/cikitlar_sidebar.html' %}
+            </div>
+            
+            <!-- محتوای اصلی در سمت راست -->
+            <div class="content-right">
+                <!-- آمار -->
+                <div class="research-card mb-4">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="stat-box text-center">
+                                <h3>156</h3>
+                                <p>SCI Yayın</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box text-center">
+                                <h3>89</h3>
+                                <p>Uluslararası Makale</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box text-center">
+                                <h3>42</h3>
+                                <p>Kitap/Bölüm</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box text-center">
+                                <h3>2.8</h3>
+                                <p>Ortalama Atıf</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فیلترها -->
+                <div class="research-card mb-4">
+                    <h5 class="mb-3">Araştırma Çıktıları Filtreleme</h5>
+                    <div class="btn-group" role="group">
+                        <a href="#" class="btn btn-outline-primary">Tümü</a>
+                        <a href="#" class="btn btn-outline-primary">SCI Makaleler</a>
+                        <a href="#" class="btn btn-outline-primary">Uluslararası</a>
+                        <a href="#" class="btn btn-outline-primary">Ulusal</a>
+                        <a href="#" class="btn btn-outline-primary">Kitaplar</a>
+                    </div>
+                    <div class="mt-3">
+                        <select class="form-control" onchange="location = this.value;">
+                            <option value="">Yıla Göre Filtrele</option>
+                            <option value="?year=2024">2024</option>
+                            <option value="?year=2023">2023</option>
+                            <option value="?year=2022">2022</option>
+                            <option value="?year=2021">2021</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- لیست تحقیقاتی خروجی ها -->
+                <div class="research-card mb-4">
+                    <h3>Yapay Zeka Destekli Tıbbi Teşhis Sisteminin Klinik Doğruluğunun Araştırılması</h3>
+                    <div class="project-meta mb-3">
+                        <span class="badge badge-success">
+                            SCI İndeksli
+                        </span>
+                        <span class="badge badge-info">
+                            Q1 Dergi
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-user"></i> Prof. Dr. Ahmet Yılmaz
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-university"></i> Tıp Fakültesi
+                        </span>
+                    </div>
+                    
+                    <p><strong>Dergi:</strong> Nature Medicine | <strong>Yıl:</strong> 2024 | <strong>DOI:</strong> 10.1038/s41591-024-02845-7</p>
+                    <p>Bu çalışmada, derin öğrenme tabanlı yapay zeka algoritmasının radyolojik görüntülerdeki erken kanser teşhisindeki doğruluğu incelenmiştir. 1500 hasta verisi üzerinde yapılan testlerde %94.3 doğruluk oranı elde edilmiştir.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i> Yayın Tarihi: 15 Mart 2024
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-quote-right"></i> 12 Atıf
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-impact"></i> Etki Faktörü: 32.5
+                            </small>
+                        </div>
+                        <a href="#" class="btn btn-primary">
+                            Makaleyi Gör <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="research-card mb-4">
+                    <h3>Sürdürülebilir Enerji Sistemlerinde Nanomalzeme Uygulamaları</h3>
+                    <div class="project-meta mb-3">
+                        <span class="badge badge-success">
+                            SCI İndeksli
+                        </span>
+                        <span class="badge badge-info">
+                            Q2 Dergi
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-user"></i> Doç. Dr. Mehmet Demir
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-university"></i> Mühendislik Fakültesi
+                        </span>
+                    </div>
+                    
+                    <p><strong>Dergi:</strong> Advanced Energy Materials | <strong>Yıl:</strong> 2023 | <strong>DOI:</strong> 10.1002/aenm.202300456</p>
+                    <p>Güneş pili verimliliğini artırmak için geliştirilen yeni nanomalzeme kaplamaların performans analizi. %18'den %24'e verim artışı gözlemlenmiştir.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i> Yayın Tarihi: 10 Eylül 2023
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-quote-right"></i> 28 Atıf
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-impact"></i> Etki Faktörü: 21.7
+                            </small>
+                        </div>
+                        <a href="#" class="btn btn-primary">
+                            Makaleyi Gör <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="research-card mb-4">
+                    <h3>Dijital Çağda Eğitim Politikaları ve Öğrenci Başarısı</h3>
+                    <div class="project-meta mb-3">
+                        <span class="badge badge-primary">
+                            Uluslararası Hakemli
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-user"></i> Prof. Dr. Ayşe Kaya
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-university"></i> Eğitim Fakültesi
+                        </span>
+                    </div>
+                    
+                    <p><strong>Dergi:</strong> Computers & Education | <strong>Yıl:</strong> 2024 | <strong>DOI:</strong> 10.1016/j.compedu.2024.104987</p>
+                    <p>Pandemi sonrası dijital eğitim modellerinin öğrenci başarısı üzerindeki etkilerinin karşılaştırmalı analizi. 5 farklı ülkeden 2500 öğrenci ile yapılan araştırma sonuçları.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i> Yayın Tarihi: 20 Ocak 2024
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-quote-right"></i> 8 Atıf
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-impact"></i> Etki Faktörü: 8.2
+                            </small>
+                        </div>
+                        <a href="#" class="btn btn-primary">
+                            Makaleyi Gör <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="research-card mb-4">
+                    <h3>İleri Malzeme Karakterizasyon Teknikleri</h3>
+                    <div class="project-meta mb-3">
+                        <span class="badge badge-secondary">
+                            Kitap Bölümü
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-user"></i> Prof. Dr. Can Yılmaz
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-university"></i> Malzeme Bilimi
+                        </span>
+                    </div>
+                    
+                    <p><strong>Kitap:</strong> Modern Malzeme Bilimi | <strong>Yayınevi:</strong> Springer | <strong>Yıl:</strong> 2023 | <strong>ISBN:</strong> 978-3-031-45678-9</p>
+                    <p>Nanomalzemelerin karakterizasyonu için geliştirilen ileri mikroskopi ve spektroskopi tekniklerinin detaylı incelenmesi. 150 sayfalık kapsamlı bölüm.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i> Yayın Tarihi: 15 Kasım 2023
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-book"></i> Bölüm 7
+                            </small>
+                        </div>
+                        <a href="#" class="btn btn-primary">
+                            Bölümü Gör <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="research-card mb-4">
+                    <h3>Yapay Sinir Ağları ile Finansal Piyasa Tahmini</h3>
+                    <div class="project-meta mb-3">
+                        <span class="badge badge-success">
+                            SCI İndeksli
+                        </span>
+                        <span class="badge badge-info">
+                            Q1 Dergi
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-user"></i> Doç. Dr. Zeynep Şahin
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-university"></i> İşletme Fakültesi
+                        </span>
+                    </div>
+                    
+                    <p><strong>Dergi:</strong> Expert Systems with Applications | <strong>Yıl:</strong> 2023 | <strong>DOI:</strong> 10.1016/j.eswa.2023.120456</p>
+                    <p>Derin öğrenme tabanlı LSTM ağları kullanılarak finansal piyasa hareketlerinin tahmin edilmesi. 10 yıllık veri seti üzerinde %87.4 doğruluk oranı.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i> Yayın Tarihi: 05 Ağustos 2023
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-quote-right"></i> 34 Atıf
+                            </small>
+                            <small class="text-muted ml-3">
+                                <i class="fas fa-impact"></i> Etki Faktörü: 18.9
+                            </small>
+                        </div>
+                        <a href="#" class="btn btn-primary">
+                            Makaleyi Gör <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

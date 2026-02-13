@@ -1,0 +1,134 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ etkinlik.baslik }} - Avrasya Üniversitesi{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <article class="bg-white p-4 rounded shadow-sm">
+        <!-- Başlık ve bilgiler -->
+        <header class="mb-4 border-bottom pb-3">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <span class="badge bg-primary mb-2">{{ etkinlik.get_etkinlik_turu_display }}</span>
+                    <h1 class="text-primary">{{ etkinlik.baslik }}</h1>
+                    
+                    <div class="etkinlik-meta mt-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-calendar-event text-primary me-2"></i>
+                                    <div>
+                                        <strong>Başlangıç:</strong><br>
+                                        {{ etkinlik.baslangic_tarihi|date:'d F Y H:i' }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-geo-alt text-primary me-2"></i>
+                                    <div>
+                                        <strong>Yer:</strong><br>
+                                        {{ etkinlik.yer }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if etkinlik.bitis_tarihi %}
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-clock text-primary me-2"></i>
+                            <div>
+                                <strong>Bitiş:</strong><br>
+                                {{ etkinlik.bitis_tarihi|date:'d F Y H:i' }}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                {% if etkinlik.kayit_gerekiyor %}
+                <span class="badge bg-warning text-dark">
+                    <i class="bi bi-person-check"></i> Kayıt Gerekli
+                </span>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- Afiş -->
+        {% if etkinlik.afis %}
+        <div class="mb-4 text-center">
+            <img src="{{ etkinlik.afis.url }}" alt="{{ etkinlik.baslik }}" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
+        </div>
+        {% endif %}
+
+        <!-- Kısa Açıklama -->
+        {% if etkinlik.kisa_aciklama %}
+        <div class="alert alert-info mb-4">
+            <h5 class="alert-heading">Özet</h5>
+            <p class="mb-0">{{ etkinlik.kisa_aciklama }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Detaylı Açıklama -->
+        <div class="content mb-5">
+            {{ etkinlik.detayli_aciklama|linebreaks }}
+        </div>
+
+        <!-- Katılım Bilgileri -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card border-0 bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-info-circle text-primary"></i> Etkinlik Bilgileri
+                        </h5>
+                        <ul class="list-unstyled">
+                            <li><strong>Tür:</strong> {{ etkinlik.get_etkinlik_turu_display }}</li>
+                            <li><strong>Yer:</strong> {{ etkinlik.yer }}</li>
+                            <li><strong>Tarih:</strong> {{ etkinlik.baslangic_tarihi|date:'d F Y' }}</li>
+                            <li><strong>Saat:</strong> {{ etkinlik.baslangic_tarihi|date:'H:i' }}</li>
+                            {% if etkinlik.ucretli %}
+                            <li><strong>Ücret:</strong> Ücretli</li>
+                            {% else %}
+                            <li><strong>Ücret:</strong> Ücretsiz</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            {% if etkinlik.katilim_linki %}
+            <div class="col-md-6">
+                <div class="card border-0 bg-primary text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">
+                            <i class="bi bi-link-45deg"></i> Katılım Linki
+                        </h5>
+                        <p class="card-text">Etkinliğe katılmak için aşağıdaki butona tıklayın:</p>
+                        <a href="{{ etkinlik.katilim_linki }}" target="_blank" class="btn btn-light btn-lg">
+                            <i class="bi bi-box-arrow-up-right"></i> Etkinliğe Katıl
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Geri dönüş butonu -->
+        <div class="mt-4 pt-3 border-top">
+            <a href="{% url 'ergoterapi:etkinlik_listesi' %}" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left"></i> Tüm Etkinliklere Dön
+            </a>
+            <a href="{% url 'ergoterapi:yaklasan_etkinlikler' %}" class="btn btn-outline-secondary ms-2">
+                <i class="bi bi-calendar-event"></i> Yaklaşan Etkinlikler
+            </a>
+        </div>
+    </article>
+</div>
+
+<style>
+.etkinlik-meta {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+</style>
+{% endblock %}

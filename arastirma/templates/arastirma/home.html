@@ -1,0 +1,160 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}Araştırma - Avrasya University{% endblock %}
+
+{% block content %}
+<!-- هیرو سکشن -->
+{% include 'arastirma/includes/hero.html' %}
+
+<!-- منوی سریع دسترسی -->
+{% include 'arastirma/includes/quick_nav.html' %}
+
+<!-- سیاست‌های تحقیقاتی -->
+<section class="research-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Araştırma Politikaları</h2>
+            <div class="title-underline"></div>
+        </div>
+        
+        <div class="row">
+            {% for policy in policies %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="research-card">
+                    <h3>{{ policy.title }}</h3>
+                    <p>{{ policy.content|truncatewords:30 }}</p>
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-users"></i> {{ policy.commission }}
+                        </small>
+                    </div>
+                    <a href="{% url 'arastirma:policy_detail' policy.pk %}" class="btn btn-primary">
+                        Detaylı İncele <i class="fas fa-arrow-right"></i>
+                    </a>
+                    
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Henüz araştırma politikası eklenmemiş.</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'arastirma:policy_list' %}" class="btn btn-outline-primary">
+                Tüm Politikaları Gör <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- پروژه‌های BAP -->
+<section class="research-section" style="background: var(--neutral-cream);">
+    <div class="container">
+        <div class="section-title">
+            <h2>BAP Projeleri</h2>
+            <div class="title-underline"></div>
+            <p class="mt-3">Üniversitemizde yürütülen bilimsel araştırma projeleri</p>
+        </div>
+        
+        <div class="row">
+            {% for project in featured_projects %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="research-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge {% if project.status == 'ongoing' %}badge-success{% else %}badge-secondary{% endif %}">
+                            {{ project.get_status_display }}
+                        </span>
+                        <span class="badge badge-info">
+                            {{ project.budget }} TL
+                        </span>
+                    </div>
+                    
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description|truncatewords:25 }}</p>
+                    
+                    <div class="project-meta mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-user"></i> {{ project.coordinator }}
+                        </small>
+                        <br>
+                        <small class="text-muted">
+                            <i class="fas fa-calendar"></i> {{ project.start_date|date:"d M Y" }}
+                        </small>
+                    </div>
+                    
+                    <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm mt-3">
+                        Proje Detayları <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Henüz BAP projesi eklenmemiş.</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'arastirma:bap_list' %}" class="btn btn-primary">
+                Tüm Projeleri Gör <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- آزمایشگاه‌ها -->
+<section class="research-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Laboratuvarlarımız</h2>
+            <div class="title-underline"></div>
+            <p class="mt-3">Modern ekipmanlarla donatılmış araştırma laboratuvarlarımız</p>
+        </div>
+        
+        <div class="row">
+            {% for lab in active_labs %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="research-card text-center">
+                    <div class="lab-icon mb-3">
+                        <i class="fas fa-microscope fa-3x" style="color: var(--secondary-medium-blue);"></i>
+                    </div>
+                    
+                    <h4>{{ lab.name }}</h4>
+                    <p class="text-muted">{{ lab.faculty }}</p>
+                    
+                    <div class="lab-info">
+                        <small class="text-muted">
+                            <i class="fas fa-user-tie"></i> {{ lab.director }}
+                        </small>
+                        <br>
+                        <small class="text-muted">
+                            <i class="fas fa-users"></i> Kapasite: {{ lab.capacity }} kişi
+                        </small>
+                    </div>
+                    
+                    <a href="{{ lab.get_absolute_url }}" class="btn btn-outline-primary btn-sm mt-3">
+                        Laboratuvar Detayı <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Henüz laboratuvar eklenmemiş.</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'arastirma:lab_list' %}" class="btn btn-outline-primary">
+                Tüm Laboratuvarları Gör <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- بخش آمار -->
+{% include 'arastirma/includes/stats.html' %}
+{% endblock %}

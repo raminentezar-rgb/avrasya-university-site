@@ -1,0 +1,86 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<div class="support-hero">
+    <div class="container">
+        <h1>Thank You!</h1>
+        <p>Your support request has been submitted successfully</p>
+    </div>
+</div>
+
+<div class="container support-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="support-card text-center">
+                <div class="success-icon mb-4">
+                    <div style="width: 80px; height: 80px; background: #d4edda; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check fa-2x text-success"></i>
+                    </div>
+                </div>
+                
+                <h2>Talebiniz Başarıyla Alındı</h2>
+                
+                <div class="ticket-info mt-4 mb-4">
+                    <div class="info-item">
+                        <strong>Ticket ID:</strong> #{{ ticket_id|stringformat:"04d" }}
+                    </div>
+                    <div class="info-item">
+                        <strong>Department:</strong> {{ department_name }}
+                    </div>
+                    <div class="info-item">
+                        <strong>Submitted:</strong> {{ submitted_date|date:"d.m.Y H:i" }}
+                    </div>
+                </div>
+                
+                <div class="alert alert-info text-left">
+                    <i class="fas fa-clock mr-2"></i>
+                    <strong>What happens next?</strong>
+                    <ul class="mb-0 mt-2 pl-3">
+                        <li>Your ticket has been assigned to the relevant department</li>
+                        <li>You'll receive an email confirmation shortly</li>
+                        <li>The department will respond within 1-2 business days</li>
+                        <li>You can track your ticket from "My Tickets" section</li>
+                    </ul>
+                </div>
+                
+                <p class="mt-4">
+                    <strong>Destek talebiniz ilgili birime iletilmiştir.</strong><br>
+                    En kısa sürede sizinle iletişime geçilecektir.
+                </p>
+
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <a href="{% url 'support:my_tickets' %}" class="btn-support">
+                        <i class="fas fa-ticket-alt"></i> View My Tickets
+                    </a>
+                    <a href="{% url 'support:search' %}" class="btn-support-secondary">
+                        <i class="fas fa-home"></i> Destek Merkezine Dön
+                    </a>
+                    <a href="{% url 'support:create_ticket' %}" class="btn-support-secondary">
+                        <i class="fas fa-plus"></i> New Ticket
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .info-item {
+        background: #f8f9fa;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+    
+    .success-icon {
+        animation: bounce 0.5s ease;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+</style>
+
+{% endblock %}

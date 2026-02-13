@@ -1,0 +1,43 @@
+{% extends "support/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="support-container">
+    <div class="breadcrumb">
+        <a href="/" class="breadcrumb-item">Ana Sayfa</a>
+        <span class="breadcrumb-divider">/</span>
+        <a href="{% url 'support:search' %}" class="breadcrumb-item">Destek Merkezi</a>
+        <span class="breadcrumb-divider">/</span>
+        <span class="breadcrumb-item active">Sıkça Sorulan Soru</span>
+    </div>
+
+    <div class="support-section">
+        <div class="card" style="border-left: 5px solid var(--secondary-blue);">
+            <div class="card-header">
+                <span class="status-badge" style="background: #e8f6f3; color: #1abc9c;">
+                    <i class="fas fa-question-circle"></i> SSS
+                </span>
+                <span class="text-muted">{{ faq.department.name|default:"Genel" }}</span>
+            </div>
+
+            <h1 class="support-title" style="font-size: 2rem; margin-top: 1rem;">{{ faq.question }}</h1>
+
+            <div class="faq-answer"
+                style="font-size: 1.1rem; margin-top: 2rem; background: #f8fafc; padding: 2rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+                {{ faq.answer|linebreaks }}
+            </div>
+
+            <div class="support-meta" style="margin-top: 2rem; display: flex; gap: 2rem; color: var(--text-light);">
+                <span><i class="fas fa-building"></i> {{ faq.department.name|default:"Genel" }}</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; text-align: center;">
+            <p>Aradığınız cevabı bulamadınız mı?</p>
+            <a href="{% url 'support:create_ticket' %}" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Yeni Destek Talebi Oluştur
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,592 @@
+{% extends 'saglik_hizmetleri_myo/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Sağlık Hizmetleri Meslek Yüksekokulu - Kalite{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Meslek Yüksekokulu - Kalite</h1>
+            <p></p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'saglik_hizmetleri_myo/shmyo_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: rgb(29, 97, 169);
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: rgb(247, 243, 233);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+    --card-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    --hover-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* طراحی تب‌ها */
+.ogrenci-isleri-tab-section {
+    margin-top: 20px;
+}
+
+.tab-container {
+    background: var(--pure-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    padding: 0;
+}
+
+.tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.tab-menu-item {
+    flex: 1;
+    min-width: 180px;
+    padding: 22px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.tab-menu-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-bottom: 4px solid var(--accent-light-blue);
+}
+
+.tab-menu-item i {
+    font-size: 1.2rem;
+}
+
+.tab-content-wrapper {
+    padding: 0;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08));
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-content-header h3 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tab-content-header h3 i {
+    color: var(--secondary-medium-blue);
+}
+
+.tab-content-body {
+    padding: 30px;
+}
+
+/* Akademik Kadro Grid */
+.akademik-kadro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.akademik-kadro-card {
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.akademik-kadro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+    border-color: var(--accent-light-blue);
+}
+
+.akademik-image-container {
+    width: 200px;
+    height: 250px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.akademik-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.akademik-kadro-card:hover .akademik-image {
+    transform: scale(1.05);
+}
+
+.akademik-info h4 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 20px 0;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.akademik-contact-info {
+    text-align: left;
+    width: 100%;
+}
+
+.akademik-contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+.akademik-contact-info i {
+    color: var(--secondary-medium-blue);
+    min-width: 20px;
+}
+
+.akademik-contact-info a {
+    color: var(--secondary-medium-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.akademik-contact-info a:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+/* Coming Soon Message */
+.coming-soon-message {
+    text-align: center;
+    padding: 60px 30px;
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.03), rgba(29, 97, 169, 0.05));
+    border-radius: 16px;
+    border: 2px dashed rgba(141, 212, 227, 0.5);
+}
+
+.coming-soon-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    color: white;
+    font-size: 48px;
+}
+
+.coming-soon-message h4 {
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.coming-soon-message p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 15px;
+}
+
+.coming-soon-message .small-text {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tab-content {
+    animation: fadeIn 0.5s ease;
+}
+
+.akademik-kadro-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.coming-soon-icon {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .akademik-kadro-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .tab-menu {
+        flex-wrap: wrap;
+    }
+    
+    .tab-menu-item {
+        flex: 1 0 45%;
+        min-width: auto;
+        padding: 18px 15px;
+        font-size: 1rem;
+    }
+    
+    .tab-content-header {
+        padding: 20px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .tab-content-body {
+        padding: 20px;
+    }
+    
+    .akademik-kadro-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+    
+    .akademik-image-container {
+        width: 180px;
+        height: 225px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .tab-menu-item {
+        flex: 1 0 100%;
+        justify-content: flex-start;
+        padding: 15px 20px;
+    }
+    
+    .akademik-kadro-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .akademik-kadro-card {
+        padding: 20px;
+    }
+    
+    .akademik-image-container {
+        width: 160px;
+        height: 200px;
+    }
+    
+    .akademik-info h4 {
+        font-size: 1.1rem;
+        min-height: 50px;
+    }
+    
+    .coming-soon-message {
+        padding: 40px 20px;
+    }
+    
+    .coming-soon-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 36px;
+    }
+    
+    .coming-soon-message h4 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .tab-content-header {
+        padding: 15px;
+    }
+    
+    .tab-content-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .tab-content-body {
+        padding: 15px;
+    }
+    
+    .akademik-kadro-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .akademik-kadro-card {
+        padding: 20px;
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+    }
+    
+    .akademik-image-container {
+        width: 120px;
+        height: 150px;
+        margin-bottom: 0;
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+    
+    .akademik-info {
+        flex: 1;
+    }
+    
+    .akademik-info h4 {
+        margin-bottom: 15px;
+        min-height: auto;
+        justify-content: flex-start;
+    }
+    
+    .coming-soon-message {
+        padding: 30px 15px;
+    }
+    
+    .coming-soon-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 32px;
+    }
+    
+    .coming-soon-message h4 {
+        font-size: 1.3rem;
+    }
+    
+    .coming-soon-message p {
+        font-size: 1rem;
+    }
+}
+
+/* کاهش motion برای دسترسی */
+@media (prefers-reduced-motion: reduce) {
+    .tab-content, .akademik-kadro-card, .coming-soon-icon {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .akademik-kadro-card:hover {
+        transform: none;
+    }
+    
+    .akademik-kadro-card:hover .akademik-image {
+        transform: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت تب‌ها
+    const tabMenuItems = document.querySelectorAll('.tab-menu-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabMenuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // حذف کلاس active از همه تب‌ها
+            tabMenuItems.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // اضافه کردن کلاس active به تب انتخاب شده
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // انیمیشن‌های هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده عناصر برای انیمیشن
+    const animatedElements = document.querySelectorAll('.akademik-kadro-card');
+    animatedElements.forEach((element, index) => {
+        // تاخیرهای مختلف برای انیمیشن هر کارت
+        element.style.animationDelay = `${(index % 10) * 0.1}s`;
+        observer.observe(element);
+    });
+    
+    // اضافه کردن افکت hover به کارت‌ها
+    const cards = document.querySelectorAll('.akademik-kadro-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+        });
+    });
+    
+    // هایلایت کردن لینک‌های ایمیل روی hover
+    const emailLinks = document.querySelectorAll('.akademik-contact-info a[href^="mailto:"]');
+    emailLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.parentElement.style.color = 'var(--primary-dark-blue)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.parentElement.style.color = 'var(--text-dark)';
+        });
+    });
+});
+</script>
+{% endblock %}

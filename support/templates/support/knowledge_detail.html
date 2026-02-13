@@ -1,0 +1,464 @@
+{% extends "support/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Premium Typography -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<div class="knowledge-detail-page">
+
+    <!-- Hero Header -->
+    <div class="knowledge-hero">
+        <div class="hero-glow"></div>
+        <div class="container relative-z">
+            <div class="breadcrumbs-premium">
+                <a href="{% url 'support:search' %}" class="crumb-link">
+                    <i class="fas fa-home"></i> Destek Merkezi
+                </a>
+                <!-- <span class="crumb-sep">/</span>
+                <span class="crumb-current">{{ item.get_content_type_display }}</span> -->
+            </div>
+
+            <h1 class="article-title-hero">{{ item.title }}</h1>
+
+            <div class="article-meta-hero">
+                <div class="meta-item">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>{{ item.updated_at|date:"d M Y" }}</span>
+                </div>
+                <div class="meta-separator"></div>
+                <div class="meta-item">
+                    <i class="far fa-eye"></i>
+                    <span>{{ item.views }} Okunma</span>
+                </div>
+                {% if item.department %}
+                <div class="meta-separator"></div>
+                <div class="meta-item">
+                    <i class="far fa-building"></i>
+                    <span>{{ item.department.name }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container main-content-wrapper">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <!-- Main Article Card -->
+                <article class="article-card shadow-lg animate-up">
+
+                    <!-- Content Badges -->
+                    <div class="article-badges">
+                        <!-- <span class="badge-premium badge-type">
+                            {% if item.content_type == 'guide' %}
+                            <i class="fas fa-book-open"></i>
+                            {% elif item.content_type == 'faq' %}
+                            <i class="fas fa-question-circle"></i>
+                            {% elif item.content_type == 'policy' %}
+                            <i class="fas fa-gavel"></i>
+                            {% else %}
+                            <i class="fas fa-file-alt"></i>
+                            {% endif %}
+                            {{ item.get_content_type_display }}
+                        </span> -->
+
+                        {% if item.category %}
+                        <span class="badge-premium badge-category">
+                            <i class="fas fa-folder-open"></i> {{ item.category.name }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="article-body">
+                        {{ item.content|safe }}
+                    </div>
+
+                    {% if item.tags.all %}
+                    <div class="article-tags-section">
+                        <h4 class="tags-title"><i class="fas fa-tags"></i> Etiketler</h4>
+                        <div class="tags-list">
+                            {% for tag in item.tags.all %}
+                            <a href="{% url 'support:search' %}?q={{ tag.name }}" class="tag-pill">
+                                #{{ tag.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </article>
+
+                <!-- Helpful / Contact Section -->
+                <div class="help-box animate-up delay-1">
+                    <div class="help-content">
+                        <h3>Yardıma mı ihtiyacınız var?</h3>
+                        <!-- <p>Aradığınız cevabı bulamadınız mı? Destek ekibimiz size yardımcı olmaya hazır.</p> -->
+                    </div>
+                    <div class="help-actions">
+                        <a href="{% url 'support:create_ticket' %}" class="btn-help btn-primary-help">
+                            <i class="fas fa-ticket-alt"></i> Talep Oluştur
+                        </a>
+                        <a href="{% url 'contact:contact' %}" class="btn-help btn-outline-help">
+                            <i class="fas fa-envelope"></i> Bize Ulaşın
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --k-primary: #0f172a;
+        --k-secondary: #3b82f6;
+        --k-surface: #ffffff;
+        --k-text: #334155;
+        --k-text-light: #64748b;
+        --k-border: #e2e8f0;
+        --k-gradient: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+    }
+
+    .knowledge-detail-page {
+        font-family: 'Outfit', sans-serif;
+        background-color: #f8fafc;
+        min-height: 100vh;
+        padding-bottom: 5rem;
+    }
+
+    /* Hero Section */
+    .knowledge-hero {
+        background: var(--k-gradient);
+        padding: 6rem 0 8rem 0;
+        /* Extra bottom padding for overlap */
+        position: relative;
+        color: white;
+        text-align: center;
+        overflow: hidden;
+        margin-top: -100px;
+    }
+
+    .hero-glow {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+    }
+
+    .relative-z {
+        position: relative;
+        z-index: 2;
+    }
+
+    .breadcrumbs-premium {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 0.5rem 1.25rem;
+        border-radius: 50px;
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+    }
+
+    .crumb-link {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        transition: 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .crumb-link:hover {
+        color: white;
+    }
+
+    .crumb-sep {
+        margin: 0 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .crumb-current {
+        color: white;
+        font-weight: 600;
+    }
+
+    .article-title-hero {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: white;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .article-meta-hero {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1rem;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .meta-separator {
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+    }
+
+    /* Main Content */
+    .main-content-wrapper {
+        margin-top: -5rem;
+        /* Overlap header */
+        position: relative;
+        z-index: 5;
+    }
+
+    .article-card {
+        background: white;
+        border-radius: 20px;
+        padding: 4rem;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .article-badges {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+        border-bottom: 1px solid var(--k-border);
+        padding-bottom: 2rem;
+    }
+
+    .badge-premium {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+    .badge-type {
+        background: #eff6ff;
+        color: #3b82f6;
+    }
+
+    .badge-category {
+        background: #fdf2f8;
+        color: #db2777;
+    }
+
+    .article-body {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: var(--k-text);
+        margin-bottom: 3rem;
+    }
+
+    .article-body h2 {
+        font-size: 1.8rem;
+        color: var(--k-primary);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .article-body h3 {
+        font-size: 1.5rem;
+        color: var(--k-primary);
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .article-body p {
+        margin-bottom: 1.5rem;
+    }
+
+    .article-body ul,
+    .article-body ol {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .article-body li {
+        margin-bottom: 0.5rem;
+    }
+
+    .article-body a {
+        color: var(--k-secondary);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: 0.2s;
+    }
+
+    .article-body a:hover {
+        border-bottom-color: var(--k-secondary);
+    }
+
+    .article-tags-section {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .tags-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--k-text-light);
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .tags-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .tag-pill {
+        background: white;
+        color: var(--k-text);
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border: 1px solid var(--k-border);
+        transition: 0.2s;
+    }
+
+    .tag-pill:hover {
+        border-color: var(--k-secondary);
+        color: var(--k-secondary);
+        transform: translateY(-1px);
+    }
+
+    /* Help Box */
+    .help-box {
+        margin-top: 2rem;
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+
+    .help-content h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--k-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .help-content p {
+        color: var(--k-text-light);
+        margin: 0;
+        font-size: 1.05rem;
+    }
+
+    .help-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .btn-help {
+        padding: 0.8rem 1.6rem;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition: 0.3s;
+    }
+
+    .btn-primary-help {
+        background: var(--k-secondary);
+        color: white;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+    }
+
+    .btn-primary-help:hover {
+        background: #2563eb;
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-help {
+        background: transparent;
+        border: 2px solid var(--k-border);
+        color: var(--k-text);
+    }
+
+    .btn-outline-help:hover {
+        border-color: var(--k-text);
+        background: white;
+    }
+
+    /* Animations */
+    .animate-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .delay-1 {
+        animation-delay: 0.1s;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .article-title-hero {
+            font-size: 2.2rem;
+        }
+
+        .article-card {
+            padding: 2rem;
+        }
+
+        .help-box {
+            flex-direction: column;
+            text-align: center;
+            gap: 1.5rem;
+        }
+
+        .help-actions {
+            width: 100%;
+            flex-direction: column;
+        }
+
+        .btn-help {
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}

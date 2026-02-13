@@ -1,0 +1,189 @@
+<!-- about_base.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <a href="{% url 'avrasya_universitesi_hakkinda:anasayfa' %}" class="text-white text-decoration-none">
+                    <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>HAKKIMIZDA</h5>
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush" id="aboutMenu">
+                    <a href="{% url 'avrasya_universitesi_hakkinda:felsefemiz' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-lightbulb me-2"></i>Felsefemiz</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_hakkinda:misyon_vizyon' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-bullseye me-2"></i>Misyon ve Vizyon</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_hakkinda:kurucu_vakif' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-building me-2"></i>Kurucu Vakıf</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_hakkinda:akreditasyon' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-award me-2"></i>Akreditasyon</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_hakkinda:kalite_politikasi' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-check-circle me-2"></i>Kalite Politikası</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_hakkinda:tarihce' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-clock-history me-2"></i>Tarihçe</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_hakkinda:organizasyon_semasi' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-diagram-3 me-2"></i>Organizasyon Şeması</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_hakkinda:stratejik_plan' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-graph-up me-2"></i>Stratejik Plan</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        {% block about_content %}
+        {% endblock %}
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی برای بخش درباره ما */
+#aboutMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#aboutMenu .list-group-item:hover,
+#aboutMenu .list-group-item.active {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+    border-bottom: 2px solid #fd7e14;
+    font-weight: 700;
+}
+
+.president-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.president-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.info-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #fd7e14;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fd7e14;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #fd7e14;
+}
+
+.organization-chart {
+    overflow-x: auto;
+}
+
+.chart-container {
+    min-width: 800px;
+}
+
+.chart-node {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin: 10px;
+    min-width: 180px;
+}
+
+.chart-node.primary {
+    background: linear-gradient(135deg, #fd7e14 0%, #feb47b 100%);
+    color: white;
+    font-weight: bold;
+}
+
+.chart-connector {
+    height: 30px;
+    width: 2px;
+    background: #6c757d;
+    margin: 0 auto;
+}
+
+.chart-connector.horizontal {
+    width: 30px;
+    height: 2px;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .president-image {
+        max-width: 200px;
+        margin: 0 auto 1rem;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,293 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi -  Kütüphane Misyon & Vizyon{% endblock %}
+
+{% block content %}
+<div class="row">
+   
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'kutuphane/sidebar.html' %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Kütüphane.jpg' %}') center/cover;">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3"> Kütüphane  Misyon & Vizyon</h1>
+                        <p class="lead mb-4">
+                            
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-bullseye display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Misyon & Vizyon Section -->
+        <div class="row mb-4">
+            <!-- Misyon Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-info text-white">
+                        <h3 class="mb-0"><i class="bi bi-bullseye me-2"></i>Misyon</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-bullseye text-info display-4"></i>
+                        </div>
+                        <div class="mission-content">
+                            <p class="text-justify">
+                                Bilgiye erişimi ve kültürel iletişimi destekleyen tarafsız 
+                                ve güvenilir ulusal ve uluslararası akademik araştırma 
+                                merkezi olarak hizmet odaklı koleksiyonları temin etmek 
+                                ve insanı merkeze alan hizmet anlayışıyla geliştirmektir.
+                            </p>
+                            <p class="text-justify">
+                                
+                            </p>
+                            <p class="text-justify">
+                               
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vizyon Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-danger text-white">
+                        <h3 class="mb-0"><i class="bi bi-eye me-2"></i>Vizyon</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-eye text-danger display-4"></i>
+                        </div>
+                        <div class="vision-content">
+                            <p class="text-justify">
+                                Üniversitemizi sosyal bilimler alanında, 
+                                eğitime, araştırmaya, üretkenliğe ve entelektüel 
+                                birikime değer katmak amacıyla tüm kaynaklara 
+                                her yerden erişim sağlayan, bilimsel alanda 
+                                ileriye götüren bir etkiye sahip olmaktır.
+
+                            </p>
+                            <p class="text-justify">
+                                
+                            </p>
+                            <p class="text-justify">
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} <!-- Values Section -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0"><i class="bi bi-star me-2"></i>Temel Değerlerimiz</h3>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-4 mb-3">
+                        <div class="value-item">
+                            <i class="bi bi-shield-check text-success display-6 mb-3"></i>
+                            <h5 class="text-dark">Kalite ve Güvenlik</h5>
+                            <p class="text-muted small">
+                                Gıda güvenliği ve kalite standartlarına tam uyum
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="value-item">
+                            <i class="bi bi-lightbulb text-warning display-6 mb-3"></i>
+                            <h5 class="text-dark">Yenilikçilik</h5>
+                            <p class="text-muted small">
+                                Sürekli araştırma ve geliştirme ile yenilik
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="value-item">
+                            <i class="bi bi-people text-primary display-6 mb-3"></i>
+                            <h5 class="text-dark">Toplumsal Sorumluluk</h5>
+                            <p class="text-muted small">
+                                Toplum sağlığı ve çevre bilinci
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی */
+.mission-content p,
+.vision-content p {
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    word-spacing: 0.05em;
+    letter-spacing: 0.01em;
+}
+
+.text-justify {
+    text-align: justify !important;
+    text-justify: inter-word;
+}
+
+.value-item {
+    padding: 1.5rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+.value-item:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-5px);
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #fd7e14;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رنگ‌های دکمه */
+.btn-primary {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-primary:hover {
+    background-color: #e56f10 !important;
+    border-color: #d9680f !important;
+}
+
+.btn-outline-primary {
+    color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .mission-content p,
+    .vision-content p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    .value-item {
+        padding: 1rem 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .mission-content p,
+    .vision-content p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
+</style>
+
+<script>
+// مدیریت منوهای آبشاری
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('#facultyMenu [data-bs-toggle="collapse"]');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menuItems.forEach(otherItem => {
+                if (otherItem !== item && !otherItem.classList.contains('collapsed')) {
+                    const targetId = otherItem.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        otherItem.classList.add('collapsed');
+                        targetElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    });
+    
+    // تنظیم ارتفاع یکسان برای کارت‌های میسون و ویژن
+    function setEqualHeight() {
+        const missionCard = document.querySelector('.mission-content');
+        const visionCard = document.querySelector('.vision-content');
+        
+        if (missionCard && visionCard) {
+            const missionHeight = missionCard.offsetHeight;
+            const visionHeight = visionCard.offsetHeight;
+            const maxHeight = Math.max(missionHeight, visionHeight);
+            
+            missionCard.parentElement.parentElement.style.minHeight = maxHeight + 'px';
+            visionCard.parentElement.parentElement.style.minHeight = maxHeight + 'px';
+        }
+    }
+    
+    // اجرا پس از لود کامل صفحه
+    window.addEventListener('load', setEqualHeight);
+    window.addEventListener('resize', setEqualHeight);
+});
+</script>
+{% endblock %}

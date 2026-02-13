@@ -1,0 +1,380 @@
+{% extends 'contact/base.html' %}
+{% load static %}
+
+{% block title %}Teşekkürler - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<style>
+    /* Premium Thank You Page Styles */
+    .thanks-hero {
+        position: relative;
+        min-height: 80vh;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: -100px;
+    }
+
+    /* Animated background elements */
+    .bg-circle {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(45deg, rgba(0, 35, 71, 0.05), rgba(255, 182, 6, 0.05));
+        z-index: 0;
+    }
+
+    .circle-1 {
+        width: 300px;
+        height: 300px;
+        top: -50px;
+        right: -50px;
+        animation: float 10s infinite ease-in-out;
+    }
+
+    .circle-2 {
+        width: 200px;
+        height: 200px;
+        bottom: 50px;
+        left: -20px;
+        animation: float 12s infinite ease-in-out reverse;
+    }
+
+    .circle-3 {
+        width: 100px;
+        height: 100px;
+        top: 40%;
+        left: 20%;
+        animation: float 8s infinite ease-in-out 1s;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .thanks-card {
+        background: white;
+        padding: 60px 50px;
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(0, 35, 71, 0.1);
+        text-align: center;
+        max-width: 600px;
+        width: 90%;
+        position: relative;
+        z-index: 10;
+        animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes scaleIn {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .success-icon-wrapper {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 30px;
+        box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+        position: relative;
+        animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s backwards;
+    }
+
+    @keyframes popIn {
+        from {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .success-icon-wrapper i {
+        color: white;
+        font-size: 45px;
+        animation: checkmark 0.5s ease-in-out 0.8s backwards;
+    }
+
+    .thanks-title {
+        color: #002347;
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: fadeInUp 0.5s ease 0.4s forwards;
+    }
+
+    .thanks-text {
+        color: #6c757d;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 40px;
+        opacity: 0;
+        animation: fadeInUp 0.5s ease 0.6s forwards;
+    }
+
+    .message-highlight {
+        color: #002347;
+        font-weight: 700;
+        background: rgba(255, 182, 6, 0.1);
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
+
+    .btn-action-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        opacity: 0;
+        animation: fadeInUp 0.5s ease 0.8s forwards;
+    }
+
+    .btn-home {
+        background: #002347;
+        color: white;
+        font-weight: 700;
+        padding: 15px 35px;
+        border-radius: 12px;
+        border: none;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 35, 71, 0.2);
+    }
+
+    .btn-home:hover {
+        background: #003366;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 35, 71, 0.3);
+        text-decoration: none;
+    }
+
+    .btn-outline-contact {
+        background: transparent;
+        color: #002347;
+        font-weight: 700;
+        padding: 15px 35px;
+        border-radius: 12px;
+        border: 2px solid #002347;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-contact:hover {
+        background: rgba(0, 35, 71, 0.05);
+        color: #002347;
+        transform: translateY(-3px);
+        text-decoration: none;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Confetti (CSS Only approach for simplicity and performance) */
+    .confetti-piece {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #ffb606;
+        top: 0;
+        opacity: 0;
+    }
+
+    .confetti-piece:nth-child(1) {
+        left: 7%;
+        transform: rotate(-40deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 1s;
+        animation-duration: 1.7s;
+    }
+
+    .confetti-piece:nth-child(2) {
+        left: 14%;
+        transform: rotate(4deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 2s;
+        animation-duration: 2.1s;
+        background: #002347;
+    }
+
+    .confetti-piece:nth-child(3) {
+        left: 23%;
+        transform: rotate(-51deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 3s;
+        animation-duration: 2.3s;
+        background: #28a745;
+    }
+
+    .confetti-piece:nth-child(4) {
+        left: 33%;
+        transform: rotate(61deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 1.5s;
+        animation-duration: 1.8s;
+    }
+
+    .confetti-piece:nth-child(5) {
+        left: 40%;
+        transform: rotate(-52deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 2.5s;
+        animation-duration: 2.8s;
+        background: #002347;
+    }
+
+    .confetti-piece:nth-child(6) {
+        left: 55%;
+        transform: rotate(38deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 1.2s;
+        animation-duration: 1.6s;
+    }
+
+    .confetti-piece:nth-child(7) {
+        left: 60%;
+        transform: rotate(14deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 3.2s;
+        animation-duration: 2.3s;
+        background: #28a745;
+    }
+
+    .confetti-piece:nth-child(8) {
+        left: 70%;
+        transform: rotate(-4deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 1.7s;
+        animation-duration: 1.9s;
+        background: #002347;
+    }
+
+    .confetti-piece:nth-child(9) {
+        left: 85%;
+        transform: rotate(40deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 2.2s;
+        animation-duration: 1.6s;
+    }
+
+    .confetti-piece:nth-child(10) {
+        left: 95%;
+        transform: rotate(-30deg);
+        animation: makeItRain 1000ms infinite ease-out;
+        animation-delay: 0.5s;
+        animation-duration: 1.8s;
+        background: #28a745;
+    }
+
+    @keyframes makeItRain {
+        from {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        to {
+            transform: translateY(350px);
+            opacity: 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .thanks-card {
+            padding: 40px 20px;
+        }
+
+        .thanks-title {
+            font-size: 2rem;
+        }
+
+        .btn-action-group {
+            flex-direction: column;
+        }
+
+        .btn-home,
+        .btn-outline-contact {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+
+<div class="thanks-hero">
+    <!-- Confetti Pieces -->
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+
+    <!-- Background Shapes -->
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+
+    <div class="container d-flex justify-content-center">
+        <div class="thanks-card">
+            <div class="success-icon-wrapper">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <h2 class="thanks-title">Mesajınız Başarıyla Gönderildi!</h2>
+
+            <p class="thanks-text">
+                Teşekkür ederiz{% if name %}, <span class="message-highlight">{{ name }}</span>{% endif %}.<br>
+                Mesajınız bize ulaştı. Ekibimiz en kısa sürede sizinle iletişime geçecektir.
+            </p>
+
+            <div class="btn-action-group">
+                <a href="/" class="btn-home">
+                    <i class="fas fa-home mr-2"></i> Anasayfaya Dön
+                </a>
+                <a href="{% url 'contact:contact' %}" class="btn-outline-contact">
+                    <i class="fas fa-envelope mr-2"></i> Yeni Mesaj
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

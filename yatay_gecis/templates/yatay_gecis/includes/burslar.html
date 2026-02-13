@@ -1,0 +1,872 @@
+{% extends 'yatay_gecis/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Yatay Geçiş Bursları ve Öğretim Ücretleri{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Yatay Geçiş Bursları ve Öğretim Ücretleri</h1>
+            <p>2025-2026 Eğitim ve Öğretim Yılı Yatay Geçiş İle Kayıt Olacak Öğrencilerin Eğitim Ücretleri ve İndirim Olanakları</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'yatay_gecis/yatay_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <div class="page-intro">
+                    <h2 class="section-title">Yatay Geçiş Eğitim Ücretleri</h2>
+                    <p class="section-subtitle">2025-2026 eğitim-öğretim yılında yatay geçiş ile Avrasya Üniversitesi'ne kayıt olacak öğrenciler için geçerli eğitim ücretleri ve indirim olanakları aşağıda belirtilmiştir.</p>
+                </div>
+                
+                <!-- بخش اطلاعیه‌های مهم -->
+                <div class="kosullar-container">
+                    <div class="kosul-section" id="genel-bilgiler">
+                        <div class="kosul-section-header">
+                            <div class="kosul-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </div>
+                            <h3>Genel Bilgiler ve Önemli Notlar</h3>
+                        </div>
+                        
+                        <div class="kosul-content">
+                            <div class="kosul-list">
+                                <div class="kosul-item">
+                                    <div class="kosul-number">1</div>
+                                    <div class="kosul-content">
+                                        <p><strong>Burs/İndirim Süresi:</strong> İndirimli kontenjandan yerleşen adayın kazanmış olduğu burs/indirim oranı "Hazırlık sınıfı, kayıt dondurma süreleri hariç olmak üzere verilen burs veya indirimler önlisans programları için 2 yıl, lisans programlarımız için ise 4 yıl" geçerli olacaktır.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="kosul-item">
+                                    <div class="kosul-number">2</div>
+                                    <div class="kosul-content">
+                                        <p><strong>KDV Durumu:</strong> Ücretlerimize KDV dahildir.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="kosul-item">
+                                    <div class="kosul-number">3</div>
+                                    <div class="kosul-content">
+                                        <p><strong>İndirim Olanağı:</strong> Yatay geçiş ile kurum dışından kayıt olacak olan tüm öğrencilerimiz %50 ve %25 indirim imkanından yararlanacaktır.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- جدول شهریه‌ها -->
+                <div class="table-responsive mb-5">
+                    <table class="table table-hover table-striped align-middle" id="tuitionTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col" width="25%">Fakülte/Yüksekokul</th>
+                                <th scope="col" width="30%">Program Adı</th>
+                                <th scope="col" width="15%" class="text-center">%25 İndirimli<br><small>(Yatay Geçiş İndirimi)</small></th>
+                                <th scope="col" width="15%" class="text-center">%50 İndirimli<br><small>(Yatay Geçiş İndirimi)</small></th>
+                                <th scope="col" width="15%" class="text-center">Tam Ücretli</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- داده‌ها از طریق JavaScript پر می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- بخش خلاصه و آمار -->
+                <div class="row mb-5">
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-primary h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h5 style="color:white;" class="mb-0">Toplam Program</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <h2 class="display-4 text-primary" id="totalPrograms">0</h2>
+                                <p class="card-text">Farklı program</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-success h-100">
+                            <div class="card-header bg-success text-white">
+                                <h5 style="color:white;"  class="mb-0">%50 İndirimli</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <h2 class="display-4 text-success" id="discount50Count">0</h2>
+                                <p class="card-text">Program</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-info h-100">
+                            <div class="card-header bg-info text-white">
+                                <h5 style="color:white;" class="mb-0">%25 İndirimli</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <h2 class="display-4 text-info" id="discount25Count">0</h2>
+                                <p class="card-text">Program</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- دکمه دانلود PDF -->
+                <div class="pdf-download-section mb-5">
+                    <div class="pdf-download-card">
+                        <div class="pdf-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.523 10.424c.14-.082.293-.162.459-.238a7.878 7.878 0 0 1-.45.606c-.28.337-.498.516-.635.572a.266.266 0 0 1-.035.012.282.282 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548zm2.455-1.647c-.119.025-.237.05-.356.078a21.148 21.148 0 0 0 .5-1.05 12.045 12.045 0 0 0 .51.858c-.217.032-.436.07-.654.114zm2.525.939a3.881 3.881 0 0 1-.435-.41c.228.005.434.022.612.054.317.057.466.147.518.209a.095.095 0 0 1 .028.036.058.058 0 0 1-.017.03.061.061 0 0 1-.021.011c-.172.031-.374.054-.597.054a3.454 3.454 0 0 1-.566-.093z"/>
+                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                <path d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.352-.372.58-.372.203 0 .333.068.41.139.155.14.27.422.261.722-.011.319-.165.588-.349.804a1.15 1.15 0 0 1-.544.327zm3.92 0a1.13 1.13 0 0 1-.542-.327c-.184-.216-.338-.485-.349-.804-.009-.3.106-.582.261-.722.077-.07.207-.139.41-.139.228 0 .382.065.58.372.21.326.275.714.08 1.102a.815.815 0 0 1-.44.42zm2.6-.006c.306-.083.513-.289.516-.57-.003-.291-.217-.5-.537-.57-.317-.068-.58.102-.71.317-.13.216-.133.476.008.667.14.19.39.3.723.256z"/>
+                            </svg>
+                        </div>
+                        <div class="pdf-content">
+                            <h4>Resmi PDF Dokümanını İndirin</h4>
+                            <p>2025-2026 eğitim-öğretim yılı yatay geçiş eğitim ücretleri tablosunun resmi PDF versiyonunu bilgisayarınıza indirebilirsiniz.</p>
+                            <a href="/media/documents/yatay-gecis-ucreti-25.07.2025-2.pdf" class="btn btn-primary btn-lg pdf-download-btn" download>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                </svg>
+                                PDF İndir (yatay-gecis-ucreti-25.07.2025-2.pdf)
+                            </a>
+                            <div class="pdf-info mt-3">
+                                <small><strong>Dosya Boyutu:</strong> ~250 KB | <strong>Format:</strong> PDF | <strong>Son Güncelleme:</strong> 25.07.2025</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- بخش اطلاعات تماس -->
+                <div class="contact-info-section">
+                    <div class="contact-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z"/>
+                        </svg>
+                        <h4>Bilgi ve İletişim</h4>
+                    </div>
+                    
+                    <div class="contact-content">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Öğrenci İşleri ve Finans</h5>
+                                <p><span>Telefon:</span> (0462) XXX XX XX</p>
+                                <p><span>E-posta:</span> ogrenciisleri@avrasya.edu.tr</p>
+                                <p><span>Finans E-posta:</span> finans@avrasya.edu.tr</p>
+                                <p><span>Adres:</span> Avrasya Üniversitesi, Yomra, Trabzon</p>
+                                <p><span>Çalışma Saatleri:</span> 09:00 - 17:00 (Pazartesi - Cuma)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* متغیرهای رنگ */
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: #1d61a9ff;
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: hsla(43, 47%, 94%, 1.00);
+    --pure-white: rgb(255, 255, 255);
+    --text-dark: #1a1a1a;
+    --text-light: #666666;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: var(--pure-white);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(9, 36, 66, 0.1);
+    padding: 20px;
+    height: fit-content;
+    {% comment %} border: 2px solid var(--accent-light-blue); {% endcomment %}
+}
+
+.content-wrapper {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(9, 36, 66, 0.1);
+    border: 2px solid var(--accent-light-blue);
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    color: var(--primary-dark-blue);
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 30px auto 0;
+    line-height: 1.6;
+}
+
+/* بخش اطلاعیه‌ها */
+.kosullar-container {
+    background: var(--pure-white);
+    border-radius: 12px;
+    padding: 25px;
+    border: 2px solid var(--secondary-medium-blue);
+    margin-bottom: 30px;
+}
+
+.kosul-section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.kosul-section-header h3 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.kosul-icon svg {
+    color: var(--secondary-medium-blue);
+    width: 32px;
+    height: 32px;
+}
+
+.kosul-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(141, 212, 227, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary-medium-blue);
+}
+
+.kosul-number {
+    background-color: var(--primary-dark-blue);
+    color: var(--pure-white);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.kosul-content p {
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.kosul-content p strong {
+    color: var(--primary-dark-blue);
+}
+
+/* جدول */
+.table th {
+    background-color: var(--primary-dark-blue) !important;
+    color: var(--pure-white) !important;
+    font-weight: 600;
+    vertical-align: middle;
+    border-bottom: 2px solid var(--accent-light-blue) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(141, 212, 227, 0.1) !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(141, 212, 227, 0.3) !important;
+    transform: scale(1.005);
+    transition: transform 0.2s ease;
+}
+
+/* کارت‌های آمار */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(9, 36, 66, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(9, 36, 66, 0.15);
+}
+
+.border-primary {
+    border-color: var(--primary-dark-blue) !important;
+}
+
+.border-success {
+    border-color: #28a745 !important;
+}
+
+.border-info {
+    border-color: #17a2b8 !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-dark-blue) !important;
+}
+
+.card-header {
+    font-weight: 700;
+    border-bottom: none !important;
+}
+
+.text-primary {
+    color: var(--primary-dark-blue) !important;
+}
+
+/* قیمت‌ها در جدول */
+.price-cell {
+    font-weight: 600;
+    text-align: center;
+    padding: 10px !important;
+}
+
+.discount-50 {
+    background-color: rgba(40, 167, 69, 0.15) !important;
+    color: #28a745 !important;
+    border-left: 4px solid #28a745 !important;
+}
+
+.discount-25 {
+    background-color: rgba(23, 162, 184, 0.15) !important;
+    color: #17a2b8 !important;
+    border-left: 4px solid #17a2b8 !important;
+}
+
+.full-price {
+    background-color: rgba(255, 193, 7, 0.15) !important;
+    color: var(--secondary-medium-blue) !important;
+    border-left: 4px solid var(--secondary-medium-blue) !important;
+}
+
+.empty-price {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+    color: var(--text-light) !important;
+    font-style: italic;
+    border-left: 4px solid var(--accent-light-blue) !important;
+}
+
+/* بخش دانلود PDF */
+.pdf-download-section {
+    margin-top: 40px;
+}
+
+.pdf-download-card {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.1));
+    border-radius: 16px;
+    padding: 30px;
+    border: 2px solid var(--accent-light-blue);
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    transition: all 0.3s ease;
+}
+
+.pdf-download-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(9, 36, 66, 0.15);
+    border-color: var(--secondary-medium-blue);
+}
+
+.pdf-icon {
+    flex-shrink: 0;
+}
+
+.pdf-icon svg {
+    color: var(--secondary-medium-blue);
+    width: 60px;
+    height: 60px;
+}
+
+.pdf-content {
+    flex: 1;
+}
+
+.pdf-content h4 {
+    color: var(--primary-dark-blue);
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.pdf-content p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.pdf-download-btn {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.pdf-download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(9, 36, 66, 0.25);
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+}
+
+.pdf-info {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.pdf-info strong {
+    color: var(--primary-dark-blue);
+}
+
+/* بخش اطلاعات تماس */
+.contact-info-section {
+    margin-top: 50px;
+    background: var(--pure-white);
+    border-radius: 16px;
+    padding: 30px;
+    border: 2px solid var(--secondary-medium-blue);
+}
+
+.contact-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.contact-header h4 {
+    color: var(--primary-dark-blue);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.contact-header svg {
+    color: var(--secondary-medium-blue);
+}
+
+.contact-content {
+    background: rgba(141, 212, 227, 0.1);
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid var(--accent-light-blue);
+}
+
+.contact-item {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--accent-light-blue));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pure-white);
+    font-weight: 700;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.contact-details h5 {
+    color: var(--primary-dark-blue);
+    margin: 0 0 15px 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.contact-details p {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+.contact-details p span {
+    color: var(--secondary-medium-blue);
+    font-weight: 600;
+    min-width: 120px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .contact-icon {
+        align-self: center;
+    }
+    
+    .pdf-download-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .pdf-icon {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .contact-details p {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .contact-details p span {
+        min-width: auto;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .pdf-download-card {
+        padding: 20px;
+    }
+    
+    .pdf-content h4 {
+        font-size: 1.3rem;
+    }
+    
+    .pdf-download-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .kosul-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .kosul-number {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .page-intro {
+        margin-bottom: 40px;
+    }
+    
+    .contact-info-section {
+        padding: 20px;
+    }
+    
+    .contact-content {
+        padding: 20px;
+    }
+    
+    .kosullar-container {
+        padding: 15px;
+    }
+}
+
+/* انیمیشن‌ها */
+.animate__animated {
+    animation-duration: 0.6s;
+    animation-fill-mode: both;
+}
+
+.animate__fadeInUp {
+    animation-name: fadeInUp;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // داده‌های شهریه‌ها از PDF
+    const tuitionData = [
+        // Fen-Edebiyat Fakültesi
+        { faculty: "Fen-Edebiyat Fakültesi", program: "İngiliz Dili ve Edebiyatı Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "Fen-Edebiyat Fakültesi", program: "İngilizce Mütercimi ve Tercümanlık Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "Fen-Edebiyat Fakültesi", program: "Moleküler Biyoloji ve Genetik Pr. (İngilizce)", discount25: "", discount50: "154.000,00", full: "308.000,00" },
+        { faculty: "Fen-Edebiyat Fakültesi", program: "Psikoloji Pr.", discount25: "", discount50: "231.000,00", full: "308.000,00" },
+        { faculty: "Fen-Edebiyat Fakültesi", program: "Türk Dili ve Edebiyatı Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        
+        // İktisadi ve İdari Bilimler Fakültesi
+        { faculty: "İktisadi ve İdari Bilimler Fakültesi", program: "Siyaset Bilimi ve Kamu Yönetimi Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        
+        // İletişim Fakültesi
+        { faculty: "İletişim Fakültesi", program: "Görsel İletişim Tasarımı Pr.", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        { faculty: "İletişim Fakültesi", program: "Yeni Medya ve İletişim Pr.", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        
+        // Mühendislik ve Mimarlık Fakültesi
+        { faculty: "Mühendislik ve Mimarlık Fakültesi", program: "Bilgisayar Mühendisliği Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "Mühendislik ve Mimarlık Fakültesi", program: "İç Mimarlık ve Çevre Tasarımı Pr.", discount25: "", discount50: "154.000,00", full: "308.000,00" },
+        { faculty: "Mühendislik ve Mimarlık Fakültesi", program: "İnşaat Mühendisliği Pr.", discount25: "", discount50: "110.000,00", full: "220.000,00" },
+        { faculty: "Mühendislik ve Mimarlık Fakültesi", program: "Mimarlık Pr.", discount25: "", discount50: "110.000,00", full: "220.000,00" },
+        
+        // Sağlık Bilimleri Fakültesi
+        { faculty: "Sağlık Bilimleri Fakültesi", program: "Beslenme ve Diyetetik Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "Sağlık Bilimleri Fakültesi", program: "Çocuk Gelişimi Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "Sağlık Bilimleri Fakültesi", program: "Ebelik Pr.", discount25: "", discount50: "231.000,00", full: "308.000,00" },
+        { faculty: "Sağlık Bilimleri Fakültesi", program: "Ergoterapi Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "Sağlık Bilimleri Fakültesi", program: "Fizyoterapi ve Rehabilitasyon Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "Sağlık Bilimleri Fakültesi", program: "Hemşirelik Pr.", discount25: "231.000,00", discount50: "", full: "308.000,00" },
+        { faculty: "Sağlık Bilimleri Fakültesi", program: "Odyoloji Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        
+        // Spor Bilimleri Fakültesi
+        { faculty: "Spor Bilimleri Fakültesi", program: "Egzersiz ve Spor Bilimleri Pr. (Özel Yetenek)", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        { faculty: "Spor Bilimleri Fakültesi", program: "Rekreasyon Pr. (Özel Yetenek)", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        { faculty: "Spor Bilimleri Fakültesi", program: "Spor Yöneticiliği Pr. (Özel Yetenek)", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        
+        // Uygulamalı Bilimler Yüksekokulu
+        { faculty: "Uygulamalı Bilimler Yüksekokulu", program: "Gastronomi ve Mutfak Sanatları Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        
+        // Meslek Yüksekokulu
+        { faculty: "Meslek Yüksekokulu", program: "Aşçılık Pr.", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "Bilgisayar Programcılığı Pr.", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "Bilişim Güvenliği Teknolojisi Pr.", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "Dış Ticaret Pr.", discount25: "", discount50: "77.000,00", full: "154.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "E-Ticaret ve Pazarlama Pr.", discount25: "", discount50: "77.000,00", full: "154.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "Halkla İlişkiler ve Tanıtım Pr.", discount25: "", discount50: "77.000,00", full: "154.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "Harita ve Kadastro Pr.", discount25: "", discount50: "77.000,00", full: "154.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "İç Mekan Tasarım Pr.", discount25: "", discount50: "99.000,00", full: "198.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "İnşaat Teknolojisi Pr.", discount25: "", discount50: "77.000,00", full: "154.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "Lojistik Pr.", discount25: "", discount50: "77.000,00", full: "154.000,00" },
+        { faculty: "Meslek Yüksekokulu", program: "Mahkeme Büro Hizmetleri Pr.", discount25: "", discount50: "77.000,00", full: "154.000,00" },
+        
+        // Sağlık Hizmetleri Meslek Yüksekokulu
+        { faculty: "Sağlık Hizmetleri Meslek Yüksekokulu", program: "Patoloji Laboratuvar Teknikleri Pr.", discount25: "", discount50: "", full: "198.000,00" },
+        { faculty: "Sağlık Hizmetleri Meslek Yüksekokulu", program: "Tıbbi Görüntüleme Teknikleri Pr.", discount25: "165.000,00", discount50: "", full: "220.000,00" },
+        { faculty: "Sağlık Hizmetleri Meslek Yüksekokulu", program: "Tıbbi Laboratuvar Teknikleri Pr.", discount25: "", discount50: "", full: "198.000,00" },
+    ];
+    
+    // عناصر DOM
+    const tableBody = document.getElementById('tableBody');
+    const totalProgramsElement = document.getElementById('totalPrograms');
+    const discount50CountElement = document.getElementById('discount50Count');
+    const discount25CountElement = document.getElementById('discount25Count');
+    
+    // تابع برای فرمت کردن قیمت
+    function formatPrice(price) {
+        if (!price || price.trim() === "") return "Yok";
+        return `₺${price}`;
+    }
+    
+    // تابع برای تعیین کلاس قیمت
+    function getPriceClass(price, type) {
+        if (!price || price.trim() === "") return "empty-price";
+        
+        switch(type) {
+            case 'discount25':
+                return "discount-25";
+            case 'discount50':
+                return "discount-50";
+            case 'full':
+                return "full-price";
+            default:
+                return "";
+        }
+    }
+    
+    // تابع برای پر کردن جدول
+    function populateTable(data) {
+        tableBody.innerHTML = '';
+        
+        data.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.faculty}</td>
+                <td>${item.program}</td>
+                <td class="price-cell ${getPriceClass(item.discount25, 'discount25')}">${formatPrice(item.discount25)}</td>
+                <td class="price-cell ${getPriceClass(item.discount50, 'discount50')}">${formatPrice(item.discount50)}</td>
+                <td class="price-cell ${getPriceClass(item.full, 'full')}">${formatPrice(item.full)}</td>
+            `;
+            
+            // افزودن انیمیشن به ردیف
+            row.style.animationDelay = `${index * 0.02}s`;
+            row.classList.add('animate__animated', 'animate__fadeInUp');
+            
+            tableBody.appendChild(row);
+        });
+        
+        // به‌روزرسانی آمار
+        updateStatistics(data);
+    }
+    
+    // تابع برای به‌روزرسانی آمار
+    function updateStatistics(data) {
+        const total = data.length;
+        const discount50Count = data.filter(item => item.discount50 && item.discount50.trim() !== "").length;
+        const discount25Count = data.filter(item => item.discount25 && item.discount25.trim() !== "").length;
+        
+        totalProgramsElement.textContent = total;
+        discount50CountElement.textContent = discount50Count;
+        discount25CountElement.textContent = discount25Count;
+    }
+    
+    // مقداردهی اولیه جدول
+    populateTable(tuitionData);
+    
+    // انیمیشن‌های هنگام اسکرول
+    const observerOptions = {
+        threshold: 0.05,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+    
+    // مشاهده بخش‌ها برای انیمیشن
+    const sections = document.querySelectorAll('.kosul-section, .contact-info-section, .card, .pdf-download-card');
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+    
+    // فعال‌سازی افکت‌های hover روی کارت‌ها
+    const cards = document.querySelectorAll('.card, .pdf-download-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    // اسکرول نرم
+    const sectionLinks = document.querySelectorAll('a[href^="#"]');
+    sectionLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}

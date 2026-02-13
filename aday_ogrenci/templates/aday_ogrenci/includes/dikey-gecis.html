@@ -1,0 +1,1536 @@
+{% extends 'aday_ogrenci/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Avrasya Üniversitesi - DİKEY GEÇİŞ (DGS)" %}{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>{% trans "DİKEY GEÇİŞ (DGS)" %}</h1>
+            <p>{% trans "2025 Dikey Geçiş Sınavı (DGS) Kontenjanları ve Başvuru Bilgileri" %}</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'aday_ogrenci/aday_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی سمت راست -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- اعلان مهم تاریخ‌ها -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="important-notice">
+                            <div class="notice-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="notice-content">
+                                <h5 class="notice-title">📅 {% trans "2025-DGS Tercih Tarihleri" %}</h5>
+                                <p class="notice-text mb-0">
+                                    {% trans "28 Ağustos - 04 Eylül 2025 tarihleri arasında yapılacaktır. Tercihler 28 Ağustos 2025 saat" %} <strong>{% trans "10:15" %}</strong> {% trans "'ten itibaren başlayacak, 04 Eylül 2025 saat" %} <strong>{% trans "23:59" %}</strong> {% trans "'da sona erecektir." %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- لینک مهم -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="link-card">
+                            <div class="link-content">
+                                <div class="link-icon">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </div>
+                                <div class="link-text">
+                                    <h5>🌐 {% trans "ÖSYM Tercih Sayfası" %}</h5>
+                                    <p>{% trans "Tercihlerinizi yapmak için ÖSYM Aday İşlemleri Sistemini kullanınız:" %}</p>
+                                    <a href="https://ais.osym.gov.tr" target="_blank" class="link-button">
+                                        <i class="fas fa-link"></i> https://ais.osym.gov.tr
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فیلترها -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="filter-section">
+                            <h5 class="filter-title mb-3">🔍 {% trans "DGS Programlarını Filtrele" %}</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="facultyFilter">
+                                        <option value="all">{% trans "Fakülte/Yüksekokul (Tümü)" %}</option>
+                                        <option value="Fen Edebiyat Fakültesi">{% trans "Fen Edebiyat Fakültesi" %}</option>
+                                        <option value="İktisadi ve İdari Bilimler Fakültesi">{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</option>
+                                        <option value="İletişim Fakültesi">{% trans "İletişim Fakültesi" %}</option>
+                                        <option value="Mühendislik ve Mimarlık Fakültesi">{% trans "Mühendislik ve Mimarlık Fakültesi" %}</option>
+                                        <option value="Sağlık Bilimleri Fakültesi">{% trans "Sağlık Bilimleri Fakültesi" %}</option>
+                                        <option value="Spor Bilimleri Fakültesi">{% trans "Spor Bilimleri Fakültesi" %}</option>
+                                        <option value="Uygulamalı Bilimler Yüksekokulu">{% trans "Uygulamalı Bilimler Yüksekokulu" %}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="programTypeFilter">
+                                        <option value="all">{% trans "Program Türü (Tümü)" %}</option>
+                                        <option value="Ücretli">{% trans "Ücretli" %}</option>
+                                        <option value="Burslu">{% trans "Burslu" %}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="scoreTypeFilter">
+                                        <option value="all">{% trans "Puan Türü (Tümü)" %}</option>
+                                        <option value="SAY">{% trans "SAY" %}</option>
+                                        <option value="EA">{% trans "EA" %}</option>
+                                        <option value="SÖZ">{% trans "SÖZ" %}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول DGS Kontenjanlar ve Ücretler -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-card">
+                            <div class="table-header">
+                                <h4 class="table-title">📊 {% trans "2025-DGS Kontenjanlar ve Eğitim Ücretleri" %}</h4>
+                                <p class="table-subtitle">{% trans "Avrasya Üniversitesi Dikey Geçiş Programları" %}</p>
+                            </div>
+                            <div class="table-announcement">
+                                <i class="fas fa-info-circle"></i>
+                                <span><strong>{% trans "Not:" %}</strong> {% trans "DGS programlarında tercih indirimi bulunmamaktadır." %}</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table dgs-table" id="dgsTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="20%">{% trans "Fakülte/Yüksekokul" %}</th>
+                                            <th width="25%">{% trans "Program Adı" %}</th>
+                                            <th width="8%">{% trans "Öğr. Süre" %}</th>
+                                            <th width="8%">{% trans "Puan Türü" %}</th>
+                                            <th width="8%">{% trans "Kont." %}</th>
+                                            <th width="12%">{% trans "Lisans Alan Kodu" %}</th>
+                                            <th width="19%">{% trans "2025 Eğitim Ücreti (KDV Dahil)" %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Fen Edebiyat Fakültesi -->
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td><strong>{% trans "Fen Edebiyat Fakültesi" %}</strong></td>
+                                            <td>{% trans "İngiliz Dili ve Edebiyatı (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>4</td>
+                                            <td><span class="field-code">3219</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "İngiliz Dili ve Edebiyatı (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3219</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "İngilizce Mütercim ve Tercümanlık (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>4</td>
+                                            <td><span class="field-code">1400</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "İngilizce Mütercim ve Tercümanlık (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">1400</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "Moleküler Biyoloji ve Genetik (İngilizce) (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>2</td>
+                                            <td><span class="field-code">3267</span></td>
+                                            <td><span class="price-dgs">308.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "Moleküler Biyoloji ve Genetik (İngilizce) (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3267</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        
+                                        <!-- İktisadi ve İdari Bilimler Fakültesi -->
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td><strong>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</strong></td>
+                                            <td>{% trans "Siyaset Bilimi ve Kamu Yönetimi (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>3</td>
+                                            <td><span class="field-code">3314</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="Burslu" data-scoretype="EA">
+                                            <td>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</td>
+                                            <td>{% trans "Siyaset Bilimi ve Kamu Yönetimi (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3314</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        
+                                        <!-- İletişim Fakültesi -->
+                                        <tr data-faculty="İletişim Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td><strong>{% trans "İletişim Fakültesi" %}</strong></td>
+                                            <td>{% trans "Görsel İletişim Tasarımı (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>3</td>
+                                            <td><span class="field-code">5109</span></td>
+                                            <td><span class="price-dgs">198.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="İletişim Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>{% trans "İletişim Fakültesi" %}</td>
+                                            <td>{% trans "Görsel İletişim Tasarımı (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">5109</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="İletişim Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td>{% trans "İletişim Fakültesi" %}</td>
+                                            <td>{% trans "Yeni Medya ve İletişim (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>3</td>
+                                            <td><span class="field-code">9471</span></td>
+                                            <td><span class="price-dgs">198.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="İletişim Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>{% trans "İletişim Fakültesi" %}</td>
+                                            <td>{% trans "Yeni Medya ve İletişim (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">9471</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        
+                                        <!-- Mühendislik ve Mimarlık Fakültesi -->
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td><strong>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</strong></td>
+                                            <td>{% trans "Bilgisayar Mühendisliği (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3124</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "Bilgisayar Mühendisliği (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3124</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "İç Mimarlık ve Çevre Tasarımı (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>2</td>
+                                            <td><span class="field-code">3212</span></td>
+                                            <td><span class="price-dgs">308.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="EA">
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "İç Mimarlık ve Çevre Tasarımı (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3212</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "İnşaat Mühendisliği (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3221</span></td>
+                                            <td><span class="price-dgs">220.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "İnşaat Mühendisliği (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3221</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "Mimarlık (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3263</span></td>
+                                            <td><span class="price-dgs">220.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "Mimarlık (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3263</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        
+                                        <!-- Sağlık Bilimleri Fakültesi -->
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td><strong>{% trans "Sağlık Bilimleri Fakültesi" %}</strong></td>
+                                            <td>{% trans "Beslenme ve Diyetetik (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3122</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Beslenme ve Diyetetik (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3122</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Çocuk Gelişimi (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">4235</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="EA">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Çocuk Gelişimi (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">4235</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Ebelik (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3155</span></td>
+                                            <td><span class="price-dgs">308.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Ebelik (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3155</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Fizyoterapi ve Rehabilitasyon (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">8344</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Fizyoterapi ve Rehabilitasyon (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">8344</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Hemşirelik (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>4</td>
+                                            <td><span class="field-code">3204</span></td>
+                                            <td><span class="price-dgs">308.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Hemşirelik (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">3204</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Odyoloji (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">9267</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Odyoloji (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">9267</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        
+                                        <!-- Spor Bilimleri Fakültesi -->
+                                        <tr data-faculty="Spor Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td><strong>{% trans "Spor Bilimleri Fakültesi" %}</strong></td>
+                                            <td>{% trans "Spor Yöneticiliği (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>4</td>
+                                            <td><span class="field-code">7104</span></td>
+                                            <td><span class="price-dgs">198.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Spor Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="EA">
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Spor Yöneticiliği (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">7104</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        <tr data-faculty="Spor Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Rekreasyon (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>4</td>
+                                            <td><span class="field-code">7103</span></td>
+                                            <td><span class="price-dgs">198.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Spor Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="EA">
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Rekreasyon (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">7103</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                        
+                                        <!-- Uygulamalı Bilimler Yüksekokulu -->
+                                        <tr data-faculty="Uygulamalı Bilimler Yüksekokulu" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td><strong>{% trans "Uygulamalı Bilimler Yüksekokulu" %}</strong></td>
+                                            <td>{% trans "Gastronomi ve Mutfak Sanatları (Ücretli)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>3</td>
+                                            <td><span class="field-code">5108</span></td>
+                                            <td><span class="price-dgs">275.000,00 ₺</span></td>
+                                        </tr>
+                                        <tr data-faculty="Uygulamalı Bilimler Yüksekokulu" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>{% trans "Uygulamalı Bilimler Yüksekokulu" %}</td>
+                                            <td>{% trans "Gastronomi ve Mutfak Sanatları (Burslu)" %}</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>1</td>
+                                            <td><span class="field-code">5108</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="table-footer">
+                                <div class="legend">
+                                    <h6>{% trans "Renk Açıklamaları:" %}</h6>
+                                    <div class="legend-items">
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #dc3545;"></span>
+                                            <span class="legend-text">{% trans "Ücretli Program" %}</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #198754;"></span>
+                                            <span class="legend-text">{% trans "Burslu Program" %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بخش اطلاعات تکمیلی -->
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="info-box">
+                            <div class="info-box-header">
+                                <h5><i class="fas fa-info-circle me-2"></i> {% trans "Önemli Bilgiler" %}</h5>
+                            </div>
+                            <div class="info-box-body">
+                                <p>{% trans "Yerleştirme işleminde," %} <strong>{% trans "2025-DGS Başvuru Kılavuzu'nda" %}</strong> {% trans "yer alan ilke ve kurallar uygulanacaktır." %}</p>
+                                <p>{% trans "2025-DGS yerleştirme ile ilgili genel bilgiler ve tablolar" %} <a href="https://www.osym.gov.tr/TR,33452/2025-dgs-tercih-bilgileri-ve-tablolar.html" target="_blank">{% trans "ÖSYM web sitesinde" %}</a> {% trans "sunulmuştur." %}</p>
+                                <div class="alert alert-warning mt-3">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>{% trans "Gastronomi ve Mutfak Sanatları" %}</strong> {% trans "programına başvuran adaylar için sağlık raporu gerekmektedir." %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-box">
+                            <div class="info-box-header">
+                                <h5><i class="fas fa-map-marker-alt me-2"></i> {% trans "Kayıt Bilgileri" %}</h5>
+                            </div>
+                            <div class="info-box-body">
+                                <p><strong>{% trans "Kayıt Yeri:" %}</strong> {% trans "Avrasya Üniversitesi Öğrenci İşleri Daire Başkanlığı" %}</p>
+                                <p><strong>{% trans "Adres:" %}</strong> {% trans "Yomra, Trabzon" %}</p>
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-clock me-2"></i>
+                                    <strong>{% trans "Çalışma Saatleri:" %}</strong> {% trans "09:00 - 17:00 (Hafta içi)" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gerekli Evraklar -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="documents-card">
+                            <div class="documents-header">
+                                <h4 class="documents-title">📋 {% trans "Dikey Geçiş Başvurusunda Gerekli Evraklar" %}</h4>
+                            </div>
+                            <div class="documents-body">
+                                <div class="documents-list">
+                                    <div class="document-item">
+                                        <i class="fas fa-file-pdf document-icon"></i>
+                                        <div class="document-content">
+                                            <a href="https://avrasya.edu.tr/wp-content/uploads/2022/09/Avrasya_Universitesi_basvuru_ve_kayit_dosyasi_kapak_formu_dgs-08.09.2022.pdf" target="_blank" class="document-link">
+                                                {% trans "Avrasya Üniversitesi Kayıt Dosyası Kapak Formu" %}
+                                            </a>
+                                            <span class="document-size">(PDF - 250KB)</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-alt document-icon"></i>
+                                        <div class="document-content">
+                                            <span class="document-text">{% trans "DGS Yerleştirme belgesinin internet çıktısı" %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-alt document-icon"></i>
+                                        <div class="document-content">
+                                            <span class="document-text">{% trans "Lise Diploması aslı (Üniversite ya da noter tarafından Aslı onaylı belgesi kabul edilir.)" %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-alt document-icon"></i>
+                                        <div class="document-content">
+                                            <span class="document-text">{% trans "Önlisans Diploması veya diploma hazırlanmamış ise yeni tarihli mezuniyet belgesi" %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-alt document-icon"></i>
+                                        <div class="document-content">
+                                            <span class="document-text">{% trans "2 adet fotoğraf (4,5×6 ebadında, son 6 ay içerisinde çekilmiş)" %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-alt document-icon"></i>
+                                        <div class="document-content">
+                                            <span class="document-text">{% trans "Nüfus Cüzdanı Fotokopisi" %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-alt document-icon"></i>
+                                        <div class="document-content">
+                                            <span class="document-text">{% trans "Eğitim Ücretinin ödendiğine dair dekont (Bir yıllık)" %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-pdf document-icon"></i>
+                                        <div class="document-content">
+                                            <a href="https://avrasya.edu.tr/wp-content/uploads/2021/08/BEYANNAME_16.08.2019-1.pdf" target="_blank" class="document-link">
+                                                {% trans "Beyanname" %}
+                                            </a>
+                                            <span class="document-size">(PDF - 150KB)</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-pdf document-icon"></i>
+                                        <div class="document-content">
+                                            <a href="https://avrasya.edu.tr/wp-content/uploads/2025/08/ogrenci-sozlesmesi-27.08.2025.pdf" target="_blank" class="document-link">
+                                                {% trans "Eğitim Sözleşmesi" %}
+                                            </a>
+                                            <span class="document-size">(PDF - 300KB)</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-pdf document-icon"></i>
+                                        <div class="document-content">
+                                            <a href="https://avrasya.edu.tr/wp-content/uploads/2021/08/engelli_og_tespit_formu.pdf" target="_blank" class="document-link">
+                                                {% trans "Engelli Öğrenci Tespit Formu" %}
+                                            </a>
+                                            <span class="document-size">(PDF - 180KB)</span>
+                                            <small class="text-muted d-block">{% trans "(Engel durumu olan aday doldurması gerekir.)" %}</small>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-pdf document-icon"></i>
+                                        <div class="document-content">
+                                            <a href="https://avrasya.edu.tr/wp-content/uploads/2023/09/AVU-Muafiyet-Formu.pdf" target="_blank" class="document-link">
+                                                {% trans "AVU Muafiyet Başvuru Formu" %}
+                                            </a>
+                                            <span class="document-size">(PDF - 200KB)</span>
+                                        </div>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-alt document-icon"></i>
+                                        <div class="document-content">
+                                            <span class="document-text">{% trans "Muafiyet başvurusu yapılacak ise önceki üniversitenin Transkript ve Ders İçerikleri Belgelerinin Asılları" %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- اطلاعات تماس -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="contact-card">
+                            <div class="contact-content">
+                                <div class="contact-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>📞 {% trans "DGS ve Kayıt Danışmanlığı" %}</h5>
+                                    <div class="contact-details">
+                                        <div class="contact-item">
+                                            <i class="fas fa-phone"></i>
+                                            <div>
+                                                <strong>{% trans "Telefon:" %}</strong>
+                                                <a href="tel:+904623340550">0462 334 05 50</a>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-envelope"></i>
+                                            <div>
+                                                <strong>{% trans "E-posta:" %}</strong>
+                                                <a href="mailto:ogrenciisleri@avrasya.edu.tr">ogrenciisleri@avrasya.edu.tr</a>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-clock"></i>
+                                            <div>
+                                                <strong>{% trans "Çalışma Saatleri:" %}</strong>
+                                                <span>{% trans "09:00 - 17:00 (Hafta içi)" %}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF İndirme Bölümü -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-12">
+                        <div class="download-card">
+                            <div class="download-content">
+                                <div class="download-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="download-text">
+                                    <h4>{% trans "Resmi DGS Kontenjan ve Ücretler Belgesini İndir" %}</h4>
+                                    <p>{% trans "Tüm DGS programlarının kontenjanları ve eğitim ücretlerini içeren resmi PDF belgesini indirebilirsiniz." %}</p>
+                                    <div class="download-info">
+                                        <span><i class="fas fa-file-alt"></i> 2025-DGS-kontenjan-ve-egitim-ucreti-28.08.2025.pdf</span>
+                                        <span><i class="fas fa-hdd"></i> 520KB</span>
+                                        <span><i class="fas fa-calendar-alt"></i> 28.08.2025</span>
+                                    </div>
+                                </div>
+                                <div class="download-btn-wrapper">
+                                    <a href="{% static 'docs/2025-DGS-kontenjan-ve-egitim-ucreti-28.08.2025.pdf' %}" class="btn btn-download" download>
+                                        <i class="fas fa-download"></i> {% trans "PDF'yi İndir" %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Layout - استفاده از استایل‌های مشابه صفحه‌های قبلی */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* اعلان مهم */
+.important-notice {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 5px solid #28a745;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.notice-icon {
+    font-size: 1.5rem;
+    color: #28a745;
+    margin-top: 2px;
+}
+
+.notice-title {
+    color: #155724;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.notice-text {
+    color: #155724;
+    font-size: 0.95rem;
+}
+
+.notice-text strong {
+    color: #0c5460;
+}
+
+/* لینک کارت */
+.link-card {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(29, 97, 169, 0.2);
+}
+
+.link-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.link-icon {
+    font-size: 2rem;
+    color: var(--secondary-medium-blue);
+}
+
+.link-text h5 {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.link-text p {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: white;
+    color: var(--secondary-medium-blue);
+    border: 1px solid var(--secondary-medium-blue);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.link-button:hover {
+    background: var(--secondary-medium-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(29, 97, 169, 0.2);
+}
+
+/* فیلتر بخش */
+.filter-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.filter-title {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+}
+
+.filter-select {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 0.25rem rgba(29, 97, 169, 0.25);
+}
+
+/* جدول */
+.table-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.table-header {
+    background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+    padding: 25px;
+    color: white;
+}
+
+.table-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.table-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.table-announcement {
+    background: #fff3cd;
+    padding: 12px 25px;
+    border-bottom: 1px solid #ffeaa7;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #856404;
+    font-size: 0.95rem;
+}
+
+.table-announcement i {
+    color: #ffc107;
+}
+
+.dgs-table {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.dgs-table thead th {
+    background: #f8f9fa;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    padding: 15px 12px;
+    border-bottom: 2px solid #495057;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dgs-table tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    border-color: #e9ecef;
+    text-align: center;
+}
+
+.dgs-table tbody tr:hover {
+    background-color: rgba(141, 212, 227, 0.1);
+}
+
+.dgs-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* استایل مقادیر */
+.field-code {
+    color: #6f42c1;
+    font-weight: 600;
+    display: block;
+    padding: 5px 10px;
+    background: rgba(111, 66, 193, 0.1);
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+}
+
+.price-dgs {
+    color: #dc3545;
+    font-weight: 600;
+    display: block;
+    padding: 5px 10px;
+    background: rgba(220, 53, 69, 0.1);
+    border-radius: 6px;
+}
+
+.price-free {
+    color: #198754;
+    font-weight: 600;
+    display: block;
+    padding: 5px 10px;
+    background: rgba(25, 135, 84, 0.1);
+    border-radius: 6px;
+}
+
+/* لِجِند */
+.legend {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.legend h6 {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.legend-text {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+/* اطلاعات باکس */
+.info-box {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    height: 100%;
+    overflow: hidden;
+}
+
+.info-box-header {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.info-box-header h5 {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.info-box-body {
+    padding: 20px;
+}
+
+.info-box-body p {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.info-box-body p:last-child {
+    margin-bottom: 0;
+}
+
+.alert {
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+/* اسناد کارت */
+.documents-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    overflow: hidden;
+}
+
+.documents-header {
+    background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+    padding: 20px 25px;
+    color: white;
+}
+
+.documents-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.documents-body {
+    padding: 30px;
+}
+
+.documents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.document-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.document-item:hover {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    transform: translateX(5px);
+}
+
+.document-icon {
+    font-size: 1.2rem;
+    color: var(--secondary-medium-blue);
+    margin-top: 2px;
+    min-width: 24px;
+}
+
+.document-content {
+    flex: 1;
+}
+
+.document-link {
+    color: var(--secondary-medium-blue);
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 3px;
+    transition: color 0.3s ease;
+}
+
+.document-link:hover {
+    color: var(--primary-dark-blue);
+    text-decoration: underline;
+}
+
+.document-text {
+    color: var(--text-dark);
+    display: block;
+    margin-bottom: 3px;
+}
+
+.document-size {
+    font-size: 0.85rem;
+    color: #6c757d;
+    display: block;
+}
+
+/* تماس کارت */
+.contact-card {
+    background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+}
+
+.contact-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-text h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    color: #adb5bd;
+    width: 24px;
+}
+
+.contact-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item strong {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-item a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #adb5bd;
+    text-decoration: underline;
+}
+
+.contact-item span {
+    color: white;
+    font-weight: 500;
+}
+
+/* دانلود کارت */
+.download-card {
+    background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+}
+
+.download-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.download-icon {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.download-text {
+    flex: 1;
+}
+
+.download-text h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.download-text p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+}
+
+.download-info {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.download-info span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-download {
+    background: white;
+    color: #343a40;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background: #f8f9fa;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    color: #343a40;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .main-container {
+        padding: 15px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .download-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .download-info {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .link-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+    }
+    
+    .content-wrapper {
+        margin-top: 0;
+    }
+    
+    .contact-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .info-box {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .table-header {
+        padding: 20px;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .dgs-table thead th,
+    .dgs-table tbody td {
+        padding: 10px 8px;
+    }
+    
+    .important-notice {
+        padding: 15px;
+    }
+    
+    .link-card {
+        padding: 15px;
+    }
+    
+    .documents-header {
+        padding: 15px 20px;
+    }
+    
+    .documents-body {
+        padding: 20px;
+    }
+    
+    .contact-card {
+        padding: 20px;
+    }
+    
+    .download-card {
+        padding: 20px;
+    }
+    
+    .field-code, .price-dgs, .price-free {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+    
+    .document-item {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 15px;
+    }
+    
+    .dgs-table {
+        font-size: 0.8rem;
+    }
+    
+    .legend-items {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-download {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .filter-section .row {
+        flex-direction: column;
+    }
+    
+    .filter-select {
+        margin-bottom: 10px;
+    }
+    
+    .documents-list {
+        gap: 10px;
+    }
+    
+    .document-item {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .document-icon {
+        align-self: flex-start;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // فیلتر کردن جدول
+    function filterTable() {
+        const facultyValue = document.getElementById('facultyFilter').value;
+        const programTypeValue = document.getElementById('programTypeFilter').value;
+        const scoreTypeValue = document.getElementById('scoreTypeFilter').value;
+        
+        const rows = document.querySelectorAll('#dgsTable tbody tr');
+        let visibleCount = 0;
+        
+        rows.forEach(row => {
+            const faculty = row.getAttribute('data-faculty');
+            const programType = row.getAttribute('data-programtype');
+            const scoreType = row.getAttribute('data-scoretype');
+            
+            let showRow = true;
+            
+            if (facultyValue !== 'all' && faculty !== facultyValue) {
+                showRow = false;
+            }
+            
+            if (programTypeValue !== 'all' && programType !== programTypeValue) {
+                showRow = false;
+            }
+            
+            if (scoreTypeValue !== 'all' && scoreType !== scoreTypeValue) {
+                showRow = false;
+            }
+            
+            if (showRow) {
+                row.style.display = '';
+                visibleCount++;
+                // عنوان‌های مهم را برجسته کن
+                if (row.querySelector('td strong')) {
+                    row.style.borderTop = '2px solid #495057';
+                }
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        // پیام زمانی که هیچ رکوردی یافت نشد
+        const tableBody = document.querySelector('#dgsTable tbody');
+        let noResultsRow = tableBody.querySelector('.no-results');
+        
+        if (visibleCount === 0) {
+            if (!noResultsRow) {
+                noResultsRow = document.createElement('tr');
+                noResultsRow.className = 'no-results';
+                noResultsRow.innerHTML = `
+                    <td colspan="7" class="text-center py-4">
+                        <i class="fas fa-search me-2"></i>
+                        Seçtiğiniz kriterlere uygun DGS programı bulunamadı.
+                    </td>
+                `;
+                tableBody.appendChild(noResultsRow);
+            }
+        } else if (noResultsRow) {
+            noResultsRow.remove();
+        }
+    }
+    
+    // گوش دادن به تغییرات فیلتر
+    document.querySelectorAll('.filter-select').forEach(select => {
+        select.addEventListener('change', filterTable);
+    });
+    
+    // انیمیشن دکمه دانلود
+    const downloadBtn = document.querySelector('.btn-download');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> İndiriliyor...';
+            this.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> İndirildi!';
+                this.style.background = '#198754';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.opacity = '1';
+                    this.style.background = 'white';
+                }, 2000);
+            }, 1000);
+        });
+    }
+    
+    // افکت‌های hover روی ردیف‌های جدول
+    const tableRows = document.querySelectorAll('.dgs-table tbody tr');
+    tableRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'rgba(141, 212, 227, 0.15)';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            const isEven = Array.from(tableRows).indexOf(this) % 2 === 1;
+            this.style.backgroundColor = isEven ? '#f8f9fa' : 'white';
+        });
+    });
+    
+    // افکت‌های hover روی اسناد
+    const documentItems = document.querySelectorAll('.document-item');
+    documentItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.boxShadow = 'none';
+        });
+    });
+    
+    // راه‌اندازی اولیه
+    filterTable();
+});
+</script>
+{% endblock %}

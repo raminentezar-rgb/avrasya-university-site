@@ -1,0 +1,160 @@
+<!-- uygulamali_bilimler/templates/uygulamali_bilimler/duyurular.html -->
+{% extends 'core/base.html' %}
+{% block title %}Uygulamalı Bilimler Duyuruları - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'uygulamali_bilimler/sidebar.html' %}
+    </div>
+    
+
+    <!-- Main Content -->
+     <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg,  #0dcc4dff 0%, #0e8636ff 100%);">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Duyurular</h1>
+                        <p class="lead mb-4">
+                            Uygulamalı Bilimler Yüksekokulu duyurularını takip edin
+                        </p>
+                        
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-megaphone me-2 display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-9">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-purple text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-megaphone me-2"></i>Uygulamalı Bilimler Yüksekokulu Duyuruları
+                </h4>
+            </div>
+            <div class="card-body">
+                <!-- فیلتر دسته‌بندی -->
+                {% comment %} <div class="mb-4">
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="{% url 'uygulamali_bilimler:duyurular' %}" 
+                           class="btn {% if not kategori %}btn-purple{% else %}btn-outline-purple{% endif %} btn-sm">
+                            Tümü
+                        </a>
+                        <a href="?kategori=akademik" 
+                           class="btn {% if kategori == 'akademik' %}btn-purple{% else %}btn-outline-purple{% endif %} btn-sm">
+                            Akademik
+                        </a>
+                        <a href="?kategori=etkinlik" 
+                           class="btn {% if kategori == 'etkinlik' %}btn-purple{% else %}btn-outline-purple{% endif %} btn-sm">
+                            Etkinlik
+                        </a>
+                        <a href="?kategori=ogrenci" 
+                           class="btn {% if kategori == 'ogrenci' %}btn-purple{% else %}btn-outline-purple{% endif %} btn-sm">
+                            Öğrenci
+                        </a>
+                        <a href="?kategori=staj" 
+                           class="btn {% if kategori == 'staj' %}btn-purple{% else %}btn-outline-purple{% endif %} btn-sm">
+                            Staj
+                        </a>
+                        <a href="?kategori=proje" 
+                           class="btn {% if kategori == 'proje' %}btn-purple{% else %}btn-outline-purple{% endif %} btn-sm">
+                            Proje
+                        </a>
+                        <a href="?kategori=sertifika" 
+                           class="btn {% if kategori == 'sertifika' %}btn-purple{% else %}btn-outline-purple{% endif %} btn-sm">
+                            Sertifika
+                        </a>
+                    </div>
+                </div> {% endcomment %}
+
+                <!-- اطلاعیه‌های مهم -->
+                {% if onemli_duyurular %}
+                <div class="alert alert-warning border-0 mb-4">
+                    <h5 class="alert-heading">
+                        <i class="bi bi-exclamation-triangle me-2"></i>Önemli Duyurular
+                    </h5>
+                    {% for duyuru in onemli_duyurular %}
+                    <div class="mb-2">
+                        <a href="{% url 'uygulamali_bilimler:duyuru_detay' duyuru.id %}" class="fw-bold text-dark">
+                            {{ duyuru.baslik }}
+                        </a>
+                        <small class="text-muted ms-2">{{ duyuru.yayin_tarihi|date:"d F Y" }}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- لیست اطلاعیه‌ها -->
+                <div class="row">
+                    {% for duyuru in duyurular %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <span class="badge bg-purple">{{ duyuru.get_kategori_display }}</span>
+                                    {% if duyuru.onemli %}
+                                    <span class="badge bg-warning">Önemli</span>
+                                    {% endif %}
+                                </div>
+                                
+                                <h5 class="card-title">
+                                    <a href="{% url 'uygulamali_bilimler:duyuru_detay' duyuru.id %}" class="text-decoration-none text-dark">
+                                        {{ duyuru.baslik }}
+                                    </a>
+                                </h5>
+                                
+                                <p class="card-text text-muted">
+                                    {{ duyuru.kisa_ozet }}
+                                </p>
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        <i class="bi bi-calendar me-1"></i>
+                                        {{ duyuru.yayin_tarihi|date:"d F Y" }}
+                                    </small>
+                                    <a href="{% url 'uygulamali_bilimler:duyuru_detay' duyuru.id %}" class="btn btn-purple btn-sm">
+                                        Devamını Oku
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <div class="alert alert-info text-center">
+                            <i class="bi bi-info-circle"></i>
+                            Henüz duyuru bulunmamaktadır.
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-purple {
+    background-color: #0d6efd !important;
+}
+
+.btn-purple {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+}
+
+.btn-purple:hover {
+    background-color: #d9680f !important;
+    border-color: #d9680f !important;
+}
+
+.badge.bg-purple {
+    background-color: #fd7e14 !important;
+}
+</style>
+{% endblock %}

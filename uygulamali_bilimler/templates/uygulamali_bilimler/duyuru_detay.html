@@ -1,0 +1,262 @@
+<!-- uygulamali_bilimler/templates/uygulamali_bilimler/duyuru_detay.html -->
+{% extends 'core/base.html' %}
+{% block title %}{{ duyuru.baslik }} - Uygulamalı Bilimler Yüksekokulu{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+     <div class="col-lg-3 mb-4">
+        {% include 'uygulamali_bilimler/sidebar.html' %}
+    </div>
+    
+
+    <!-- Main Content -->
+     <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg,  #0dcc4dff 0%, #0e8636ff 100%);">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Duyuru</h1>
+                        <p class="lead mb-4">
+                            
+                        </p>
+                        
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-megaphone me-2 display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-9">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'uygulamali_bilimler:uygulamali_bilimler' %}">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'uygulamali_bilimler:duyurular' %}">Duyurular</a></li>
+                <li class="breadcrumb-item active">{{ duyuru.baslik|truncatewords:5 }}</li>
+            </ol>
+        </nav>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <!-- هدر اطلاعیه -->
+                <div class="mb-4 border-bottom pb-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge bg-primary">{{ duyuru.get_kategori_display }}</span>
+
+                        {% if duyuru.onemli %}
+                        <span class="badge bg-warning">
+                            <i class="bi bi-exclamation-triangle me-1"></i>Önemli
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <h1 class="text-purple mb-3">{{ duyuru.baslik }}</h1>
+                    
+                    <div class="d-flex align-items-center text-muted">
+                        <i class="bi bi-calendar-event me-2"></i>
+                        <span>{{ duyuru.yayin_tarihi|date:"d F Y H:i" }}</span>
+                    </div>
+                </div>
+
+                <!-- محتوای اطلاعیه -->
+                <div class="content mb-5">
+                    {% if duyuru.icerik %}
+                        {{ duyuru.icerik|linebreaks }}
+                    {% else %}
+                        <p class="text-muted">İçerik bulunmamaktadır.</p>
+                    {% endif %}
+                </div>
+
+                <!-- فایل‌های ضمیمه -->
+                {% if duyuru.dosya or duyuru.mevcut_dosyalar %}
+                <div class="mt-4 pt-3 border-top">
+                    <h5 class="text-secondary mb-3">
+                        <i class="bi bi-paperclip me-2"></i>İndirilebilir Dosyalar
+                    </h5>
+                    
+                    <!-- فایل اصلی اطلاعیه -->
+                    {% if duyuru.dosya %}
+                    <div class="mb-3">
+                        <a href="{{ duyuru.dosya.url }}" class="btn btn-outline-purple" download>
+                            <i class="bi bi-download me-2"></i>
+                            {{ duyuru.dosya_adi }}
+                        </a>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- فایل‌های ضمیمه از اطلاعیه اصلی -->
+                    {% with dosyalar=duyuru.mevcut_dosyalar %}
+                        {% if dosyalar %}
+                        <div class="row">
+                            {% for dosya in dosyalar %}
+                            <div class="col-md-6 mb-3">
+                                <div class="card border-0 bg-light h-100">
+                                    <div class="card-body text-center">
+                                        <i class="bi {{ dosya.icon }} display-4 text-primary mb-2"></i>
+                                        <h6 class="card-title">{{ dosya.adi }}</h6>
+                                        <p class="text-muted small">{{ dosya.tur }}</p>
+                                        {% if dosya.aciklama %}
+                                            <p class="card-text small">{{ dosya.aciklama|truncatewords:10 }}</p>
+                                        {% endif %}
+                                        <a href="{{ dosya.url }}" class="btn btn-purple btn-sm" download>
+                                            <i class="bi bi-download"></i> İndir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                {% endif %}
+
+                <!-- اطلاعیه‌های مرتبط -->
+                {% if ilgili_duyurular %}
+                <div class="mt-5 pt-4 border-top">
+                    <h4 class="text-secondary mb-3">
+                        <i class="bi bi-link me-2"></i>İlgili Duyurular
+                    </h4>
+                    <div class="row">
+                        {% for ilgili in ilgili_duyurular %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <span class="badge bg-purple small">{{ ilgili.get_kategori_display }}</span>
+                                        {% if ilgili.onemli %}
+                                        <span class="badge bg-warning small">Önemli</span>
+                                        {% endif %}
+                                    </div>
+                                    <h6 class="card-title">
+                                        <a href="{% url 'uygulamali_bilimler:duyuru_detay' ilgili.id %}" class="text-decoration-none text-dark">
+                                            {{ ilgili.baslik|truncatewords:8 }}
+                                        </a>
+                                    </h6>
+                                    <small class="text-muted">
+                                        <i class="bi bi-calendar-event me-1"></i>
+                                        {{ ilgili.yayin_tarihi|date:"d M Y" }}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- دکمه‌های ناوبری -->
+                <div class="mt-4 d-flex justify-content-between">
+                    <a href="{% url 'uygulamali_bilimler:duyurular' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-2"></i>Tüm Duyurular
+                    </a>
+                    <a href="{% url 'uygulamali_bilimler:uygulamali_bilimler' %}" class="btn btn-outline-purple">
+                        <i class="bi bi-house me-2"></i>Ana Sayfa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+:root {
+    --purple: #fd7e14;
+}
+
+.text-purple {
+    color: var(--purple) !important;
+}
+
+.bg-purple {
+    background-color: var(--purple) !important;
+}
+
+.btn-purple {
+    background-color: var(--purple) !important;
+    border-color: var(--purple) !important;
+    color: white !important;
+}
+
+.btn-outline-purple {
+    color: var(--purple) !important;
+    border-color: var(--purple) !important;
+}
+
+.btn-outline-purple:hover {
+    background-color: var(--purple) !important;
+    border-color: var(--purple) !important;
+    color: white !important;
+}
+
+.content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.content p {
+    margin-bottom: 1rem;
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.5em 0.8em;
+}
+
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.list-group-item.active {
+    background-color: var(--purple) !important;
+    border-color: var(--purple) !important;
+}
+
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .content {
+        font-size: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت لینک‌های فایل برای نمایش بهتر
+    const fileLinks = document.querySelectorAll('a[download]');
+    fileLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const fileName = this.textContent.trim();
+            console.log(`Dosya indiriliyor: ${fileName}`);
+        });
+    });
+    
+    // هایلایت کردن کلمات کلیدی در محتوا
+    const contentElement = document.querySelector('.content');
+    if (contentElement) {
+        const importantKeywords = ['önemli', 'dikkat', 'acil', 'son tarih', 'deadline', 'staj', 'proje', 'sertifika', 'uygulama'];
+        let contentHtml = contentElement.innerHTML;
+        
+        importantKeywords.forEach(keyword => {
+            const regex = new RegExp(`(${keyword})`, 'gi');
+            contentHtml = contentHtml.replace(regex, '<mark>$1</mark>');
+        });
+        
+        contentElement.innerHTML = contentHtml;
+    }
+});
+</script>
+{% endblock %}

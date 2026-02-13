@@ -1,0 +1,975 @@
+{% extends "support/base.html" %}
+{% load static %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Immersive Header Section -->
+<div class="premium-header">
+    <div class="header-overlay"></div>
+    <div class="container position-relative">
+        <div class="header-content-wrapper text-center animate-fade-in">
+            <nav class="premium-breadcrumb mb-4">
+                <a href="/">Ana Sayfa</a>
+                <span class="divider"><i class="fas fa-chevron-right"></i></span>
+                <a href="{% url 'support:search' %}">Destek Merkezi</a>
+                <span class="divider"><i class="fas fa-chevron-right"></i></span>
+                <span class="active">Talep Oluştur</span>
+            </nav>
+            <h1 class="premium-title">Nasıl Yardımcı Olabiliriz?</h1>
+            <p class="premium-subtitle">Sorununuzu veya sorunuzu iletin, uzman ekibimiz en kısa sürede size geri dönüş
+                yapsın.</p>
+        </div>
+    </div>
+
+    <!-- Auth Status Floating -->
+    <div class="auth-floating-badge">
+        {% if user.is_authenticated %}
+        <div class="user-badge shadow-lg">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-details">
+                <span class="username">{{ user.username }}</span>
+                <div class="badge-actions">
+                    <a href="{% url 'support:my_tickets' %}" title="Taleplerim"><i class="fas fa-ticket-alt"></i></a>
+                    <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" title="ÇıkışYap" class="logout-btn"><i
+                                class="fas fa-sign-out-alt"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="guest-badge shadow-lg">
+            <a href="{% url 'accounts:login' %}" class="login-link">Giriş Yap</a>
+            <span class="sep">|</span>
+            <a href="{% url 'accounts:signup' %}" class="signup-btn">Kayıt Ol</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container main-content-wrapper pb-5" style="margin-top: 200px;">
+    <div class="row justify-content-center" <!-- Main Form Column -->
+        <div class="col-lg-8">
+            <div class="form-container-premium animate-slide-up">
+                <div class="form-card">
+                    <div class="form-card-header">
+                        <div class="icon-circle shadow-sm">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h2>Yeni Destek Talebi</h2>
+                        <div class="drag-line"></div>
+                    </div>
+
+                    <form method="post" id="ticket-form" class="premium-form">
+                        {% csrf_token %}
+
+                        <div class="row g-4">
+                            <!-- Department Selection -->
+                            <div class="col-md-6">
+                                <div class="floating-group">
+                                    <select id="department-select" name="department" class="premium-select" required>
+                                        <option value="" disabled selected></option>
+                                        {% for dept in departments %}
+                                        <option value="{{ dept.id }}">{{ dept.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label class="floating-label"><i class="fas fa-building me-2"></i>İlgili Bölüm
+                                        *</label>
+                                    <div class="focus-line"></div>
+                                </div>
+                            </div>
+
+                            <!-- Category Selection -->
+                            <div class="col-md-6">
+                                <div class="floating-group">
+                                    <select id="category-select" name="category" class="premium-select" required
+                                        disabled>
+                                        <option value="" disabled selected></option>
+                                    </select>
+                                    <label class="floating-label"><i class="fas fa-tags me-2"></i>Kategori *</label>
+                                    <div class="focus-line"></div>
+                                </div>
+                            </div>
+
+                            <!-- Subject -->
+                            <div class="col-12">
+                                <div class="floating-group">
+                                    <input type="text" id="subject" name="subject" class="premium-input" placeholder=" "
+                                        required>
+                                    <label class="floating-label"><i class="fas fa-heading me-2"></i>Konu Başlığı
+                                        *</label>
+                                    <div class="focus-line"></div>
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-12">
+                                <div class="floating-group">
+                                    <textarea id="message" name="message" class="premium-textarea" placeholder=" "
+                                        required></textarea>
+                                    <label class="floating-label"><i class="fas fa-comment-alt me-2"></i>Sorun veya Soru
+                                        Detayı *</label>
+                                    <div class="focus-line"></div>
+                                    <div class="textarea-support-info">
+                                        <i class="fas fa-info-circle"></i>
+                                        Lütfen hata mesajlarını veya işlem adımlarını detaylı yazın.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Priority Selection -->
+                            <div class="col-12 mt-4">
+                                <label class="section-label mb-3">Öncelik Seviyesi</label>
+                                <div class="priority-selector-grid">
+                                    <label class="priority-option low" for="p-low">
+                                        <input type="radio" id="p-low" name="priority" value="low">
+                                        <div class="option-content">
+                                            <div class="indicator"></div>
+                                            <div class="text">
+                                                <span class="p-title">Düşük</span>
+                                                <span class="p-desc">Bilgi alma veya öneriler</span>
+                                            </div>
+                                            <i class="fas fa-check-circle check-icon"></i>
+                                        </div>
+                                    </label>
+
+                                    <label class="priority-option medium active" for="p-medium">
+                                        <input type="radio" id="p-medium" name="priority" value="medium" checked>
+                                        <div class="option-content">
+                                            <div class="indicator"></div>
+                                            <div class="text">
+                                                <span class="p-title">Orta</span>
+                                                <span class="p-desc">Normal işleyiş soruları</span>
+                                            </div>
+                                            <i class="fas fa-check-circle check-icon"></i>
+                                        </div>
+                                    </label>
+
+                                    <label class="priority-option high" for="p-high">
+                                        <input type="radio" id="p-high" name="priority" value="high">
+                                        <div class="option-content">
+                                            <div class="indicator"></div>
+                                            <div class="text">
+                                                <span class="p-title">Yüksek</span>
+                                                <span class="p-desc">Sistem erişim veya kritik hatalar</span>
+                                            </div>
+                                            <i class="fas fa-check-circle check-icon"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Submission -->
+                        <div class="form-footer mt-5">
+                            <div class="footer-note">
+                                <i class="fas fa-shield-alt"></i> Verileriniz güvenli altyapımızda korunmaktadır.
+                            </div>
+                            <div class="action-buttons">
+                                <a href="{% url 'support:search' %}" class="btn-cancel">
+                                    <i class="fas fa-times me-2"></i> Vazgeç
+                                </a>
+                                <button type="submit" class="btn-submit-premium">
+                                    <span>Talebi Gönder</span>
+                                    <div class="icon-box">
+                                        <i class="fas fa-paper-plane default-icon"></i>
+                                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Tips Column -->
+        <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="sticky-top" style="top: 2rem; z-index: 10;">
+                <div class="info-card-premium animate-fade-in-right">
+                    <div class="card-glow"></div>
+                    <div class="info-header">
+                        <i class="fas fa-lightbulb"></i>
+                        <h4>Hızlı Çözüm İçin İpuçları</h4>
+                    </div>
+                    <ul class="tips-list">
+                        <li>
+                            <div class="tip-icon"><i class="fas fa-check"></i></div>
+                            <div class="tip-text"><b>SSS Kontrolü:</b> Sorunuzun cevabı Sıkça Sorulan Sorular bölümünde
+                                olabilir.</div>
+                        </li>
+                        <li>
+                            <div class="tip-icon"><i class="fas fa-search"></i></div>
+                            <div class="tip-text"><b>Arama:</b> Destek merkezindeki arama çubuğunu kullanarak daha önce
+                                verilmiş cevapları tarayın.</div>
+                        </li>
+                        <li>
+                            <div class="tip-icon"><i class="fas fa-pen-nib"></i></div>
+                            <div class="tip-text"><b>Detaylı Yazım:</b> Yaşadığınız sorunu adım adım anlatmanız çözüm
+                                sürecini hızlandırır.</div>
+                        </li>
+                        <li>
+                            <div class="tip-icon"><i class="fas fa-clock"></i></div>
+                            <div class="tip-text"><b>Takip:</b> Talebinizden sonra bilet numaranızı "Taleplerim"
+                                sayfasından takip edebilirsiniz.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Emergency Support -->
+                <div class="whatsapp-card-mini mt-4 animate-fade-in-right" style="animation-delay: 0.2s;">
+                    <div class="wa-content">
+                        <div class="wa-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="wa-text">
+                            <h6>Bize Yazın!</h6>
+                            <p>Canlı destek için WhatsApp hattımız hazır.</p>
+                        </div>
+                        <a href="https://wa.me/905353334555" target="_blank" class="wa-btn"><i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    /* New Design System - Premium Aesthetics */
+    :root {
+        --p-primary: #192f59;
+        --p-secondary: #092442;
+        --p-accent: #8dd4e3;
+        --p-gold: #8dd4e3;
+        --p-bg-gradient: linear-gradient(135deg, #192f59 0%, #092442 100%);
+        --p-white: #ffffff;
+        --p-soft-bg: #f8fafc;
+        --p-border: rgba(25, 47, 89, 0.1);
+        --p-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --p-font: 'Outfit', sans-serif;
+        --p-success: #10b981;
+        --p-warning: #8dd4e3;
+        --p-danger: #ef4444;
+    }
+
+    body {
+        font-family: var(--p-font);
+        background-color: #f1f5f9;
+    }
+
+    /* Premium Header */
+    .premium-header {
+        height: 350px;
+        background: var(--p-bg-gradient);
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: white;
+        margin-bottom: -100px;
+        overflow: hidden;
+        margin-top: -110px;
+    }
+
+    .header-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+            radial-gradient(circle at 20% 50%, rgba(228, 149, 22, 0.15) 0%, transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(141, 212, 227, 0.1) 0%, transparent 50%);
+        z-index: 1;
+    }
+
+    .header-content-wrapper {
+        position: relative;
+        z-index: 2;
+        padding-top: 60px;
+    }
+
+    .premium-breadcrumb {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .premium-breadcrumb a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .premium-breadcrumb a:hover {
+        color: var(--p-accent);
+    }
+
+    .premium-breadcrumb .active {
+        color: white;
+        font-weight: 600;
+    }
+
+    .premium-breadcrumb .divider {
+        font-size: 0.7rem;
+        opacity: 0.5;
+    }
+
+    .premium-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(to right, #fff, #8dd4e3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .premium-subtitle {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        opacity: 0.8;
+        font-weight: 300;
+    }
+
+    /* Auth Floating Badge */
+    .auth-floating-badge {
+        position: absolute;
+        top: 130px;
+        right: 30px;
+        z-index: 10;
+    }
+
+    .user-badge {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 10px 18px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .user-avatar i {
+        font-size: 1.8rem;
+        color: var(--p-accent);
+    }
+
+    .user-details .username {
+        color: white;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .badge-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 2px;
+    }
+
+    .badge-actions a,
+    .logout-btn {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.85rem;
+        text-decoration: none;
+        background: none;
+        border: none;
+        padding: 0;
+        transition: 0.3s;
+    }
+
+    .badge-actions a:hover,
+    .logout-btn:hover {
+        color: var(--p-accent);
+    }
+
+    .guest-badge {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 10px 20px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--p-primary);
+        font-weight: 600;
+    }
+
+    .guest-badge .signup-btn {
+        background: var(--p-bg-gradient);
+        color: white;
+        padding: 6px 15px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-size: 0.85rem;
+    }
+
+    /* Form Container */
+    .form-container-premium {
+        position: relative;
+        z-index: 5;
+    }
+
+    .form-card {
+        background: white;
+        border-radius: 30px;
+        padding: 50px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(25, 47, 89, 0.05);
+    }
+
+    .form-card-header {
+        text-align: center;
+        margin-bottom: 45px;
+        position: relative;
+    }
+
+    .icon-circle {
+        width: 80px;
+        height: 80px;
+        background: var(--p-bg-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: -90px auto 20px;
+        color: white;
+        font-size: 2rem;
+        border: 5px solid white;
+    }
+
+    .form-card-header h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--p-primary);
+    }
+
+    .drag-line {
+        width: 60px;
+        height: 4px;
+        background: var(--p-accent);
+        margin: 15px auto 0;
+        border-radius: 10px;
+    }
+
+    /* Floating Form Controls */
+    .floating-group {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .premium-input,
+    .premium-select,
+    .premium-textarea {
+        width: 100%;
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 18px 20px;
+        font-weight: 500;
+        font-family: var(--p-font);
+        font-size: 1rem;
+        color: var(--p-primary);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        outline: none;
+    }
+
+    .premium-textarea {
+        min-height: 180px;
+        padding-top: 25px;
+    }
+
+    .floating-label {
+        position: absolute;
+        top: 18px;
+        left: 20px;
+        color: #94a3b8;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .premium-input:focus,
+    .premium-select:focus,
+    .premium-textarea:focus {
+        background: white;
+        border-color: var(--p-primary);
+        box-shadow: 0 10px 20px rgba(25, 47, 89, 0.05);
+    }
+
+    .premium-input:focus+.floating-label,
+    .premium-input:not(:placeholder-shown)+.floating-label,
+    .premium-select:focus+.floating-label,
+    .premium-select:valid+.floating-label,
+    .premium-textarea:focus+.floating-label,
+    .premium-textarea:not(:placeholder-shown)+.floating-label {
+        top: -12px;
+        left: 15px;
+        font-size: 0.85rem;
+        background: white;
+        padding: 0 8px;
+        color: var(--p-primary);
+        font-weight: 700;
+        transform: none;
+    }
+
+    .focus-line {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background: var(--p-accent);
+        transition: 0.4s;
+        border-radius: 0 0 16px 16px;
+    }
+
+    .premium-input:focus~.focus-line,
+    .premium-select:focus~.focus-line,
+    .premium-textarea:focus~.focus-line {
+        width: 100%;
+        left: 0;
+    }
+
+    .textarea-support-info {
+        font-size: 0.8rem;
+        color: #64748b;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Priority Selector */
+    .section-label {
+        font-weight: 700;
+        color: var(--p-primary);
+        font-size: 1.1rem;
+    }
+
+    .priority-selector-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .priority-option {
+        cursor: pointer;
+        position: relative;
+    }
+
+    .priority-option input {
+        display: none;
+    }
+
+    .option-content {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        transition: 0.3s;
+        height: 100%;
+    }
+
+    .priority-option:hover .option-content {
+        border-color: #cbd5e1;
+        transform: translateY(-5px);
+    }
+
+    .indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-top: 6px;
+        flex-shrink: 0;
+    }
+
+    .low .indicator {
+        background: var(--p-success);
+    }
+
+    .medium .indicator {
+        background: var(--p-warning);
+    }
+
+    .high .indicator {
+        background: var(--p-danger);
+    }
+
+    .p-title {
+        display: block;
+        font-weight: 700;
+        color: var(--p-primary);
+        font-size: 1rem;
+    }
+
+    .p-desc {
+        display: block;
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 2px;
+    }
+
+    .check-icon {
+        margin-left: auto;
+        color: #cbd5e1;
+        font-size: 1.2rem;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .priority-option input:checked+.option-content {
+        border-color: var(--p-primary);
+        background: rgba(25, 47, 89, 0.03);
+        box-shadow: 0 10px 20px rgba(25, 47, 89, 0.05);
+    }
+
+    .priority-option input:checked+.option-content .check-icon {
+        opacity: 1;
+        color: var(--p-primary);
+    }
+
+    /* Form Footer */
+    .form-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 30px;
+    }
+
+    .footer-note {
+        font-size: 0.85rem;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .btn-cancel {
+        text-decoration: none;
+        font-weight: 700;
+        color: #64748b;
+        padding: 12px 25px;
+        border-radius: 14px;
+        transition: 0.3s;
+    }
+
+    .btn-cancel:hover {
+        background: #f1f5f9;
+        color: var(--p-danger);
+    }
+
+    .btn-submit-premium {
+        background: var(--p-bg-gradient);
+        border: none;
+        color: white;
+        padding: 5px 5px 5px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 30px rgba(25, 47, 89, 0.3);
+    }
+
+    .btn-submit-premium:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(25, 47, 89, 0.4);
+    }
+
+    .btn-submit-premium .icon-box {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading-icon {
+        display: none;
+    }
+
+    .btn-submit-premium:disabled {
+        opacity: 0.8;
+        cursor: not-allowed;
+    }
+
+    .btn-submit-premium:disabled .default-icon {
+        display: none;
+    }
+
+    .btn-submit-premium:disabled .loading-icon {
+        display: block;
+    }
+
+    /* Info Card Sidebar */
+    .info-card-premium {
+        background: white;
+        border-radius: 24px;
+        padding: 30px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(25, 47, 89, 0.05);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-glow {
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, rgba(228, 149, 22, 0.1) 0%, transparent 70%);
+    }
+
+    .info-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .info-header i {
+        font-size: 1.5rem;
+        color: var(--p-gold);
+    }
+
+    .info-header h4 {
+        font-weight: 800;
+        color: var(--p-primary);
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    .tips-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tips-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .tip-icon {
+        width: 32px;
+        height: 32px;
+        background: rgba(25, 47, 89, 0.05);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--p-primary);
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .tip-text {
+        font-size: 0.9rem;
+        color: #475569;
+        line-height: 1.5;
+    }
+
+    .tip-text b {
+        color: var(--p-primary);
+    }
+
+    /* WhatsApp Mini Card */
+    .whatsapp-card-mini {
+        background: #25D366;
+        border-radius: 20px;
+        padding: 15px 20px;
+        color: white;
+    }
+
+    .wa-content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .wa-icon {
+        font-size: 2rem;
+    }
+
+    .wa-text h6 {
+        margin: 0;
+        font-weight: 800;
+        font-size: 1rem;
+    }
+
+    .wa-text p {
+        margin: 0;
+        font-size: 0.8rem;
+        opacity: 0.9;
+    }
+
+    .wa-btn {
+        margin-left: auto;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .wa-btn:hover {
+        background: white;
+        color: #25D366;
+    }
+
+    /* Animations */
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease forwards;
+    }
+
+    .animate-slide-up {
+        animation: slideUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    .animate-fade-in-right {
+        animation: fadeInRight 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @media (max-width: 991px) {
+        .premium-title {
+            font-size: 2.5rem;
+        }
+
+        .auth-floating-badge {
+            top: 20px;
+            right: 20px;
+        }
+
+        .form-card {
+            padding: 30px;
+        }
+
+        .priority-selector-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-footer {
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deptSelect = document.getElementById("department-select");
+        const categorySelect = document.getElementById("category-select");
+        const ticketForm = document.getElementById("ticket-form");
+        const submitBtn = document.querySelector(".btn-submit-premium");
+
+        // Priority Selector Visual Logic
+        const priorityOptions = document.querySelectorAll(".priority-option");
+        priorityOptions.forEach(opt => {
+            opt.addEventListener("click", function () {
+                priorityOptions.forEach(o => o.classList.remove("active"));
+                this.classList.add("active");
+            });
+        });
+
+        // Dynamic Categories
+        deptSelect.addEventListener("change", function () {
+            const departmentId = this.value;
+
+            if (!departmentId) {
+                categorySelect.innerHTML = '<option value="" disabled selected></option>';
+                categorySelect.disabled = true;
+                return;
+            }
+
+            categorySelect.innerHTML = '<option value="" disabled selected>Yükleniyor...</option>';
+            categorySelect.disabled = true;
+
+            fetch(`/support/api/categories/?department_id=${departmentId}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        categorySelect.innerHTML = '<option value="" disabled selected></option>';
+                        data.forEach(item => {
+                            categorySelect.innerHTML += `<option value="${item.id}">${item.name}</option>`;
+                        });
+                        categorySelect.disabled = false;
+                    } else {
+                        categorySelect.innerHTML = '<option value="" disabled selected>Kategori yok</option>';
+                        categorySelect.disabled = true;
+                    }
+                });
+        });
+
+        // Loading State
+        ticketForm.addEventListener("submit", function () {
+            submitBtn.disabled = true;
+        });
+    });
+</script>
+{% endblock %}

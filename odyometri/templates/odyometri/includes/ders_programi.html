@@ -1,0 +1,872 @@
+{% extends 'odyometri/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Ders Programı - Odyometri Programı{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Hero Section -->
+<section class="research-hero" style="background: linear-gradient(135deg, #1d5da9 0%, #3a7bd5 100%);  ">
+    <div class="container">
+        <div class="research-hero-content text-center py-5">
+            <h1 class="text-white fw-bold mb-3" style="margin-top: -60px;"> Odyometri Ders Programı</h1>
+            <p class="text-white-80 mb-0 fs-5" ></p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid erasmus-container mt-4">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                 {% include 'odyometri/odyometri_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="course-schedule-container">
+                <!-- اطلاعیه مهم -->
+                <div class="info-alert mb-5">
+                    <div class="alert alert-info">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle fa-2x"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="alert-heading mb-2">Önemli Bilgi!</h5>
+                                <p class="mb-0">Ders programları akademik yıllara ve sınıflara göre gruplandırılmıştır. Güncel programlar için sınıfınıza uygun dosyayı indirebilirsiniz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- آمار سریع -->
+                <div class="additional-info mb-5">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <h5>Toplam Dosya</h5>
+                                <div class="info-number">{{ toplam_dosya }}</div>
+                                <p class="info-text">Aktif ders programı</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h5>Sınıflar</h5>
+                                <div class="info-number">{{ gruplar|length }}</div>
+                                <p class="info-text">Farklı sınıf seviyesi</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <h5>Güncel</h5>
+                                <div class="info-number">2025</div>
+                                <p class="info-text">Güncel akademik yıl</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- برنامه درسی برای هر کلاس -->
+                {% if toplam_dosya > 0 %}
+                    {% for sinif, dosyalar in gruplar.items %}
+                    <div class="class-section mb-5">
+                        <div class="schedule-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h2><i class="fas fa-book-open me-2"></i>{{ sinif }} Ders Programları</h2>
+                                    <p class="text-muted mb-0">{{ dosyalar|length }} adet ders programı dosyası bulunmaktadır.</p>
+                                </div>
+                                <span class="badge bg-primary fs-6">{{ sinif }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            {% for dosya in dosyalar %}
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="course-card file-card">
+                                    <div class="course-card-header">
+                                        <div class="file-type-icon">
+                                            {% if dosya.dosya.name|lower|slice:"-3:" == "pdf" %}
+                                            <i class="fas fa-file-pdf"></i>
+                                            {% elif dosya.dosya.name|lower|slice:"-4:" == "docx" or dosya.dosya.name|lower|slice:"-3:" == "doc" %}
+                                            <i class="fas fa-file-word"></i>
+                                            {% elif dosya.dosya.name|lower|slice:"-4:" == "xlsx" or dosya.dosya.name|lower|slice:"-3:" == "xls" %}
+                                            <i class="fas fa-file-excel"></i>
+                                            {% else %}
+                                            <i class="fas fa-file"></i>
+                                            {% endif %}
+                                        </div>
+                                        <div class="file-badge">
+                                            <span class="badge bg-secondary">{{ dosya.dosya.name|slice:"-3:"|upper }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="course-card-body">
+                                        <h5 class="course-name">{{ dosya.baslik }}</h5>
+                                        {% if dosya.aciklama %}
+                                        <p class="course-description">{{ dosya.aciklama|truncatewords:15 }}</p>
+                                        {% endif %}
+                                        
+                                        <div class="course-meta">
+                                            <div class="meta-item">
+                                                <i class="fas fa-calendar"></i>
+                                                <span>{{ dosya.yayin_tarihi|date:"d.m.Y" }}</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <i class="fas fa-file"></i>
+                                                <span>
+                                                    {% if dosya.dosya.size < 1024 %}
+                                                        {{ dosya.dosya.size }} B
+                                                    {% elif dosya.dosya.size < 1048576 %}
+                                                        {{ dosya.dosya.size|divisibleby:1024|floatformat:1 }} KB
+                                                    {% else %}
+                                                        {{ dosya.dosya.size|divisibleby:1048576|floatformat:1 }} MB
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="course-card-footer">
+                                        <a href="{{ dosya.dosya.url }}" class="btn btn-primary btn-download" download>
+                                            <i class="fas fa-download me-2"></i> İndir
+                                        </a>
+                                        <a href="{{ dosya.dosya.url }}" class="btn btn-outline-primary btn-preview" target="_blank">
+                                            <i class="fas fa-eye me-2"></i> Görüntüle
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <!-- حالت بدون فایل -->
+                <div class="text-center py-5">
+                    <div class="empty-state">
+                        <i class="fas fa-folder-open fa-4x text-muted mb-4"></i>
+                        <h3 class="text-muted mb-3">Henüz Ders Programı Yüklenmemiş</h3>
+                        <p class="text-muted mb-4">Bu bölüm için henüz ders programı yüklenmemiştir.</p>
+                        <div class="alert alert-warning d-inline-block">
+                            <i class="fas fa-clock me-2"></i>
+                            Yakında güncellenecektir.
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- نکات مهم -->
+                <div class="important-notes mt-5">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-exclamation-circle me-2"></i> Önemli Notlar</h4>
+                    </div>
+                    <div class="notes-content">
+                        <ul>
+                            <li>Ders programları PDF, Word ve Excel formatlarında sunulmaktadır.</li>
+                            <li>Her sınıf için ayrı programlar bulunmaktadır.</li>
+                            <li>Programları görüntülemek için "Görüntüle" butonuna, indirmek için "İndir" butonuna tıklayınız.</li>
+                            <li>Programlarda değişiklik olması durumunda en güncel versiyon yayınlanacaktır.</li>
+                            <li>Ders programlarıyla ilgili sorularınız için bölüm sekreterliği ile iletişime geçebilirsiniz.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- اطلاعات تماس -->
+                <div class="contact-info mt-5">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-3"><i class="fas fa-question-circle me-2"></i> Yardıma mı ihtiyacınız var?</h5>
+                            <p class="card-text mb-4">Ders programlarıyla ilgili sorularınız için aşağıdaki iletişim bilgilerini kullanabilirsiniz.</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-item mb-3">
+                                        <i class="fas fa-envelope me-2 text-primary"></i>
+                                        <span>ingilizedebiyati@avrasya.edu.tr</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="contact-item mb-3">
+                                        <i class="fas fa-phone me-2 text-primary"></i>
+                                        <span>0 (462) 444 0 XXXX</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --primary-blue: #1d5da9;
+        --secondary-blue: #3a7bd5;
+        --light-blue: #e3f2fd;
+        --accent-blue: #4a90e2;
+        --dark-blue: #0d3b6b;
+        --success: #28a745;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --light-gray: #f8f9fa;
+        --medium-gray: #e9ecef;
+        --dark-gray: #6c757d;
+        --text-dark: #343a40;
+    }
+
+    /* استایل‌های عمومی */
+    .course-schedule-container {
+        padding: 30px;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    /* اطلاعیه */
+    .info-alert .alert {
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 8px 25px rgba(29, 93, 169, 0.15);
+        background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+        border-left: 5px solid var(--primary-blue);
+        padding: 25px;
+    }
+
+    .info-alert .alert i {
+        color: var(--primary-blue);
+    }
+
+    /* کارت اطلاعات */
+    .info-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .info-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        border-color: var(--primary-blue);
+    }
+
+    .info-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+    }
+
+    .info-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: white;
+        font-size: 2rem;
+        box-shadow: 0 8px 20px rgba(29, 93, 169, 0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover .info-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .info-number {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--primary-blue);
+        margin-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* هدر بخش */
+    .schedule-header {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border-left: 8px solid var(--primary-blue);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .schedule-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, rgba(29, 93, 169, 0.1), rgba(58, 123, 213, 0.1));
+        border-radius: 0 0 0 100px;
+    }
+
+    .schedule-header h2 {
+        color: var(--primary-blue);
+        font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* کارت فایل */
+    .file-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 2px solid transparent;
+        height: 100%;
+        position: relative;
+    }
+
+    .file-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--primary-blue);
+    }
+
+    .course-card-header {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        padding: 25px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 100px;
+    }
+
+    .file-type-icon {
+        font-size: 3.5rem;
+        color: white;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .file-card:hover .file-type-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .file-badge .badge {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .course-card-body {
+        padding: 25px;
+    }
+
+    .course-name {
+        color: var(--text-dark);
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+        line-height: 1.4;
+        min-height: 60px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .course-description {
+        color: var(--dark-gray);
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        font-family: 'Poppins', sans-serif;
+        min-height: 50px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .course-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: var(--light-gray);
+        border-radius: 10px;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        color: var(--dark-gray);
+        font-size: 0.9rem;
+    }
+
+    .meta-item i {
+        width: 25px;
+        color: var(--primary-blue);
+        font-size: 1rem;
+    }
+
+    .course-card-footer {
+        padding: 20px 25px;
+        background: var(--light-gray);
+        border-top: 1px solid var(--medium-gray);
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-download, .btn-preview {
+        flex: 1;
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 12px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-download {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        border: none;
+    }
+
+    .btn-download:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(29, 93, 169, 0.3);
+    }
+
+    .btn-preview:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary-blue);
+        color: var(--primary-blue);
+    }
+
+    /* حالت بدون فایل */
+    .empty-state {
+        padding: 60px 30px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .empty-state i {
+        color: var(--medium-gray);
+    }
+
+    /* نکات مهم */
+    .important-notes {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        border: 2px solid var(--light-blue);
+    }
+
+    .notes-header {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        padding: 25px 40px;
+        color: white;
+    }
+
+    .notes-header h4 {
+        margin: 0;
+        font-weight: 600;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+    }
+
+    .notes-content {
+        padding: 40px;
+    }
+
+    .notes-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .notes-content li {
+        padding: 15px 0;
+        padding-left: 40px;
+        position: relative;
+        color: var(--text-dark);
+        line-height: 1.7;
+        font-family: 'Poppins', sans-serif;
+        border-bottom: 1px solid var(--medium-gray);
+        font-size: 1.05rem;
+    }
+
+    .notes-content li:last-child {
+        border-bottom: none;
+    }
+
+    .notes-content li:before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        top: 15px;
+        width: 28px;
+        height: 28px;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(29, 93, 169, 0.3);
+    }
+
+    /* اطلاعات تماس */
+    .contact-info .card {
+        border-radius: 20px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 2px solid var(--light-blue);
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        background: var(--light-blue);
+    }
+
+    /* انیمیشن‌ها */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(29, 93, 169, 0.4);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(29, 93, 169, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(29, 93, 169, 0);
+        }
+    }
+
+    .file-card, .info-card, .schedule-header {
+        animation: fadeInUp 0.6s ease;
+        animation-fill-mode: both;
+    }
+
+    .file-card:nth-child(1) { animation-delay: 0.1s; }
+    .file-card:nth-child(2) { animation-delay: 0.2s; }
+    .file-card:nth-child(3) { animation-delay: 0.3s; }
+
+    /* دکمه پرینت */
+    .print-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        border: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.5rem;
+        box-shadow: 0 8px 25px rgba(29, 93, 169, 0.3);
+        animation: pulse 2s infinite;
+        transition: all 0.3s ease;
+    }
+
+    .print-button:hover {
+        transform: scale(1.1) rotate(10deg);
+        animation: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 1400px) {
+        .erasmus-container {
+            padding: 0 15px;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .course-name {
+            font-size: 1.2rem;
+        }
+        
+        .info-number {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .course-schedule-container {
+            padding: 20px;
+        }
+        
+        .schedule-header {
+            padding: 25px;
+        }
+        
+        .notes-content {
+            padding: 30px;
+        }
+        
+        .course-card-footer {
+            flex-direction: column;
+        }
+        
+        .btn-download, .btn-preview {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .additional-info .row {
+            flex-direction: column;
+        }
+        
+        .info-card {
+            margin-bottom: 20px;
+        }
+        
+        .course-card-header {
+            padding: 20px;
+        }
+        
+        .course-card-body {
+            padding: 20px;
+        }
+        
+        .notes-content li {
+            padding-left: 35px;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .course-schedule-container {
+            padding: 15px;
+        }
+        
+        .schedule-header {
+            padding: 20px;
+        }
+        
+        .schedule-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .info-card {
+            padding: 20px;
+        }
+        
+        .info-number {
+            font-size: 2rem;
+        }
+        
+        .notes-content {
+            padding: 20px;
+        }
+        
+        .print-button {
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+        }
+    }
+
+
+
+     /* Container and Sidebar Styles */
+    .erasmus-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .sidebar-wrapper {
+        position: sticky;
+        top: 120px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        padding: 20px;
+        height: fit-content;
+        border: 1px solid rgba(141, 212, 227, 0.2);
+    }
+    
+    .lab-main-content {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        border: 1px solid rgba(141, 212, 227, 0.2);
+    }
+    
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // دکمه پرینت
+        const printButton = document.createElement('button');
+        printButton.className = 'print-button d-print-none';
+        printButton.innerHTML = '<i class="fas fa-print"></i>';
+        printButton.title = 'Programları Yazdır';
+        
+        printButton.addEventListener('click', function() {
+            window.print();
+        });
+        
+        document.body.appendChild(printButton);
+        
+        // استایل‌های پرینت
+        const printStyles = `
+            @media print {
+                .sidebar-wrapper, .print-button, .btn-preview,
+                .info-alert, .additional-info, .contact-info,
+                .important-notes, .d-print-none {
+                    display: none !important;
+                }
+                
+                .file-card {
+                    break-inside: avoid;
+                    box-shadow: none !important;
+                    border: 2px solid #000 !important;
+                    margin-bottom: 20px !important;
+                }
+                
+                .course-card-header {
+                    background: #000 !important;
+                    color: white !important;
+                }
+                
+                .file-type-icon {
+                    color: white !important;
+                }
+                
+                .btn-download {
+                    background: #000 !important;
+                    color: white !important;
+                    border: 1px solid #000 !important;
+                }
+                
+                body {
+                    font-size: 12pt !important;
+                    color: #000 !important;
+                    background: white !important;
+                }
+                
+                .container-fluid {
+                    max-width: 100% !important;
+                    padding: 0 !important;
+                }
+                
+                .schedule-header h2 {
+                    color: #000 !important;
+                }
+                
+                .col-lg-9 {
+                    flex: 0 0 100% !important;
+                    max-width: 100% !important;
+                }
+            }
+        `;
+        
+        const styleSheet = document.createElement("style");
+        styleSheet.textContent = printStyles;
+        document.head.appendChild(styleSheet);
+        
+        // انیمیشن اسکرول
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // اعمال انیمیشن به المان‌ها
+        document.querySelectorAll('.file-card, .info-card, .schedule-header').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+        
+        // هاور افکت برای کارت‌ها
+        document.querySelectorAll('.file-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+{% endblock %}

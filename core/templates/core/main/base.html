@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+<title>Course</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Course Project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'core/main/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/responsive.css' %}">
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<div class="super_container">
+
+<!-- Top Bar -->
+		<div class="top_bar">
+			<div class="top_bar_container">
+				<div class="top_bar_left">
+					<ul class="top_bar_list">
+						<li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/">OBS</a></li>
+						<li class="top_bar_item"><a href="https://avukalite.avrasya.edu.tr/">Kalite</a></li>
+						<li class="top_bar_item"><a href="https://ebys.avrasya.edu.tr/Giris.aspx">EBYS</a></li>
+						<li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/">Bologna</a></li>
+						<li class="top_bar_item"><a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F">Online Eğitim</a></li>
+						<li class="top_bar_item"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638996701980044877.MjRiNzMxNjQtMjE3YS00YTE5LWIxMTAtNmI1OGE1ODg1MTExYjYxZWRkYTktMTA3ZS00ZTgzLWE0YjMtZGQxYzRkMGU4NDRm&ui_locales=tr-TR&mkt=tr-TR&client-request-id=552d74f3-e879-46b5-8cf9-af6111fc0737&state=aoBhGvBmR_CkgkJYuR98DDaLwkfd6kISsF4I3D3gxShv1udv4H2O4JLpjx6Zg-RxAAPsosdtPe4ZQ8dwmpEHqs9UID2r3kKLbv8VWoK4Aze4XpRbP-K17MWLR9y-wMrih4SoGJ8fwL5t30Iw5ZuTmtBrdIWm20UxdoknRwbcYekQgO-D5WuZ2XY0oAoVD97wKPBPcmFzdzE1ojFkcDKxY4PwfVpR2MFdPCXYmjvISJWcs3sT0oN28WS0pzBx9XF-4_s_EXpkCQ7nNs2pGxv8W7b4owvr_cqeynfqVP2DuKM&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true">Mail</a></li>
+						<li class="top_bar_item"><a href="#">Kütüphane</a></li>
+					</ul>
+				</div>
+				<div class="top_bar_right">
+					<div class="language_selector">
+						<span class="current_language">tr Turkish</span>
+						<span class="language_dropdown">▼</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!-- Header -->
+
+	<header class="header d-flex flex-row">
+		<div class="header_content d-flex flex-row align-items-center">
+			<!-- Logo -->
+			<div class="logo_container">
+				
+				<div class="logo">
+					<a href="{% url 'core:index' %}">
+					<img src="{% static 'core/img/LGOO-WEB.png' %}" alt=""></a>
+					
+					<span></span>
+					
+				</div>
+				
+			</div>
+
+			<!-- Main Navigation -->
+				<nav class="main_nav_container">
+    				<div class="main_nav">
+       				 {% include 'core/navbar.html' %}
+ 	   				</div>
+				</nav>
+			</div>
+		{% comment %} <div class="header_side d-flex flex-row justify-content-center align-items-center">
+			<img src="{% static 'core/main/images/map.svg' %}" alt="">
+			<img src="{% static 'core/main/images/share-nodes-solid-full.svg' %}" alt="">
+			<img src="{% static 'core/main/images/circle-user-regular-full.svg' %}" alt="">
+			<img src="{% static 'core/main/images/language-solid-full.svg' %}" alt="">
+			
+			<span></span>
+		</div> {% endcomment %}
+
+{% comment %} <div class="header_side d-flex flex-row justify-content-center align-items-center">
+    <div class="header_icon_container">
+        <img src="{% static 'core/main/images/map.svg' %}" class="header_icon" alt="">
+        <span class="header_icon_text"></span>
+    </div>
+    <div class="header_icon_container">
+        <img src="{% static 'core/main/images/share-nodes-solid-full.svg' %}" class="header_icon" alt="">
+        <span class="header_icon_text"></span>
+    </div>
+	<div class="header_icon_container">
+        <img src="{% static 'core/main/images/circle-user-regular-full.svg' %}" class="header_icon" alt="">
+        <span class="header_icon_text"></span>
+    </div>
+    <div class="header_icon_container">
+        <img src="{% static 'core/main/images/language-solid-full.svg' %}" class="header_icon" alt="">
+        <span class="header_icon_text"></span>
+    </div>
+</div> {% endcomment %}
+
+
+		
+
+
+
+
+		<!-- Hamburger -->
+		<div class="hamburger_container">
+			<i class="fas fa-bars trans_200"></i>
+		</div>
+
+	</header>
+	
+	<!-- Menu -->
+	<div class="menu_container menu_mm">
+
+		<!-- Menu Close Button -->
+		<div class="menu_close_container">
+			<div class="menu_close"></div>
+		</div>
+
+		<!-- Menu Items -->
+		<div class="menu_inner menu_mm">
+			<div class="menu menu_mm">
+				<ul class="menu_list menu_mm">
+					<li class="menu_item menu_mm"><a href="#">Home</a></li>
+					<li class="menu_item menu_mm"><a href="#">About us</a></li>
+					<li class="menu_item menu_mm"><a href="courses.html">Courses</a></li>
+					<li class="menu_item menu_mm"><a href="elements.html">Elements</a></li>
+					<li class="menu_item menu_mm"><a href="news.html">News</a></li>
+					<li class="menu_item menu_mm"><a href="contact.html">Contact</a></li>
+					<li class="menu_item menu_mm"><a href="news.html">News</a></li>
+					<li class="menu_item menu_mm"><a href="contact.html">Contact</a></li>
+				</ul>
+
+				<!-- Menu Social -->
+				
+				<div class="menu_social_container menu_mm">
+					<ul class="menu_social menu_mm">
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-instagram"></i></a></li>
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+						<li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-twitter"></i></a></li>
+					</ul>
+				</div>
+
+				<div class="menu_copyright menu_mm">Colorlib All rights reserved</div>
+			</div>
+
+		</div>
+
+	</div>
+
+    {% block content %}
+    {% endblock content %}
+
+
+
+    <!-- Footer -->
+{% include "core/footer.html" %}
+	<footer class="footer">
+		<div class="container">
+			
+			<!-- Newsletter -->
+
+			<div class="newsletter">
+				<div class="row">
+					<div class="col">
+						<div class="section_title text-center">
+							<h1>Subscribe to newsletter</h1>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col text-center">
+						<div class="newsletter_form_container mx-auto">
+							<form action="post">
+								<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-center">
+									<input id="newsletter_email" class="newsletter_email" type="email" placeholder="Email Address" required="required" data-error="Valid email is required.">
+									<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Subscribe</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Footer Content -->
+
+			<div class="footer_content">
+				<div class="row">
+
+					<!-- Footer Column - About -->
+					<div class="col-lg-3 footer_col">
+
+						<!-- Logo -->
+						<div class="logo_container">
+							<div class="logo">
+								<img src="{% static 'core/img/LGOO-WEB.png' %}" alt="">
+								<span></span>
+							</div>
+						</div>
+
+						<div class="footer_column_content">
+							<ul>
+								<li class="footer_contact_item">
+									<div class="footer_contact_icon">
+										<img src="{% static 'core/main/images/placeholder.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+									</div>
+									Blvd Libertad, 34 m05200 Arévalo
+								</li>
+								<li class="footer_contact_item">
+									<div class="footer_contact_icon">
+										<img src="{% static 'core/main/images/smartphone.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+									</div>
+									0034 37483 2445 322
+								</li>
+								<li class="footer_contact_item">
+									<div class="footer_contact_icon">
+										<img src="{% static 'core/main/images/envelope.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+									</div>hello@company.com
+								</li>
+							</ul>
+						</div>
+
+					</div>
+
+					<!-- Footer Column - Menu -->
+
+					<div class="col-lg-3 footer_col">
+						<div class="footer_column_title">Menu</div>
+						<div class="footer_column_content">
+							<ul>
+								<li class="footer_list_item"><a href="#">Home</a></li>
+								<li class="footer_list_item"><a href="#">About Us</a></li>
+								<li class="footer_list_item"><a href="courses.html">Courses</a></li>
+								<li class="footer_list_item"><a href="news.html">News</a></li>
+								<li class="footer_list_item"><a href="contact.html">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Footer Column - Usefull Links -->
+
+					<div class="col-lg-3 footer_col">
+						<div class="footer_column_title">Usefull Links</div>
+						<div class="footer_column_content">
+							<ul>
+								<li class="footer_list_item"><a href="#">Testimonials</a></li>
+								<li class="footer_list_item"><a href="#">FAQ</a></li>
+								<li class="footer_list_item"><a href="#">Community</a></li>
+								<li class="footer_list_item"><a href="#">Campus Pictures</a></li>
+								<li class="footer_list_item"><a href="#">Tuitions</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Footer Column - Contact -->
+
+					<div class="col-lg-3 footer_col">
+						<div class="footer_column_title"></div>
+						<div class="footer_column_content">
+							<ul>
+								<li class="footer_contact_item">
+									<div class="campus_image">
+										<img src="{% static 'core/img/menu/peelitli.png' %}" alt="https://www.flaticon.com/authors/lucy-g">
+									</div>
+									
+								</li>
+								{% comment %} <li class="footer_contact_item">
+									<div class="footer_contact_icon">
+										<img src="{% static 'core/main/images/smartphone.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+									</div>
+									0034 37483 2445 322
+								</li>
+								<li class="footer_contact_item">
+									<div class="footer_contact_icon">
+										<img src="{% static 'core/main/images/envelope.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+									</div>hello@company.com
+								</li> {% endcomment %}
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Footer Copyright -->
+
+			<div class="footer_bar d-flex flex-column flex-sm-row align-items-center">
+				<div class="footer_copyright">
+					<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
+				</div>
+				<div class="footer_social ml-sm-auto">
+					<ul class="menu_social">
+						<li class="menu_social_item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+						<li class="menu_social_item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+						<li class="menu_social_item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+						<li class="menu_social_item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+						<li class="menu_social_item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+
+</div>
+
+<!-- اصلاح مسیر اسکریپت‌ها -->
+<script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'core/main/styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'core/main/styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'core/main/plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'core/main/plugins/easing/easing.js' %}"></script>
+<script src="{% static 'core/main/js/custom.js' %}"></script>
+
+
+</body>
+</html>

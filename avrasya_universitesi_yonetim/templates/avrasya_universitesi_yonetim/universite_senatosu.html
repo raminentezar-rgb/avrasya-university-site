@@ -1,0 +1,624 @@
+{% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load static %}
+
+{% block title %}Avrasya Üniversitesi - Üniversite Senatosu{% endblock %}
+
+{% block about_content %}
+<!-- Hero Section -->
+<div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+    <div class="card-body text-white py-5">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3">ÜNİVERSİTE SENATOSU</h1>
+                <p class="lead mb-4">
+                    Üniversitemizin en yüksek akademik organı olan Senato, 
+                    akademik politikaların belirlenmesinden sorumludur.
+                </p>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-building me-2"></i>
+                    <span>Avrasya Üniversitesi</span>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="bi bi-journal-text display-1 opacity-75"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Toggle -->
+<div class="d-flex justify-content-end mb-4">
+    <div class="view-toggle">
+        <button id="cardViewBtn" class="active">
+            <i class="bi bi-grid-3x3-gap me-1"></i> Kart Görünümü
+        </button>
+        <button id="tableViewBtn">
+            <i class="bi bi-table me-1"></i> Tablo Görünümü
+        </button>
+    </div>
+</div>
+
+<!-- Card View -->
+<div id="cardView">
+    <h2 class="section-title">Senato Üyeleri</h2>
+    <div class="row">
+        <!-- Rektör -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-person-badge member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Mahir KADAKAL</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Rektör</div>
+                    <div class="member-role">Rektör</div>
+                    <div class="member-department">Fen Edebiyat Fakültesi Dekan V.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rektör Yardımcıları -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-person-check member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Yavuz ÖZORAN</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Rektör Yardımcısı</div>
+                    <div class="member-role">Rektör Yardımcısı</div>
+                    <div class="member-department">Sağlık Bilimleri Fakültesi Dekan V.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-person-check member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Celalettin KARALİ</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Rektör Yardımcısı</div>
+                    <div class="member-role">Rektör Yardımcısı</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dekanlar -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-mortarboard member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Cemal BIYIK</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Dekan</div>
+                    <div class="member-role">İletişim Fakültesi Dekanı</div>
+                    <div class="member-department">M.M.F. Fak. Kur. Seç. Tem. Üye</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-mortarboard member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Birol DOĞAN</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Dekan</div>
+                    <div class="member-role">Spor Bilimleri Fakültesi Dekanı</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-mortarboard member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Orhan DURGUN</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Dekan</div>
+                    <div class="member-role">Mühendislik Mimarlık Fakültesi Dekanı</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-mortarboard member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Ümit UZMAN</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Dekan</div>
+                    <div class="member-role">İktisadi ve İdari Bilimler Fakültesi Dekanı</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Yüksekokul Müdürleri -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-building member-icon"></i>
+                    <h4 class="member-name">Dr. Öğr. Üyesi Hülya UYSAL</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Yüksekokul Müdürü</div>
+                    <div class="member-role">Yabancı Diller Yüksekokulu Müdürü</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-building member-icon"></i>
+                    <h4 class="member-name">Dr. Öğr. Üyesi İsmail Hakkı KOFOĞLU</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Yüksekokul Müdürü</div>
+                    <div class="member-role">Meslek Yüksekokulu Müdürü</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-building member-icon"></i>
+                    <h4 class="member-name">Dr. Öğr. Üyesi H. Emre ENGİN</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Enstitü Müdürü</div>
+                    <div class="member-role">Lisansüstü Eğitim Enstitüsü Müdürü</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-building member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Fikret Nafi ÇOKSÖYLER</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Yüksekokul Müdürü</div>
+                    <div class="member-role">Uygulamalı Bilimler Yüksekokulu Müdürü</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-building member-icon"></i>
+                    <h4 class="member-name">Dr. Öğr. Üyesi Eren URTEKİN</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Yüksekokul Müdürü</div>
+                    <div class="member-role">Sağlık Hiz. Mes. Yüksekokulu Müdürü</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fakülte Temsilcileri -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-person member-icon"></i>
+                    <h4 class="member-name">Prof. Dr. Gülay YEĞİNOĞLU</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Fakülte Temsilcisi</div>
+                    <div class="member-role">Sağlık Bilimleri Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-person member-icon"></i>
+                    <h4 class="member-name">Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Fakülte Temsilcisi</div>
+                    <div class="member-role">İ.İ.B.F. Kur. Seç. Tem. Üye</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-person member-icon"></i>
+                    <h4 class="member-name">Dr. Öğr. Üyesi Zeynep Nihan BAKIR</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Fakülte Temsilcisi</div>
+                    <div class="member-role">İletişim Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-person member-icon"></i>
+                    <h4 class="member-name">Dr. Öğr. Üyesi Mehmet DERELİOĞLU</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Fakülte Temsilcisi</div>
+                    <div class="member-role">Spor Bil. Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-person member-icon"></i>
+                    <h4 class="member-name">Dr. Öğr. Üyesi Abdullah ÇELİK</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Fakülte Temsilcisi</div>
+                    <div class="member-role">Fen Edebiyat Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Genel Sekreter -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="member-card">
+                <div class="member-header">
+                    <i class="bi bi-clipboard-data member-icon"></i>
+                    <h4 class="member-name">Gülay YENÇERİ</h4>
+                </div>
+                <div class="member-body">
+                    <div class="member-title">Genel Sekreter</div>
+                    <div class="member-role">Genel Sekreter (Raportör)</div>
+                    <div class="member-department">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Table View -->
+<div id="tableView" class="d-none">
+    <div class="card border-0 table-section">
+        <div class="card-body">
+            <h3 class="text-primary mb-4 section-title">Senato Üyeleri</h3>
+            
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Üye</th>
+                            <th>Unvan</th>
+                            <th>Görevi</th>
+                            <th>Fakülte/Birim</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Prof. Dr. Mahir KADAKAL</td>
+                            <td>Rektör</td>
+                            <td>Rektör</td>
+                            <td>Fen Edebiyat Fakültesi Dekan V.</td>
+                        </tr>
+                        <tr>
+                            <td>Prof. Dr. Yavuz ÖZORAN</td>
+                            <td>Rektör Yardımcısı</td>
+                            <td>Rektör Yardımcısı</td>
+                            <td>Sağlık Bilimleri Fakültesi Dekan V.</td>
+                        </tr>
+                        <tr>
+                            <td>Prof. Dr. Celalettin KARALİ</td>
+                            <td>Rektör Yardımcısı</td>
+                            <td>Rektör Yardımcısı</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Prof. Dr. Cemal BIYIK</td>
+                            <td>Dekan</td>
+                            <td>İletişim Fakültesi Dekanı</td>
+                            <td>M.M.F. Fak. Kur. Seç. Tem. Üye</td>
+                        </tr>
+                        <tr>
+                            <td>Prof. Dr. Birol DOĞAN</td>
+                            <td>Dekan</td>
+                            <td>Spor Bilimleri Fakültesi Dekanı</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Prof. Dr. Orhan DURGUN</td>
+                            <td>Dekan</td>
+                            <td>Mühendislik Mimarlık Fakültesi Dekanı</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Prof. Dr. Ümit UZMAN</td>
+                            <td>Dekan</td>
+                            <td>İktisadi ve İdari Bilimler Fakültesi Dekanı</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Öğr. Üyesi Hülya UYSAL</td>
+                            <td>Yüksekokul Müdürü</td>
+                            <td>Yabancı Diller Yüksekokulu Müdürü</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Öğr. Üyesi İsmail Hakkı KOFOĞLU</td>
+                            <td>Yüksekokul Müdürü</td>
+                            <td>Meslek Yüksekokulu Müdürü</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Öğr. Üyesi H. Emre ENGİN</td>
+                            <td>Enstitü Müdürü</td>
+                            <td>Lisansüstü Eğitim Enstitüsü Müdürü</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Prof. Dr. Fikret Nafi ÇOKSÖYLER</td>
+                            <td>Yüksekokul Müdürü</td>
+                            <td>Uygulamalı Bilimler Yüksekokulu Müdürü</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Öğr. Üyesi Eren URTEKİN</td>
+                            <td>Yüksekokul Müdürü</td>
+                            <td>Sağlık Hiz. Mes. Yüksekokulu Müdürü</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Prof. Dr. Gülay YEĞİNOĞLU</td>
+                            <td>Fakülte Temsilcisi</td>
+                            <td>Sağlık Bilimleri Fak. Kur. Seç. Tem. Üye</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR</td>
+                            <td>Fakülte Temsilcisi</td>
+                            <td>İ.İ.B.F. Kur. Seç. Tem. Üye</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Öğr. Üyesi Zeynep Nihan BAKIR</td>
+                            <td>Fakülte Temsilcisi</td>
+                            <td>İletişim Fak. Kur. Seç. Tem. Üye</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Öğr. Üyesi Mehmet DERELİOĞLU</td>
+                            <td>Fakülte Temsilcisi</td>
+                            <td>Spor Bil. Fak. Kur. Seç. Tem. Üye</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Öğr. Üyesi Abdullah ÇELİK</td>
+                            <td>Fakülte Temsilcisi</td>
+                            <td>Fen Edebiyat Fak. Kur. Seç. Tem. Üye</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Gülay YENÇERİ</td>
+                            <td>Genel Sekreter</td>
+                            <td>Genel Sekreter (Raportör)</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c9ce4ff;
+    --accent-color: #0d6efd;
+    --dark-color: #343a40;
+    --light-color: #f8f9fa;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+    background-size: cover;
+    background-position: center bottom;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.member-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.member-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.member-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.member-body {
+    padding: 20px;
+}
+
+.member-name {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+}
+
+.member-title {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.member-role {
+    font-weight: 500;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+}
+
+.member-department {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.table-section {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(23, 162, 184, 0.05);
+}
+
+.table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    border-color: #e9ecef;
+}
+
+.view-toggle {
+    background-color: white;
+    border-radius: 30px;
+    padding: 5px;
+    display: inline-flex;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.view-toggle button {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background: transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.view-toggle button.active {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .hero-section .display-5 {
+        font-size: 2rem;
+    }
+    
+    .member-card {
+        margin-bottom: 20px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cardViewBtn = document.getElementById('cardViewBtn');
+    const tableViewBtn = document.getElementById('tableViewBtn');
+    const cardView = document.getElementById('cardView');
+    const tableView = document.getElementById('tableView');
+    
+    cardViewBtn.addEventListener('click', function() {
+        cardView.classList.remove('d-none');
+        tableView.classList.add('d-none');
+        cardViewBtn.classList.add('active');
+        tableViewBtn.classList.remove('active');
+    });
+    
+    tableViewBtn.addEventListener('click', function() {
+        cardView.classList.add('d-none');
+        tableView.classList.remove('d-none');
+        cardViewBtn.classList.remove('active');
+        tableViewBtn.classList.add('active');
+    });
+});
+</script>
+{% endblock %}

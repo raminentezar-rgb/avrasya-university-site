@@ -1,0 +1,1644 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as CURRENT_LANG %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+<!-- templates/core/mega_navbar.html -->
+<nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!-- Anasayfa Mega Menu - Simplified -->
+            <li class="nav-item dropdown mega-menu">
+                <a class="nav-link dropdown-toggle" href="/" role="button">
+                    {% trans "Anasayfa" %}
+                </a>
+                <div class="dropdown-menu mega-menu-content p-4">
+                    <div class="container-fluid">
+                        <div class="row g-3">
+                            <!-- Column 1: GENEL BAKIŞ -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "GENEL BAKIŞ" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="/">{% trans "ANA SAYFA " %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'avrasya_universitesi_hakkinda:felsefemiz' %}">{% trans "HAKKIMIZDA" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'avrasya_universitesi_yonetim:mutevelli_heyeti' %}">{% trans "YÖNETİM" %}</a></li>
+                                        <li><a class="dropdown-item" href="/#contact">{% trans "İLETİŞİM" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'gallery:main' %}">{% trans "GALERİ" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: HIZLI ERİŞİM -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "HIZLI ERİŞİM" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="/#news">{% trans "SON HABERLER" %}</a></li>
+                                        <li><a class="dropdown-item" href="/#announcements">{% trans "DUYURULAR" %}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/#etkinlikler">{% trans "ETKİNLİKLER" %}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/#HİZMETLERİMİZ">{% trans "HİZMETLERİMİZ" %}</a></li>
+                                        <li><a class="dropdown-item" href="/#campuses">{% trans "KAMPÜSLERİMİZ" %}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/#milestones">{% trans "BAŞARIYLAĞIMIZ" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: SİSTEMLER -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "SİSTEMLER" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="https://obs.avrasya.edu.tr/"
+                                                target="_blank">{% trans "OBS" %}</a></li>
+                                        <li><a class="dropdown-item" href="https://avukalite.avrasya.edu.tr/"
+                                                target="_blank">{% trans "KALİTE" %}</a></li>
+                                        <li><a class="dropdown-item" href="https://ebys.avrasya.edu.tr/"
+                                                target="_blank">{% trans "EBYS" %}</a></li>
+                                        <li><a class="dropdown-item" href="https://kampus.avrasya.edu.tr/"
+                                                target="_blank">{% trans "BOLOGNA" %}</a></li>
+                                        <li><a class="dropdown-item" href="https://login.microsoftonline.com/"
+                                                target="_blank">{% trans "ONLİNE EĞİTİM" %}</a></li>
+                                        <li><a class="dropdown-item" href="https://login.microsoftonline.com/"
+                                                target="_blank">{% trans "MAİL" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'kutuphane:kutuphane' %}"
+                                                target="_blank">{% trans "KÜTÜPHANE" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 4: Image & Quick Links -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="">
+                                    <div class="menu-image-container mb-3">
+                                        <img src="{% static 'core/img/menu/peelitli.png' %}"
+                                            alt="{% trans 'Anasayfa' %}" class="img-fluid rounded">
+                                        <div class="menu-image-overlay">
+                                            <h2 class="mega_menu_pic_title">{% trans "ANASAYFA" %}</h2>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Aday Öğrenci Mega Menu - Simplified -->
+            <li class="nav-item dropdown mega-menu">
+                <a class="nav-link dropdown-toggle" href="{% url 'aday_ogrenci:aday_anasayfa' %}" role="button">
+                    {% trans "Aday Öğrenci" %}
+                </a>
+                <div class="dropdown-menu mega-menu-content p-4">
+                    <div class="container-fluid">
+                        <div class="row g-3">
+                            <!-- Column 1: BAŞVURU SÜREÇLERİ -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "BAŞVURU SÜREÇLERİ" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:aday_anasayfa' %}">{% trans "ADAY ÖĞRENCİ ANA SAYFA" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:kontenjanlar' %}">{% trans "KONTENJANLAR" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:egitim_ucretleri' %}">{% trans "EĞİTİM ÜCRETLERİ" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:taban_puanlar' %}">{% trans "TABAN PUANLAR" %}</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: BURS VE FİNANS -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "BURS VE FİNANS" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:dikey_gecis' %}">{% trans "DİKEY GEÇİŞ" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'yatay_gecis:yatay_gecis' %}">{% trans "YATAY GEÇİŞ" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:cap_yan_dal' %}">{% trans "ÇAP/YANDAL" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:yabanci_ogrenci' %}">{% trans "YABANCI UYRUKLU ÖĞRENCİ" %}</a></li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: YAŞAM VE OLANAKLAR -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "YAŞAM VE OLANAKLAR" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:basvuru' %}">{% trans "ERASMUS" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:kampus_yasam' %}">{% trans "KAMPÜSTE YAŞAM" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:yurt_olanaklari' %}">{% trans "YURT OLANAKLARI" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:foto_galeri' %}">{% trans "FOTO GALERİ" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:laboratuvarlar' %}">{% trans "LABORATUVARLAR" %}</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 4: Image & Quick Links -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="">
+                                    <div class="menu-image-container mb-3">
+                                        <img src="{% static 'core/img/akademik/avrasya.jpg' %}"
+                                            alt="{% trans 'Aday Öğrenci' %}" class="img-fluid rounded">
+                                        <div class="menu-image-overlay">
+                                            <h3 class="mega_menu_pic_title">{% trans "ADAY ÖĞRENCİ" %}</h3>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Öğrenci İşleri Mega Menu - Simplified -->
+            <li class="nav-item dropdown mega-menu">
+                <a class="nav-link dropdown-toggle" href="{% url 'ogrenci_isleri:ogrenci_isleri' %}" role="button">
+                    {% trans "EĞİTİM-ÖĞRETİM" %}
+                </a>
+                <div class="dropdown-menu mega-menu-content p-4">
+                    <div class="container-fluid">
+                        <div class="row g-3">
+                            <!-- Column 1: ÖĞRENCİ İŞLERİ -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "ÖĞRENCİ İŞLERİ" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'ogrenci_isleri:daire_baskanligi' %}">{% trans "Öğrenci İşleri Daire Başkanlığı" %}</a></li>
+                                        <li><a class="dropdown-item" href="https://obs.avrasya.edu.tr/">{% trans "Öğrenci Bilgi Sistemi" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'ogrenci_isleri:ogrenim_ucretleri' %}">{% trans "Öğrenim Ücretleri" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:kayit' %}">{% trans "Kayıt İşlemleri" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:burslar' %}">{% trans "Burslar ve İndirimler" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: SOSYAL YAŞAM -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "SOSYAL YAŞAM" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:yurtlar' %}">{% trans "Yurtlar" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'international:international' %}">{% trans "Uluslararası Öğrenciler" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'yatay_gecis:yatay_gecis' %}">{% trans "Yatay Geçiş" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:muafiyetler' %}">{% trans "Muafiyet" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:kulupler' %}">{% trans "Öğrenci Kulüpleri" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: ULUSLARARASI -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "ULUSLARARASI" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:yabanci_ogrenci' %}">{% trans "ERASMUS" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/">{% trans "Ders Bilgi Paketi" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:dikey' %}">{% trans "Dikey Geçiş" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:yonetmelik' %}">{% trans "Yönetmelik ve Yönergeler" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:formlar' %}">{% trans "Formlar" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:basvuru' %}">{% trans "Çift Anadal/Yandal" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 4: Image & Quick Links -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="">
+                                    <div class="menu-image-container mb-3">
+                                        <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}"
+                                            alt="{% trans 'Öğrenci İşleri' %}" class="img-fluid rounded">
+                                        <div class="menu-image-overlay">
+                                            <h3 class="mega_menu_pic_title">{% trans "ÖĞRENCİ İŞLERİ" %}</h3>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Akademik Mega Menu - Simplified -->
+            <li class="nav-item dropdown mega-menu">
+                <a class="nav-link dropdown-toggle" href="{% url 'akademik:akademik' %}" role="button">
+                    {% trans "Akademik" %}
+                </a>
+                <div class="dropdown-menu mega-menu-content p-4">
+                    <div class="container-fluid">
+                        <div class="row g-3">
+                            <!-- Column 1: FAKÜLTELER -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "FAKÜLTELER" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'fakulteler:fakulteler' %}">{% trans "Tüm Fakülteler" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'muhendislik_mimarlik:muhendislik_mimarlik' %}">{% trans "Mühendislik ve Mimarlık" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'fen_edebiyat:fen_edebiyat' %}">{% trans "Fen ve Edebiyat" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'iktisadi_idari:iktisadi_idari' %}">{% trans "İktisadi ve İdari Bilimler" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'saglik_bilimleri:saglik_bilimleri' %}">{% trans "Sağlık Bilimleri" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'spor_bilimleri:spor_bilimleri' %}">{% trans "Spor Bilimleri" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'iletisim:iletisim_anasayfa' %}">{% trans "İletişim" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: YÜKSEKOKULLAR -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "YÜKSEKOKULLAR" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'yuksekokullari:yuksekokullari' %}">{% trans "Tüm Yüksekokullar" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'uygulamali_bilimler:uygulamali_bilimler' %}">{% trans "Uygulamalı Bilimler" %}</a></li>
+                                    </ul>
+
+                                    <h6 class="section-title mb-3 mt-3">{% trans "MESLEK YÜKSEKOKULLARI" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'meslekyuksekokullari:meslekyuksekokullari' %}">{% trans "Tüm MYO'lar" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'meslek_yuksekokulu:meslek_yuksekokulu' %}">{% trans "Meslek Yüksekokulu" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'saglik_hizmetleri_myo:saglik_hizmetleri_myo' %}">{% trans "Sağlık Hizmetleri MYO" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: ENSTİTÜLER -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "ENSTİTÜLER" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'lee:lee' %}">{% trans "Tüm Enstitüler" %}</a></li>
+
+                                    </ul>
+
+                                    <h6 class="section-title mb-3 mt-3">{% trans "AKADEMİK TAKVİM" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="#">{% trans "Akademik Takvim" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Ders Programları" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Sınav Takvimi" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 4: Image & Quick Links -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="">
+                                    <div class="menu-image-container mb-3">
+                                        <img src="{% static 'core/img/menu/yomra.png' %}" alt="{% trans 'Akademik' %}"
+                                            class="img-fluid rounded">
+                                        <div class="menu-image-overlay">
+                                            <h2 class="mega_menu_pic_title">{% trans "AKADEMİK" %}</h2>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- İdari Birimler Mega Menu - Simplified -->
+
+            <li class="nav-item dropdown mega-menu">
+                <a class="nav-link dropdown-toggle" href="{% url 'idari_birimler:idari_birimler' %}" role="button">
+                    {% trans "İdari" %}
+                </a>
+                <div class="dropdown-menu mega-menu-content p-4">
+                    <div class="container-fluid">
+                        <div class="row g-3">
+                            <!-- Column 1: YÖNETİM -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "İdari Birimler" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'idari_birimler:kurumsal_iletisim' %}">{% trans "Kurumsal İletişim ve Halkla İlişkiler" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'idari_birimler:bilgi_islem' %}">{% trans "Bilgi İşlem Daire Başkanlığı" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'idari_birimler:idari_mali' %}">{% trans "İdari ve Mali İşler Daire Başkanlığı" %}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'idari_birimler:ogrenci_isleri_daire_baskanligi' %}">{% trans "Öğrenci İşleri Daire Başkanlığı" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: DAİRE BAŞKANLIKLARI -->
+                            {% comment %} <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "DAİRE BAŞKANLIKLARI" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item"
+                                                href="{% url 'ogrenci_isleri:daire_baskanligi' %}">{% trans "" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "" %}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">{% trans "" %}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">{% trans "" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div> {% endcomment %}
+
+                            <!-- Column 3: KOORDİNATÖRLÜKLER -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "İdari Birimler" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'idari_birimler:kutuphane_dokumantasyon' %}">{% trans "Kütüphane ve Dökümantasyon" %}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{% url 'idari_birimler:personel_daire_baskanligi' %}">{% trans "Personel Daire Başkanlığı" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'idari_birimler:yapi_isleri_mudurlugu' %}">{% trans "Yapı İşleri ve Teknik" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'idari_birimler:yazi_isleri' %}">{% trans "Yazı İşleri Müdürlüğü" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 4: Image & Quick Links -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="">
+                                    <div class="menu-image-container mb-3">
+                                        <img src="{% static 'core/img/menu/yomra.png' %}" alt="{% trans 'İdari' %}"
+                                            class="img-fluid rounded">
+                                        <div class="menu-image-overlay">
+                                            <h2 class="mega_menu_pic_title">{% trans "İDARİ" %}</h2>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Araştırma Mega Menu - Simplified -->
+            <li class="nav-item dropdown mega-menu">
+                <a class="nav-link dropdown-toggle" href="{% url 'arastirma:home' %}" role="button">
+                    {% trans "Araştırma" %}
+                </a>
+                <div class="dropdown-menu mega-menu-content p-4">
+                    <div class="container-fluid">
+                        <div class="row g-3">
+                            <!-- Column 1: ARAŞTIRMA MERKEZLERİ -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "ARAŞTIRMA MERKEZLERİ" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="{% url 'arastirma:arastirma_merkezleri' %}">{% trans "Uygulama ve Araştırma Merkezleri" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Kadın Çalışmaları" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Bağımlılıkla Mücadele" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Uzaktan Eğitim" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Girişimcilik ve Yenilikçilik" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Gıda Eğitim" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Göç Çalışmaları" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Türkçe Öğretimi" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Kariyer Geliştirme" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Ulaştırma Uygulama" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Teknoloji Transfer Ofisi" %}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Sürekli Eğitim Uygulama" %}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: PROJELER -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "PROJELER" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="#">{% trans "BAP" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Etik Kurul" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Bilimsel Etkinlikler" %}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Üniversite Dergileri" %}</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: YAYINLAR & ETKİNLİKLER -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="menu-section">
+                                    <h6 class="section-title mb-3">{% trans "YAYINLAR & ETKİNLİKLER" %}</h6>
+                                    <ul class="list-unstyled menu-list">
+                                        <li><a class="dropdown-item" href="#">{% trans "Projelerimiz" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Öğrenci Projeleri" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Laboratuvarlar" %}</a></li>
+                                        <li><a class="dropdown-item" href="#">{% trans "Yeni Yayınlar" %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Column 4: Image & Quick Links -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="">
+                                    <div class="menu-image-container mb-3">
+                                        <img src="{% static 'core/img/akademik/IMG_0536-2-scaled.jpg' %}"
+                                            alt="{% trans 'Araştırma' %}" class="img-fluid rounded">
+                                        <div class="menu-image-overlay">
+                                            <h2 class="mega_menu_pic_title">{% trans "ARAŞTIRMA" %}</h2>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- İletişim -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'core:iletisim' %}">
+                    {% trans "İLETİŞİM" %}
+                </a>
+            </li>
+
+            <!-- Header Icons Section as Dropdowns -->
+            <li class="nav-item">
+                <div class="header_side d-flex flex-row justify-content-center align-items-center">
+                    <!-- Map Icon Dropdown -->
+                    <div class="dropdown header_icon_container">
+                        <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="{% static 'core/main/images/placeholder.svg' %}" class="header_icon"
+                                alt="{% trans 'موقعیت' %}">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end header-dropdown-menu p-3">
+                            <div class="menu-section">
+                                <h6 class="section-title mb-3">{% trans "Bölümler" %}</h6>
+                                <ul class="list-unstyled menu-list">
+                                    <li><a class="dropdown-item" href="{% url 'lee:lee' %}">{% trans "Enstitüler" %}</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'muhendislik_mimarlik:muhendislik_mimarlik' %}">{% trans "Mühendislik ve Mimarlık" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'fen_edebiyat:fen_edebiyat' %}">{% trans "Fen ve Edebiyat" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'iktisadi_idari:iktisadi_idari' %}">{% trans "İktisadi ve İdari Bilimler" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'saglik_bilimleri:saglik_bilimleri' %}">{% trans "Sağlık Bilimleri" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'spor_bilimleri:spor_bilimleri' %}">{% trans "Spor Bilimleri" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'iletisim:iletisim_anasayfa' %}">{% trans "İletişim" %}</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'uygulamali_bilimler:uygulamali_bilimler' %}">{% trans "Uygulamalı Bilimler" %}</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'meslek_yuksekokulu:meslek_yuksekokulu' %}">{% trans "Meslek Yüksekokulu" %}</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'saglik_hizmetleri_myo:saglik_hizmetleri_myo' %}">{% trans "Sağlık Hizmetleri MYO" %}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Icon Dropdown -->
+                    <div class="dropdown header_icon_container">
+                        <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="{% static 'core/main/images/morta.png' %}" class="header_icon"
+                                alt="{% trans 'حساب کاربری' %}">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end header-dropdown-menu p-3">
+                            <div class="menu-section">
+                                <h6 class="section-title mb-3">{% trans "Öğrenci" %}</h6>
+                                <ul class="list-unstyled menu-list">
+                                    <li><a class="dropdown-item" href="#">{% trans "Kayıt İşlemleri" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Öğrenim Ücretleri" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Burs ve İndirimler" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Yatay Geçiş" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Dikey Geçiş" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Öğrenci Kulüpleri" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Etkinlik Takvimi" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Kampüs Hayatı" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Yurtlarımız" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Öğrenci Temsilciliği" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Sosyal Alanlar" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Mail Kullanımı" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Öğrenci Deneyimi" %}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Language Selector Dropdown - Enhanced -->
+                    <div class="dropdown language-selector ms-3">
+                        <!-- Current Language Display -->
+                        <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="current-language d-flex align-items-center">
+                                <div class="language-flag me-2">
+                                    {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}
+                                    <span class="flag-icon flag-icon-tr"></span>
+                                    {% elif CURRENT_LANG == 'fa' %}
+                                    <span class="flag-icon flag-icon-ir"></span>
+                                    {% elif CURRENT_LANG == 'ar' %}
+                                    <span class="flag-icon flag-icon-sa"></span>
+                                    {% elif CURRENT_LANG == 'ru' %}
+                                    <span class="flag-icon flag-icon-ru"></span>
+                                    {% elif CURRENT_LANG == 'de' %}
+                                    <span class="flag-icon flag-icon-de"></span>
+                                    {% else %}
+                                    <span class="flag-icon flag-icon-gb"></span>
+                                    {% endif %}
+                                </div>
+                                <span class="language-code fw-medium">
+                                    {% if CURRENT_LANG %}{{ CURRENT_LANG|upper }}{% else %}TR{% endif %}
+                                </span>
+                            </div>
+                        </a>
+
+                        <!-- Language Options Dropdown Menu -->
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown p-2">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'tr' or CURRENT_LANG == 'tr-tr' or not CURRENT_LANG %}active-language{% endif %}"
+                                    href="javascript:void(0)" onclick="changeLanguage('tr')">
+                                    <span class="flag-icon flag-icon-tr me-3"></span>
+                                    <div class="language-info">
+                                        <div class="language-name">{% trans "Türkçe" %}</div>
+                                        <div class="language-code text-muted small">TR</div>
+                                    </div>
+                                    {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}
+                                    <span class="ms-auto text-primary">✓</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'en' %}active-language{% endif %}"
+                                    href="javascript:void(0)" onclick="changeLanguage('en')">
+                                    <span class="flag-icon flag-icon-gb me-3"></span>
+                                    <div class="language-info">
+                                        <div class="language-name">{% trans "English" %}</div>
+                                        <div class="language-code text-muted small">EN</div>
+                                    </div>
+                                    {% if CURRENT_LANG == 'en' %}
+                                    <span class="ms-auto text-primary">✓</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'fa' %}active-language{% endif %}"
+                                    href="javascript:void(0)" onclick="changeLanguage('fa')">
+                                    <span class="flag-icon flag-icon-ir me-3"></span>
+                                    <div class="language-info">
+                                        <div class="language-name">{% trans "فارسی" %}</div>
+                                        <div class="language-code text-muted small">FA</div>
+                                    </div>
+                                    {% if CURRENT_LANG == 'fa' %}
+                                    <span class="ms-auto text-primary">✓</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'ar' %}active-language{% endif %}"
+                                    href="javascript:void(0)" onclick="changeLanguage('ar')">
+                                    <span class="flag-icon flag-icon-sa me-3"></span>
+                                    <div class="language-info">
+                                        <div class="language-name">{% trans "العربية" %}</div>
+                                        <div class="language-code text-muted small">AR</div>
+                                    </div>
+                                    {% if CURRENT_LANG == 'ar' %}
+                                    <span class="ms-auto text-primary">✓</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'ru' %}active-language{% endif %}"
+                                    href="javascript:void(0)" onclick="changeLanguage('ru')">
+                                    <span class="flag-icon flag-icon-ru me-3"></span>
+                                    <div class="language-info">
+                                        <div class="language-name">{% trans "Русский" %}</div>
+                                        <div class="language-code text-muted small">RU</div>
+                                    </div>
+                                    {% if CURRENT_LANG == 'ru' %}
+                                    <span class="ms-auto text-primary">✓</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'de' %}active-language{% endif %}"
+                                    href="javascript:void(0)" onclick="changeLanguage('de')">
+                                    <span class="flag-icon flag-icon-de me-3"></span>
+                                    <div class="language-info">
+                                        <div class="language-name">{% trans "Deutsch" %}</div>
+                                        <div class="language-code text-muted small">DE</div>
+                                    </div>
+                                    {% if CURRENT_LANG == 'de' %}
+                                    <span class="ms-auto text-primary">✓</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Hidden Language Form -->
+                    <form action="{% url 'core:set_language' %}" method="post" id="lang-form" class="d-none">
+                        {% csrf_token %}
+                        <input type="hidden" name="language" id="lang-code" value="">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<style>
+    /* Clean and Simplified Styles */
+    .menu-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 15px;
+        height: 100%;
+        border: 1px solid rgba(141, 212, 227, 0.0);
+        transition: all 0.2s ease;
+    }
+
+    .menu-section:hover {
+        background: rgba(255, 255, 255, 1);
+    }
+
+    .section-title {
+        color: var(--secondary-medium-blue) !important;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--accent-light-blue);
+    }
+
+    .menu-list {
+        max-height: 250px;
+        overflow-y: auto;
+        padding-right: 8px;
+    }
+
+    .menu-list::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    .menu-list::-webkit-scrollbar-track {
+        background: rgba(141, 212, 227, 0.05);
+        border-radius: 10px;
+    }
+
+    .menu-list::-webkit-scrollbar-thumb {
+        background: var(--accent-light-blue);
+        border-radius: 10px;
+    }
+
+    .menu-list .dropdown-item {
+        padding: 6px 8px;
+        margin-bottom: 4px;
+        color: var(--text-dark);
+        transition: all 0.2s ease;
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: 4px;
+        position: relative;
+    }
+
+    .menu-list .dropdown-item:hover {
+        background: rgba(29, 97, 169, 0.08);
+        color: var(--secondary-medium-blue);
+        padding-left: 12px;
+    }
+
+    .menu-list .dropdown-item::before {
+        content: "›";
+        color: var(--accent-light-blue);
+        margin-right: 6px;
+        font-size: 14px;
+        opacity: 0;
+        transition: all 0.2s ease;
+    }
+
+    .menu-list .dropdown-item:hover::before {
+        opacity: 1;
+    }
+
+    .menu-info-card {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        padding: 15px;
+        height: 100%;
+        border: 1px solid rgba(141, 212, 227, 0.15);
+        transition: all 0.2s ease;
+    }
+
+    .menu-info-card:hover {
+        border-color: var(--accent-light-blue);
+    }
+
+    .menu-image-container {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        height: 400px;
+        margin-bottom: 15px;
+    }
+
+    .menu-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .mega-menu:hover .menu-image-container img {
+        transform: scale(1.02);
+    }
+
+    .menu-image-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(9, 36, 66, 0.85));
+        color: white;
+        padding: 10px;
+    }
+
+    .menu-image-overlay h5 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--pure-white);
+    }
+
+    .menu-image-overlay p {
+        margin: 3px 0 0 0;
+        font-size: 11px;
+        opacity: 0.9;
+        color: var(--accent-light-blue);
+    }
+
+    .mega_menu_pic_title {
+        color: white;
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 900;
+        margin-left: 50px;
+        text-transform: uppercase;
+    }
+
+    .btn-menu {
+        background: rgba(29, 97, 169, 0.08);
+        border: 1px solid rgba(29, 97, 169, 0.2);
+        color: var(--secondary-medium-blue);
+        padding: 6px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .btn-menu:hover {
+        background: var(--secondary-medium-blue);
+        color: white;
+        border-color: var(--secondary-medium-blue);
+    }
+
+    /* Remove Font Awesome dependency */
+    .fas {
+        display: none !important;
+    }
+
+    /* کلاس جدید برای تغییر رنگ لینک‌ها هنگام اسکرول */
+    .navbar.scrolled .nav-link {
+        color: #1e90ff !important;
+        text-shadow: 0 2px 4px rgba(30, 144, 255, 0.4);
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    /* حفظ رنگ هاور در حالت اسکرول */
+    .navbar.scrolled .nav-link:hover,
+    .navbar.scrolled .nav-link:focus {
+        color: #0056b3 !important;
+        text-shadow: 0 2px 4px rgba(0, 86, 179, 0.4);
+    }
+
+    /* حفظ رنگ برای منوی فعال در حالت اسکرول */
+    .navbar.scrolled .nav-item.show>.nav-link,
+    .navbar.scrolled .nav-link.active {
+        color: #0056b3 !important;
+    }
+
+    /* (اختیاری) تغییر رنگ آیکون‌ها در حالت اسکرول */
+    .navbar.scrolled .header_icon {
+        filter: brightness(0) saturate(100%) invert(35%) sepia(98%) saturate(2000%) hue-rotate(200deg) brightness(90%) contrast(90%);
+    }
+
+    /* (اختیاری) تغییر رنگ dropdown-toggle در حالت اسکرول */
+    .navbar.scrolled .dropdown-toggle::after {
+        border-top-color: #1e90ff;
+    }
+
+    /* تضمین کنتراست در حالت عادی */
+    .nav-link {
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+        color: rgba(255, 255, 255, 0.85) !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .nav-link:hover {
+        color: var(--accent-light-blue) !important;
+    }
+
+    /* استایل برای آیکون‌های هدر به صورت dropdown */
+    .header_side {
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .header_icon_container {
+        position: relative;
+        margin: 0;
+    }
+
+    .header_icon_container .dropdown-menu {
+        min-width: 250px;
+        max-width: 300px;
+        background: rgba(247, 243, 233, 0.98) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(9, 36, 66, 0.3);
+        margin-top: 10px !important;
+        animation: fadeInUp 0.3s ease forwards;
+        transform-origin: top right;
+    }
+
+    .header_icon_container .dropdown-menu.header-dropdown-menu {
+        right: 0 !important;
+        left: auto !important;
+    }
+
+    .header_icon_container .menu-section {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(29, 97, 169, 0.1);
+        margin: 0;
+    }
+
+    .header_icon_container .menu-list {
+        max-height: 200px;
+        margin: 0;
+    }
+
+    .header_icon_container .menu-list .dropdown-item {
+        padding: 8px 12px;
+        font-size: 13px;
+        color: var(--text-dark);
+        background: transparent;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+        margin-bottom: 5px;
+    }
+
+    .header_icon_container .menu-list .dropdown-item:hover {
+        background: rgba(29, 97, 169, 0.08);
+        color: var(--secondary-medium-blue);
+        padding-left: 16px;
+        border-left: 3px solid var(--accent-light-blue);
+    }
+
+    .header_icon {
+        width: 24px;
+        height: 24px;
+        transition: all 0.3s ease;
+        filter: brightness(0) invert(1);
+    }
+
+    .header_icon_container:hover .header_icon {
+        filter: brightness(0) saturate(100%) invert(81%) sepia(15%) saturate(1000%) hue-rotate(160deg) brightness(95%) contrast(85%);
+        transform: scale(1.1);
+    }
+
+    /* انیمیشن برای باز شدن منو */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* نمایش dropdown روی هاور برای دسکتاپ */
+    @media (min-width: 992px) {
+        .header_icon_container:hover .dropdown-menu {
+            display: block !important;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.3s ease forwards;
+        }
+
+        .header_icon_container .dropdown-menu {
+            display: none;
+        }
+
+        .navbar-nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap !important;
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+
+        .menu-section,
+        .menu-info-card {
+            padding: 12px;
+        }
+
+        .menu-image-container {
+            height: 120px;
+        }
+
+        .menu-list {
+            max-height: 220px;
+        }
+
+        .header_icon_container .dropdown-menu {
+            min-width: 220px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .menu-section {
+            margin-bottom: 10px;
+        }
+
+        .menu-info-card {
+            margin-top: 10px;
+        }
+
+        .menu-list {
+            max-height: 180px;
+        }
+
+        .menu-image-container {
+            height: 100px;
+        }
+
+        .menu-image-overlay h5 {
+            font-size: 12px;
+        }
+
+        .menu-image-overlay p {
+            font-size: 10px;
+        }
+
+        .btn-menu {
+            padding: 5px 8px;
+            font-size: 11px;
+        }
+
+        .header_side {
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            /* کاهش فاصله بین آیکون‌ها */
+            padding: 0 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            height: 40px;
+        }
+
+        .header_icon_container {
+            position: relative;
+            margin: 0 4px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .col-md-6 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .menu-section,
+        .menu-info-card {
+            padding: 10px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .menu-list .dropdown-item {
+            padding: 5px 6px;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .menu-image-container {
+            height: 90px;
+        }
+
+        .header_icon_container .dropdown-menu {
+            position: static !important;
+            float: none;
+            width: 100%;
+            margin-top: 5px !important;
+            animation: none;
+        }
+    }
+
+    /* Language Selector Styles - Fixed */
+    .header_side .language-selector {
+        position: relative;
+        margin-left: 10px;
+    }
+
+    .header_side .current-language {
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+    }
+
+    .header_side .current-language:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .header_side .language-flag .flag-icon {
+        width: 20px;
+        height: 15px;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        vertical-align: middle;
+    }
+
+    .header_side .language-code {
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+        margin-left: 5px;
+    }
+
+    /* Language Dropdown Menu - Fixed Position */
+
+
+    .header_side .language-dropdown {
+        min-width: 200px !important;
+        background: rgba(247, 243, 233, 0.98) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(9, 36, 66, 0.3);
+        margin-top: 0px !important;
+        transform-origin: top right;
+        right: 0 !important;
+        left: auto !important;
+        animation: slideInDown 0.3s ease forwards;
+    }
+
+    .header_side .language-dropdown .dropdown-item {
+        border-radius: 6px;
+        margin-bottom: 2px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+    }
+
+    .header_side .language-dropdown .dropdown-item:hover {
+        background: rgba(29, 97, 169, 0.1);
+        transform: translateX(5px);
+    }
+
+    .header_side .language-dropdown .flag-icon {
+        width: 24px;
+        height: 18px;
+        border-radius: 3px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        margin-right: 12px;
+    }
+
+    .header_side .language-info {
+        flex: 1;
+    }
+
+    .header_side .language-name {
+        font-weight: 500;
+        color: var(--text-dark);
+        font-size: 14px;
+        margin-bottom: 2px;
+        text-transform: uppercase;
+    }
+
+    .header_side .language-dropdown .language-code.text-muted {
+        font-size: 11px;
+        color: #666;
+        display: block;
+    }
+
+    /* Animation */
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* When navbar is scrolled */
+    .navbar.scrolled .header_side .current-language {
+        background: rgba(30, 144, 255, 0.1);
+        border-color: rgba(30, 144, 255, 0.2);
+    }
+
+    .navbar.scrolled .header_side .language-code {
+        color: #1e90ff;
+    }
+
+    .navbar.scrolled .header_side .current-language:hover {
+        background: rgba(30, 144, 255, 0.2);
+        border-color: rgba(30, 144, 255, 0.3);
+    }
+
+    /* Responsive Design for Language Selector */
+    @media (max-width: 992px) {
+        .header_side .current-language {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .header_side .language-code {
+            font-size: 14px;
+        }
+
+        .header_side .language-dropdown {
+            position: static !important;
+            float: none;
+            width: 100%;
+            margin-top: 5px !important;
+            animation: none;
+            background: rgba(255, 255, 255, 0.98) !important;
+        }
+    }
+
+    /* Ensure dropdown menu appears on hover for desktop */
+    @media (min-width: 992px) {
+        .header_side .language-selector:hover .language-dropdown {
+            display: block !important;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: slideInDown 0.3s ease forwards;
+        }
+
+        .header_side .language-selector .language-dropdown {
+            display: none;
+        }
+    }
+
+    /* Style for active language in dropdown */
+    .header_side .language-dropdown .active-language {
+        background-color: rgba(29, 97, 169, 0.08) !important;
+        border-left: 3px solid var(--accent-light-blue);
+    }
+
+    .header_side .language-dropdown .active-language .language-name {
+        color: var(--secondary-medium-blue);
+        font-weight: 600;
+    }
+
+    .header_side .language-dropdown .active-language .text-primary {
+        color: var(--accent-light-blue) !important;
+        font-weight: bold;
+    }
+
+    /* Highlight Turkish as default */
+    .header_side .language-dropdown .dropdown-item:first-child {
+        background-color: rgba(29, 97, 169, 0.05);
+    }
+</style>
+
+<script>
+
+
+    // اصلاح شده: مدیریت بهتر هاور برای منوها
+    document.addEventListener('DOMContentLoaded', function () {
+        // فقط برای دسکتاپ
+        if (window.innerWidth >= 992) {
+            const megaMenus = document.querySelectorAll('.mega-menu');
+            let closeTimer;
+
+            megaMenus.forEach(menu => {
+                const dropdownToggle = menu.querySelector('.dropdown-toggle');
+                const dropdownMenu = menu.querySelector('.dropdown-menu');
+
+                if (!dropdownToggle || !dropdownMenu) return;
+
+                // هاور روی کل منو
+                menu.addEventListener('mouseenter', function () {
+                    clearTimeout(closeTimer);
+
+                    // بستن بقیه منوها
+                    megaMenus.forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.classList.remove('show');
+                            otherMenu.querySelector('.dropdown-menu')?.classList.remove('show');
+                        }
+                    });
+
+                    // باز کردن منوی جاری
+                    menu.classList.add('show');
+                    dropdownMenu.classList.add('show');
+
+                    // برای Bootstrap
+                    if (dropdownToggle.getAttribute('data-bs-toggle') === 'dropdown') {
+                        const bsDropdown = bootstrap.Dropdown.getInstance(dropdownToggle);
+                        if (!bsDropdown) {
+                            new bootstrap.Dropdown(dropdownToggle).show();
+                        } else {
+                            bsDropdown.show();
+                        }
+                    }
+                });
+
+                // خروج از منو
+                menu.addEventListener('mouseleave', function (e) {
+                    // تاخیر برای بستن (300ms)
+                    closeTimer = setTimeout(() => {
+                        // بررسی اگر کاربر به منوی دیگر رفته
+                        const relatedTarget = e.relatedTarget;
+                        if (!menu.contains(relatedTarget)) {
+                            menu.classList.remove('show');
+                            dropdownMenu.classList.remove('show');
+
+                            // برای Bootstrap
+                            if (dropdownToggle.getAttribute('data-bs-toggle') === 'dropdown') {
+                                const bsDropdown = bootstrap.Dropdown.getInstance(dropdownToggle);
+                                if (bsDropdown) {
+                                    bsDropdown.hide();
+                                }
+                            }
+                        }
+                    }, 300);
+                });
+
+                // هاور روی خود منوی باز شده
+                dropdownMenu.addEventListener('mouseenter', function () {
+                    clearTimeout(closeTimer);
+                });
+
+                dropdownMenu.addEventListener('mouseleave', function (e) {
+                    closeTimer = setTimeout(() => {
+                        const relatedTarget = e.relatedTarget;
+                        if (!menu.contains(relatedTarget)) {
+                            menu.classList.remove('show');
+                            dropdownMenu.classList.remove('show');
+
+                            // برای Bootstrap
+                            if (dropdownToggle.getAttribute('data-bs-toggle') === 'dropdown') {
+                                const bsDropdown = bootstrap.Dropdown.getInstance(dropdownToggle);
+                                if (bsDropdown) {
+                                    bsDropdown.hide();
+                                }
+                            }
+                        }
+                    }, 300);
+                });
+            });
+
+            // بستن تمام منوها هنگام کلیک بیرون
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.mega-menu')) {
+                    megaMenus.forEach(menu => {
+                        menu.classList.remove('show');
+                        menu.querySelector('.dropdown-menu')?.classList.remove('show');
+                    });
+                }
+            });
+        }
+
+        // مدیریت ریسپانسیو (موبایل) - مثل قبل
+        if (window.innerWidth < 992) {
+            const megaMenuToggles = document.querySelectorAll('.mega-menu .dropdown-toggle');
+
+            megaMenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Close other open menus
+                    document.querySelectorAll('.mega-menu').forEach(menu => {
+                        if (menu !== this.parentElement) {
+                            menu.classList.remove('show');
+                        }
+                    });
+
+                    // Toggle current menu
+                    const megaMenu = this.parentElement;
+                    megaMenu.classList.toggle('show');
+                });
+            });
+        }
+    });
+
+
+
+
+
+
+
+    // Simple JavaScript for Mega Menu
+    document.addEventListener('DOMContentLoaded', function () {
+        const megaMenuToggles = document.querySelectorAll('.mega-menu .dropdown-toggle');
+
+        megaMenuToggles.forEach(toggle => {
+            toggle.addEventListener('click', function (e) {
+                if (window.innerWidth < 992) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Close other open menus
+                    document.querySelectorAll('.mega-menu').forEach(menu => {
+                        if (menu !== this.parentElement) {
+                            menu.classList.remove('show');
+                        }
+                    });
+
+                    // Toggle current menu
+                    const megaMenu = this.parentElement;
+                    megaMenu.classList.toggle('show');
+                }
+            });
+        });
+
+        // Close mega menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.mega-menu')) {
+                document.querySelectorAll('.mega-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+
+        // Close mega menu on mobile scroll
+        window.addEventListener('scroll', function () {
+            if (window.innerWidth < 992) {
+                document.querySelectorAll('.mega-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+
+        // Simple hover effect for menu items
+        const menuItems = document.querySelectorAll('.menu-list .dropdown-item');
+        menuItems.forEach(item => {
+            item.addEventListener('mouseenter', function () {
+                this.style.transition = 'all 0.15s ease';
+            });
+        });
+
+        // Auto-adjust menu list heights based on content
+        function adjustMenuHeights() {
+            const menuLists = document.querySelectorAll('.menu-list');
+            menuLists.forEach(list => {
+                const items = list.querySelectorAll('li');
+                const itemCount = items.length;
+
+                if (itemCount > 7) {
+                    list.style.maxHeight = '250px';
+                    list.style.overflowY = 'auto';
+                } else {
+                    list.style.maxHeight = 'none';
+                    list.style.overflowY = 'visible';
+                }
+            });
+        }
+
+        // Initialize
+        adjustMenuHeights();
+
+        // Re-adjust on window resize
+        window.addEventListener('resize', adjustMenuHeights);
+
+        // اسکریپت جدید برای تغییر رنگ هنگام اسکرول
+        const navbar = document.querySelector('.navbar');
+        const threshold = 100;
+
+        function handleScroll() {
+            if (window.scrollY > threshold) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        if (window.scrollY > threshold) {
+            navbar.classList.add('scrolled');
+        }
+
+        // مدیریت منوهای آیکون‌ها برای دسکتاپ
+        if (window.innerWidth >= 992) {
+            const iconContainers = document.querySelectorAll('.header_icon_container');
+
+            iconContainers.forEach(container => {
+                const dropdownMenu = container.querySelector('.dropdown-menu');
+
+                container.addEventListener('mouseenter', function () {
+                    if (dropdownMenu) {
+                        dropdownMenu.style.display = 'block';
+                        dropdownMenu.style.opacity = '0';
+                        dropdownMenu.style.transform = 'translateY(10px)';
+
+                        setTimeout(() => {
+                            dropdownMenu.style.opacity = '1';
+                            dropdownMenu.style.transform = 'translateY(0)';
+                            dropdownMenu.style.transition = 'all 0.3s ease';
+                        }, 10);
+                    }
+                });
+
+                container.addEventListener('mouseleave', function (e) {
+                    if (dropdownMenu && !container.contains(e.relatedTarget)) {
+                        dropdownMenu.style.opacity = '0';
+                        dropdownMenu.style.transform = 'translateY(10px)';
+
+                        setTimeout(() => {
+                            dropdownMenu.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        }
+    });
+
+    function changeLanguage(lang) {
+        document.getElementById('lang-code').value = lang;
+        document.getElementById('lang-form').submit();
+    }
+
+    // Language Change Function - Keep only one version
+    function changeLanguage(lang) {
+        const form = document.getElementById('lang-form');
+        const langInput = document.getElementById('lang-code');
+
+        // Set selected language
+        langInput.value = lang;
+
+        // Optional: Add loading indicator
+        const currentLang = document.querySelector('.current-language');
+        if (currentLang) {
+            currentLang.style.opacity = '0.7';
+        }
+
+        // Submit form
+        form.submit();
+    }
+
+    // Set default language to Turkish on page load if not set
+    document.addEventListener('DOMContentLoaded', function () {
+        const currentLang = "{{ CURRENT_LANG|default:'tr' }}";
+
+        // If language is not set, default to Turkish
+        if (!currentLang || currentLang === 'None') {
+            const langForm = document.getElementById('lang-form');
+            const langInput = document.getElementById('lang-code');
+
+            if (langForm && langInput) {
+                // Don't auto-submit, just update UI
+                const currentLangDisplay = document.querySelector('.language-code');
+                const currentFlag = document.querySelector('.language-flag .flag-icon');
+
+                if (currentLangDisplay) {
+                    currentLangDisplay.textContent = 'TR';
+                }
+
+                if (currentFlag) {
+                    currentFlag.className = 'flag-icon flag-icon-tr';
+                }
+            }
+        }
+    });
+
+    // Function to get current language from cookie
+    function getCurrentLanguage() {
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('django_language='))
+            ?.split('=')[1];
+
+        return cookieValue || 'tr'; // Default to Turkish
+    }
+
+    // Update UI based on cookie language
+    function updateLanguageFromCookie() {
+        const lang = getCurrentLanguage();
+        const currentLangDisplay = document.querySelector('.language-code');
+        const currentFlag = document.querySelector('.language-flag .flag-icon');
+
+        if (!currentLangDisplay || !currentFlag) return;
+
+        // Update flag and code
+        currentFlag.className = 'flag-icon';
+        switch (lang) {
+            case 'tr':
+                currentFlag.classList.add('flag-icon-tr');
+                currentLangDisplay.textContent = 'TR';
+                break;
+            case 'en':
+                currentFlag.classList.add('flag-icon-gb');
+                currentLangDisplay.textContent = 'EN';
+                break;
+            case 'fa':
+                currentFlag.classList.add('flag-icon-ir');
+                currentLangDisplay.textContent = 'FA';
+                break;
+            case 'ar':
+                currentFlag.classList.add('flag-icon-sa');
+                currentLangDisplay.textContent = 'AR';
+                break;
+            case 'ru':
+                currentFlag.classList.add('flag-icon-ru');
+                currentLangDisplay.textContent = 'RU';
+                break;
+            case 'de':
+                currentFlag.classList.add('flag-icon-de');
+                currentLangDisplay.textContent = 'DE';
+                break;
+            default:
+                currentFlag.classList.add('flag-icon-tr');
+                currentLangDisplay.textContent = 'TR';
+        }
+
+        // Update active items in dropdown
+        document.querySelectorAll('.language-dropdown .dropdown-item').forEach(item => {
+            item.classList.remove('active-language');
+            item.querySelector('.text-primary')?.remove();
+
+            // Check if this item matches current language
+            const onclickAttr = item.getAttribute('onclick');
+            if (onclickAttr && onclickAttr.includes(`'${lang}'`)) {
+                item.classList.add('active-language');
+                const checkmark = document.createElement('span');
+                checkmark.className = 'ms-auto text-primary';
+                checkmark.innerHTML = '✓';
+                item.appendChild(checkmark);
+            }
+        });
+    }
+
+    // Call this on page load
+    document.addEventListener('DOMContentLoaded', function () {
+        updateLanguageFromCookie();
+
+        // Also update when language changes (for AJAX solution)
+        window.addEventListener('languageChanged', updateLanguageFromCookie);
+    });
+</script>

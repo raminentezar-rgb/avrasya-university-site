@@ -1,0 +1,364 @@
+<!-- Sidebar Menu -->
+    <div class="col-lg-12 mb-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <a href="{% url 'saglik_hizmetleri_myo:saglik_hizmetleri_myo' %}" class="text-white text-decoration-none">
+                    <h5 class="mb-0"><i class="bi bi-journals me-2"></i>Sağlık Hizmetleri Meslek Yüksekokulu</h5>
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush" id="facultyMenu">
+                    <!-- Fakülte -->
+                    <div class="list-group-item border-0 p-0">
+                        <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                                data-bs-toggle="collapse" data-bs-target="#fakulteCollapse">
+                            <span><i class="bi bi-building me-2"></i>Fakülte</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="fakulteCollapse">
+                            <div class="list-group list-group-flush">
+                                <a href="{% url 'saglik_hizmetleri_myo:tarihce' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-clock-history me-2"></i>Tarihçe
+                                </a>
+                                <a href="{% url 'saglik_hizmetleri_myo:misyon_visyon' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-bullseye me-2"></i>Misyon & Vizyon
+                                </a>
+                                <a href="{% url 'saglik_hizmetleri_myo:dekan_mesaji' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-chat-quote me-2"></i>Dekan Mesajı
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yönetim -->
+                    <div class="list-group-item border-0 p-0">
+                        <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                                data-bs-toggle="collapse" data-bs-target="#yonetimCollapse">
+                            <span><i class="bi bi-people me-2"></i>Yönetim</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="yonetimCollapse">
+                            <div class="list-group list-group-flush">
+                                <a href="{% url 'saglik_hizmetleri_myo:fakulte_yonetimi' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-person-badge me-2"></i>Fakülte Yönetimi
+                                </a>
+                                <a href="{% url 'saglik_hizmetleri_myo:bolum_baskanli' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-person-video me-2"></i>Bölüm Başkanları
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Akademik Kadro -->
+                    <div class="list-group-item border-0 p-0">
+                        <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
+                                data-bs-toggle="collapse" data-bs-target="#akademikKadroCollapse">
+                            <span><i class="bi bi-mortarboard me-2"></i>Akademik Kadro</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="collapse" id="akademikKadroCollapse">
+                            <div class="list-group list-group-flush">
+                                <a href="{% url 'saglik_hizmetleri_myo:akademik_kadro' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-person-check me-2"></i>Akademik Kadro
+                                </a>
+                                <a href="{% url 'saglik_hizmetleri_myo:misafir_kadro' %}" class="list-group-item list-group-item-action border-0 small">
+                                    <i class="bi bi-person-plus me-2"></i>Misafir Öğretim Elemanları
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bölümler -->
+                    <div class="list-group-item border-0 p-0">
+                        <button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center" 
+                                data-bs-toggle="collapse" data-bs-target="#bolumlerCollapse">
+                            <span><i class="bi bi-book me-2"></i>Bölümler</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="collapse " id="bolumlerCollapse">
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action border-0 small active">
+                                    <i class=""></i>Acil Durum ve Afet Yönetimi
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Ağız ve Diş Sağlığı 
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Ameliyathane Hizmetleri
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Anestezi
+                                </a>
+                                
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Diyaliz
+                                </a>
+
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Diş Protezi Teknolojisi
+                                </a>
+
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Elektronorofizyoloji
+                                </a>
+
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Eczane Hizmetleri
+                                </a>
+
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>fizyoterapi
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small active">
+                                    <i class=""></i>Çocuk Gelişimi 
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>İlk ve Acil Yardım 
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>İş Sağlığı ve Güvenliği
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>İş ve Uğraşı Terapisi 
+                                </a>
+                                
+                                
+
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Odyometri
+                                </a>
+
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Optisyenlik
+
+                                </a>
+
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Ortopedik Protez Ve Ortez
+                                </a>
+
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Patoloji Laboratuar Teknikleri
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small active">
+                                    <i class=""></i>Radyoterapi 
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Sağlık Kurumları İşletmeciliği 
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Tıbbi Görüntüleme Teknikleri
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 small">
+                                    <i class=""></i>Tıbbi Laboratuvar Teknikleri
+                                </a>
+                                
+                                
+
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diğer Menüler -->
+                    <a href="{% url 'saglik_hizmetleri_myo:duyurular' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-megaphone me-2"></i>duyurular</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="{% url 'saglik_hizmetleri_myo:kalite' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-award me-2"></i>Kalite</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="{% url 'saglik_hizmetleri_myo:iletisim' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-telephone me-2"></i>İletişim</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-person-circle me-2"></i>Öğrenci</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx" 
+                       class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center"
+                       target="_blank">
+                        <span><i class="bi bi-file-text me-2"></i>Bologna</span>
+                        <i class="bi bi-box-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+/* استایل‌های سفارشی برای صفحه تاریخچه */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.timeline-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-left: 4px solid #fd7e14;
+}
+
+.timeline-content h5 {
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* استایل برای دایره‌های آمار */
+.stat-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 1.2rem;
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #0d6efd;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رنگ‌های دکمه */
+.btn-primary {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-primary:hover {
+    background-color: #e56f10 !important;
+    border-color: #d9680f !important;
+}
+
+.btn-outline-primary {
+    color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .timeline::before {
+        left: 15px;
+    }
+    
+    .timeline-marker {
+        left: -2rem;
+        width: 30px;
+        height: 30px;
+    }
+    
+    .stat-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1rem;
+    }
+}
+</style>
+
+<script>
+// مدیریت منوهای آبشاری
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('#facultyMenu [data-bs-toggle="collapse"]');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menuItems.forEach(otherItem => {
+                if (otherItem !== item && !otherItem.classList.contains('collapsed')) {
+                    const targetId = otherItem.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        otherItem.classList.add('collapsed');
+                        targetElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    });
+});
+</script>

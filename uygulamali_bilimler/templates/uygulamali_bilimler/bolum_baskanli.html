@@ -1,0 +1,772 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi - Uygulamalı Bilimler Yüksekokulu Başkanları{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'uygulamali_bilimler/sidebar.html' %}
+    </div>
+    
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #0dcc4dff 0%, #0e8636ff 100%);">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Uygulamalı Bilimler Yüksekokulu Bölüm Başkanları</h1>
+                        <p class="lead mb-4">
+                            
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-person-video display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text text-white" style="background-color: #764ba2;">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" id="searchInput" class="form-control" placeholder="Bölüm başkanı ara...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department Chairs Section -->
+        <div class="row" id="departmentChairs">
+            <!-- Bölüm Başkanı 1 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="maliye">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #1a936f;">
+                        <div class="department-badge">Beslenme ve Diyetetik</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/ABDURRAHMAN-ATALAY-1.jpg' %}" alt="Dr. Öğr. Üyesi Abdurrahman ATALAY" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Abdurrahman ATALAY</h5>
+                        <p class="card-subtitle small opacity-75">Beslenme ve Diyetetik Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #1a936f;"></i>
+                                <a href="mailto:sermin.onder@avrasya.edu.tr" class="text-decoration-none">abdurrahman.atalay@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #1a936f;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #1a936f;"></i>
+                                <span>B Blok, Kat: 2, Oda: 205</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #1a936f;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #1a936f;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c7fe500c5e4&dil=0" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #1a936f; color: #1a936f;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #1a936f;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bölüm Başkanı 2 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="siyaset-bilimi">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #6a4c93;">
+                        <div class="department-badge">Çocuk Gelişimi</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Doç.Dr. Özcan PALAVAN" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Doç.Dr. Özcan PALAVAN</h5>
+                        <p class="card-subtitle small opacity-75">Çocuk Gelişimi Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #6a4c93;"></i>
+                                <a href="mailto:oguzbilge.gungordu@avrasya.edu.tr" class="text-decoration-none">oguzbilge.gungordu@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #6a4c93;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #6a4c93;"></i>
+                                <span>C Blok, Kat: 1, Oda: 112</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #6a4c93;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #6a4c93;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                               
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #6a4c93; color: #6a4c93;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #6a4c93;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bölüm Başkanı 3 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="iktisat">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #f8961e;">
+                        <div class="department-badge">Ebelik Bölüm</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Doç.Dr.Seda KESKİN" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Doç.Dr.Seda KESKİN</h5>
+                        <p class="card-subtitle small opacity-75">Ebelik Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #f8961e;"></i>
+                                <a href="mailto:ismail.kofoglu@avrasya.edu.tr" class="text-decoration-none">seda.keskin@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #f8961e;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #f8961e;"></i>
+                                <span>D Blok, Kat: 3, Oda: 305</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #f8961e;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #f8961e;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #f8961e; color: #f8961e;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #f8961e;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bölüm Başkanı 4 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="isletme">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #2a9d8f;">
+                        <div class="department-badge">Ergoterapi Bölüm</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Alper PERÇİN" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Alper PERÇİN</h5>
+                        <p class="card-subtitle small opacity-75">Ergoterapi Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #2a9d8f;"></i>
+                                <a href="mailto:gizelbusem.sayil@avrasya.edu.tr" class="text-decoration-none">alperpercin@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #2a9d8f;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #2a9d8f;"></i>
+                                <span>Laboratuvar Binası, Kat: 2, Oda: 208</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #2a9d8f;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #2a9d8f;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                               
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #2a9d8f; color: #2a9d8f;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #2a9d8f;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bölüm Başkanı 5 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="uluslararasi-iliskiler">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #7209b7;">
+                        <div class="department-badge">Fizyoterapi ve Rehabilitasyon</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Doç. Dr. Zeydin ACAR" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Doç. Dr. Zeydin ACAR</h5>
+                        <p class="card-subtitle small opacity-75">Fizyoterapi ve Rehabilitasyon Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #7209b7;"></i>
+                                <a href="mailto:emrah.yildirimcakar@avrasya.edu.tr" class="text-decoration-none">zeydin.acar@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #7209b7;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #7209b7;"></i>
+                                <span>E Blok, Kat: 1, Oda: 115</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #7209b7;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #7209b7;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c6a5fb51ff9&dil=0" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #7209b7; color: #7209b7;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #7209b7;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bölüm Başkanı 6 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="hukuk">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #f9c74f;">
+                        <div class="department-badge">Hemşirelik Bölüm</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/hasan-turgut.jpg' %}" alt="Doç. Dr. Hasan TURGUT" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Doç. Dr. Hasan TURGUT</h5>
+                        <p class="card-subtitle small opacity-75">Hemşirelik Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #f9c74f;"></i>
+                                <a href="mailto:ornek@avrasya.edu.tr" class="text-decoration-none">hasan.turgut@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #f9c74f;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #f9c74f;"></i>
+                                <span>F Blok, Kat: 2, Oda: 210</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #f9c74f;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #f9c74f;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c6a07b6937d&dil=0" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #f9c74f; color: #f9c74f;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #f9c74f;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bölüm Başkanı 7 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="psikoloji">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #277da1;">
+                        <div class="department-badge">Odyoloji Bölüm</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/bos-a.jpg' %}" alt="Prof. Dr. Suat TERZİ" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Prof. Dr. Suat TERZİ</h5>
+                        <p class="card-subtitle small opacity-75">Odyoloji Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #277da1;"></i>
+                                <a href="mailto:ornek@avrasya.edu.tr" class="text-decoration-none">suat.terzi@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #277da1;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #277da1;"></i>
+                                <span>G Blok, Kat: 3, Oda: 315</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #277da1;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #277da1;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c6a46b1f4a4&dil=0" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #277da1; color: #277da1;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #277da1;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bölüm Başkanı 8 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="tip">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #e63946;">
+                        <div class="department-badge">Sağlık Yönetimi</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/Fatma-YILMAZ.jpg' %}" alt="Dr. Öğr. Üyesi Fatma YILMAZ" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Fatma YILMAZ</h5>
+                        <p class="card-subtitle small opacity-75">Sağlık Yönetimi Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #e63946;"></i>
+                                <a href="mailto:ornek@avrasya.edu.tr" class="text-decoration-none">fatma.yilmaz@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #e63946;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #e63946;"></i>
+                                <span>H Blok, Kat: 1, Oda: 110</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #e63946;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #e63946;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c935b934062&dil=0" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #e63946; color: #e63946;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #e63946;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bölüm Başkanı 9 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-department="sosyoloji">
+                <div class="card border-0 shadow-sm h-100 department-chair-card">
+                    <div class="card-header text-white text-center py-4 position-relative" style="background-color: #9b5de5;">
+                        <div class="department-badge">Sosyal Hizmet</div>
+                        <div class="profile-img mx-auto mb-3">
+                            <img src="{% static 'saglik_bilimleri/images/akademik-kadro/ufuk-yilmaz.jpeg' %}" alt="Dr. Öğr. Üyesi Ufuk YILMAZ" class="profile-photo">
+                        </div>
+                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Ufuk YILMAZ</h5>
+                        <p class="card-subtitle small opacity-75">Sosyal Hizmet Bölüm Başkanı</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-envelope me-2" style="color: #9b5de5;"></i>
+                                <a href="mailto:ornek@avrasya.edu.tr" class="text-decoration-none">ufuk.yilmaz@avrasya.edu.tr</a>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-telephone me-2" style="color: #9b5de5;"></i>
+                                <span>+90 462 334 05 50</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-geo-alt me-2" style="color: #9b5de5;"></i>
+                                <span>I Blok, Kat: 2, Oda: 220</span>
+                            </div>
+                        </div>
+                        <div class="academic-interests">
+                            <h6 class="mb-2" style="color: #9b5de5;">Akademik İlgi Alanları</h6>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                                <span class="badge bg-light text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="department-info mt-3">
+                            <h6 class="mb-2" style="color: #9b5de5;">Bölüm Hakkında</h6>
+                            <p class="text-muted small mb-0">
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c9410d1b1a9&dil=0" class="btn btn-outline-secondary btn-sm w-100" style="border-color: #9b5de5; color: #9b5de5;">
+                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-sm w-100 text-white" style="background-color: #9b5de5;">
+                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="card border-0 shadow-sm text-center py-5 d-none">
+            <div class="card-body">
+                <i class="bi bi-search display-1 text-muted mb-3"></i>
+                <h4 class="text-muted">Sonuç Bulunamadı</h4>
+                <p class="text-muted">Arama kriterlerinize uygun bölüm başkanı bulunamadı.</p>
+            </div>
+        </div>
+
+        <!-- Department Statistics -->
+        <div class="card border-0 shadow-sm mt-4">
+            <div class="card-body">
+                <h4 class="mb-4" style="color: #1a936f;"><i class="bi bi-graph-up me-2"></i>Bölümlerimiz Hakkında</h4>
+                <div class="row text-center">
+                    <div class="col-md-2 col-6 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" style="color: #1a936f;">9</div>
+                            <div class="stat-label">Bölüm</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-6 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" style="color: #6a4c93;">50+</div>
+                            <div class="stat-label">Akademisyen</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-6 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" style="color: #f8961e;">1000+</div>
+                            <div class="stat-label">Öğrenci</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-6 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" style="color: #2a9d8f;">15+</div>
+                            <div class="stat-label">Laboratuvar</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-6 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" style="color: #7209b7;">10+</div>
+                            <div class="stat-label">Araştırma Projesi</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-6 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" style="color: #f9c74f;">20+</div>
+                            <div class="stat-label">Uluslararası İşbirliği</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    
+/* استایل‌های سفارشی برای صفحه Bölüm Başkanları */
+.department-chair-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.department-chair-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 4px solid rgba(255,255,255,0.3);
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.department-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+.contact-info a {
+    color: inherit;
+    transition: color 0.2s;
+}
+
+.contact-info a:hover {
+    color: #1a936f !important;
+}
+
+/* استایل آمار */
+.stat-item {
+    padding: 15px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .department-badge {
+        font-size: 0.6rem;
+        padding: 3px 6px;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+}
+
+/* انیمیشن‌های ظریف */
+.department-chair-card .card-header {
+    transition: all 0.3s ease;
+}
+
+.department-chair-card:hover .card-header {
+    transform: scale(1.02);
+}
+</style>
+
+<script>
+// مدیریت فیلتر و جستجو
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const departmentCards = document.querySelectorAll('.department-chair-card');
+    const noResults = document.getElementById('noResults');
+    
+    function filterCards() {
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        let visibleCount = 0;
+        
+        departmentCards.forEach(card => {
+            const cardElement = card.closest('.col-md-6');
+            const name = card.querySelector('.card-title').textContent.toLowerCase();
+            const department = card.querySelector('.department-badge').textContent.toLowerCase();
+            
+            const matchesSearch = name.includes(searchTerm) || department.includes(searchTerm);
+            
+            if (matchesSearch) {
+                cardElement.style.display = 'block';
+                visibleCount++;
+            } else {
+                cardElement.style.display = 'none';
+            }
+        });
+        
+        // نمایش پیام عدم یافتن نتیجه
+        if (visibleCount === 0) {
+            noResults.classList.remove('d-none');
+        } else {
+            noResults.classList.add('d-none');
+        }
+    }
+    
+    searchInput.addEventListener('input', filterCards);
+});
+</script>
+{% endblock %}

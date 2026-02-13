@@ -1,0 +1,325 @@
+{% extends "support/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-header" style="margin-top: -100px; position: relative;">
+    <div class="page-header-content">
+        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">Destek
+            Talebi Ayrıntıları</h1>
+        <p>Destek talebinizin durumunu takip edin</p>
+    </div>
+
+    <!-- قسمت احراز هویت در گوشه بالا راست -->
+    <div class="auth-buttons"
+        style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; align-items: center;">
+        {% if user.is_authenticated %}
+        <!-- اگر کاربر لاگین کرده باشد -->
+        <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
+            <span style="color: white; font-weight: 500;">
+                <i class="fas fa-user-circle"></i> {{ user.username }}
+            </span>
+
+            <!-- دکمه داشبورد -->
+            {% if user.profile.role == 'student' %}
+            <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
+                <i class="fas fa-tachometer-alt"></i> Taleplerim
+            </a>
+            {% elif user.profile.role == 'staff' %}
+            <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            {% else %}
+            <a href="/" class="btn btn-outline-light btn-sm">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            {% endif %}
+
+            <!-- فرم logout -->
+            <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                </button>
+            </form>
+        </div>
+        {% else %}
+        <!-- اگر کاربر لاگین نکرده باشد -->
+        <div class="guest-buttons" style="display: flex; gap: 10px;">
+            <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
+                <i class="fas fa-sign-in-alt"></i> Giriş Yap
+            </a>
+            <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm"
+                style="background-color: white; color: var(--primary-dark-blue);">
+                <i class="fas fa-user-plus"></i> Kayıt Ol
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="support-container">
+    <div class="breadcrumb">
+        <a href="/" class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-divider">/</span>
+        <a href="{% url 'support:search' %}" class="breadcrumb-item">Support</a>
+        <span class="breadcrumb-divider">/</span>
+        <a href="{% url 'support:my_tickets' %}" class="breadcrumb-item">My Tickets</a>
+        <span class="breadcrumb-divider">/</span>
+        <span class="breadcrumb-item active">Talep #{{ ticket.id|stringformat:"04d" }}</span>
+    </div>
+
+    <div class="row">
+        <!-- سایدبار اطلاعات تیکت -->
+        <div class="col-4">
+            <div class="card" style="position: sticky; top: 2rem;">
+                <div class="card-header">
+                    <h2 class="card-title">Talep Bilgileri</h2>
+                    <span class="status-badge status-{{ ticket.status }}">
+                        {{ ticket.get_status_display }}
+                    </span>
+                </div>
+
+                <div style="padding: 1rem 0;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3
+                            style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
+                            Talep ID
+                        </h3>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-blue);">
+                            #{{ ticket.id|stringformat:"04d" }}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3
+                            style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
+                            Department
+                        </h3>
+                        <div style="font-weight: 600; color: var(--text-dark);">
+                            <i class="fas fa-building"></i> {{ ticket.department.name }}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3
+                            style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
+                            Oluşturuldu
+                        </h3>
+                        <div style="color: var(--text-dark);">
+                            <i class="fas fa-calendar"></i> {{ ticket.created_at|date:"d.m.Y" }}
+                            <br>
+                            <small style="color: var(--text-light);">{{ ticket.created_at|date:"H:i" }}</small>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3
+                            style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
+                            Son Güncellenme
+                        </h3>
+                        <div style="color: var(--text-dark);">
+                            <i class="fas fa-clock"></i> {{ ticket.updated_at|date:"d.m.Y H:i" }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
+                            Öncelik
+                        </h3>
+                        <div
+                            style="display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; background: rgba(243, 156, 18, 0.1); color: #f39c12; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
+                            <i class="fas fa-flag"></i> Medium
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- دکمه‌های اقدام -->
+            <div class="card" style="margin-top: 1rem;">
+                <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.1rem;">
+                    <i class="fas fa-cog"></i> Eylemler
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <a href="{% url 'support:my_tickets' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Taleplere Geri Dön
+                    </a>
+                    <a href="{% url 'support:create_ticket' %}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Yeni Talep Oluştur
+                    </a>
+                    {% if ticket.status != 'closed' %}
+                    <button class="btn btn-danger">
+                        <i class="fas fa-times-circle"></i> Talebi Kapat
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- محتوای اصلی -->
+        <div class="col-8">
+            <!-- موضوع تیکت -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">{{ ticket.subject }}</h2>
+                    <div style="color: var(--text-light); font-size: 0.9rem;">
+                        {{ ticket.category.name|default:"No Category" }}
+                    </div>
+                </div>
+
+                <!-- پیام کاربر -->
+                <div style="margin-bottom: 2rem;">
+                    <div
+                        style="display: flex; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-blue);">
+                        <div
+                            style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary-blue); margin: 0; font-size: 1.1rem;">
+                                Sorunuz
+                            </h3>
+                            <small style="color: var(--text-light);">
+                                {{ ticket.user.username }} • {{ ticket.created_at|date:"d.m.Y H:i" }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div
+                        style="background: #f8fafc; padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary-blue);">
+                        <p style="color: var(--text-dark); line-height: 1.6; margin: 0; white-space: pre-line;">
+                            {{ ticket.message }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- پاسخ (اگر وجود دارد) -->
+                {% if replies %}
+                {% for reply in replies %}
+                <div style="margin-top: 2rem;">
+                    <div
+                        style="display: flex; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-blue);">
+                        <div
+                            style="width: 40px; height: 40px; background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div>
+                            <h3 style="color: #27ae60; margin: 0; font-size: 1.1rem;">
+                                Department Cevap
+                            </h3>
+                            <small style="color: var(--text-light);">
+                                {{ reply.staff.get_full_name|default:reply.staff.username }}
+                                • {{ reply.created_at|date:"d.m.Y H:i" }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div
+                        style="background: rgba(46, 204, 113, 0.05); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid #2ecc71;">
+                        <p style="color: var(--text-dark); line-height: 1.6; margin: 0; white-space: pre-line;">
+                            {{ reply.message }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <!-- Ticket Under Review (همان UI فعلی‌ات، بدون تغییر) -->
+                <div
+                    style="text-align: center; padding: 2rem; background: rgba(52, 152, 219, 0.05); border-radius: var(--radius-md); border: 2px dashed rgba(52, 152, 219, 0.3);">
+                    <div style="font-size: 3rem; color: var(--status-resolved); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 0.5rem;">
+                        Talep İncelemede
+                    </h3>
+                    <p style="color: var(--text-medium); max-width: 500px; margin: 0 auto;">
+                        Talebiniz <strong>{{ ticket.department.name }}</strong> tarafından inceleniyor.
+                    </p>
+                </div>
+                {% endif %}
+
+
+                <!-- تاریخچه تیکت -->
+                {% if ticket.history.exists %}
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(141, 212, 227, 0.2);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.1rem;">
+                        <i class="fas fa-history"></i> Talep Geçmişi
+                    </h3>
+
+                    <div style="position: relative; padding-left: 2rem;">
+                        <!-- خط عمودی -->
+                        <div
+                            style="position: absolute; left: 0.5rem; top: 0; bottom: 0; width: 2px; background: rgba(141, 212, 227, 0.3);">
+                        </div>
+
+                        {% for history in ticket.history.all %}
+                        <div style="position: relative; margin-bottom: 1.5rem;">
+                            <!-- دایره روی خط -->
+                            <div
+                                style="position: absolute; left: -1.75rem; top: 0; width: 16px; height: 16px; background: var(--secondary-blue); border-radius: 50%; border: 3px solid white;">
+                            </div>
+
+                            <div
+                                style="background: white; padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(141, 212, 227, 0.2);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <strong style="color: var(--text-dark);">
+                                        {{ history.get_status_display }}
+                                    </strong>
+                                    <small style="color: var(--text-light);">
+                                        {{ history.changed_at|date:"d.m.Y H:i" }}
+                                    </small>
+                                </div>
+                                {% if history.note %}
+                                <p style="color: var(--text-medium); font-size: 0.9rem; margin: 0;">
+                                    {{ history.note }}
+                                </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .status-open {
+        background: rgba(46, 204, 113, 0.15);
+        color: #27ae60;
+    }
+
+    .status-pending {
+        background: rgba(243, 156, 18, 0.15);
+        color: #d35400;
+    }
+
+    .status-closed {
+        background: rgba(231, 76, 60, 0.15);
+        color: #c0392b;
+    }
+
+    .status-resolved {
+        background: rgba(52, 152, 219, 0.15);
+        color: #2980b9;
+    }
+
+    .status-in_progress {
+        background: rgba(155, 89, 182, 0.15);
+        color: #8e44ad;
+    }
+</style>
+{% endblock %}

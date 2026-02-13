@@ -1,0 +1,85 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}{{ policy.title }} - Avrasya University{% endblock %}
+
+{% block content %}
+<section class="research-hero" style="background: linear-gradient(135deg, #1d61a9 0%, #092442 100%); padding: 100px 0 60px;">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>{{ policy.title }}</h1>
+            <p>Araştırma Politikası</p>
+        </div>
+    </div>
+</section>
+
+<section class="research-section">
+    <div class="container">
+        <div class="sidebar-layout">
+            <!-- سایدبار در سمت چپ -->
+            <div class="sidebar-left">
+                {% include 'arastirma/includes/policy_sidebar.html' %}
+            </div>
+            
+            <!-- محتوای اصلی در سمت راست -->
+            <div class="content-right">
+                <div class="research-card">
+                    <!-- اطلاعات متا -->
+                    <div class="policy-header mb-4">
+                        <div class="d-flex flex-wrap gap-3 mb-3">
+                            <span class="badge badge-primary">
+                                <i class="fas fa-users"></i> {{ policy.commission }}
+                            </span>
+                            <span class="badge badge-secondary">
+                                <i class="fas fa-calendar"></i> {{ policy.created_at|date:"d M Y" }}
+                            </span>
+                            {% if policy.order %}
+                            <span class="badge badge-info">
+                                Öncelik: {{ policy.order }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- محتوای اصلی -->
+                    <div class="policy-content">
+                        {{ policy.content|linebreaks }}
+                    </div>
+
+                    <!-- داکیومنت ضمیمه -->
+                    {% if policy.document %}
+                    <div class="document-section mt-5 p-4" style="background: var(--neutral-cream); border-radius: 8px;">
+                        <h5><i class="fas fa-paperclip"></i> Ekli Doküman</h5>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span>
+                                <i class="fas fa-file-pdf text-danger"></i>
+                                {{ policy.document.name|slice:"-4:"|upper }} Dosyası
+                            </span>
+                            <a href="{{ policy.document.url }}" class="btn btn-primary" target="_blank" download>
+                                <i class="fas fa-download"></i> İndir
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- ناوبری -->
+                    <div class="policy-navigation mt-5 pt-4 border-top">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="{% url 'arastirma:policy_list' %}" class="btn btn-outline-primary">
+                                    <i class="fas fa-arrow-left"></i> Tüm Politikalar
+                                </a>
+                            </div>
+                            <div class="col-6 text-right">
+                                <a href="{% url 'arastirma:home' %}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-home"></i> Araştırma Ana Sayfa
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,320 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ etkinlik.baslik }} - Avrasya Üniversitesi{% endblock %}
+{% block content %}
+<div class="page_section">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'core:index' %}" class="text-decoration-none">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'etkinlikler:liste' %}" class="text-decoration-none">Etkinlikler</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ etkinlik.baslik|truncatewords:4 }}</li>
+            </ol>
+        </nav>
+
+        <article class="bg-white rounded-4 shadow-sm overflow-hidden">
+            <!-- Hero Section -->
+            <div class="hero-section position-relative">
+                {% if etkinlik.afis %}
+                <img src="{{ etkinlik.afis.url }}" alt="{{ etkinlik.baslik }}" class="img-fluid w-100" style="max-height: 500px; object-fit: cover;">
+                {% else %}
+                <div class="placeholder-hero bg-light-blue" style="height: 300px;"></div>
+                {% endif %}
+                
+                <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end">
+                    <div class="container text-white p-4">
+                        <div class="row align-items-end">
+                            <div class="col-md-8">
+                                <span class="badge bg-white text-dark-blue mb-3 fs-6">{{ etkinlik.get_etkinlik_turu_display }}</span>
+                                <h1 class="display-5 fw-bold mb-3">{{ etkinlik.baslik }}</h1>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                {% if etkinlik.kayit_gerekiyor %}
+                                <span class="badge bg-warning text-dark fs-6">
+                                    <i class="fas fa-user-check me-2"></i> Kayıt Gerekli
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="content-section p-5">
+                <div class="row">
+                    <!-- Main Content -->
+                    <div class="col-lg-8">
+                        <!-- Quick Info Cards -->
+                        <div class="row mb-5">
+                            <div class="col-md-6 mb-3">
+                                <div class="info-card-small border-0 rounded-3 p-4 h-100">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-calendar-day text-medium-blue fs-2 me-3"></i>
+                                        <div>
+                                            <h6 class="text-muted mb-1">Tarih & Saat</h6>
+                                            <p class="fw-bold text-dark-blue mb-0">
+                                                {{ etkinlik.baslangic_tarihi|date:'d F Y' }}
+                                                {% if etkinlik.baslangic_tarihi|date:'H:i' != '00:00' %}
+                                                <br><small class="text-muted">{{ etkinlik.baslangic_tarihi|date:'H:i' }}</small>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-card-small border-0 rounded-3 p-4 h-100">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-map-marker-alt text-medium-blue fs-2 me-3"></i>
+                                        <div>
+                                            <h6 class="text-muted mb-1">Yer</h6>
+                                            <p class="fw-bold text-dark-blue mb-0">{{ etkinlik.yer }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kısa Açıklama -->
+                        {% if etkinlik.kisa_aciklama %}
+                        <div class="alert alert-light-blue border-0 rounded-3 p-4 mb-5">
+                            <h5 class="text-dark-blue mb-3">
+                                <i class="fas fa-star me-2"></i> Etkinlik Özeti
+                            </h5>
+                            <p class="mb-0 fs-5">{{ etkinlik.kisa_aciklama }}</p>
+                        </div>
+                        {% endif %}
+
+                        <!-- Detaylı Açıklama -->
+                        <div class="content mb-5">
+                            <h4 class="text-dark-blue mb-4">Etkinlik Detayları</h4>
+                            <div class="content-text">
+                                {{ etkinlik.detayli_aciklama|linebreaks }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <!-- Action Card -->
+                        <div class="card action-card border-0 rounded-3 shadow-sm mb-4">
+                            <div class="card-body p-4 text-center">
+                                <h5 class="text-dark-blue mb-4">Etkinlik Katılım</h5>
+                                
+                                {% if etkinlik.katilim_linki %}
+                                <a href="{{ etkinlik.katilim_linki }}" target="_blank" class="btn btn-primary btn-lg w-100 mb-3">
+                                    <i class="fas fa-external-link-alt me-2"></i> Etkinliğe Katıl
+                                </a>
+                                {% endif %}
+                                
+                                {% if etkinlik.kayit_gerekiyor %}
+                                <button class="btn btn-outline-primary btn-lg w-100 mb-3">
+                                    <i class="fas fa-user-plus me-2"></i> Kayıt Ol
+                                </button>
+                                {% endif %}
+                                
+                                <button class="btn btn-outline-secondary w-100 mb-3">
+                                    <i class="fas fa-share-alt me-2"></i> Paylaş
+                                </button>
+                                
+                                <button class="btn btn-outline-secondary w-100">
+                                    <i class="fas fa-calendar-plus me-2"></i> Takvime Ekle
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Info Card -->
+                        <div class="card info-card-sidebar border-0 rounded-3 shadow-sm">
+                            <div class="card-body p-4">
+                                <h6 class="text-dark-blue mb-4">
+                                    <i class="fas fa-info-circle me-2"></i> Etkinlik Bilgileri
+                                </h6>
+                                
+                                <div class="info-list">
+                                    <div class="info-item d-flex align-items-center mb-3">
+                                        <i class="fas fa-tag text-medium-blue me-3"></i>
+                                        <div>
+                                            <small class="text-muted">Tür</small>
+                                            <div class="fw-semibold text-dark-blue">{{ etkinlik.get_etkinlik_turu_display }}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="info-item d-flex align-items-center mb-3">
+                                        <i class="fas fa-clock text-medium-blue me-3"></i>
+                                        <div>
+                                            <small class="text-muted">Süre</small>
+                                            <div class="fw-semibold text-dark-blue">
+                                                {{ etkinlik.baslangic_tarihi|date:'H:i' }}
+                                                {% if etkinlik.bitis_tarihi %}
+                                                - {{ etkinlik.bitis_tarihi|date:'H:i' }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="info-item d-flex align-items-center mb-3">
+                                        <i class="fas fa-money-bill text-medium-blue me-3"></i>
+                                        <div>
+                                            <small class="text-muted">Ücret</small>
+                                            <div class="fw-semibold text-dark-blue">
+                                                {% if etkinlik.ucretli %}Ücretli{% else %}Ücretsiz{% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="info-item d-flex align-items-center">
+                                        <i class="fas fa-users text-medium-blue me-3"></i>
+                                        <div>
+                                            <small class="text-muted">Katılım</small>
+                                            <div class="fw-semibold text-dark-blue">
+                                                {% if etkinlik.kayit_gerekiyor %}Kayıt Gerekli{% else %}Açık Katılım{% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="row mt-5 pt-4 border-top">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'etkinlikler:liste' %}" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-arrow-left me-2"></i> Tüm Etkinliklere Dön
+                            </a>
+                            <a href="{% url 'etkinlikler:yaklasan' %}" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-calendar me-2"></i> Yaklaşan Etkinlikler
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
+<style>
+:root {
+    --primary-dark-blue: #092442;
+    --secondary-medium-blue: #1d61a9;
+    --accent-light-blue: #8dd4e3;
+    --neutral-cream: #f6f2e7;
+}
+
+.page_section{
+    margin-top: 10rem;
+}
+
+.hero-section {
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    background: linear-gradient(transparent 0%, rgba(9, 36, 66, 0.8) 100%);
+}
+
+.placeholder-hero {
+    background: linear-gradient(135deg, var(--accent-light-blue) 0%, var(--secondary-medium-blue) 100%);
+}
+
+.content-section {
+    background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+}
+
+.info-card-small {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.info-card-small:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: var(--accent-light-blue);
+}
+
+.action-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e9ecef;
+}
+
+.info-card-sidebar {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.alert-light-blue {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.1) 0%, rgba(141, 212, 227, 0.05) 100%);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.content-text {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #4a5568;
+}
+
+.content-text p {
+    margin-bottom: 1.5rem;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+}
+
+.breadcrumb-item a {
+    color: var(--secondary-medium-blue);
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--primary-dark-blue);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(29, 97, 169, 0.3);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--primary-dark-blue);
+    color: var(--primary-dark-blue);
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-dark-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.badge {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+}
+
+.text-dark-blue { color: var(--primary-dark-blue); }
+.text-medium-blue { color: var(--secondary-medium-blue); }
+.text-light-blue { color: var(--accent-light-blue); }
+.bg-dark-blue { background-color: var(--primary-dark-blue); }
+.bg-medium-blue { background-color: var(--secondary-medium-blue); }
+.bg-light-blue { background-color: var(--accent-light-blue); }
+</style>
+{% endblock %}

@@ -1,0 +1,1298 @@
+{% extends 'aday_ogrenci/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Avrasya Üniversitesi - TABAN PUANLAR{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="research-hero">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>2025-YKS TABAN PUANLAR</h1>
+            <p>Avrasya Üniversitesi 2025-2026 Eğitim-Öğretim Yılı Taban Puanları ve Kontenjan Bilgileri</p>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid main-container">
+    <div class="row g-4">
+        <!-- سایدبار سمت چپ -->
+        <div class="col-lg-3 col-xxl-2">
+            <div class="sidebar-wrapper">
+                {% include 'aday_ogrenci/aday_sidebar.html' %}
+            </div>
+        </div>
+        
+        <!-- محتوای اصلی سمت راست -->
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper">
+                <!-- اعلان مهم -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="important-notice">
+                            <div class="notice-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="notice-content">
+                                <h5 class="notice-title">📌 Önemli Bilgiler</h5>
+                                <p class="notice-text mb-0">
+                                    Aşağıda <strong>2024-YKS yerleştirme sonuçlarına göre</strong> taban puanlar, 
+                                    başarı sıraları ve kontenjan bilgileri gösterilmektedir. 
+                                    2025-YKS tercihlerinizde bu bilgileri dikkate alınız.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فیلترها -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="filter-section">
+                            <h5 class="filter-title mb-3">🔍 Programları Filtrele</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="facultyFilter">
+                                        <option value="all">Fakülte/Yüksekokul (Tümü)</option>
+                                        <option value="Fen Edebiyat Fakültesi">Fen Edebiyat Fakültesi</option>
+                                        <option value="İktisadi ve İdari Bilimler Fakültesi">İktisadi ve İdari Bilimler Fakültesi</option>
+                                        <option value="İletişim Fakültesi">İletişim Fakültesi</option>
+                                        <option value="Mühendislik ve Mimarlık Fakültesi">Mühendislik ve Mimarlık Fakültesi</option>
+                                        <option value="Sağlık Bilimleri Fakültesi">Sağlık Bilimleri Fakültesi</option>
+                                        <option value="Spor Bilimleri Fakültesi">Spor Bilimleri Fakültesi</option>
+                                        <option value="Uygulamalı Bilimler Yüksekokulu">Uygulamalı Bilimler Yüksekokulu</option>
+                                        <option value="Meslek Yüksekokulu">Meslek Yüksekokulu</option>
+                                        <option value="Sağlık Hizmetleri Meslek Yüksekokulu">Sağlık Hizmetleri Meslek Yüksekokulu</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="programTypeFilter">
+                                        <option value="all">Program Türü (Tümü)</option>
+                                        <option value="Ücretli">Ücretli</option>
+                                        <option value="Burslu">Burslu</option>
+                                        <option value="İndirimli">%50 İndirimli</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select filter-select" id="scoreTypeFilter">
+                                        <option value="all">Puan Türü (Tümü)</option>
+                                        <option value="TYT">TYT</option>
+                                        <option value="SAY">SAY</option>
+                                        <option value="EA">EA</option>
+                                        <option value="SÖZ">SÖZ</option>
+                                        <option value="DIL">DIL</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول Taban Puanlar -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-card">
+                            <div class="table-header">
+                                <h4 class="table-title">📊 2025-YKS Taban Puanlar ve Kontenjanlar</h4>
+                                <p class="table-subtitle">Avrasya Üniversitesi 2024-YKS yerleştirme sonuçları</p>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table score-table" id="scoreTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="20%">Fakülte/Yüksekokul</th>
+                                            <th width="25%">Program Adı</th>
+                                            <th width="8%">Öğr. Süre</th>
+                                            <th width="8%">Puan Türü</th>
+                                            <th width="8%">Genel Kont.</th>
+                                            <th width="10%">Taban Puan (2024)</th>
+                                            <th width="12%">Başarı Sırası (2024)</th>
+                                            <th width="9%">Program Türü</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Fen Edebiyat Fakültesi -->
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="DIL">
+                                            <td><strong>Fen Edebiyat Fakültesi</strong></td>
+                                            <td>İngiliz Dili ve Edebiyatı (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>DIL</td>
+                                            <td>25</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="DIL">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>İngiliz Dili ve Edebiyatı (Burslu)</td>
+                                            <td>4</td>
+                                            <td>DIL</td>
+                                            <td>7</td>
+                                            <td><span class="score-value">361.49115</span></td>
+                                            <td><span class="rank-value">41.454</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="İndirimli" data-scoretype="DIL">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>İngiliz Dili ve Edebiyatı (%50 İndirimli)</td>
+                                            <td>4</td>
+                                            <td>DIL</td>
+                                            <td>17</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-warning text-dark">%50 İndirimli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="DIL">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>İngilizce Mütercim ve Tercümanlık (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>DIL</td>
+                                            <td>25</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="DIL">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>İngilizce Mütercim ve Tercümanlık (Burslu)</td>
+                                            <td>4</td>
+                                            <td>DIL</td>
+                                            <td>7</td>
+                                            <td><span class="score-value">364.45144</span></td>
+                                            <td><span class="rank-value">40.014</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Moleküler Biyoloji ve Genetik (İngilizce) (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>10</td>
+                                            <td><span class="score-value">284.90130</span></td>
+                                            <td><span class="rank-value">321.306</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Moleküler Biyoloji ve Genetik (İngilizce) (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>3</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Psikoloji (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>35</td>
+                                            <td><span class="score-value">261.15120</span></td>
+                                            <td><span class="rank-value">697.994</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="EA">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Psikoloji (Burslu)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>9</td>
+                                            <td><span class="score-value">348.05641</span></td>
+                                            <td><span class="rank-value">131.556</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Türk Dili ve Edebiyatı (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>12</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>Fen Edebiyat Fakültesi</td>
+                                            <td>Türk Dili ve Edebiyatı (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>3</td>
+                                            <td><span class="score-value">326.77582</span></td>
+                                            <td><span class="rank-value">234.999</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        
+                                        <!-- İktisadi ve İdari Bilimler Fakültesi -->
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td><strong>İktisadi ve İdari Bilimler Fakültesi</strong></td>
+                                            <td>İşletme (İngilizce) (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>34</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="Burslu" data-scoretype="EA">
+                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
+                                            <td>İşletme (İngilizce) (Burslu)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>5</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
+                                            <td>Siyaset Bilimi ve Kamu Yönetimi (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>21</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="Burslu" data-scoretype="EA">
+                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
+                                            <td>Siyaset Bilimi ve Kamu Yönetimi (Burslu)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>4</td>
+                                            <td><span class="score-value">262.44912</span></td>
+                                            <td><span class="rank-value">603.432</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="İndirimli" data-scoretype="EA">
+                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
+                                            <td>Siyaset Bilimi ve Kamu Yönetimi (%50 İndirimli)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>9</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-warning text-dark">%50 İndirimli</span></td>
+                                        </tr>
+                                        
+                                        <!-- İletişim Fakültesi -->
+                                        <tr data-faculty="İletişim Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td><strong>İletişim Fakültesi</strong></td>
+                                            <td>Görsel İletişim Tasarımı (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>24</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="İletişim Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>İletişim Fakültesi</td>
+                                            <td>Görsel İletişim Tasarımı (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>5</td>
+                                            <td><span class="score-value">323.35176</span></td>
+                                            <td><span class="rank-value">253.393</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="İletişim Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td>İletişim Fakültesi</td>
+                                            <td>Yeni Medya ve İletişim (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>24</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="İletişim Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>İletişim Fakültesi</td>
+                                            <td>Yeni Medya ve İletişim (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>5</td>
+                                            <td><span class="score-value">298.05456</span></td>
+                                            <td><span class="rank-value">409.866</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        
+                                        <!-- Mühendislik ve Mimarlık Fakültesi -->
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td><strong>Mühendislik ve Mimarlık Fakültesi</strong></td>
+                                            <td>Bilgisayar Mühendisliği (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>20</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>Bilgisayar Mühendisliği (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>5</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>İç Mimarlık ve Çevre Tasarımı (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>13</td>
+                                            <td><span class="score-value">327.88999</span></td>
+                                            <td><span class="rank-value">200.407</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="İndirimli" data-scoretype="EA">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>İç Mimarlık ve Çevre Tasarımı (%50 İndirimli)</td>
+                                            <td>4</td>
+                                            <td>EA</td>
+                                            <td>9</td>
+                                            <td><span class="score-value">248.87776</span></td>
+                                            <td><span class="rank-value">843.808</span></td>
+                                            <td><span class="badge bg-warning text-dark">%50 İndirimli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>İnşaat Mühendisliği (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>10</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>Mimarlık (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>5</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
+                                            <td>Mimarlık (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>2</td>
+                                            <td><span class="score-value">306.02233</span></td>
+                                            <td><span class="rank-value">246.194</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        
+                                        <!-- Sağlık Bilimleri Fakültesi -->
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td><strong>Sağlık Bilimleri Fakültesi</strong></td>
+                                            <td>Beslenme ve Diyetetik (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>14</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>Sağlık Bilimleri Fakültesi</td>
+                                            <td>Beslenme ve Diyetetik (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>3</td>
+                                            <td><span class="score-value">291.53975</span></td>
+                                            <td><span class="rank-value">294.592</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="İndirimli" data-scoretype="SAY">
+                                            <td>Sağlık Bilimleri Fakültesi</td>
+                                            <td>Beslenme ve Diyetetik (%50 İndirimli)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>9</td>
+                                            <td><span class="score-value">243.21331</span></td>
+                                            <td><span class="rank-value">594.726</span></td>
+                                            <td><span class="badge bg-warning text-dark">%50 İndirimli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>Sağlık Bilimleri Fakültesi</td>
+                                            <td>Ebelik (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>55</td>
+                                            <td><span class="score-value">243.31905</span></td>
+                                            <td><span class="rank-value">587.626</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>Sağlık Bilimleri Fakültesi</td>
+                                            <td>Ebelik (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>9</td>
+                                            <td><span class="score-value">309.25107</span></td>
+                                            <td><span class="rank-value">250.608</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
+                                            <td>Sağlık Bilimleri Fakültesi</td>
+                                            <td>Hemşirelik (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>51</td>
+                                            <td><span class="score-value">268.08215</span></td>
+                                            <td><span class="rank-value">403.320</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
+                                            <td>Sağlık Bilimleri Fakültesi</td>
+                                            <td>Hemşirelik (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SAY</td>
+                                            <td>8</td>
+                                            <td><span class="score-value">332.24820</span></td>
+                                            <td><span class="rank-value">189.022</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        
+                                        <!-- Uygulamalı Bilimler Yüksekokulu -->
+                                        <tr data-faculty="Uygulamalı Bilimler Yüksekokulu" data-programtype="Ücretli" data-scoretype="SÖZ">
+                                            <td><strong>Uygulamalı Bilimler Yüksekokulu</strong></td>
+                                            <td>Gastronomi ve Mutfak Sanatları (Ücretli)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>30</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Uygulamalı Bilimler Yüksekokulu" data-programtype="Burslu" data-scoretype="SÖZ">
+                                            <td>Uygulamalı Bilimler Yüksekokulu</td>
+                                            <td>Gastronomi ve Mutfak Sanatları (Burslu)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>8</td>
+                                            <td><span class="score-value">371.21887</span></td>
+                                            <td><span class="rank-value">30.794</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Uygulamalı Bilimler Yüksekokulu" data-programtype="İndirimli" data-scoretype="SÖZ">
+                                            <td>Uygulamalı Bilimler Yüksekokulu</td>
+                                            <td>Gastronomi ve Mutfak Sanatları (%50 İndirimli)</td>
+                                            <td>4</td>
+                                            <td>SÖZ</td>
+                                            <td>21</td>
+                                            <td><span class="score-value">217.57357</span></td>
+                                            <td><span class="rank-value">1.184.963</span></td>
+                                            <td><span class="badge bg-warning text-dark">%50 İndirimli</span></td>
+                                        </tr>
+                                        
+                                        <!-- Meslek Yüksekokulu (نمونه‌ای از داده‌ها) -->
+                                        <tr data-faculty="Meslek Yüksekokulu" data-programtype="Ücretli" data-scoretype="TYT">
+                                            <td><strong>Meslek Yüksekokulu</strong></td>
+                                            <td>Aşçılık (Ücretli)</td>
+                                            <td>2</td>
+                                            <td>TYT</td>
+                                            <td>40</td>
+                                            <td><span class="score-value">—</span></td>
+                                            <td><span class="rank-value">—</span></td>
+                                            <td><span class="badge bg-danger">Ücretli</span></td>
+                                        </tr>
+                                        <tr data-faculty="Meslek Yüksekokulu" data-programtype="Burslu" data-scoretype="TYT">
+                                            <td>Meslek Yüksekokulu</td>
+                                            <td>Aşçılık (Burslu)</td>
+                                            <td>2</td>
+                                            <td>TYT</td>
+                                            <td>10</td>
+                                            <td><span class="score-value">302.84927</span></td>
+                                            <td><span class="rank-value">846.798</span></td>
+                                            <td><span class="badge bg-success">Burslu</span></td>
+                                        </tr>
+                                        <tr data-faculty="Meslek Yüksekokulu" data-programtype="İndirimli" data-scoretype="TYT">
+                                            <td>Meslek Yüksekokulu</td>
+                                            <td>Aşçılık (%50 İndirimli)</td>
+                                            <td>2</td>
+                                            <td>TYT</td>
+                                            <td>28</td>
+                                            <td><span class="score-value">184.50122</span></td>
+                                            <td><span class="rank-value">2.705.398</span></td>
+                                            <td><span class="badge bg-warning text-dark">%50 İndirimli</span></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="table-footer">
+                                <div class="legend">
+                                    <h6>Renk Açıklamaları:</h6>
+                                    <div class="legend-items">
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #dc3545;"></span>
+                                            <span class="legend-text">Ücretli Program</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #198754;"></span>
+                                            <span class="legend-text">Burslu Program</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #ffc107;"></span>
+                                            <span class="legend-text">%50 İndirimli Program</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color" style="background-color: #6c757d;"></span>
+                                            <span class="legend-text">Veri Yok</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- توضیحات و نکات مهم -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="info-card">
+                            <div class="info-header">
+                                <h4 class="info-title">📝 Açıklamalar ve Önemli Notlar</h4>
+                            </div>
+                            <div class="info-body">
+                                <div class="info-conditions">
+                                    <ol>
+                                        <li>
+                                            <strong>Taban Puan ve Başarı Sırası:</strong>
+                                            <p>
+                                                Tabloda gösterilen taban puanlar ve başarı sıraları <strong>2024-YKS yerleştirme sonuçlarına</strong> 
+                                                aittir. 2025-YKS yerleştirmelerinde bu değerler değişebilir.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <strong>Kontenjan Bilgileri:</strong>
+                                            <p>
+                                                Kontenjanlar 2025-2026 eğitim-öğretim yılı için planlanmıştır. 
+                                                ÖSYM tarafından yapılacak duyurular doğrultusunda değişiklik gösterebilir.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <strong>Program Türleri:</strong>
+                                            <p>
+                                                <span class="badge bg-danger me-1">Ücretli</span> programlar için öğrenim ücreti ödenir.
+                                                <span class="badge bg-success me-1 ms-2">Burslu</span> programlar için öğrenim ücreti yoktur.
+                                                <span class="badge bg-warning text-dark me-1 ms-2">%50 İndirimli</span> programlar için indirimli öğrenim ücreti ödenir.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <strong>Özel Koşullar:</strong>
+                                            <p>
+                                                Bazı programlar için özel koşullar (yabancı dil hazırlık, özel yetenek sınavı, vb.) 
+                                                bulunabilir. Detaylı bilgi için ilgili fakülte/yüksekokul ile iletişime geçiniz.
+                                            </p>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- اطلاعات تماس -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="contact-card">
+                            <div class="contact-content">
+                                <div class="contact-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>📞 Tercih Danışmanlığı</h5>
+                                    <div class="contact-details">
+                                        <div class="contact-item">
+                                            <i class="fas fa-phone"></i>
+                                            <div>
+                                                <strong>Telefon:</strong>
+                                                <a href="tel:+904623340550">0462 334 05 50</a>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-envelope"></i>
+                                            <div>
+                                                <strong>E-posta:</strong>
+                                                <a href="mailto:tercih@avrasya.edu.tr">tercih@avrasya.edu.tr</a>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-clock"></i>
+                                            <div>
+                                                <strong>Çalışma Saatleri:</strong>
+                                                <span>09:00 - 17:00 (Hafta içi)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF İndirme Bölümü -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-12">
+                        <div class="download-card">
+                            <div class="download-content">
+                                <div class="download-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="download-text">
+                                    <h4>Resmi Taban Puanlar Belgesini İndir</h4>
+                                    <p>Tüm programların taban puanları, başarı sıraları ve kontenjan bilgilerini içeren resmi PDF belgesini indirebilirsiniz.</p>
+                                    <div class="download-info">
+                                        <span><i class="fas fa-file-alt"></i> 2025-YKS-taban-puanlar-01.08.2025.pdf</span>
+                                        <span><i class="fas fa-hdd"></i> 450KB</span>
+                                        <span><i class="fas fa-calendar-alt"></i> 01.08.2025</span>
+                                    </div>
+                                </div>
+                                <div class="download-btn-wrapper">
+                                    <a href="{% static 'docs/2025-YKS-taban-puanlar-01.08.2025.pdf' %}" class="btn btn-download" download>
+                                        <i class="fas fa-download"></i> PDF'yi İndir
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Layout - استفاده از استایل‌های مشابه صفحه egitim-ucretleri.html */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar-wrapper {
+    position: sticky;
+    top: 120px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+.content-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(141, 212, 227, 0.2);
+}
+
+/* اعلان مهم */
+.important-notice {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 5px solid var(--secondary-medium-blue);
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.notice-icon {
+    font-size: 1.5rem;
+    color: var(--secondary-medium-blue);
+    margin-top: 2px;
+}
+
+.notice-title {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.notice-text {
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+/* فیلتر بخش */
+.filter-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.filter-title {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+}
+
+.filter-select {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    border-color: var(--secondary-medium-blue);
+    box-shadow: 0 0 0 0.25rem rgba(29, 97, 169, 0.25);
+}
+
+/* جدول */
+.table-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.table-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    padding: 25px;
+    color: white;
+}
+
+.table-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.table-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.score-table {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.score-table thead th {
+    background: #f8f9fa;
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    padding: 15px 12px;
+    border-bottom: 2px solid var(--secondary-medium-blue);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.score-table tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    border-color: #e9ecef;
+    text-align: center;
+}
+
+.score-table tbody tr:hover {
+    background-color: rgba(141, 212, 227, 0.1);
+}
+
+.score-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* استایل مقادیر عددی */
+.score-value {
+    color: var(--secondary-medium-blue);
+    font-weight: 600;
+    display: block;
+    padding: 5px 10px;
+    background: rgba(29, 97, 169, 0.1);
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+}
+
+.rank-value {
+    color: #198754;
+    font-weight: 600;
+    display: block;
+    padding: 5px 10px;
+    background: rgba(25, 135, 84, 0.1);
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+}
+
+/* بج‌های برنامه */
+.badge {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* لِجِند */
+.legend {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.legend h6 {
+    color: var(--primary-dark-blue);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.legend-text {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+/* کارت اطلاعات */
+.info-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(141, 212, 227, 0.3);
+    overflow: hidden;
+}
+
+.info-header {
+    background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+    padding: 20px 25px;
+    color: white;
+}
+
+.info-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.info-body {
+    padding: 30px;
+}
+
+.info-conditions ol {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.info-conditions li {
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.info-conditions li:last-child {
+    margin-bottom: 0;
+}
+
+.info-conditions li strong {
+    color: var(--primary-dark-blue);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.info-conditions li p {
+    color: var(--text-light);
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* تماس کارت */
+.contact-card {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+}
+
+.contact-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-text h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    color: var(--accent-light-blue);
+    width: 24px;
+}
+
+.contact-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item strong {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-item a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--accent-light-blue);
+    text-decoration: underline;
+}
+
+.contact-item span {
+    color: white;
+    font-weight: 500;
+}
+
+/* دانلود کارت */
+.download-card {
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%);
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+}
+
+.download-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.download-icon {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.download-text {
+    flex: 1;
+}
+
+.download-text h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.download-text p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+}
+
+.download-info {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.download-info span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-download {
+    background: white;
+    color: var(--primary-dark-blue);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background: #f8f9fa;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    color: var(--primary-dark-blue);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .main-container {
+        padding: 15px;
+    }
+    
+    .content-wrapper {
+        padding: 25px;
+    }
+    
+    .download-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .download-info {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+    }
+    
+    .content-wrapper {
+        margin-top: 0;
+    }
+    
+    .contact-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .content-wrapper {
+        padding: 20px;
+    }
+    
+    .table-header {
+        padding: 20px;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .score-table thead th,
+    .score-table tbody td {
+        padding: 10px 8px;
+    }
+    
+    .important-notice {
+        padding: 15px;
+    }
+    
+    .info-header {
+        padding: 15px 20px;
+    }
+    
+    .info-body {
+        padding: 20px;
+    }
+    
+    .contact-card {
+        padding: 20px;
+    }
+    
+    .download-card {
+        padding: 20px;
+    }
+    
+    .score-value, .rank-value {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+    
+    .badge {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 15px;
+    }
+    
+    .score-table {
+        font-size: 0.8rem;
+    }
+    
+    .legend-items {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-download {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .filter-section .row {
+        flex-direction: column;
+    }
+    
+    .filter-select {
+        margin-bottom: 10px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // فیلتر کردن جدول
+    function filterTable() {
+        const facultyValue = document.getElementById('facultyFilter').value;
+        const programTypeValue = document.getElementById('programTypeFilter').value;
+        const scoreTypeValue = document.getElementById('scoreTypeFilter').value;
+        
+        const rows = document.querySelectorAll('#scoreTable tbody tr');
+        let visibleCount = 0;
+        
+        rows.forEach(row => {
+            const faculty = row.getAttribute('data-faculty');
+            const programType = row.getAttribute('data-programtype');
+            const scoreType = row.getAttribute('data-scoretype');
+            
+            let showRow = true;
+            
+            if (facultyValue !== 'all' && faculty !== facultyValue) {
+                showRow = false;
+            }
+            
+            if (programTypeValue !== 'all' && programType !== programTypeValue) {
+                showRow = false;
+            }
+            
+            if (scoreTypeValue !== 'all' && scoreType !== scoreTypeValue) {
+                showRow = false;
+            }
+            
+            if (showRow) {
+                row.style.display = '';
+                visibleCount++;
+                // عنوان‌های مهم را برجسته کن
+                if (row.querySelector('td strong')) {
+                    row.style.borderTop = '2px solid var(--secondary-medium-blue)';
+                }
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        // پیام زمانی که هیچ رکوردی یافت نشد
+        const tableBody = document.querySelector('#scoreTable tbody');
+        let noResultsRow = tableBody.querySelector('.no-results');
+        
+        if (visibleCount === 0) {
+            if (!noResultsRow) {
+                noResultsRow = document.createElement('tr');
+                noResultsRow.className = 'no-results';
+                noResultsRow.innerHTML = `
+                    <td colspan="8" class="text-center py-4">
+                        <i class="fas fa-search me-2"></i>
+                        Seçtiğiniz kriterlere uygun program bulunamadı.
+                    </td>
+                `;
+                tableBody.appendChild(noResultsRow);
+            }
+        } else if (noResultsRow) {
+            noResultsRow.remove();
+        }
+    }
+    
+    // گوش دادن به تغییرات فیلتر
+    document.querySelectorAll('.filter-select').forEach(select => {
+        select.addEventListener('change', filterTable);
+    });
+    
+    // انیمیشن دکمه دانلود
+    const downloadBtn = document.querySelector('.btn-download');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> İndiriliyor...';
+            this.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> İndirildi!';
+                this.style.background = '#198754';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.opacity = '1';
+                    this.style.background = 'white';
+                }, 2000);
+            }, 1000);
+        });
+    }
+    
+    // افکت‌های hover روی ردیف‌های جدول
+    const tableRows = document.querySelectorAll('.score-table tbody tr');
+    tableRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'rgba(141, 212, 227, 0.15)';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            const isEven = Array.from(tableRows).indexOf(this) % 2 === 1;
+            this.style.backgroundColor = isEven ? '#f8f9fa' : 'white';
+        });
+    });
+    
+    // راه‌اندازی اولیه
+    filterTable();
+});
+</script>
+{% endblock %}

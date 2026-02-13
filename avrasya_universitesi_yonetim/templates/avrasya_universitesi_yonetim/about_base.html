@@ -1,0 +1,90 @@
+<!-- about_base.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <a href="{% url 'avrasya_universitesi_yonetim:mutevelli_heyeti' %}" class="text-white text-decoration-none">
+                    <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>Yönetim</h5>
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush" id="aboutMenu">
+                    <a href="{% url 'avrasya_universitesi_yonetim:mutevelli_heyeti' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-people me-2"></i>Mütevelli Heyeti</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="{% url 'avrasya_universitesi_yonetim:mutevelli_heyet_baskani' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-people me-2"></i> Mütevelli Heyet Başkanı </span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_yonetim:rektor' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-person-gear me-2"></i>Rektör</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_yonetim:rektor_yardimcilari' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-people-fill me-2"></i>Rektör Yardımcıları</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a href="{% url 'avrasya_universitesi_yonetim:genel_sekreter' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-person-vcard me-2"></i>Genel Sekreter</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_yonetim:dekanlar' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-building me-2"></i>Dekanlar</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    
+                    <a href="{% url 'avrasya_universitesi_yonetim:universite_senatosu' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-journal-text me-2"></i>Üniversite Senatosu</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    
+                    <a href="{% url 'avrasya_universitesi_yonetim:yonetim_kurulu' %}" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-diagram-3 me-2"></i>Yönetim Kurulu</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        {% block about_content %}
+        {% endblock %}
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی برای بخش درباره ما */
+#aboutMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#aboutMenu .list-group-item:hover,
+#aboutMenu .list-group-item.active {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+    border-bottom: 2px solid #fd7e14;
+    font-weight: 700;
+}
+
+/* ... سایر استایل‌ها */
+</style>
+{% endblock %}

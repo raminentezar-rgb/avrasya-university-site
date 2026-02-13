@@ -1,0 +1,63 @@
+{% extends 'arastirma/base.html' %}
+{% load static %}
+
+{% block title %}Araştırma Politikaları - Avrasya University{% endblock %}
+
+{% block content %}
+<section class="research-hero" style="background: linear-gradient(135deg, #1d61a9 0%, #092442 100%); padding: 100px 0 60px;">
+    <div class="container">
+        <div class="research-hero-content">
+            <h1>Araştırma Politikaları</h1>
+            <p>Üniversitemizin araştırma stratejileri ve politikaları</p>
+        </div>
+    </div>
+</section>
+
+<section class="research-section">
+    <div class="container">
+        <div class="sidebar-layout">
+            <!-- سایدبار در سمت چپ -->
+            <div class="sidebar-left">
+                {% include 'arastirma/includes/policy_sidebar.html' %}
+            </div>
+            
+            <!-- محتوای اصلی در سمت راست -->
+            <div class="content-right">
+                {% for policy in policies %}
+                <div class="research-card mb-4">
+                    <h3>{{ policy.title }}</h3>
+                    <div class="policy-meta mb-3">
+                        <span class="badge badge-primary">
+                            <i class="fas fa-users"></i> {{ policy.commission }}
+                        </span>
+                        <span class="text-muted ml-3">
+                            <i class="fas fa-calendar"></i> {{ policy.created_at|date:"d M Y" }}
+                        </span>
+                    </div>
+                    
+                    <p>{{ policy.content|truncatewords:50 }}</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <a href="{% url 'arastirma:policy_detail' policy.pk %}" class="btn btn-primary">
+                            Devamını Oku <i class="fas fa-arrow-right"></i>
+                        </a>
+                        
+                        {% if policy.document %}
+                        <a href="{{ policy.document.url }}" class="btn btn-outline-secondary btn-sm" target="_blank">
+                            <i class="fas fa-download"></i> Dokümanı İndir
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-5">
+                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">Henüz politika eklenmemiş</h4>
+                    <p class="text-muted">En kısa sürede araştırma politikalarımız paylaşılacaktır.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

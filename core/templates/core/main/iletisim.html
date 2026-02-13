@@ -1,0 +1,466 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}İletişim - Avrasya Üniversitesi{% endblock %}
+
+{% block content %}
+<style>
+    /* Global Page Styles */
+    :root {
+        --primary-blue: #002347;
+        --accent-cyan: #8dd4e3;
+        --text-dark: #333;
+        --text-light: #666;
+        --bg-light: #f8f9fa;
+    }
+
+    /* Hero Section */
+    .page-hero {
+        background-image: linear-gradient(rgba(0, 35, 71, 0.5), rgba(0, 35, 71, 0.8)),
+        url('{% static "core/img/student/about-banner.png" %}');
+        background-size: cover;
+        background-position: center;
+        padding: 180px 0 100px;
+        color: white;
+        text-align: center;
+        position: relative;
+        margin-top: 140px;
+        /* Pull behind navbar */
+    }
+
+    .hero-title {
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 800;
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        color: #f8f9fa;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 700px;
+        margin: 0 auto;
+        font-weight: 300;
+        line-height: 1.6;
+    }
+
+    /* Content Section */
+    .content-wrapper {
+        background: var(--bg-light);
+        padding: 80px 0;
+    }
+
+    /* Campus Card Styles */
+    .campus-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        margin-bottom: 60px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .campus-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .campus-header {
+        background: var(--primary-blue);
+        padding: 25px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .campus-header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05));
+    }
+
+    .campus-title {
+        color: white;
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .campus-title i {
+        color: var(--accent-cyan);
+        margin-right: 15px;
+        font-size: 1.2rem;
+    }
+
+    .card-body-custom {
+        padding: 40px;
+    }
+
+    /* Contact Items */
+    .contact-row {
+        display: flex;
+        margin-bottom: 25px;
+        align-items: flex-start;
+    }
+
+    .icon-box {
+        width: 45px;
+        height: 45px;
+        background: rgba(141, 212, 227, 0.15);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-blue);
+        font-size: 1.1rem;
+        margin-right: 20px;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+    }
+
+    .contact-row:hover .icon-box {
+        background: var(--primary-blue);
+        color: var(--accent-cyan);
+    }
+
+    .info-content strong {
+        display: block;
+        color: var(--primary-blue);
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .info-content p,
+    .info-content div {
+        color: var(--text-light);
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Phone Grid */
+    .phone-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 10px;
+        margin-top: 5px;
+    }
+
+    .phone-badge {
+        background: #f1f5f9;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+        border-left: 3px solid var(--accent-cyan);
+        transition: all 0.2s;
+        display: inline-block;
+    }
+
+    .phone-badge:hover {
+        background: white;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        transform: translateX(3px);
+    }
+
+    /* Map Stylings */
+    .map-wrapper {
+        height: 100%;
+        min-height: 400px;
+        border-left: 1px solid #eee;
+    }
+
+    .map-frame {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        filter: grayscale(20%) contrast(1.1);
+        transition: filter 0.3s;
+    }
+
+    .campus-card:hover .map-frame {
+        filter: grayscale(0%) contrast(1);
+    }
+
+    /* WhatsApp Button */
+    .btn-whatsapp {
+        background: #25D366;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        margin-top: 10px;
+    }
+
+    .btn-whatsapp:hover {
+        background: #1ebc57;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Call to Action Section */
+    .cta-box {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, #1a4f8b 100%);
+        border-radius: 20px;
+        padding: 50px;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .cta-box::before {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(141, 212, 227, 0.1);
+        border-radius: 50%;
+        top: -150px;
+        left: -150px;
+    }
+
+    .cta-btn {
+        background: var(--accent-cyan);
+        color: var(--primary-blue);
+        font-weight: 800;
+        padding: 15px 40px;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 25px;
+        transition: all 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-btn:hover {
+        background: white;
+        color: var(--primary-blue);
+        transform: translateY(-3px);
+        text-decoration: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (max-width: 991px) {
+        .page-hero {
+            padding: 150px 0 80px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .map-wrapper {
+            min-height: 300px;
+            border-left: none;
+            border-top: 1px solid #eee;
+        }
+
+        .card-body-custom {
+            padding: 30px;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="page-hero">
+    <div class="container">
+        <h1 class="hero-title">İletişim Noktaları</h1>
+        <p class="hero-subtitle">
+            Avrasya Üniversitesi'nin tüm yerleşkelerine ait detaylı iletişim bilgileri, adresler ve ulaşım haritaları.
+        </p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-wrapper">
+    <div class="container">
+
+        <!-- Pelitli Campus -->
+        <div class="campus-card">
+            <div class="campus-header">
+                <h2 class="campus-title">
+                    <i class="fas fa-university"></i> Pelitli Yerleşkesi (Rektörlük)
+                </h2>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <div class="card-body-custom">
+
+                        <div class="contact-row">
+                            <div class="icon-box"><i class="fa-solid fa-map-marker-alt"></i></div>
+                            <div class="info-content">
+                                <strong>Adres</strong>
+                                <p>Avrasya Üniversitesi Rektörlüğü, Pelitli Mahallesi, Olimpiyat Bulvarı No:35/A,
+                                    Ortahisar/TRABZON</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-row">
+                            <div class="icon-box"><i class="fa-solid fa-phone-alt"></i></div>
+                            <div class="info-content">
+                                <strong>Telefon Numaraları</strong>
+                                <div class="phone-grid">
+                                    <span class="phone-badge">0 462 334 05 50</span>
+                                    <span class="phone-badge">0 462 334 64 44</span>
+                                    <span class="phone-badge">0 462 334 64 45</span>
+                                    <span class="phone-badge">0 462 334 64 47</span>
+                                    <span class="phone-badge">0 462 334 64 50</span>
+                                    <span class="phone-badge">0 462 344 05 10</span>
+                                    <span class="phone-badge">0 462 344 05 18</span>
+                                    <span class="phone-badge">0 462 335 50 02</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="map-wrapper">
+                        <iframe class="map-frame"
+                            src="https://maps.google.com/maps?q=Avrasya%20%C3%9Cniversitesi%20Pelitli%20Yerle%C5%9Fkesi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ömer Yıldız Campus -->
+        <div class="campus-card">
+            <div class="campus-header">
+                <h2 class="campus-title">
+                    <i class="fas fa-building"></i> Ömer Yıldız Yerleşkesi
+                </h2>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="card-body-custom">
+
+                        <div class="contact-row">
+                            <div class="icon-box"><i class="fa-solid fa-map-marker-alt"></i></div>
+                            <div class="info-content">
+                                <strong>Adres</strong>
+                                <p>Yalıncak Mahallesi, Rize Cad. No: 125/1 Ortahisar/Trabzon</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-row">
+                            <div class="icon-box"><i class="fa-solid fa-phone-alt"></i></div>
+                            <div class="info-content">
+                                <strong>Telefon Numaraları</strong>
+                                <div class="phone-grid">
+                                    <span class="phone-badge">0 462 335 50 00</span>
+                                    <span class="phone-badge">0 462 334 00 18</span>
+                                    <span class="phone-badge">0 462 334 00 21</span>
+                                    <span class="phone-badge">0 462 334 00 23</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-row">
+                            <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="info-content">
+                                <strong>KEP Adresi</strong>
+                                <p>avrasyauniversitesi@hs01.kep.tr</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="map-wrapper" style="border-right: 1px solid #eee; border-left: none;">
+                        <iframe class="map-frame"
+                            src="https://maps.google.com/maps?q=Avrasya%20%C3%9Cniversitesi%20%C3%96mer%20Y%C4%B1ld%C4%B1z%20Yerle%C5%9Fkesi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Yomra Campus -->
+        <div class="campus-card">
+            <div class="campus-header">
+                <h2 class="campus-title">
+                    <i class="fas fa-graduation-cap"></i> Yomra Yerleşkesi
+                </h2>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <div class="card-body-custom">
+
+                        <div class="contact-row">
+                            <div class="icon-box"><i class="fa-solid fa-map-marker-alt"></i></div>
+                            <div class="info-content">
+                                <strong>Adres</strong>
+                                <p>Sancak Mah. Hükümet Cad. Yomra Yomra/TRABZON</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-row">
+                            <div class="icon-box"><i class="fa-solid fa-phone-alt"></i></div>
+                            <div class="info-content">
+                                <strong>Telefon Numaraları</strong>
+                                <div class="phone-grid">
+                                    <span class="phone-badge">0 462 344 05 11</span>
+                                    <span class="phone-badge">0 462 344 05 19</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-row">
+                            <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
+                            <div class="info-content">
+                                <strong>Whatsapp Danışma Hattı</strong>
+                                <a href="https://wa.me/5353334555" target="_blank" class="btn-whatsapp">
+                                    <i class="fab fa-whatsapp mr-2"></i> 0 535 333 45 55
+                                </a>
+                                <p class="mt-2 text-muted small"><i class="far fa-clock mr-1"></i> Hafta içi 09:00 -
+                                    17:00</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="map-wrapper">
+                        <iframe class="map-frame"
+                            src="https://maps.google.com/maps?q=Avrasya%20%C3%9Cniversitesi%20Yomra%20Yerle%C5%9Fkesi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-box">
+            <h2 style="font-family: 'Metropolis', sans-serif; font-weight: 800; margin-bottom: 20px; color:#f1f5f9">
+                Soru ve Görüşleriniz İçin Bize Yazın
+            </h2>
+            <p style="font-size: 1.1rem; opacity: 0.5; max-width: 600px; margin: 0 auto; color:#f1f5f9">
+                Herhangi bir konuda bilgi almak, öneri iletmek veya soru sormak için iletişim formumuzu
+                kullanabilirsiniz.
+            </p>
+            <a href="{% url 'contact:contact' %}" class="cta-btn">
+                <i class="fas fa-envelope mr-2"></i> İletişim Formuna Git
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

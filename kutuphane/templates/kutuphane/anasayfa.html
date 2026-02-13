@@ -1,0 +1,390 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Avrasya Üniversitesi -  Kütüphane{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-lg-3 mb-4">
+        {% include 'kutuphane/sidebar.html' %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+        <!-- Hero Section -->
+        <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), url('{% static 'img/Kütüphane.jpg' %}') center/cover;">
+            <div class="card-body text-white py-5">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold mb-3">Kütüphanemize Hoşgeldiniz</h1>
+                        <p class="lead mb-4">
+                            Avrasya Üniversitesi Kütüphanesi, akademik başarınızı desteklemek için geniş kaynaklar ve hizmetler sunmaktadır.
+                        </p>
+                         <div class="d-flex gap-3">
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-calendar me-1"></i>1999'dan Beri
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-building me-1"></i>5 Bölüm
+                            </span>
+                            <span class="badge bg-light text-dark fs-6 p-2">
+                                <i class="bi bi-award me-1"></i>25 Yıllık Deneyim
+                            </span>
+                        </div> 
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <i class="bi bi-book display-1 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4 border-bottom pb-2">Kütüphane Hizmetleri</h2>
+            </div>
+            
+            <!-- Veritabanları -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary rounded-circle p-3 me-3">
+                                <i class="bi bi-database text-white fs-4"></i>
+                            </div>
+                            <h4 class="card-title mb-0">VERİTABANLARI</h4>
+                        </div>
+                        <p class="card-text">Akademik çalışmalarınız için geniş veritabanı koleksiyonuna erişim sağlayın.</p>
+                        <a href="https://katalog.avrasya.edu.tr/vetisbt/?dil=tr&p=1&veritabani=" class="btn btn-primary">Erişim Sağla</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kütüphane Kataloğu -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary rounded-circle p-3 me-3">
+                                <i class="bi bi-search text-white fs-4"></i>
+                            </div>
+                            <h4 class="card-title mb-0">KÜTÜPHANE KATALOĞU</h4>
+                        </div>
+                        <p class="card-text">Kütüphanemizdeki tüm materyalleri arayın ve keşfedin.</p>
+                        <a href="https://katalog.avrasya.edu.tr/yordam/" class="btn btn-primary">Kataloğu Görüntüle</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Akademik Kurumsal Arşiv -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary rounded-circle p-3 me-3">
+                                <i class="bi bi-archive text-white fs-4"></i>
+                            </div>
+                            <h4 class="card-title mb-0">AKADEMİK KURUMSAL ARŞİV</h4>
+                        </div>
+                        <p class="card-text">Üniversitemizin akademik çıktılarını ve yayınlarını keşfedin.</p>
+                        <a href="https://acikerisim.avrasya.edu.tr/" class="btn btn-primary">Arşivi Keşfet</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kurum Dışı Erişim -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary rounded-circle p-3 me-3">
+                                <i class="bi bi-globe text-white fs-4"></i>
+                            </div>
+                            <h4 class="card-title mb-0">KURUM DIŞI ERİŞİM</h4>
+                        </div>
+                        <p class="card-text">Kampüs dışından kütüphane kaynaklarına erişim sağlayın.</p>
+                        <a href="https://katalog.avrasya.edu.tr/vetisbt/?dil=tr&p=1&veritabani=" class="btn btn-primary">Erişim Bilgileri</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4 border-bottom pb-2">Akademik Araçlar</h2>
+            </div>
+            
+            <!-- Turnitin -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 border-0 text-center shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="bg-warning rounded-circle p-3 mx-auto mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-file-earmark-check text-white fs-3"></i>
+                        </div>
+                        <h5 class="card-title">TURNITIN</h5>
+                        <p class="card-text">Akademik intihal tespit aracı</p>
+                        <a href="https://www.turnitin.com/login_page.asp?err=3400&lang=tr" class="btn btn-outline-primary btn-sm">Kullan</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- iThenticate -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 border-0 text-center shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="bg-warning rounded-circle p-3 mx-auto mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-shield-check text-white fs-3"></i>
+                        </div>
+                        <h5 class="card-title">ITHENTICATE</h5>
+                        <p class="card-text">Profesyonel intihal tespit</p>
+                        <a href="https://app.ithenticate.com/en_us/login" class="btn btn-outline-primary btn-sm">Kullan</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TO-KAT -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 border-0 text-center shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="bg-warning rounded-circle p-3 mx-auto mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-collection text-white fs-3"></i>
+                        </div>
+                        <h5 class="card-title">TO-KAT</h5>
+                        <p class="card-text">Katalog tarama sistemi</p>
+                        <a href="https://toplukatalog.tr/" class="btn btn-outline-primary btn-sm">Kullan</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- EKUAL TARAMA -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 border-0 text-center shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="bg-warning rounded-circle p-3 mx-auto mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-search-heart text-white fs-3"></i>
+                        </div>
+                        <h5 class="card-title">EKUAL TARAMA</h5>
+                        <p class="card-text">Akademik tarama sistemi</p>
+                        <a href="https://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=eds" class="btn btn-outline-primary btn-sm">Kullan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4 border-bottom pb-2">Kütüphane İstatistikleri</h2>
+            </div>
+            
+            <div class="col-md-3 col-sm-6 mb-4 text-center">
+                <div class="stat-circle bg-primary text-white mx-auto mb-3">
+                    <i class="bi bi-book fs-2"></i>
+                </div>
+                <h3 class="fw-bold">50,000+</h3>
+                <p class="text-muted">Basılı Kitap</p>
+            </div>
+            
+            <div class="col-md-3 col-sm-6 mb-4 text-center">
+                <div class="stat-circle bg-primary text-white mx-auto mb-3">
+                    <i class="bi bi-journal fs-2"></i>
+                </div>
+                <h3 class="fw-bold">15,000+</h3>
+                <p class="text-muted">E-Kitap</p>
+            </div>
+            
+            <div class="col-md-3 col-sm-6 mb-4 text-center">
+                <div class="stat-circle bg-primary text-white mx-auto mb-3">
+                    <i class="bi bi-newspaper fs-2"></i>
+                </div>
+                <h3 class="fw-bold">200+</h3>
+                <p class="text-muted">Dergi Aboneliği</p>
+            </div>
+            
+            <div class="col-md-3 col-sm-6 mb-4 text-center">
+                <div class="stat-circle bg-primary text-white mx-auto mb-3">
+                    <i class="bi bi-database fs-2"></i>
+                </div>
+                <h3 class="fw-bold">30+</h3>
+                <p class="text-muted">Veritabanı</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* استایل‌های سفارشی برای صفحه تاریخچه */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.timeline-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-left: 4px solid #fd7e14;
+}
+
+.timeline-content h5 {
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* استایل برای دایره‌های آمار */
+.stat-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 1.2rem;
+}
+
+/* استایل‌های منو */
+#facultyMenu .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+
+#facultyMenu .list-group-item:not(.collapsed) {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+#facultyMenu .list-group-item:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    border-bottom: 2px solid #0d6efd;
+    font-weight: 700;
+}
+
+#facultyMenu .collapse .list-group-item {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    border-left: 4px solid transparent;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+#facultyMenu .collapse .list-group-item:hover,
+#facultyMenu .collapse .list-group-item.active {
+    border-left: 4px solid #fd7e14;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding-left: 2.7rem;
+}
+
+/* رنگ‌های دکمه */
+.btn-primary {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-primary:hover {
+    background-color: #e56f10 !important;
+    border-color: #d9680f !important;
+}
+
+.btn-outline-primary {
+    color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #fd7e14 !important;
+    border-color: #fd7e14 !important;
+    color: white !important;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .col-lg-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .timeline::before {
+        left: 15px;
+    }
+    
+    .timeline-marker {
+        left: -2rem;
+        width: 30px;
+        height: 30px;
+    }
+    
+    .stat-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1rem;
+    }
+}
+</style>
+
+<script>
+// مدیریت منوهای آبشاری
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('#facultyMenu [data-bs-toggle="collapse"]');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menuItems.forEach(otherItem => {
+                if (otherItem !== item && !otherItem.classList.contains('collapsed')) {
+                    const targetId = otherItem.getAttribute('data-bs-target');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        otherItem.classList.add('collapsed');
+                        targetElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}
