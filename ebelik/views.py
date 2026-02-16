@@ -3,20 +3,21 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import EbelikDuyuru, Ebelik_Etkinlik, EbelikDersProgrami
+from .models import EbelikDuyuru, EbelikEtkinlik, EbelikDersProgrami
 from django.utils import timezone
+
 
 def etkinlik_listesi(request):
     now = timezone.now()
     
     # رویدادهای آینده (از حالا به بعد)
-    gelecek_etkinlikler = Ebelik_Etkinlik.objects.filter(
+    gelecek_etkinlikler = EbelikEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__gte=now
     ).order_by('baslangic_tarihi')
     
     # رویدادهای گذشته (قبل از حالا)
-    gecmis_etkinlikler = Ebelik_Etkinlik.objects.filter(
+    gecmis_etkinlikler = EbelikEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__lt=now
     ).order_by('-baslangic_tarihi')
@@ -32,16 +33,18 @@ def etkinlik_listesi(request):
     
     return render(request, 'ebelik/includes/etkinlikler/list.html', context)
 
+
 def etkinlik_detay(request, slug):
-    etkinlik = get_object_or_404(Ebelik_Etkinlik, slug=slug, yayinda=True)
+    etkinlik = get_object_or_404(EbelikEtkinlik, slug=slug, yayinda=True)
     return render(request, 'ebelik/includes/etkinlikler/detail.html', {
         'etkinlik': etkinlik
     })
 
+
 def yaklasan_etkinlikler(request):
-    """Yaklaşan etkinlikler (7 gün içinde)"""
+    """رویدادهای نزدیک (طی ۷ روز آینده)"""
     yedi_gun_sonra = timezone.now() + timezone.timedelta(days=7)
-    etkinlikler = Ebelik_Etkinlik.objects.filter(
+    etkinlikler = EbelikEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__range=[timezone.now(), yedi_gun_sonra]
     ).order_by('baslangic_tarihi')
@@ -50,10 +53,11 @@ def yaklasan_etkinlikler(request):
         'etkinlikler': etkinlikler
     })
 
+
 def ebelik_duyurulari(request):
-    """نمایش تمام اطلاعیه‌های مربوط به مامایی"""
+    """نمایش تمام اطلاعیه‌های مربوط به رشته مامایی"""
     
-    # استفاده از مدل مدیر پروکسی برای فیلتر خودکار
+    # استفاده از مدل پروکسی برای فیلتر خودکار
     duyurular = EbelikDuyuru.objects.all().order_by('-yayin_tarihi')
     
     # پارامترهای جستجو
@@ -63,7 +67,7 @@ def ebelik_duyurulari(request):
     # اعمال فیلترها
     if search_query:
         duyurular = duyurular.filter(
-            Q(baslik__icontains=search_query) | 
+            Q(baslik__icontains=search_query) |
             Q(icerik__icontains=search_query) |
             Q(ozet__icontains=search_query)
         )
@@ -84,21 +88,23 @@ def ebelik_duyurulari(request):
     
     return render(request, 'ebelik/includes/list.html', context)
 
+
 def ebelik_duyuru_detay(request, slug):
-    """نمایش جزییات یک اطلاعیه مامایی"""
+    """نمایش جزئیات یک اطلاعیه رشته مامایی"""
     duyuru = get_object_or_404(EbelikDuyuru, slug=slug)
     
     # اطلاعیه‌های مرتبط
     ilgili_duyurular = EbelikDuyuru.objects.exclude(id=duyuru.id).order_by('-yayin_tarihi')[:3]
     
     # پیدا کردن رشته مامایی برای نمایش اطلاعات
-    ebelik_bolumu = get_object_or_404(Bolum, kod='ebelik')
+    ebelik_bolumu = get_object_or_404(Bolum, kod='ebelik', aktif=True)
     
     return render(request, 'ebelik/includes/detail.html', {
         'duyuru': duyuru,
         'ilgili_duyurular': ilgili_duyurular,
         'bolum': ebelik_bolumu,
     })
+
 
 def ders_programi(request):
     # فقط فایل‌های فعال را نمایش بده
@@ -119,18 +125,23 @@ def ders_programi(request):
     
     return render(request, 'ebelik/includes/ders_programi.html', context)
 
+
 # صفحات استاتیک
-def ebelik(request):
+def ebelik_bolumu(request):
     return render(request, 'ebelik/includes/ebelik.html')
+
 
 def idari_faaliyetler_2024_2025(request):
     return render(request, 'ebelik/includes/idari_faaliyetler_2024_2025.html')
 
+
 def diger_faaliyetler_2024_2025(request):
     return render(request, 'ebelik/includes/diger_faaliyetler_2024_2025.html')
 
+
 def kalite_yonetimi(request):
     return render(request, 'ebelik/includes/kalite_yonetimi.html')
+
 
 def toplumsal_katki(request):
     return render(request, 'ebelik/includes/toplumsal_katki.html')

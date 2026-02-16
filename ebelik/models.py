@@ -5,6 +5,7 @@ from duyurular.models import Duyuru
 from django.urls import reverse
 from django.utils import timezone
 
+
 class EbelikDuyuruManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
@@ -12,8 +13,9 @@ class EbelikDuyuruManager(models.Manager):
             yayinda=True
         )
 
+
 class EbelikDuyuru(Duyuru):
-    """مدل پروکسی برای نمایش اطلاعیه‌های مامایی"""
+    """پروکسی مدل برای نمایش اطلاعیه‌های رشته مامایی"""
     
     objects = EbelikDuyuruManager()
     
@@ -22,7 +24,8 @@ class EbelikDuyuru(Duyuru):
         verbose_name = "Ebelik Duyurusu"
         verbose_name_plural = "Ebelik Duyuruları"
 
-class Ebelik_Etkinlik(models.Model):
+
+class EbelikEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
@@ -30,6 +33,8 @@ class Ebelik_Etkinlik(models.Model):
         ('spor', 'Spor Etkinliği'),
         ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -38,8 +43,8 @@ class Ebelik_Etkinlik(models.Model):
     kisa_aciklama = models.TextField(blank=True, verbose_name="Kısa Açıklama")
     detayli_aciklama = models.TextField(verbose_name="Detaylı Açıklama")
     etkinlik_turu = models.CharField(
-        max_length=20, 
-        choices=ETKINLIK_TURU_CHOICES, 
+        max_length=20,
+        choices=ETKINLIK_TURU_CHOICES,
         default='diger',
         verbose_name="Etkinlik Türü"
     )
@@ -49,8 +54,8 @@ class Ebelik_Etkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/afis/ebelik/%Y/%m/%d/', 
-        blank=True, 
+        upload_to='etkinlikler/afis/ebelik/%Y/%m/%d/',
+        blank=True,
         null=True,
         verbose_name="Etkinlik Afişi"
     )
@@ -75,20 +80,21 @@ class Ebelik_Etkinlik(models.Model):
         return reverse('ebelik:etkinlik_detay', args=[self.slug])
 
     def yaklasan_etkinlik(self):
-        """Etkinliğin yaklaşıp yaklaşmadığını kontrol eder"""
+        """بررسی نزدیک بودن رویداد"""
         return self.baslangic_tarihi <= timezone.now() + timezone.timedelta(days=7)
 
     def devam_ediyor(self):
-        """Etkinliğin devam edip etmediğini kontrol eder"""
+        """بررسی ادامه داشتن رویداد"""
         now = timezone.now()
         if self.bitis_tarihi:
             return self.baslangic_tarihi <= now <= self.bitis_tarihi
         return self.baslangic_tarihi.date() == now.date()
 
     def gun_kaldi(self):
-        """Etkinliğe kaç gün kaldığını hesaplar"""
+        """محاسبه روزهای باقی‌مانده تا رویداد"""
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
+
 
 class EbelikDersProgrami(models.Model):
     SINIF_CHOICES = [

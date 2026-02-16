@@ -1,10 +1,11 @@
 # app_name: ebelik/admin.py
 
 from django.contrib import admin
-from .models import EbelikDuyuru, Ebelik_Etkinlik, EbelikDersProgrami
+from .models import EbelikDuyuru, EbelikEtkinlik, EbelikDersProgrami
 
-@admin.register(Ebelik_Etkinlik)
-class Ebelik_EtkinlikAdmin(admin.ModelAdmin):
+
+@admin.register(EbelikEtkinlik)
+class EbelikEtkinlikAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -26,6 +27,7 @@ class Ebelik_EtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
+
 @admin.register(EbelikDuyuru)
 class EbelikDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -34,6 +36,7 @@ class EbelikDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return EbelikDuyuru.objects.all()
+
 
 @admin.register(EbelikDersProgrami)
 class EbelikDersProgramiAdmin(admin.ModelAdmin):
