@@ -73,6 +73,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('gorsel_iletisim_tasarimi/', include('gorsel_iletisim_tasarimi.urls')),
     path('idari_birimler/', include('idari_birimler.urls')),
+    
 
 
     #MYO 

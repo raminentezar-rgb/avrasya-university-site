@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'gorsel_iletisim_tasarimi',
     'idari_birimler',
     
+    
     #MYO
     'adalet',
     'ascilik',
