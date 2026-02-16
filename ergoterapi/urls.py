@@ -9,16 +9,17 @@ urlpatterns = [
     # URLهای اطلاعیه‌ها
     path('duyurular/', views.ergoterapi_duyurulari, name='liste'),
     path('duyurular/<slug:slug>/', views.ergoterapi_duyuru_detay, name='detay'),
-    
+
     # URLهای صفحات استاتیک
-    path('', views.ergoterapi, name='ergoterapi'),
-    
+    path('', views.ergoterapi_bolumu, name='ergoterapi'),
+
     path('ders_programi/', views.ders_programi, name='ders_programi'),
-    
+
     # URLهای فعالیت‌ها
     path('idari_faaliyetler_2024_2025/', views.idari_faaliyetler_2024_2025, name='idari_faaliyetler_2024_2025'),
+
     path('diğer_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
-    
+
     # URLهای فعالیت‌ها
     path('etkinlikler/', views.etkinlik_listesi, name='etkinlik_listesi'),
     path('etkinlikler/yaklasan/', views.yaklasan_etkinlikler, name='yaklasan_etkinlikler'),

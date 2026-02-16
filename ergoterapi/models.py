@@ -5,6 +5,7 @@ from duyurular.models import Duyuru
 from django.urls import reverse
 from django.utils import timezone
 
+
 class ErgoterapiDuyuruManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
@@ -12,17 +13,19 @@ class ErgoterapiDuyuruManager(models.Manager):
             yayinda=True
         )
 
+
 class ErgoterapiDuyuru(Duyuru):
-    """مدل پروکسی برای نمایش اطلاعیه‌های ارگوتراپی"""
-    
+    """پروکسی مدل برای نمایش اطلاعیه‌های رشته ارگوتراپی"""
+
     objects = ErgoterapiDuyuruManager()
-    
+
     class Meta:
         proxy = True
         verbose_name = "Ergoterapi Duyurusu"
         verbose_name_plural = "Ergoterapi Duyuruları"
 
-class Ergoterapi_Etkinlik(models.Model):
+
+class ErgoterapiEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
@@ -30,35 +33,37 @@ class Ergoterapi_Etkinlik(models.Model):
         ('spor', 'Spor Etkinliği'),
         ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
-    
+
     baslik = models.CharField(max_length=255, verbose_name="Etkinlik Başlığı")
     slug = models.SlugField(unique=True, verbose_name="SEO URL")
     kisa_aciklama = models.TextField(blank=True, verbose_name="Kısa Açıklama")
     detayli_aciklama = models.TextField(verbose_name="Detaylı Açıklama")
     etkinlik_turu = models.CharField(
-        max_length=20, 
-        choices=ETKINLIK_TURU_CHOICES, 
+        max_length=20,
+        choices=ETKINLIK_TURU_CHOICES,
         default='diger',
         verbose_name="Etkinlik Türü"
     )
-    
+
     baslangic_tarihi = models.DateTimeField(verbose_name="Başlangıç Tarihi")
     bitis_tarihi = models.DateTimeField(verbose_name="Bitiş Tarihi", blank=True, null=True)
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
-    
+
     afis = models.ImageField(
-        upload_to='etkinlikler/ergoterapi/afis/%Y/%m/%d/', 
-        blank=True, 
+        upload_to='etkinlikler/afis/ergoterapi/%Y/%m/%d/',
+        blank=True,
         null=True,
         verbose_name="Etkinlik Afişi"
     )
-    
+
     katilim_linki = models.URLField(blank=True, verbose_name="Katılım Linki")
     kayit_gerekiyor = models.BooleanField(default=False, verbose_name="Kayıt Gerekiyor")
     ucretli = models.BooleanField(default=False, verbose_name="Ücretli Etkinlik")
-    
+
     yayinda = models.BooleanField(default=False, verbose_name="Yayında")
     olusturulma_tarihi = models.DateTimeField(auto_now_add=True)
     guncellenme_tarihi = models.DateTimeField(auto_now=True)
@@ -75,20 +80,21 @@ class Ergoterapi_Etkinlik(models.Model):
         return reverse('ergoterapi:etkinlik_detay', args=[self.slug])
 
     def yaklasan_etkinlik(self):
-        """Etkinliğin yaklaşıp yaklaşmadığını kontrol eder"""
+        """بررسی نزدیک بودن رویداد"""
         return self.baslangic_tarihi <= timezone.now() + timezone.timedelta(days=7)
 
     def devam_ediyor(self):
-        """Etkinliğin devam edip etmediğini kontrol eder"""
+        """بررسی در حال برگزاری بودن رویداد"""
         now = timezone.now()
         if self.bitis_tarihi:
             return self.baslangic_tarihi <= now <= self.bitis_tarihi
         return self.baslangic_tarihi.date() == now.date()
 
     def gun_kaldi(self):
-        """Etkinliğe kaç gün kaldığını hesaplar"""
+        """محاسبه روزهای باقی‌مانده تا رویداد"""
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
+
 
 class ErgoterapiDersProgrami(models.Model):
     SINIF_CHOICES = [
@@ -98,18 +104,18 @@ class ErgoterapiDersProgrami(models.Model):
         ('4', '4. Sınıf'),
         ('tum', 'Tüm Sınıflar'),
     ]
-    
+
     baslik = models.CharField(max_length=200, verbose_name="Başlık")
     aciklama = models.TextField(blank=True, verbose_name="Açıklama")
     dosya = models.FileField(upload_to='ders_programlari/ergoterapi/', verbose_name="Dosya")
     sinif = models.CharField(max_length=10, choices=SINIF_CHOICES, verbose_name="Sınıf")
     yayin_tarihi = models.DateTimeField(default=timezone.now, verbose_name="Yayın Tarihi")
     aktif = models.BooleanField(default=True, verbose_name="Aktif")
-    
+
     class Meta:
         verbose_name = "Ders Programı (Ergoterapi)"
         verbose_name_plural = "Ders Programları (Ergoterapi)"
         ordering = ['-yayin_tarihi']
-    
+
     def __str__(self):
         return f"{self.baslik} - {self.get_sinif_display()}"
