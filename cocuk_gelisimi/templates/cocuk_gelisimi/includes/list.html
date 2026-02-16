@@ -1,6 +1,6 @@
-{% extends 'dis_ticaret/base.html' %}
+{% extends 'cocuk_gelisimi/base.html' %}
 {% load static %}
-{% block title %}Avrasya Üniversitesi - Dış Ticaret Duyuruları{% endblock %}
+{% block title %}Avrasya Üniversitesi - Çocuk Gelişimi Duyuruları{% endblock %}
 
 
 {% block content %}
@@ -9,7 +9,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Dış Ticaret Duyuruları</h1>
+            <h1>Çocuk Gelişimi Duyuruları</h1>
             <p>Akademik Duyurular ve Haberler</p>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <!-- سایدبار سمت چپ -->
         <div class="col-lg-3 col-xxl-2">
             <div class="sidebar-wrapper">
-                {% include 'dis_ticaret/dis_sidebar.html' %}
+                {% include 'cocuk_gelisimi/cocuk_sidebar.html' %}
             </div>
         </div>
         
@@ -36,12 +36,12 @@
                       </a>
                   </li>
                   <li class="breadcrumb-item">
-                      <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu='FEF' %}" class="text-decoration-none">
-                          <i class="bi bi-building me-1"></i>FEF
+                      <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu='SBF' %}" class="text-decoration-none">
+                          <i class="bi bi-building me-1"></i>SBF
                       </a>
                   </li>
                   <li class="breadcrumb-item active text-primary fw-semibold" aria-current="page">
-                      <i class="bi bi-book me-1"></i> Dış Ticaret
+                      <i class="bi bi-book me-1"></i> Çocuk Gelişimi
                   </li>
               </ol>
           </nav>
@@ -52,7 +52,7 @@
                   <div class="col-lg-8 mb-4 mb-lg-0">
                       <div class="header-gradient p-4 rounded-4">
                           <h1 class="section-title mb-2">
-                              <i class="bi bi-book me-2"></i> Dış Ticaret Duyuruları
+                              <i class="bi bi-book me-2"></i> Çocuk Gelişimi Duyuruları
                           </h1>
                           <p class="section-subtitle mb-0">
                               Dış Ticaret bölümüne ait akademik duyurular, etkinlikler ve önemli haberler
@@ -81,11 +81,11 @@
                       <i class="bi bi-funnel me-2"></i>Duyuru Filtreleme
                   </h3>
                   <p class="section-sub-description mb-4">
-                      Türk Dili ve Edebiyatı duyurularında arama yapın veya tarihe göre filtreleyin
+                      Çocuk Gelişimi duyurularında arama yapın veya tarihe göre filtreleyin
                   </p>
               </div>
               
-              <form method="get" action="{% url 'dis_ticaret:liste' %}" class="row g-3">
+              <form method="get" action="{% url 'cocuk_gelisimi:liste' %}" class="row g-3">
                   <div class="col-lg-8">
                       <div class="input-group input-group-lg">
                           <span class="input-group-text bg-white border-end-0">
@@ -97,7 +97,7 @@
                               id="q" 
                               name="q" 
                               value="{{ search_query }}"
-                              placeholder="Türk Dili ve Edebiyatı duyurularında ara..."
+                              placeholder="Çocuk Gelişimi duyurularında ara..."
                               style="height: 56px;"
                           >
                       </div>
@@ -140,7 +140,7 @@
                           </span>
                           {% endif %}
                       </div>
-                      <a href="{% url 'dis_ticaret:liste' %}" class="btn btn-outline-danger btn-sm">
+                      <a href="{% url 'cocuk_gelisimi:liste' %}" class="btn btn-outline-danger btn-sm">
                           <i class="bi bi-x-circle me-1"></i> Filtreleri Temizle
                       </a>
                   </div>
@@ -152,11 +152,11 @@
           <div class="duyuru-list-section">
               <div class="section-header mb-4">
                   <h3 class="section-sub-title mb-3">
-                      <i class="bi bi-bell me-2"></i>Dış Ticaret Duyuruları
+                      <i class="bi bi-bell me-2"></i>Çocuk Gelişimi Duyuruları
                   </h3>
                   {% if duyurular %}
                   <p class="section-sub-description mb-0">
-                      Toplam <span class="fw-bold text-primary">{{ duyurular|length }}</span> Dış Ticaret duyurusu listeleniyor
+                      Toplam <span class="fw-bold text-primary">{{ duyurular|length }}</span> Çocuk Gelişimi duyurusu listeleniyor
                   </p>
                   {% endif %}
               </div>
@@ -173,7 +173,7 @@
                                           <i class="bi bi-building me-1"></i>{{ duyuru.get_fakulte_display }}
                                       </span>
                                       <span class="duyuru-category" style="background: linear-gradient(135deg, #8dd4e3 0%, #4a9db8 100%);">
-                                          <i class="bi bi-book me-1"></i>Dış Ticaret
+                                          <i class="bi bi-book me-1"></i>Çocuk Gelişimi
                                       </span>
                                   </div>
                                   <div class="duyuru-date">
@@ -192,7 +192,7 @@
                           
                           <div class="duyuru-card-body">
                               <h3 class="duyuru-title">
-                                  <a href="{% url 'dis_ticaret:detay' duyuru.slug %}">
+                                  <a href="{% url 'cocuk_gelisimi:detay' duyuru.slug %}">
                                       {{ duyuru.baslik }}
                                   </a>
                               </h3>
@@ -232,7 +232,7 @@
                           
                           <div class="duyuru-card-footer">
                               <div class="d-flex justify-content-between align-items-center">
-                                  <a href="{% url 'dis_ticaret:detay' duyuru.slug %}" class="duyuru-read-more">
+                                  <a href="{% url 'cocuk_gelisimi:detay' duyuru.slug %}" class="duyuru-read-more">
                                       Devamını Oku
                                       <i class="bi bi-arrow-right ms-2"></i>
                                   </a>
@@ -254,16 +254,16 @@
                   <div class="empty-state-icon">
                       <i class="bi bi-book"></i>
                   </div>
-                  <h4 class="mb-3">Dış Ticaret Duyurusu Bulunamadı</h4>
+                  <h4 class="mb-3">Çocuk Gelişimi Duyurusu Bulunamadı</h4>
                   <p class="mb-4">
                       {% if search_query or tarih_query %}
-                      Arama kriterlerinize uygun Dış Ticaret duyurusu bulunamadı. Lütfen farklı anahtar kelimelerle tekrar deneyin.
+                      Arama kriterlerinize uygun Çocuk Gelişimi duyurusu bulunamadı. Lütfen farklı anahtar kelimelerle tekrar deneyin.
                       {% else %}
-                      Dış Ticaret bölümü için henüz duyuru paylaşılmamıştır. Yeni duyuruları takip etmek için lütfen daha sonra tekrar ziyaret edin.
+                      Çocuk Gelişimi bölümü için henüz duyuru paylaşılmamıştır. Yeni duyuruları takip etmek için lütfen daha sonra tekrar ziyaret edin.
                       {% endif %}
                   </p>
                   <div class="duyuru-filter-buttons justify-content-center">
-                      <a href="{% url 'dis_ticaret:liste' %}" class="filter-btn active">
+                      <a href="{% url 'cocuk_gelisimi:liste' %}" class="filter-btn active">
                           <i class="bi bi-arrow-clockwise me-2"></i>Tüm Duyuruları Göster
                       </a>
                       <a href="{% url 'duyurular:liste' %}" class="filter-btn">

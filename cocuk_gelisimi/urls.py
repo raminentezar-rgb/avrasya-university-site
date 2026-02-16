@@ -9,15 +9,15 @@ urlpatterns = [
     # URLهای اطلاعیه‌ها
     path('duyurular/', views.cocuk_gelisimi_duyurulari, name='liste'),
     path('duyurular/<slug:slug>/', views.cocuk_gelisimi_duyuru_detay, name='detay'),
-    
+
     # URLهای صفحات استاتیک
-    path('', views.cocuk_gelisimi, name='cocuk_gelisimi'),
-    
+    path('', views.cocuk_gelisimi_bolumu, name='cocuk_gelisimi'),
+
     path('ders_programi/', views.ders_programi, name='ders_programi'),
-    
+
     # URLهای فعالیت‌ها
     path('idari_faaliyetler_2024_2025/', views.idari_faaliyetler_2024_2025, name='idari_faaliyetler_2024_2025'),
- 
+
     path('diger_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
 
     # URLهای فعالیت‌ها

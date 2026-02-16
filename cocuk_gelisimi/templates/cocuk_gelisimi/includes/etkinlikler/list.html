@@ -1,7 +1,7 @@
-{% extends 'dis_ticaret/base.html' %}
+{% extends 'cocuk_gelisimi/base.html' %}
 {% load static %}
 {% load i18n %} <!-- اضافه شده -->
-{% block title %}{% trans "Avrasya Üniversitesi - Dış Ticaret  Etkinlikleri" %}{% endblock %}
+{% block title %}{% trans "Avrasya Üniversitesi - Çocuk Gelişimi  Etkinlikleri" %}{% endblock %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>{% trans "Dış Ticaret  Etkinlikleri" %}</h1>
+            <h1>{% trans "Çocuk Gelişimi  Etkinlikleri" %}</h1>
             <p></p>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <!-- سایدبار سمت چپ -->
         <div class="col-lg-3 col-xxl-2">
             <div class="sidebar-wrapper">
-                {% include 'dis_ticaret/dis_sidebar.html' %}
+                {% include 'cocuk_gelisimi/cocuk_sidebar.html' %}
             </div>
         </div>
         
@@ -42,13 +42,13 @@
                                 </div>
                             </div>
                             <div>
-                                <h2 class="mb-2" style="color: var(--primary-dark-blue);">{% trans "Dış Ticaret Etkinlikleri" %}</h2>
+                                <h2 class="mb-2" style="color: var(--primary-dark-blue);">{% trans "Çocuk Gelişimi Etkinlikleri" %}</h2>
                                 <p class="text-muted mb-0">{% trans "Akademik ve sosyal etkinliklerimizi keşfedin" %}</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 text-end">
-                        <a href="{% url 'dis_ticaret:yaklasan_etkinlikler' %}" class="btn-primary-custom">
+                        <a href="{% url 'cocuk_gelisimi:yaklasan_etkinlikler' %}" class="btn-primary-custom">
                             <i class="fas fa-arrow-right me-2"></i> {% trans "Yaklaşan Etkinlikler" %}
                         </a>
                     </div>
@@ -103,7 +103,7 @@
                                     {% endif %}
                                     
                                     <div class="etkinlik-footer">
-                                        <a href="{% url 'dis_ticaret:etkinlik_detay' etkinlik.slug %}" class="etkinlik-detay-btn">
+                                        <a href="{% url 'cocuk_gelisimi:etkinlik_detay' etkinlik.slug %}" class="etkinlik-detay-btn">
                                             {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right"></i>
                                         </a>
                                         {% if etkinlik.kayit_gerekiyor %}
@@ -123,7 +123,7 @@
                                 </div>
                                 <h4>{% trans "Yaklaşan etkinlik bulunmuyor" %}</h4>
                                 <p>{% trans "En kısa sürede yeni etkinlikler duyurulacaktır." %}</p>
-                                <a href="{% url 'dis_ticaret:yaklasan_etkinlikler' %}" class="btn-secondary-custom mt-3">
+                                <a href="{% url 'cocuk_gelisimi:yaklasan_etkinlikler' %}" class="btn-secondary-custom mt-3">
                                     {% trans "Tüm Etkinlikleri Gör" %}
                                 </a>
                             </div>
@@ -155,7 +155,7 @@
                                 <p class="gecmis-etkinlik-text">
                                     {{ etkinlik.kisa_aciklama|truncatechars:80 }}
                                 </p>
-                                <a href="{% url 'dis_ticaret:etkinlik_detay' etkinlik.slug %}" class="gecmis-detay-btn">
+                                <a href="{% url 'cocuk_gelisimi:etkinlik_detay' etkinlik.slug %}" class="gecmis-detay-btn">
                                     {% trans "Detayları Gör" %} <i class="fas fa-external-link-alt"></i>
                                 </a>
                             </div>
