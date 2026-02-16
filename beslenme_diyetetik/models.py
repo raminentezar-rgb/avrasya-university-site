@@ -8,12 +8,12 @@ from django.utils import timezone
 class BeslenmeDiyetetikDuyuruManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
-            bolumler__kod='beslenme-ve-diyetetik',
+            bolumler__kod='beslenme_diyetetik',
             yayinda=True
         )
 
 class BeslenmeDiyetetikDuyuru(Duyuru):
-    """مدل پروکسی برای نمایش اطلاعیه‌های تغذیه و رژیم‌درمانی"""
+    """مدل پروکسی برای نمایش اطلاعیه‌های رشته تغذیه و رژیم‌درمانی"""
     
     objects = BeslenmeDiyetetikDuyuruManager()
     
@@ -22,7 +22,7 @@ class BeslenmeDiyetetikDuyuru(Duyuru):
         verbose_name = "Beslenme ve Diyetetik Duyurusu"
         verbose_name_plural = "Beslenme ve Diyetetik Duyuruları"
 
-class Beslenme_Etkinlik(models.Model):
+class BeslenmeDiyetetikEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
@@ -30,6 +30,8 @@ class Beslenme_Etkinlik(models.Model):
         ('spor', 'Spor Etkinliği'),
         ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -49,7 +51,7 @@ class Beslenme_Etkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/afis/%Y/%m/%d/', 
+        upload_to='etkinlikler/afis/beslenme_diyetetik/%Y/%m/%d/', 
         blank=True, 
         null=True,
         verbose_name="Etkinlik Afişi"
@@ -90,7 +92,7 @@ class Beslenme_Etkinlik(models.Model):
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
 
-class BeslenmeDersProgrami(models.Model):
+class BeslenmeDiyetetikDersProgrami(models.Model):
     SINIF_CHOICES = [
         ('1', '1. Sınıf'),
         ('2', '2. Sınıf'),
@@ -101,7 +103,7 @@ class BeslenmeDersProgrami(models.Model):
     
     baslik = models.CharField(max_length=200, verbose_name="Başlık")
     aciklama = models.TextField(blank=True, verbose_name="Açıklama")
-    dosya = models.FileField(upload_to='ders_programlari/beslenme/', verbose_name="Dosya")
+    dosya = models.FileField(upload_to='ders_programlari/beslenme_diyetetik/', verbose_name="Dosya")
     sinif = models.CharField(max_length=10, choices=SINIF_CHOICES, verbose_name="Sınıf")
     yayin_tarihi = models.DateTimeField(default=timezone.now, verbose_name="Yayın Tarihi")
     aktif = models.BooleanField(default=True, verbose_name="Aktif")

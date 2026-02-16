@@ -3,20 +3,20 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import BeslenmeDiyetetikDuyuru, Beslenme_Etkinlik, BeslenmeDersProgrami
+from .models import BeslenmeDiyetetikDuyuru, BeslenmeDiyetetikEtkinlik, BeslenmeDiyetetikDersProgrami
 from django.utils import timezone
 
 def etkinlik_listesi(request):
     now = timezone.now()
     
     # رویدادهای آینده (از حالا به بعد)
-    gelecek_etkinlikler = Beslenme_Etkinlik.objects.filter(
+    gelecek_etkinlikler = BeslenmeDiyetetikEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__gte=now
     ).order_by('baslangic_tarihi')
     
     # رویدادهای گذشته (قبل از حالا)
-    gecmis_etkinlikler = Beslenme_Etkinlik.objects.filter(
+    gecmis_etkinlikler = BeslenmeDiyetetikEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__lt=now
     ).order_by('-baslangic_tarihi')
@@ -33,7 +33,7 @@ def etkinlik_listesi(request):
     return render(request, 'beslenme_diyetetik/includes/etkinlikler/list.html', context)
 
 def etkinlik_detay(request, slug):
-    etkinlik = get_object_or_404(Beslenme_Etkinlik, slug=slug, yayinda=True)
+    etkinlik = get_object_or_404(BeslenmeDiyetetikEtkinlik, slug=slug, yayinda=True)
     return render(request, 'beslenme_diyetetik/includes/etkinlikler/detail.html', {
         'etkinlik': etkinlik
     })
@@ -41,7 +41,7 @@ def etkinlik_detay(request, slug):
 def yaklasan_etkinlikler(request):
     """Yaklaşan etkinlikler (7 gün içinde)"""
     yedi_gun_sonra = timezone.now() + timezone.timedelta(days=7)
-    etkinlikler = Beslenme_Etkinlik.objects.filter(
+    etkinlikler = BeslenmeDiyetetikEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__range=[timezone.now(), yedi_gun_sonra]
     ).order_by('baslangic_tarihi')
@@ -51,7 +51,7 @@ def yaklasan_etkinlikler(request):
     })
 
 def beslenme_diyetetik_duyurulari(request):
-    """نمایش تمام اطلاعیه‌های مربوط به تغذیه و رژیم‌درمانی"""
+    """نمایش تمام اطلاعیه‌های مربوط به رشته تغذیه و رژیم‌درمانی"""
     
     # استفاده از مدل مدیر پروکسی برای فیلتر خودکار
     duyurular = BeslenmeDiyetetikDuyuru.objects.all().order_by('-yayin_tarihi')
@@ -71,12 +71,12 @@ def beslenme_diyetetik_duyurulari(request):
     if tarih_query:
         duyurular = duyurular.filter(yayin_tarihi__date=tarih_query)
     
-    # پیدا کردن رشته تغذیه و رژیم‌درمانی برای نمایش اطلاعات
-    beslenme_bolumu = get_object_or_404(Bolum, kod='beslenme-ve-diyetetik', aktif=True)
+    # پیدا کردن رشته تغذیه برای نمایش اطلاعات
+    beslenme_diyetetik_bolumu = get_object_or_404(Bolum, kod='beslenme_diyetetik', aktif=True)
     
     context = {
         'duyurular': duyurular,
-        'bolum': beslenme_bolumu,
+        'bolum': beslenme_diyetetik_bolumu,
         'search_query': search_query,
         'tarih_query': tarih_query,
         'toplam_duyuru': duyurular.count(),
@@ -85,24 +85,24 @@ def beslenme_diyetetik_duyurulari(request):
     return render(request, 'beslenme_diyetetik/includes/list.html', context)
 
 def beslenme_diyetetik_duyuru_detay(request, slug):
-    """نمایش جزییات یک اطلاعیه تغذیه و رژیم‌درمانی"""
+    """نمایش جزییات یک اطلاعیه رشته تغذیه و رژیم‌درمانی"""
     duyuru = get_object_or_404(BeslenmeDiyetetikDuyuru, slug=slug)
     
     # اطلاعیه‌های مرتبط
     ilgili_duyurular = BeslenmeDiyetetikDuyuru.objects.exclude(id=duyuru.id).order_by('-yayin_tarihi')[:3]
     
-    # پیدا کردن رشته تغذیه و رژیم‌درمانی برای نمایش اطلاعات
-    beslenme_bolumu = get_object_or_404(Bolum, kod='beslenme-ve-diyetetik', aktif=True)
+    # پیدا کردن رشته تغذیه برای نمایش اطلاعات
+    beslenme_diyetetik_bolumu = get_object_or_404(Bolum, kod='beslenme_diyetetik', aktif=True)
     
     return render(request, 'beslenme_diyetetik/includes/detail.html', {
         'duyuru': duyuru,
         'ilgili_duyurular': ilgili_duyurular,
-        'bolum': beslenme_bolumu,
+        'bolum': beslenme_diyetetik_bolumu,
     })
 
 def ders_programi(request):
     # فقط فایل‌های فعال را نمایش بده
-    dosyalar = BeslenmeDersProgrami.objects.filter(aktif=True)
+    dosyalar = BeslenmeDiyetetikDersProgrami.objects.filter(aktif=True)
     
     # گروه‌بندی بر اساس کلاس
     gruplar = {}
@@ -120,7 +120,7 @@ def ders_programi(request):
     return render(request, 'beslenme_diyetetik/includes/ders_programi.html', context)
 
 # صفحات استاتیک
-def beslenme_diyetetik(request):
+def beslenme_diyetetik_bolumu(request):
     return render(request, 'beslenme_diyetetik/includes/beslenme_diyetetik.html')
 
 def idari_faaliyetler_2024_2025(request):

@@ -5,3 +5,4 @@ from django.apps import AppConfig
 class BeslenmeDiyetetikConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'beslenme_diyetetik'
+    verbose_name = 'Beslenme ve Diyetetik'

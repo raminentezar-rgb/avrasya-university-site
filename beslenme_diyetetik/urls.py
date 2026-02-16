@@ -11,14 +11,14 @@ urlpatterns = [
     path('duyurular/<slug:slug>/', views.beslenme_diyetetik_duyuru_detay, name='detay'),
     
     # URLهای صفحات استاتیک
-    path('', views.beslenme_diyetetik, name='beslenme_diyetetik'),
+    path('', views.beslenme_diyetetik_bolumu, name='beslenme_diyetetik'),
     
     path('ders_programi/', views.ders_programi, name='ders_programi'),
     
     # URLهای فعالیت‌ها
     path('idari_faaliyetler_2024_2025/', views.idari_faaliyetler_2024_2025, name='idari_faaliyetler_2024_2025'),
     
-    path('diğer_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
+    path('diger_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
     
     # URLهای فعالیت‌ها
     path('etkinlikler/', views.etkinlik_listesi, name='etkinlik_listesi'),
