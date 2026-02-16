@@ -528,33 +528,374 @@
 </style>
 
 <script>
-// انیمیشن اسکرول برای کارت‌ها
 document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.service-card');
+    // ... mevcut kodlarınız ...
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animationPlayState = 'running';
+    // مدیریت فرم تماس
+    const callBackForm = document.getElementById('callBackForm');
+    const successMessage = document.getElementById('successMessage');
+    
+    if (callBackForm) {
+        callBackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // CSRF token'ı al
+            const csrftoken = getCookie('csrftoken');
+            
+            if (!csrftoken) {
+                showError('CSRF token bulunamadı. Sayfayı yenileyip tekrar deneyin.');
+                return;
+            }
+            
+            // Form verilerini topla
+            const fullName = document.getElementById('fullName')?.value || '';
+            const email = document.getElementById('email')?.value || '';
+            const phone = document.getElementById('phone')?.value || '';
+            const acceptCommunication = document.getElementById('acceptCommunication')?.checked || false;
+            const acceptKVKK = document.getElementById('acceptKVKK')?.checked || false;
+            
+            // Basit validasyon
+            let isValid = true;
+            const errors = {};
+            
+            // fullName kontrolü
+            if (!fullName.trim()) {
+                errors.full_name = 'Ad Soyad alanı zorunludur.';
+                markFieldError('fullName', 'Ad Soyad alanı zorunludur.');
+                isValid = false;
+            } else {
+                clearFieldError('fullName');
+            }
+            
+            // email kontrolü
+            if (!email.trim()) {
+                errors.email = 'E-posta alanı zorunludur.';
+                markFieldError('email', 'E-posta alanı zorunludur.');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                errors.email = 'Geçerli bir e-posta adresi giriniz.';
+                markFieldError('email', 'Geçerli bir e-posta adresi giriniz.');
+                isValid = false;
+            } else {
+                clearFieldError('email');
+            }
+            
+            // phone kontrolü
+            if (!phone.trim()) {
+                errors.phone = 'Telefon alanı zorunludur.';
+                markFieldError('phone', 'Telefon alanı zorunludur.');
+                isValid = false;
+            } else {
+                clearFieldError('phone');
+            }
+            
+            // checkbox kontrolleri
+            if (!acceptCommunication) {
+                errors.accept_communication = 'İletişim izni vermelisiniz.';
+                markCheckboxError('acceptCommunication', 'İletişim izni vermelisiniz.');
+                isValid = false;
+            } else {
+                clearCheckboxError('acceptCommunication');
+            }
+            
+            if (!acceptKVKK) {
+                errors.accept_kvkk = 'KVKK onayı vermelisiniz.';
+                markCheckboxError('acceptKVKK', 'KVKK onayı vermelisiniz.');
+                isValid = false;
+            } else {
+                clearCheckboxError('acceptKVKK');
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Submit button'u güncelle
+            const submitButton = callBackForm.querySelector('.submit-button');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = `
+                <span class="submit-text">Gönderiliyor...</span>
+                <i class="fas fa-spinner fa-spin"></i>
+            `;
+            submitButton.disabled = true;
+            
+            // AJAX isteği gönder
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({
+                    full_name: fullName,
+                    email: email,
+                    phone: phone,
+                    accept_communication: acceptCommunication,
+                    accept_kvkk: acceptKVKK
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw err; });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    // Başarılı mesajı göster
+                    showSuccess(data.message || 'Formunuz başarıyla gönderildi!');
+                    
+                    // Formu temizle
+                    callBackForm.reset();
+                    
+                    // Formu gizle, başarı mesajını göster
+                    callBackForm.style.display = 'none';
+                    if (successMessage) {
+                        successMessage.style.display = 'flex';
+                        const successTitle = successMessage.querySelector('h4');
+                        const successText = successMessage.querySelector('p');
+                        if (successTitle) successTitle.textContent = 'Formunuz Başarıyla Gönderildi!';
+                        if (successText) successText.textContent = 'En kısa sürede sizinle iletişime geçeceğiz.';
+                    }
+                    
+                    // 5 saniye sonra formu tekrar göster
+                    setTimeout(() => {
+                        callBackForm.style.display = 'block';
+                        if (successMessage) {
+                            successMessage.style.display = 'none';
+                        }
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                    }, 5000);
+                } else {
+                    // Hata varsa göster
+                    if (data.errors) {
+                        Object.keys(data.errors).forEach(field => {
+                            if (field === 'full_name') {
+                                markFieldError('fullName', data.errors[field]);
+                            } else if (field === 'email') {
+                                markFieldError('email', data.errors[field]);
+                            } else if (field === 'phone') {
+                                markFieldError('phone', data.errors[field]);
+                            } else if (field === 'accept_communication') {
+                                markCheckboxError('acceptCommunication', data.errors[field]);
+                            } else if (field === 'accept_kvkk') {
+                                markCheckboxError('acceptKVKK', data.errors[field]);
+                            }
+                        });
+                    } else {
+                        showError(data.message || 'Form gönderilirken bir hata oluştu.');
+                    }
+                    
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                
+                let errorMessage = 'Bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
+                
+                if (error.errors) {
+                    // Field hataları
+                    Object.keys(error.errors).forEach(field => {
+                        if (field === 'full_name') {
+                            markFieldError('fullName', error.errors[field]);
+                        } else if (field === 'email') {
+                            markFieldError('email', error.errors[field]);
+                        } else if (field === 'phone') {
+                            markFieldError('phone', error.errors[field]);
+                        }
+                    });
+                    errorMessage = 'Lütfen formdaki hataları düzeltin.';
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                
+                showError(errorMessage);
+                
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            });
+        });
+    }
+    
+    // Yardımcı fonksiyonlar
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    function markFieldError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.style.borderColor = '#dc2626';
+            const errorElement = field.parentElement.querySelector('.form-error');
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.opacity = '1';
+                errorElement.style.transform = 'translateY(0)';
+            }
+        }
+    }
+    
+    function clearFieldError(fieldId) {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.style.borderColor = '#e2e8f0';
+            const errorElement = field.parentElement.querySelector('.form-error');
+            if (errorElement) {
+                errorElement.style.opacity = '0';
+                errorElement.style.transform = 'translateY(-10px)';
+            }
+        }
+    }
+    
+    function markCheckboxError(checkboxId, message) {
+        const checkbox = document.getElementById(checkboxId);
+        if (checkbox) {
+            checkbox.style.outline = '2px solid #dc2626';
+            const errorElement = checkbox.closest('.form-check').querySelector('.form-error');
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.opacity = '1';
+                errorElement.style.transform = 'translateY(0)';
+            }
+        }
+    }
+    
+    function clearCheckboxError(checkboxId) {
+        const checkbox = document.getElementById(checkboxId);
+        if (checkbox) {
+            checkbox.style.outline = 'none';
+            const errorElement = checkbox.closest('.form-check').querySelector('.form-error');
+            if (errorElement) {
+                errorElement.style.opacity = '0';
+                errorElement.style.transform = 'translateY(-10px)';
+            }
+        }
+    }
+    
+    function showError(message) {
+        const errorToast = document.createElement('div');
+        errorToast.className = 'alert alert-danger';
+        errorToast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            padding: 15px 25px;
+            border-radius: 8px;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideInRight 0.3s ease;
+            max-width: 350px;
+        `;
+        errorToast.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-exclamation-circle" style="font-size: 20px;"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        document.body.appendChild(errorToast);
+        
+        setTimeout(() => {
+            errorToast.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => errorToast.remove(), 300);
+        }, 5000);
+    }
+    
+    function showSuccess(message) {
+        const successToast = document.createElement('div');
+        successToast.className = 'alert alert-success';
+        successToast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            padding: 15px 25px;
+            border-radius: 8px;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideInRight 0.3s ease;
+            max-width: 350px;
+        `;
+        successToast.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-check-circle" style="font-size: 20px;"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        document.body.appendChild(successToast);
+        
+        setTimeout(() => {
+            successToast.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => successToast.remove(), 300);
+        }, 5000);
+    }
+    
+    // Real-time validasyon
+    const formInputs = callBackForm.querySelectorAll('.form-control');
+    formInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.style.borderColor = '#10b981';
+                const errorElement = this.parentElement.querySelector('.form-error');
+                if (errorElement) {
+                    errorElement.style.opacity = '0';
+                    errorElement.style.transform = 'translateY(-10px)';
+                }
+            } else {
+                this.style.borderColor = '#e2e8f0';
             }
         });
-    }, { threshold: 0.1 });
-    
-    cards.forEach(card => {
-        observer.observe(card);
     });
     
-    // افکت hover برای دکمه‌ها
-    const buttons = document.querySelectorAll('.btn-hover');
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
+    // ... mevcut kodlarınız ...
 });
 </script>
+
+<style>
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+</style>
 {% endblock %}

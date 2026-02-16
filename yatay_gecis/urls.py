@@ -17,4 +17,7 @@ urlpatterns = [
     path('orenci_isleri_daire_baskanli', views.orenci_isleri_daire_baskanli, name='orenci_isleri_daire_baskanli'),
     path('basvuru_takvim', views.takvim, name='takvim'),
     path('bahar', views.bahar, name='bahar'),
+    
+    # API için endpoint (eğer kullanmak isterseniz)
+    # path('api/callback-request/', views.callback_request_api, name='callback_api'),
 ]

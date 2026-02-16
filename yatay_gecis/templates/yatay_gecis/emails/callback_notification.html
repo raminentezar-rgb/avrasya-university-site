@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Geri Arama Talebi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #092442, #1d61a9);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .content {
+            background: #f9f9f9;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1d61a9;
+        }
+        .info-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #1d61a9;
+            display: inline-block;
+            width: 120px;
+        }
+        .info-value {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            background: #1d61a9;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .button:hover {
+            background: #092442;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📞 Yeni Geri Arama Talebi</h1>
+        <p>Bir öğrenci adayı sizinle iletişime geçmek istiyor</p>
+    </div>
+    
+    <div class="content">
+        <div class="info-box">
+            <h2 style="color: #1d61a9; margin-top: 0;">Talep Detayları</h2>
+            
+            <div class="info-item">
+                <span class="info-label">Ad Soyad:</span>
+                <span class="info-value">{{ callback.full_name }}</span>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">E-posta:</span>
+                <span class="info-value">
+                    <a href="mailto:{{ callback.email }}">{{ callback.email }}</a>
+                </span>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">Telefon:</span>
+                <span class="info-value">
+                    <a href="tel:{{ callback.phone }}">{{ callback.phone }}</a>
+                </span>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">Tarih:</span>
+                <span class="info-value">{{ callback.created_at|date:"d F Y H:i" }}</span>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">IP Adresi:</span>
+                <span class="info-value">{{ callback.ip_address|default:"Bilinmiyor" }}</span>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="{{ site_url }}/admin/yatay_gecis/callbackrequest/{{ callback.id }}/change/" class="button">
+                Talebi Yönetim Panelinde Görüntüle
+            </a>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-radius: 8px;">
+            <p style="margin: 0; color: #856404;">
+                <strong>⚠️ Not:</strong> Bu talep {{ callback.created_at|timespan }} önce oluşturuldu. 
+                En kısa sürede öğrenci adayıyla iletişime geçilmesi önerilir.
+            </p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Bu e-posta otomatik olarak gönderilmiştir. Lütfen yanıtlamayınız.</p>
+        <p>&copy; {% now "Y" %} Avrasya Üniversitesi - Tüm hakları saklıdır.</p>
+    </div>
+</body>
+</html>

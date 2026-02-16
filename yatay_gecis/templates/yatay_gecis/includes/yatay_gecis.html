@@ -1402,5 +1402,269 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(formSection);
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ... بقیه کدهای موجود ...
+    
+    // مدیریت فرم تماس
+    const callBackForm = document.getElementById('callBackForm');
+    const successMessage = document.getElementById('successMessage');
+    
+    if (callBackForm) {
+        callBackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // جمع‌آوری داده‌های فرم
+            const formData = new FormData(callBackForm);
+            const formObject = {};
+            
+            // تبدیل به آبجکت برای ارسال JSON
+            formData.forEach((value, key) => {
+                // تبدیل چک‌باکس‌ها به boolean
+                if (key === 'acceptCommunication' || key === 'acceptKVKK') {
+                    formObject[key] = document.getElementById(key).checked;
+                } else {
+                    formObject[key] = value;
+                }
+            });
+            
+            // اعتبارسنجی ساده سمت کلاینت
+            let isValid = true;
+            const requiredFields = callBackForm.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                const errorElement = field.parentElement.querySelector('.form-error');
+                
+                if (field.type === 'checkbox') {
+                    if (!field.checked) {
+                        isValid = false;
+                        field.style.outline = '2px solid #dc2626';
+                        if (errorElement) {
+                            errorElement.textContent = 'Bu alanı onaylamalısınız.';
+                            errorElement.style.opacity = '1';
+                            errorElement.style.transform = 'translateY(0)';
+                        }
+                    } else {
+                        field.style.outline = 'none';
+                        if (errorElement) {
+                            errorElement.style.opacity = '0';
+                            errorElement.style.transform = 'translateY(-10px)';
+                        }
+                    }
+                } else {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.borderColor = '#dc2626';
+                        if (errorElement) {
+                            errorElement.textContent = 'Bu alanı doldurunuz.';
+                            errorElement.style.opacity = '1';
+                            errorElement.style.transform = 'translateY(0)';
+                        }
+                    } else {
+                        field.style.borderColor = '#10b981';
+                        if (errorElement) {
+                            errorElement.style.opacity = '0';
+                            errorElement.style.transform = 'translateY(-10px)';
+                        }
+                    }
+                }
+                
+                // اعتبارسنجی خاص برای ایمیل
+                if (field.type === 'email' && field.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value.trim())) {
+                        isValid = false;
+                        field.style.borderColor = '#dc2626';
+                        if (errorElement) {
+                            errorElement.textContent = 'Geçerli bir e-posta adresi giriniz.';
+                            errorElement.style.opacity = '1';
+                            errorElement.style.transform = 'translateY(0)';
+                        }
+                    }
+                }
+            });
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // ارسال فرم با AJAX
+            const submitButton = callBackForm.querySelector('.submit-button');
+            const originalText = submitButton.innerHTML;
+            
+            // نمایش وضعیت loading
+            submitButton.innerHTML = `
+                <span class="submit-text">Gönderiliyor...</span>
+                <i class="fas fa-spinner fa-spin"></i>
+            `;
+            submitButton.disabled = true;
+            
+            // ارسال درخواست AJAX
+            fetch(window.location.href, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({
+                    full_name: formObject.fullName,
+                    email: formObject.email,
+                    phone: formObject.phone,
+                    accept_communication: formObject.acceptCommunication,
+                    accept_kvkk: formObject.acceptKVKK
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // نمایش پیام موفقیت
+                    callBackForm.style.opacity = '0';
+                    callBackForm.style.transform = 'translateY(-20px)';
+                    
+                    setTimeout(() => {
+                        callBackForm.style.display = 'none';
+                        successMessage.style.display = 'flex';
+                        
+                        // به‌روزرسانی متن پیام موفقیت
+                        const successTitle = successMessage.querySelector('h4');
+                        const successText = successMessage.querySelector('p');
+                        if (successTitle) successTitle.textContent = 'Formunuz Başarıyla Gönderildi!';
+                        if (successText) successText.textContent = 'En kısa sürede sizinle iletişime geçeceğiz.';
+                        
+                        setTimeout(() => {
+                            successMessage.style.opacity = '1';
+                            successMessage.style.transform = 'translateY(0)';
+                        }, 50);
+                    }, 300);
+                    
+                    // ریست فرم پس از 5 ثانیه
+                    setTimeout(() => {
+                        callBackForm.reset();
+                        callBackForm.style.display = 'block';
+                        callBackForm.style.opacity = '1';
+                        callBackForm.style.transform = 'translateY(0)';
+                        successMessage.style.display = 'none';
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                        
+                        // ریست استایل فیلدها
+                        callBackForm.querySelectorAll('.form-control').forEach(field => {
+                            field.style.borderColor = '#e2e8f0';
+                        });
+                        callBackForm.querySelectorAll('.form-check-input').forEach(checkbox => {
+                            checkbox.style.outline = 'none';
+                        });
+                    }, 5000);
+                } else {
+                    // نمایش خطاها
+                    if (data.errors) {
+                        Object.keys(data.errors).forEach(field => {
+                            const fieldElement = document.getElementById(getFieldId(field));
+                            if (fieldElement) {
+                                fieldElement.style.borderColor = '#dc2626';
+                                
+                                const errorElement = fieldElement.parentElement.querySelector('.form-error');
+                                if (errorElement) {
+                                    errorElement.textContent = data.errors[field];
+                                    errorElement.style.opacity = '1';
+                                    errorElement.style.transform = 'translateY(0)';
+                                }
+                            }
+                        });
+                        
+                        // نمایش پیام خطا
+                        const errorToast = document.createElement('div');
+                        errorToast.className = 'alert alert-danger';
+                        errorToast.style.cssText = `
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            z-index: 9999;
+                            padding: 15px 25px;
+                            border-radius: 8px;
+                            background: #f8d7da;
+                            color: #721c24;
+                            border: 1px solid #f5c6cb;
+                            animation: slideInRight 0.3s ease;
+                        `;
+                        errorToast.innerHTML = '<i class="fas fa-exclamation-circle"></i> Lütfen formdaki hataları düzeltin.';
+                        document.body.appendChild(errorToast);
+                        
+                        setTimeout(() => {
+                            errorToast.remove();
+                        }, 3000);
+                    }
+                    
+                    // ریست دکمه
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                
+                // نمایش پیام خطا
+                const errorToast = document.createElement('div');
+                errorToast.className = 'alert alert-danger';
+                errorToast.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 9999;
+                    padding: 15px 25px;
+                    border-radius: 8px;
+                    background: #f8d7da;
+                    color: #721c24;
+                    border: 1px solid #f5c6cb;
+                    animation: slideInRight 0.3s ease;
+                `;
+                errorToast.innerHTML = '<i class="fas fa-exclamation-circle"></i> Bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
+                document.body.appendChild(errorToast);
+                
+                setTimeout(() => {
+                    errorToast.remove();
+                }, 3000);
+                
+                // ریست دکمه
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            });
+        });
+        
+        // ... بقیه کدهای اعتبارسنجی real-time ...
+    }
+    
+    // تابع کمکی برای دریافت CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    // تابع کمکی برای دریافت ID فیلد
+    function getFieldId(fieldName) {
+        const map = {
+            'full_name': 'fullName',
+            'email': 'email',
+            'phone': 'phone',
+            'accept_communication': 'acceptCommunication',
+            'accept_kvkk': 'acceptKVKK'
+        };
+        return map[fieldName] || fieldName;
+    }
+    
+    // ... بقیه کدهای موجود ...
+});
 </script>
 {% endblock %}
