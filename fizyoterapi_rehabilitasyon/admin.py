@@ -1,10 +1,15 @@
 # app_name: fizyoterapi_rehabilitasyon/admin.py
 
 from django.contrib import admin
-from .models import FizyoterapiRehabilitasyonDuyuru, Fizyoterapi_Etkinlik, FizyoterapiDersProgrami
+from .models import (
+    FizyoterapiRehabilitasyonDuyuru,
+    FizyoterapiRehabilitasyonEtkinlik,
+    FizyoterapiRehabilitasyonDersProgrami
+)
 
-@admin.register(Fizyoterapi_Etkinlik)
-class Fizyoterapi_EtkinlikAdmin(admin.ModelAdmin):
+
+@admin.register(FizyoterapiRehabilitasyonEtkinlik)
+class FizyoterapiRehabilitasyonEtkinlikAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -26,6 +31,7 @@ class Fizyoterapi_EtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
+
 @admin.register(FizyoterapiRehabilitasyonDuyuru)
 class FizyoterapiRehabilitasyonDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -35,8 +41,9 @@ class FizyoterapiRehabilitasyonDuyuruAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return FizyoterapiRehabilitasyonDuyuru.objects.all()
 
-@admin.register(FizyoterapiDersProgrami)
-class FizyoterapiDersProgramiAdmin(admin.ModelAdmin):
+
+@admin.register(FizyoterapiRehabilitasyonDersProgrami)
+class FizyoterapiRehabilitasyonDersProgramiAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']

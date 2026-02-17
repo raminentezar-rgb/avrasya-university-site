@@ -5,31 +5,36 @@ from duyurular.models import Duyuru
 from django.urls import reverse
 from django.utils import timezone
 
+
 class FizyoterapiRehabilitasyonDuyuruManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
-            bolumler__kod='fizyoterapi-ve-rehabilitasyon',
+            bolumler__kod='fizyoterapi_rehabilitasyon',
             yayinda=True
         )
 
+
 class FizyoterapiRehabilitasyonDuyuru(Duyuru):
-    """مدل پروکسی برای نمایش اطلاعیه‌های فیزیوتراپی و توانبخشی"""
+    """مدل پروکسی برای نمایش اطلاعیه‌های رشته فیزیوتراپی و توانبخشی"""
     
     objects = FizyoterapiRehabilitasyonDuyuruManager()
     
     class Meta:
         proxy = True
-        verbose_name = "Fizyoterapi ve Rehabilitasyon Duyurusu"
-        verbose_name_plural = "Fizyoterapi ve Rehabilitasyon Duyuruları"
+        verbose_name = "Fizyoterapi Duyurusu"
+        verbose_name_plural = "Fizyoterapi Duyuruları"
 
-class Fizyoterapi_Etkinlik(models.Model):
+
+class FizyoterapiRehabilitasyonEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
-        ('klinik', 'Klinik Eğitim / Uygulama'),
+        ('kultur', 'Kültür-Sanat Etkinliği'),
+        ('spor', 'Spor Etkinliği'),
+        ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
-        ('kongre', 'Ulusal / Uluslararası Kongre'),
-        ('saha', 'Saha Çalışması'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -38,8 +43,8 @@ class Fizyoterapi_Etkinlik(models.Model):
     kisa_aciklama = models.TextField(blank=True, verbose_name="Kısa Açıklama")
     detayli_aciklama = models.TextField(verbose_name="Detaylı Açıklama")
     etkinlik_turu = models.CharField(
-        max_length=20, 
-        choices=ETKINLIK_TURU_CHOICES, 
+        max_length=20,
+        choices=ETKINLIK_TURU_CHOICES,
         default='diger',
         verbose_name="Etkinlik Türü"
     )
@@ -49,8 +54,8 @@ class Fizyoterapi_Etkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/fizyoterapi/afis/%Y/%m/%d/', 
-        blank=True, 
+        upload_to='etkinlikler/afis/fizyoterapi_rehabilitasyon/%Y/%m/%d/',
+        blank=True,
         null=True,
         verbose_name="Etkinlik Afişi"
     )
@@ -65,8 +70,8 @@ class Fizyoterapi_Etkinlik(models.Model):
 
     class Meta:
         ordering = ['baslangic_tarihi']
-        verbose_name = "Etkinlik (Fizyoterapi ve Rehabilitasyon)"
-        verbose_name_plural = "Etkinlikler (Fizyoterapi ve Rehabilitasyon)"
+        verbose_name = "Etkinlik (Fizyoterapi)"
+        verbose_name_plural = "Etkinlikler (Fizyoterapi)"
 
     def __str__(self):
         return self.baslik
@@ -79,7 +84,7 @@ class Fizyoterapi_Etkinlik(models.Model):
         return self.baslangic_tarihi <= timezone.now() + timezone.timedelta(days=7)
 
     def devam_ediyor(self):
-        """Etkinliğin devام edip etmediğini kontrol eder"""
+        """Etkinliğin devam edip etmediğini kontrol eder"""
         now = timezone.now()
         if self.bitis_tarihi:
             return self.baslangic_tarihi <= now <= self.bitis_tarihi
@@ -90,27 +95,26 @@ class Fizyoterapi_Etkinlik(models.Model):
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
 
-class FizyoterapiDersProgrami(models.Model):
+
+class FizyoterapiRehabilitasyonDersProgrami(models.Model):
     SINIF_CHOICES = [
         ('1', '1. Sınıf'),
         ('2', '2. Sınıf'),
         ('3', '3. Sınıf'),
         ('4', '4. Sınıf'),
-        ('yuksek_lisans', 'Yüksek Lisans'),
-        ('doktora', 'Doktora'),
         ('tum', 'Tüm Sınıflar'),
     ]
     
     baslik = models.CharField(max_length=200, verbose_name="Başlık")
     aciklama = models.TextField(blank=True, verbose_name="Açıklama")
-    dosya = models.FileField(upload_to='ders_programlari/fizyoterapi/', verbose_name="Dosya")
-    sinif = models.CharField(max_length=20, choices=SINIF_CHOICES, verbose_name="Sınıf / Program")
+    dosya = models.FileField(upload_to='ders_programlari/fizyoterapi_rehabilitasyon/', verbose_name="Dosya")
+    sinif = models.CharField(max_length=10, choices=SINIF_CHOICES, verbose_name="Sınıf")
     yayin_tarihi = models.DateTimeField(default=timezone.now, verbose_name="Yayın Tarihi")
     aktif = models.BooleanField(default=True, verbose_name="Aktif")
     
     class Meta:
-        verbose_name = "Ders Programı (Fizyoterapi ve Rehabilitasyon)"
-        verbose_name_plural = "Ders Programları (Fizyoterapi ve Rehabilitasyon)"
+        verbose_name = "Ders Programı (Fizyoterapi)"
+        verbose_name_plural = "Ders Programları (Fizyoterapi)"
         ordering = ['-yayin_tarihi']
     
     def __str__(self):
