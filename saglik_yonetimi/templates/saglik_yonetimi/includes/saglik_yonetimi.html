@@ -1,8 +1,8 @@
-{% extends 'dis_ticaret/base.html' %}
+{% extends 'saglik_yonetimi/base.html' %}
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% trans "Avrasya Üniversitesi - Dış Ticaret" %}{% endblock %}
+{% block title %}{% trans "Avrasya Üniversitesi - Sağlık Yönetimi" %}{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,8 +11,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>{% trans "Dış Ticaret" %}</h1>
-            <p>{% trans "Avrasya Üniversitesi Dış Ticaret - Küresel Ticarette Geleceğin Liderlerini Yetiştiriyoruz" %}</p>
+            <h1>{% trans "Sağlık Yönetimi" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi Sağlık Yönetimi - Geleceğin Sağlık Liderlerini Yetiştiriyoruz" %}</p>
         </div>
     </div>
 </section>
@@ -22,7 +22,7 @@
         <!-- سایدبار سمت چپ -->
         <div class="col-lg-3 col-xxl-2">
             <div class="sidebar-wrapper">
-                {% include 'dis_ticaret/dis_sidebar.html' %}
+                {% include 'saglik_yonetimi/saglik_yonetimi_sidebar.html' %}
             </div>
         </div>
         
@@ -56,32 +56,51 @@
                             <!-- Tab 1: Tarihçe -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-history"></i> {% trans "Dış Ticaret Tarihçesi" %}</h3>
+                                    <h3><i class="fas fa-history"></i> {% trans "Sağlık Yönetimi Programı Tarihçesi" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>{% trans "Dış Ticaret Bölümü Avrasya Üniversitesinde 2024-2025 Eğitim-Öğretim yılında faaliyete geçmiştir." %}</p>
+                                        <p>{% trans "Sağlık Yönetimi Bölümü 2016 yılında Sağlık Bilimleri Fakültesi bünyesinde kurulmuş olup, 2016-2017 eğitim öğretim yılında ilk öğrencilerini almış ve ilk mezunlarını 2019-2020 eğitim öğretim yılında vermiştir. Sağlık Yönetimi Bölümünü başarıyla tamamlayan öğrencilere “Lisans Diploması” ve “Sağlık Yöneticisi” unvanı verilmektedir." %}</p>
                                     </div>
                                     
                                     <div class="history-timeline-section">
                                         <h4><i class="fas fa-timeline"></i> {% trans "Bölüm Tarihçesi" %}</h4>
                                         
                                         <div class="timeline-container">
-                                            <!-- 2024-2025 -->
+                                            <!-- 2016-2017: Kuruluş -->
                                             <div class="timeline-item active">
                                                 <div class="timeline-marker">
                                                     <div class="marker-icon">
-                                                        <i class="fas fa-university"></i>
+                                                        <i class="fas fa-seedling"></i>
                                                     </div>
                                                     <div class="marker-line"></div>
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>{% trans "Kuruluş ve Faaliyete Geçiş" %}</h5>
-                                                        <span class="timeline-date">2024-2025</span>
+                                                        <h5>{% trans "Kuruluş ve İlk Öğrenciler" %}</h5>
+                                                        <span class="timeline-date">2016-2017</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>{% trans "Dış Ticaret Bölümü Avrasya Üniversitesi'nde 2024-2025 Eğitim-Öğretim yılında faaliyete geçmiştir." %}</p>
+                                                        <p>{% trans "Sağlık Yönetimi Bölümü, Sağlık Bilimleri Fakültesi bünyesinde kuruldu ve ilk öğrencilerini almaya başladı." %}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 2019-2020: İlk Mezunlar -->
+                                            <div class="timeline-item">
+                                                <div class="timeline-marker">
+                                                    <div class="marker-icon">
+                                                        <i class="fas fa-user-graduate"></i>
+                                                    </div>
+                                                    <div class="marker-line"></div>
+                                                </div>
+                                                <div class="timeline-content">
+                                                    <div class="timeline-header">
+                                                        <h5>{% trans "İlk Mezunlar" %}</h5>
+                                                        <span class="timeline-date">2019-2020</span>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                        <p>{% trans "Bölüm ilk mezunlarını verdi. Mezunlar 'Sağlık Yöneticisi' unvanı almaya hak kazandı." %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -90,22 +109,22 @@
                                             <div class="timeline-item current">
                                                 <div class="timeline-marker">
                                                     <div class="marker-icon">
-                                                        <i class="fas fa-globe"></i>
+                                                        <i class="fas fa-stethoscope"></i>
                                                     </div>
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>{% trans "Günümüzde Dış Ticaret Bölümü" %}</h5>
+                                                        <h5>{% trans "Günümüzde Sağlık Yönetimi" %}</h5>
                                                         <span class="timeline-date">{% trans "2024/2025" %}</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>{% trans "Modern eğitim yöntemleri ve sektör işbirlikleriyle uluslararası ticaretin geleceğini şekillendiren liderler yetiştirmek için faaliyetlerine devam etmektedir." %}</p>
+                                                        <p>{% trans "Modern sağlık yönetimi eğitimi ve sektör işbirlikleriyle sağlık sektörünün geleceğini şekillendiren liderler yetiştirmeye devam ediyoruz." %}</p>
                                                         <div class="current-departments">
                                                             <span class="department-badge">
                                                                 <i class="fas fa-map-marker-alt"></i> {% trans "Avrasya Üniversitesi" %}
                                                             </span>
                                                             <span class="department-badge">
-                                                                <i class="fas fa-chart-line"></i> {% trans "Dış Ticaret Bölümü" %}
+                                                                <i class="fas fa-chart-line"></i> {% trans "Sağlık Yönetimi Bölümü" %}
                                                             </span>
                                                             <span class="department-badge">
                                                                 <i class="fas fa-user-graduate"></i> {% trans "Lisans Programı" %}
@@ -127,7 +146,7 @@
                                                 </div>
                                                 <div class="stat-content">
                                                     <h5>{% trans "Kuruluş Yılı" %}</h5>
-                                                    <div class="stat-number">2024</div>
+                                                    <div class="stat-number">2016</div>
                                                 </div>
                                             </div>
                                             
@@ -136,28 +155,28 @@
                                                     <i class="fas fa-user-graduate"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>{% trans "İlk Öğrenci Yılı" %}</h5>
-                                                    <div class="stat-number">2024</div>
+                                                    <h5>{% trans "İlk Mezuniyet Yılı" %}</h5>
+                                                    <div class="stat-number">2020</div>
                                                 </div>
                                             </div>
                                             
                                             <div class="history-stat-card">
                                                 <div class="stat-icon">
-                                                    <i class="fas fa-rocket"></i>
+                                                    <i class="fas fa-graduation-cap"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>{% trans "Başlangıç Dönemi" %}</h5>
-                                                    <div class="stat-number">2024-2025</div>
+                                                    <h5>{% trans "Verilen Unvan" %}</h5>
+                                                    <div class="stat-number" style="font-size: 1.8rem;">{% trans "Sağlık Yöneticisi" %}</div>
                                                 </div>
                                             </div>
                                             
                                             <div class="history-stat-card">
                                                 <div class="stat-icon">
-                                                    <i class="fas fa-bullseye"></i>
+                                                    <i class="fas fa-school"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>{% trans "Hedef Yılı" %}</h5>
-                                                    <div class="stat-number">2025</div>
+                                                    <h5>{% trans "Bağlı Olduğu Fakülte" %}</h5>
+                                                    <div class="stat-number" style="font-size: 1.4rem;">{% trans "Sağlık Bilimleri Fakültesi" %}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,7 +189,7 @@
                                             <h3>{% trans "Önemli Not" %}</h3>
                                         </div>
                                         <div class="info-card-body">
-                                            <p>{% trans "Bölümümüz 2024-2025 eğitim-öğretim yılında faaliyete geçmiş olup, modern eğitim metodları ve sektör işbirlikleriyle küresel ticaretin ihtiyaç duyduğu nitelikli uzmanları yetiştirmektedir." %}</p>
+                                            <p>{% trans "Sağlık Yönetimi Bölümünü başarıyla tamamlayan öğrencilere 'Lisans Diploması' ve 'Sağlık Yöneticisi' unvanı verilmektedir." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +198,7 @@
                             <!-- Tab 2: Misyon & Vizyon -->
                             <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-bullseye"></i> {% trans "Dış Ticaret Bölümü Misyon ve Vizyonu" %}</h3>
+                                    <h3><i class="fas fa-bullseye"></i> {% trans "Sağlık Yönetimi Programı Misyon ve Vizyonu" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="mission-vision-section">
@@ -197,7 +216,7 @@
                                                 </div>
                                             </div>
                                             <div class="mission-statement">
-                                                {% trans "Öğrencilerimize, dış ticaret alanında derinlemesine teorik bilgi ve pratik beceriler kazandırarak, uluslararası iş dünyasında başarılı olmalarını sağlamak. Akademik kadromuzun uzmanlığı ve sektörle işbirliği sayesinde, öğrencilerimizi mezuniyet öncesinde iş hayatına hazırlamak ve onlara kariyer fırsatları sunmak. Dış ticaretle ilgili güncel gelişmeleri takip ederek, müfredatımızı sürekli yenilemek ve öğrencilerimize en güncel bilgileri aktarmak." %}
+                                                {% trans "Sağlık Yönetimi alanında yeterli bilgi ve beceriye sahip, disiplinler arası işbirliğine açık, ekip çalışmasını benimseyen, kurumunda rekabetçi avantaj yaratan, yenilikçi ve teknolojiyi iyi kullanabilen, eleştirel düşünebilen, girişimci ve yaşam boyu öğrenme becerisine sahip, evrensel, kültürel, etik ve insani değerlere bağlı, sektörde tercih edilen sağlık yöneticileri yetiştirmektir." %}
                                             </div>
                                             
                                             <div class="mission-pillars">
@@ -206,38 +225,38 @@
                                                         <i class="fas fa-graduation-cap"></i>
                                                     </div>
                                                     <div class="pillar-content">
-                                                        <h6>{% trans "Teorik ve Pratik Eğitim" %}</h6>
-                                                        <p>{% trans "Dış ticaret alanında derinlemesine teorik bilgi ve pratik beceriler kazandırmak" %}</p>
+                                                        <h6>{% trans "Bilgi ve Beceri" %}</h6>
+                                                        <p>{% trans "Sağlık yönetimi alanında yeterli bilgi ve beceriye sahip bireyler yetiştirmek" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="pillar">
                                                     <div class="pillar-icon">
-                                                        <i class="fas fa-handshake"></i>
+                                                        <i class="fas fa-users-cog"></i>
                                                     </div>
                                                     <div class="pillar-content">
-                                                        <h6>{% trans "Sektör İşbirliği" %}</h6>
-                                                        <p>{% trans "Akademik kadro uzmanlığı ve sektör işbirlikleri ile öğrencileri iş hayatına hazırlamak" %}</p>
+                                                        <h6>{% trans "Disiplinlerarası İşbirliği" %}</h6>
+                                                        <p>{% trans "Disiplinler arası işbirliğine açık, ekip çalışmasını benimseyen yöneticiler yetiştirmek" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="pillar">
                                                     <div class="pillar-icon">
-                                                        <i class="fas fa-sync-alt"></i>
+                                                        <i class="fas fa-lightbulb"></i>
                                                     </div>
                                                     <div class="pillar-content">
-                                                        <h6>{% trans "Sürekli Güncelleme" %}</h6>
-                                                        <p>{% trans "Dış ticaretle ilgili güncel gelişmeleri takip ederek müfredatı sürekli yenilemek" %}</p>
+                                                        <h6>{% trans "Yenilikçi ve Eleştirel" %}</h6>
+                                                        <p>{% trans "Yenilikçi, teknolojiyi iyi kullanabilen ve eleştirel düşünebilen bireyler yetiştirmek" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="pillar">
                                                     <div class="pillar-icon">
-                                                        <i class="fas fa-briefcase"></i>
+                                                        <i class="fas fa-hand-holding-heart"></i>
                                                     </div>
                                                     <div class="pillar-content">
-                                                        <h6>{% trans "Kariyer Fırsatları" %}</h6>
-                                                        <p>{% trans "Öğrencilere mezuniyet öncesinde kariyer fırsatları sunmak" %}</p>
+                                                        <h6>{% trans "Etik ve İnsani Değerler" %}</h6>
+                                                        <p>{% trans "Evrensel, kültürel, etik ve insani değerlere bağlı yöneticiler yetiştirmek" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -257,39 +276,39 @@
                                                 </div>
                                             </div>
                                             <div class="vision-statement">
-                                                {% trans "Ülkemizin rekabet gücünü artıracak nitelikli dış ticaret uzmanları yetiştirerek, uluslararası arenada etkin rol oynayan, sektörün ihtiyaçlarına cevap veren lider bir bölüm olmak." %}
+                                                {% trans "Eğitim ve öğretim alanında güncel kaliteyi yakalamış, mezunları ve paydaşlarıyla işbirliği içeresinde, sağlık politikalarında ve sektörde dönüştürücü etki yapan, bölgesinde lider, ulusal ve uluslararası platformlarda adından söz ettiren saygın bir bölüm olmaktır." %}
                                             </div>
                                             
                                             <div class="vision-goals">
                                                 <div class="goal">
                                                     <div class="goal-number">1</div>
                                                     <div class="goal-content">
-                                                        <h6>{% trans "Nitelikli Uzmanlar" %}</h6>
-                                                        <p>{% trans "Ülkemizin rekabet gücünü artıracak dış ticaret uzmanları yetiştirmek" %}</p>
+                                                        <h6>{% trans "Güncel Kalite" %}</h6>
+                                                        <p>{% trans "Eğitim ve öğretim alanında güncel kaliteyi yakalamak" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="goal">
                                                     <div class="goal-number">2</div>
                                                     <div class="goal-content">
-                                                        <h6>{% trans "Uluslararası Arena" %}</h6>
-                                                        <p>{% trans "Uluslararası arenada etkin rol oynayan bir bölüm olmak" %}</p>
+                                                        <h6>{% trans "İşbirliği ve Etki" %}</h6>
+                                                        <p>{% trans "Mezunlar ve paydaşlarla işbirliği içinde sektörde dönüştürücü etki yaratmak" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="goal">
                                                     <div class="goal-number">3</div>
                                                     <div class="goal-content">
-                                                        <h6>{% trans "Sektörel İhtiyaçlar" %}</h6>
-                                                        <p>{% trans "Sektörün ihtiyaçlarına cevap veren çözümler üretmek" %}</p>
+                                                        <h6>{% trans "Bölgesel Liderlik" %}</h6>
+                                                        <p>{% trans "Bölgesinde lider bir bölüm olmak" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="goal">
                                                     <div class="goal-number">4</div>
                                                     <div class="goal-content">
-                                                        <h6>{% trans "Liderlik" %}</h6>
-                                                        <p>{% trans "Dış ticaret eğitiminde lider bir bölüm olmak" %}</p>
+                                                        <h6>{% trans "Uluslararası Tanınırlık" %}</h6>
+                                                        <p>{% trans "Ulusal ve uluslararası platformlarda adından söz ettiren saygın bir bölüm olmak" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -303,41 +322,41 @@
                                             <div class="values-grid">
                                                 <div class="value-card">
                                                     <div class="value-icon">
-                                                        <i class="fas fa-globe"></i>
+                                                        <i class="fas fa-heartbeat"></i>
                                                     </div>
                                                     <div class="value-content">
-                                                        <h5>{% trans "Küresel Bakış Açısı" %}</h5>
-                                                        <p>{% trans "Uluslararası ticaretin dinamiklerini anlayan ve uygulayan bireyler yetiştirme" %}</p>
+                                                        <h5>{% trans "Hasta Odaklılık" %}</h5>
+                                                        <p>{% trans "Tüm sağlık hizmetlerinin merkezine insanı ve hasta refahını koymak" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="value-card">
                                                     <div class="value-icon">
-                                                        <i class="fas fa-lightbulb"></i>
+                                                        <i class="fas fa-chart-line"></i>
                                                     </div>
                                                     <div class="value-content">
-                                                        <h5>{% trans "Yenilikçilik" %}</h5>
-                                                        <p>{% trans "Sürekli öğrenme ve yenilikçi yaklaşımlar geliştirme" %}</p>
+                                                        <h5>{% trans "Verimlilik" %}</h5>
+                                                        <p>{% trans "Kaynakları etkin ve verimli bir şekilde kullanarak sürdürülebilir sağlık hizmeti sunmak" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="value-card">
                                                     <div class="value-icon">
-                                                        <i class="fas fa-handshake"></i>
+                                                        <i class="fas fa-balance-scale"></i>
+                                                    </div>
+                                                    <div class="value-content">
+                                                        <h5>{% trans "Adalet ve Eşitlik" %}</h5>
+                                                        <p>{% trans "Sağlık hizmetlerine erişimde fırsat eşitliği ve adil kaynak dağılımını sağlamak" %}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="value-card">
+                                                    <div class="value-icon">
+                                                        <i class="fas fa-shield-alt"></i>
                                                     </div>
                                                     <div class="value-content">
                                                         <h5>{% trans "Etik Değerler" %}</h5>
-                                                        <p>{% trans "Mesleki etik ilkelere ve ticari dürüstlüğe bağlılık" %}</p>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="value-card">
-                                                    <div class="value-icon">
-                                                        <i class="fas fa-users"></i>
-                                                    </div>
-                                                    <div class="value-content">
-                                                        <h5>{% trans "Takım Çalışması" %}</h5>
-                                                        <p>{% trans "Uluslararası ekiplerle etkili iletişim ve işbirliği becerileri" %}</p>
+                                                        <p>{% trans "Mesleki etik ilkelere ve hasta mahremiyetine bağlılık" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -349,8 +368,8 @@
                                                 <i class="fas fa-quote-right"></i>
                                             </div>
                                             <div class="quote-content">
-                                                <p>{% trans "Dış Ticaret Bölümü olarak, öğrencilerimize sadece teorik bilgi değil, aynı zamanda uluslararası ticaretin pratik dinamiklerini anlama, analiz yapma ve küresel pazarlarda başarılı olma becerileri kazandırmayı hedefliyoruz." %}</p>
-                                                <div class="quote-author">- {% trans "Dış Ticaret Bölümü Akademik Kadrosu" %}</div>
+                                                <p>{% trans "Sağlık Yönetimi Bölümü olarak, öğrencilerimize sadece teorik bilgi değil, aynı zamanda sağlık sektörünün dinamiklerini anlama, stratejik kararlar alma ve sağlık politikalarını şekillendirme becerileri kazandırmayı hedefliyoruz." %}</p>
+                                                <div class="quote-author">- {% trans "Sağlık Yönetimi Bölümü Akademik Kadrosu" %}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -360,49 +379,49 @@
                             <!-- Tab 3: Ne İş Yaparlar? -->
                             <div class="tab-content" id="tab3">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-user-md"></i> {% trans "Dış Ticaret Mezunları Ne İş Yaparlar?" %}</h3>
+                                    <h3><i class="fas fa-user-md"></i> {% trans "Sağlık Yöneticileri Ne İş Yaparlar?" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>{% trans "Dış ticaret mezunları oldukça geniş bir alanda çalışma imkânı bulurlar. Özel sektörde çalışanlar çalıştıkları firmada ithalat işlemlerinin mevzuata uygun olarak yapılmasını sağlarlar. Ayrıca tedarik zincirinde de görev alanlar sipariş takibi yaparak malların zamanında teslim edilmesini sağlarlar." %}</p>
+                                        <p>{% trans "Sağlık yöneticileri; sağlık sektörünün işleyişinin olumlu ivme kazanmasında oldukça önemlidir. Sağlık yöneticisi sağlık alanına gerekli personel ve ekipman tedarikinden hastane yönetimine kadar her alanda kilit rol üstlenmektedir." %}</p>
                                     </div>
                                     
-                                    <!-- Mezunların Görevleri -->
+                                    <!-- Yöneticilerin Görevleri -->
                                     <div class="key-features-section">
                                         <h4 style="color: var(--primary-dark-blue); margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid rgba(74, 111, 165, 0.3);">
-                                            <i class="fas fa-tasks"></i> {% trans "Dış Ticaret Mezunlarının Temel Görevleri" %}
+                                            <i class="fas fa-tasks"></i> {% trans "Sağlık Yöneticilerinin Temel Görevleri" %}
                                         </h4>
                                         <div class="key-features-grid">
                                             <div class="key-feature-card">
                                                 <div class="feature-icon">
-                                                    <i class="fas fa-file-contract"></i>
+                                                    <i class="fas fa-clipboard-list"></i>
                                                 </div>
-                                                <h4>{% trans "İthalat İşlemleri" %}</h4>
-                                                <p>{% trans "İthalat işlemlerinin mevzuata uygun olarak yapılmasını sağlama" %}</p>
+                                                <h4>{% trans "İhtiyaç Saptama" %}</h4>
+                                                <p>{% trans "Çalıştığı kurumun her türlü ihtiyacını saptar, kurumun verimliliğini arttırmak için gerekli çalışmaları sürdürür." %}</p>
                                             </div>
                                             
                                             <div class="key-feature-card">
                                                 <div class="feature-icon">
-                                                    <i class="fas fa-shipping-fast"></i>
+                                                    <i class="fas fa-shield-alt"></i>
                                                 </div>
-                                                <h4>{% trans "Tedarik Zinciri Yönetimi" %}</h4>
-                                                <p>{% trans "Sipariş takibi yaparak malların zamanında teslim edilmesini sağlama" %}</p>
+                                                <h4>{% trans "Önleyici Tedbirler" %}</h4>
+                                                <p>{% trans "Yaşanması muhtemel olumsuzluklarla karşılaşılmaması adına önceden gerekli önlemleri alır." %}</p>
                                             </div>
                                             
                                             <div class="key-feature-card">
                                                 <div class="feature-icon">
-                                                    <i class="fas fa-passport"></i>
+                                                    <i class="fas fa-chart-pie"></i>
                                                 </div>
-                                                <h4>{% trans "Gümrük İşlemleri" %}</h4>
-                                                <p>{% trans "Gerekli evrakların hazırlanması ve gümrük işlemlerinin takibi" %}</p>
+                                                <h4>{% trans "Kaynak Yönetimi" %}</h4>
+                                                <p>{% trans "Eldeki kaynakların etkin ve verimli bir biçimde kullanılmasını sağlar." %}</p>
                                             </div>
                                             
                                             <div class="key-feature-card">
                                                 <div class="feature-icon">
-                                                    <i class="fas fa-money-check-alt"></i>
+                                                    <i class="fas fa-user-tie"></i>
                                                 </div>
-                                                <h4>{% trans "Kambiyo İşlemleri" %}</h4>
-                                                <p>{% trans "Mal bedeli transferi ve tahsili konularında aktif görev alma" %}</p>
+                                                <h4>{% trans "Personel Yönetimi" %}</h4>
+                                                <p>{% trans "Ekibindeki personelin çalışmasını denetler, değerlendirir ve ihtiyaçlarını karşılar." %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -411,58 +430,57 @@
                                     <div class="info-card" style="margin: 40px 0;">
                                         <div class="info-card-header">
                                             <i class="fas fa-sitemap"></i>
-                                            <h3>{% trans "Detaylı Çalışma Alanları" %}</h3>
+                                            <h3>{% trans "Sağlık Yöneticisinin Kapsamlı Rolleri" %}</h3>
                                         </div>
                                         <div class="info-card-body">
-                                            <p>{% trans "Dış ticaret mezunları aşağıdaki alanlarda uzmanlaşır ve çalışmalar yürütür:" %}</p>
+                                            <p>{% trans "Sağlık yöneticileri, sağlık kuruluşlarının stratejik ve operasyonel yönetiminde aşağıdaki rollerde bulunur:" %}</p>
                                             
                                             <div style="margin-top: 25px;">
-                                                <h5 style="color: var(--primary-dark-blue); margin-bottom: 15px;">{% trans "Başlıca Çalışma Alanları:" %}</h5>
                                                 <div class="contributions-grid">
                                                     <div class="contribution-item">
                                                         <div class="contribution-icon">
-                                                            <i class="fas fa-file-export"></i>
+                                                            <i class="fas fa-chart-line"></i>
                                                         </div>
-                                                        <h4>{% trans "İhracat Evrakları" %}</h4>
-                                                        <p>{% trans "İthalatta ve ihracatta gerekli evrakların hazırlanması ve takibi" %}</p>
+                                                        <h4>{% trans "Stratejik Planlama" %}</h4>
+                                                        <p>{% trans "Kurumun uzun vadeli hedeflerini belirleme ve stratejik planlar oluşturma" %}</p>
                                                     </div>
                                                     
                                                     <div class="contribution-item">
                                                         <div class="contribution-icon">
-                                                            <i class="fas fa-truck-loading"></i>
+                                                            <i class="fas fa-hand-holding-usd"></i>
                                                         </div>
-                                                        <h4>{% trans "Sevkiyat Yönetimi" %}</h4>
-                                                        <p>{% trans "Malların gümrükten çekilmesi ve sevkiyatının yapılması süreçleri" %}</p>
+                                                        <h4>{% trans "Finansal Yönetim" %}</h4>
+                                                        <p>{% trans "Bütçe planlaması, maliyet kontrolü ve finansal sürdürülebilirliği sağlama" %}</p>
+                                                    </div>
+                                                    
+                                                    <div class="contribution-item">
+                                                        <div class="contribution-icon">
+                                                            <i class="fas fa-users"></i>
+                                                        </div>
+                                                        <h4>{% trans "İnsan Kaynakları" %}</h4>
+                                                        <p>{% trans "Personel alımı, eğitimi, performans değerlendirmesi ve motivasyonu" %}</p>
                                                     </div>
                                                     
                                                     <div class="contribution-item">
                                                         <div class="contribution-icon">
                                                             <i class="fas fa-balance-scale"></i>
                                                         </div>
-                                                        <h4>{% trans "Gümrük Mevzuatı" %}</h4>
-                                                        <p>{% trans "Gümrük mevzuatını takip etme ve uygulama" %}</p>
-                                                    </div>
-                                                    
-                                                    <div class="contribution-item">
-                                                        <div class="contribution-icon">
-                                                            <i class="fas fa-language"></i>
-                                                        </div>
-                                                        <h4>{% trans "Uluslararası İletişim" %}</h4>
-                                                        <p>{% trans "Yabancı dil bilgisi ile uluslararası iletişim kurma" %}</p>
+                                                        <h4>{% trans "Mevzuat ve Kalite" %}</h4>
+                                                        <p>{% trans "Sağlık mevzuatına uygunluğu denetleme ve kalite standartlarını iyileştirme" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             
                                             <div class="additional-info" style="margin-top: 30px;">
                                                 <div class="info-box">
-                                                    <h4><i class="fas fa-list-check"></i> {% trans "Avantajlı Özellikler" %}</h4>
+                                                    <h4><i class="fas fa-list-check"></i> {% trans "Kritik Yönetim Becerileri" %}</h4>
                                                     <ul>
-                                                        <li>{% trans "Gümrük mevzuatını takip etme becerisi" %}</li>
-                                                        <li>{% trans "Yabancı dil bilgisi ile uluslararası iletişim" %}</li>
-                                                        <li>{% trans "Uluslararası ticaret hukuku bilgisi" %}</li>
-                                                        <li>{% trans "Pazarlama ve satış stratejileri geliştirme" %}</li>
-                                                        <li>{% trans "Lojistik ve tedarik zinciri yönetimi" %}</li>
-                                                        <li>{% trans "Finansal analiz ve risk yönetimi" %}</li>
+                                                        <li>{% trans "Liderlik ve ekip yönetimi" %}</li>
+                                                        <li>{% trans "Problem çözme ve kriz yönetimi" %}</li>
+                                                        <li>{% trans "Etkili iletişim ve müzakere" %}</li>
+                                                        <li>{% trans "Sağlık politikalarını analiz etme" %}</li>
+                                                        <li>{% trans "Teknolojik yenilikleri takip etme" %}</li>
+                                                        <li>{% trans "Hasta memnuniyetini artırma stratejileri" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -471,8 +489,8 @@
                                     
                                     <!-- Kariyer Yolları -->
                                     <div class="cta-section">
-                                        <h3>{% trans "Kariyer Yolunuzu Şekillendirin" %}</h3>
-                                        <p>{% trans "Dış Ticaret Bölümü'nden mezun olduktan sonra, uluslararası ticaret alanında birçok farklı kariyer seçeneği bulunmaktadır." %}</p>
+                                        <h3>{% trans "Kariyerinizi Sağlık Sektöründe Şekillendirin" %}</h3>
+                                        <p>{% trans "Sağlık Yönetimi Bölümü'nden mezun olduktan sonra, sağlık sektörünün dinamik dünyasında birçok farklı kariyer seçeneği bulunmaktadır." %}</p>
                                         <div class="cta-buttons">
                                             <a href="#tab4" class="btn-action tab-switch">
                                                 <i class="fas fa-briefcase"></i>
@@ -490,46 +508,46 @@
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>{% trans "Dış ticaret bölümünü tamamlayan mezunlar, uluslararası ticaretin farklı alanlarında geniş çalışma imkanlarına sahiptir. İş olanakları hem özel sektör hem de kamu sektöründe oldukça çeşitlidir." %}</p>
+                                        <p>{% trans "Sağlık yönetimi bölümünü tamamlayan mezunlar, sağlık sektörünün kamu ve özel alanlarında geniş çalışma imkanlarına sahiptir." %}</p>
                                     </div>
                                     
                                     <!-- İş Alanları Genel Bakış -->
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-chart-pie"></i>
-                                            <h3>{% trans "Dış Ticaret Mezunları İçin İş Olanakları" %}</h3>
+                                            <h3>{% trans "Sağlık Yönetimi Mezunları İçin İş Olanakları" %}</h3>
                                         </div>
                                         <div class="info-card-body">
-                                            <p>{% trans "Mezunlarımız, edindikleri uluslararası ticaret bilgisiyle hem ihracat-ithalat şirketlerinde hem de diğer sektörlerde başarılı kariyerler yapabilmektedir." %}</p>
+                                            <p>{% trans "Mezunlarımız, edindikleri sağlık yönetimi bilgisiyle hem kamu kurumlarında hem de özel sektörde başarılı kariyerler yapabilmektedir." %}</p>
                                             
                                             <div class="mobility-distribution" style="margin: 30px 0;">
                                                 <div class="distribution-item primary">
                                                     <div class="distribution-chart">
-                                                        <div class="chart-circle" style="--percentage: 40">%40</div>
+                                                        <div class="chart-circle" style="--percentage: 45">%45</div>
                                                     </div>
                                                     <div class="distribution-info">
-                                                        <h5>{% trans "İhracat/İthalat Şirketleri" %}</h5>
-                                                        <p>{% trans "Uluslararası ticaret firmaları, dış ticaret şirketleri" %}</p>
+                                                        <h5>{% trans "Hastaneler ve Sağlık Kuruluşları" %}</h5>
+                                                        <p>{% trans "Kamu ve özel hastaneler, tıp merkezleri, rehabilitasyon merkezleri" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="distribution-item secondary">
                                                     <div class="distribution-chart">
-                                                        <div class="chart-circle" style="--percentage: 25">%25</div>
+                                                        <div class="chart-circle" style="--percentage: 30">%30</div>
                                                     </div>
                                                     <div class="distribution-info">
-                                                        <h5>{% trans "Lojistik Firmaları" %}</h5>
-                                                        <p>{% trans "Taşımacılık, depolama ve dağıtım şirketleri" %}</p>
+                                                        <h5>{% trans "Sağlık Sanayi ve Sigorta" %}</h5>
+                                                        <p>{% trans "İlaç firmaları, tıbbi cihaz firmaları, sağlık sigortası şirketleri" %}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="distribution-item tertiary">
                                                     <div class="distribution-chart">
-                                                        <div class="chart-circle" style="--percentage: 35">%35</div>
+                                                        <div class="chart-circle" style="--percentage: 25">%25</div>
                                                     </div>
                                                     <div class="distribution-info">
-                                                        <h5>{% trans "Diğer Sektörler" %}</h5>
-                                                        <p>{% trans "Bankalar, gümrük müşavirlikleri, uluslararası organizasyonlar" %}</p>
+                                                        <h5>{% trans "Kamu ve Diğer" %}</h5>
+                                                        <p>{% trans "Sağlık Bakanlığı, üniversiteler, uluslararası kuruluşlar" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -539,24 +557,25 @@
                                     <!-- Çalışma Alanları Detayları -->
                                     <div class="mobility-section">
                                         <h4 style="color: var(--primary-dark-blue); margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid rgba(74, 111, 165, 0.3);">
-                                            <i class="fas fa-building"></i> {% trans "Ana Çalışma Alanları" %}
+                                            <i class="fas fa-building"></i> {% trans "Mezunlarımızın Çalıştığı Başlıca Kurumlar" %}
                                         </h4>
                                         <div class="mobility-cards">
                                             <div class="mobility-card">
                                                 <div class="card-header">
                                                     <div class="card-icon">
-                                                        <i class="fas fa-exchange-alt"></i>
+                                                        <i class="fas fa-hospital"></i>
                                                     </div>
-                                                    <h3>{% trans "İhracat ve İthalat Şirketleri" %}</h3>
+                                                    <h3>{% trans "Hastaneler ve Sağlık Kuruluşları" %}</h3>
                                                 </div>
                                                 <div class="card-content">
-                                                    <p>{% trans "Bu şirketlerde, ürünlerin yurt dışına satışı veya yurt dışından satın alınması süreçlerinde görev alırlar." %}</p>
+                                                    <p>{% trans "Mezunlar, hastanelerin genel yönetim, hasta hizmetleri, mali işler gibi departmanlarında görev alırlar." %}</p>
                                                     <ul class="feature-list">
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Pazar araştırması ve analizi" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Fiyatlandırma stratejileri geliştirme" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Lojistik ve tedarik zinciri yönetimi" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Gümrük işlemleri ve evrak hazırlama" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Uluslararası müşteri ilişkileri yönetimi" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Özel hastaneler" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Sağlık Bakanlığı'na bağlı hastaneler" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Rehabilitasyon merkezleri" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Evde bakım hizmeti veren kuruluşlar" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Huzurevleri" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Halk sağlığı kurum ve kuruluşları" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -564,18 +583,18 @@
                                             <div class="mobility-card">
                                                 <div class="card-header">
                                                     <div class="card-icon">
-                                                        <i class="fas fa-shipping-fast"></i>
+                                                        <i class="fas fa-industry"></i>
                                                     </div>
-                                                    <h3>{% trans "Lojistik Firmaları" %}</h3>
+                                                    <h3>{% trans "Sağlık Endüstrisi ve Sigorta" %}</h3>
                                                 </div>
                                                 <div class="card-content">
-                                                    <p>{% trans "Uluslararası taşımacılık, depolama ve dağıtım süreçlerinde çalışabilirler." %}</p>
+                                                    <p>{% trans "Sağlık sektörüne hizmet veren endüstri kuruluşlarında yönetici veya pazarlamacı olarak çalışabilirler." %}</p>
                                                     <ul class="feature-list">
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Uluslararası nakliye planlaması" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Gümrük ve liman işlemleri" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Depolama ve envanter yönetimi" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Taşımacılık maliyet analizleri" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Lojistik çözümleri tasarlama" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "İlaç firmaları" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Tıbbi cihaz üreten endüstri kuruluşları" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Medikal malzeme firmaları" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Sağlık sigortası şirketleri" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Sağlık turizmi işletmeleri" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -583,46 +602,45 @@
                                             <div class="mobility-card">
                                                 <div class="card-header">
                                                     <div class="card-icon">
-                                                        <i class="fas fa-university"></i>
+                                                        <i class="fas fa-landmark"></i>
                                                     </div>
-                                                    <h3>{% trans "Bankalar ve Finans Kuruluşları" %}</h3>
+                                                    <h3>{% trans "Kamu ve Akademik Kariyer" %}</h3>
                                                 </div>
                                                 <div class="card-content">
-                                                    <p>{% trans "Dış ticaret finansmanı, döviz işlemleri gibi konularda görev alabilirler." %}</p>
+                                                    <p>{% trans "Mezunlar, kamu kurumlarında ve akademide sağlık politikalarının belirlenmesinde aktif rol alabilirler." %}</p>
                                                     <ul class="feature-list">
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Dış ticaret finansmanı sağlama" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Akreditif ve garanti işlemleri" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Döviz işlemleri ve risk yönetimi" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Uluslararası ödeme sistemleri" %}</li>
-                                                        <li><i class="fas fa-check-circle"></i> {% trans "Ticari risk analizleri" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Sağlık Bakanlığı (Sağlık Uzmanı olarak)" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Üniversitelerde akademisyen olarak" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Dünya Sağlık Örgütü projeleri" %}</li>
+                                                        <li><i class="fas fa-check-circle"></i> {% trans "Kendi işinin yöneticisi" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <!-- Ek Çalışma Alanları -->
+                                    <!-- Özel Kariyer Yolu -->
                                     <div class="documents-section">
                                         <div class="documents-card">
                                             <div class="documents-content">
-                                                <h3>{% trans "Diğer Çalışma Alanları" %}</h3>
-                                                <p>{% trans "Dış Ticaret mezunları için sürekli genişleyen iş olanakları bulunmaktadır." %}</p>
+                                                <h3>{% trans "Kariyerinizde Bir Adım Öne Geçin" %}</h3>
+                                                <p>{% trans "Sağlık Yönetimi mezunları, Sağlık Bakanlığı'nın Sağlık Uzman Yardımcısı sınavlarına katılarak Sağlık Uzmanı olabilir veya uluslararası kariyer fırsatlarını değerlendirebilirler." %}</p>
                                                 <div class="documents-features">
                                                     <div class="feature-item">
                                                         <i class="fas fa-check-circle"></i>
-                                                        <span>{% trans "Gümrük Müşavirlik Firmaları" %}</span>
+                                                        <span>{% trans "Sağlık Bakanlığı - Sağlık Uzmanı" %}</span>
                                                     </div>
                                                     <div class="feature-item">
                                                         <i class="fas fa-check-circle"></i>
-                                                        <span>{% trans "Uluslararası Organizasyonlar (DTÖ gibi)" %}</span>
+                                                        <span>{% trans "Dünya Sağlık Örgütü Projeleri" %}</span>
                                                     </div>
                                                     <div class="feature-item">
                                                         <i class="fas fa-check-circle"></i>
-                                                        <span>{% trans "Danışmanlık ve Kendi İşini Kurma" %}</span>
+                                                        <span>{% trans "Kendi İşinin Yöneticisi" %}</span>
                                                     </div>
                                                     <div class="feature-item">
                                                         <i class="fas fa-check-circle"></i>
-                                                        <span>{% trans "Devlet Kurumları ve Ticaret Bakanlığı" %}</span>
+                                                        <span>{% trans "Uluslararası Sağlık Kuruluşları" %}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -650,10 +668,9 @@
                                             <div class="dean-header">
                                                 <div class="dean-avatar">
                                                     <div class="">
-                                                        <img src="{% static 'core/img/teacher/Tugba-Topak.jpg' %}" 
-                                                        alt="Avrasya University Logo" class="logo-image"
+                                                        <img src="https://saglikyonetimi.avrasya.edu.tr/wp-content/uploads/2024/02/a83.jpg" 
+                                                        alt="Öğr. Gör. Fatma YILMAZ" class="logo-image"
                                                         style="border-radius: 10%; width: 220px; height: 220px; object-fit: cover;">
-                                                        {% comment %} <i class="fas fa-user-tie"></i> {% endcomment %}
                                                     </div>
                                                     <div class="dean-status">
                                                         <div class="status-dot active"></div>
@@ -661,11 +678,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="dean-info">
-                                                    <h3>Öğr. Gör. Tuğba TOPAK</h3>
-                                                    <div class="dean-title">{% trans "Dış Ticaret Program Başkanı" %}</div>
+                                                    <h3>Öğr. Gör. Fatma YILMAZ</h3>
+                                                    <div class="dean-title">{% trans "Sağlık Yönetimi Program Başkanı" %}</div>
                                                     <div class="dean-badges">
                                                         <span class="profile-badge">
-                                                            <i class="fas fa-envelope"></i> tugba.topak@avrasya.edu.tr
+                                                            <i class="fas fa-envelope"></i> fatma.yilmaz@avrasya.edu.tr
                                                         </span>
                                                         <span class="profile-badge">
                                                             <i class="fas fa-phone"></i> (XXX) XXX-XXXX
@@ -681,7 +698,7 @@
                                                     </div>
                                                     <div class="detail-content">
                                                         <h5>{% trans "E-posta" %}</h5>
-                                                        <h5>tugba.topak@avrasya.edu.tr</h5>
+                                                        <p>fatma.yilmaz@avrasya.edu.tr</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-item">
@@ -699,7 +716,7 @@
                                                     </div>
                                                     <div class="detail-content">
                                                         <h5>{% trans "Oda Numarası" %}</h5>
-                                                        <p>{% trans "İşletme Fakültesi, Kat X, Oda XXX" %}</p>
+                                                        <p>{% trans "Sağlık Bilimleri Fakültesi, Kat X, Oda XXX" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-item">
@@ -708,81 +725,57 @@
                                                     </div>
                                                     <div class="detail-content">
                                                         <h5>{% trans "Ofis Saatleri" %}</h5>
-                                                        <p>{% trans "Pazartesi-Çarşamba 10:00-12:00" %}</p>
+                                                        <p>{% trans "Salı-Perşembe 14:00-16:00" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <!-- Bölüm Başkanı Mesajı -->
+                                    <!-- Bölüm Başkanı'nın Tanıtım Metni -->
                                     <div class="message-intro">
                                         <div class="intro-icon">
                                             <i class="fas fa-quote-left"></i>
                                         </div>
                                         <div class="intro-content">
-                                            <h4>{% trans "Sevgili Öğrenciler," %}</h4>
-                                            <p>{% trans "Bildiğiniz gibi, dış ticaret günümüz dünyasında giderek önem kazanan ve dinamik bir alan. Bölümümüzde edindiğiniz bilgi ve becerilerle, bu alanda ülkemizin ve dünyamızın geleceğini şekillendirecek önemli birer aktör olacaksınız." %}</p>
+                                            <h4>{% trans "Sağlık Yönetimi Bölümü'ne Hoş Geldiniz" %}</h4>
+                                            <p>{% trans "İdari bilimlerden farklı olarak sağlık alanına özel; sağlık sigortacılığı, sağlık ekonomisi, sağlık hukuku, sağlık hizmetlerinde kalite, sağlık hizmetlerinde pazarlama, sağlıkta stratejik yönetim, sağlıkta iletişim, sağlık hizmetlerinde insan kaynakları yönetimi gibi bir çok uzmanlık alanını kapsayan hizmetlerin organizasyonu, yönetimi konusunda geniş kapsamlı eğitim programlarını içeren Sağlık Yönetimi Bölümü’nün mezunlarına, YÖK Yürütme Kurulu’nun 26.08.1998 tarihli kararı uyarınca “Sağlık Yöneticisi” unvanı verilmektedir." %}</p>
                                         </div>
                                     </div>
                                     
                                     <!-- Mesaj İçeriği -->
                                     <div class="message-content">
-                                        <div class="message-paragraph">
-                                            <div class="paragraph-header">
-                                                <div class="paragraph-number">1</div>
-                                                <h5>{% trans "Dış Ticaretin Kapsamı" %}</h5>
-                                            </div>
-                                            <p>{% trans "Dış ticaret, sadece ürünlerin ülkeler arasında taşınması anlamına gelmiyor. Bu alan, kültürel farklılıkları anlama, farklı dil ve hukuki sistemlere uyum sağlama, pazarlama stratejileri geliştirme gibi birçok farklı beceriyi gerektiriyor. Bölümümüzde aldığınız eğitim sayesinde bu becerileri kazanacak ve küresel bir bakış açısıyla dünyaya açılacaksınız." %}</p>
-                                        </div>
-                                        
                                         <div class="message-paragraph highlight">
                                             <div class="paragraph-header">
-                                                <div class="paragraph-number">2</div>
-                                                <h5>{% trans "Pratik Eğitim ve Staj İmkanları" %}</h5>
+                                                <div class="paragraph-number">1</div>
+                                                <h5>{% trans "Eğitim Hedefimiz" %}</h5>
                                             </div>
-                                            <p>{% trans "Bu yıl sizlere daha fazla staj imkanı sunarak, teorik bilginizi pratiğe dökme fırsatı sunmayı hedefliyoruz. Ayrıca, sektörün önde gelen isimlerini bölümümüze konuk ederek, size ilham verecek ve kariyer planlamanızda size yol gösterecek etkinlikler düzenleyeceğiz." %}</p>
+                                            <p>{% trans "Ülkemizin sağlık sistemi ve politikaları hakkında bilgili, tıbbi deontolojiyi özümsemiş, sağlık çalışanları ile aynı dili konuşabilen, stratejik düşünebilen, vizyon sahibi, problem çözme becerileri olan sağlık yöneticileri yetiştirilmesi hedeflenmektedir." %}</p>
                                         </div>
                                         
                                         <div class="message-paragraph">
                                             <div class="paragraph-header">
-                                                <div class="paragraph-number">3</div>
-                                                <h5>{% trans "Sürekli Gelişim" %}</h5>
+                                                <div class="paragraph-number">2</div>
+                                                <h5>{% trans "Mezunlarımızın Rolü" %}</h5>
                                             </div>
-                                            <p>{% trans "Unutmayın ki, dış ticaret sürekli değişen ve gelişen bir alan. Bu nedenle, sürekli öğrenmeye ve kendinizi geliştirmeye açık olmalısınız. Farklı diller öğrenmek, sektörle ilgili yayınları takip etmek ve uluslararası etkinliklere katılmak, sizin için önemli adımlar olacaktır." %}</p>
+                                            <p>{% trans "Mezunlarımız, ülkemizin sağlık politikalarının belirlenmesi ve yürütülmesinde de aktif rol almaktadırlar. Sağlık sektörünün her alanında, kamu ve özel kuruluşlarda yönetici pozisyonlarında görev alarak sağlık hizmetlerinin kalitesini artırmaya katkıda bulunmaktadırlar." %}</p>
                                         </div>
                                         
                                         <div class="special-message">
-                                            {% trans "Hepinizden beklentimiz, bölümümüzün adını gururla taşıyacak, ülkemize ve insanlığa faydalı bireyler olmanızdır. Bu süreçte size her zaman destek olmaya hazırız." %}
-                                        </div>
-                                        
-                                        <div class="message-paragraph">
-                                            <div class="paragraph-header">
-                                                <div class="paragraph-number">4</div>
-                                                <h5>{% trans "Kariyer Hedefleri" %}</h5>
-                                            </div>
-                                            <p>{% trans "Dış ticaret alanında edineceğiniz bilgi ve becerilerle, uluslararası şirketlerde, ihracat-ithalat firmalarında, lojistik şirketlerinde, bankalarda ve birçok farklı sektörde başarılı kariyerler kurabilirsiniz. Hatta kendi dış ticaret şirketinizi kurarak girişimci olma fırsatına da sahipsiniz." %}</p>
-                                        </div>
-                                        
-                                        <div class="message-paragraph highlight">
-                                            <div class="paragraph-header">
-                                                <div class="paragraph-number">5</div>
-                                                <h5>{% trans "Uluslararası Perspektif" %}</h5>
-                                            </div>
-                                            <p>{% trans "Dış ticaret eğitimi size sadece teknik bilgiler değil, aynı zamanda uluslararası bir bakış açısı kazandıracaktır. Farklı kültürleri anlama, uluslararası pazarları analiz etme ve küresel trendleri takip etme becerileri, kariyerinizde sizi öne çıkaracak özellikler olacaktır." %}</p>
+                                            {% trans "Sizleri de bu başarılı ve anlamlı yolculukta aramızda görmekten mutluluk duyacağız. Sağlık yönetimi alanında kariyer yaparak, toplum sağlığına değer katmak isteyen tüm öğrencilerimizi bölümümüze bekliyoruz." %}
                                         </div>
                                         
                                         <div class="signature">
                                             <div class="signature-line"></div>
-                                            <div class="signature-name">Öğr. Gör. Tuğba TOPAK</div>
-                                            <div class="signature-title">{% trans "Dış Ticaret Program Başkanı" %}</div>
+                                            <div class="signature-name">Öğr. Gör. Fatma YILMAZ</div>
+                                            <div class="signature-title">{% trans "Sağlık Yönetimi Program Başkanı" %}</div>
                                         </div>
                                     </div>
                                     
-                                    <!-- Akademik Kadro İletişim -->
+                                    <!-- Diğer Sekmelere Yönlendirme -->
                                     <div class="cta-section">
-                                        <h3>{% trans "Dış Ticaret Bölümü Akademik Kadrosu" %}</h3>
-                                        <p>{% trans "Dış Ticaret Bölümü akademik kadro olarak, hepinize sevgi dolu başarılı günler diliyoruz." %}</p>
+                                        <h3>{% trans "Sağlık Yönetimi Bölümü Hakkında Daha Fazla Bilgi" %}</h3>
+                                        <p>{% trans "Bölümümüzün tarihçesi, misyonu, vizyonu ve mezunlarımızın çalışma alanları hakkında daha detaylı bilgi edinebilirsiniz." %}</p>
                                         <div class="cta-buttons">
                                             <a href="#tab1" class="btn-action tab-switch">
                                                 <i class="fas fa-history"></i>
@@ -808,7 +801,7 @@
     </div>
 </div>
 <style>
-<style>
+
 
 
 
