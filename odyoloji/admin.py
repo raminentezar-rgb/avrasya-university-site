@@ -1,8 +1,10 @@
-from django.contrib import admin
-from .models import OdyolojiDuyuru, Odyoloji_Etkinlik, OdyolojiDersProgrami
+# app_name: odyoloji/admin.py
 
-@admin.register(Odyoloji_Etkinlik)
-class Odyoloji_EtkinlikAdmin(admin.ModelAdmin):
+from django.contrib import admin
+from .models import OdyolojiDuyuru, OdyolojiEtkinlik, OdyolojiDersProgrami
+
+@admin.register(OdyolojiEtkinlik)
+class OdyolojiEtkinlikAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']

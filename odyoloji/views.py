@@ -1,20 +1,22 @@
+# app_name: odyoloji/views.py
+
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import OdyolojiDuyuru, Odyoloji_Etkinlik, OdyolojiDersProgrami
+from .models import OdyolojiDuyuru, OdyolojiEtkinlik, OdyolojiDersProgrami
 from django.utils import timezone
 
 def etkinlik_listesi(request):
     now = timezone.now()
     
     # رویدادهای آینده (از حالا به بعد)
-    gelecek_etkinlikler = Odyoloji_Etkinlik.objects.filter(
+    gelecek_etkinlikler = OdyolojiEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__gte=now
     ).order_by('baslangic_tarihi')
     
     # رویدادهای گذشته (قبل از حالا)
-    gecmis_etkinlikler = Odyoloji_Etkinlik.objects.filter(
+    gecmis_etkinlikler = OdyolojiEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__lt=now
     ).order_by('-baslangic_tarihi')
@@ -31,7 +33,7 @@ def etkinlik_listesi(request):
     return render(request, 'odyoloji/includes/etkinlikler/list.html', context)
 
 def etkinlik_detay(request, slug):
-    etkinlik = get_object_or_404(Odyoloji_Etkinlik, slug=slug, yayinda=True)
+    etkinlik = get_object_or_404(OdyolojiEtkinlik, slug=slug, yayinda=True)
     return render(request, 'odyoloji/includes/etkinlikler/detail.html', {
         'etkinlik': etkinlik
     })
@@ -39,7 +41,7 @@ def etkinlik_detay(request, slug):
 def yaklasan_etkinlikler(request):
     """Yaklaşan etkinlikler (7 gün içinde)"""
     yedi_gun_sonra = timezone.now() + timezone.timedelta(days=7)
-    etkinlikler = Odyoloji_Etkinlik.objects.filter(
+    etkinlikler = OdyolojiEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__range=[timezone.now(), yedi_gun_sonra]
     ).order_by('baslangic_tarihi')
@@ -83,14 +85,14 @@ def odyoloji_duyurulari(request):
     return render(request, 'odyoloji/includes/list.html', context)
 
 def odyoloji_duyuru_detay(request, slug):
-    """نمایش جزییات یک اطلاعیه ادیولوژی"""
+    """نمایش جزییات یک اطلاعیه رشته ادیولوژی"""
     duyuru = get_object_or_404(OdyolojiDuyuru, slug=slug)
     
     # اطلاعیه‌های مرتبط
     ilgili_duyurular = OdyolojiDuyuru.objects.exclude(id=duyuru.id).order_by('-yayin_tarihi')[:3]
     
     # پیدا کردن رشته ادیولوژی برای نمایش اطلاعات
-    odyoloji_bolumu = get_object_or_404(Bolum, kod='odyoloji')
+    odyoloji_bolumu = get_object_or_404(Bolum, kod='odyoloji', aktif=True)
     
     return render(request, 'odyoloji/includes/detail.html', {
         'duyuru': duyuru,
@@ -118,7 +120,7 @@ def ders_programi(request):
     return render(request, 'odyoloji/includes/ders_programi.html', context)
 
 # صفحات استاتیک
-def odyoloji(request):
+def odyoloji_bolumu(request):
     return render(request, 'odyoloji/includes/odyoloji.html')
 
 def idari_faaliyetler_2024_2025(request):

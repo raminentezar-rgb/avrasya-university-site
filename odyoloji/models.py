@@ -1,3 +1,5 @@
+# app_name: odyoloji/models.py
+
 from django.db import models
 from duyurular.models import Duyuru
 from django.urls import reverse
@@ -20,7 +22,7 @@ class OdyolojiDuyuru(Duyuru):
         verbose_name = "Odyoloji Duyurusu"
         verbose_name_plural = "Odyoloji Duyuruları"
 
-class Odyoloji_Etkinlik(models.Model):
+class OdyolojiEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
@@ -28,6 +30,8 @@ class Odyoloji_Etkinlik(models.Model):
         ('spor', 'Spor Etkinliği'),
         ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -47,7 +51,7 @@ class Odyoloji_Etkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/afis/%Y/%m/%d/', 
+        upload_to='etkinlikler/afis/odyoloji/%Y/%m/%d/', 
         blank=True, 
         null=True,
         verbose_name="Etkinlik Afişi"

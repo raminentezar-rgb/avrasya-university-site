@@ -1,5 +1,6 @@
-from django.apps import AppConfig
+# app_name: odyoloji/apps.py
 
+from django.apps import AppConfig
 
 class OdyolojiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
