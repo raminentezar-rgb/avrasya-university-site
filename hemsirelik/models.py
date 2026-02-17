@@ -1,7 +1,10 @@
+# app_name: hemsirelik/models.py
+
 from django.db import models
 from duyurular.models import Duyuru
 from django.urls import reverse
 from django.utils import timezone
+
 
 class HemsirelikDuyuruManager(models.Manager):
     def get_queryset(self):
@@ -10,8 +13,9 @@ class HemsirelikDuyuruManager(models.Manager):
             yayinda=True
         )
 
+
 class HemsirelikDuyuru(Duyuru):
-    """مدل پروکسی برای نمایش اطلاعیه‌های پرستاری"""
+    """مدل پروکسی برای نمایش اطلاعیه‌های رشته پرستاری"""
     
     objects = HemsirelikDuyuruManager()
     
@@ -20,7 +24,8 @@ class HemsirelikDuyuru(Duyuru):
         verbose_name = "Hemşirelik Duyurusu"
         verbose_name_plural = "Hemşirelik Duyuruları"
 
-class Hemsirelik_Etkinlik(models.Model):
+
+class HemsirelikEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
@@ -28,6 +33,8 @@ class Hemsirelik_Etkinlik(models.Model):
         ('spor', 'Spor Etkinliği'),
         ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -36,8 +43,8 @@ class Hemsirelik_Etkinlik(models.Model):
     kisa_aciklama = models.TextField(blank=True, verbose_name="Kısa Açıklama")
     detayli_aciklama = models.TextField(verbose_name="Detaylı Açıklama")
     etkinlik_turu = models.CharField(
-        max_length=20, 
-        choices=ETKINLIK_TURU_CHOICES, 
+        max_length=20,
+        choices=ETKINLIK_TURU_CHOICES,
         default='diger',
         verbose_name="Etkinlik Türü"
     )
@@ -47,8 +54,8 @@ class Hemsirelik_Etkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/afis/%Y/%m/%d/', 
-        blank=True, 
+        upload_to='etkinlikler/afis/hemsirelik/%Y/%m/%d/',
+        blank=True,
         null=True,
         verbose_name="Etkinlik Afişi"
     )
@@ -87,6 +94,7 @@ class Hemsirelik_Etkinlik(models.Model):
         """Etkinliğe kaç gün kaldığını hesaplar"""
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
+
 
 class HemsirelikDersProgrami(models.Model):
     SINIF_CHOICES = [

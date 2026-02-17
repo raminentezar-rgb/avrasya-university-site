@@ -1,3 +1,5 @@
+# app_name: hemsirelik/urls.py
+
 from django.urls import path
 from . import views
 
@@ -9,11 +11,13 @@ urlpatterns = [
     path('duyurular/<slug:slug>/', views.hemsirelik_duyuru_detay, name='detay'),
     
     # URLهای صفحات استاتیک
-    path('', views.hemsirelik, name='hemsirelik'),
+    path('', views.hemsirelik_bolumu, name='hemsirelik'),
+    
     path('ders_programi/', views.ders_programi, name='ders_programi'),
     
     # URLهای فعالیت‌ها
     path('idari_faaliyetler_2024_2025/', views.idari_faaliyetler_2024_2025, name='idari_faaliyetler_2024_2025'),
+    
     path('diger_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
     
     # URLهای فعالیت‌ها

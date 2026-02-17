@@ -1,8 +1,11 @@
-from django.contrib import admin
-from .models import HemsirelikDuyuru, Hemsirelik_Etkinlik, HemsirelikDersProgrami
+# app_name: hemsirelik/admin.py
 
-@admin.register(Hemsirelik_Etkinlik)
-class Hemsirelik_EtkinlikAdmin(admin.ModelAdmin):
+from django.contrib import admin
+from .models import HemsirelikDuyuru, HemsirelikEtkinlik, HemsirelikDersProgrami
+
+
+@admin.register(HemsirelikEtkinlik)
+class HemsirelikEtkinlikAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -24,6 +27,7 @@ class Hemsirelik_EtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
+
 @admin.register(HemsirelikDuyuru)
 class HemsirelikDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -32,6 +36,7 @@ class HemsirelikDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return HemsirelikDuyuru.objects.all()
+
 
 @admin.register(HemsirelikDersProgrami)
 class HemsirelikDersProgramiAdmin(admin.ModelAdmin):

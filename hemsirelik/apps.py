@@ -1,4 +1,7 @@
+# app_name: hemsirelik/apps.py
+
 from django.apps import AppConfig
+
 
 class HemsirelikConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
