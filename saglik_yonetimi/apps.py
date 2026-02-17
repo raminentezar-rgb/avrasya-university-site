@@ -2,7 +2,7 @@
 
 from django.apps import AppConfig
 
-
 class SaglikYonetimiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'saglik_yonetimi'
+    verbose_name = "Sağlık Yönetimi"

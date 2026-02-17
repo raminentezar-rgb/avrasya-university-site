@@ -3,20 +3,20 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import SaglikYonetimiDuyuru, Saglik_Etkinlik, SaglikDersProgrami
+from .models import SaglikYonetimiDuyuru, SaglikYonetimiEtkinlik, SaglikYonetimiDersProgrami
 from django.utils import timezone
 
 def etkinlik_listesi(request):
     now = timezone.now()
     
     # رویدادهای آینده (از حالا به بعد)
-    gelecek_etkinlikler = Saglik_Etkinlik.objects.filter(
+    gelecek_etkinlikler = SaglikYonetimiEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__gte=now
     ).order_by('baslangic_tarihi')
     
     # رویدادهای گذشته (قبل از حالا)
-    gecmis_etkinlikler = Saglik_Etkinlik.objects.filter(
+    gecmis_etkinlikler = SaglikYonetimiEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__lt=now
     ).order_by('-baslangic_tarihi')
@@ -33,15 +33,15 @@ def etkinlik_listesi(request):
     return render(request, 'saglik_yonetimi/includes/etkinlikler/list.html', context)
 
 def etkinlik_detay(request, slug):
-    etkinlik = get_object_or_404(Saglik_Etkinlik, slug=slug, yayinda=True)
+    etkinlik = get_object_or_404(SaglikYonetimiEtkinlik, slug=slug, yayinda=True)
     return render(request, 'saglik_yonetimi/includes/etkinlikler/detail.html', {
         'etkinlik': etkinlik
     })
 
 def yaklasan_etkinlikler(request):
-    """Yaklaşan etkinlikler (7 gün içinde)"""
+    """رویدادهای نزدیک (طی ۷ روز آینده)"""
     yedi_gun_sonra = timezone.now() + timezone.timedelta(days=7)
-    etkinlikler = Saglik_Etkinlik.objects.filter(
+    etkinlikler = SaglikYonetimiEtkinlik.objects.filter(
         yayinda=True,
         baslangic_tarihi__range=[timezone.now(), yedi_gun_sonra]
     ).order_by('baslangic_tarihi')
@@ -51,7 +51,7 @@ def yaklasan_etkinlikler(request):
     })
 
 def saglik_yonetimi_duyurulari(request):
-    """نمایش تمام اطلاعیه‌های مربوط به مدیریت سلامت"""
+    """نمایش تمام اطلاعیه‌های مربوط به رشته مدیریت سلامت"""
     
     # استفاده از مدل مدیر پروکسی برای فیلتر خودکار
     duyurular = SaglikYonetimiDuyuru.objects.all().order_by('-yayin_tarihi')
@@ -72,11 +72,11 @@ def saglik_yonetimi_duyurulari(request):
         duyurular = duyurular.filter(yayin_tarihi__date=tarih_query)
     
     # پیدا کردن رشته مدیریت سلامت برای نمایش اطلاعات
-    saglik_bolumu = get_object_or_404(Bolum, kod='saglik-yonetimi', aktif=True)
+    saglik_yonetimi_bolumu = get_object_or_404(Bolum, kod='saglik_yonetimi', aktif=True)
     
     context = {
         'duyurular': duyurular,
-        'bolum': saglik_bolumu,
+        'bolum': saglik_yonetimi_bolumu,
         'search_query': search_query,
         'tarih_query': tarih_query,
         'toplam_duyuru': duyurular.count(),
@@ -85,24 +85,24 @@ def saglik_yonetimi_duyurulari(request):
     return render(request, 'saglik_yonetimi/includes/list.html', context)
 
 def saglik_yonetimi_duyuru_detay(request, slug):
-    """نمایش جزییات یک اطلاعیه مدیریت سلامت"""
+    """نمایش جزییات یک اطلاعیه رشته مدیریت سلامت"""
     duyuru = get_object_or_404(SaglikYonetimiDuyuru, slug=slug)
     
     # اطلاعیه‌های مرتبط
     ilgili_duyurular = SaglikYonetimiDuyuru.objects.exclude(id=duyuru.id).order_by('-yayin_tarihi')[:3]
     
     # پیدا کردن رشته مدیریت سلامت برای نمایش اطلاعات
-    saglik_bolumu = get_object_or_404(Bolum, kod='saglik-yonetimi')
+    saglik_yonetimi_bolumu = get_object_or_404(Bolum, kod='saglik_yonetimi', aktif=True)
     
     return render(request, 'saglik_yonetimi/includes/detail.html', {
         'duyuru': duyuru,
         'ilgili_duyurular': ilgili_duyurular,
-        'bolum': saglik_bolumu,
+        'bolum': saglik_yonetimi_bolumu,
     })
 
 def ders_programi(request):
     # فقط فایل‌های فعال را نمایش بده
-    dosyalar = SaglikDersProgrami.objects.filter(aktif=True)
+    dosyalar = SaglikYonetimiDersProgrami.objects.filter(aktif=True)
     
     # گروه‌بندی بر اساس کلاس
     gruplar = {}
@@ -120,7 +120,7 @@ def ders_programi(request):
     return render(request, 'saglik_yonetimi/includes/ders_programi.html', context)
 
 # صفحات استاتیک
-def saglik_yonetimi(request):
+def saglik_yonetimi_bolumu(request):
     return render(request, 'saglik_yonetimi/includes/saglik_yonetimi.html')
 
 def idari_faaliyetler_2024_2025(request):

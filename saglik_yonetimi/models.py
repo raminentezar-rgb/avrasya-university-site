@@ -8,12 +8,12 @@ from django.utils import timezone
 class SaglikYonetimiDuyuruManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
-            bolumler__kod='saglik-yonetimi',
+            bolumler__kod='saglik_yonetimi',
             yayinda=True
         )
 
 class SaglikYonetimiDuyuru(Duyuru):
-    """مدل پروکسی برای نمایش اطلاعیه‌های مدیریت سلامت"""
+    """پروکسی مدل برای نمایش اطلاعیه‌های رشته مدیریت سلامت"""
     
     objects = SaglikYonetimiDuyuruManager()
     
@@ -22,7 +22,7 @@ class SaglikYonetimiDuyuru(Duyuru):
         verbose_name = "Sağlık Yönetimi Duyurusu"
         verbose_name_plural = "Sağlık Yönetimi Duyuruları"
 
-class Saglik_Etkinlik(models.Model):
+class SaglikYonetimiEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
@@ -30,6 +30,8 @@ class Saglik_Etkinlik(models.Model):
         ('spor', 'Spor Etkinliği'),
         ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -49,7 +51,7 @@ class Saglik_Etkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/saglik/%Y/%m/%d/', 
+        upload_to='etkinlikler/afis/saglik_yonetimi/%Y/%m/%d/', 
         blank=True, 
         null=True,
         verbose_name="Etkinlik Afişi"
@@ -75,22 +77,22 @@ class Saglik_Etkinlik(models.Model):
         return reverse('saglik_yonetimi:etkinlik_detay', args=[self.slug])
 
     def yaklasan_etkinlik(self):
-        """Etkinliğin yaklaşıp yaklaşmadığını kontrol eder"""
+        """کنترل نزدیک بودن رویداد"""
         return self.baslangic_tarihi <= timezone.now() + timezone.timedelta(days=7)
 
     def devam_ediyor(self):
-        """Etkinliğin devam edip etmediğini kontrol eder"""
+        """کنترل ادامه دار بودن رویداد"""
         now = timezone.now()
         if self.bitis_tarihi:
             return self.baslangic_tarihi <= now <= self.bitis_tarihi
         return self.baslangic_tarihi.date() == now.date()
 
     def gun_kaldi(self):
-        """Etkinliğe kaç gün kaldığını hesaplar"""
+        """محاسبه روزهای باقی مانده تا رویداد"""
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
 
-class SaglikDersProgrami(models.Model):
+class SaglikYonetimiDersProgrami(models.Model):
     SINIF_CHOICES = [
         ('1', '1. Sınıf'),
         ('2', '2. Sınıf'),
@@ -101,7 +103,7 @@ class SaglikDersProgrami(models.Model):
     
     baslik = models.CharField(max_length=200, verbose_name="Başlık")
     aciklama = models.TextField(blank=True, verbose_name="Açıklama")
-    dosya = models.FileField(upload_to='ders_programlari/saglik/', verbose_name="Dosya")
+    dosya = models.FileField(upload_to='ders_programlari/saglik_yonetimi/', verbose_name="Dosya")
     sinif = models.CharField(max_length=10, choices=SINIF_CHOICES, verbose_name="Sınıf")
     yayin_tarihi = models.DateTimeField(default=timezone.now, verbose_name="Yayın Tarihi")
     aktif = models.BooleanField(default=True, verbose_name="Aktif")

@@ -1,10 +1,10 @@
 # app_name: saglik_yonetimi/admin.py
 
 from django.contrib import admin
-from .models import SaglikYonetimiDuyuru, Saglik_Etkinlik, SaglikDersProgrami
+from .models import SaglikYonetimiDuyuru, SaglikYonetimiEtkinlik, SaglikYonetimiDersProgrami
 
-@admin.register(Saglik_Etkinlik)
-class Saglik_EtkinlikAdmin(admin.ModelAdmin):
+@admin.register(SaglikYonetimiEtkinlik)
+class SaglikYonetimiEtkinlikAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -35,8 +35,8 @@ class SaglikYonetimiDuyuruAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return SaglikYonetimiDuyuru.objects.all()
 
-@admin.register(SaglikDersProgrami)
-class SaglikDersProgramiAdmin(admin.ModelAdmin):
+@admin.register(SaglikYonetimiDersProgrami)
+class SaglikYonetimiDersProgramiAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
