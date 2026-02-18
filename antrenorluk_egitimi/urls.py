@@ -6,21 +6,21 @@ from . import views
 app_name = 'antrenorluk_egitimi'
 
 urlpatterns = [
-    # URLهای اطلاعیه‌ها
+    # اطلاعیه‌ها
     path('duyurular/', views.antrenorluk_egitimi_duyurulari, name='liste'),
     path('duyurular/<slug:slug>/', views.antrenorluk_egitimi_duyuru_detay, name='detay'),
-    
-    # URLهای صفحات استاتیک
-    path('', views.antrenorluk_egitimi, name='antrenorluk_egitimi'),
-    
-    path('ders_programi/', views.ders_programi, name='ders_programi'),
-    
-    # URLهای فعالیت‌ها
-    path('idari_faaliyetler_2024_2025/', views.idari_faaliyetler_2024_2025, name='idari_faaliyetler_2024_2025'),
- 
-    path('diğer_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
 
-    # URLهای فعالیت‌ها
+    # صفحات استاتیک
+    path('', views.antrenorluk_egitimi_bolumu, name='antrenorluk_egitimi'),
+
+    path('ders_programi/', views.ders_programi, name='ders_programi'),
+
+    # فعالیت‌ها
+    path('idari_faaliyetler_2024_2025/', views.idari_faaliyetler_2024_2025, name='idari_faaliyetler_2024_2025'),
+
+    path('diger_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
+
+    # رویدادها
     path('etkinlikler/', views.etkinlik_listesi, name='etkinlik_listesi'),
     path('etkinlikler/yaklasan/', views.yaklasan_etkinlikler, name='yaklasan_etkinlikler'),
     path('etkinlikler/<slug:slug>/', views.etkinlik_detay, name='etkinlik_detay'),
