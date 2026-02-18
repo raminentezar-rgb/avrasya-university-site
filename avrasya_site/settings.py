@@ -104,6 +104,7 @@ INSTALLED_APPS = [
     'sosyal_hizmetler',
     'spor_yonetimi',
     'web_tasarimi',
+    'sosyal_hizmet',
     
     # SHMYO
     'acil_durum',

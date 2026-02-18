@@ -1,4 +1,4 @@
-{% extends 'dis_ticaret/base.html' %}
+{% extends 'sosyal_hizmet/base.html' %}
 {% load i18n %} <!-- اضافه شده -->
 {% block title %}{% trans "Yaklaşan Etkinlikler - Avrasya Üniversitesi" %}{% endblock %}
 {% block content %}
@@ -7,8 +7,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>{% trans "Dış Ticaret Bölümü" %}</h1>
-            <p>{% trans "Avrasya Üniversitesi Dış Ticaret - Bilimin Işığında, İnsanın Hizmetinde" %}</p>
+            <h1>{% trans "Sosyal Hizmet Bölümü" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi Sosyal Hizmet - Bilimin Işığında, İnsanın Hizmetinde" %}</p>
         </div>
     </div>
 </section>
@@ -18,7 +18,7 @@
         <!-- سایدبار سمت چپ -->
         <div class="col-lg-3 col-xxl-2">
             <div class="sidebar-wrapper">
-                {% include 'dis_ticaret/dis_sidebar.html' %}
+                {% include 'sosyal_hizmet/sosyal_hizmet_sidebar.html' %}
             </div>
         </div>
         
@@ -57,7 +57,7 @@
                         
                         <div class="col-lg-4 text-lg-end">
                             <div class="header-actions">
-                                <a href="{% url 'dis_ticaret:etkinlik_listesi' %}" class="header-btn secondary">
+                                <a href="{% url 'sosyal_hizmet:etkinlik_listesi' %}" class="header-btn secondary">
                                     <i class="fas fa-list"></i> {% trans "Tüm Etkinlikler" %}
                                 </a>
                             </div>
@@ -172,7 +172,7 @@
                         <h3>{% trans "Yaklaşan etkinlik bulunmuyor" %}</h3>
                         <p class="modern-empty-text">{% trans "Önümüzdeki 7 gün içinde planlanmış etkinlik bulunmamaktadır." %}</p>
                         <div class="modern-empty-actions">
-                            <a href="{% url 'dis_ticaret:etkinlik_listesi' %}" class="modern-empty-btn">
+                            <a href="{% url 'sosyal_hizmet:etkinlik_listesi' %}" class="modern-empty-btn">
                                 <i class="fas fa-list"></i> {% trans "Tüm Etkinlikleri Gör" %}
                             </a>
                         </div>
