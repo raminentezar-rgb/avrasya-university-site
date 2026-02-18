@@ -5,6 +5,7 @@ from duyurular.models import Duyuru
 from django.urls import reverse
 from django.utils import timezone
 
+
 class EgzersizDuyuruManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
@@ -12,8 +13,9 @@ class EgzersizDuyuruManager(models.Manager):
             yayinda=True
         )
 
+
 class EgzersizDuyuru(Duyuru):
-    """مدل پروکسی برای نمایش اطلاعیه‌های رشته ورزشی (Egzersiz)"""
+    """مدل پروکسی برای نمایش اطلاعیه‌های رشته ورزش"""
     
     objects = EgzersizDuyuruManager()
     
@@ -22,14 +24,17 @@ class EgzersizDuyuru(Duyuru):
         verbose_name = "Egzersiz Duyurusu"
         verbose_name_plural = "Egzersiz Duyuruları"
 
+
 class EgzersizEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
         ('kultur', 'Kültür-Sanat Etkinliği'),
         ('spor', 'Spor Etkinliği'),
-        ('yarisma', 'Yarışma / Turnuva'),
+        ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -38,8 +43,8 @@ class EgzersizEtkinlik(models.Model):
     kisa_aciklama = models.TextField(blank=True, verbose_name="Kısa Açıklama")
     detayli_aciklama = models.TextField(verbose_name="Detaylı Açıklama")
     etkinlik_turu = models.CharField(
-        max_length=20, 
-        choices=ETKINLIK_TURU_CHOICES, 
+        max_length=20,
+        choices=ETKINLIK_TURU_CHOICES,
         default='diger',
         verbose_name="Etkinlik Türü"
     )
@@ -49,8 +54,8 @@ class EgzersizEtkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/afis/egzersiz/%Y/%m/%d/', 
-        blank=True, 
+        upload_to='etkinlikler/afis/egzersiz/%Y/%m/%d/',
+        blank=True,
         null=True,
         verbose_name="Etkinlik Afişi"
     )
@@ -89,6 +94,7 @@ class EgzersizEtkinlik(models.Model):
         """Etkinliğe kaç gün kaldığını hesaplar"""
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
+
 
 class EgzersizDersProgrami(models.Model):
     SINIF_CHOICES = [

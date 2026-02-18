@@ -6,6 +6,7 @@ from duyurular.models import Duyuru, Bolum
 from .models import EgzersizDuyuru, EgzersizEtkinlik, EgzersizDersProgrami
 from django.utils import timezone
 
+
 def etkinlik_listesi(request):
     now = timezone.now()
     
@@ -32,11 +33,13 @@ def etkinlik_listesi(request):
     
     return render(request, 'egzersiz/includes/etkinlikler/list.html', context)
 
+
 def etkinlik_detay(request, slug):
     etkinlik = get_object_or_404(EgzersizEtkinlik, slug=slug, yayinda=True)
     return render(request, 'egzersiz/includes/etkinlikler/detail.html', {
         'etkinlik': etkinlik
     })
+
 
 def yaklasan_etkinlikler(request):
     """Yaklaşan etkinlikler (7 gün içinde)"""
@@ -50,8 +53,9 @@ def yaklasan_etkinlikler(request):
         'etkinlikler': etkinlikler
     })
 
+
 def egzersiz_duyurulari(request):
-    """نمایش تمام اطلاعیه‌های مربوط به رشته ورزشی (Egzersiz)"""
+    """نمایش تمام اطلاعیه‌های مربوط به رشته ورزش"""
     
     # استفاده از مدل مدیر پروکسی برای فیلتر خودکار
     duyurular = EgzersizDuyuru.objects.all().order_by('-yayin_tarihi')
@@ -63,7 +67,7 @@ def egzersiz_duyurulari(request):
     # اعمال فیلترها
     if search_query:
         duyurular = duyurular.filter(
-            Q(baslik__icontains=search_query) | 
+            Q(baslik__icontains=search_query) |
             Q(icerik__icontains=search_query) |
             Q(ozet__icontains=search_query)
         )
@@ -71,7 +75,7 @@ def egzersiz_duyurulari(request):
     if tarih_query:
         duyurular = duyurular.filter(yayin_tarihi__date=tarih_query)
     
-    # پیدا کردن رشته ورزشی (Egzersiz) برای نمایش اطلاعات
+    # پیدا کردن رشته ورزش برای نمایش اطلاعات
     egzersiz_bolumu = get_object_or_404(Bolum, kod='egzersiz', aktif=True)
     
     context = {
@@ -84,14 +88,15 @@ def egzersiz_duyurulari(request):
     
     return render(request, 'egzersiz/includes/list.html', context)
 
+
 def egzersiz_duyuru_detay(request, slug):
-    """نمایش جزییات یک اطلاعیه رشته ورزشی (Egzersiz)"""
+    """نمایش جزییات یک اطلاعیه رشته ورزش"""
     duyuru = get_object_or_404(EgzersizDuyuru, slug=slug)
     
     # اطلاعیه‌های مرتبط
     ilgili_duyurular = EgzersizDuyuru.objects.exclude(id=duyuru.id).order_by('-yayin_tarihi')[:3]
     
-    # پیدا کردن رشته ورزشی (Egzersiz) برای نمایش اطلاعات
+    # پیدا کردن رشته ورزش برای نمایش اطلاعات
     egzersiz_bolumu = get_object_or_404(Bolum, kod='egzersiz', aktif=True)
     
     return render(request, 'egzersiz/includes/detail.html', {
@@ -99,6 +104,7 @@ def egzersiz_duyuru_detay(request, slug):
         'ilgili_duyurular': ilgili_duyurular,
         'bolum': egzersiz_bolumu,
     })
+
 
 def ders_programi(request):
     # فقط فایل‌های فعال را نمایش بده
@@ -119,18 +125,23 @@ def ders_programi(request):
     
     return render(request, 'egzersiz/includes/ders_programi.html', context)
 
+
 # صفحات استاتیک
-def egzersiz(request):
+def egzersiz_bolumu(request):
     return render(request, 'egzersiz/includes/egzersiz.html')
+
 
 def idari_faaliyetler_2024_2025(request):
     return render(request, 'egzersiz/includes/idari_faaliyetler_2024_2025.html')
 
+
 def diger_faaliyetler_2024_2025(request):
     return render(request, 'egzersiz/includes/diger_faaliyetler_2024_2025.html')
 
+
 def kalite_yonetimi(request):
     return render(request, 'egzersiz/includes/kalite_yonetimi.html')
+
 
 def toplumsal_katki(request):
     return render(request, 'egzersiz/includes/toplumsal_katki.html')
