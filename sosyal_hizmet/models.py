@@ -5,12 +5,14 @@ from duyurular.models import Duyuru
 from django.urls import reverse
 from django.utils import timezone
 
+
 class SosyalHizmetDuyuruManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
-            bolumler__kod='sosyal-hizmet',
+            bolumler__kod='sosyal_hizmet',
             yayinda=True
         )
+
 
 class SosyalHizmetDuyuru(Duyuru):
     """مدل پروکسی برای نمایش اطلاعیه‌های رشته مددکاری اجتماعی"""
@@ -22,7 +24,8 @@ class SosyalHizmetDuyuru(Duyuru):
         verbose_name = "Sosyal Hizmet Duyurusu"
         verbose_name_plural = "Sosyal Hizmet Duyuruları"
 
-class Sosyal_Etkinlik(models.Model):
+
+class SosyalHizmetEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
         ('konferans', 'Konferans / Kongre / Sempozyum'),
         ('seminer', 'Seminer / Panel'),
@@ -30,8 +33,8 @@ class Sosyal_Etkinlik(models.Model):
         ('spor', 'Spor Etkinliği'),
         ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
-        ('staj', 'Staj / Uygulama'),
-        ('saha', 'Saha Çalışması'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -40,8 +43,8 @@ class Sosyal_Etkinlik(models.Model):
     kisa_aciklama = models.TextField(blank=True, verbose_name="Kısa Açıklama")
     detayli_aciklama = models.TextField(verbose_name="Detaylı Açıklama")
     etkinlik_turu = models.CharField(
-        max_length=20, 
-        choices=ETKINLIK_TURU_CHOICES, 
+        max_length=20,
+        choices=ETKINLIK_TURU_CHOICES,
         default='diger',
         verbose_name="Etkinlik Türü"
     )
@@ -51,8 +54,8 @@ class Sosyal_Etkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/sosyal_hizmet/%Y/%m/%d/', 
-        blank=True, 
+        upload_to='etkinlikler/afis/sosyal_hizmet/%Y/%m/%d/',
+        blank=True,
         null=True,
         verbose_name="Etkinlik Afişi"
     )
@@ -92,7 +95,8 @@ class Sosyal_Etkinlik(models.Model):
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
 
-class SosyalDersProgrami(models.Model):
+
+class SosyalHizmetDersProgrami(models.Model):
     SINIF_CHOICES = [
         ('1', '1. Sınıf'),
         ('2', '2. Sınıf'),
