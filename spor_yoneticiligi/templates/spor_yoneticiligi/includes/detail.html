@@ -1,5 +1,5 @@
-{% extends 'dis_ticaret/base.html' %}
-{% block title %}{{ duyuru.baslik }} - Dış Ticaret - Avrasya Üniversitesi{% endblock %}
+{% extends 'spor_yoneticiligi/base.html' %}
+{% block title %}{{ duyuru.baslik }} - Spor Yöneticiliği - Avrasya Üniversitesi{% endblock %}
 {% block content %}
 
 <style>
@@ -492,7 +492,7 @@
         <!-- سایدبار سمت چپ -->
         <div class="col-lg-3 col-xxl-2">
             <div class="sidebar-wrapper">
-                 {% include 'dis_ticaret/dis_sidebar.html' %}
+                 {% include 'spor_yoneticiligi/spor_yoneticiligi_sidebar.html' %}
             </div>
         </div>
 
@@ -510,8 +510,8 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{% url 'dis_ticaret:liste' %}">
-                                <i class="bi bi-book me-1"></i>Dış Ticaret
+                            <a href="{% url 'spor_yoneticiligi:liste' %}">
+                                <i class="bi bi-book me-1"></i>Spor Yöneticiliği
                             </a>
                         </li>
                         <li class="breadcrumb-item active text-primary fw-semibold">Duyuru Detayı</li>
@@ -590,9 +590,9 @@
             {% if ilgili_duyurular %}
             <div class="related-section">
                 <h3 class="section-title-detail">
-                    <i class="bi bi-link me-2"></i>Diğer Dış Ticaret Duyuruları
+                    <i class="bi bi-link me-2"></i>Diğer Spor Yöneticiliği Duyuruları
                 </h3>
-                <p class="text-muted mb-4">Aşağıda benzer Dış Ticaret duyurularını inceleyebilirsiniz.</p>
+                <p class="text-muted mb-4">Aşağıda benzer Spor Yöneticiliği duyurularını inceleyebilirsiniz.</p>
 
                 <div class="row g-4">
                     {% for ilgili in ilgili_duyurular %}
@@ -600,14 +600,14 @@
                         <div class="related-card">
                             <div class="related-badges">
                                 <span class="badge bg-primary">{{ ilgili.get_fakulte_display }}</span>
-                                <span class="badge bg-success">Dış Ticaret</span>
+                                <span class="badge bg-success">Spor Yöneticiliği</span>
                             </div>
                             <h4 class="related-title">{{ ilgili.baslik }}</h4>
                             <div class="related-date">
                                 <i class="bi bi-calendar-event"></i>
                                 {{ ilgili.yayin_tarihi|date:'d M Y' }}
                             </div>
-                            <a href="{% url 'dis_ticaret:detay' ilgili.slug %}" class="related-link">
+                            <a href="{% url 'spor_yoneticiligi:detay' ilgili.slug %}" class="related-link">
                                 Detaylı İncele
                                 <i class="bi bi-arrow-right"></i>
                             </a>
@@ -621,9 +621,9 @@
             <!-- Navigation Buttons -->
             <div class="navigation-section">
                 <div class="nav-buttons">
-                    <a href="{% url 'dis_ticaret:liste' %}" class="nav-btn nav-btn-outline">
+                    <a href="{% url 'spor_yoneticiligi:liste' %}" class="nav-btn nav-btn-outline">
                         <i class="bi bi-arrow-left"></i>
-                        Tüm Dış Ticaret Duyuruları
+                        Tüm Spor Yöneticiliği Duyuruları
                     </a>
                     
                     <div class="d-flex gap-3">
