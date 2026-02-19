@@ -5,6 +5,7 @@ from duyurular.models import Duyuru
 from django.urls import reverse
 from django.utils import timezone
 
+
 class RekreasyonDuyuruManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(
@@ -12,8 +13,9 @@ class RekreasyonDuyuruManager(models.Manager):
             yayinda=True
         )
 
+
 class RekreasyonDuyuru(Duyuru):
-    """مدل پروکسی برای نمایش اطلاعیه‌های رشته ریکراسیون"""
+    """مدل پروکسی برای نمایش اطلاعیه‌های رشته تفریحات"""
     
     objects = RekreasyonDuyuruManager()
     
@@ -21,6 +23,7 @@ class RekreasyonDuyuru(Duyuru):
         proxy = True
         verbose_name = "Rekreasyon Duyurusu"
         verbose_name_plural = "Rekreasyon Duyuruları"
+
 
 class RekreasyonEtkinlik(models.Model):
     ETKINLIK_TURU_CHOICES = [
@@ -30,6 +33,8 @@ class RekreasyonEtkinlik(models.Model):
         ('spor', 'Spor Etkinliği'),
         ('tanitim', 'Tanıtım Günleri'),
         ('workshop', 'Workshop / Atölye'),
+        ('sergi', 'Sergi'),
+        ('yarisma', 'Yarışma'),
         ('diger', 'Diğer'),
     ]
     
@@ -49,7 +54,7 @@ class RekreasyonEtkinlik(models.Model):
     yer = models.CharField(max_length=255, verbose_name="Etkinlik Yeri")
     
     afis = models.ImageField(
-        upload_to='etkinlikler/rekreasyon/afis/%Y/%m/%d/', 
+        upload_to='etkinlikler/afis/rekreasyon/%Y/%m/%d/', 
         blank=True, 
         null=True,
         verbose_name="Etkinlik Afişi"
@@ -89,6 +94,7 @@ class RekreasyonEtkinlik(models.Model):
         """Etkinliğe kaç gün kaldığını hesaplar"""
         kalan_gun = (self.baslangic_tarihi.date() - timezone.now().date()).days
         return max(0, kalan_gun)
+
 
 class RekreasyonDersProgrami(models.Model):
     SINIF_CHOICES = [

@@ -3,6 +3,7 @@
 from django.contrib import admin
 from .models import RekreasyonDuyuru, RekreasyonEtkinlik, RekreasyonDersProgrami
 
+
 @admin.register(RekreasyonEtkinlik)
 class RekreasyonEtkinlikAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
@@ -26,6 +27,7 @@ class RekreasyonEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
+
 @admin.register(RekreasyonDuyuru)
 class RekreasyonDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -34,6 +36,7 @@ class RekreasyonDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return RekreasyonDuyuru.objects.all()
+
 
 @admin.register(RekreasyonDersProgrami)
 class RekreasyonDersProgramiAdmin(admin.ModelAdmin):
