@@ -173,3 +173,8 @@ def erasmus(request):
     return render(request,'ogrenci_isleri/includes/erasmus.html')
 
 
+
+def cift_Anadal_yandal(request):
+    return render(request,'ogrenci_isleri/includes/cift_Anadal_yandal.html')
+
+
