@@ -35,16 +35,21 @@ def qa_search(request):
 
 
 def set_language(request):
-    lang_code = request.POST.get('language', request.GET.get('language'))
-    next_url = request.POST.get('next', request.GET.get('next', request.META.get('HTTP_REFERER', '/')))
+    lang_code = request.POST.get('language', 'tr')
+    next_url = request.POST.get('next', '/')
     
-    if lang_code in dict(settings.LANGUAGES):
-        translation.activate(lang_code)
-        response = HttpResponseRedirect(next_url)
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
-        return response
+    # Safely get target URL
+    try:
+        target_url = translate_url(next_url, lang_code)
+    except:
+        target_url = None
+        
+    if not target_url:
+        target_url = f'/{lang_code}/' if lang_code != 'tr' else '/'
     
-    return HttpResponseRedirect(next_url)
+    response = HttpResponseRedirect(target_url)
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code, path='/')
+    return response
 
 
 
@@ -133,12 +138,7 @@ def anasyafa(request):
 
 
 def index(request):
-    # فعال کردن زبان ترکی به صورت explicit
     current_lang = translation.get_language()
-    
-    if not current_lang or current_lang.startswith('en'):
-        translation.activate('tr')
-        current_lang = 'tr'
     
     # Get latest news
     latest_news = News.objects.filter(is_published=True)[:6]
@@ -199,8 +199,6 @@ def index(request):
         'this_month_announcements': this_month_announcements,
         'with_files_count': with_files_count,
         'recent_week_count': recent_week_count,
-        'LANGUAGE_CODE': current_lang,
-        'CURRENT_LANG': current_lang,
     }
     
     return render(request, 'core/main/index.html', context)

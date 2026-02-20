@@ -3,16 +3,18 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.i18n import set_language  # این خط را اضافه کنید
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+
+urlpatterns += i18n_patterns(
     path('', include('core.urls', namespace='core')),
     path('news/', include('news.urls', namespace='news')),
-    path('contact/', include('contact.urls',namespace='contact')),
+    path('contact/', include('contact.urls', namespace='contact')),
     path('duyurular/', include('duyurular.urls')),
-    path('etkinlikler/', include('etkinlikler.urls')), 
+    path('etkinlikler/', include('etkinlikler.urls')),
     path('aday_ogrenci/', include('aday_ogrenci.urls', namespace='aday_ogrenci')),
     path('akademik/', include('akademik.urls')),
     path('fakulteler/', include('fakulteler.urls')),
@@ -73,13 +75,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('gorsel_iletisim_tasarimi/', include('gorsel_iletisim_tasarimi.urls')),
     path('idari_birimler/', include('idari_birimler.urls')),
-    path('idari_birimler/', include('idari_birimler.urls')),
     path('sosyal_hizmet/', include('sosyal_hizmet.urls')),
-    
-    
-
-
-    #MYO 
     path('adalet/', include('adalet.urls')),
     path('ascilik/', include('ascilik.urls')),
     path('bilgisayar_programciligi/', include('bilgisayar_programciligi.urls')),
@@ -101,8 +97,6 @@ urlpatterns = [
     path('sosyal_hizmetler/', include('sosyal_hizmetler.urls')),
     path('spor_yonetimi/', include('spor_yonetimi.urls')),
     path('web_tasarimi/', include('web_tasarimi.urls')),
-
-    #SHMYO
     path('acil_durum/', include('acil_durum.urls')),
     path('agiz_dis/', include('agiz_dis.urls')),
     path('ameliyathane_hizmetler/', include('ameliyathane.urls')),
@@ -124,21 +118,11 @@ urlpatterns = [
     path('saglik_kurumlari_isletmeciligi/', include('saglik_kurumlari.urls')),
     path('tibbi_goruntuleme_teknikleri/', include('tibbi_goruntuleme.urls')),
     path('tibbi_laboratuvar_teknikleri/', include('tibbi_laboratuvar.urls')),
-
-    #UBYO
     path('yonetim_bilisim_sistemleri/', include('yonetim_bilisim_sistemleri.urls')),
     path('gastronomi_mutfak_sanatlari/', include('gastronomi_mutfak_sanatlari.urls')),
-    
-    
-    
-
-    
-   
-   
-   
-   
-    
-]
+    prefix_default_language=False
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

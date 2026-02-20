@@ -15,6 +15,7 @@ urlpatterns = [
 
 
 
+
     path("asistan/", views.qa_search, name="qa_search"),
 
     
