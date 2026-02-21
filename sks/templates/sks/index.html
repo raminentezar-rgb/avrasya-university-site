@@ -1,0 +1,849 @@
+{% extends 'sks/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/main_styles.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+<style>
+    :root {
+        --avrasya-dark: #092442;
+        --avrasya-blue: #1d61a9;
+        --avrasya-light: #8dd4e3;
+        --avrasya-cream: #f6f2e7;
+        --glass-bg: rgba(255, 255, 255, 0.9);
+        --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    body {
+        background-color: var(--avrasya-cream);
+        overflow-x: hidden;
+    }
+
+    .super_container {
+        padding-top: 140px !important;
+        /* Account for fixed header height */
+    }
+
+    /* Hero Section */
+    .sks-hero {
+        position: relative;
+        height: 100vh;
+        min-height: 600px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: 0;
+        background: var(--avrasya-dark);
+        /* border-radius: 0 0 50px 50px; */
+        /* Modern rounded bottom */
+    }
+
+    .sks-hero-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(9, 36, 66, 0.1), rgba(9, 36, 66, 0.1)),
+        url('{% static "core/img/student/1-5.jpeg" %}');
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.8);
+        transition: transform 10s ease;
+    }
+
+    .sks-hero:hover .sks-hero-img {
+        transform: scale(1.1);
+    }
+
+    .sks-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 15px;
+        max-width: 900px;
+    }
+
+    .sks-hero-content h1 {
+        font-family: 'Metropolis', 'Roboto', sans-serif;
+        font-weight: 900;
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        color: #fff;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        margin-bottom: 25px;
+        margin-top: 225px;
+        line-height: 1.1;
+    }
+
+    .sks-hero-content p {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 40px;
+        font-weight: 300;
+    }
+
+    .sks-hero-btns .btn {
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        margin: 10px;
+    }
+
+    .btn-avrasya-primary {
+        background: var(--avrasya-blue);
+        color: #fff;
+        border: 2px solid var(--avrasya-blue);
+        box-shadow: 0 10px 20px rgba(29, 97, 169, 0.3);
+    }
+
+    .btn-avrasya-primary:hover {
+        background: #fff;
+        color: var(--avrasya-blue);
+        transform: translateY(-5px);
+    }
+
+    .btn-avrasya-outline {
+        background: transparent;
+        color: #fff;
+        border: 2px solid #fff;
+    }
+
+    .btn-avrasya-outline:hover {
+        background: #fff;
+        color: var(--avrasya-dark);
+        transform: translateY(-5px);
+    }
+
+    /* Section Styling */
+    .section-title-wrap {
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .section-title-wrap h2 {
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 900;
+        font-size: 3.2rem;
+        color: var(--avrasya-dark);
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 20px;
+        letter-spacing: -1px;
+    }
+
+    .section-title-wrap h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 8px;
+        background: var(--avrasya-blue);
+        /* Stronger blue for better visibility */
+        border-radius: 4px;
+    }
+
+    .section_padding {
+        padding: 120px 0;
+        /* More consistent breathing room */
+    }
+
+    /* Facilities Cards */
+    .facility-card {
+        background: #fff;
+        border-radius: 24px;
+        padding: 40px 30px;
+        text-align: center;
+        transition: all 0.5s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        height: 100%;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .facility-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: linear-gradient(135deg, var(--avrasya-dark), var(--avrasya-blue));
+        transition: all 0.5s ease;
+        z-index: -1;
+    }
+
+    .facility-card:hover::before {
+        height: 100%;
+    }
+
+    .facility-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 20px 40px rgba(9, 36, 66, 0.2);
+    }
+
+    .facility-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--avrasya-cream);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        font-size: 2rem;
+        color: var(--avrasya-blue);
+        transition: all 0.5s ease;
+    }
+
+    .facility-card:hover .facility-icon {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        transform: rotateY(360deg);
+    }
+
+    .facility-card h3 {
+        font-weight: 800;
+        color: var(--avrasya-dark);
+        margin-bottom: 20px;
+        transition: all 0.5s ease;
+    }
+
+    .facility-card p {
+        color: #4a5568;
+        /* Darker grey for better contrast on white */
+        font-weight: 500;
+        transition: all 0.5s ease;
+    }
+
+    .facility-card:hover h3,
+    .facility-card:hover p {
+        color: #fff;
+    }
+
+    /* Food Menu Section with Glassmorphism */
+    .food-section {
+        background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-attachment: fixed;
+        padding: 100px 0;
+        position: relative;
+    }
+
+    .food-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(9, 36, 66, 0.4);
+    }
+
+    .glass-menu {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 30px;
+        padding: 50px;
+        color: #fff;
+    }
+
+    .menu-day-badge {
+        background: var(--avrasya-light);
+        color: var(--avrasya-dark);
+        padding: 10px 25px;
+        border-radius: 50px;
+        font-weight: 800;
+        display: inline-block;
+        margin-bottom: 30px;
+    }
+
+    .menu-item-row {
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-item-row:last-child {
+        border-bottom: none;
+    }
+
+    .menu-item-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .menu-item-cat {
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        color: #fff;
+        /* White for better visibility */
+        background: rgba(29, 97, 169, 0.3);
+        /* Subtle blue pill background */
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-weight: 700;
+    }
+
+    /* Sports Section */
+    .sports-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .sport-item {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 350px;
+        cursor: pointer;
+    }
+
+    .sport-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .sport-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        color: #fff;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+    }
+
+    .sport-item:hover .sport-img {
+        transform: scale(1.15);
+    }
+
+    .sport-item:hover .sport-overlay {
+        transform: translateY(0);
+    }
+
+    /* Admin structure section */
+    .admin-grid {
+        background: #fff;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        padding: 60px;
+    }
+
+    .admin-link-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .admin-link-list a {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        background: var(--avrasya-cream);
+        border-radius: 15px;
+        color: var(--avrasya-dark);
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .admin-link-list a:hover {
+        background: var(--avrasya-blue);
+        color: #fff;
+        transform: translateX(10px);
+    }
+
+    .admin-link-list a i {
+        margin-right: 15px;
+        color: var(--avrasya-blue);
+    }
+
+    .admin-link-list a:hover i {
+        color: #fff;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .glass-menu {
+            padding: 30px 20px;
+        }
+
+        .admin-grid {
+            padding: 30px 20px;
+        }
+    }
+
+    /* News & Announcements Styles */
+    .news-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+        height: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .news-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(9, 36, 66, 0.1);
+    }
+
+    .news-img-wrap {
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .news-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .news-card:hover .news-img-wrap img {
+        transform: scale(1.1);
+    }
+
+    .news-type-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--avrasya-blue);
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        z-index: 2;
+    }
+
+    .news-body {
+        padding: 30px;
+    }
+
+    .news-date {
+        color: var(--avrasya-blue);
+        /* More contrast than light blue */
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+        display: block;
+    }
+
+    .news-title {
+        font-weight: 800;
+        color: var(--avrasya-dark);
+        margin-bottom: 15px;
+        line-height: 1.4;
+        font-size: 1.25rem;
+    }
+
+    .announcement-list-item {
+        display: flex;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .announcement-list-item:last-child {
+        border-bottom: none;
+    }
+
+    .announcement-date-box {
+        min-width: 70px;
+        height: 70px;
+        background: var(--avrasya-cream);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        color: var(--avrasya-dark);
+    }
+
+    .announcement-date-box span {
+        font-weight: 900;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
+    .announcement-date-box small {
+        font-weight: 700;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: var(--avrasya-blue);
+    }
+
+    .announcement-content h5 {
+        font-weight: 700;
+        color: var(--avrasya-dark);
+        margin-bottom: 5px;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+    }
+
+    .announcement-list-item:hover .announcement-content h5 {
+        color: var(--avrasya-blue);
+    }
+</style>
+
+<!-- Enhanced Hero -->
+<section class="sks-hero">
+    <div class="sks-hero-img"></div>
+    <div class="sks-hero-content animate__animated animate__fadeInUp">
+        <span class="text-white mb-3 d-block"
+            style="letter-spacing: 5px; text-transform: uppercase; font-weight: 600;"></span>
+        <h1>{% trans "Sağlık, Kültür ve Spor Daire Başkanlığı" %}</h1>
+        <p></p>
+        <div class="sks-hero-btns">
+            <a href="#hizmetler" class="btn btn-avrasya-primary">{% trans "Keşfet" %}</a>
+            <a href="#" class="btn btn-avrasya-outline">{% trans "Yemek Listesi" %}</a>
+        </div>
+    </div>
+</section>
+
+<!-- Stats counters (Micro-animation potential) -->
+<!-- <section class="py-5" style="background: var(--avrasya-dark); color: #fff;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-6 col-md-3">
+                <h2 class="font-weight-bold" style="color: var(--avrasya-light);">25+</h2>
+                <p class="small text-uppercase">{% trans "Spor Branşı" %}</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="font-weight-bold" style="color: var(--avrasya-light);">40+</h2>
+                <p class="small text-uppercase">{% trans "Öğrenci Kulübü" %}</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="font-weight-bold" style="color: var(--avrasya-light);">3</h2>
+                <p class="small text-uppercase">{% trans "Modern Kampüs" %}</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="font-weight-bold" style="color: var(--avrasya-light);">5000+</h2>
+                <p class="small text-uppercase">{% trans "Günlük Yemek" %}</p>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<!-- Facilities Section -->
+<section id="hizmetler" class="section_padding">
+    <div class="container">
+        <div class="section-title-wrap">
+            <h2>{% trans "Hizmetlerimiz" %}</h2>
+            <p class="lead text-muted">{% trans "Öğrenci yaşam kalitesini artırmak için her alanda profesyonel destek
+                sağlıyoruz." %}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.1s;">
+                    <div class="facility-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>{% trans "Beslenme" %}</h3>
+                    <p>{% trans "Hijyenik ve kaliteli beslenme hizmetleri ile tüm kampüslerimizde sağlıklı öğünler." %}
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                    <div class="facility-icon"><i class="fas fa-basketball-ball"></i></div>
+                    <h3>{% trans "Spor" %}</h3>
+                    <p>{% trans "Modern spor salonları, turnuvalar ve üniversiteler arası spor müsabakaları heyecanı."
+                        %}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.3s;">
+                    <div class="facility-icon"><i class="fas fa-theater-masks"></i></div>
+                    <h3>{% trans "Kültür" %}</h3>
+                    <p>{% trans "Konserler, sergiler, tiyatrolar ve sanatsal atölyelerle canlı bir kampüs hayatı." %}
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+                    <div class="facility-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3>{% trans "Psikolojik Destek" %}</h3>
+                    <p>{% trans "Bireysel danışmanlık hizmetleri ile öğrencilerimizin ruhsal gelişimine katkı
+                        sağlıyoruz." %}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.5s;">
+                    <div class="facility-icon"><i class="fas fa-users"></i></div>
+                    <h3>{% trans "Kulüpler" %}</h3>
+                    <p>{% trans "Bilimden sanata, hobilerden spora kadar onlarca farklı öğrenci topluluğu." %}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.6s;">
+                    <div class="facility-icon"><i class="fas fa-bed"></i></div>
+                    <h3>{% trans "Barınma" %}</h3>
+                    <p>{% trans "Güvenli ve temiz yurt imkanları ile öğrencilerimizin barınma ihtiyaçlarını
+                        karşılıyoruz." %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- News & Announcements Section -->
+<section id="duyurular" class="section_padding bg-light">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-md-8">
+                <div class="section-title-wrap text-left mb-0">
+                    <h2 class="mb-0">{% trans "Haberler & Duyurular" %}</h2>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-right mt-3 mt-md-0">
+                <a href="#" class="btn-avrasya-outline"
+                    style="border-color: var(--avrasya-blue); color: var(--avrasya-blue);">{% trans "Tümünü Gör" %} <i
+                        class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Featured News -->
+            <div class="col-lg-7 mb-4">
+                <div class="news-card">
+                    <div class="news-img-wrap">
+                        <span class="news-type-badge">{% trans "Haber" %}</span>
+                        <img src="https://sks.istanbul.edu.tr/upload/img/4092/lRzK3Sy3N6.png" alt="Featured News">
+                    </div>
+                    <div class="news-body">
+                        <span class="news-date"><i class="far fa-calendar-alt mr-2"></i> 19 Şubat 2026</span>
+                        <h3 class="news-title">{% trans "Muaythai Türkiye Şampiyonası’nda Gümüş Madalya" %}</h3>
+                        <p style="color: #2d3748; font-weight: 500;">{% trans "Antalya'da düzenlenen Türkiye Muaythai
+                            Şampiyonası'nda
+                            üniversitemiz takımı büyük bir başarıya imزا آتاراک گوموش مادالیا ایله دوندو..." %}</p>
+                        <a href="#" class="font-weight-bold"
+                            style="color: var(--avrasya-blue); text-decoration: underline;">{% trans "Devamını Oku" %}
+                            <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements List -->
+            <div class="col-lg-5">
+                <div class="bg-white p-4 p-md-5 rounded-lg shadow-sm border h-100">
+                    <h4 class="font-weight-bold mb-4 pb-3 border-bottom"><i
+                            class="fas fa-bullhorn mr-2 text-primary"></i> {% trans "Son Duyurular" %}</h4>
+                    <div class="announcement-list">
+                        <!-- Item 1 -->
+                        <div class="announcement-list-item">
+                            <div class="announcement-date-box">
+                                <span>19</span>
+                                <small>Şub</small>
+                            </div>
+                            <div class="announcement-content">
+                                <h5>{% trans "Antalya’da Farklı Galibiyet: 46–8" %}</h5>
+                                <p class="small text-muted mb-0">{% trans "Amerikan Futbolu takımımızın muazzam
+                                    başarısı..." %}</p>
+                            </div>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="announcement-list-item">
+                            <div class="announcement-date-box">
+                                <span>19</span>
+                                <small>Şub</small>
+                            </div>
+                            <div class="announcement-content">
+                                <h5>{% trans "Kayak Takımlarımız Başarıyla Temsil Etti" %}</h5>
+                                <p class="small text-muted mb-0">{% trans "Erzurum'da gerçekleşen kış oyunlarında..." %}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="announcement-list-item">
+                            <div class="announcement-date-box">
+                                <span>17</span>
+                                <small>Şub</small>
+                            </div>
+                            <div class="announcement-content">
+                                <h5>{% trans "Eğitim Raporu Anketi Hakkında" %}</h5>
+                                <p class="small text-muted mb-0">{% trans "Öğrencilerimizin katılımı beklenen anket..."
+                                    %}</p>
+                            </div>
+                        </div>
+                        <!-- Item 4 -->
+                        <div class="announcement-list-item">
+                            <div class="announcement-date-box">
+                                <span>15</span>
+                                <small>Şub</small>
+                            </div>
+                            <div class="announcement-content">
+                                <h5>{% trans "Yemekhane Çalışma Saatleri Düzenlemesi" %}</h5>
+                                <p class="small text-muted mb-0">{% trans "Finaller dönemi boyunca geçerli olacak yeni
+                                    saatler..." %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Food Section with Glassmorphism -->
+<section class="food-section">
+    <div class="container relative z-2">
+        <div class="row align-items-center">
+            <div class="col-lg-5 text-white mb-5 mb-lg-0">
+                <h2 class="font-weight-bold mb-4" style="font-size: 3rem;">{% trans "Sizin İçin En İyisi" %}</h2>
+                <p class="lead mb-5">{% trans "Gıda güvenliği standartlarında hazırlanan zengin menülerimizle enerjinizi
+                    her daim yüksek tutun." %}</p>
+                <div class="d-flex align-items-center mb-4">
+                    <div class="mr-4 text-center">
+                        <i class="fas fa-carrot fa-2x mb-2" style="color: var(--avrasya-light);"></i>
+                        <p class="small">{% trans "Taze & Organik" %}</p>
+                    </div>
+                    <div class="mr-4 text-center">
+                        <i class="fas fa-shield-alt fa-2x mb-2" style="color: var(--avrasya-light);"></i>
+                        <p class="small">{% trans "Hijyenik" %}</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-apple-alt fa-2x mb-2" style="color: var(--avrasya-light);"></i>
+                        <p class="small">{% trans "Diyet" %}</p>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-avrasya-primary">{% trans "Aylık Menüyü İndir" %}</a>
+            </div>
+            <div class="col-lg-7">
+                <div class="glass-menu">
+                    <div class="menu-day-badge">{% trans "Günün Menüsü" %} | 21.02.2026</div>
+                    <div class="menu-item-row">
+                        <div class="menu-item-cat">{% trans "Çorba" %}</div>
+                        <div class="menu-item-name">{% trans "Süzme Mercimek Çorba" %}</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="menu-item-cat">{% trans "Ana Yemek" %}</div>
+                        <div class="menu-item-name">{% trans "Piliç Rosto & Püre" %}</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="menu-item-cat">{% trans "Yan Ürün" %}</div>
+                        <div class="menu-item-name">{% trans "Bulgur Pilavı" %}</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="menu-item-cat">{% trans "TAMAMLAYICI" %}</div>
+                        <div class="menu-item-name">{% trans "Mevsim Salatası / Ayran" %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sports & Activities Grid -->
+<section class="section_padding">
+    <div class="container">
+        <div class="section-title-wrap">
+            <h2>{% trans "Spor Branşlarımız" %}</h2>
+        </div>
+        <div class="sports-grid">
+            <div class="sport-item group">
+                <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Basketbol" class="sport-img">
+                <div class="sport-overlay">
+                    <h4>{% trans "Basketbol" %}</h4>
+                    <p>{% trans "Üniversite takımımıza katılın veya serbest zamanlı oynayın." %}</p>
+                </div>
+            </div>
+            <div class="sport-item group">
+                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Futbol" class="sport-img">
+                <div class="sport-overlay">
+                    <h4>{% trans "Futbol" %}</h4>
+                    <p>{% trans "Fakülteler arası halı saha turnuvaları ve okul takımı." %}</p>
+                </div>
+            </div>
+            <div class="sport-item group">
+                <img src="https://images.unsplash.com/photo-1541252260730-0412e8e2108e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Voleybol" class="sport-img">
+                <div class="sport-overlay">
+                    <h4>{% trans "Voleybol" %}</h4>
+                    <p>{% trans "Bayan ve erkek voleybol takımlarımızla zirveye." %}</p>
+                </div>
+            </div>
+            <div class="sport-item group">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Fitness" class="sport-img">
+                <div class="sport-overlay">
+                    <h4>{% trans "Fitness" %}</h4>
+                    <p>{% trans "Modern ekipmanlarla donatılmış spor salonlarımız." %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Administrative Links (Structure & Regulations) -->
+<section class="section_padding bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="admin-grid">
+                    <div class="row">
+                        <div class="col-md-6 mb-5 mb-md-0">
+                            <h4 class="font-weight-bold mb-4"><i class="fas fa-sitemap mr-2 text-primary"></i> {% trans
+                                "İdari Yapı" %}</h4>
+                            <div class="admin-link-list">
+                                <a href="#"><i class="fas fa-angle-right"></i> {% trans "Yönetim ve Başkanlık" %}</a>
+                                <a href="#"><i class="fas fa-angle-right"></i> {% trans "Merkez Yönetim Kurulu" %}</a>
+                                <a href="#"><i class="fas fa-angle-right"></i> {% trans "Organizasyon Şeması" %}</a>
+                                <a href="#"><i class="fas fa-angle-right"></i> {% trans "Daire Başkanlıkları" %}</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="font-weight-bold mb-4"><i class="fas fa-file-invoice mr-2 text-primary"></i> {%
+                                trans "Mevzuat & Bilgi" %}</h4>
+                            <div class="admin-link-list">
+                                <a href="#"><i class="fas fa-angle-right"></i> {% trans "Yönetmelikler" %}</a>
+                                <a href="#"><i class="fas fa-angle-right"></i> {% trans "Yönergeler" %}</a>
+                                <a href="#"><i class="fas fa-angle-right"></i> {% trans "Etik Davranış" %}</a>
+                                <a href="#"><i class="fas fa-angle-right"></i> {% trans "Kalite Belgeleri" %}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="py-5 bg-primary text-white text-center">
+    <div class="container">
+        <h2 class="mb-4">{% trans "Sorularınız mı var?" %}</h2>
+        <p class="mb-4">{% trans "Sağlık, Kültür ve Spor Daire Başkanlığı ekibi size yardımcı olmaktan mutluluk
+            duyacaktır." %}</p>
+        <a href="mailto:sks@avrasya.edu.tr" class="btn btn-light btn-lg rounded-pill px-5 py-3 font-weight-bold">{%
+            trans "Bize Ulaşın" %}</a>
+    </div>
+</section>
+
+{% endblock content %}

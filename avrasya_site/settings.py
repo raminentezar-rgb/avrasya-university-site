@@ -80,7 +80,7 @@ INSTALLED_APPS = [
     'accounts',
     'gorsel_iletisim_tasarimi',
     'idari_birimler',
-    
+    'sks',
     
     #MYO
     'adalet',

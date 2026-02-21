@@ -120,6 +120,7 @@ urlpatterns += i18n_patterns(
     path('tibbi_laboratuvar_teknikleri/', include('tibbi_laboratuvar.urls')),
     path('yonetim_bilisim_sistemleri/', include('yonetim_bilisim_sistemleri.urls')),
     path('gastronomi_mutfak_sanatlari/', include('gastronomi_mutfak_sanatlari.urls')),
+    path('sks/', include('sks.urls')),
     prefix_default_language=False
 )
 
