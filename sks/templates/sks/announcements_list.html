@@ -1,0 +1,193 @@
+{% extends 'sks/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Duyurular" %} - {% trans "SKS" %}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/main_styles.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+
+<style>
+    :root {
+        --avrasya-dark: #092442;
+        --avrasya-blue: #1d61a9;
+        --avrasya-light: #8dd4e3;
+        --avrasya-cream: #f6f2e7;
+    }
+
+    .announcements-header {
+        background: linear-gradient(135deg, var(--avrasya-dark), var(--avrasya-blue));
+        padding: 80px 0;
+        margin-bottom: 60px;
+        color: white;
+        text-align: center;
+    }
+
+    .announcements-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .announcement-item {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .announcement-item:hover {
+        transform: translateX(10px);
+        box-shadow: 0 10px 30px rgba(9, 36, 66, 0.1);
+    }
+
+    .announcement-date-box {
+        min-width: 80px;
+        height: 80px;
+        background: var(--avrasya-cream);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--avrasya-dark);
+    }
+
+    .announcement-date-box span {
+        font-weight: 900;
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    .announcement-date-box small {
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: var(--avrasya-blue);
+    }
+
+    .announcement-content {
+        flex: 1;
+    }
+
+    .announcement-content h3 {
+        font-weight: 800;
+        color: var(--avrasya-dark);
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+    }
+
+    .announcement-content p {
+        color: #4a5568;
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+
+    .announcement-important {
+        background: linear-gradient(135deg, #fff6e5, #fff);
+        border-left: 5px solid #ff9800;
+    }
+
+    .announcement-important .announcement-date-box {
+        background: #ff9800;
+        color: white;
+    }
+
+    .announcement-important .announcement-date-box small {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    @media (max-width: 768px) {
+        .announcement-item {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .announcement-date-box {
+            align-self: flex-start;
+        }
+    }
+</style>
+
+<!-- Header -->
+<div class="announcements-header">
+    <div class="container">
+        <h1 class="animate__animated animate__fadeInDown">{% trans "Duyurular" %}</h1>
+        <p class="lead animate__animated animate__fadeInUp">{% trans "Sağlık, Kültür ve Spor Daire Başkanlığı'ndan       güncel duyurular" %}</p>
+    </div>
+</div>
+
+<div class="container announcements-container mb-5">
+    {% for announcement in page_obj %}
+    <div
+        class="announcement-item {% if announcement.is_important %}announcement-important{% endif %} animate__animated animate__fadeInUp">
+        <div class="announcement-date-box">
+            <span>{{ announcement.get_day }}</span>
+            <small>{{ announcement.get_month_short }}</small>
+        </div>
+        <div class="announcement-content">
+            <h3><a href="{{ announcement.get_absolute_url }}" style="color: inherit; text-decoration: none;">{{ announcement.title }}</a></h3>
+            <p>{{ announcement.content|truncatechars:200 }}</p>
+
+            <div class="d-flex align-items-center mt-3">
+                <a href="{{ announcement.get_absolute_url }}" class="font-weight-bold mr-4"
+                    style="color: var(--avrasya-blue);">
+                    {% trans "Devamını Oku" %}
+                    <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+
+                {% if announcement.external_link %}
+                <a href="{{ announcement.external_link }}" class="font-weight-bold" style="color: var(--avrasya-blue);"
+                    target="_blank">
+                    {{ announcement.external_link_text|default:_("Dış Bağlantی") }}
+                    <i class="fas fa-external-link-alt ml-1"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="text-center py-5">
+        <i class="fas fa-bullhorn fa-4x text-muted mb-3"></i>
+        <h4>{% trans "Henüz duyuru bulunmamaktadır." %}</h4>
+    </div>
+    {% endfor %}
+
+    <!-- Pagination -->
+    {% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation" class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-item"><a
+                    class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

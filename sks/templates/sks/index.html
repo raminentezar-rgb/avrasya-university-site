@@ -5,6 +5,9 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/main_styles.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<!-- Font Awesome with correct version and fallback -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <style>
     :root {
@@ -14,6 +17,18 @@
         --avrasya-cream: #f6f2e7;
         --glass-bg: rgba(255, 255, 255, 0.9);
         --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto:400,500,700');
+    @import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    @font-face {
+        font-family: 'Metropolis';
+        src: url('{% static "core/fonts/Metropolis-Black.woff2" %}') format('woff2'),
+        url('{% static "core/fonts/Metropolis-Black.woff" %}') format('woff');
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
     }
 
     body {
@@ -130,7 +145,7 @@
     .section-title-wrap h2 {
         font-family: 'Metropolis', sans-serif;
         font-weight: 900;
-        font-size: 3.2rem;
+        font-size: 3rem;
         color: var(--avrasya-dark);
         text-transform: uppercase;
         position: relative;
@@ -328,7 +343,7 @@
         left: 0;
         width: 100%;
         padding: 30px;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        background: linear-gradient(transparent, rgba(255, 255, 255, 0.9));
         color: #fff;
         transform: translateY(20px);
         transition: all 0.4s ease;
@@ -509,6 +524,35 @@
     .announcement-list-item:hover .announcement-content h5 {
         color: var(--avrasya-blue);
     }
+
+    /* Fallback for images */
+    .news-img-wrap img {
+        background-color: #f0f0f0;
+        min-height: 250px;
+        display: block;
+    }
+
+    /* Fix for trans tags - ensure text is visible */
+    [class*="trans"] {
+        display: inline;
+    }
+
+    /* Icon fallback - if Font Awesome doesn't load, show text icons */
+    .fa,
+    .fas,
+    .far,
+    .fab {
+        font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", "FontAwesome", sans-serif;
+    }
+
+    /* Ensure icons have minimum size */
+    .facility-icon i,
+    .admin-link-list i,
+    .news-date i,
+    .btn i {
+        display: inline-block;
+        min-width: 1em;
+    }
 </style>
 
 <!-- Enhanced Hero -->
@@ -516,9 +560,9 @@
     <div class="sks-hero-img"></div>
     <div class="sks-hero-content animate__animated animate__fadeInUp">
         <span class="text-white mb-3 d-block"
-            style="letter-spacing: 5px; text-transform: uppercase; font-weight: 600;"></span>
+            style="letter-spacing: 5px; text-transform: uppercase; font-weight: 600;">{% trans "SKS" %}</span>
         <h1>{% trans "Sağlık, Kültür ve Spor Daire Başkanlığı" %}</h1>
-        <p></p>
+        <p>{% trans "Öğrenci yaşam kalitesini artırmak için her alanda profesyonel destek sağlıyoruz." %}</p>
         <div class="sks-hero-btns">
             <a href="#hizmetler" class="btn btn-avrasya-primary">{% trans "Keşfet" %}</a>
             <a href="#" class="btn btn-avrasya-outline">{% trans "Yemek Listesi" %}</a>
@@ -526,43 +570,18 @@
     </div>
 </section>
 
-<!-- Stats counters (Micro-animation potential) -->
-<!-- <section class="py-5" style="background: var(--avrasya-dark); color: #fff;">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-6 col-md-3">
-                <h2 class="font-weight-bold" style="color: var(--avrasya-light);">25+</h2>
-                <p class="small text-uppercase">{% trans "Spor Branşı" %}</p>
-            </div>
-            <div class="col-6 col-md-3">
-                <h2 class="font-weight-bold" style="color: var(--avrasya-light);">40+</h2>
-                <p class="small text-uppercase">{% trans "Öğrenci Kulübü" %}</p>
-            </div>
-            <div class="col-6 col-md-3">
-                <h2 class="font-weight-bold" style="color: var(--avrasya-light);">3</h2>
-                <p class="small text-uppercase">{% trans "Modern Kampüs" %}</p>
-            </div>
-            <div class="col-6 col-md-3">
-                <h2 class="font-weight-bold" style="color: var(--avrasya-light);">5000+</h2>
-                <p class="small text-uppercase">{% trans "Günlük Yemek" %}</p>
-            </div>
-        </div>
-    </div>
-</section> -->
-
 <!-- Facilities Section -->
 <section id="hizmetler" class="section_padding">
     <div class="container">
         <div class="section-title-wrap">
             <h2>{% trans "Hizmetlerimiz" %}</h2>
-            <p class="lead text-muted">{% trans "Öğrenci yaşam kalitesini artırmak için her alanda profesyonel destek
-                sağlıyoruz." %}</p>
+            <p class="lead text-muted">{% trans "Öğrenci yaşam kalitesini artırmak için her alanda profesyonel destek sağlıyoruz." %}</p>
         </div>
 
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.1s;">
-                    <div class="facility-icon"><i class="fas fa-utensils"></i></div>
+                    <div class="facility-icon">🍽️</div>
                     <h3>{% trans "Beslenme" %}</h3>
                     <p>{% trans "Hijyenik ve kaliteli beslenme hizmetleri ile tüm kampüslerimizde sağlıklı öğünler." %}
                     </p>
@@ -570,15 +589,14 @@
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
-                    <div class="facility-icon"><i class="fas fa-basketball-ball"></i></div>
+                    <div class="facility-icon">🏀</div>
                     <h3>{% trans "Spor" %}</h3>
-                    <p>{% trans "Modern spor salonları, turnuvalar ve üniversiteler arası spor müsabakaları heyecanı."
-                        %}</p>
+                    <p>{% trans "Modern spor salonları, turnuvalar ve üniversiteler arası spor müsabakaları heyecanı." %}</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.3s;">
-                    <div class="facility-icon"><i class="fas fa-theater-masks"></i></div>
+                    <div class="facility-icon">🎭</div>
                     <h3>{% trans "Kültür" %}</h3>
                     <p>{% trans "Konserler, sergiler, tiyatrolar ve sanatsal atölyelerle canlı bir kampüs hayatı." %}
                     </p>
@@ -586,25 +604,23 @@
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
-                    <div class="facility-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <div class="facility-icon">🤝</div>
                     <h3>{% trans "Psikolojik Destek" %}</h3>
-                    <p>{% trans "Bireysel danışmanlık hizmetleri ile öğrencilerimizin ruhsal gelişimine katkı
-                        sağlıyoruz." %}</p>
+                    <p>{% trans "Bireysel danışmanlık hizmetleri ile öğrencilerimizin ruhsal gelişimine katkı sağlıyoruz." %}</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.5s;">
-                    <div class="facility-icon"><i class="fas fa-users"></i></div>
+                    <div class="facility-icon">👥</div>
                     <h3>{% trans "Kulüpler" %}</h3>
                     <p>{% trans "Bilimden sanata, hobilerden spora kadar onlarca farklı öğrenci topluluğu." %}</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="facility-card animate__animated animate__fadeIn" style="animation-delay: 0.6s;">
-                    <div class="facility-icon"><i class="fas fa-bed"></i></div>
+                    <div class="facility-icon">🛏️</div> <!-- به جای آیکون تخت -->
                     <h3>{% trans "Barınma" %}</h3>
-                    <p>{% trans "Güvenli ve temiz yurt imkanları ile öğrencilerimizin barınma ihtiyaçlarını
-                        karşılıyoruz." %}</p>
+                    <p>{% trans "Güvenli ve temiz yurt imkanları ile öğrencilerimizin barınma ihtiyaçlarını karşılıyoruz." %}</p>
                 </div>
             </div>
         </div>
@@ -621,102 +637,130 @@
                 </div>
             </div>
             <div class="col-md-4 text-md-right mt-3 mt-md-0">
-                <a href="#" class="btn-avrasya-outline"
-                    style="border-color: var(--avrasya-blue); color: var(--avrasya-blue);">{% trans "Tümünü Gör" %} <i
-                        class="fas fa-arrow-right ml-2"></i></a>
+                <a href="{% url 'sks:news_list' %}" class="btn-avrasya-outline"
+                    style="border-color: var(--avrasya-blue); color: var(--avrasya-blue);">
+                    {% trans "Tümünü Gör" %}
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
             </div>
         </div>
 
         <div class="row">
             <!-- Featured News -->
             <div class="col-lg-7 mb-4">
+                {% if featured_news %}
+                <div class="news-card">
+                    <div class="news-img-wrap">
+                        <span class="news-type-badge">
+                            <i class="{{ featured_news.get_news_type_display_with_icon.icon }} mr-1"></i>
+                            {{ featured_news.get_news_type_display }}
+                        </span>
+                        <img src="{{ featured_news.get_image_url }}"
+                            alt="{{ featured_news.image_alt|default:featured_news.title }}"
+                            onerror="this.src='https://via.placeholder.com/800x400?text=Haber+Görseli'">
+                    </div>
+                    <div class="news-body">
+                        <span class="news-date">
+                            <i class="far fa-calendar-alt mr-2"></i>
+                            {{ featured_news.published_at|date:"d F Y" }}
+                        </span>
+                        <h3 class="news-title">{{ featured_news.title }}</h3>
+                        <p style="color: #2d3748; font-weight: 500;">{{ featured_news.summary|truncatechars:120 }}</p>
+                        <a href="{{ featured_news.get_absolute_url }}" class="font-weight-bold"
+                            style="color: var(--avrasya-blue); text-decoration: underline;">
+                            {% trans "Devamını Oku" %}
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                {% else %}
                 <div class="news-card">
                     <div class="news-img-wrap">
                         <span class="news-type-badge">{% trans "Haber" %}</span>
-                        <img src="https://sks.istanbul.edu.tr/upload/img/4092/lRzK3Sy3N6.png" alt="Featured News">
+                        <img src="https://sks.istanbul.edu.tr/upload/img/4092/lRzK3Sy3N6.png" alt="Featured News"
+                            onerror="this.src='https://via.placeholder.com/800x400?text=Haber+Görseli'">
                     </div>
                     <div class="news-body">
                         <span class="news-date"><i class="far fa-calendar-alt mr-2"></i> 19 Şubat 2026</span>
                         <h3 class="news-title">{% trans "Muaythai Türkiye Şampiyonası’nda Gümüş Madalya" %}</h3>
-                        <p style="color: #2d3748; font-weight: 500;">{% trans "Antalya'da düzenlenen Türkiye Muaythai
-                            Şampiyonası'nda
-                            üniversitemiz takımı büyük bir başarıya imزا آتاراک گوموش مادالیا ایله دوندو..." %}</p>
+                        <p style="color: #2d3748; font-weight: 500;">{% trans "Antalya'da düzenlenen Türkiye Muaythai Şampiyonası'nda üniversitemiz takımı büyük bir başarıya imza atarak gümüş madalya ile döndü..." %}</p>
                         <a href="#" class="font-weight-bold"
                             style="color: var(--avrasya-blue); text-decoration: underline;">{% trans "Devamını Oku" %}
                             <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
+                {% endif %}
             </div>
 
             <!-- Announcements List -->
+            <!-- Announcements List -->
             <div class="col-lg-5">
                 <div class="bg-white p-4 p-md-5 rounded-lg shadow-sm border h-100">
-                    <h4 class="font-weight-bold mb-4 pb-3 border-bottom"><i
-                            class="fas fa-bullhorn mr-2 text-primary"></i> {% trans "Son Duyurular" %}</h4>
+                    <h4 class="font-weight-bold mb-4 pb-3 border-bottom">
+                        <i class="fas fa-bullhorn mr-2 text-primary"></i>
+                        {% trans "Son Duyurular" %}
+                    </h4>
                     <div class="announcement-list">
-                        <!-- Item 1 -->
-                        <div class="announcement-list-item">
+                        {% for announcement in announcements %}
+                        <div
+                            class="announcement-list-item {% if announcement.is_important %}bg-light-warning{% endif %}">
                             <div class="announcement-date-box">
-                                <span>19</span>
-                                <small>Şub</small>
+                                <span>{{ announcement.get_day }}</span>
+                                <small>{{ announcement.get_month_short }}</small>
                             </div>
                             <div class="announcement-content">
-                                <h5>{% trans "Antalya’da Farklı Galibiyet: 46–8" %}</h5>
-                                <p class="small text-muted mb-0">{% trans "Amerikan Futbolu takımımızın muazzam
-                                    başarısı..." %}</p>
-                            </div>
-                        </div>
-                        <!-- Item 2 -->
-                        <div class="announcement-list-item">
-                            <div class="announcement-date-box">
-                                <span>19</span>
-                                <small>Şub</small>
-                            </div>
-                            <div class="announcement-content">
-                                <h5>{% trans "Kayak Takımlarımız Başarıyla Temsil Etti" %}</h5>
-                                <p class="small text-muted mb-0">{% trans "Erzurum'da gerçekleşen kış oyunlarında..." %}
+                                <h5><a href="{{ announcement.get_absolute_url }}"
+                                        style="color: inherit; text-decoration: none;">{{ announcement.title }}</a></h5>
+                                <p class="small text-muted mb-2">
+                                    {{ announcement.content|truncatechars:50 }}
                                 </p>
                             </div>
                         </div>
-                        <!-- Item 3 -->
+                        {% empty %}
+                        <!-- Örnek duyurular -->
                         <div class="announcement-list-item">
                             <div class="announcement-date-box">
-                                <span>17</span>
+                                <span>23</span>
                                 <small>Şub</small>
                             </div>
                             <div class="announcement-content">
-                                <h5>{% trans "Eğitim Raporu Anketi Hakkında" %}</h5>
-                                <p class="small text-muted mb-0">{% trans "Öğrencilerimizin katılımı beklenen anket..."
-                                    %}</p>
+                                <h5>UBYO – 2025-2026 EĞİTİM ÖĞRETİM BAHAR DÖNEMİ DERS PROGRAMI (Güncel)</h5>
+                                <p class="small text-muted mb-2">test</p>
                             </div>
                         </div>
-                        <!-- Item 4 -->
                         <div class="announcement-list-item">
                             <div class="announcement-date-box">
-                                <span>15</span>
+                                <span>22</span>
                                 <small>Şub</small>
                             </div>
                             <div class="announcement-content">
-                                <h5>{% trans "Yemekhane Çalışma Saatleri Düzenlemesi" %}</h5>
-                                <p class="small text-muted mb-0">{% trans "Finaller dönemi boyunca geçerli olacak yeni
-                                    saatler..." %}</p>
+                                <h5>SBF – BES 1016 kodlu Beslenme İlkeleri ve Uygulamaları Dersini Alan Öğrencilerin
+                                    Dikkatine</h5>
+                                <p class="small text-muted mb-2">test</p>
                             </div>
                         </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'sks:announcements_list' %}" class="btn btn-sm btn-outline-primary">
+                            {% trans "Tüm Duyurular" %}
+                            <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 <!-- Food Section with Glassmorphism -->
 <section class="food-section">
     <div class="container relative z-2">
         <div class="row align-items-center">
             <div class="col-lg-5 text-white mb-5 mb-lg-0">
-                <h2 class="font-weight-bold mb-4" style="font-size: 3rem;">{% trans "Sizin İçin En İyisi" %}</h2>
-                <p class="lead mb-5">{% trans "Gıda güvenliği standartlarında hazırlanan zengin menülerimizle enerjinizi
-                    her daim yüksek tutun." %}</p>
+                <h2 class=" mb-4"
+                    style="font-size: 2.5rem; color:white; font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "Sizin İçin En İyisi" %}</h2>
+                <p class="lead mb-5" style="color:white;">{% trans "Gıda güvenliği standartlarında hazırlanan zengin menülerimizle enerjinizi her daim yüksek tutun." %}</p>
                 <div class="d-flex align-items-center mb-4">
                     <div class="mr-4 text-center">
                         <i class="fas fa-carrot fa-2x mb-2" style="color: var(--avrasya-light);"></i>
@@ -749,7 +793,7 @@
                         <div class="menu-item-name">{% trans "Bulgur Pilavı" %}</div>
                     </div>
                     <div class="menu-item-row">
-                        <div class="menu-item-cat">{% trans "TAMAMLAYICI" %}</div>
+                        <div class="menu-item-cat">{% trans "Tamamlayıcı" %}</div>
                         <div class="menu-item-name">{% trans "Mevsim Salatası / Ayran" %}</div>
                     </div>
                 </div>
@@ -766,35 +810,54 @@
         </div>
         <div class="sports-grid">
             <div class="sport-item group">
-                <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                    alt="Basketbol" class="sport-img">
+                <img src="{% static 'core/img/sks/basketball-avu.jpg'%}" alt="Basketbol" class="sport-img"
+                    onerror="this.src='https://via.placeholder.com/800x600?text=Basketbol'">
                 <div class="sport-overlay">
-                    <h4>{% trans "Basketbol" %}</h4>
-                    <p>{% trans "Üniversite takımımıza katılın veya serbest zamanlı oynayın." %}</p>
+                    <h2 style="color: white; font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "Basketbol" %}</h2>
+                    <p style="color: white;">{% trans "Üniversite takımımıza katılın veya serbest zamanlı oynayın." %}
+                    </p>
                 </div>
             </div>
             <div class="sport-item group">
-                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                    alt="Futbol" class="sport-img">
+                <img src="{% static 'core/img/sks/football-avu.jpg'%}" alt="Futbol" class="sport-img"
+                    onerror="this.src='https://via.placeholder.com/800x600?text=Futbol'">
                 <div class="sport-overlay">
-                    <h4>{% trans "Futbol" %}</h4>
-                    <p>{% trans "Fakülteler arası halı saha turnuvaları ve okul takımı." %}</p>
+                    <h2 style="color: white; font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "Futbol" %}</h2>
+                    <p style="color: white;">{% trans "Fakülteler arası halı saha turnuvaları ve okul takımı." %}</p>
                 </div>
             </div>
             <div class="sport-item group">
-                <img src="https://images.unsplash.com/photo-1541252260730-0412e8e2108e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                    alt="Voleybol" class="sport-img">
+                <img src="{% static 'core/img/sks/volleyball-avu.jpg'%}" alt="Voleybol" class="sport-img"
+                    onerror="this.src='https://via.placeholder.com/800x600?text=Voleybol'">
                 <div class="sport-overlay">
-                    <h4>{% trans "Voleybol" %}</h4>
-                    <p>{% trans "Bayan ve erkek voleybol takımlarımızla zirveye." %}</p>
+                    <h2 style="color: white; font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "Voleybol" %}</h2>
+                    <p style="color: white;">{% trans "Bayan ve erkek voleybol takımlarımızla zirveye." %}</p>
                 </div>
             </div>
             <div class="sport-item group">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                    alt="Fitness" class="sport-img">
+                <img src="{% static 'core/img/sks/fitness-avu.jpg'%}" alt="Fitness" class="sport-img"
+                    onerror="this.src='https://via.placeholder.com/800x600?text=Fitness'">
                 <div class="sport-overlay">
-                    <h4>{% trans "Fitness" %}</h4>
-                    <p>{% trans "Modern ekipmanlarla donatılmış spor salonlarımız." %}</p>
+                    <h2 style="color: white; font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "Fitness" %}</h2>
+                    <p style="color: white;">{% trans "Modern ekipmanlarla donatılmış spor salonlarımız." %}</p>
+                </div>
+            </div>
+
+            <div class="sport-item group">
+                <img src="{% static 'core/img/sks/avu-swimmer-pool.jpg'%}" alt="yüzme" class="sport-img"
+                    onerror="this.src='https://via.placeholder.com/800x600?text=Fitness'">
+                <div class="sport-overlay">
+                    <h2 style="color: white; font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "yüzme" %}</h2>
+                    <p style="color: white;">{% trans "Modern ekipmanlarla donatılmış spor salonlarımız." %}</p>
+                </div>
+            </div>
+
+            <div class="sport-item group">
+                <img src="{% static 'core/img/sks/tennis-avu.jpg'%}" alt="Tenis" class="sport-img"
+                    onerror="this.src='https://via.placeholder.com/800x600?text=Tenis'">
+                <div class="sport-overlay">
+                    <h2 style="color: white; font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "Tenis" %}</h2>
+                    <p style="color: white;">{% trans "Modern ekipmanlarla donatılmış spor salonlarımız." %}</p>
                 </div>
             </div>
         </div>
@@ -809,8 +872,7 @@
                 <div class="admin-grid">
                     <div class="row">
                         <div class="col-md-6 mb-5 mb-md-0">
-                            <h4 class="font-weight-bold mb-4"><i class="fas fa-sitemap mr-2 text-primary"></i> {% trans
-                                "İdari Yapı" %}</h4>
+                            <h4 class="font-weight-bold mb-4"><i class="fas fa-sitemap mr-2 text-primary"></i> {% trans "İdari Yapı" %}</h4>
                             <div class="admin-link-list">
                                 <a href="#"><i class="fas fa-angle-right"></i> {% trans "Yönetim ve Başkanlık" %}</a>
                                 <a href="#"><i class="fas fa-angle-right"></i> {% trans "Merkez Yönetim Kurulu" %}</a>
@@ -819,8 +881,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <h4 class="font-weight-bold mb-4"><i class="fas fa-file-invoice mr-2 text-primary"></i> {%
-                                trans "Mevzuat & Bilgi" %}</h4>
+                            <h4 class="font-weight-bold mb-4"><i class="fas fa-file-invoice mr-2 text-primary"></i> {% trans "Mevzuat & Bilgi" %}</h4>
                             <div class="admin-link-list">
                                 <a href="#"><i class="fas fa-angle-right"></i> {% trans "Yönetmelikler" %}</a>
                                 <a href="#"><i class="fas fa-angle-right"></i> {% trans "Yönergeler" %}</a>
@@ -839,11 +900,66 @@
 <section class="py-5 bg-primary text-white text-center">
     <div class="container">
         <h2 class="mb-4">{% trans "Sorularınız mı var?" %}</h2>
-        <p class="mb-4">{% trans "Sağlık, Kültür ve Spor Daire Başkanlığı ekibi size yardımcı olmaktan mutluluk
-            duyacaktır." %}</p>
-        <a href="mailto:sks@avrasya.edu.tr" class="btn btn-light btn-lg rounded-pill px-5 py-3 font-weight-bold">{%
-            trans "Bize Ulaşın" %}</a>
+        <p class="mb-4">{% trans "Sağlık, Kültür ve Spor Daire Başkanlığı ekibi size yardımcı olmaktan mutluluk duyacaktır." %}</p>
+        <a href="mailto:sks@avrasya.edu.tr" class="btn btn-light btn-lg rounded-pill px-5 py-3 font-weight-bold">{% trans "Bize Ulaşın" %}</a>
     </div>
 </section>
+
+<!-- Fallback for icons if Font Awesome fails to load -->
+<script>
+    (function () {
+        // Check if Font Awesome is loaded
+        var testIcon = document.createElement('i');
+        testIcon.className = 'fas fa-utensils';
+        document.body.appendChild(testIcon);
+
+        // Get computed style
+        var styles = window.getComputedStyle(testIcon);
+        var fontFamily = styles.getPropertyValue('font-family');
+
+        // If Font Awesome not loaded, replace with emoji fallback
+        if (!fontFamily.includes('Font Awesome') && !fontFamily.includes('FontAwesome')) {
+            console.log('Font Awesome not loaded, using emoji fallback');
+
+            // Replace all icon elements with emoji
+            document.querySelectorAll('.facility-icon i').forEach(function (icon) {
+                if (icon.classList.contains('fa-utensils')) {
+                    icon.parentNode.innerHTML = '🍽️';
+                } else if (icon.classList.contains('fa-basketball-ball')) {
+                    icon.parentNode.innerHTML = '🏀';
+                } else if (icon.classList.contains('fa-theater-masks')) {
+                    icon.parentNode.innerHTML = '🎭';
+                } else if (icon.classList.contains('fa-hand-holding-heart')) {
+                    icon.parentNode.innerHTML = '🤝';
+                } else if (icon.classList.contains('fa-users')) {
+                    icon.parentNode.innerHTML = '👥';
+                } else if (icon.classList.contains('fa-bed')) {
+                    icon.parentNode.innerHTML = '🛏️';
+                } else if (icon.classList.contains('fa-calendar-alt')) {
+                    icon.parentNode.innerHTML = '📅';
+                } else if (icon.classList.contains('fa-arrow-right')) {
+                    icon.parentNode.innerHTML = '→';
+                } else if (icon.classList.contains('fa-bullhorn')) {
+                    icon.parentNode.innerHTML = '📢';
+                } else if (icon.classList.contains('fa-carrot')) {
+                    icon.parentNode.innerHTML = '🥕';
+                } else if (icon.classList.contains('fa-shield-alt')) {
+                    icon.parentNode.innerHTML = '🛡️';
+                } else if (icon.classList.contains('fa-apple-alt')) {
+                    icon.parentNode.innerHTML = '🍎';
+                } else if (icon.classList.contains('fa-sitemap')) {
+                    icon.parentNode.innerHTML = '🗺️';
+                } else if (icon.classList.contains('fa-file-invoice')) {
+                    icon.parentNode.innerHTML = '📄';
+                } else if (icon.classList.contains('fa-angle-right')) {
+                    icon.parentNode.innerHTML = '›';
+                }
+            });
+        }
+
+        // Remove test icon
+        document.body.removeChild(testIcon);
+    })();
+</script>
 
 {% endblock content %}

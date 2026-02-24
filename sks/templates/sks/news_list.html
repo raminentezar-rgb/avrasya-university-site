@@ -1,0 +1,209 @@
+{% extends 'sks/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Haberler ve Duyurular" %} - {% trans "SKS" %}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/main_styles.css' %}">
+
+<style>
+    .news-header {
+        background: linear-gradient(135deg, var(--avrasya-dark), var(--avrasya-blue));
+        padding: 80px 0;
+        margin-bottom: 60px;
+        color: white;
+        text-align: center;
+    }
+    
+    .news-header h1 {
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 900;
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+    
+    .filter-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        margin-bottom: 40px;
+    }
+    
+    .news-grid-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: all 0.4s ease;
+        height: 100%;
+        margin-bottom: 30px;
+    }
+    
+    .news-grid-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(9, 36, 66, 0.1);
+    }
+    
+    .news-grid-img {
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .news-grid-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    
+    .news-grid-card:hover .news-grid-img img {
+        transform: scale(1.1);
+    }
+    
+    .news-type-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: var(--avrasya-blue);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        z-index: 2;
+    }
+    
+    .news-grid-body {
+        padding: 25px;
+    }
+    
+    .news-grid-date {
+        color: var(--avrasya-blue);
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+    
+    .news-grid-title {
+        font-weight: 800;
+        color: var(--avrasya-dark);
+        margin-bottom: 15px;
+        line-height: 1.4;
+        font-size: 1.2rem;
+    }
+    
+    .pagination {
+        margin-top: 50px;
+        justify-content: center;
+    }
+    
+    .page-link {
+        color: var(--avrasya-dark);
+        border: none;
+        margin: 0 5px;
+        border-radius: 10px;
+        padding: 10px 18px;
+    }
+    
+    .page-item.active .page-link {
+        background-color: var(--avrasya-blue);
+        color: white;
+    }
+</style>
+
+<!-- Header -->
+<div class="news-header">
+    <div class="container">
+        <h1 class="animate__animated animate__fadeInDown">{% trans "Haberler ve Duyurular" %}</h1>
+        <p class="lead animate__animated animate__fadeInUp">{% trans "Sağlık, Kültür ve Spor Daire Başkanlığı'ndan güncel haberler" %}</p>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <!-- Filter Form -->
+    <div class="filter-card animate__animated animate__fadeIn">
+        <form method="get" class="row">
+            <div class="col-md-4 mb-3">
+                {{ form.q }}
+            </div>
+            <div class="col-md-3 mb-3">
+                {{ form.news_type }}
+            </div>
+            <div class="col-md-3 mb-3">
+                {{ form.category }}
+            </div>
+            <div class="col-md-2 mb-3">
+                <button type="submit" class="btn btn-avrasya-primary btn-block">
+                    <i class="fas fa-search mr-2"></i>{% trans "Filtrele" %}
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- News Grid -->
+    <div class="row">
+        {% for news in page_obj %}
+        <div class="col-lg-4 col-md-6">
+            <div class="news-grid-card animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter|add:"0.1" }}s">
+                <div class="news-grid-img">
+                    <span class="news-type-badge">
+                        <i class="{{ news.get_news_type_display_with_icon.icon }} mr-1"></i>
+                        {{ news.get_news_type_display }}
+                    </span>
+                    <img src="{{ news.get_image_url }}" alt="{{ news.image_alt|default:news.title }}">
+                </div>
+                <div class="news-grid-body">
+                    <span class="news-grid-date">
+                        <i class="far fa-calendar-alt mr-2"></i>{{ news.published_at|date:"d F Y" }}
+                    </span>
+                    <h3 class="news-grid-title">{{ news.title|truncatechars:60 }}</h3>
+                    <p class="text-muted mb-3">{{ news.summary|truncatechars:80 }}</p>
+                    <a href="{{ news.get_absolute_url }}" class="font-weight-bold" style="color: var(--avrasya-blue);">
+                        {% trans "Devamını Oku" %} <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
+            <h4>{% trans "Henüz haber bulunmamaktadır." %}</h4>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Pagination -->
+    {% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.news_type %}&news_type={{ request.GET.news_type }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+            {% endif %}
+            
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.news_type %}&news_type={{ request.GET.news_type }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">{{ num }}</a></li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.news_type %}&news_type={{ request.GET.news_type }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}
