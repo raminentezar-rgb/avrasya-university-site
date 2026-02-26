@@ -1,0 +1,326 @@
+{% load i18n %}
+{% get_current_language as CURRENT_LANG %}
+
+<!-- Flag Icon CSS (اگر قبلاً global لود کرده‌ای، این خط را حذف کن) -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+<!-- Language Switcher -->
+<div class="dropdown language-selector ms-3">
+    <!-- Current Language Display -->
+    <a class="nav-link dropdown-toggle d-flex align-items-center p-0"
+       href="#"
+       id="languageDropdown"
+       role="button"
+       data-bs-toggle="dropdown"
+       aria-expanded="false">
+        <div class="current-language d-flex align-items-center">
+            <div class="language-flag me-2">
+                {% if LANGUAGE_CODE == 'ar' %}
+                    <span class="flag-icon flag-icon-sa"></span>
+                {% elif LANGUAGE_CODE == 'fa' %}
+                    <span class="flag-icon flag-icon-ir"></span>
+                {% elif LANGUAGE_CODE == 'en' %}
+                    <span class="flag-icon flag-icon-gb"></span>
+                {% elif LANGUAGE_CODE == 'ru' %}
+                    <span class="flag-icon flag-icon-ru"></span>
+                {% elif LANGUAGE_CODE == 'de' %}
+                    <span class="flag-icon flag-icon-de"></span>
+                {% else %}
+                    <span class="flag-icon flag-icon-tr"></span>
+                {% endif %}
+            </div>
+            <span class="language-code fw-medium">
+                {{ LANGUAGE_CODE|upper }}
+            </span>
+        </div>
+    </a>
+
+    <!-- Language Options Dropdown Menu -->
+    <ul class="dropdown-menu dropdown-menu-end language-dropdown p-2">
+        <li>
+            <a class="dropdown-item d-flex align-items-center py-2
+                      {% if LANGUAGE_CODE == 'tr' or LANGUAGE_CODE == 'tr-tr' or not LANGUAGE_CODE %}
+                        active-language
+                      {% endif %}"
+               href="javascript:void(0)" onclick="changeLanguage('tr')">
+                <span class="flag-icon flag-icon-tr me-3"></span>
+                <div class="language-info">
+                    <div class="language-name">{% trans "Türkçe" %}</div>
+                    <div class="language-code text-muted small">TR</div>
+                </div>
+                {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}
+                    <span class="ms-auto text-primary">✓</span>
+                {% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center py-2
+                      {% if CURRENT_LANG == 'en' %}active-language{% endif %}"
+               href="javascript:void(0)" onclick="changeLanguage('en')">
+                <span class="flag-icon flag-icon-gb me-3"></span>
+                <div class="language-info">
+                    <div class="language-name">{% trans "English" %}</div>
+                    <div class="language-code text-muted small">EN</div>
+                </div>
+                {% if CURRENT_LANG == 'en' %}
+                    <span class="ms-auto text-primary">✓</span>
+                {% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center py-2
+                      {% if CURRENT_LANG == 'fa' %}active-language{% endif %}"
+               href="javascript:void(0)" onclick="changeLanguage('fa')">
+                <span class="flag-icon flag-icon-ir me-3"></span>
+                <div class="language-info">
+                    <div class="language-name">{% trans "فارسی" %}</div>
+                    <div class="language-code text-muted small">FA</div>
+                </div>
+                {% if CURRENT_LANG == 'fa' %}
+                    <span class="ms-auto text-primary">✓</span>
+                {% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center py-2
+                      {% if CURRENT_LANG == 'ar' %}active-language{% endif %}"
+               href="javascript:void(0)" onclick="changeLanguage('ar')">
+                <span class="flag-icon flag-icon-sa me-3"></span>
+                <div class="language-info">
+                    <div class="language-name">{% trans "العربية" %}</div>
+                    <div class="language-code text-muted small">AR</div>
+                </div>
+                {% if CURRENT_LANG == 'ar' %}
+                    <span class="ms-auto text-primary">✓</span>
+                {% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center py-2
+                      {% if CURRENT_LANG == 'ru' %}active-language{% endif %}"
+               href="javascript:void(0)" onclick="changeLanguage('ru')">
+                <span class="flag-icon flag-icon-ru me-3"></span>
+                <div class="language-info">
+                    <div class="language-name">{% trans "Русский" %}</div>
+                    <div class="language-code text-muted small">RU</div>
+                </div>
+                {% if CURRENT_LANG == 'ru' %}
+                    <span class="ms-auto text-primary">✓</span>
+                {% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center py-2
+                      {% if CURRENT_LANG == 'de' %}active-language{% endif %}"
+               href="javascript:void(0)" onclick="changeLanguage('de')">
+                <span class="flag-icon flag-icon-de me-3"></span>
+                <div class="language-info">
+                    <div class="language-name">{% trans "Deutsch" %}</div>
+                    <div class="language-code text-muted small">DE</div>
+                </div>
+                {% if CURRENT_LANG == 'de' %}
+                    <span class="ms-auto text-primary">✓</span>
+                {% endif %}
+            </a>
+        </li>
+    </ul>
+</div>
+
+<style>
+    /* کانتینر اصلی سوییچر زبان */
+    .language-selector {
+        position: relative;
+        margin-left: 10px;
+    }
+
+    .current-language {
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+    }
+
+    .current-language:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .language-flag .flag-icon {
+        width: 20px;
+        height: 15px;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        vertical-align: middle;
+    }
+
+    .language-code.fw-medium {
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+        margin-left: 5px;
+    }
+
+    /* خود منوی بازشونده زبان‌ها */
+    .language-dropdown {
+        min-width: 200px !important;
+        background: rgba(247, 243, 233, 0.98) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(9, 36, 66, 0.3);
+        margin-top: 0px !important;
+        transform-origin: top right;
+        right: 0 !important;
+        left: auto !important;
+        animation: slideInDown 0.3s ease forwards;
+    }
+
+    .language-dropdown .dropdown-item {
+        border-radius: 6px;
+        margin-bottom: 2px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+    }
+
+    .language-dropdown .dropdown-item:hover {
+        background: rgba(29, 97, 169, 0.1);
+        transform: translateX(5px);
+    }
+
+    .language-dropdown .flag-icon {
+        width: 24px;
+        height: 18px;
+        border-radius: 3px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        margin-right: 12px;
+    }
+
+    .language-info {
+        flex: 1;
+    }
+
+    .language-name {
+        font-weight: 500;
+        color: var(--text-dark, #333);
+        font-size: 14px;
+        margin-bottom: 2px;
+        text-transform: uppercase;
+    }
+
+    .language-dropdown .language-code.text-muted {
+        font-size: 11px;
+        color: #666;
+        display: block;
+    }
+
+    /* استایل زبان فعال */
+    .language-dropdown .active-language {
+        background-color: rgba(29, 97, 169, 0.08) !important;
+        border-left: 3px solid var(--accent-light-blue, #1d61a9);
+    }
+
+    .language-dropdown .active-language .language-name {
+        color: var(--secondary-medium-blue, #1d61a9);
+        font-weight: 600;
+    }
+
+    .language-dropdown .active-language .text-primary {
+        color: var(--accent-light-blue, #1d61a9) !important;
+        font-weight: bold;
+    }
+
+    /* هایلایت زبان پیش‌فرض (ترکی) */
+    .language-dropdown .dropdown-item:first-child {
+        background-color: rgba(29, 97, 169, 0.05);
+    }
+
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ریسپانسیو ساده */
+    @media (max-width: 992px) {
+        .current-language {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .language-code.fw-medium {
+            font-size: 14px;
+        }
+
+        .language-dropdown {
+            position: static !important;
+            float: none;
+            width: 100%;
+            margin-top: 5px !important;
+            animation: none;
+            background: rgba(255, 255, 255, 0.98) !important;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .language-selector:hover .language-dropdown {
+            display: block !important;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: slideInDown 0.3s ease forwards;
+        }
+
+        .language-selector .language-dropdown {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    // تغییر زبان بر اساس پیشوند URL
+    // زبان پیش‌فرض (tr) بدون پیشوند است، بقیه به صورت /fa/, /en/ و ...
+    function changeLanguage(lang) {
+        const supportedLangs = ['tr', 'en', 'fa', 'ar', 'ru', 'de'];
+        let path = window.location.pathname || '/';
+        const parts = path.split('/');  // ["", "fa", "news", ...] یا ["", "news", ...]
+
+        const hasPrefix = supportedLangs.includes(parts[1]);
+
+        if (hasPrefix) {
+            if (lang === 'tr') {
+                // حذف پیشوند زبان → برگشت به URL پیش‌فرض بدون پیشوند
+                parts.splice(1, 1);
+            } else {
+                // جایگزین کردن پیشوند فعلی
+                parts[1] = lang;
+            }
+        } else {
+            if (lang === 'tr') {
+                // همین الان روی زبان پیش‌فرض بدون پیشوند هستیم
+            } else {
+                // اضافه کردن پیشوند زبان
+                parts.splice(1, 0, lang);
+            }
+        }
+
+        let newPath = parts.join('/');
+        if (!newPath.startsWith('/')) {
+            newPath = '/' + newPath;
+        }
+
+        const qs = window.location.search || '';
+        const hash = window.location.hash || '';
+        window.location.href = newPath + qs + hash;
+    }
+</script>

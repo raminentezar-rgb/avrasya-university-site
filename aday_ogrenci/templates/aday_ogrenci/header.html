@@ -790,11 +790,6 @@
             <i class="fas fa-bars" style="color: white; font-size: 24px;"></i>
         </div>
         
-        <!-- Hidden Language Form -->
-        <form action="{% url 'core:set_language' %}" method="post" id="research-lang-form" class="d-none">
-            {% csrf_token %}
-            <input type="hidden" name="language" id="research-lang-code" value="">
-        </form>
     </div>
 </header>
 
@@ -923,76 +918,6 @@
             langDropdown.style.transition = 'all 0.3s ease';
         }
         
-        // Function to get current language from cookie
-        function getCurrentLanguage() {
-            const cookieValue = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('django_language='))
-                ?.split('=')[1];
-            
-            return cookieValue || 'tr'; // Default to Turkish
-        }
-        
-        // Update UI based on cookie language
-        function updateResearchLanguageFromCookie() {
-            const lang = getCurrentLanguage();
-            const currentLangDisplay = document.querySelector('.research-language-code');
-            const currentFlag = document.querySelector('.research-language-flag .flag-icon');
-            
-            if (!currentLangDisplay || !currentFlag) return;
-            
-            // Update flag and code
-            currentFlag.className = 'flag-icon';
-            switch(lang) {
-                case 'tr':
-                    currentFlag.classList.add('flag-icon-tr');
-                    currentLangDisplay.textContent = 'TR';
-                    break;
-                case 'en':
-                    currentFlag.classList.add('flag-icon-gb');
-                    currentLangDisplay.textContent = 'EN';
-                    break;
-                case 'fa':
-                    currentFlag.classList.add('flag-icon-ir');
-                    currentLangDisplay.textContent = 'FA';
-                    break;
-                case 'ar':
-                    currentFlag.classList.add('flag-icon-sa');
-                    currentLangDisplay.textContent = 'AR';
-                    break;
-                case 'ru':
-                    currentFlag.classList.add('flag-icon-ru');
-                    currentLangDisplay.textContent = 'RU';
-                    break;
-                case 'de':
-                    currentFlag.classList.add('flag-icon-de');
-                    currentLangDisplay.textContent = 'DE';
-                    break;
-                default:
-                    currentFlag.classList.add('flag-icon-tr');
-                    currentLangDisplay.textContent = 'TR';
-            }
-            
-            // Update active items in dropdown
-            document.querySelectorAll('.research-language-dropdown .dropdown-item').forEach(item => {
-                item.classList.remove('active-language');
-                item.querySelector('.text-primary')?.remove();
-                
-                // Check if this item matches current language
-                const onclickAttr = item.getAttribute('onclick');
-                if (onclickAttr && onclickAttr.includes(`'${lang}'`)) {
-                    item.classList.add('active-language');
-                    const checkmark = document.createElement('span');
-                    checkmark.className = 'ms-auto text-primary';
-                    checkmark.innerHTML = '✓';
-                    item.appendChild(checkmark);
-                }
-            });
-        }
-        
-        // Update language UI on page load
-        updateResearchLanguageFromCookie();
-        
         // Re-update on window resize
         window.addEventListener('resize', function() {
             if (window.innerWidth < 992 && langDropdown) {
@@ -1001,22 +926,40 @@
         });
     });
     
-    // تابع تغییر زبان برای هدر تحقیقات
+    // تابع تغییر زبان بر اساس پیشوند URL (مانند منوی اصلی)
+    // زبان پیش‌فرض (tr) بدون پیشوند است، سایر زبان‌ها به صورت /fa/, /en/ و ...
     function changeLanguage(lang) {
-        const form = document.getElementById('research-lang-form');
-        const langInput = document.getElementById('research-lang-code');
-        
-        // Set selected language
-        langInput.value = lang;
-        
-        // Optional: Add loading indicator
-        const currentLang = document.querySelector('.research-current-language');
-        if (currentLang) {
-            currentLang.style.opacity = '0.7';
+        const supportedLangs = ['tr', 'en', 'fa', 'ar', 'ru', 'de'];
+        let path = window.location.pathname || '/';
+        const parts = path.split('/');  // ["", "fa", "aday_ogrenci", ...] یا ["", "aday_ogrenci", ...]
+
+        const hasPrefix = supportedLangs.includes(parts[1]);
+
+        if (hasPrefix) {
+            if (lang === 'tr') {
+                // حذف پیشوند زبان → بازگشت به URL پیش‌فرض بدون پیشوند
+                parts.splice(1, 1);
+            } else {
+                // جایگزینی پیشوند فعلی
+                parts[1] = lang;
+            }
+        } else {
+            if (lang === 'tr') {
+                // همین الان روی زبان پیش‌فرض بدون پیشوند هستیم
+            } else {
+                // اضافه کردن پیشوند زبان
+                parts.splice(1, 0, lang);
+            }
         }
-        
-        // Submit form
-        form.submit();
+
+        let newPath = parts.join('/');
+        if (!newPath.startsWith('/')) {
+            newPath = '/' + newPath;
+        }
+
+        const qs = window.location.search || '';
+        const hash = window.location.hash || '';
+        window.location.href = newPath + qs + hash;
     }
 </script>
 [file content end]

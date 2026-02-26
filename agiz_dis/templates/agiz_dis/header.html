@@ -683,117 +683,15 @@
                 </ul>
             </div>
         </nav>
+        {% include 'core/language_switcher.html'%}
 
-        <!-- Language Selector Dropdown - اضافه شده -->
-        <div class="research-language-selector">
-            <!-- Current Language Display -->
-            <div class="research-current-language" id="research-language-toggle">
-                <div class="research-language-flag me-2">
-                    {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}
-                        <span class="flag-icon flag-icon-tr"></span>
-                    {% elif CURRENT_LANG == 'fa' %}
-                        <span class="flag-icon flag-icon-ir"></span>
-                    {% elif CURRENT_LANG == 'ar' %}
-                        <span class="flag-icon flag-icon-sa"></span>
-                    {% elif CURRENT_LANG == 'ru' %}
-                        <span class="flag-icon flag-icon-ru"></span>
-                    {% elif CURRENT_LANG == 'de' %}
-                        <span class="flag-icon flag-icon-de"></span>
-                    {% else %}
-                        <span class="flag-icon flag-icon-gb"></span>
-                    {% endif %}
-                </div>
-                <span class="research-language-code">
-                    {% if CURRENT_LANG %}{{ CURRENT_LANG|upper }}{% else %}TR{% endif %}
-                </span>
-            </div>
-            
-            <!-- Language Options Dropdown Menu -->
-            <div class="research-language-dropdown" id="research-language-dropdown">
-                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}active-language{% endif %}" 
-                     onclick="changeLanguage('tr')">
-                    <span class="flag-icon flag-icon-tr me-3"></span>
-                    <div class="research-language-info">
-                        <div class="research-language-name">{% trans "Türkçe" %}</div>
-                        <div class="language-code text-muted small">TR</div>
-                    </div>
-                    {% if CURRENT_LANG == 'tr' or not CURRENT_LANG %}
-                    <span class="ms-auto text-primary">✓</span>
-                    {% endif %}
-                </div>
-                
-                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'en' %}active-language{% endif %}" 
-                     onclick="changeLanguage('en')">
-                    <span class="flag-icon flag-icon-gb me-3"></span>
-                    <div class="research-language-info">
-                        <div class="research-language-name">{% trans "English" %}</div>
-                        <div class="language-code text-muted small">EN</div>
-                    </div>
-                    {% if CURRENT_LANG == 'en' %}
-                    <span class="ms-auto text-primary">✓</span>
-                    {% endif %}
-                </div>
-                
-                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'fa' %}active-language{% endif %}" 
-                     onclick="changeLanguage('fa')">
-                    <span class="flag-icon flag-icon-ir me-3"></span>
-                    <div class="research-language-info">
-                        <div class="research-language-name">{% trans "فارسی" %}</div>
-                        <div class="language-code text-muted small">FA</div>
-                    </div>
-                    {% if CURRENT_LANG == 'fa' %}
-                    <span class="ms-auto text-primary">✓</span>
-                    {% endif %}
-                </div>
-                
-                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'ar' %}active-language{% endif %}" 
-                     onclick="changeLanguage('ar')">
-                    <span class="flag-icon flag-icon-sa me-3"></span>
-                    <div class="research-language-info">
-                        <div class="research-language-name">{% trans "العربية" %}</div>
-                        <div class="language-code text-muted small">AR</div>
-                    </div>
-                    {% if CURRENT_LANG == 'ar' %}
-                    <span class="ms-auto text-primary">✓</span>
-                    {% endif %}
-                </div>
-                
-                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'ru' %}active-language{% endif %}" 
-                     onclick="changeLanguage('ru')">
-                    <span class="flag-icon flag-icon-ru me-3"></span>
-                    <div class="research-language-info">
-                        <div class="research-language-name">{% trans "Русский" %}</div>
-                        <div class="language-code text-muted small">RU</div>
-                    </div>
-                    {% if CURRENT_LANG == 'ru' %}
-                    <span class="ms-auto text-primary">✓</span>
-                    {% endif %}
-                </div>
-                
-                <div class="dropdown-item d-flex align-items-center py-2 {% if CURRENT_LANG == 'de' %}active-language{% endif %}" 
-                     onclick="changeLanguage('de')">
-                    <span class="flag-icon flag-icon-de me-3"></span>
-                    <div class="research-language-info">
-                        <div class="research-language-name">{% trans "Deutsch" %}</div>
-                        <div class="language-code text-muted small">DE</div>
-                    </div>
-                    {% if CURRENT_LANG == 'de' %}
-                    <span class="ms-auto text-primary">✓</span>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
+        
         <!-- Hamburger Menu -->
         <div class="research-hamburger_container">
             <i class="fas fa-bars" style="color: white; font-size: 24px;"></i>
         </div>
         
-        <!-- Hidden Language Form -->
-        <form action="{% url 'core:set_language' %}" method="post" id="research-lang-form" class="d-none">
-            {% csrf_token %}
-            <input type="hidden" name="language" id="research-lang-code" value="">
-        </form>
+        
     </div>
 </header>
 
@@ -922,76 +820,6 @@
             langDropdown.style.transition = 'all 0.3s ease';
         }
         
-        // Function to get current language from cookie
-        function getCurrentLanguage() {
-            const cookieValue = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('django_language='))
-                ?.split('=')[1];
-            
-            return cookieValue || 'tr'; // Default to Turkish
-        }
-        
-        // Update UI based on cookie language
-        function updateResearchLanguageFromCookie() {
-            const lang = getCurrentLanguage();
-            const currentLangDisplay = document.querySelector('.research-language-code');
-            const currentFlag = document.querySelector('.research-language-flag .flag-icon');
-            
-            if (!currentLangDisplay || !currentFlag) return;
-            
-            // Update flag and code
-            currentFlag.className = 'flag-icon';
-            switch(lang) {
-                case 'tr':
-                    currentFlag.classList.add('flag-icon-tr');
-                    currentLangDisplay.textContent = 'TR';
-                    break;
-                case 'en':
-                    currentFlag.classList.add('flag-icon-gb');
-                    currentLangDisplay.textContent = 'EN';
-                    break;
-                case 'fa':
-                    currentFlag.classList.add('flag-icon-ir');
-                    currentLangDisplay.textContent = 'FA';
-                    break;
-                case 'ar':
-                    currentFlag.classList.add('flag-icon-sa');
-                    currentLangDisplay.textContent = 'AR';
-                    break;
-                case 'ru':
-                    currentFlag.classList.add('flag-icon-ru');
-                    currentLangDisplay.textContent = 'RU';
-                    break;
-                case 'de':
-                    currentFlag.classList.add('flag-icon-de');
-                    currentLangDisplay.textContent = 'DE';
-                    break;
-                default:
-                    currentFlag.classList.add('flag-icon-tr');
-                    currentLangDisplay.textContent = 'TR';
-            }
-            
-            // Update active items in dropdown
-            document.querySelectorAll('.research-language-dropdown .dropdown-item').forEach(item => {
-                item.classList.remove('active-language');
-                item.querySelector('.text-primary')?.remove();
-                
-                // Check if this item matches current language
-                const onclickAttr = item.getAttribute('onclick');
-                if (onclickAttr && onclickAttr.includes(`'${lang}'`)) {
-                    item.classList.add('active-language');
-                    const checkmark = document.createElement('span');
-                    checkmark.className = 'ms-auto text-primary';
-                    checkmark.innerHTML = '✓';
-                    item.appendChild(checkmark);
-                }
-            });
-        }
-        
-        // Update language UI on page load
-        updateResearchLanguageFromCookie();
-        
         // Re-update on window resize
         window.addEventListener('resize', function() {
             if (window.innerWidth < 992 && langDropdown) {
@@ -1000,21 +828,6 @@
         });
     });
     
-    // تابع تغییر زبان برای هدر تحقیقات
-    function changeLanguage(lang) {
-        const form = document.getElementById('research-lang-form');
-        const langInput = document.getElementById('research-lang-code');
-        
-        // Set selected language
-        langInput.value = lang;
-        
-        // Optional: Add loading indicator
-        const currentLang = document.querySelector('.research-current-language');
-        if (currentLang) {
-            currentLang.style.opacity = '0.7';
-        }
-        
-        // Submit form
-        form.submit();
-    }
+    // توجه: تابع changeLanguage در سوییچر زبان مشترک (core/language_switcher.html)
+    // تعریف شده و در همه منوها به صورت یکسان استفاده می‌شود.
 </script>

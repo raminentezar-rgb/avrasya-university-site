@@ -4,8 +4,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 <!-- templates/core/mega_navbar.html -->
 <nav class="navbar navbar-expand-lg">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
+    <!-- Bootstrap 4 compatible hamburger button -->
+    <button class="navbar-toggler custom-navbar-toggler" type="button"
+        data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon custom-navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
@@ -664,16 +667,64 @@
                     <form action="{% url 'set_language' %}" method="post" id="lang-form" class="d-none">
                         {% csrf_token %}
                         <input type="hidden" name="language" id="lang-code" value="">
-                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <input type="hidden" name="next" id="lang-next" value="{{ request.path }}">
                     </form>
                 </div>
             </li>
         </ul>
     </div>
+    </div>
 </nav>
 
 <style>
     /* Clean and Simplified Styles */
+    /* Hamburger icon styling for Bootstrap 4 */
+    .custom-navbar-toggler {
+        border-color: rgba(255, 255, 255, 0.6);
+        padding: 4px 8px;
+        margin-inline-start: 8px;
+        outline: none;
+        box-shadow: none;
+    }
+
+    .custom-navbar-toggler-icon {
+        position: relative;
+        display: inline-block;
+        width: 22px;
+        height: 2px;
+        background-color: #ffffff;
+        transition: all 0.2s ease;
+    }
+
+    .custom-navbar-toggler-icon::before,
+    .custom-navbar-toggler-icon::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 22px;
+        height: 2px;
+        background-color: #ffffff;
+        transition: all 0.2s ease;
+    }
+
+    .custom-navbar-toggler-icon::before {
+        top: -6px;
+    }
+
+    .custom-navbar-toggler-icon::after {
+        top: 6px;
+    }
+
+    @media (max-width: 991.98px) {
+        .navbar {
+            width: 100%;
+        }
+
+        .navbar-nav {
+            padding-top: 10px;
+        }
+    }
+
     .menu-section {
         background: rgba(255, 255, 255, 0.1);
         border-radius: 8px;
@@ -1528,26 +1579,42 @@
         }
     });
 
-    // Language Change Function
-
-    // Language Change Function    // Language Change Function
+    // Language Change Function - URL prefix based
+    // Default language (TR) has no prefix, others use /<lang>/ prefix.
     function changeLanguage(lang) {
-        const langForm = document.getElementById('lang-form');
-        const langInput = document.getElementById('lang-code');
+        const supportedLangs = ['tr', 'en', 'fa', 'ar', 'ru', 'de'];
+        let path = window.location.pathname || '/';
+        const parts = path.split('/'); // ["", "fa", "news", ...] or ["", "news", ...]
 
-        if (langForm && langInput) {
-            langInput.value = lang;
+        const hasPrefix = supportedLangs.includes(parts[1]);
 
-            // UI Feedback
-            const currentLang = document.querySelector('.current-language');
-            if (currentLang) currentLang.style.opacity = '0.5';
-
-            langForm.submit();
+        if (hasPrefix) {
+            if (lang === 'tr') {
+                // remove existing language prefix -> go to default language without prefix
+                parts.splice(1, 1);
+            } else {
+                // replace existing language prefix
+                parts[1] = lang;
+            }
         } else {
-            console.error('Language form not found');
-            // Fallback: direct URL change
-            window.location.href = '/' + lang + '/';
+            if (lang === 'tr') {
+                // already on default language URL without prefix
+                // nothing to change in path
+            } else {
+                // add language prefix in URL
+                parts.splice(1, 0, lang);
+            }
         }
+
+        let newPath = parts.join('/');
+        if (!newPath.startsWith('/')) {
+            newPath = '/' + newPath;
+        }
+
+        // keep query string and hash
+        const qs = window.location.search || '';
+        const hash = window.location.hash || '';
+        window.location.href = newPath + qs + hash;
     }
 
     // Set default language to Turkish on page load if not set
@@ -1575,78 +1642,5 @@
         }
     });
 
-    // Function to get current language from cookie
-    function getCurrentLanguage() {
-        const cookieValue = document.cookie
-            .split('; ')
-            .find(row => row.startsWith('django_language='))
-            ?.split('=')[1];
-
-        return cookieValue || 'tr'; // Default to Turkish
-    }
-
-    // Update UI based on cookie language
-    function updateLanguageFromCookie() {
-        const lang = getCurrentLanguage();
-        const currentLangDisplay = document.querySelector('.language-code');
-        const currentFlag = document.querySelector('.language-flag .flag-icon');
-
-        if (!currentLangDisplay || !currentFlag) return;
-
-        // Update flag and code
-        currentFlag.className = 'flag-icon';
-        switch (lang) {
-            case 'tr':
-                currentFlag.classList.add('flag-icon-tr');
-                currentLangDisplay.textContent = 'TR';
-                break;
-            case 'en':
-                currentFlag.classList.add('flag-icon-gb');
-                currentLangDisplay.textContent = 'EN';
-                break;
-            case 'fa':
-                currentFlag.classList.add('flag-icon-ir');
-                currentLangDisplay.textContent = 'FA';
-                break;
-            case 'ar':
-                currentFlag.classList.add('flag-icon-sa');
-                currentLangDisplay.textContent = 'AR';
-                break;
-            case 'ru':
-                currentFlag.classList.add('flag-icon-ru');
-                currentLangDisplay.textContent = 'RU';
-                break;
-            case 'de':
-                currentFlag.classList.add('flag-icon-de');
-                currentLangDisplay.textContent = 'DE';
-                break;
-            default:
-                currentFlag.classList.add('flag-icon-tr');
-                currentLangDisplay.textContent = 'TR';
-        }
-
-        // Update active items in dropdown
-        document.querySelectorAll('.language-dropdown .dropdown-item').forEach(item => {
-            item.classList.remove('active-language');
-            item.querySelector('.text-primary')?.remove();
-
-            // Check if this item matches current language
-            const onclickAttr = item.getAttribute('onclick');
-            if (onclickAttr && onclickAttr.includes(`'${lang}'`)) {
-                item.classList.add('active-language');
-                const checkmark = document.createElement('span');
-                checkmark.className = 'ms-auto text-primary';
-                checkmark.innerHTML = '✓';
-                item.appendChild(checkmark);
-            }
-        });
-    }
-
-    // Call this on page load
-    document.addEventListener('DOMContentLoaded', function () {
-        updateLanguageFromCookie();
-
-        // Also update when language changes (for AJAX solution)
-        window.addEventListener('languageChanged', updateLanguageFromCookie);
-    });
+    // (Cookie-based language UI update removed; we rely on server-side LANGUAGE_CODE)
 </script>
