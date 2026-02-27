@@ -2633,12 +2633,12 @@ document.addEventListener('DOMContentLoaded', function() {
         filterToggle.addEventListener('click', function() {
             if (filterSection.style.display === 'none' || filterSection.style.display === '') {
                 filterSection.style.display = 'block';
-                this.innerHTML = '<i class="fas fa-times"></i> Kapat';
+                this.innerHTML = '<i class="fas fa-times"></i> {% trans "Kapat" %}';
                 this.classList.remove('tertiary');
                 this.classList.add('secondary');
             } else {
                 filterSection.style.display = 'none';
-                this.innerHTML = '<i class="fas fa-filter"></i> Filtrele';
+                this.innerHTML = '<i class="fas fa-filter"></i> {% trans "Filtrele" %}';
                 this.classList.remove('secondary');
                 this.classList.add('tertiary');
             }
@@ -2647,7 +2647,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (closeFilter) {
             closeFilter.addEventListener('click', function() {
                 filterSection.style.display = 'none';
-                filterToggle.innerHTML = '<i class="fas fa-filter"></i> Filtrele';
+                filterToggle.innerHTML = '<i class="fas fa-filter"></i> {% trans "Filtrele" %}';
                 filterToggle.classList.remove('secondary');
                 filterToggle.classList.add('tertiary');
             });

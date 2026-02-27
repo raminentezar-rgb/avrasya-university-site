@@ -1,4 +1,5 @@
-{% load static %}
+﻿{% load static %}
+{% load i18n %}
 <!-- سایدبار مخصوص صفحات Akademik -->
 <aside class="policy-sidebar-new">
     <div class="sidebar-header-new">
@@ -18,7 +19,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'uluslararasi_iliskiler:liste' %}" class="main-link">Duyurular</a>
+                            <a href="{% url 'uluslararasi_iliskiler:liste' %}" class="main-link">{% trans "Duyurular" %}</a>
                         </span>
                         
                 </li>
@@ -28,7 +29,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'uluslararasi_iliskiler:etkinlik_listesi' %}" class="main-link">Etkinlikleri</a>
+                            <a href="{% url 'uluslararasi_iliskiler:etkinlik_listesi' %}" class="main-link">{% trans "Etkinlikleri" %}</a>
                         </span>
                         <span class="nav-check submenu-toggle">
                             {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
@@ -43,7 +44,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'uluslararasi_iliskiler:kalite_yonetimi' %}" class="main-link">Kalite Yönetimi</a>
+                            <a href="{% url 'uluslararasi_iliskiler:kalite_yonetimi' %}" class="main-link">{% trans "Kalite Yönetimi" %}</a>
                         </span>
                         
                 </li>
@@ -54,7 +55,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'uluslararasi_iliskiler:idari_faaliyetler_2024_2025' %}" class="main-link">İdari Faaliyetler</a>
+                            <a href="{% url 'uluslararasi_iliskiler:idari_faaliyetler_2024_2025' %}" class="main-link">{% trans "İdari Faaliyetler" %}</a>
                         </span>
                         <span class="nav-check submenu-toggle">
                             {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
@@ -66,7 +67,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'uluslararasi_iliskiler:diger_faaliyetler_2024_2025' %}" class="main-link">Diğer Faaliyetler</a>
+                            <a href="{% url 'uluslararasi_iliskiler:diger_faaliyetler_2024_2025' %}" class="main-link">{% trans "Diğer Faaliyetler" %}</a>
                         </span>
                         <span class="nav-check submenu-toggle">
                             {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
@@ -78,7 +79,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'uluslararasi_iliskiler:toplumsal_katki' %}" class="main-link">Toplumsal Katkı</a>
+                            <a href="{% url 'uluslararasi_iliskiler:toplumsal_katki' %}" class="main-link">{% trans "Toplumsal Katkı" %}</a>
                         </span>
                         <span class="nav-check submenu-toggle">
                             {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
@@ -90,7 +91,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'ogrenci_isleri:ogrenci_isleri' %}" class="main-link">Öğrenci</a>
+                            <a href="{% url 'ogrenci_isleri:ogrenci_isleri' %}" class="main-link">{% trans "Öğrenci" %}</a>
                         </span>
                         <span class="nav-check submenu-toggle">
                             {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
@@ -102,7 +103,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'uluslararasi_iliskiler:ders_programi' %}" class="main-link">Ders Programı</a>
+                            <a href="{% url 'uluslararasi_iliskiler:ders_programi' %}" class="main-link">{% trans "Ders Programı" %}</a>
                         </span>
                         <span class="nav-check submenu-toggle">
                             {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
@@ -114,7 +115,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx" class="main-link">Bologna</a>
+                            <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx" class="main-link">{% trans "Bologna" %}</a>
                         </span>
                         <span class="nav-check submenu-toggle">
                             {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
@@ -126,7 +127,7 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'core:iletisim' %}" class="main-link">İletişim</a>
+                            <a href="{% url 'core:iletisim' %}" class="main-link">{% trans "İletişim" %}</a>
 
                         </span>
                         <span class="nav-check submenu-toggle">
@@ -140,7 +141,7 @@
     </nav>
     
     <div class="sidebar-contact-new">
-        <div class="contact-title">İletişim</div>
+        <div class="contact-title">{% trans "İletişim" %}</div>
         <div class="contact-info">
             <strong>Öğrenci İşleri Koordinatörlüğü</strong>
             <p>ogrenciisleri@avrasya.edu.tr</p>

@@ -1281,7 +1281,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addressElement = document.querySelector('.contact-item:nth-child(1) p');
     if (addressElement) {
         addressElement.style.cursor = 'pointer';
-        addressElement.title = 'Adresi kopyalamak için tıklayın';
+        addressElement.title = '{% trans "Adresi kopyalamak için tıklayın" %}';
         
         addressElement.addEventListener('click', function() {
             const addressText = this.textContent.trim();
@@ -1290,7 +1290,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navigator.clipboard.writeText(addressText).then(() => {
                 // نمایش پیام موفقیت
                 const originalHTML = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-check"></i> Adres panoya kopyalandı!';
+                this.innerHTML = '<i class="fas fa-check"></i> {% trans "Adres panoya kopyalandı!" %}';
                 this.style.color = 'var(--secondary-medium-blue)';
                 
                 setTimeout(() => {

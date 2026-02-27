@@ -57,7 +57,7 @@
     <div class="mobile-nav" id="mobile-nav">
         <div class="mobile-nav-header">
             <div class="mobile-logo">
-                <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="Logo">
+                <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="{% trans "Logo" %}">
             </div>
             <div class="mobile-close-btn" id="mobile-close-btn">
                 <span style="color: white; font-size: 24px; font-weight: bold;">✕</span>
@@ -156,7 +156,8 @@
         </ul>
         
         <div class="mobile-nav-footer">
-            <p>© 2024 Avrasya Üniversitesi</p>
+            {% now "Y" as current_year %}
+            <p>© {{ current_year }} {% trans "Avrasya Üniversitesi" %}</p>
         </div>
     </div>
 
