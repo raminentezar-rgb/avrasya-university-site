@@ -1,5 +1,5 @@
-{% extends 'gorsel_iletisim_tasarimi/base.html' %}
-{% block title %}{{ duyuru.baslik }} - Görsel İletişim Tasarımı - Avrasya Üniversitesi{% endblock %}
+{% extends 'otomotiv/base.html' %}
+{% block title %}{{ duyuru.baslik }} - Otomotiv - Avrasya Üniversitesi{% endblock %}
 {% block content %}
 
 <style>
@@ -372,6 +372,44 @@
         gap: 15px;
         justify-content: space-between;
     }
+
+    /* Hero Section */
+.research-hero {
+    background: linear-gradient(135deg, #4a6fa5 0%, #2e4a7d 100%);
+    padding: 80px 0 60px;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0px;
+}
+
+.research-hero:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+    background-size: cover;
+}
+
+.research-hero-content h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.research-hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
     
     .nav-btn {
         padding: 12px 25px;
@@ -492,7 +530,7 @@
         <!-- سایدبار سمت چپ -->
         <div class="col-lg-3 col-xxl-2">
             <div class="sidebar-wrapper">
-                 {% include 'gorsel_iletisim_tasarimi/gorsel_sidebar.html' %}
+                 {% include 'otomotiv/otomotiv_sidebar.html' %}
             </div>
         </div>
 
@@ -510,8 +548,8 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{% url 'gorsel_iletisim_tasarimi:liste' %}">
-                                <i class="bi bi-book me-1"></i>Türk Dili ve Edebiyatı
+                            <a href="{% url 'otomotiv:liste' %}">
+                                <i class="bi bi-book me-1"></i>Otomotiv
                             </a>
                         </li>
                         <li class="breadcrumb-item active text-primary fw-semibold">Duyuru Detayı</li>
@@ -525,7 +563,7 @@
                             <i class="bi bi-building me-1"></i>{{ duyuru.get_fakulte_display }}
                         </span>
                         <span class="badge-bolum">
-                            <i class="bi bi-book me-1"></i>Türk Dili ve Edebiyatı
+                            <i class="bi bi-book me-1"></i>Otomotiv
                         </span>
                     </div>
                     
@@ -590,9 +628,9 @@
             {% if ilgili_duyurular %}
             <div class="related-section">
                 <h3 class="section-title-detail">
-                    <i class="bi bi-link me-2"></i>Diğer Görsel İletişim Tasarımı Duyuruları
+                    <i class="bi bi-link me-2"></i>Diğer Otomotiv Duyuruları
                 </h3>
-                <p class="text-muted mb-4">Aşağıda benzer Görsel İletişim Tasarımı duyurularını inceleyebilirsiniz.</p>
+                <p class="text-muted mb-4">Aşağıda benzer Otomotiv duyurularını inceleyebilirsiniz.</p>
                 
                 <div class="row g-4">
                     {% for ilgili in ilgili_duyurular %}
@@ -600,14 +638,14 @@
                         <div class="related-card">
                             <div class="related-badges">
                                 <span class="badge bg-primary">{{ ilgili.get_fakulte_display }}</span>
-                                <span class="badge bg-success">Görsel İletişim Tasarımı</span>
+                                <span class="badge bg-success">Otomotiv</span>
                             </div>
                             <h4 class="related-title">{{ ilgili.baslik }}</h4>
                             <div class="related-date">
                                 <i class="bi bi-calendar-event"></i>
                                 {{ ilgili.yayin_tarihi|date:'d M Y' }}
                             </div>
-                            <a href="{% url 'gorsel_iletisim_tasarimi:detay' ilgili.slug %}" class="related-link">
+                            <a href="{% url 'otomotiv:detay' ilgili.slug %}" class="related-link">
                                 Detaylı İncele
                                 <i class="bi bi-arrow-right"></i>
                             </a>
@@ -621,9 +659,9 @@
             <!-- Navigation Buttons -->
             <div class="navigation-section">
                 <div class="nav-buttons">
-                    <a href="{% url 'gorsel_iletisim_tasarimi:liste' %}" class="nav-btn nav-btn-outline">
+                    <a href="{% url 'otomotiv:liste' %}" class="nav-btn nav-btn-outline">
                         <i class="bi bi-arrow-left"></i>
-                        Tüm Görsel İletişim Tasarımı Duyuruları
+                        Tüm Otomotiv Duyuruları
                     </a>
                     
                     <div class="d-flex gap-3">
