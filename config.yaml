@@ -1,0 +1,46 @@
+﻿# تنظیمات اصلی پروه
+mt5:
+  path: "C:/Program Files/MetaTrader 5/terminal64.exe"
+  login: 12345678
+  server: "BrokerServer"
+  timeout: 5000
+
+trading:
+  symbol: "XAUUSD"
+  timeframe: "M5"
+  volume: 0.1
+  magic_number: 234000
+
+strategy:
+  name: "SP2L"
+  min_higher_lows: 3
+  use_ma: true
+  ma_period: 60
+  risk_reward_ratio: 2.0
+  max_spread: 30
+  
+risk_management:
+  max_risk_per_trade: 2.0
+  max_daily_risk: 5.0
+  max_open_positions: 3
+  use_dynamic_sizing: true
+
+logging:
+  level: "INFO"git status
+
+git add .
+
+git commit -m "Yeni sayfalar eklendi: [örneğin accounts ve aday_ogrenci klasörleri güncellendi]"
+
+git push origin main
+
+python manage.py runserver 8081
+  file: "logs/trading.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+backtest:
+  start_date: "2024-01-01"
+  end_date: "2024-01-31"
+  initial_balance: 10000
+  commission: 0.0
+  slippage: 1
