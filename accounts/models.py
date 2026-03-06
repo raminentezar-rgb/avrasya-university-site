@@ -7,6 +7,7 @@ class Profile(models.Model):
     ROLE_CHOICES = (
         ('student', 'Student'),
         ('staff', 'Staff'),
+        ('professor', 'Professor'),
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -17,6 +18,7 @@ class Profile(models.Model):
         null=True,
         blank=True
     )
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
     def __str__(self):
         return self.user.username

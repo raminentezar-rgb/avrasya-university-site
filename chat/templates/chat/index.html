@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="tr">
+<head>
+    <title>Sohbet | Avrasya Üniversitesi</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'core/img/Avrasya Logo.png' %}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Avrasya Üniversitesi anlık mesajlaşma sistemi">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Fonts and Styles -->
+    <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/bootstrap4/bootstrap.min.css' %}">
+    <link href="{% static 'core/main/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== Renk Değişkenleri ===== */
+        :root {
+            --primary-dark-blue: #092442;
+            --secondary-medium-blue: #1d61a9;
+            --accent-light-blue: #8dd4e3;
+            --neutral-cream: #f6f2e7;
+            --pure-white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --border-light: #e9ecef;
+            --success-green: #28a745;
+            --warning-yellow: #ffc107;
+            --danger-red: #dc3545;
+            --online-green: #2ecc71;
+            --offline-gray: #95a5a6;
+            --message-sent: #dcf8c6;
+            --message-received: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.2);
+        }
+
+        /* ===== Temel Stiller ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ===== Ana Sohbet Konteyneri ===== */
+        .chat-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1600px;
+            height: 100vh;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .chat-container {
+            display: flex;
+            gap: 20px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== Kenar Çubuğu (Sohbet Listesi) ===== */
+        .chat-sidebar {
+            width: 380px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(141, 212, 227, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 25px 20px;
+            background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(141, 212, 227, 0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-dark-blue);
+            font-weight: 700;
+            border: 3px solid var(--pure-white);
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .online-status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background: var(--online-green);
+            border: 2px solid var(--pure-white);
+            border-radius: 50%;
+        }
+
+        .user-info h3 {
+            color: var(--pure-white);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .user-info p {
+            color: var(--accent-light-blue);
+            font-size: 13px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .user-info p i {
+            font-size: 10px;
+        }
+
+        .sidebar-search {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            background: var(--neutral-cream);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-light-blue);
+            background: var(--pure-white);
+            box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.1);
+        }
+
+        .chat-tabs {
+            display: flex;
+            padding: 15px 20px;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn i {
+            font-size: 14px;
+        }
+
+        .tab-btn.active {
+            background: var(--secondary-medium-blue);
+            color: var(--pure-white);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: var(--neutral-cream);
+            color: var(--primary-dark-blue);
+        }
+
+        .chat-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .chat-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-list::-webkit-scrollbar-track {
+            background: var(--neutral-cream);
+            border-radius: 10px;
+        }
+
+        .chat-list::-webkit-scrollbar-thumb {
+            background: var(--accent-light-blue);
+            border-radius: 10px;
+        }
+
+        .chat-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .chat-item:hover {
+            background: var(--neutral-cream);
+            transform: translateX(5px);
+        }
+
+        .chat-item.active {
+            background: linear-gradient(135deg, rgba(29, 97, 169, 0.1), rgba(141, 212, 227, 0.1));
+            border-left: 4px solid var(--secondary-medium-blue);
+        }
+
+        .chat-avatar {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+        .chat-avatar img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-light-blue);
+        }
+
+        .chat-avatar .status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--pure-white);
+        }
+
+        .status.online { background: var(--online-green); }
+        .status.offline { background: var(--offline-gray); }
+
+        .chat-info {
+            flex: 1;
+        }
+
+        .chat-name {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .chat-name h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .chat-time {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .chat-message {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-message p {
+            font-size: 13px;
+            color: var(--text-light);
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+
+        .unread-badge {
+            background: var(--secondary-medium-blue);
+            color: var(--pure-white);
+            font-size: 11px;
+            font-weight: 600;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+        }
+
+        /* ===== Ana Sohbet Alanı ===== */
+        .chat-main {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(141, 212, 227, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--accent-light-blue);
+            background: var(--accent-light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark-blue);
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .header-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-text h3 {
+            color: var(--pure-white);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header-text p {
+            color: var(--accent-light-blue);
+            font-size: 13px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .header-text p i {
+            font-size: 8px;
+        }
+
+        .chat-header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--pure-white);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-btn:hover {
+            background: var(--accent-light-blue);
+            color: var(--primary-dark-blue);
+            transform: translateY(-2px);
+        }
+
+        .header-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .header-btn:disabled:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--pure-white);
+            transform: none;
+        }
+
+        /* ===== Mesajlar Alanı ===== */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            background: var(--neutral-cream);
+            background-image: radial-gradient(circle at 25% 25%, rgba(141, 212, 227, 0.05) 0%, transparent 50%);
+        }
+
+        .messages-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb {
+            background: var(--accent-light-blue);
+            border-radius: 10px;
+        }
+
+        .message-date-divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .message-date-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-light-blue), transparent);
+        }
+
+        .date-text {
+            background: var(--pure-white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-light);
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message-wrapper {
+            display: flex;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-wrapper.sent {
+            justify-content: flex-end;
+        }
+
+        .message-wrapper.received {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 65%;
+            display: flex;
+            gap: 10px;
+        }
+
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--accent-light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark-blue);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message-bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .sent .message-bubble {
+            background: var(--secondary-medium-blue);
+            color: var(--pure-white);
+            border-bottom-right-radius: 4px;
+        }
+
+        .received .message-bubble {
+            background: var(--pure-white);
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message-text {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 5px;
+        }
+
+        .message-meta {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            font-size: 11px;
+        }
+
+        .sent .message-meta {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .received .message-meta {
+            color: var(--text-light);
+        }
+
+        .message-meta i {
+            font-size: 12px;
+        }
+
+        .message-meta .read-status {
+            color: var(--accent-light-blue);
+        }
+
+        /* Dosya Mesajları */
+        .file-message {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 250px;
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-light-blue);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark-blue);
+            font-size: 20px;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: var(--text-dark);
+        }
+
+        .file-size {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .file-download {
+            color: var(--secondary-medium-blue);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .file-download:hover {
+            transform: scale(1.1);
+            color: var(--primary-dark-blue);
+        }
+
+        /* Boş Durum Göstergeleri */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            color: var(--accent-light-blue);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .empty-state-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+            color: var(--pure-white);
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .empty-state-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== Mesaj Gönderme Alanı ===== */
+        .chat-footer {
+            padding: 20px 25px;
+            background: var(--pure-white);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .message-form {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .message-input-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: var(--neutral-cream);
+            border-radius: 30px;
+            padding: 5px 5px 5px 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .message-input-wrapper:focus-within {
+            border-color: var(--accent-light-blue);
+            background: var(--pure-white);
+            box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.1);
+        }
+
+        .message-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 12px 0;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .message-input:disabled {
+            background: transparent;
+            color: var(--text-light);
+            cursor: not-allowed;
+        }
+
+        .attach-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .attach-btn:hover:not(:disabled) {
+            background: var(--accent-light-blue);
+            color: var(--pure-white);
+            transform: rotate(45deg);
+        }
+
+        .attach-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+            color: var(--pure-white);
+            font-size: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .send-btn:active:not(:disabled) {
+            transform: scale(0.95);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: linear-gradient(135deg, var(--text-light), var(--offline-gray));
+        }
+
+        /* ===== Yeni Sohbet Modalı ===== */
+        .new-chat-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(9, 36, 66, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .new-chat-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 500px;
+            background: var(--pure-white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            animation: slideUp 0.3s ease forwards;
+        }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+            color: var(--pure-white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--pure-white);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--accent-light-blue);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .user-search {
+            margin-bottom: 20px;
+        }
+
+        .user-search input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .user-search input:focus {
+            outline: none;
+            border-color: var(--accent-light-blue);
+            box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.1);
+        }
+
+        .users-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .user-item:hover {
+            background: var(--neutral-cream);
+            border-color: var(--accent-light-blue);
+            transform: translateX(5px);
+        }
+
+        .user-item.selected {
+            background: linear-gradient(135deg, rgba(29, 97, 169, 0.1), rgba(141, 212, 227, 0.1));
+            border-color: var(--secondary-medium-blue);
+        }
+
+        .user-avatar-lg {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--primary-dark-blue);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .user-avatar-lg img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-details h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .user-details p {
+            font-size: 13px;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .user-role {
+            font-size: 12px;
+            color: var(--secondary-medium-blue);
+            font-weight: 500;
+        }
+
+        .modal-footer {
+            padding: 20px 25px;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn.cancel {
+            background: var(--neutral-cream);
+            color: var(--text-light);
+        }
+
+        .modal-btn.start {
+            background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+            color: var(--pure-white);
+        }
+
+        .modal-btn.start:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .modal-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== Responsive Tasarım ===== */
+        @media (max-width: 1200px) {
+            .chat-sidebar {
+                width: 320px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .chat-container {
+                flex-direction: column;
+            }
+            
+            .chat-sidebar {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .chat-main {
+                height: calc(100vh - 460px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-wrapper {
+                padding: 10px;
+            }
+            
+            .chat-container {
+                padding: 10px;
+            }
+            
+            .message-content {
+                max-width: 85%;
+            }
+            
+            .chat-header {
+                padding: 15px 20px;
+            }
+            
+            .chat-footer {
+                padding: 15px 20px;
+            }
+            
+            .header-text h3 {
+                font-size: 16px;
+            }
+            
+            .header-text p {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .chat-header-info {
+                gap: 10px;
+            }
+            
+            .header-avatar {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .header-text h3 {
+                font-size: 14px;
+            }
+            
+            .message-meta {
+                font-size: 10px;
+            }
+            
+            .file-message {
+                min-width: 200px;
+            }
+        }
+
+        /* Hareket hassasiyeti olanlar için */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-wrapper">
+        <div class="chat-container">
+            <!-- Sol Kenar Çubuğu - Sohbet Listesi -->
+            <div class="chat-sidebar">
+                <div class="sidebar-header">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            {% if user.profile and user.profile.avatar %}
+                                <img src="{{ user.profile.avatar.url }}" alt="{{ user.get_full_name }}">
+                            {% else %}
+                                {{ user.first_name|first|default:user.username|first|upper }}
+                            {% endif %}
+                            <span class="online-status"></span>
+                        </div>
+                        <div class="user-info">
+                            <h3>{{ user.get_full_name|default:user.username }}</h3>
+                            <p><i class="fas fa-circle"></i> Çevrimiçi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-search">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Sohbet ara..." id="chatSearch">
+                    </div>
+                </div>
+
+                <div class="chat-tabs">
+                    <button class="tab-btn active" data-tab="all">
+                        <i class="fas fa-comments"></i>
+                        Tümü
+                    </button>
+                    <button class="tab-btn" data-tab="unread">
+                        <i class="fas fa-envelope"></i>
+                        Okunmamış
+                    </button>
+                    <button class="tab-btn" data-tab="groups">
+                        <i class="fas fa-users"></i>
+                        Gruplar
+                    </button>
+                </div>
+
+                <!-- Sol Kenar Çubuğu - Sohbet Listesi -->
+                <div class="chat-list" id="chatList">
+                    <!-- Sohbet öğeleri dinamik olarak eklenecek -->
+                    {% for item in threads_with_participants %}
+                    <div class="chat-item {% if forloop.first %}active{% endif %}" data-thread-id="{{ item.thread.id }}">
+                        <div class="chat-avatar">
+                            {% if item.other_user.profile and item.other_user.profile.avatar %}
+                                <img src="{{ item.other_user.profile.avatar.url }}" alt="{{ item.other_user.get_full_name }}">
+                            {% else %}
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-light-blue); display: flex; align-items: center; justify-content: center; color: var(--primary-dark-blue); font-weight: 600;">
+                                    {{ item.other_user.get_full_name|first|default:item.other_user.username|first|upper }}
+                                </div>
+                            {% endif %}
+                            <span class="status online"></span>
+                        </div>
+                        <div class="chat-info">
+                            <div class="chat-name">
+                                <h4>{{ item.other_user.get_full_name|default:item.other_user.username }}</h4>
+                                <span class="chat-time">
+                                    {% if item.last_message %}
+                                        {{ item.last_message.created_at|date:'H:i' }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="chat-message">
+                                <p>
+                                    {% if item.last_message %}
+                                        {% if item.last_message.sender == user %}
+                                            <i class="fas fa-check" style="font-size: 10px;"></i>
+                                        {% endif %}
+                                        {{ item.last_message.text|truncatechars:30 }}
+                                    {% else %}
+                                        Henüz mesaj yok
+                                    {% endif %}
+                                </p>
+                                {% if item.unread_count > 0 %}
+                                <span class="unread-badge">{{ item.unread_count }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <h3>Henüz hiç sohbetiniz yok</h3>
+                        <p>Yeni bir sohbet başlatmak için aşağıdaki butona tıklayın</p>
+                        <button class="empty-state-btn" onclick="openNewChatModal()">
+                            <i class="fas fa-plus-circle"></i>
+                            Yeni Sohbet Başlat
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if threads_with_participants %}
+                <div style="padding: 15px 20px; border-top: 1px solid var(--border-light);">
+                    <button class="tab-btn" style="width: 100%;" onclick="openNewChatModal()">
+                        <i class="fas fa-plus-circle"></i>
+                        Yeni Sohbet
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Ana Sohbet Alanı -->
+            <div class="chat-main">
+                <!-- Sohbet Başlığı -->
+                <div class="chat-header">
+                    <div class="chat-header-info">
+                        <div class="header-avatar">
+                            {% if first_valid_thread %}
+                                {% if first_valid_thread.other_user.profile and first_valid_thread.other_user.profile.avatar %}
+                                    <img src="{{ first_valid_thread.other_user.profile.avatar.url }}" alt="{{ first_valid_thread.other_user.get_full_name }}">
+                                {% else %}
+                                    <span>{{ first_valid_thread.other_user.get_full_name|first|default:first_valid_thread.other_user.username|first|upper }}</span>
+                                {% endif %}
+                            {% else %}
+                                <img src="{% static 'core/img/default-avatar.png' %}" alt="Sohbet Seçin">
+                            {% endif %}
+                        </div>
+                        <div class="header-text">
+                            <h3 id="currentChatName">
+                                {% if first_valid_thread %}
+                                    {{ first_valid_thread.other_user.get_full_name|default:first_valid_thread.other_user.username }}
+                                {% else %}
+                                    Sohbet Seçin
+                                {% endif %}
+                            </h3>
+                            <p id="currentChatStatus">
+                                {% if first_valid_thread %}
+                                    <i class="fas fa-circle"></i> Çevrimiçi
+                                {% else %}
+                                    <i class="fas fa-circle"></i> Sohbet başlatın
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="chat-header-actions">
+                        <button class="header-btn" onclick="toggleUserInfo()" {% if not first_valid_thread %}disabled{% endif %}>
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                        {% if first_valid_thread %}
+                        <button class="header-btn" onclick="deleteCurrentThread()">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Mesajlar -->
+                <div class="messages-container" id="messagesContainer">
+                    {% if first_valid_thread %}
+                        <!-- Mesajlar dinamik olarak yüklenecek -->
+                        <div class="message-date-divider">
+                            <span class="date-text">Bugün</span>
+                        </div>
+
+                        <!-- Örnek Alınan Mesaj -->
+                        <div class="message-wrapper received">
+                            <div class="message-content">
+                                <div class="message-avatar">
+                                    {% if first_valid_thread.other_user.profile and first_valid_thread.other_user.profile.avatar %}
+                                        <img src="{{ first_valid_thread.other_user.profile.avatar.url }}" alt="{{ first_valid_thread.other_user.get_full_name }}">
+                                    {% else %}
+                                        <span>{{ first_valid_thread.other_user.get_full_name|first|default:first_valid_thread.other_user.username|first|upper }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="message-bubble">
+                                    <div class="message-text">
+                                        Merhaba, nasılsınız?
+                                    </div>
+                                    <div class="message-meta">
+                                        <span>14:30</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Örnek Gönderilen Mesaj -->
+                        <div class="message-wrapper sent">
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    <div class="message-text">
+                                        İyiyim, teşekkürler. Siz nasılsınız?
+                                    </div>
+                                    <div class="message-meta">
+                                        <span>14:32</span>
+                                        <i class="fas fa-check-double read-status" title="Okundu"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fas fa-envelope-open-text"></i>
+                            <h3>Sohbet başlatın</h3>
+                            <p>Bir kullanıcı seçerek mesajlaşmaya başlayın</p>
+                            <button class="empty-state-btn" onclick="openNewChatModal()">
+                                <i class="fas fa-plus-circle"></i>
+                                Yeni Sohbet Başlat
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Mesaj Gönderme Alanı -->
+                <div class="chat-footer">
+                    <form class="message-form" id="messageForm" onsubmit="sendMessage(event)">
+                        <div class="message-input-wrapper">
+                            <input type="text" class="message-input" placeholder="Mesajınızı yazın..." id="messageInput" {% if not first_valid_thread %}disabled{% endif %}>
+                            <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(event)">
+                            <button type="button" class="attach-btn" onclick="document.getElementById('fileInput').click()" {% if not first_valid_thread %}disabled{% endif %}>
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                        </div>
+                        <button type="submit" class="send-btn" {% if not first_valid_thread %}disabled{% endif %}>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Yeni Sohbet Modalı -->
+    <div class="new-chat-modal" id="newChatModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-comment-medical"></i> Yeni Sohbet Başlat</h3>
+                <button class="modal-close" onclick="closeNewChatModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="user-search">
+                    <input type="text" placeholder="Kullanıcı ara..." id="userSearch" onkeyup="searchUsers()">
+                </div>
+                <div class="users-list" id="usersList">
+                    <!-- Kullanıcılar dinamik olarak listelenecek -->
+                    {% for user_item in users %}
+                    <div class="user-item" data-user-id="{{ user_item.id }}" onclick="selectUser(this)">
+                        <div class="user-avatar-lg">
+                            {% if user_item.profile and user_item.profile.avatar %}
+                                <img src="{{ user_item.profile.avatar.url }}" alt="{{ user_item.get_full_name }}">
+                            {% else %}
+                                {{ user_item.first_name|first|default:user_item.username|first|upper }}
+                            {% endif %}
+                        </div>
+                        <div class="user-details">
+                            <h4>{{ user_item.get_full_name|default:user_item.username }}</h4>
+                            <p>{{ user_item.email }}</p>
+                            <span class="user-role">{{ user_item.profile.get_role_display|default:'Öğrenci' }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel" onclick="closeNewChatModal()">İptal</button>
+                <button class="modal-btn start" onclick="startNewChat()" id="startChatBtn" disabled>Sohbet Başlat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script>
+    <script>
+    // Aktif sohbet ID'si
+    let currentThreadId = {% if first_valid_thread %}{{ first_valid_thread.thread.id }}{% else %}null{% endif %};
+    let selectedUserId = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Sayfa yüklendi, currentThreadId:', currentThreadId);
+        
+        // Sohbet öğelerine tıklama
+        document.querySelectorAll('.chat-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                currentThreadId = this.dataset.threadId;
+                
+                console.log('Sohbet seçildi, thread ID:', currentThreadId);
+                
+                // Inputları aktif et
+                const messageInput = document.getElementById('messageInput');
+                const attachBtn = document.querySelector('.attach-btn');
+                const sendBtn = document.querySelector('.send-btn');
+                
+                if (messageInput) messageInput.disabled = false;
+                if (attachBtn) attachBtn.disabled = false;
+                if (sendBtn) sendBtn.disabled = false;
+                
+                // Mesajları yükle
+                loadMessages(currentThreadId);
+                updateChatHeader(this);
+            });
+        });
+
+        // Sayfa yüklendiğinde ilk mesajları yükle
+        if (currentThreadId) {
+            console.log('İlk mesajlar yükleniyor, thread ID:', currentThreadId);
+            loadMessages(currentThreadId);
+        } else {
+            console.log('Aktif thread yok, mesajlar yüklenmedi');
+        }
+
+        // Sohbet arama
+        const chatSearch = document.getElementById('chatSearch');
+        if (chatSearch) {
+            chatSearch.addEventListener('keyup', function(e) {
+                const query = this.value.toLowerCase();
+                document.querySelectorAll('.chat-item').forEach(item => {
+                    const name = item.querySelector('.chat-name h4').textContent.toLowerCase();
+                    if (name.includes(query)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Tab değiştirme
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Tab'a göre filtreleme yapılabilir
+                const tab = this.dataset.tab;
+                // Şimdilik tüm sohbetleri göster
+                document.querySelectorAll('.chat-item').forEach(item => {
+                    item.style.display = 'flex';
+                });
+            });
+        });
+
+        // Enter ile mesaj gönder
+        const messageInput = document.getElementById('messageInput');
+        if (messageInput) {
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    document.getElementById('messageForm').dispatchEvent(new Event('submit'));
+                }
+            });
+        }
+
+        // Modal dışına tıklayınca kapat
+        window.onclick = function(event) {
+            const modal = document.getElementById('newChatModal');
+            if (event.target === modal) {
+                closeNewChatModal();
+            }
+        }
+    });
+
+    // Mesajları yükle
+    function loadMessages(threadId) {
+        if (!threadId) {
+            console.error('Thread ID yok, mesajlar yüklenemiyor');
+            return;
+        }
+        
+        console.log('Mesajlar yükleniyor, thread ID:', threadId);
+        
+        fetch(`/chat/thread/${threadId}/messages/`)
+            .then(response => {
+                console.log('API yanıt durumu:', response.status);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('API yanıt verisi:', data);
+                
+                // Mesajları göster
+                if (data.messages) {
+                    console.log('Mesaj sayısı:', data.messages.length);
+                    renderMessages(data.messages);
+                    
+                    // Okundu bilgisi gönder
+                    if (data.messages.length > 0) {
+                        markAsRead(threadId);
+                    }
+                } else {
+                    console.error('API yanıtında messages bulunamadı:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Mesajlar yüklenirken hata:', error);
+                
+                // Hata mesajını göster
+                const container = document.getElementById('messagesContainer');
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle" style="color: var(--danger-red);"></i>
+                        <h3>Mesajlar yüklenemedi</h3>
+                        <p>Hata: ${error.message}</p>
+                        <button class="empty-state-btn" onclick="loadMessages(${threadId})">
+                            <i class="fas fa-sync-alt"></i>
+                            Tekrar Dene
+                        </button>
+                    </div>
+                `;
+            });
+    }
+
+    // Mesajları render et
+    function renderMessages(messages) {
+        const container = document.getElementById('messagesContainer');
+        container.innerHTML = '';
+        
+        if (!messages || messages.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-comment-dots"></i>
+                    <h3>Henüz mesaj yok</h3>
+                    <p>Sohbete başlamak için bir mesaj yazın</p>
+                </div>
+            `;
+            return;
+        }
+        
+        let lastDate = null;
+        
+        messages.forEach(msg => {
+            try {
+                const messageDate = new Date(msg.created_at_full).toLocaleDateString('tr-TR');
+                
+                // Tarih ayırıcı
+                if (lastDate !== messageDate) {
+                    const divider = document.createElement('div');
+                    divider.className = 'message-date-divider';
+                    divider.innerHTML = `<span class="date-text">${messageDate}</span>`;
+                    container.appendChild(divider);
+                    lastDate = messageDate;
+                }
+                
+                // Mesaj elementi
+                const wrapper = document.createElement('div');
+                wrapper.className = `message-wrapper ${msg.is_sent ? 'sent' : 'received'}`;
+                
+                let messageHtml = '';
+                if (!msg.is_sent) {
+                    messageHtml += `
+                        <div class="message-content">
+                            <div class="message-avatar">
+                                <span>${msg.sender_name ? msg.sender_name.charAt(0).toUpperCase() : '?'}</span>
+                            </div>
+                    `;
+                } else {
+                    messageHtml += `<div class="message-content">`;
+                }
+                
+                messageHtml += `
+                    <div class="message-bubble">
+                `;
+                
+                if (msg.file_url) {
+                    const fileExt = msg.file_name ? msg.file_name.split('.').pop().toLowerCase() : '';
+                    let fileIcon = 'fa-file';
+                    if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExt)) fileIcon = 'fa-file-image';
+                    else if (['pdf'].includes(fileExt)) fileIcon = 'fa-file-pdf';
+                    else if (['doc', 'docx'].includes(fileExt)) fileIcon = 'fa-file-word';
+                    else if (['xls', 'xlsx'].includes(fileExt)) fileIcon = 'fa-file-excel';
+                    
+                    messageHtml += `
+                        <div class="file-message">
+                            <div class="file-icon">
+                                <i class="fas ${fileIcon}"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-name">${msg.file_name || 'Dosya'}</div>
+                                <div class="file-size">${msg.file_size ? (msg.file_size / 1024).toFixed(1) + ' KB' : 'Boyut bilinmiyor'}</div>
+                            </div>
+                            <a href="${msg.file_url}" class="file-download" download target="_blank">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                    `;
+                }
+                
+                if (msg.text) {
+                    messageHtml += `<div class="message-text">${msg.text}</div>`;
+                }
+                
+                messageHtml += `
+                        <div class="message-meta">
+                            <span>${msg.created_at || ''}</span>
+                            ${msg.is_sent ? `<i class="fas ${msg.is_read ? 'fa-check-double read-status' : 'fa-check'}" title="${msg.is_read ? 'Okundu' : 'Gönderildi'}"></i>` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                if (!msg.is_sent) {
+                    messageHtml += `</div>`;
+                }
+                
+                messageHtml += `</div>`;
+                
+                wrapper.innerHTML = messageHtml;
+                container.appendChild(wrapper);
+            } catch (error) {
+                console.error('Mesaj render edilirken hata:', error, msg);
+            }
+        });
+        
+        // En alta kaydır
+        container.scrollTop = container.scrollHeight;
+    }
+
+    // Okundu olarak işaretle
+    function markAsRead(threadId) {
+        fetch('/chat/mark-read/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ thread_id: threadId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Okundu bilgisi gönderildi:', data);
+        })
+        .catch(error => console.error('Okundu bilgisi gönderilirken hata:', error));
+    }
+
+    // Mesaj gönder
+    function sendMessage(event) {
+        event.preventDefault();
+        
+        const messageInput = document.getElementById('messageInput');
+        const fileInput = document.getElementById('fileInput');
+        const text = messageInput.value.trim();
+        const file = fileInput.files[0];
+        
+        if (!text && !file) return;
+        if (!currentThreadId) {
+            alert('Lütfen önce bir sohbet seçin');
+            return;
+        }
+        
+        console.log('Mesaj gönderiliyor:', { threadId: currentThreadId, text, file: file ? file.name : null });
+        
+        const formData = new FormData();
+        formData.append('thread_id', currentThreadId);
+        formData.append('text', text);
+        if (file) {
+            formData.append('file', file);
+        }
+        formData.append('temp_id', Date.now());
+        
+        fetch('/chat/send/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Mesaj gönderme yanıtı:', data);
+            if (data.success) {
+                messageInput.value = '';
+                fileInput.value = '';
+                loadMessages(currentThreadId);
+            } else {
+                alert('Mesaj gönderilemedi: ' + (data.error || 'Bilinmeyen hata'));
+            }
+        })
+        .catch(error => {
+            console.error('Mesaj gönderilirken hata:', error);
+            alert('Mesaj gönderilirken bir hata oluştu');
+        });
+    }
+
+    // Dosya seçimi
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Dosya boyutu kontrolü (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Dosya boyutu 10MB\'dan büyük olamaz');
+                event.target.value = '';
+                return;
+            }
+            
+            // Dosya tipi kontrolü
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Bu dosya tipi desteklenmiyor');
+                event.target.value = '';
+                return;
+            }
+            
+            // Otomatik gönder
+            sendMessage(new Event('submit'));
+        }
+    }
+
+    // Sohbet başlığını güncelle
+    function updateChatHeader(chatItem) {
+        const name = chatItem.querySelector('.chat-name h4').textContent;
+        document.getElementById('currentChatName').textContent = name;
+        document.getElementById('currentChatStatus').innerHTML = '<i class="fas fa-circle"></i> Çevrimiçi';
+    }
+
+    // Yeni sohbet modalı
+    function openNewChatModal() {
+        document.getElementById('newChatModal').classList.add('active');
+        document.getElementById('startChatBtn').disabled = true;
+    }
+
+    function closeNewChatModal() {
+        document.getElementById('newChatModal').classList.remove('active');
+        selectedUserId = null;
+        document.getElementById('startChatBtn').disabled = true;
+        document.querySelectorAll('.user-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+    }
+
+    // Kullanıcı seç
+    function selectUser(element) {
+        document.querySelectorAll('.user-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+        element.classList.add('selected');
+        selectedUserId = element.dataset.userId;
+        document.getElementById('startChatBtn').disabled = false;
+    }
+
+    // Kullanıcı ara
+    function searchUsers() {
+        const query = document.getElementById('userSearch').value;
+        if (query.length < 2) return;
+        
+        fetch(`/chat/search-users/?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                const usersList = document.getElementById('usersList');
+                usersList.innerHTML = '';
+                
+                data.users.forEach(user => {
+                    const userItem = document.createElement('div');
+                    userItem.className = 'user-item';
+                    userItem.dataset.userId = user.id;
+                    userItem.onclick = () => selectUser(userItem);
+                    
+                    userItem.innerHTML = `
+                        <div class="user-avatar-lg">
+                            ${user.avatar ? `<img src="${user.avatar}" alt="${user.name}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">` : user.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="user-details">
+                            <h4>${user.name}</h4>
+                            <p>${user.email}</p>
+                            <span class="user-role">${user.role}</span>
+                        </div>
+                    `;
+                    
+                    usersList.appendChild(userItem);
+                });
+            });
+    }
+
+    // Yeni sohbet başlat
+    function startNewChat() {
+        if (!selectedUserId) {
+            alert('Lütfen bir kullanıcı seçin');
+            return;
+        }
+        
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/chat/start/';
+        
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = 'csrfmiddlewaretoken';
+        csrfInput.value = getCookie('csrftoken');
+        
+        const userInput = document.createElement('input');
+        userInput.type = 'hidden';
+        userInput.name = 'target_user_id';
+        userInput.value = selectedUserId;
+        
+        form.appendChild(csrfInput);
+        form.appendChild(userInput);
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    // Sohbet sil
+    function deleteCurrentThread() {
+        if (!currentThreadId) return;
+        
+        if (confirm('Bu sohbeti silmek istediğinizden emin misiniz?')) {
+            fetch(`/chat/thread/${currentThreadId}/delete/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                }
+            });
+        }
+    }
+
+    // Kullanıcı bilgisi
+    function toggleUserInfo() {
+        if (!currentThreadId) {
+            alert('Lütfen önce bir sohbet seçin');
+            return;
+        }
+        // Profil sayfasına yönlendir
+        window.location.href = '/chat/profile/';
+    }
+
+    // CSRF token helper
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+</body>
+</html>

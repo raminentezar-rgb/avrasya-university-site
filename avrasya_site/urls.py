@@ -72,6 +72,7 @@ urlpatterns += i18n_patterns(
     path('erasmus/', include('erasmus.urls')),
     path('lisansustu_egitim_enstitusu/', include('lee.urls')),
     path('support/', include('support.urls')),
+    path('chat/', include('chat.urls', namespace='chat')),
     path('accounts/', include('accounts.urls')),
     path('gorsel_iletisim_tasarimi/', include('gorsel_iletisim_tasarimi.urls')),
     path('idari_birimler/', include('idari_birimler.urls')),

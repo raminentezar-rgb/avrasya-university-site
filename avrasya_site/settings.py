@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'gorsel_iletisim_tasarimi',
     'idari_birimler',
     'sks',
+    'chat',
     
     #MYO
     'adalet',
