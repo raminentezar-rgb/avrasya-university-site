@@ -473,11 +473,11 @@
             </li>
 
             <!-- İletişim -->
-            <li class="nav-item">
+            {% comment %} <li class="nav-item">
                 <a class="nav-link" href="{% url 'core:iletisim' %}">
                     {% trans "İLETİŞİM" %}
                 </a>
-            </li>
+            </li> {% endcomment %}
 
             <!-- Header Icons Section as Dropdowns -->
             <li class="nav-item">
@@ -524,6 +524,9 @@
                             <div class="menu-section">
                                 <h6 class="section-title mb-3">{% trans "Öğrenci" %}</h6>
                                 <ul class="list-unstyled menu-list">
+                                    <li><a class="dropdown-item" href="{% url 'accounts:login' %}">{% trans "Giriş Yapmak" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'accounts:signup' %}">{% trans "Hesabı Oluşturmak" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'support:search' %}">{% trans "Destek Merkezi" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Kayıt İşlemleri" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Öğrenim Ücretleri" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Burs ve İndirimler" %}</a></li>
@@ -537,6 +540,32 @@
                                     <li><a class="dropdown-item" href="#">{% trans "Sosyal Alanlar" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Mail Kullanımı" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Öğrenci Deneyimi" %}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    
+
+
+
+                    <!-- User Icon Dropdown -->
+                    <div class="dropdown header_icon_container">
+                        <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="{% static 'core/main/images/teacher-svgrepo-com.svg' %}" class="header_icon"
+                                alt="{% trans 'حساب کاربری' %}">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end header-dropdown-menu p-3">
+                            <div class="menu-section">
+                                <h6 class="section-title mb-3">{% trans "Akademik ve idari personel" %}</h6>
+                                <ul class="list-unstyled menu-list">
+                                    <li><a class="dropdown-item" href="{% url 'accounts:login' %}">{% trans "Giriş Yapmak" %}</a></li>
+                                    
+                                    <li><a class="dropdown-item" href="{% url 'chat:index' %}">{% trans "Meslektaşlarla iletişim" %}</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
