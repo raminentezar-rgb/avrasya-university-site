@@ -23,7 +23,7 @@
                             {% comment %} <i class="fas fa-graduation-cap"></i> {% endcomment %}
                         </div>
                     </div>
-                    <h2 style=" font-family: Metropolis, sans-serif; font-weight: 800;">Avrasya Üniversitesi'ne giriş yapın</h2>
+                    <h2 style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">Avrasya Üniversitesi'ne Giriş Yapın</h2>
                     <p class="text-muted">Devam etmek için kimlik bilgilerinizi girin.</p>
                 </div>
 
@@ -66,10 +66,10 @@
 
                     <div class="form-row align-items-center mb-4">
                         <div class="col">
-                            <div class="custom-control custom-checkbox">
+                            {% comment %} <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="rememberMe">
                                 <label class="custom-control-label" for="rememberMe">Beni Hatırla</label>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                         <div class="col text-right">
                             <a href="{% url 'accounts:password_reset' %}" class="auth-link">
@@ -79,17 +79,17 @@
                     </div>
 
                     <button type="submit" class="btn-auth btn-auth-primary btn-block" id="loginBtn">
-                        <i class="fas fa-sign-in-alt mr-2"></i> Giriş yapmak
+                        <i class="fas fa-sign-in-alt mr-2"></i> Giriş Yapmak
                         <span class="spinner-border spinner-border-sm ml-2 d-none" id="loginSpinner"></span>
                     </button>
 
-                    <div class="divider">
+                    {% comment %} <div class="divider">
                         <span>or</span>
                     </div>
 
                     <a href="#" class="btn-auth btn-auth-secondary btn-block mb-3">
                         <i class="fab fa-google mr-2"></i> Google ile devam edin
-                    </a>
+                    </a> {% endcomment %}
 
                     <div class="auth-links text-center mt-4">
                         <p class="mb-2">Hesabınız yok mu?</p>
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="mailto:ogrenci@avrasya.edu.tr" class="auth-link small">
+                <a href="{% url 'support:create_ticket' %}" class="auth-link small">
                     <i class="fas fa-headset mr-1"></i> Yardım mı gerek? IT destek ile iletişime geçin
                 </a>
             </div>
