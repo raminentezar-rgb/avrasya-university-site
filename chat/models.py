@@ -43,3 +43,34 @@ class Message(models.Model):
         # Update thread's updated_at when new message is created
         self.thread.updated_at = self.created_at
         self.thread.save()
+
+
+
+
+# chat/models.py - اضافه کردن مدل نوتیفیکیشن
+
+# chat/models.py - این کد را به انتهای فایل اضافه کنید
+
+class Notification(models.Model):
+    NOTIFICATION_TYPES = [
+        ('message', 'پیام جدید'),
+        ('mention', 'منشن'),
+        ('system', 'سیستم'),
+    ]
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    notification_type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES, default='message')
+    title = models.CharField(max_length=255)
+    message = models.TextField()
+    thread_id = models.IntegerField(null=True, blank=True)
+    sender_id = models.IntegerField(null=True, blank=True)
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Notification'
+        verbose_name_plural = 'Notifications'
+    
+    def __str__(self):
+        return f"{self.user.username}: {self.title[:50]}"

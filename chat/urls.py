@@ -29,6 +29,11 @@ urlpatterns = [
     
     # جستجوی کاربران
     path('search-users/', views.search_users, name='search_users'),
+
+
+
+    path('notifications/', views.get_notifications, name='notifications'),
+    path('notifications/mark-read/', views.mark_notification_read, name='mark_notification_read'),
 ]
 
 # اضافه کردن مسیر فایل‌های مدیا در حالت توسعه

@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'gorsel_iletisim_tasarimi',
     'idari_birimler',
     'sks',
+    'channels',
     'chat',
     
     #MYO
@@ -295,7 +296,18 @@ CKEDITOR_CONFIGS = {
 }
 
 
+# Channels configuration
+ASGI_APPLICATION = 'your_project.asgi.application'
 
+# Redis configuration for channels
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 

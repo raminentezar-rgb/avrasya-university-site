@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from django.db.models import Q, Count, OuterRef, Subquery
-from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q, Count
 from django.utils import timezone
-from .models import Thread, Message
+from .models import Thread, Message, Notification
 import json
 from django.contrib import messages
 import os
+from django.utils.timesince import timesince
+
 
 @login_required
 def chat_index(request):
@@ -43,6 +44,7 @@ def chat_index(request):
         'first_valid_thread': threads_with_participants[0] if threads_with_participants else None
     }
     return render(request, 'chat/index.html', context)
+
 
 @login_required
 def thread_messages(request, thread_id):
@@ -100,9 +102,10 @@ def thread_messages(request, thread_id):
         }
     })
 
+
 @login_required
 def send_message(request):
-    """AJAX endpoint to send a message to a thread."""
+    """AJAX endpoint to send a message to a thread. (With notifications)"""
     if request.method == 'POST':
         thread_id = request.POST.get('thread_id')
         text = request.POST.get('text', '').strip()
@@ -121,6 +124,28 @@ def send_message(request):
                 text=text,
                 file=file
             )
+            
+            # ارسال نوتیفیکیشن به سایر شرکت‌کنندگان
+            other_users = thread.participants.exclude(id=request.user.id)
+            for user in other_users:
+                if text:  # فقط اگر متن وجود داشت نوتیفیکیشن بفرست
+                    Notification.objects.create(
+                        user=user,
+                        notification_type='message',
+                        title=f'Yeni mesaj: {request.user.get_full_name() or request.user.username}',
+                        message=text[:100] + '...' if len(text) > 100 else text,
+                        thread_id=thread.id,
+                        sender_id=request.user.id
+                    )
+                elif file:  # اگر فایل بود
+                    Notification.objects.create(
+                        user=user,
+                        notification_type='message',
+                        title=f'Yeni dosya: {request.user.get_full_name() or request.user.username}',
+                        message='Bir dosya gönderdi',
+                        thread_id=thread.id,
+                        sender_id=request.user.id
+                    )
 
             return JsonResponse({
                 'success': True,
@@ -139,35 +164,34 @@ def send_message(request):
             })
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
+
 @login_required
 def start_thread(request):
     """Start a new thread with a selected user."""
     if request.method == 'POST':
         target_user_id = request.POST.get('target_user_id')
-        initial_message = request.POST.get('initial_message', '').strip()
         target_user = get_object_or_404(User, id=target_user_id)
         
-        # Check if thread already exists between these two users
+        # Check if thread already exists between these two users (including inactive)
         thread = Thread.objects.filter(
             participants=request.user
         ).filter(
             participants=target_user
         ).first()
         
-        if not thread:
+        if thread:
+            # Reactivate the thread if it was previously deleted
+            if not thread.is_active:
+                thread.is_active = True
+                thread.save()
+        else:
+            # Create a new thread
             thread = Thread.objects.create()
             thread.participants.add(request.user, target_user)
-            
-            # Send initial message if provided
-            if initial_message:
-                Message.objects.create(
-                    thread=thread,
-                    sender=request.user,
-                    text=initial_message
-                )
         
         return redirect('chat:index')
     return redirect('chat:index')
+
 
 @login_required
 def mark_as_read(request):
@@ -185,6 +209,7 @@ def mark_as_read(request):
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
+
 @login_required
 def delete_thread(request, thread_id):
     """Soft delete a thread."""
@@ -197,6 +222,7 @@ def delete_thread(request, thread_id):
         except Thread.DoesNotExist:
             return JsonResponse({'error': 'Thread not found'}, status=404)
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
 
 @login_required
 def search_users(request):
@@ -221,6 +247,7 @@ def search_users(request):
     } for user in users]
     
     return JsonResponse({'users': data})
+
 
 @login_required
 def edit_profile(request):
@@ -256,3 +283,45 @@ def edit_profile(request):
     
     # اگر درخواست GET باشد، صفحه ویرایش پروفایل را نمایش می‌دهیم
     return render(request, 'chat/edit_profile.html', {'user': request.user})
+
+
+@login_required
+def get_notifications(request):
+    """دریافت نوتیفیکیشن‌های کاربر"""
+    notifications = Notification.objects.filter(user=request.user)[:50]
+    unread_count = Notification.objects.filter(user=request.user, is_read=False).count()
+    
+    data = [{
+        'id': n.id,
+        'type': n.notification_type,
+        'title': n.title,
+        'message': n.message,
+        'thread_id': n.thread_id,
+        'sender_id': n.sender_id,
+        'is_read': n.is_read,
+        'created_at': n.created_at.strftime('%Y-%m-%d %H:%M'),
+        'time_ago': timesince(n.created_at) + ' önce' if n.created_at else ''
+    } for n in notifications]
+    
+    return JsonResponse({
+        'notifications': data,
+        'unread_count': unread_count
+    })
+
+
+@login_required
+def mark_notification_read(request):
+    """علامت‌گذاری نوتیفیکیشن به عنوان خوانده شده"""
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        notification_id = data.get('notification_id')
+        
+        if notification_id:
+            Notification.objects.filter(id=notification_id, user=request.user).update(is_read=True)
+        else:
+            # Mark all as read
+            Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
+        
+        return JsonResponse({'success': True})
+    
+    return JsonResponse({'error': 'Invalid request'}, status=400)
