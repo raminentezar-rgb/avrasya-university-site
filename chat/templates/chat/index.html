@@ -1499,17 +1499,13 @@
                 </div>
 
                 <div class="chat-tabs">
-                    <button class="tab-btn active" data-tab="all">
+                    <button class="tab-btn active" data-tab="all" onclick="filterChats('all', event)">
                         <i class="fas fa-comments"></i>
                         Tümü
                     </button>
-                    <button class="tab-btn" data-tab="unread">
+                    <button class="tab-btn" data-tab="unread" onclick="filterChats('unread', event)">
                         <i class="fas fa-envelope"></i>
                         Okunmamış
-                    </button>
-                    <button class="tab-btn" data-tab="groups">
-                        <i class="fas fa-users"></i>
-                        Gruplar
                     </button>
                 </div>
 
@@ -1781,20 +1777,31 @@
         // ========== MESAJ FONKSİYONLARI ==========
 
         function loadMessages(threadId) {
-            if (!threadId) return;
+    if (!threadId) return;
 
-            fetch(`/chat/thread/${threadId}/messages/`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.messages) {
-                        renderMessages(data.messages);
-                        if (data.messages.length > 0) markAsRead(threadId);
+    fetch(`/chat/thread/${threadId}/messages/`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.messages) {
+                renderMessages(data.messages);
+                if (data.messages.length > 0) markAsRead(threadId);
+                
+                // بعد از خواندن پیام‌ها، وضعیت okunmamış badge'leri güncelle
+                setTimeout(() => {
+                    // Active tab'e göre filtreleme yap
+                    const activeTab = document.querySelector('.tab-btn.active');
+                    if (activeTab && activeTab.dataset.tab === 'unread') {
+                        // Eğer okunmamış tab'i aktifse, tekrar filtrele
+                        const fakeEvent = { target: activeTab };
+                        filterChats('unread', fakeEvent);
                     }
-                })
-                .catch(error => {
-                    console.error('Mesajlar yüklenirken hata:', error);
-                });
-        }
+                }, 500);
+            }
+        })
+        .catch(error => {
+            console.error('Mesajlar yüklenirken hata:', error);
+        });
+}
 
         function renderMessages(messages) {
             const container = document.getElementById('messagesContainer');
@@ -2232,6 +2239,65 @@
             }
             return cookieValue;
         }
+
+        // ========== CHAT FILTER FUNCTIONS ==========
+function filterChats(filterType, event) {
+    // Update active tab styling
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    const chatItems = document.querySelectorAll('.chat-item');
+    let visibleCount = 0;
+    
+    chatItems.forEach(item => {
+        const unreadBadge = item.querySelector('.unread-badge');
+        const hasUnread = unreadBadge && parseInt(unreadBadge.textContent) > 0;
+        
+        if (filterType === 'all') {
+            item.style.display = 'flex';
+            visibleCount++;
+        } else if (filterType === 'unread') {
+            if (hasUnread) {
+                item.style.display = 'flex';
+                visibleCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        }
+    });
+    
+    // Show or hide empty state message
+    const chatList = document.getElementById('chatList');
+    const existingEmptyState = chatList.querySelector('.filter-empty-state');
+    
+    if (visibleCount === 0) {
+        // Remove existing empty state if any
+        if (existingEmptyState) {
+            existingEmptyState.remove();
+        }
+        
+        // Create new empty state
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'empty-state filter-empty-state';
+        emptyDiv.innerHTML = `
+            <i class="fas fa-envelope-open-text"></i>
+            <h3>Okunmamış mesaj yok</h3>
+            <p>Tüm mesajlarınız okundu</p>
+        `;
+        chatList.appendChild(emptyDiv);
+    } else {
+        // Remove empty state if there are visible items
+        if (existingEmptyState) {
+            existingEmptyState.remove();
+        }
+    }
+}
+
+
+
+        
     </script>
 </body>
 
