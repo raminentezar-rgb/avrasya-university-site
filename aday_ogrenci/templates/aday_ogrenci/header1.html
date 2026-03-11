@@ -1,4 +1,4 @@
-
+﻿
 {% load static %}
 {% load i18n %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
@@ -614,7 +614,7 @@
         <!-- Logo -->
         <div class="research-logo_container">
             <div class="logo">
-                <a href="{% url 'lee:lee' %}" class="navbar-brand d-flex align-items-center">
+                <a href="{% url 'aday_ogrenci:aday_anasayfa' %}" class="navbar-brand d-flex align-items-center">
                     <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="Avrasya University" style="height: 80px;">
                     <span class="ms-3 fw-bold text-primary"></span>
                     <span></span>
@@ -633,56 +633,50 @@
                     
                     <!-- Aday Öğrenci Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'aday_ogrenci:aday_anasayfa' %}">Genel</a>
+                        <a href="{% url 'aday_ogrenci:aday_anasayfa' %}">ADAY ÖĞRENCİ</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
-                                    <h6>{% trans "Genel Bilgiler" %}</h6>
+                                    <h6>ADAY ÖĞRENCİ</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:lee' %}">{% trans "Genel Bilgiler" %}</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:duyurular' %}">Duyuruları</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:etkinlik_listesi' %}">{% trans "Etkinlikler" %}</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:akademik_kadro' %}">Akademik Kadro</a></li>
-                                        
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </li>
-
-
-                    <!-- Aday Öğrenci Menu -->
-                    <li class="research-main_nav_item research-mega-menu">
-                        <a href="">Programlar</a>
-                        <div class="research-mega-menu-content">
-                            <div class="research-mega-row">
-                                <div class="research-mega-col">
-                                    <h6>Programlar</h6>
-                                    <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:doktora_programları' %}">Doktora Programları</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:tezli_yukseklisans_programlari' %}">Tezli Yükseklisans Programları</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:tezsiz_yukseklisans_programlari' %}">Tezsiz Yükseklisans Programları</a></li>
-                                        
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:kontenjanlar' %}">KONTENJANLAR</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:egitim_ucretleri' %}">EĞİTİM ÜCRETLERİ</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:taban_puanlar' %}">TABAN PUANLAR</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:dikey_gecis' %}">DİKEY GEÇİŞ</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'yatay_gecis:yatay_gecis' %}">YATAY GEÇİŞ</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:foto_galeri' %}">FOTO GALERİ</a></li>
                                     </ul>
                                 </div>
-                                
+                                <div class="research-mega-col">
+                                    <h6>&nbsp;</h6>
+                                    <ul class="research-list-unstyled">
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:laboratuvarlar' %}">LABORATUVARLAR</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:kampus_yasam' %}">KAMPÜSTE YAŞAM</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:yurt_olanaklari' %}">YURT OLANAKLARI</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:cap_yan_dal' %}">ÇAP/YANDAL</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:yabanci_ogrenci' %}">YABANCI UYRUKLU ÖĞRENCİ</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'aday_ogrenci:basvuru' %}">ERASMUS</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </li>
                     
-
-
-                    <!-- Aday Öğrenci Menu -->
-                    <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'lee:mevzuat_formlar' %}">Mevzuat&Formlar</a>
-                        
-                    </li>
                     <!-- Öğrenci İşleri Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'lee:on_basvuru_formu' %}">Ön Başvuru</a>
+                        <a href="{% url 'ogrenci_isleri:ogrenci_isleri' %}">Öğrenci İşleri</a>
                     </li>
 
-                    
+                    <!-- Akademik Menu -->
+                    <li class="research-main_nav_item research-mega-menu">
+                        <a href="{% url 'akademik:akademik' %}">Akademik</a>
+                    </li>
+
+                    <!-- Araştırma Menu -->
+                    <li class="research-main_nav_item research-mega-menu">
+                        <a href="{% url 'arastirma:home' %}">Araştırma</a>
+                    </li>
+
                     <!-- İletişim Menu -->
                     <li class="research-main_nav_item research-mega-menu">
                         <a href="{% url 'core:iletisim' %}">{% trans "İletişim" %}</a>
@@ -796,11 +790,6 @@
             <i class="fas fa-bars" style="color: white; font-size: 24px;"></i>
         </div>
         
-        <!-- Hidden Language Form -->
-        <form action="{% url 'core:set_language' %}" method="post" id="research-lang-form" class="d-none">
-            {% csrf_token %}
-            <input type="hidden" name="language" id="research-lang-code" value="">
-        </form>
     </div>
 </header>
 
@@ -929,76 +918,6 @@
             langDropdown.style.transition = 'all 0.3s ease';
         }
         
-        // Function to get current language from cookie
-        function getCurrentLanguage() {
-            const cookieValue = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('django_language='))
-                ?.split('=')[1];
-            
-            return cookieValue || 'tr'; // Default to Turkish
-        }
-        
-        // Update UI based on cookie language
-        function updateResearchLanguageFromCookie() {
-            const lang = getCurrentLanguage();
-            const currentLangDisplay = document.querySelector('.research-language-code');
-            const currentFlag = document.querySelector('.research-language-flag .flag-icon');
-            
-            if (!currentLangDisplay || !currentFlag) return;
-            
-            // Update flag and code
-            currentFlag.className = 'flag-icon';
-            switch(lang) {
-                case 'tr':
-                    currentFlag.classList.add('flag-icon-tr');
-                    currentLangDisplay.textContent = 'TR';
-                    break;
-                case 'en':
-                    currentFlag.classList.add('flag-icon-gb');
-                    currentLangDisplay.textContent = 'EN';
-                    break;
-                case 'fa':
-                    currentFlag.classList.add('flag-icon-ir');
-                    currentLangDisplay.textContent = 'FA';
-                    break;
-                case 'ar':
-                    currentFlag.classList.add('flag-icon-sa');
-                    currentLangDisplay.textContent = 'AR';
-                    break;
-                case 'ru':
-                    currentFlag.classList.add('flag-icon-ru');
-                    currentLangDisplay.textContent = 'RU';
-                    break;
-                case 'de':
-                    currentFlag.classList.add('flag-icon-de');
-                    currentLangDisplay.textContent = 'DE';
-                    break;
-                default:
-                    currentFlag.classList.add('flag-icon-tr');
-                    currentLangDisplay.textContent = 'TR';
-            }
-            
-            // Update active items in dropdown
-            document.querySelectorAll('.research-language-dropdown .dropdown-item').forEach(item => {
-                item.classList.remove('active-language');
-                item.querySelector('.text-primary')?.remove();
-                
-                // Check if this item matches current language
-                const onclickAttr = item.getAttribute('onclick');
-                if (onclickAttr && onclickAttr.includes(`'${lang}'`)) {
-                    item.classList.add('active-language');
-                    const checkmark = document.createElement('span');
-                    checkmark.className = 'ms-auto text-primary';
-                    checkmark.innerHTML = '✓';
-                    item.appendChild(checkmark);
-                }
-            });
-        }
-        
-        // Update language UI on page load
-        updateResearchLanguageFromCookie();
-        
         // Re-update on window resize
         window.addEventListener('resize', function() {
             if (window.innerWidth < 992 && langDropdown) {
@@ -1007,22 +926,40 @@
         });
     });
     
-    // تابع تغییر زبان برای هدر تحقیقات
+    // تابع تغییر زبان بر اساس پیشوند URL (مانند منوی اصلی)
+    // زبان پیش‌فرض (tr) بدون پیشوند است، سایر زبان‌ها به صورت /fa/, /en/ و ...
     function changeLanguage(lang) {
-        const form = document.getElementById('research-lang-form');
-        const langInput = document.getElementById('research-lang-code');
-        
-        // Set selected language
-        langInput.value = lang;
-        
-        // Optional: Add loading indicator
-        const currentLang = document.querySelector('.research-current-language');
-        if (currentLang) {
-            currentLang.style.opacity = '0.7';
+        const supportedLangs = ['tr', 'en', 'fa', 'ar', 'ru', 'de'];
+        let path = window.location.pathname || '/';
+        const parts = path.split('/');  // ["", "fa", "aday_ogrenci", ...] یا ["", "aday_ogrenci", ...]
+
+        const hasPrefix = supportedLangs.includes(parts[1]);
+
+        if (hasPrefix) {
+            if (lang === 'tr') {
+                // حذف پیشوند زبان → بازگشت به URL پیش‌فرض بدون پیشوند
+                parts.splice(1, 1);
+            } else {
+                // جایگزینی پیشوند فعلی
+                parts[1] = lang;
+            }
+        } else {
+            if (lang === 'tr') {
+                // همین الان روی زبان پیش‌فرض بدون پیشوند هستیم
+            } else {
+                // اضافه کردن پیشوند زبان
+                parts.splice(1, 0, lang);
+            }
         }
-        
-        // Submit form
-        form.submit();
+
+        let newPath = parts.join('/');
+        if (!newPath.startsWith('/')) {
+            newPath = '/' + newPath;
+        }
+
+        const qs = window.location.search || '';
+        const hash = window.location.hash || '';
+        window.location.href = newPath + qs + hash;
     }
 </script>
 [file content end]
