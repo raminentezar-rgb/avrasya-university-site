@@ -5,6 +5,7 @@ from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
 from .models import AdaletDuyuru, AdaletEtkinlik, AdaletDersProgrami
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 def etkinlik_listesi(request):
     now = timezone.now()
