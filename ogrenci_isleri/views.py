@@ -177,4 +177,7 @@ def erasmus(request):
 def cift_Anadal_yandal(request):
     return render(request,'ogrenci_isleri/includes/cift_Anadal_yandal.html')
 
+def akademik_takvim(request):
+    return render(request,'ogrenci_isleri/includes/akademik_takvim.html')
+
 

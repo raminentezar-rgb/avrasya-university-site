@@ -19,4 +19,5 @@ urlpatterns = [
     path('api/payment-submit/', views.submit_payment_form, name='submit_payment_form'),
     path('api/registration-submit/', views.submit_registration_form, name='submit_registration_form'),
     path('cift_Anadal_yandal/',views.cift_Anadal_yandal,name='cift_Anadal_yandal'),
+    path('akademik_takvim/',views.akademik_takvim,name='akademik_takvim'),
 ]
