@@ -5,6 +5,8 @@ from .models import LeeDuyuru
 
 @receiver(post_save, sender=Duyuru)
 def sync_duyuru_to_lee(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     """
     وقتی یک اطلاعیه جدید در سیستم اصلی ایجاد می‌شود،
     به صورت اتوماتیک در LEE نیز کپی می‌شود.

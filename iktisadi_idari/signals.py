@@ -8,6 +8,8 @@ from django.core.files import File
 
 @receiver(post_save, sender=Duyuru)
 def create_iktisadi_idari_duyuru(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     """
     وقتی یک اطلاعیه جدید در سیستم اصلی ایجاد شد،
     اگر مربوط به دانشکده İktisadi İdari باشد، به صورت خودکار
@@ -63,6 +65,8 @@ def copy_attached_files(ana_duyuru, iktisadi_duyuru):
 
 @receiver(post_save, sender=Duyuru)
 def update_iktisadi_idari_duyuru(sender, instance, **kwargs):
+    if kwargs.get('raw'):
+        return
     """
     وقتی اطلاعیه اصلی آپدیت شد، اطلاعیه مربوطه در اپ دانشکده نیز آپدیت شود
     """

@@ -6,6 +6,8 @@ from .models import MeslekYuksekokuluDuyuru, MeslekYuksekokuluDosya
 
 @receiver(post_save, sender=Duyuru)
 def create_meslek_yuksekokulu_duyuru(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     if instance.fakulte == 'MYO' and instance.yayinda:
         try:
             meslek_yuksekokulu_duyuru, created = MeslekYuksekokuluDuyuru.objects.get_or_create(
@@ -50,6 +52,8 @@ def copy_attached_files(ana_duyuru, meslek_duyuru):
 
 @receiver(post_save, sender=Duyuru)
 def update_meslek_yuksekokulu_duyuru(sender, instance, **kwargs):
+    if kwargs.get('raw'):
+        return
     if instance.fakulte == 'MYO' and hasattr(instance, 'meslek_yuksekokulu_duyuru'):
         try:
             meslek_yuksekokulu_duyuru = instance.meslek_yuksekokulu_duyuru

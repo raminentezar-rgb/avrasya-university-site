@@ -6,6 +6,8 @@ from .models import SaglikBilimleriDuyuru, SaglikBilimleriDosya
 
 @receiver(post_save, sender=Duyuru)
 def create_saglik_bilimleri_duyuru(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     """
     وقتی یک اطلاعیه جدید در سیستم اصلی ایجاد شد،
     اگر مربوط به دانشکده Sağlık Bilimleri باشد، به صورت خودکار
@@ -61,6 +63,8 @@ def copy_attached_files(ana_duyuru, saglik_duyuru):
 
 @receiver(post_save, sender=Duyuru)
 def update_saglik_bilimleri_duyuru(sender, instance, **kwargs):
+    if kwargs.get('raw'):
+        return
     """
     وقتی اطلاعیه اصلی آپدیت شد، اطلاعیه مربوطه در اپ دانشکده نیز آپدیت شود
     """

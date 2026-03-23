@@ -6,6 +6,8 @@ from .models import UygulamaliBilimlerDuyuru, UygulamaliBilimlerDosya
 
 @receiver(post_save, sender=Duyuru)
 def create_uygulamali_bilimler_duyuru(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     if instance.fakulte == 'UBY' and instance.yayinda:  # Burada fakulte değerini kontrol edin
         try:
             uygulamali_bilimler_duyuru, created = UygulamaliBilimlerDuyuru.objects.get_or_create(
@@ -50,6 +52,8 @@ def copy_attached_files(ana_duyuru, uygulamali_duyuru):
 
 @receiver(post_save, sender=Duyuru)
 def update_uygulamali_bilimler_duyuru(sender, instance, **kwargs):
+    if kwargs.get('raw'):
+        return
     if instance.fakulte == 'UYG_BIL' and hasattr(instance, 'uygulamali_bilimler_duyuru'):  # Burada fakulte değerini kontrol edin
         try:
             uygulamali_bilimler_duyuru = instance.uygulamali_bilimler_duyuru

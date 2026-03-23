@@ -6,6 +6,8 @@ from .models import Payment, Registration
 
 @receiver(post_save, sender=Payment)
 def payment_status_change(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     """وقتی وضعیت پرداخت تغییر کرد"""
     if not created and instance.islem_durumu == 'basarili':
         # ارسال ایمیل تایید نهایی پرداخت
@@ -22,6 +24,8 @@ def payment_status_change(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=Registration)
 def registration_status_change(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     """وقتی وضعیت ثبت‌نام تغییر کرد"""
     if not created and instance.kayit_durumu == 'onaylandi':
         # ارسال ایمیل تایید نهایی ثبت‌نام

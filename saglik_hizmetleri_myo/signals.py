@@ -6,6 +6,8 @@ from .models import SaglikHizmetleriMYODuyuru, SaglikHizmetleriMYODosya
 
 @receiver(post_save, sender=Duyuru)
 def create_saglik_hizmetleri_myo_duyuru(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     if instance.fakulte == 'SHMYO' and instance.yayinda:
         try:
             saglik_hizmetleri_myo_duyuru, created = SaglikHizmetleriMYODuyuru.objects.get_or_create(
@@ -50,6 +52,8 @@ def copy_attached_files(ana_duyuru, saglik_hizmetleri_duyuru):
 
 @receiver(post_save, sender=Duyuru)
 def update_saglik_hizmetleri_myo_duyuru(sender, instance, **kwargs):
+    if kwargs.get('raw'):
+        return
     if instance.fakulte == 'SHMYO' and hasattr(instance, 'saglik_hizmetleri_myo_duyuru'):
         try:
             saglik_hizmetleri_myo_duyuru = instance.saglik_hizmetleri_myo_duyuru

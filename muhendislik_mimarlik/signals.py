@@ -6,6 +6,8 @@ from .models import MuhendislikMimarlikDuyuru
 
 @receiver(post_save, sender=Duyuru)
 def create_muhendislik_mimarlik_duyuru(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     """
     وقتی یک اطلاعیه جدید در سیستم اصلی ایجاد شد،
     اگر مربوط به دانشکده Mühendislik Mimarlık باشد، به صورت خودکار
@@ -40,6 +42,8 @@ def create_muhendislik_mimarlik_duyuru(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=Duyuru)
 def update_muhendislik_mimarlik_duyuru(sender, instance, **kwargs):
+    if kwargs.get('raw'):
+        return
     """
     وقتی اطلاعیه اصلی آپدیت شد، اطلاعیه مربوطه در اپ دانشکده نیز آپدیت شود
     """
