@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load cache %}
+{% get_current_language as CURRENT_LANG %}
 {% block title %}Avrasya Üniversitesi - Anasayfa {% endblock %}
 
 {% block content %}
@@ -21,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- Slider Section -->
+{% cache 3600 home_sliders CURRENT_LANG %}
 <section id="slider" class="mb-4">
 <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
 <div class="carousel-inner">
@@ -335,6 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- Announcements Section - جدید -->
+{% cache 3600 home_announcements CURRENT_LANG %}
 <section id="announcements" class="py-5 bg-white">
     <div class="container">
         <div class="row align-items-center mb-4">

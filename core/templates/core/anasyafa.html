@@ -1,6 +1,8 @@
-
 <!DOCTYPE html>
 {% load static %}
+{% load cache %}
+{% get_current_language as CURRENT_LANG %}
+{% cache 3600 anasyafa_page CURRENT_LANG %}
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -2191,3 +2193,4 @@
 	<script src="https://cdn2.axessora.com/axessorasecure.js"></script>
 	</body>
 </html>
+{% endcache %}

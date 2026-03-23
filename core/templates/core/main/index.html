@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
+{% load cache %}
+{% get_current_language as CURRENT_LANG %}
 <html lang="en">
 <head>
     <title>Avrasya University</title>
@@ -267,6 +269,7 @@
     </div>
 
     <!-- News Section -->
+    {% cache 3600 index_news CURRENT_LANG %}
     <section id="news" class="page_section">
         <div class="container">
             <div class="news-header">
@@ -380,8 +383,10 @@
             </div>
         </div>
     </section>
+    {% endcache %}
 
     <!-- Duyurular Section -->
+    {% cache 3600 index_announcements CURRENT_LANG %}
     <section id="announcements" class="page_section">
         <div class="container">
             <div class="announcements-header">
@@ -463,6 +468,7 @@
             </div>
         </div>
     </section>
+    {% endcache %}
 
     <!-- Register -->
     <div class="register">
