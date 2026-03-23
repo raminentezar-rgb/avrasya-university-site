@@ -74,3 +74,35 @@ class Notification(models.Model):
     
     def __str__(self):
         return f"{self.user.username}: {self.title[:50]}"
+
+class SupportThread(models.Model):
+    session_key = models.CharField(max_length=100, unique=True)
+    full_name = models.CharField(max_length=255, blank=True)
+    email = models.EmailField(blank=True)
+    language = models.CharField(max_length=10, default='tr')
+    assigned_staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_support_threads')
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Support Thread'
+        verbose_name_plural = 'Support Threads'
+        ordering = ['-updated_at']
+
+    def __str__(self):
+        return f'SupportSession: {self.full_name or self.session_key} ({self.language})'
+
+
+class SupportMessage(models.Model):
+    thread = models.ForeignKey(SupportThread, on_delete=models.CASCADE, related_name='support_messages')
+    sender_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    sender_name = models.CharField(max_length=255)
+    text = models.TextField()
+    is_staff = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Support Message'
+        verbose_name_plural = 'Support Messages'
+        ordering = ['created_at']

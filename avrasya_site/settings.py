@@ -6,6 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY, DEBUG, and ALLOWED_HOSTS are defined at the bottom of this file using environment variables.
 
 INSTALLED_APPS = [
+    'daphne',
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -13,8 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
-    'ckeditor_uploader',
+    'axes',
 
     # local apps
     'core',
@@ -148,7 +148,6 @@ INSTALLED_APPS = [
     # third-party
     'crispy_forms',
     'crispy_bootstrap5',
-    'axes',
 ]
 
 
@@ -359,15 +358,12 @@ CKEDITOR_CONFIGS = {
 
 
 # Channels configuration
-ASGI_APPLICATION = 'your_project.asgi.application'
+ASGI_APPLICATION = 'avrasya_site.asgi.application'
 
 # Redis configuration for channels
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+﻿from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -14,17 +14,23 @@ from django.utils.timesince import timesince
 @login_required
 def chat_index(request):
     """Render the main chat interface."""
-    # Sadece geçerli diğer kullanıcısı olan thread'leri al
+    # Sadece geÃ§erli diÄŸer kullanÄ±cÄ±sÄ± olan thread'leri al
     threads = request.user.threads.filter(is_active=True).prefetch_related(
         'participants', 'messages'
     ).annotate(
         unread_count=Count('messages', filter=Q(messages__is_read=False) & ~Q(messages__sender=request.user))
     )
     
-    # Get all users for starting new chats (kullanıcıyı hariç tut)
+    # Get all users for starting new chats (kullanÄ±cÄ±yÄ± hariÃ§ tut)
     users = User.objects.exclude(id=request.user.id).select_related('profile')
     
-    # Prepare threads data with other participant - sadece geçerli olanları ekle
+    # Prepare support threads for staff
+    support_threads = []
+    if request.user.is_staff:
+        from .models import SupportThread
+        support_threads = SupportThread.objects.filter(is_active=True).order_by('-updated_at')
+    
+    # Prepare threads data with other participant - sadece geÃ§erli olanlarÄ± ekle
     threads_with_participants = []
     for thread in threads:
         other_user = thread.get_other_participant(request.user)
@@ -36,9 +42,10 @@ def chat_index(request):
                 'last_message': thread.get_last_message()
             })
     
-    # Eğer hiç geçerli thread yoksa, boş liste gönder
+    # EÄŸer hiÃ§ geÃ§erli thread yoksa, boÅŸ liste gÃ¶nder
     context = {
         'threads_with_participants': threads_with_participants,
+        'support_threads': support_threads,
         'users': users,
         'has_valid_threads': len(threads_with_participants) > 0,
         'first_valid_thread': threads_with_participants[0] if threads_with_participants else None
@@ -60,14 +67,14 @@ def thread_messages(request, thread_id):
     start = (page - 1) * page_size
     end = start + page_size
     
-    # ابتدا کل کوئری را می‌گیریم
+    # Ø§Ø¨ØªØ¯Ø§ Ú©Ù„ Ú©ÙˆØ¦Ø±ÛŒ Ø±Ø§ Ù…ÛŒâ€ŒÚ¯ÛŒØ±ÛŒÙ…
     messages_query = thread.messages.select_related('sender').order_by('-created_at')
     
-    # ابتدا پیام‌های خوانده نشده را آپدیت می‌کنیم (قبل از اسلایس)
+    # Ø§Ø¨ØªØ¯Ø§ Ù¾ÛŒØ§Ù…â€ŒÙ‡Ø§ÛŒ Ø®ÙˆØ§Ù†Ø¯Ù‡ Ù†Ø´Ø¯Ù‡ Ø±Ø§ Ø¢Ù¾Ø¯ÛŒØª Ù…ÛŒâ€ŒÚ©Ù†ÛŒÙ… (Ù‚Ø¨Ù„ Ø§Ø² Ø§Ø³Ù„Ø§ÛŒØ³)
     unread_messages = messages_query.filter(is_read=False).exclude(sender=request.user)
     unread_messages.update(is_read=True, is_delivered=True)
     
-    # سپس اسلایس را اعمال می‌کنیم
+    # Ø³Ù¾Ø³ Ø§Ø³Ù„Ø§ÛŒØ³ Ø±Ø§ Ø§Ø¹Ù…Ø§Ù„ Ù…ÛŒâ€ŒÚ©Ù†ÛŒÙ…
     messages = list(messages_query[start:end])
     
     data = []
@@ -125,10 +132,10 @@ def send_message(request):
                 file=file
             )
             
-            # ارسال نوتیفیکیشن به سایر شرکت‌کنندگان
+            # Ø§Ø±Ø³Ø§Ù„ Ù†ÙˆØªÛŒÙÛŒÚ©ÛŒØ´Ù† Ø¨Ù‡ Ø³Ø§ÛŒØ± Ø´Ø±Ú©Øªâ€ŒÚ©Ù†Ù†Ø¯Ú¯Ø§Ù†
             other_users = thread.participants.exclude(id=request.user.id)
             for user in other_users:
-                if text:  # فقط اگر متن وجود داشت نوتیفیکیشن بفرست
+                if text:  # ÙÙ‚Ø· Ø§Ú¯Ø± Ù…ØªÙ† ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø´Øª Ù†ÙˆØªÛŒÙÛŒÚ©ÛŒØ´Ù† Ø¨ÙØ±Ø³Øª
                     Notification.objects.create(
                         user=user,
                         notification_type='message',
@@ -137,12 +144,12 @@ def send_message(request):
                         thread_id=thread.id,
                         sender_id=request.user.id
                     )
-                elif file:  # اگر فایل بود
+                elif file:  # Ø§Ú¯Ø± ÙØ§ÛŒÙ„ Ø¨ÙˆØ¯
                     Notification.objects.create(
                         user=user,
                         notification_type='message',
                         title=f'Yeni dosya: {request.user.get_full_name() or request.user.username}',
-                        message='Bir dosya gönderdi',
+                        message='Bir dosya gÃ¶nderdi',
                         thread_id=thread.id,
                         sender_id=request.user.id
                     )
@@ -251,9 +258,9 @@ def search_users(request):
 
 @login_required
 def edit_profile(request):
-    """ویرایش پروفایل کاربر"""
+    """ÙˆÛŒØ±Ø§ÛŒØ´ Ù¾Ø±ÙˆÙØ§ÛŒÙ„ Ú©Ø§Ø±Ø¨Ø±"""
     if request.method == 'POST':
-        # بروزرسانی اطلاعات کاربر
+        # Ø¨Ø±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ú©Ø§Ø±Ø¨Ø±
         user = request.user
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -266,9 +273,9 @@ def edit_profile(request):
         if email:
             user.email = email
         
-        # بروزرسانی عکس پروفایل
+        # Ø¨Ø±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ø¹Ú©Ø³ Ù¾Ø±ÙˆÙØ§ÛŒÙ„
         if request.FILES.get('avatar'):
-            # حذف عکس قبلی اگر وجود دارد
+            # Ø­Ø°Ù Ø¹Ú©Ø³ Ù‚Ø¨Ù„ÛŒ Ø§Ú¯Ø± ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø±Ø¯
             if hasattr(user, 'profile') and user.profile.avatar:
                 if os.path.isfile(user.profile.avatar.path):
                     os.remove(user.profile.avatar.path)
@@ -278,50 +285,65 @@ def edit_profile(request):
                 user.profile.save()
         
         user.save()
-        messages.success(request, 'پروفایل با موفقیت بروزرسانی شد.')
+        messages.success(request, 'Ù¾Ø±ÙˆÙØ§ÛŒÙ„ Ø¨Ø§ Ù…ÙˆÙÙ‚ÛŒØª Ø¨Ø±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ø´Ø¯.')
         return redirect('chat:index')
     
-    # اگر درخواست GET باشد، صفحه ویرایش پروفایل را نمایش می‌دهیم
+    # Ø§Ú¯Ø± Ø¯Ø±Ø®ÙˆØ§Ø³Øª GET Ø¨Ø§Ø´Ø¯ØŒ ØµÙØ­Ù‡ ÙˆÛŒØ±Ø§ÛŒØ´ Ù¾Ø±ÙˆÙØ§ÛŒÙ„ Ø±Ø§ Ù†Ù…Ø§ÛŒØ´ Ù…ÛŒâ€ŒØ¯Ù‡ÛŒÙ…
     return render(request, 'chat/edit_profile.html', {'user': request.user})
 
 
 @login_required
-def get_notifications(request):
-    """دریافت نوتیفیکیشن‌های کاربر"""
-    notifications = Notification.objects.filter(user=request.user)[:50]
-    unread_count = Notification.objects.filter(user=request.user, is_read=False).count()
-    
-    data = [{
-        'id': n.id,
-        'type': n.notification_type,
-        'title': n.title,
-        'message': n.message,
-        'thread_id': n.thread_id,
-        'sender_id': n.sender_id,
-        'is_read': n.is_read,
-        'created_at': n.created_at.strftime('%Y-%m-%d %H:%M'),
-        'time_ago': timesince(n.created_at) + ' önce' if n.created_at else ''
-    } for n in notifications]
-    
-    return JsonResponse({
-        'notifications': data,
-        'unread_count': unread_count
-    })
 
+@login_required
+def get_notifications(request):
+    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')[:50]
+    unread_count = Notification.objects.filter(user=request.user, is_read=False).count()
+    data = []
+    for n in notifications:
+        data.append({
+            'id': n.id,
+            'type': n.notification_type,
+            'title': n.title,
+            'message': n.message,
+            'thread_id': n.thread_id,
+            'sender_id': n.sender_id,
+            'is_read': n.is_read,
+            'created_at': n.created_at.strftime('%Y-%m-%d %H:%M')
+        })
+    return JsonResponse({'notifications': data, 'unread_count': unread_count})
 
 @login_required
 def mark_notification_read(request):
-    """علامت‌گذاری نوتیفیکیشن به عنوان خوانده شده"""
     if request.method == 'POST':
-        data = json.loads(request.body)
-        notification_id = data.get('notification_id')
-        
-        if notification_id:
-            Notification.objects.filter(id=notification_id, user=request.user).update(is_read=True)
-        else:
-            # Mark all as read
-            Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
-        
-        return JsonResponse({'success': True})
-    
+        import json
+        try:
+            data = json.loads(request.body)
+            notification_id = data.get('notification_id')
+            if notification_id:
+                Notification.objects.filter(id=notification_id, user=request.user).update(is_read=True)
+            else:
+                Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
+            return JsonResponse({'success': True})
+        except:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@login_required
+def get_support_messages(request, session_key):
+    if not request.user.is_staff:
+        return JsonResponse({'success': False, 'error': 'Yetkisiz erişim'})
+    from .models import SupportThread, SupportMessage
+    try:
+        thread = SupportThread.objects.get(session_key=session_key)
+        messages = thread.support_messages.all().order_by('created_at')
+        data = []
+        for msg in messages:
+            data.append({
+                'text': msg.text,
+                'sender_name': msg.sender_name,
+                'is_staff': msg.is_staff,
+                'created_at': msg.created_at.strftime('%H:%M')
+            })
+        return JsonResponse({'success': True, 'messages': data, 'visitor_name': thread.full_name})
+    except SupportThread.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Oturum bulunamadı'})

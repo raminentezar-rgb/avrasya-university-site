@@ -1,0 +1,319 @@
+{% load i18n %}
+{% load static %}
+
+<!-- Live Support Widget -->
+<div id="live-support-widget" class="live-support-minimized">
+    <div id="live-support-button" class="live-support-circle">
+        <i class="fas fa-comments"></i>
+        <div class="support-notification-badge" id="support-badge" style="display: none;">0</div>
+    </div>
+
+    <div id="live-support-window" style="display: none;">
+        <div class="support-header">
+            <div class="support-title">{% trans "Canlı Destek" %}</div>
+            <div class="support-controls">
+                <button id="close-support"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        
+        <div id="support-onboarding" class="support-body">
+            <p>{% trans "Merhaba! Size nasıl yardımcı olabiliriz?" %}</p>
+            <form id="support-init-form">
+                <div class="mb-3">
+                    <input type="text" id="support-name" class="form-control" placeholder="{% trans 'Adınız Soyadınız' %}" required>
+                </div>
+                <div class="mb-3">
+                    <select id="support-lang" class="form-control">
+                        <option value="tr">Türkçe</option>
+                        <option value="en">English</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">{% trans "Sohbete Başla" %}</button>
+            </form>
+        </div>
+
+        <div id="support-chat-container" class="support-body" style="display: none;">
+            <div id="support-messages" class="support-messages-list">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="support-input-area">
+                <textarea id="support-input" placeholder="{% trans 'Mesajınızı yazın...' %}" rows="1"></textarea>
+                <button id="send-support-msg"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #live-support-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .live-support-circle {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #1d61a9, #00d2ff);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .live-support-circle:hover {
+        transform: scale(1.1);
+    }
+
+    .support-notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #ff4d4d;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 10px;
+        border: 2px solid white;
+    }
+
+    #live-support-window {
+        width: 320px;
+        height: 450px;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .support-header {
+        background: #1d61a9;
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .support-title {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .support-controls button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .support-body {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .support-messages-list {
+        flex: 1;
+        overflow-y: auto;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .support-msg {
+        max-width: 80%;
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .support-msg-visitor {
+        align-self: flex-end;
+        background: #e1f5fe;
+        color: #1d61a9;
+        border-bottom-right-radius: 2px;
+    }
+
+    .support-msg-staff {
+        align-self: flex-start;
+        background: #f1f0f0;
+        color: #333;
+        border-bottom-left-radius: 2px;
+    }
+
+    .support-input-area {
+        display: flex;
+        gap: 5px;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+    }
+
+    #support-input {
+        flex: 1;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        padding: 8px 15px;
+        resize: none;
+        outline: none;
+        font-size: 14px;
+    }
+
+    #send-support-msg {
+        background: #1d61a9;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+
+    #send-support-msg:hover {
+        background: #00d2ff;
+    }
+</style>
+
+<script>
+    (function() {
+        console.log('Live Support Widget Loading...');
+        const supportBtn = document.getElementById('live-support-button');
+        const supportWindow = document.getElementById('live-support-window');
+        const closeBtn = document.getElementById('close-support');
+        const onboarding = document.getElementById('support-onboarding');
+        const chatContainer = document.getElementById('support-chat-container');
+        const initForm = document.getElementById('support-init-form');
+        const msgList = document.getElementById('support-messages');
+        const msgInput = document.getElementById('support-input');
+        const sendBtn = document.getElementById('send-support-msg');
+        const badge = document.getElementById('support-badge');
+
+        let socket = null;
+        let sessionKey = localStorage.getItem('support_session_key');
+        let visitorName = localStorage.getItem('support_visitor_name') || 'Ziyaretçi';
+        let unreadCount = 0;
+
+        if (!sessionKey) {
+            sessionKey = 'vis_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('support_session_key', sessionKey);
+        }
+
+        supportBtn.addEventListener('click', () => {
+            supportBtn.style.display = 'none';
+            supportWindow.style.display = 'flex';
+            unreadCount = 0;
+            updateBadge();
+            
+            if (localStorage.getItem('support_active') === 'true') {
+                showChat();
+                if (!socket) connectSocket();
+            } else {
+                onboarding.style.display = 'flex';
+                chatContainer.style.display = 'none';
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            supportWindow.style.display = 'none';
+            supportBtn.style.display = 'flex';
+        });
+
+        initForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            visitorName = document.getElementById('support-name').value;
+            localStorage.setItem('support_visitor_name', visitorName);
+            localStorage.setItem('support_active', 'true');
+            showChat();
+            connectSocket();
+        });
+
+        function showChat() {
+            onboarding.style.display = 'none';
+            chatContainer.style.display = 'flex';
+        }
+
+        function connectSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            socket = new WebSocket(`${protocol}://${window.location.host}/ws/support/${sessionKey}/`);
+
+            socket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                if (data.type === 'message') {
+                    addMessage(data.message, data.sender_name, data.is_staff);
+                    if (supportWindow.style.display === 'none') {
+                        unreadCount++;
+                        updateBadge();
+                    }
+                }
+            };
+
+            socket.onclose = function() {
+                console.error('Support socket closed');
+                // Auto reconnect?
+            };
+        }
+
+        function addMessage(text, sender, isStaff) {
+            const div = document.createElement('div');
+            div.className = `support-msg ${isStaff ? 'support-msg-staff' : 'support-msg-visitor'}`;
+            div.textContent = text;
+            msgList.appendChild(div);
+            msgList.scrollTop = msgList.scrollHeight;
+        }
+
+        function updateBadge() {
+            if (unreadCount > 0) {
+                badge.textContent = unreadCount;
+                badge.style.display = 'block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        msgInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const msg = msgInput.value.trim();
+            if (msg && socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify({
+                    'type': 'message',
+                    'message': msg,
+                    'sender_name': visitorName
+                }));
+                msgInput.value = '';
+            }
+        }
+    })();
+</script>

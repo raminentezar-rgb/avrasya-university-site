@@ -15,74 +15,30 @@
 
     <!-- Fonts and Styles -->
     <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/bootstrap4/bootstrap.min.css' %}">
-    <link href="{% static 'core/main/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet"
-        type="text/css">
+    <link href="{% static 'core/main/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* ===== Renk Değişkenleri ===== */
         :root {
-            --primary-dark-blue: #092442;
-            --secondary-medium-blue: #1d61a9;
-            --accent-light-blue: #8dd4e3;
-            --neutral-cream: #f6f2e7;
-            --pure-white: #FFFFFF;
-            --text-dark: #1a1a1a;
-            --text-light: #666666;
-            --border-light: #e9ecef;
+            --primary-dark-blue: #0a2b44;
+            --secondary-medium-blue: #1e6f9f;
+            --accent-light-blue: #7fc9e0;
+            --neutral-cream: #f8f6f0;
+            --pure-white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --border-light: #e2e8f0;
             --success-green: #28a745;
-            --warning-yellow: #ffc107;
-            --danger-red: #dc3545;
             --online-green: #2ecc71;
             --offline-gray: #95a5a6;
-            --message-sent: #dcf8c6;
+            --message-sent: #d4f1f9;
             --message-received: #ffffff;
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
-            --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.2);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
         }
 
-        /* Hero Section */
-        .research-hero {
-            background: linear-gradient(135deg, rgba(29, 97, 169, 0.5) 0%, rgba(9, 36, 66, 0.5) 100%), url('{% static 'core/img/akademik/Başlıksız-2.png' %}') !important;
-            padding: 80px 0 60px;
-            color: white;
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-            margin-top: 0px;
-        }
-
-        .research-hero:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
-        }
-
-        .research-hero-content h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            margin-top: 20px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .research-hero-content h2 {
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            font-family: 'Metropolis';
-            font-weight: 800;
-        }
-
-        /* ===== Temel Stiller ===== */
         * {
             margin: 0;
             padding: 0;
@@ -90,108 +46,88 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a2b44 0%, #1e6f9f 100%);
             min-height: 100vh;
             color: var(--text-dark);
-            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(10, 43, 68, 0.85) 0%, rgba(30, 111, 159, 0.85) 100%);
+            padding: 40px 0 30px;
+            text-align: center;
+            position: relative;
+            margin-top: 80px;
+
+        }
+
+        .hero-section h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            margin-top: 8px;
         }
 
         /* ===== Ana Sohbet Konteyneri ===== */
         .chat-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1600px;
-            height: 100vh;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
         .chat-container {
             display: flex;
             gap: 20px;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 32px;
-            padding: 20px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            height: calc(100vh - 180px);
+            min-height: 550px;
         }
 
-        /* ===== Kenar Çubuğu (Sohbet Listesi) ===== */
+        /* ===== Kenar Çubuğu ===== */
         .chat-sidebar {
-            width: 380px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            width: 340px;
+            background: var(--pure-white);
             border-radius: 24px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(141, 212, 227, 0.2);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .sidebar-header {
-            padding: 25px 20px;
+            padding: 20px;
             background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sidebar-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(141, 212, 227, 0.2) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
+            color: white;
         }
 
         .user-profile {
             display: flex;
             align-items: center;
             gap: 15px;
-            position: relative;
-            z-index: 2;
         }
 
         .user-avatar {
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: var(--accent-light-blue);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
+            font-weight: 600;
             color: var(--primary-dark-blue);
-            font-weight: 700;
-            border: 3px solid var(--pure-white);
-            box-shadow: var(--shadow-md);
+            border: 3px solid rgba(255,255,255,0.3);
             position: relative;
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
         }
 
         .online-status {
@@ -201,32 +137,27 @@
             width: 14px;
             height: 14px;
             background: var(--online-green);
-            border: 2px solid var(--pure-white);
+            border: 2px solid white;
             border-radius: 50%;
         }
 
         .user-info h3 {
-            color: var(--pure-white);
-            font-size: 18px;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin: 0 0 4px 0;
         }
 
         .user-info p {
-            color: var(--accent-light-blue);
-            font-size: 13px;
+            font-size: 0.75rem;
+            opacity: 0.8;
             margin: 0;
             display: flex;
             align-items: center;
             gap: 5px;
         }
 
-        .user-info p i {
-            font-size: 10px;
-        }
-
         .sidebar-search {
-            padding: 15px 20px;
+            padding: 16px 20px;
             border-bottom: 1px solid var(--border-light);
         }
 
@@ -236,7 +167,7 @@
 
         .search-box i {
             position: absolute;
-            left: 15px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-light);
@@ -245,52 +176,48 @@
 
         .search-box input {
             width: 100%;
-            padding: 12px 20px 12px 45px;
-            border: 2px solid transparent;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border-light);
             border-radius: 30px;
+            font-size: 0.85rem;
             background: var(--neutral-cream);
-            font-size: 14px;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
 
         .search-box input:focus {
             outline: none;
             border-color: var(--accent-light-blue);
-            background: var(--pure-white);
-            box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.1);
+            background: white;
         }
 
         .chat-tabs {
             display: flex;
-            padding: 15px 20px;
-            gap: 10px;
+            padding: 12px 20px;
+            gap: 8px;
             border-bottom: 1px solid var(--border-light);
+            background: white;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 10px;
+            padding: 8px 12px;
             border: none;
             background: transparent;
             border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 500;
             color: var(--text-light);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-        }
-
-        .tab-btn i {
-            font-size: 14px;
+            gap: 6px;
         }
 
         .tab-btn.active {
             background: var(--secondary-medium-blue);
-            color: var(--pure-white);
+            color: white;
         }
 
         .tab-btn:hover:not(.active) {
@@ -301,11 +228,11 @@
         .chat-list {
             flex: 1;
             overflow-y: auto;
-            padding: 10px;
+            padding: 12px;
         }
 
         .chat-list::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
 
         .chat-list::-webkit-scrollbar-track {
@@ -321,100 +248,101 @@
         .chat-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
+            gap: 12px;
+            padding: 12px;
             border-radius: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 5px;
-            position: relative;
+            transition: all 0.2s;
+            margin-bottom: 4px;
         }
 
         .chat-item:hover {
             background: var(--neutral-cream);
-            transform: translateX(5px);
         }
 
         .chat-item.active {
-            background: linear-gradient(135deg, rgba(29, 97, 169, 0.1), rgba(141, 212, 227, 0.1));
-            border-left: 4px solid var(--secondary-medium-blue);
+            background: linear-gradient(135deg, rgba(30, 111, 159, 0.08), rgba(127, 201, 224, 0.08));
+            border-left: 3px solid var(--secondary-medium-blue);
         }
 
         .chat-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent-light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--primary-dark-blue);
+            flex-shrink: 0;
             position: relative;
-            width: 50px;
-            height: 50px;
         }
 
         .chat-avatar img {
-            width: 50px;
-            height: 50px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-light-blue);
         }
 
-        .chat-avatar .status {
+        .status-dot {
             position: absolute;
             bottom: 2px;
             right: 2px;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            border: 2px solid var(--pure-white);
+            border: 2px solid white;
         }
 
-        .status.online {
-            background: var(--online-green);
-        }
-
-        .status.offline {
-            background: var(--offline-gray);
-        }
+        .status-dot.online { background: var(--online-green); }
+        .status-dot.offline { background: var(--offline-gray); }
 
         .chat-info {
             flex: 1;
+            min-width: 0;
         }
 
         .chat-name {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
+            align-items: baseline;
+            margin-bottom: 4px;
         }
 
         .chat-name h4 {
-            font-size: 16px;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: var(--text-dark);
             margin: 0;
+            color: var(--text-dark);
         }
 
         .chat-time {
-            font-size: 11px;
+            font-size: 0.7rem;
             color: var(--text-light);
         }
 
-        .chat-message {
+        .chat-message-preview {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .chat-message p {
-            font-size: 13px;
+        .chat-message-preview p {
+            font-size: 0.75rem;
             color: var(--text-light);
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 150px;
+            max-width: 160px;
         }
 
         .unread-badge {
             background: var(--secondary-medium-blue);
-            color: var(--pure-white);
-            font-size: 11px;
+            color: white;
+            font-size: 0.7rem;
             font-weight: 600;
             min-width: 20px;
             height: 20px;
@@ -428,121 +356,98 @@
         /* ===== Ana Sohbet Alanı ===== */
         .chat-main {
             flex: 1;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--pure-white);
             border-radius: 24px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(141, 212, 227, 0.2);
-            overflow: hidden;
+            box-shadow: var(--shadow-lg);
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .chat-header {
-            padding: 20px 25px;
-            background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
+            padding: 16px 24px;
+            background: white;
+            border-bottom: 1px solid var(--border-light);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .chat-header-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .header-avatar {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--accent-light-blue);
             background: var(--accent-light-blue);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-dark-blue);
             font-weight: 600;
-            font-size: 18px;
+            font-size: 1rem;
+            color: var(--primary-dark-blue);
         }
 
         .header-avatar img {
             width: 100%;
             height: 100%;
+            border-radius: 50%;
             object-fit: cover;
         }
 
         .header-text h3 {
-            color: var(--pure-white);
-            font-size: 18px;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin: 0 0 4px 0;
         }
 
         .header-text p {
-            color: var(--accent-light-blue);
-            font-size: 13px;
+            font-size: 0.7rem;
+            color: var(--text-light);
             margin: 0;
             display: flex;
             align-items: center;
-            gap: 5px;
-        }
-
-        .header-text p i {
-            font-size: 8px;
-        }
-
-        .chat-header-actions {
-            display: flex;
-            gap: 10px;
+            gap: 4px;
         }
 
         .header-btn {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            background: transparent;
             border: none;
-            color: var(--pure-white);
-            font-size: 16px;
+            color: var(--text-light);
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
+            transition: all 0.2s;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
         }
 
-        .header-btn:hover {
-            background: var(--accent-light-blue);
-            color: var(--primary-dark-blue);
-            transform: translateY(-2px);
+        .header-btn:hover:not(:disabled) {
+            background: var(--neutral-cream);
+            color: var(--secondary-medium-blue);
         }
 
         .header-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
-        }
-
-        .header-btn:disabled:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--pure-white);
-            transform: none;
         }
 
         /* ===== Mesajlar Alanı ===== */
         .messages-container {
             flex: 1;
             overflow-y: auto;
-            padding: 25px;
+            padding: 20px 24px;
             background: var(--neutral-cream);
-            background-image: radial-gradient(circle at 25% 25%, rgba(141, 212, 227, 0.05) 0%, transparent 50%);
         }
 
         .messages-container::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
 
         .messages-container::-webkit-scrollbar-track {
@@ -567,145 +472,93 @@
             top: 50%;
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-light-blue), transparent);
+            background: var(--border-light);
         }
 
         .date-text {
-            background: var(--pure-white);
-            padding: 5px 15px;
+            background: var(--neutral-cream);
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 0.7rem;
             color: var(--text-light);
             display: inline-block;
             position: relative;
             z-index: 2;
-            box-shadow: var(--shadow-sm);
         }
 
         .message-wrapper {
             display: flex;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.3s ease;
+            margin-bottom: 16px;
+            animation: fadeIn 0.2s ease;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .message-wrapper.sent {
-            justify-content: flex-end;
-        }
-
-        .message-wrapper.received {
-            justify-content: flex-start;
-        }
-
-        .message-content {
-            max-width: 65%;
-            display: flex;
-            gap: 10px;
-        }
-
-        .message-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            background: var(--accent-light-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-dark-blue);
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .message-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .message-wrapper.sent { justify-content: flex-end; }
+        .message-wrapper.received { justify-content: flex-start; }
 
         .message-bubble {
-            padding: 12px 16px;
+            max-width: 65%;
+            padding: 10px 14px;
             border-radius: 18px;
             position: relative;
-            word-wrap: break-word;
         }
 
         .sent .message-bubble {
             background: var(--secondary-medium-blue);
-            color: var(--pure-white);
+            color: white;
             border-bottom-right-radius: 4px;
         }
 
         .received .message-bubble {
-            background: var(--pure-white);
+            background: white;
             color: var(--text-dark);
             border-bottom-left-radius: 4px;
             box-shadow: var(--shadow-sm);
         }
 
         .message-text {
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 5px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            word-wrap: break-word;
         }
 
         .message-meta {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 5px;
-            font-size: 11px;
+            gap: 4px;
+            margin-top: 4px;
+            font-size: 0.65rem;
         }
 
-        .sent .message-meta {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .received .message-meta {
-            color: var(--text-light);
-        }
-
-        .message-meta i {
-            font-size: 12px;
-        }
-
-        .message-meta .read-status {
-            color: var(--accent-light-blue);
-        }
+        .sent .message-meta { color: rgba(255,255,255,0.7); }
+        .received .message-meta { color: var(--text-light); }
 
         /* Dosya Mesajları */
         .file-message {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 12px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            min-width: 250px;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 10px;
         }
 
+        .sent .file-message { background: rgba(255,255,255,0.15); }
+        .received .file-message { background: #f1f3f5; }
+
         .file-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--accent-light-blue);
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.2);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-dark-blue);
-            font-size: 20px;
         }
 
         .file-info {
@@ -713,87 +566,77 @@
         }
 
         .file-name {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 3px;
-            color: var(--text-dark);
+            font-size: 0.75rem;
+            font-weight: 500;
         }
 
         .file-size {
-            font-size: 11px;
-            color: var(--text-light);
+            font-size: 0.65rem;
+            opacity: 0.7;
         }
 
         .file-download {
-            color: var(--secondary-medium-blue);
-            font-size: 16px;
-            transition: all 0.3s ease;
+            color: inherit;
+            text-decoration: none;
         }
 
-        .file-download:hover {
-            transform: scale(1.1);
-            color: var(--primary-dark-blue);
-        }
-
-        /* Boş Durum Göstergeleri */
+        /* Boş Durum */
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             color: var(--text-light);
         }
 
         .empty-state i {
-            font-size: 64px;
+            font-size: 48px;
             color: var(--accent-light-blue);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             opacity: 0.5;
         }
 
         .empty-state h3 {
-            font-size: 20px;
+            font-size: 1.1rem;
             font-weight: 600;
+            margin-bottom: 8px;
             color: var(--text-dark);
-            margin-bottom: 10px;
         }
 
         .empty-state p {
-            font-size: 14px;
-            color: var(--text-light);
-            margin-bottom: 25px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
         }
 
         .empty-state-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
-            color: var(--pure-white);
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--secondary-medium-blue);
+            color: white;
             border: none;
             border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
+            transition: all 0.2s;
         }
 
         .empty-state-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            background: var(--primary-dark-blue);
+            transform: translateY(-1px);
         }
 
-        /* ===== Mesaj Gönderme Alanı ===== */
+        /* Mesaj Gönderme Alanı */
         .chat-footer {
-            padding: 20px 25px;
-            background: var(--pure-white);
+            padding: 16px 24px;
+            background: white;
             border-top: 1px solid var(--border-light);
         }
 
         .message-form {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .message-input-wrapper {
@@ -802,51 +645,45 @@
             align-items: center;
             background: var(--neutral-cream);
             border-radius: 30px;
-            padding: 5px 5px 5px 20px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
+            padding: 4px 4px 4px 18px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
         }
 
         .message-input-wrapper:focus-within {
             border-color: var(--accent-light-blue);
-            background: var(--pure-white);
-            box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.1);
+            background: white;
         }
 
         .message-input {
             flex: 1;
             border: none;
             background: transparent;
-            padding: 12px 0;
-            font-size: 14px;
+            padding: 10px 0;
+            font-size: 0.85rem;
             outline: none;
         }
 
         .message-input:disabled {
             background: transparent;
-            color: var(--text-light);
             cursor: not-allowed;
+            color: var(--text-light);
         }
 
         .attach-btn {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border: none;
             background: transparent;
             color: var(--text-light);
-            font-size: 18px;
             cursor: pointer;
-            transition: all 0.3s ease;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: all 0.2s;
         }
 
         .attach-btn:hover:not(:disabled) {
             background: var(--accent-light-blue);
-            color: var(--pure-white);
-            transform: rotate(45deg);
+            color: white;
         }
 
         .attach-btn:disabled {
@@ -855,624 +692,302 @@
         }
 
         .send-btn {
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border: none;
-            background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
-            color: var(--pure-white);
-            font-size: 18px;
+            background: var(--secondary-medium-blue);
+            color: white;
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
+            transition: all 0.2s;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-md);
         }
 
         .send-btn:hover:not(:disabled) {
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .send-btn:active:not(:disabled) {
-            transform: scale(0.95);
+            background: var(--primary-dark-blue);
+            transform: scale(1.05);
         }
 
         .send-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            background: linear-gradient(135deg, var(--text-light), var(--offline-gray));
         }
 
-        /* ===== Yeni Sohbet Modalı ===== */
+        /* Bildirimler */
+        .notifications-dropdown {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .notifications-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            position: relative;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s;
+        }
+
+        .notifications-btn:hover {
+            background: var(--accent-light-blue);
+            transform: scale(1.05);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+        }
+
+        .notifications-panel {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 340px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .notifications-panel.active { display: block; }
+
+        .notifications-header {
+            padding: 14px 18px;
+            background: var(--primary-dark-blue);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notifications-header h4 {
+            font-size: 0.9rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notifications-header button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .notifications-list {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .notification-item:hover { background: var(--neutral-cream); }
+        .notification-item.unread { background: #e8f4f8; }
+
+        .notification-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark-blue);
+        }
+
+        .notification-content { flex: 1; }
+        .notification-title { font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; }
+        .notification-message { font-size: 0.7rem; color: var(--text-light); }
+        .notification-time { font-size: 0.65rem; color: var(--text-light); margin-top: 4px; }
+
+        /* Modal */
         .new-chat-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(9, 36, 66, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 2000;
         }
 
-        .new-chat-modal.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
+        .new-chat-modal.active { display: flex; }
 
         .modal-content {
             width: 90%;
-            max-width: 500px;
-            background: var(--pure-white);
+            max-width: 480px;
+            background: white;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            transform: translateY(20px);
-            animation: slideUp 0.3s ease forwards;
-        }
-
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-            }
         }
 
         .modal-header {
-            padding: 20px 25px;
-            background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
-            color: var(--pure-white);
+            padding: 18px 20px;
+            background: var(--primary-dark-blue);
+            color: white;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
 
         .modal-header h3 {
+            font-size: 1.1rem;
             margin: 0;
-            font-size: 20px;
-            font-weight: 600;
         }
 
         .modal-close {
-            background: rgba(255, 255, 255, 0.2);
+            background: none;
             border: none;
-            color: var(--pure-white);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .modal-close:hover {
-            background: var(--accent-light-blue);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 25px;
-        }
-
-        .user-search {
-            margin-bottom: 20px;
-        }
-
-        .user-search input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid var(--border-light);
-            border-radius: 12px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .user-search input:focus {
-            outline: none;
-            border-color: var(--accent-light-blue);
-            box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.1);
-        }
-
-        .users-list {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .user-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .user-item:hover {
-            background: var(--neutral-cream);
-            border-color: var(--accent-light-blue);
-            transform: translateX(5px);
-        }
-
-        .user-item.selected {
-            background: linear-gradient(135deg, rgba(29, 97, 169, 0.1), rgba(141, 212, 227, 0.1));
-            border-color: var(--secondary-medium-blue);
-        }
-
-        .user-avatar-lg {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--accent-light-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: var(--primary-dark-blue);
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        .user-avatar-lg img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .user-details {
-            flex: 1;
-        }
-
-        .user-details h4 {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 5px;
-        }
-
-        .user-details p {
-            font-size: 13px;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        .user-role {
-            font-size: 12px;
-            color: var(--secondary-medium-blue);
-            font-weight: 500;
-        }
-
+        .modal-body { padding: 20px; }
         .modal-footer {
-            padding: 20px 25px;
+            padding: 16px 20px;
             border-top: 1px solid var(--border-light);
             display: flex;
             justify-content: flex-end;
             gap: 10px;
         }
 
-        .modal-btn {
-            padding: 12px 25px;
-            border: none;
+        .user-search input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
             border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin-bottom: 16px;
         }
 
-        .modal-btn.cancel {
-            background: var(--neutral-cream);
-            color: var(--text-light);
-        }
-
-        .modal-btn.start {
-            background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
-            color: var(--pure-white);
-        }
-
-        .modal-btn.start:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .modal-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* استایل‌های نوتیفیکیشن */
-        .notifications-dropdown {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 10000;
-            display: inline-block;
-        }
-
-        .notifications-btn {
-            position: relative;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 12px;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: var(--shadow-md);
-        }
-
-        .notifications-btn:hover {
-            background: var(--accent-light-blue);
-            color: var(--primary-dark-blue);
-            transform: translateY(-2px);
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--danger-red);
-            color: white;
-            font-size: 11px;
-            font-weight: 600;
-            min-width: 20px;
-            height: 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 6px;
-            border: 2px solid white;
-        }
-
-        .notifications-panel {
-            position: absolute;
-            top: 60px;
-            right: 0;
-            width: 380px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow-lg);
-            display: none;
-            z-index: 10001;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-
-        .notifications-panel.active {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .notifications-header {
-            padding: 15px 20px;
-            background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .notifications-header h4 {
-            margin: 0;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .notifications-header h4 i {
-            color: var(--accent-light-blue);
-        }
-
-        .notifications-header button {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 12px;
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .notifications-header button:hover {
-            background: var(--accent-light-blue);
-            color: var(--primary-dark-blue);
-        }
-
-        .notifications-list {
-            max-height: 400px;
+        .users-list {
+            max-height: 350px;
             overflow-y: auto;
-            background: #f8f9fa;
         }
 
-        .notifications-list::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .notifications-list::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .notifications-list::-webkit-scrollbar-thumb {
-            background: var(--accent-light-blue);
-            border-radius: 10px;
-        }
-
-        .notification-item {
+        .user-item {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 12px;
-            padding: 15px 20px;
-            border-bottom: 1px solid #e9ecef;
+            padding: 12px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
+            transition: all 0.2s;
         }
 
-        .notification-item:hover {
-            background: var(--neutral-cream);
-            transform: translateX(5px);
-        }
+        .user-item:hover { background: var(--neutral-cream); }
+        .user-item.selected { background: #e8f4f8; border-left: 3px solid var(--secondary-medium-blue); }
 
-        .notification-item.unread {
-            background: linear-gradient(135deg, rgba(29, 97, 169, 0.05), rgba(141, 212, 227, 0.05));
-            border-left: 3px solid var(--secondary-medium-blue);
-        }
-
-        .notification-icon {
-            width: 35px;
-            height: 35px;
-            background: var(--accent-light-blue);
+        .user-avatar-lg {
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
+            background: var(--accent-light-blue);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-dark-blue);
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-
-        .notification-content {
-            flex: 1;
-        }
-
-        .notification-title {
-            font-size: 14px;
             font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 3px;
         }
 
-        .notification-message {
-            font-size: 12px;
+        .user-details h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0 0 4px 0;
+        }
+
+        .user-details p {
+            font-size: 0.7rem;
             color: var(--text-light);
-            margin-bottom: 5px;
-            line-height: 1.4;
+            margin: 0;
         }
 
-        .notification-time {
-            font-size: 10px;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .notification-time i {
-            font-size: 6px;
-            color: var(--accent-light-blue);
-        }
-
-        .notifications-footer {
-            padding: 12px 20px;
-            text-align: center;
-            border-top: 1px solid #e9ecef;
-            background: white;
-        }
-
-        .notifications-footer a {
-            color: var(--secondary-medium-blue);
-            text-decoration: none;
-            font-size: 13px;
+        .modal-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: none;
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .notifications-footer a:hover {
-            color: var(--primary-dark-blue);
-            gap: 10px;
-        }
+        .modal-btn.cancel { background: var(--neutral-cream); }
+        .modal-btn.start { background: var(--secondary-medium-blue); color: white; }
+        .modal-btn.start:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* برای موبایل */
+        /* Responsive */
         @media (max-width: 768px) {
-            .notifications-dropdown {
-                top: 15px;
-                right: 15px;
-            }
-
-            .notifications-panel {
-                width: 320px;
-                right: -10px;
-            }
-
-            .notifications-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .notifications-panel {
-                width: 280px;
-            }
-
-            .notification-item {
-                padding: 12px 15px;
-            }
-        }
-
-        /* ===== Responsive Tasarım ===== */
-        @media (max-width: 1200px) {
-            .chat-sidebar {
-                width: 320px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .chat-container {
-                flex-direction: column;
-            }
-
-            .chat-sidebar {
-                width: 100%;
-                height: 400px;
-            }
-
-            .chat-main {
-                height: calc(100vh - 460px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .chat-wrapper {
-                padding: 10px;
-            }
-
-            .chat-container {
-                padding: 10px;
-            }
-
-            .message-content {
-                max-width: 85%;
-            }
-
-            .chat-header {
-                padding: 15px 20px;
-            }
-
-            .chat-footer {
-                padding: 15px 20px;
-            }
-
-            .header-text h3 {
-                font-size: 16px;
-            }
-
-            .header-text p {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .chat-header-info {
-                gap: 10px;
-            }
-
-            .header-avatar {
-                width: 40px;
-                height: 40px;
-            }
-
-            .header-text h3 {
-                font-size: 14px;
-            }
-
-            .message-meta {
-                font-size: 10px;
-            }
-
-            .file-message {
-                min-width: 200px;
-            }
-        }
-
-        /* Hareket hassasiyeti olanlar için */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition: none !important;
-            }
+            .chat-container { flex-direction: column; height: auto; }
+            .chat-sidebar { width: 100%; max-height: 350px; }
+            .chat-main { min-height: 500px; }
+            .hero-section h1 { font-size: 1.5rem; }
+            .message-bubble { max-width: 85%; }
+            .notifications-panel { width: 300px; right: -10px; }
         }
     </style>
 </head>
 
 <body>
 
-    <section class="research-hero">
+    <div class="hero-section">
         <div class="container">
-            <div class="research-hero-content">
-                <h1>{% trans "Akademik ve idari personel " %}</h1>
-                <h1>{% trans "İletişim Merkezi" %}</h1>
-            </div>
+            <h1>{% trans "Akademik ve İdari Personel" %}</h1>
+            <h1>{% trans "İletişim Merkezi" %}</h1>
         </div>
-    </section>
+    </div>
 
     <div class="notifications-dropdown">
         <button class="notifications-btn" onclick="toggleNotifications()">
             <i class="fas fa-bell"></i>
             <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
         </button>
-
         <div class="notifications-panel" id="notificationsPanel">
             <div class="notifications-header">
                 <h4><i class="fas fa-bell"></i> Bildirimler</h4>
-                <button onclick="markAllNotificationsRead()">{% trans "Tümünü okundu olarak işaretle" %}</button>
+                <button onclick="markAllNotificationsRead()">Tümünü okundu işaretle</button>
             </div>
-
-            <div class="notifications-list" id="notificationsList">
-                <!-- نوتیفیکیشن‌ها اینجا نمایش داده می‌شوند -->
-            </div>
+            <div class="notifications-list" id="notificationsList"></div>
         </div>
     </div>
 
     <div class="chat-wrapper">
         <div class="chat-container">
-            <!-- Sol Kenar Çubuğu - Sohbet Listesi -->
+            <!-- Sol Kenar Çubuğu -->
             <div class="chat-sidebar">
                 <div class="sidebar-header">
                     <div class="user-profile">
@@ -1486,7 +1001,7 @@
                         </div>
                         <div class="user-info">
                             <h3>{{ user.get_full_name|default:user.username }}</h3>
-                            <p><i class="fas fa-circle"></i> Çevrimiçi</p>
+                            <p><i class="fas fa-circle" style="font-size: 8px;"></i> Çevrimiçi</p>
                         </div>
                     </div>
                 </div>
@@ -1499,182 +1014,148 @@
                 </div>
 
                 <div class="chat-tabs">
-                    <button class="tab-btn active" data-tab="all" onclick="filterChats('all', event)">
-                        <i class="fas fa-comments"></i>
-                        Tümü
+                    <button class="tab-btn active" data-tab="all" onclick="switchChatTab('all', event)">
+                        <i class="fas fa-comments"></i> Tümü
                     </button>
-                    <button class="tab-btn" data-tab="unread" onclick="filterChats('unread', event)">
-                        <i class="fas fa-envelope"></i>
-                        Okunmamış
+                    {% if user.is_staff %}
+                    <button class="tab-btn" data-tab="support" onclick="switchChatTab('support', event)">
+                        <i class="fas fa-headset"></i> Canlı Destek
                     </button>
+                    {% endif %}
                 </div>
 
-                <!-- Sol Kenar Çubuğu - Sohbet Listesi -->
                 <div class="chat-list" id="chatList">
-                    <!-- Sohbet öğeleri dinamik olarak eklenecek -->
-                    {% for item in threads_with_participants %}
-                    <div class="chat-item {% if forloop.first %}active{% endif %}"
-                        data-thread-id="{{ item.thread.id }}">
-                        <div class="chat-avatar">
-                            {% if item.other_user.profile and item.other_user.profile.avatar %}
-                            <img src="{{ item.other_user.profile.avatar.url }}"
-                                alt="{{ item.other_user.get_full_name }}">
-                            {% else %}
-                            <div
-                                style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-light-blue); display: flex; align-items: center; justify-content: center; color: var(--primary-dark-blue); font-weight: 600;">
+                    <div id="supportList" style="display: none;">
+                        {% for s_thread in support_threads %}
+                        <div class="chat-item support-chat-item" data-session-key="{{ s_thread.session_key }}" onclick="openSupportChat('{{ s_thread.session_key }}')">
+                            <div class="chat-avatar">
+                                <i class="fas fa-user"></i>
+                                <span class="status-dot online"></span>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">
+                                    <h4>{{ s_thread.full_name|default:"Ziyaretçi" }}</h4>
+                                    <span class="chat-time">{{ s_thread.updated_at|date:'H:i' }}</span>
+                                </div>
+                                <div class="chat-message-preview">
+                                    <p>{{ s_thread.language|upper }} - {{ s_thread.session_key|truncatechars:12 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="empty-state" style="padding: 30px;">
+                            <p>Aktif destek oturumu yok</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div id="regularChatList">
+                        {% for item in threads_with_participants %}
+                        <div class="chat-item {% if forloop.first %}active{% endif %}" data-thread-id="{{ item.thread.id }}">
+                            <div class="chat-avatar">
+                                {% if item.other_user.profile and item.other_user.profile.avatar %}
+                                <img src="{{ item.other_user.profile.avatar.url }}" alt="{{ item.other_user.get_full_name }}">
+                                {% else %}
                                 {{ item.other_user.get_full_name|first|default:item.other_user.username|first|upper }}
-                            </div>
-                            {% endif %}
-                            <span class="status online"></span>
-                        </div>
-                        <div class="chat-info">
-                            <div class="chat-name">
-                                <h4>{{ item.other_user.get_full_name|default:item.other_user.username }}</h4>
-                                <span class="chat-time">
-                                    {% if item.last_message %}
-                                    {{ item.last_message.created_at|date:'H:i' }}
-                                    {% endif %}
-                                </span>
-                            </div>
-                            <div class="chat-message">
-                                <p>
-                                    {% if item.last_message %}
-                                    {% if item.last_message.sender == user %}
-                                    <i class="fas fa-check" style="font-size: 10px;"></i>
-                                    {% endif %}
-                                    {{ item.last_message.text|truncatechars:30 }}
-                                    {% else %}
-                                    Henüz mesaj yok
-                                    {% endif %}
-                                </p>
-                                {% if item.unread_count > 0 %}
-                                <span class="unread-badge">{{ item.unread_count }}</span>
                                 {% endif %}
+                                <span class="status-dot online"></span>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">
+                                    <h4>{{ item.other_user.get_full_name|default:item.other_user.username }}</h4>
+                                    <span class="chat-time">{% if item.last_message %}{{ item.last_message.created_at|date:'H:i' }}{% endif %}</span>
+                                </div>
+                                <div class="chat-message-preview">
+                                    <p>{% if item.last_message %}{% if item.last_message.sender == user %}<i class="fas fa-check" style="font-size: 8px;"></i> {% endif %}{{ item.last_message.text|truncatechars:28 }}{% else %}Henüz mesaj yok{% endif %}</p>
+                                    {% if item.unread_count > 0 %}<span class="unread-badge">{{ item.unread_count }}</span>{% endif %}
+                                </div>
                             </div>
                         </div>
+                        {% empty %}
+                        <div class="empty-state">
+                            <i class="fas fa-comments"></i>
+                            <h3>Henüz sohbetiniz yok</h3>
+                            <p>Yeni bir sohbet başlatın</p>
+                            <button class="empty-state-btn" onclick="openNewChatModal()"><i class="fas fa-plus-circle"></i> Yeni Sohbet</button>
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% empty %}
-                    <div class="empty-state">
-                        <i class="fas fa-comments"></i>
-                        <h3>Henüz hiç sohbetiniz yok</h3>
-                        <p>Yeni bir sohbet başlatmak için aşağıdaki butona tıklayın</p>
-                        <button class="empty-state-btn" onclick="openNewChatModal()">
-                            <i class="fas fa-plus-circle"></i>
-                            Yeni Sohbet Başlat
-                        </button>
-                    </div>
-                    {% endfor %}
                 </div>
 
                 {% if threads_with_participants %}
-                <div style="padding: 15px 20px; border-top: 1px solid var(--border-light);">
-                    <button class="tab-btn" style="width: 100%;" onclick="openNewChatModal()">
-                        <i class="fas fa-plus-circle"></i>
-                        Yeni Sohbet
-                    </button>
+                <div style="padding: 12px 20px 20px; border-top: 1px solid var(--border-light);">
+                    <button class="tab-btn" style="width: 100%;" onclick="openNewChatModal()"><i class="fas fa-plus-circle"></i> Yeni Sohbet</button>
                 </div>
                 {% endif %}
             </div>
 
             <!-- Ana Sohbet Alanı -->
             <div class="chat-main">
-                <!-- Sohbet Başlığı -->
                 <div class="chat-header">
                     <div class="chat-header-info">
                         <div class="header-avatar">
                             {% if first_valid_thread %}
-                            {% if first_valid_thread.other_user.profile and first_valid_thread.other_user.profile.avatar %}
-                            <img src="{{ first_valid_thread.other_user.profile.avatar.url }}"
-                                alt="{{ first_valid_thread.other_user.get_full_name }}">
+                                {% if first_valid_thread.other_user.profile and first_valid_thread.other_user.profile.avatar %}
+                                <img src="{{ first_valid_thread.other_user.profile.avatar.url }}" alt="">
+                                {% else %}
+                                {{ first_valid_thread.other_user.get_full_name|first|default:first_valid_thread.other_user.username|first|upper }}
+                                {% endif %}
                             {% else %}
-                            <span>{{ first_valid_thread.other_user.get_full_name|first|default:first_valid_thread.other_user.username|first|upper }}</span>
-                            {% endif %}
-                            {% else %}
-                            <img src="{% static 'core/img/default-avatar.png' %}" alt="Sohbet Seçin">
+                            <i class="fas fa-comment"></i>
                             {% endif %}
                         </div>
                         <div class="header-text">
-                            <h3 id="currentChatName">
-                                {% if first_valid_thread %}{{ first_valid_thread.other_user.get_full_name|default:first_valid_thread.other_user.username }}{% else %}Sohbet Seçin{% endif %}
-                            </h3>
-                            <p id="currentChatStatus">
-                                {% if first_valid_thread %}
-                                <i class="fas fa-circle"></i> Çevrimiçi
-                                {% else %}
-                                <i class="fas fa-circle"></i> Sohbet başlatın
-                                {% endif %}
-                            </p>
+                            <h3 id="currentChatName">{% if first_valid_thread %}{{ first_valid_thread.other_user.get_full_name|default:first_valid_thread.other_user.username }}{% else %}Sohbet Seçin{% endif %}</h3>
+                            <p id="currentChatStatus"><i class="fas fa-circle" style="font-size: 6px;"></i> {% if first_valid_thread %}Çevrimiçi{% else %}Sohbet başlatın{% endif %}</p>
                         </div>
                     </div>
-                    <div class="chat-header-actions">
-                        <button class="header-btn" onclick="toggleUserInfo()" {% if not first_valid_thread %}disabled{% endif %}>
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-                        {% if first_valid_thread %}
-                        <button class="header-btn" onclick="deleteCurrentThread()">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                        {% endif %}
+                    <div>
+                        <button class="header-btn" onclick="deleteCurrentThread()" {% if not first_valid_thread %}disabled{% endif %}><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
 
-                <!-- Mesajlar -->
                 <div class="messages-container" id="messagesContainer">
-                    {% if first_valid_thread %}
-                    <!-- Mesajlar dinamik olarak yüklenecek -->
-                    {% else %}
+                    {% if not first_valid_thread %}
                     <div class="empty-state">
                         <i class="fas fa-envelope-open-text"></i>
                         <h3>Sohbet başlatın</h3>
                         <p>Bir kullanıcı seçerek mesajlaşmaya başlayın</p>
-                        <button class="empty-state-btn" onclick="openNewChatModal()">
-                            <i class="fas fa-plus-circle"></i>
-                            Yeni Sohbet Başlat
-                        </button>
+                        <button class="empty-state-btn" onclick="openNewChatModal()"><i class="fas fa-plus-circle"></i> Yeni Sohbet</button>
                     </div>
                     {% endif %}
                 </div>
 
-                <!-- Mesaj Gönderme Alanı -->
                 <div class="chat-footer">
                     <form class="message-form" id="messageForm" onsubmit="sendMessage(event)">
                         <div class="message-input-wrapper">
-                            <input type="text" class="message-input" placeholder="Mesajınızı yazın..." id="messageInput"
-                                {% if not first_valid_thread %}disabled{% endif %}>
+                            <input type="text" class="message-input" placeholder="Mesajınızı yazın..." id="messageInput" {% if not first_valid_thread %}disabled{% endif %}>
                             <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(event)">
-                            <button type="button" class="attach-btn" onclick="document.getElementById('fileInput').click()" {% if not first_valid_thread %}disabled{% endif %}>
-                                <i class="fas fa-paperclip"></i>
-                            </button>
+                            <button type="button" class="attach-btn" onclick="document.getElementById('fileInput').click()" {% if not first_valid_thread %}disabled{% endif %}><i class="fas fa-paperclip"></i></button>
                         </div>
-                        <button type="submit" class="send-btn" {% if not first_valid_thread %}disabled{% endif %}>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
+                        <button type="submit" class="send-btn" {% if not first_valid_thread %}disabled{% endif %}><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Yeni Sohbet Modalı -->
+    <!-- Modal -->
     <div class="new-chat-modal" id="newChatModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fas fa-comment-medical"></i> Yeni Sohbet Başlat</h3>
-                <button class="modal-close" onclick="closeNewChatModal()">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3><i class="fas fa-comment-medical"></i> Yeni Sohbet</h3>
+                <button class="modal-close" onclick="closeNewChatModal()"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <div class="user-search">
                     <input type="text" placeholder="Kullanıcı ara..." id="userSearch" onkeyup="searchUsers()">
                 </div>
                 <div class="users-list" id="usersList">
-                    <!-- Kullanıcılar dinamik olarak listelenecek -->
                     {% for user_item in users %}
                     <div class="user-item" data-user-id="{{ user_item.id }}" onclick="selectUser(this)">
                         <div class="user-avatar-lg">
                             {% if user_item.profile and user_item.profile.avatar %}
-                            <img src="{{ user_item.profile.avatar.url }}" alt="{{ user_item.get_full_name }}">
+                            <img src="{{ user_item.profile.avatar.url }}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
                             {% else %}
                             {{ user_item.first_name|first|default:user_item.username|first|upper }}
                             {% endif %}
@@ -1682,7 +1163,6 @@
                         <div class="user-details">
                             <h4>{{ user_item.get_full_name|default:user_item.username }}</h4>
                             <p>{{ user_item.email }}</p>
-                            <span class="user-role">{{ user_item.profile.get_role_display|default:'Öğrenci' }}</span>
                         </div>
                     </div>
                     {% endfor %}
@@ -1696,218 +1176,116 @@
     </div>
 
     <script>
-        // Aktif sohbet ID'si
         let currentThreadId = {% if first_valid_thread %}{{ first_valid_thread.thread.id }}{% else %}null{% endif %};
         let selectedUserId = null;
+        let supportSocket = null;
+        let currentSupportSession = null;
 
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('Sayfa yüklendi, currentThreadId:', currentThreadId);
-
-            // Sohbet öğelerine tıklama
-            document.querySelectorAll('.chat-item').forEach(item => {
-                item.addEventListener('click', function () {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.chat-item[data-thread-id]').forEach(item => {
+                item.addEventListener('click', function() {
                     document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');
                     currentThreadId = this.dataset.threadId;
-
-                    const messageInput = document.getElementById('messageInput');
-                    const attachBtn = document.querySelector('.attach-btn');
-                    const sendBtn = document.querySelector('.send-btn');
-
-                    if (messageInput) messageInput.disabled = false;
-                    if (attachBtn) attachBtn.disabled = false;
-                    if (sendBtn) sendBtn.disabled = false;
-
+                    document.getElementById('messageInput').disabled = false;
+                    document.querySelector('.attach-btn').disabled = false;
+                    document.querySelector('.send-btn').disabled = false;
                     loadMessages(currentThreadId);
                     updateChatHeader(this);
                 });
             });
 
-            if (currentThreadId) {
-                loadMessages(currentThreadId);
-            }
+            if (currentThreadId) loadMessages(currentThreadId);
 
-            // Sohbet arama
-            const chatSearch = document.getElementById('chatSearch');
-            if (chatSearch) {
-                chatSearch.addEventListener('keyup', function (e) {
-                    const query = this.value.toLowerCase();
-                    document.querySelectorAll('.chat-item').forEach(item => {
-                        const name = item.querySelector('.chat-name h4').textContent.toLowerCase();
-                        item.style.display = name.includes(query) ? 'flex' : 'none';
-                    });
-                });
-            }
-
-            // Tab değiştirme
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    document.querySelectorAll('.chat-item').forEach(item => {
-                        item.style.display = 'flex';
-                    });
+            document.getElementById('chatSearch')?.addEventListener('keyup', function(e) {
+                const query = this.value.toLowerCase();
+                document.querySelectorAll('#regularChatList .chat-item').forEach(item => {
+                    const name = item.querySelector('.chat-name h4')?.textContent.toLowerCase() || '';
+                    item.style.display = name.includes(query) ? 'flex' : 'none';
                 });
             });
 
-            // Enter ile mesaj gönder
-            const messageInput = document.getElementById('messageInput');
-            if (messageInput) {
-                messageInput.addEventListener('keypress', function (e) {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        document.getElementById('messageForm').dispatchEvent(new Event('submit'));
-                    }
-                });
-            }
+            document.getElementById('messageInput')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    document.getElementById('messageForm').dispatchEvent(new Event('submit'));
+                }
+            });
 
-            // Modal dışına tıklayınca kapat
-            window.onclick = function (event) {
-                const modal = document.getElementById('newChatModal');
-                if (event.target === modal) closeNewChatModal();
-            }
-
-            // Notification'ları yükle
             fetchNotifications();
-            // Her 30 saniyede bir güncelle
             setInterval(fetchNotifications, 30000);
         });
 
-        // ========== MESAJ FONKSİYONLARI ==========
-
         function loadMessages(threadId) {
-    if (!threadId) return;
-
-    fetch(`/chat/thread/${threadId}/messages/`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.messages) {
-                renderMessages(data.messages);
-                if (data.messages.length > 0) markAsRead(threadId);
-                
-                // بعد از خواندن پیام‌ها، وضعیت okunmamış badge'leri güncelle
-                setTimeout(() => {
-                    // Active tab'e göre filtreleme yap
-                    const activeTab = document.querySelector('.tab-btn.active');
-                    if (activeTab && activeTab.dataset.tab === 'unread') {
-                        // Eğer okunmamış tab'i aktifse, tekrar filtrele
-                        const fakeEvent = { target: activeTab };
-                        filterChats('unread', fakeEvent);
-                    }
-                }, 500);
-            }
-        })
-        .catch(error => {
-            console.error('Mesajlar yüklenirken hata:', error);
-        });
-}
+            if (!threadId) return;
+            fetch(`/chat/thread/${threadId}/messages/`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.messages) renderMessages(data.messages);
+                })
+                .catch(err => console.error('Mesaj yükleme hatası:', err));
+        }
 
         function renderMessages(messages) {
             const container = document.getElementById('messagesContainer');
             container.innerHTML = '';
-
             if (!messages || messages.length === 0) {
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-comment-dots"></i><h3>Henüz mesaj yok</h3><p>Sohbete başlamak için bir mesaj yazın</p></div>';
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-comment-dots"></i><h3>Henüz mesaj yok</h3><p>İlk mesajı gönderin</p></div>';
                 return;
             }
 
             let lastDate = null;
-
             messages.forEach(msg => {
-                try {
-                    const messageDate = new Date(msg.created_at_full).toLocaleDateString('tr-TR');
+                const msgDate = new Date(msg.created_at_full).toLocaleDateString('tr-TR');
+                if (lastDate !== msgDate) {
+                    container.innerHTML += `<div class="message-date-divider"><span class="date-text">${msgDate}</span></div>`;
+                    lastDate = msgDate;
+                }
 
-                    if (lastDate !== messageDate) {
-                        const divider = document.createElement('div');
-                        divider.className = 'message-date-divider';
-                        divider.innerHTML = `<span class="date-text">${messageDate}</span>`;
-                        container.appendChild(divider);
-                        lastDate = messageDate;
-                    }
-
-                    const wrapper = document.createElement('div');
-                    wrapper.className = `message-wrapper ${msg.is_sent ? 'sent' : 'received'}`;
-
-                    let messageHtml = '';
-                    if (!msg.is_sent) {
-                        messageHtml += `
-                            <div class="message-content">
-                                <div class="message-avatar">
-                                    <span>${msg.sender_name ? msg.sender_name.charAt(0).toUpperCase() : '?'}</span>
-                                </div>
-                        `;
-                    } else {
-                        messageHtml += `<div class="message-content">`;
-                    }
-
-                    messageHtml += `<div class="message-bubble">`;
-
-                    if (msg.file_url) {
-                        const fileExt = msg.file_name ? msg.file_name.split('.').pop().toLowerCase() : '';
-                        let fileIcon = 'fa-file';
-                        if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExt)) fileIcon = 'fa-file-image';
-                        else if (['pdf'].includes(fileExt)) fileIcon = 'fa-file-pdf';
-                        else if (['doc', 'docx'].includes(fileExt)) fileIcon = 'fa-file-word';
-                        else if (['xls', 'xlsx'].includes(fileExt)) fileIcon = 'fa-file-excel';
-
-                        messageHtml += `
+                const isSent = msg.is_sent;
+                container.innerHTML += `
+                    <div class="message-wrapper ${isSent ? 'sent' : 'received'}">
+                        <div class="message-bubble">
+                            ${msg.file_url ? `
                             <div class="file-message">
-                                <div class="file-icon"><i class="fas ${fileIcon}"></i></div>
+                                <div class="file-icon"><i class="fas fa-file"></i></div>
                                 <div class="file-info">
                                     <div class="file-name">${msg.file_name || 'Dosya'}</div>
-                                    <div class="file-size">${msg.file_size ? (msg.file_size / 1024).toFixed(1) + ' KB' : 'Boyut bilinmiyor'}</div>
+                                    <div class="file-size">${msg.file_size ? (msg.file_size/1024).toFixed(1)+' KB' : ''}</div>
                                 </div>
-                                <a href="${msg.file_url}" class="file-download" download target="_blank"><i class="fas fa-download"></i></a>
+                                <a href="${msg.file_url}" class="file-download" download><i class="fas fa-download"></i></a>
                             </div>
-                        `;
-                    }
-
-                    if (msg.text) messageHtml += `<div class="message-text">${msg.text}</div>`;
-
-                    messageHtml += `
+                            ` : ''}
+                            ${msg.text ? `<div class="message-text">${escapeHtml(msg.text)}</div>` : ''}
                             <div class="message-meta">
                                 <span>${msg.created_at || ''}</span>
-                                ${msg.is_sent ? `<i class="fas ${msg.is_read ? 'fa-check-double read-status' : 'fa-check'}" title="${msg.is_read ? 'Okundu' : 'Gönderildi'}"></i>` : ''}
+                                ${isSent ? `<i class="fas ${msg.is_read ? 'fa-check-double' : 'fa-check'}"></i>` : ''}
                             </div>
                         </div>
-                    `;
-
-                    if (!msg.is_sent) messageHtml += `</div>`;
-                    messageHtml += `</div>`;
-
-                    wrapper.innerHTML = messageHtml;
-                    container.appendChild(wrapper);
-                } catch (error) {
-                    console.error('Mesaj render hatası:', error);
-                }
+                    </div>
+                `;
             });
-
             container.scrollTop = container.scrollHeight;
-        }
-
-        function markAsRead(threadId) {
-            fetch('/chat/mark-read/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
-                },
-                body: JSON.stringify({ thread_id: threadId })
-            }).catch(error => console.error('Okundu hatası:', error));
         }
 
         function sendMessage(event) {
             event.preventDefault();
-
-            const messageInput = document.getElementById('messageInput');
+            const input = document.getElementById('messageInput');
             const fileInput = document.getElementById('fileInput');
-            const text = messageInput.value.trim();
+            const text = input.value.trim();
             const file = fileInput.files[0];
 
             if (!text && !file) return;
-            if (!currentThreadId) {
-                alert('Lütfen önce bir sohbet seçin');
+            if (!currentThreadId && !currentSupportSession) {
+                alert('Lütfen bir sohbet seçin');
+                return;
+            }
+
+            if (currentSupportSession && document.querySelector('.tab-btn[data-tab="support"]')?.classList.contains('active')) {
+                if (supportSocket && supportSocket.readyState === WebSocket.OPEN) {
+                    supportSocket.send(JSON.stringify({ type: 'message', message: text, sender_name: '{{ user.get_full_name|default:user.username }}' }));
+                    input.value = '';
+                }
                 return;
             }
 
@@ -1915,390 +1293,214 @@
             formData.append('thread_id', currentThreadId);
             formData.append('text', text);
             if (file) formData.append('file', file);
-            formData.append('temp_id', Date.now());
 
             fetch('/chat/send/', {
                 method: 'POST',
                 headers: { 'X-CSRFToken': getCookie('csrftoken') },
                 body: formData
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        messageInput.value = '';
-                        fileInput.value = '';
-                        loadMessages(currentThreadId);
-                        setTimeout(fetchNotifications, 2000);
-                    } else {
-                        alert('Mesaj gönderilemedi: ' + (data.error || 'Bilinmeyen hata'));
-                    }
-                })
-                .catch(error => {
-                    console.error('Mesaj gönderme hatası:', error);
-                    alert('Mesaj gönderilirken bir hata oluştu');
-                });
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    input.value = '';
+                    fileInput.value = '';
+                    loadMessages(currentThreadId);
+                } else alert('Mesaj gönderilemedi');
+            })
+            .catch(err => console.error('Hata:', err));
         }
 
         function handleFileSelect(event) {
             const file = event.target.files[0];
-            if (file) {
-                if (file.size > 10 * 1024 * 1024) {
-                    alert('Dosya boyutu 10MB\'dan büyük olamaz');
-                    event.target.value = '';
-                    return;
-                }
-                sendMessage(new Event('submit'));
+            if (file && file.size > 10 * 1024 * 1024) {
+                alert('Dosya boyutu 10MB\'dan küçük olmalıdır');
+                event.target.value = '';
+                return;
             }
+            if (file) sendMessage(new Event('submit'));
         }
 
         function updateChatHeader(chatItem) {
-            const name = chatItem.querySelector('.chat-name h4').textContent;
+            const name = chatItem.querySelector('.chat-name h4')?.textContent || 'Sohbet';
             document.getElementById('currentChatName').textContent = name;
-            document.getElementById('currentChatStatus').innerHTML = '<i class="fas fa-circle"></i> Çevrimiçi';
+            document.getElementById('currentChatStatus').innerHTML = '<i class="fas fa-circle" style="font-size: 6px;"></i> Çevrimiçi';
         }
 
-        // ========== NOTIFICATION FONKSİYONLARI ==========
+        function switchChatTab(tab, event) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            const supportList = document.getElementById('supportList');
+            const regularList = document.getElementById('regularChatList');
+            if (tab === 'support') {
+                supportList.style.display = 'block';
+                regularList.style.display = 'none';
+            } else {
+                supportList.style.display = 'none';
+                regularList.style.display = 'block';
+            }
+        }
 
-        let unreadCount = 0;
+        function openSupportChat(sessionKey) {
+            currentSupportSession = sessionKey;
+            document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+            document.querySelector(`.chat-item[data-session-key="${sessionKey}"]`)?.classList.add('active');
+            if (supportSocket) supportSocket.close();
+
+            fetch(`/chat/support/${sessionKey}/messages/`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('currentChatName').textContent = data.visitor_name || 'Ziyaretçi';
+                        document.getElementById('currentChatStatus').innerHTML = '<i class="fas fa-circle" style="font-size: 6px;"></i> Canlı Destek';
+                        const container = document.getElementById('messagesContainer');
+                        container.innerHTML = '';
+                        data.messages.forEach(msg => {
+                            container.innerHTML += `
+                                <div class="message-wrapper ${msg.is_staff ? 'sent' : 'received'}">
+                                    <div class="message-bubble">
+                                        <div class="message-text">${escapeHtml(msg.text)}</div>
+                                        <div class="message-meta"><span>${msg.created_at || ''}</span></div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        container.scrollTop = container.scrollHeight;
+                        connectSupportSocket(sessionKey);
+                    }
+                });
+        }
+
+        function connectSupportSocket(sessionKey) {
+            const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            supportSocket = new WebSocket(`${protocol}://${window.location.host}/ws/support/${sessionKey}/`);
+            supportSocket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                if (data.type === 'message') {
+                    const container = document.getElementById('messagesContainer');
+                    container.innerHTML += `
+                        <div class="message-wrapper ${data.is_staff ? 'sent' : 'received'}">
+                            <div class="message-bubble">
+                                <div class="message-text">${escapeHtml(data.message)}</div>
+                                <div class="message-meta"><span>${data.created_at || ''}</span></div>
+                            </div>
+                        </div>
+                    `;
+                    container.scrollTop = container.scrollHeight;
+                }
+            };
+        }
 
         function fetchNotifications() {
             fetch('/chat/notifications/')
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
-                    updateNotificationBadge(data.unread_count || 0);
+                    const badge = document.getElementById('notificationBadge');
+                    if (data.unread_count > 0) {
+                        badge.textContent = data.unread_count > 99 ? '99+' : data.unread_count;
+                        badge.style.display = 'flex';
+                    } else badge.style.display = 'none';
                     renderNotifications(data.notifications || []);
-                })
-                .catch(error => console.error('Notifications hatası:', error));
-        }
-
-        function updateNotificationBadge(count) {
-            unreadCount = count;
-            document.title = count > 0 ? `(${count}) Sohbet | Avrasya Üniversitesi` : 'Sohbet | Avrasya Üniversitesi';
-
-            const badge = document.getElementById('notificationBadge');
-            if (badge) {
-                if (count > 0) {
-                    badge.textContent = count > 99 ? '99+' : count;
-                    badge.style.display = 'flex';
-                } else {
-                    badge.style.display = 'none';
-                }
-            }
+                });
         }
 
         function renderNotifications(notifications) {
             const container = document.getElementById('notificationsList');
             if (!container) return;
-
-            container.innerHTML = '';
-
-            if (!notifications || notifications.length === 0) {
-                container.innerHTML = '<div class="empty-notifications"><i class="fas fa-bell-slash"></i><p>Bildiriminiz yok</p></div>';
+            if (!notifications.length) {
+                container.innerHTML = '<div style="padding: 30px; text-align: center; color: #999;">Bildirim yok</div>';
                 return;
             }
-
-            notifications.forEach(notification => {
-                const notifItem = document.createElement('div');
-                notifItem.className = `notification-item ${notification.is_read ? '' : 'unread'}`;
-                notifItem.dataset.id = notification.id;
-                notifItem.onclick = () => openThreadFromNotification(notification.thread_id, notification.id);
-
-                const timeText = notification.created_at?.split(' ')[1] || '';
-
-                notifItem.innerHTML = `
+            container.innerHTML = notifications.map(n => `
+                <div class="notification-item ${n.is_read ? '' : 'unread'}" onclick="openThreadFromNotification(${n.thread_id}, ${n.id})">
                     <div class="notification-icon"><i class="fas fa-envelope"></i></div>
                     <div class="notification-content">
-                        <div class="notification-title">${notification.title || 'Yeni mesaj'}</div>
-                        <div class="notification-message">${notification.message || ''}</div>
-                        <div class="notification-time"><i class="fas fa-circle"></i> ${timeText}</div>
+                        <div class="notification-title">${escapeHtml(n.title || 'Yeni mesaj')}</div>
+                        <div class="notification-message">${escapeHtml(n.message || '')}</div>
+                        <div class="notification-time">${n.created_at?.split(' ')[1] || ''}</div>
                     </div>
-                `;
-
-                container.appendChild(notifItem);
-            });
+                </div>
+            `).join('');
         }
 
         function openThreadFromNotification(threadId, notificationId) {
             if (threadId) {
                 markNotificationRead(notificationId);
                 const chatItem = document.querySelector(`.chat-item[data-thread-id="${threadId}"]`);
-                if (chatItem) {
-                    chatItem.click();
-                    document.getElementById('notificationsPanel')?.classList.remove('active');
-                } else {
-                    window.location.href = `/chat/?thread=${threadId}`;
-                }
+                if (chatItem) chatItem.click();
+                else window.location.href = `/chat/?thread=${threadId}`;
+                document.getElementById('notificationsPanel')?.classList.remove('active');
             }
         }
 
         function markNotificationRead(notificationId = null) {
-            const data = notificationId ? { notification_id: notificationId } : {};
             fetch('/chat/notifications/mark-read/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) fetchNotifications();
-                })
-                .catch(error => console.error('Okundu hatası:', error));
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+                body: JSON.stringify(notificationId ? { notification_id: notificationId } : {})
+            }).then(() => fetchNotifications());
         }
 
-        function markAllNotificationsRead() {
-            markNotificationRead();
-        }
+        function markAllNotificationsRead() { markNotificationRead(); }
+        function toggleNotifications() { document.getElementById('notificationsPanel')?.classList.toggle('active'); }
 
-        // استایل‌های اضافی
-        const style = document.createElement('style');
-        style.textContent = `
-            .empty-notifications { text-align: center; padding: 40px 20px; color: var(--text-light); }
-            .empty-notifications i { font-size: 48px; color: var(--accent-light-blue); margin-bottom: 15px; opacity: 0.5; }
-            .empty-notifications p { font-size: 14px; margin: 0; }
-            .no-results { text-align: center; padding: 30px 20px; color: var(--text-light); font-size: 14px; }
-        `;
-        document.head.appendChild(style);
+        function openNewChatModal() { document.getElementById('newChatModal').classList.add('active'); }
+        function closeNewChatModal() { document.getElementById('newChatModal').classList.remove('active'); }
 
-        // ========== NOTIFICATION UI ==========
-
-        function toggleNotifications() {
-            const panel = document.getElementById('notificationsPanel');
-            panel.classList.toggle('active');
-            if (panel.classList.contains('active')) {
-                fetchNotifications();
-            }
-        }
-
-        document.addEventListener('click', function (event) {
-            const panel = document.getElementById('notificationsPanel');
-            const btn = document.querySelector('.notifications-btn');
-            if (panel && btn && !btn.contains(event.target) && !panel.contains(event.target)) {
-                panel.classList.remove('active');
-            }
-        });
-
-        // ========== CHAT MODAL FONKSİYONLARI ==========
-
-        function openNewChatModal() {
-            document.getElementById('newChatModal').classList.add('active');
-            document.getElementById('startChatBtn').disabled = true;
-            selectedUserId = null;
-            
-            // Remove selected class from all items
-            document.querySelectorAll('#usersList .user-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-        }
-
-        function closeNewChatModal() {
-            document.getElementById('newChatModal').classList.remove('active');
-            selectedUserId = null;
-            document.getElementById('startChatBtn').disabled = true;
-            
-            // Remove selected class from all items
-            document.querySelectorAll('#usersList .user-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            
-            // Clear search input
-            document.getElementById('userSearch').value = '';
-        }
-
-        // Kullanıcı seç fonksiyonu
         function selectUser(element) {
-            // Tüm seçimleri kaldır
-            document.querySelectorAll('#usersList .user-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-
-            // Bu elementi seç
+            document.querySelectorAll('#usersList .user-item').forEach(i => i.classList.remove('selected'));
             element.classList.add('selected');
-
-            // ID'yi al
-            selectedUserId = element.getAttribute('data-user-id');
-
-            // Butonu aktif et
+            selectedUserId = element.dataset.userId;
             document.getElementById('startChatBtn').disabled = false;
-            
-            console.log('Seçilen kullanıcı ID:', selectedUserId);
         }
 
-        // Kullanıcı ara fonksiyonu
         function searchUsers() {
             const query = document.getElementById('userSearch').value;
-
-            if (query.length < 2) {
-                // Arama boşsa, sayfayı yenile
-                location.reload();
-                return;
-            }
-
+            if (query.length < 2) return;
             fetch(`/chat/search-users/?q=${encodeURIComponent(query)}`)
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
-                    const usersList = document.getElementById('usersList');
-                    usersList.innerHTML = '';
-
-                    if (data.users.length === 0) {
-                        usersList.innerHTML = '<div class="no-results">Kullanıcı bulunamadı</div>';
-                        return;
-                    }
-
-                    data.users.forEach(user => {
-                        const userItem = document.createElement('div');
-                        userItem.className = 'user-item';
-                        userItem.setAttribute('data-user-id', user.id);
-                        userItem.setAttribute('onclick', 'selectUser(this)');
-
-                        const firstChar = user.name ? user.name.charAt(0).toUpperCase() : '?';
-
-                        userItem.innerHTML = `
-                            <div class="user-avatar-lg">
-                                ${user.avatar ? `<img src="${user.avatar}" alt="${user.name}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">` : firstChar}
-                            </div>
-                            <div class="user-details">
-                                <h4>${user.name}</h4>
-                                <p>${user.email}</p>
-                                <span class="user-role">${user.role || 'Staff'}</span>
-                            </div>
-                        `;
-
-                        usersList.appendChild(userItem);
-                    });
-                })
-                .catch(error => {
-                    console.error('Arama hatası:', error);
+                    const list = document.getElementById('usersList');
+                    list.innerHTML = data.users.map(u => `
+                        <div class="user-item" data-user-id="${u.id}" onclick="selectUser(this)">
+                            <div class="user-avatar-lg">${u.avatar ? `<img src="${u.avatar}" style="width:100%;height:100%;border-radius:50%;">` : (u.name?.charAt(0) || '?')}</div>
+                            <div class="user-details"><h4>${escapeHtml(u.name)}</h4><p>${escapeHtml(u.email)}</p></div>
+                        </div>
+                    `).join('');
                 });
         }
 
-        // Yeni sohbet başlat
         function startNewChat() {
-            if (!selectedUserId) {
-                alert('Lütfen bir kullanıcı seçin');
-                return;
-            }
-
+            if (!selectedUserId) return;
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = '/chat/start/';
-            form.style.display = 'none';
-
-            const csrfInput = document.createElement('input');
-            csrfInput.type = 'hidden';
-            csrfInput.name = 'csrfmiddlewaretoken';
-            csrfInput.value = getCookie('csrftoken');
-
-            const userInput = document.createElement('input');
-            userInput.type = 'hidden';
-            userInput.name = 'target_user_id';
-            userInput.value = selectedUserId;
-
-            form.appendChild(csrfInput);
-            form.appendChild(userInput);
+            form.innerHTML = `<input type="hidden" name="csrfmiddlewaretoken" value="${getCookie('csrftoken')}"><input type="hidden" name="target_user_id" value="${selectedUserId}">`;
             document.body.appendChild(form);
             form.submit();
         }
 
-        // Sohbet sil
         function deleteCurrentThread() {
             if (!currentThreadId) return;
-
             if (confirm('Bu sohbeti silmek istediğinizden emin misiniz?')) {
                 fetch(`/chat/thread/${currentThreadId}/delete/`, {
                     method: 'POST',
                     headers: { 'X-CSRFToken': getCookie('csrftoken') }
-                })
-                    .then(response => response.json())
-                    .then(data => { if (data.success) location.reload(); });
+                }).then(res => res.json()).then(data => { if (data.success) location.reload(); });
             }
         }
-
-        // Kullanıcı bilgisi
-        function toggleUserInfo() {
-            if (!currentThreadId) {
-                alert('Lütfen önce bir sohbet seçin');
-                return;
-            }
-            window.location.href = '/chat/profile/';
-        }
-
-        // ========== COOKIE ==========
 
         function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                document.cookie.split(';').forEach(cookie => {
-                    const c = cookie.trim();
-                    if (c.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(c.substring(name.length + 1));
-                    }
+            let value = null;
+            if (document.cookie) {
+                document.cookie.split(';').forEach(c => {
+                    const cookie = c.trim();
+                    if (cookie.startsWith(name + '=')) value = decodeURIComponent(cookie.substring(name.length + 1));
                 });
             }
-            return cookieValue;
+            return value;
         }
 
-        // ========== CHAT FILTER FUNCTIONS ==========
-function filterChats(filterType, event) {
-    // Update active tab styling
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    const chatItems = document.querySelectorAll('.chat-item');
-    let visibleCount = 0;
-    
-    chatItems.forEach(item => {
-        const unreadBadge = item.querySelector('.unread-badge');
-        const hasUnread = unreadBadge && parseInt(unreadBadge.textContent) > 0;
-        
-        if (filterType === 'all') {
-            item.style.display = 'flex';
-            visibleCount++;
-        } else if (filterType === 'unread') {
-            if (hasUnread) {
-                item.style.display = 'flex';
-                visibleCount++;
-            } else {
-                item.style.display = 'none';
-            }
-        }
-    });
-    
-    // Show or hide empty state message
-    const chatList = document.getElementById('chatList');
-    const existingEmptyState = chatList.querySelector('.filter-empty-state');
-    
-    if (visibleCount === 0) {
-        // Remove existing empty state if any
-        if (existingEmptyState) {
-            existingEmptyState.remove();
-        }
-        
-        // Create new empty state
-        const emptyDiv = document.createElement('div');
-        emptyDiv.className = 'empty-state filter-empty-state';
-        emptyDiv.innerHTML = `
-            <i class="fas fa-envelope-open-text"></i>
-            <h3>Okunmamış mesaj yok</h3>
-            <p>Tüm mesajlarınız okundu</p>
-        `;
-        chatList.appendChild(emptyDiv);
-    } else {
-        // Remove empty state if there are visible items
-        if (existingEmptyState) {
-            existingEmptyState.remove();
-        }
-    }
-}
-
-
-
-        
+        function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
     </script>
 </body>
-
 </html>

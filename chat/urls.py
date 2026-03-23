@@ -34,6 +34,7 @@ urlpatterns = [
 
     path('notifications/', views.get_notifications, name='notifications'),
     path('notifications/mark-read/', views.mark_notification_read, name='mark_notification_read'),
+    path('support/<str:session_key>/messages/', views.get_support_messages, name='get_support_messages'),
 ]
 
 # اضافه کردن مسیر فایل‌های مدیا در حالت توسعه
