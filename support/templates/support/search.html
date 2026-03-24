@@ -81,7 +81,7 @@
         </div>
     </div>
     <!-- Quick Access Chips -->
-    <div class="quick-access-chips mt-4 animate-fade-in">
+    <div class="quick-access-chips mt-4 animate-fade-in" style="margin-bottom: 33px;">
         <a href="{% url 'support:create_ticket' %}" class="chip-item"><i class="fas fa-plus"></i> Yeni Talep</a>
         <a href="{% url 'support:faq_list' %}" class="chip-item"><i class="fas fa-question-circle"></i> SSS</a>
         <a href="{% url 'support:my_tickets' %}" class="chip-item"><i class="fas fa-history"></i> Taleplerim</a>
@@ -89,7 +89,7 @@
 </div>
 
 <!-- محتوای اصلی -->
-<div class="container main-content-layout">
+{% comment %} <div class="container main-content-layout">
     {% if query %}
     <!-- Search Results View -->
     <div class="results-layout animate-slide-up">
@@ -177,7 +177,7 @@
     </div>
     {% else %}
     <!-- Landing View -->
-    {% comment %} <div class="landing-layout">
+     <div class="landing-layout">
         <h2 class="section-title-premium text-center mb-5">Popüler Konular</h2>
         <div class="popular-topics-grid animate-slide-up">
             {% for topic in popular_topics %}
@@ -213,11 +213,11 @@
                 <a href="?q=ücret" class="f-link">İncele</a>
             </div>
         </div>
-    </div> {% endcomment %}
+    </div> 
     {% endif %}
 
     <!-- Premium WhatsApp Banner -->
-    {% comment %} <div class="wa-banner-premium mt-5 animate-fade-in shadow-xl">
+     <div class="wa-banner-premium mt-5 animate-fade-in shadow-xl">
         <div class="wa-bg-pattern"></div>
         <div class="wa-flex-container">
             <div class="wa-left">
@@ -240,8 +240,8 @@
                 </a>
             </div>
         </div>
-    </div> {% endcomment %}
-</div>
+    </div> 
+</div> {% endcomment %}
 
 
 
