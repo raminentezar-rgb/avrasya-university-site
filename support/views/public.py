@@ -2,7 +2,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.http import JsonResponse
-from django.db.models import Q, Count
+from django.db.models import Q, Count, CharField, TextField
+from django.apps import apps
 from support.models import FAQ, KnowledgeBase, ImportantLink, Department, Category, Tag
 from django.core.paginator import Paginator
 
@@ -16,6 +17,8 @@ def support_search(request):
         'categories': [],
         'tags': [],
     }
+    
+    all_results = []
     
     if query:
         # جستجوی هوشمند در FAQ
@@ -51,47 +54,120 @@ def support_search(request):
         results['tags'] = Tag.objects.filter(
             Q(name__icontains=query)
         )
-    
-    # ترکیب و مرتب‌سازی نتایج
-    all_results = []
-    
-    # FAQ‌ها با اولویت بالا
-    for faq in results['faqs']:
-        all_results.append({
-            'type': 'faq',
-            'title': faq.question,
-            'content': faq.answer,
-            'category': 'SSS',
-            'department': faq.department.name if faq.department else 'Genel',
-            'created_at': None,
-            'url': reverse('support:faq_detail', kwargs={'pk': faq.pk}),
-        })
-    
-    # مطالب پایگاه دانش
-    for kb in results['knowledge']:
-        all_results.append({
-            'id': kb.pk,
-            'type': kb.content_type,
-            'title': kb.title,
-            'content': kb.content,
-            'category': kb.category.name if kb.category else 'Bilgi Bankası',
-            'department': kb.department.name if kb.department else 'Genel',
-            'created_at': kb.created_at,
-            'url': reverse('support:knowledge_detail', kwargs={'pk': kb.pk}),
-        })
-    
-    # لینک‌های مهم
-    for link in results['links']:
-        all_results.append({
-            'type': 'link',
-            'title': link.title,
-            'content': link.description,
-            'category': 'Bağlantı',
-            'department': '',
-            'created_at': None,
-            'url': link.url,
-        })
-    
+
+        # FAQ‌ها با اولویت بالا
+        for faq in results['faqs']:
+            all_results.append({
+                'type': 'faq',
+                'title': faq.question,
+                'content': faq.answer,
+                'category': 'SSS',
+                'department': faq.department.name if faq.department else 'Genel',
+                'created_at': None,
+                'url': reverse('support:faq_detail', kwargs={'pk': faq.pk}),
+            })
+        
+        # مطالب پایگاه دانش
+        for kb in results['knowledge']:
+            all_results.append({
+                'id': kb.pk,
+                'type': kb.content_type,
+                'title': kb.title,
+                'content': kb.content,
+                'category': kb.category.name if kb.category else 'Bilgi Bankası',
+                'department': kb.department.name if kb.department else 'Genel',
+                'created_at': kb.created_at,
+                'url': reverse('support:knowledge_detail', kwargs={'pk': kb.pk}),
+            })
+        
+        # لینک‌های مهم
+        for link in results['links']:
+            all_results.append({
+                'type': 'link',
+                'title': link.title,
+                'content': link.description,
+                'category': 'Bağlantı',
+                'department': '',
+                'created_at': None,
+                'url': link.url,
+            })
+            
+        # -- جستجوی پویا در تمام اپلیکیشن‌های دیگر --
+        excluded_apps = ['admin', 'auth', 'contenttypes', 'sessions', 'messages', 'staticfiles', 'axes', 'daphne', 'modeltranslation', 'crispy_forms', 'crispy_bootstrap5', 'channels', 'support']
+        
+        for model in apps.get_models():
+            if model._meta.app_label in excluded_apps:
+                continue
+                
+            if not hasattr(model, 'get_absolute_url'):
+                continue
+                
+            if model._meta.proxy:
+                continue
+                
+            searchable_fields = [
+                f.name for f in model._meta.get_fields()
+                if isinstance(f, (CharField, TextField)) and getattr(f, 'choices', None) is None
+            ]
+            
+            if not searchable_fields:
+                continue
+                
+            q_objects = Q()
+            for field in searchable_fields:
+                q_objects |= Q(**{f"{field}__icontains": query})
+                
+            try:
+                queryset = model.objects.all()
+                field_names = [f.name for f in model._meta.get_fields()]
+                
+                if 'yayinda' in field_names:
+                    queryset = queryset.filter(yayinda=True)
+                if 'aktif' in field_names:
+                    queryset = queryset.filter(aktif=True)
+                if 'is_active' in field_names:
+                    queryset = queryset.filter(is_active=True)
+                    
+                dynamic_results = queryset.filter(q_objects).distinct()[:5]
+                
+                for obj in dynamic_results:
+                    try:
+                        url = obj.get_absolute_url()
+                    except Exception:
+                        continue
+                        
+                    title_attr = next((attr for attr in ['baslik', 'title', 'question', 'name', 'ad'] if hasattr(obj, attr)), None)
+                    title = getattr(obj, title_attr, str(obj)) if title_attr else str(obj)
+                    if callable(title): title = title()
+                    
+                    content_attr = next((attr for attr in ['icerik', 'detayli_aciklama', 'aciklama', 'answer', 'description', 'kisa_aciklama', 'content'] if hasattr(obj, attr)), None)
+                    content = getattr(obj, content_attr, '') if content_attr else ''
+                    if callable(content): content = content()
+                    
+                    category = str(model._meta.verbose_name).title()
+                    app_config = apps.get_app_config(model._meta.app_label)
+                    department = str(app_config.verbose_name)
+                    
+                    created_at = None
+                    if hasattr(obj, 'olusturulma_tarihi'):
+                        created_at = obj.olusturulma_tarihi
+                    elif hasattr(obj, 'created_at'):
+                        created_at = obj.created_at
+                    elif hasattr(obj, 'yayin_tarihi'):
+                        created_at = obj.yayin_tarihi
+                    
+                    all_results.append({
+                        'type': 'guide',  # Use generic type for proper icon in template
+                        'title': title,
+                        'content': content,
+                        'category': category,
+                        'department': department,
+                        'created_at': created_at,
+                        'url': url,
+                    })
+            except Exception as e:
+                pass
+
     # مرتب‌سازی
     with_date = [r for r in all_results if r.get('created_at')]
     without_date = [r for r in all_results if not r.get('created_at')]
@@ -142,3 +218,4 @@ def knowledge_detail(request, pk):
     item.views += 1
     item.save()
     return render(request, 'support/knowledge_detail.html', {'item': item})
+
