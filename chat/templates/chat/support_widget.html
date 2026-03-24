@@ -3,8 +3,8 @@
 
 <!-- Live Support Widget -->
 <div id="live-support-widget" class="live-support-minimized">
-    <div id="live-support-button" class="live-support-circle">
-        <i class="fas fa-comments"></i>
+    <div id="live-support-button" class="live-support-circle" title="Canlı Destek">
+        <i class="fa-solid fa-headset" style="font-size: 30px; color: #ffffff !important; display: block; line-height: 1; z-index: 10;"></i>
         <div class="support-notification-badge" id="support-badge" style="display: none;">0</div>
     </div>
 
@@ -12,7 +12,8 @@
         <div class="support-header">
             <div class="support-title">{% trans "Canlı Destek" %}</div>
             <div class="support-controls">
-                <button id="close-support"><i class="fas fa-times"></i></button>
+                <button id="minimize-support" title="{% trans 'Küçült' %}"><i class="fa-solid fa-minus" style="color: #ffffff !important; font-size: 18px;"></i></button>
+                <button id="close-support" title="{% trans 'Kapat' %}" style="margin-left: 10px;"><i class="fa-solid fa-xmark" style="color: #ffffff !important; font-size: 20px;"></i></button>
             </div>
         </div>
         
@@ -39,7 +40,7 @@
             </div>
             <div class="support-input-area">
                 <textarea id="support-input" placeholder="{% trans 'Mesajınızı yazın...' %}" rows="1"></textarea>
-                <button id="send-support-msg"><i class="fas fa-paper-plane"></i></button>
+                <button id="send-support-msg"><i class="fa-solid fa-paper-plane" style="color: white; font-size: 16px;"></i></button>
             </div>
         </div>
     </div>
@@ -198,6 +199,13 @@
     #send-support-msg:hover {
         background: #00d2ff;
     }
+
+    /* Force Font Awesome 6 for widget icons to prevent conflicts */
+    #live-support-widget i.fas,
+    #live-support-widget i.fa-solid {
+        font-family: "Font Awesome 6 Free" !important;
+        font-weight: 900 !important;
+    }
 </style>
 
 <script>
@@ -206,6 +214,7 @@
         const supportBtn = document.getElementById('live-support-button');
         const supportWindow = document.getElementById('live-support-window');
         const closeBtn = document.getElementById('close-support');
+        const minimizeBtn = document.getElementById('minimize-support');
         const onboarding = document.getElementById('support-onboarding');
         const chatContainer = document.getElementById('support-chat-container');
         const initForm = document.getElementById('support-init-form');
@@ -239,10 +248,13 @@
             }
         });
 
-        closeBtn.addEventListener('click', () => {
+        function hideSupportWindow() {
             supportWindow.style.display = 'none';
             supportBtn.style.display = 'flex';
-        });
+        }
+
+        closeBtn.addEventListener('click', hideSupportWindow);
+        minimizeBtn.addEventListener('click', hideSupportWindow);
 
         initForm.addEventListener('submit', (e) => {
             e.preventDefault();
