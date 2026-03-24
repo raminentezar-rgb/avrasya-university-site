@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-{% load cache %}
-{% get_current_language as CURRENT_LANG %}
+{% comment %} {% load cache %} {% endcomment %}
+{% comment %} {% get_current_language as CURRENT_LANG %} {% endcomment %}
 <html lang="en">
 <head>
     <title>Avrasya University</title>
@@ -270,7 +270,7 @@
     </div>
 
     <!-- News Section -->
-    {% cache 3600 index_news CURRENT_LANG %}
+    {% comment %} {% cache 3600 index_news CURRENT_LANG %} {% endcomment %}
     <section id="news" class="page_section">
         <div class="container">
             <div class="news-header">
@@ -384,10 +384,10 @@
             </div>
         </div>
     </section>
-    {% endcache %}
+    {% comment %} {% endcache %} {% endcomment %}
 
     <!-- Duyurular Section -->
-    {% cache 3600 index_announcements CURRENT_LANG %}
+    {% comment %} {% cache 3600 index_announcements CURRENT_LANG %} {% endcomment %}
     <section id="announcements" class="page_section">
         <div class="container">
             <div class="announcements-header">
@@ -469,7 +469,7 @@
             </div>
         </div>
     </section>
-    {% endcache %}
+    {% comment %} {% endcache %} {% endcomment %}
 
     <!-- Register -->
     <div class="register">
@@ -500,7 +500,7 @@
                                 {% comment %} <button id="search_submit_button" type="submit" class="search_submit_button trans_200" value="Submit">{% trans "search course" %}</button> {% endcomment %}
                                  <div class="etkinlikler-link">
                                     <a href="{% url 'support:search' %}" class="btn-outline-primary">
-                                       <h2> {% trans "Sorularınızın cevaplarını bulun." %} </h2><i class="fas fa-chevron-right"></i>
+                                        {% trans "Sorularınızın cevaplarını bulun" %} <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </div>
                         </div>
