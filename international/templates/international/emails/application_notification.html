@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { width: 80%; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
+        .header { background-color: #192f59; color: white; padding: 10px; text-align: center; border-radius: 10px 10px 0 0; }
+        .section { margin-bottom: 20px; }
+        .section-title { font-weight: bold; border-bottom: 2px solid #192f59; margin-bottom: 10px; padding-bottom: 5px; color: #192f59; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; }
+        th { width: 30%; color: #666; }
+        .footer { font-size: 0.8em; color: #777; margin-top: 30px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>New Student Application</h2>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Personal Information</div>
+            <table>
+                <tr><th>Full Name:</th><td>{{ application.first_name }} {{ application.last_name }}</td></tr>
+                <tr><th>Date of Birth:</th><td>{{ application.birth_date }}</td></tr>
+                <tr><th>Gender:</th><td>{{ application.get_gender_display }}</td></tr>
+                <tr><th>Email:</th><td>{{ application.email }}</td></tr>
+                <tr><th>Phone:</th><td>{{ application.phone }}</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Address Information</div>
+            <table>
+                <tr><th>Country:</th><td>{{ application.get_country_display }}</td></tr>
+                <tr><th>City:</th><td>{{ application.city }}</td></tr>
+                <tr><th>Address:</th><td>{{ application.address }}</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Academic Information</div>
+            <table>
+                <tr><th>Desired Program:</th><td>{{ application.get_program_display }}</td></tr>
+                <tr><th>Start Date:</th><td>{{ application.get_semester_display }}</td></tr>
+                <tr><th>Education Level:</th><td>{{ application.get_education_level_display }}</td></tr>
+                <tr><th>English Proficiency:</th><td>{{ application.get_english_level_display|default:"Not specified" }}</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Documents</div>
+            <p>Documents have been uploaded and can be viewed in the admin panel.</p>
+            <ul>
+                <li><a href="{{ site_url }}{{ application.passport_copy.url }}">Passport Copy</a></li>
+                <li><a href="{{ site_url }}{{ application.diploma_certificate.url }}">Diploma/Certificate</a></li>
+                <li><a href="{{ site_url }}{{ application.academic_transcript.url }}">Academic Transcript</a></li>
+                <li><a href="{{ site_url }}{{ application.passport_photo.url }}">Passport Photo</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>This is an automated notification from the Avrasya University International Students Portal.</p>
+        </div>
+    </div>
+</body>
+</html>

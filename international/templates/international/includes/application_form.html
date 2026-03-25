@@ -167,7 +167,8 @@
                         <p class="form-subtitle" style="color: var(--light-text);">Fill in your details below. Estimated completion time: 10-15 minutes</p>
                     </div>
 
-                    <form id="applicationForm" class="modern-form">
+                    <form id="applicationForm" class="modern-form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <!-- Personal Information با آکاردئون -->
                         <div class="form-section card-section">
                             <div class="section-header" onclick="toggleSection('personalInfo')">
@@ -184,7 +185,7 @@
                                 <div class="row g-4">
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <input type="text" id="firstName" class="form-control" required>
+                                            <input type="text" id="firstName" name="first_name" class="form-control" required>
                                             <label for="firstName" style="color: var(--light-text);">First Name *</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-user"></i>
@@ -193,7 +194,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <input type="text" id="lastName" class="form-control" required>
+                                            <input type="text" id="lastName" name="last_name" class="form-control" required>
                                             <label for="lastName" style="color: var(--light-text);">Last Name *</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-user"></i>
@@ -202,7 +203,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <input type="date" id="dob" class="form-control" required>
+                                            <input type="date" id="dob" name="birth_date" class="form-control" required>
                                             <label for="dob" style="color: var(--light-text);">Date of Birth *</label>
                                             <div class="form-icon">
                                                 {% comment %} <i class="fas fa-calendar-alt"></i> {% endcomment %}
@@ -211,7 +212,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <select id="gender" class="form-select" required>
+                                            <select id="gender" name="gender" class="form-select" required>
                                                 <option value=""></option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
@@ -225,7 +226,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <input type="email" id="email" class="form-control" required>
+                                            <input type="email" id="email" name="email" class="form-control" required>
                                             <label for="email" style="color: var(--light-text);">Email Address *</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-envelope"></i>
@@ -234,7 +235,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <input type="tel" id="phone" class="form-control" required>
+                                            <input type="tel" id="phone" name="phone" class="form-control" required>
                                             <label for="phone" style="color: var(--light-text);">Phone Number *</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-phone"></i>
@@ -261,7 +262,7 @@
                                 <div class="row g-4">
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <select id="country" class="form-select" required>
+                                            <select id="country" name="country" class="form-select" required>
                                                 <option value=""></option>
                                                 <option value="tr">Turkey</option>
                                                 <option value="us">United States</option>
@@ -277,7 +278,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <input type="text" id="city" class="form-control" required>
+                                            <input type="text" id="city" name="city" class="form-control" required>
                                             <label for="city" style="color: var(--light-text);">City *</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-city"></i>
@@ -286,7 +287,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group floating-label">
-                                            <textarea id="address" class="form-control" rows="3" required></textarea>
+                                            <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
                                             <label for="address" style="color: var(--light-text);">Full Address *</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-map-marker-alt"></i>
@@ -313,7 +314,7 @@
                                 <div class="row g-4">
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <select id="program" class="form-select" required>
+                                            <select id="program" name="program" class="form-select" required>
                                                 <option value=""></option>
                                                 <option value="computer">Computer Engineering</option>
                                                 <option value="business">Business Administration</option>
@@ -329,7 +330,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <select id="semester" class="form-select" required>
+                                            <select id="semester" name="semester" class="form-select" required>
                                                 <option value=""></option>
                                                 <option value="fall2024">Fall 2024</option>
                                                 <option value="spring2025">Spring 2025</option>
@@ -343,7 +344,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <select id="educationLevel" class="form-select" required>
+                                            <select id="educationLevel" name="education_level" class="form-select" required>
                                                 <option value=""></option>
                                                 <option value="highschool">High School Diploma</option>
                                                 <option value="bachelor">Bachelor's Degree</option>
@@ -358,7 +359,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
-                                            <select id="englishLevel" class="form-select">
+                                            <select id="englishLevel" name="english_level" class="form-select">
                                                 <option value=""></option>
                                                 <option value="beginner">Beginner (A1-A2)</option>
                                                 <option value="intermediate">Intermediate (B1-B2)</option>
@@ -404,7 +405,7 @@
                                             <div class="upload-area" data-type="passport">
                                                 <i class="fas fa-cloud-upload-alt"></i>
                                                 <p>Drag & drop or click to upload</p>
-                                                <input type="file" class="file-input" accept=".pdf,.jpg,.png" required>
+                                                <input type="file" name="passport_copy" class="file-input" accept=".pdf,.jpg,.png" required>
                                             </div>
                                         </div>
                                     </div>
@@ -419,7 +420,7 @@
                                             <div class="upload-area" data-type="diploma">
                                                 <i class="fas fa-cloud-upload-alt"></i>
                                                 <p>Drag & drop or click to upload</p>
-                                                <input type="file" class="file-input" accept=".pdf,.jpg,.png" required>
+                                                <input type="file" name="diploma_certificate" class="file-input" accept=".pdf,.jpg,.png" required>
                                             </div>
                                         </div>
                                     </div>
@@ -434,7 +435,7 @@
                                             <div class="upload-area" data-type="transcript">
                                                 <i class="fas fa-cloud-upload-alt"></i>
                                                 <p>Drag & drop or click to upload</p>
-                                                <input type="file" class="file-input" accept=".pdf,.jpg,.png" required>
+                                                <input type="file" name="academic_transcript" class="file-input" accept=".pdf,.jpg,.png" required>
                                             </div>
                                         </div>
                                     </div>
@@ -449,7 +450,7 @@
                                             <div class="upload-area" data-type="photo">
                                                 <i class="fas fa-cloud-upload-alt"></i>
                                                 <p>Drag & drop or click to upload</p>
-                                                <input type="file" class="file-input" accept=".jpg,.jpeg,.png" required>
+                                                <input type="file" name="passport_photo" class="file-input" accept=".jpg,.jpeg,.png" required>
                                             </div>
                                         </div>
                                     </div>
@@ -471,7 +472,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check custom-checkbox mt-3">
-                                        <input type="checkbox" id="newsletterCheck" class="form-check-input">
+                                        <input type="checkbox" id="newsletterCheck" name="newsletter_subscription" class="form-check-input">
                                         <label for="newsletterCheck" class="form-check-label" style="color: var(--dark-text);">
                                             I would like to receive updates, news, and information about scholarships and events from Avrasya University via email.
                                         </label>
@@ -1405,7 +1406,7 @@ document.addEventListener('DOMContentLoaded', function() {
     uploadAreas.forEach(area => {
         const input = area.querySelector('.file-input');
         
-        area.addEventListener('click', () => input.click());
+        // No need for area.click() as the input [z-index: 2] covers the area
         
         area.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -1442,30 +1443,7 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Validate all required fields
-            const requiredFields = form.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.classList.add('is-invalid');
-                    isValid = false;
-                    
-                    // Add error message
-                    if (!field.nextElementSibling?.classList.contains('error-message')) {
-                        const error = document.createElement('div');
-                        error.className = 'error-message text-danger mt-1';
-                        error.textContent = 'This field is required';
-                        field.parentNode.appendChild(error);
-                    }
-                } else {
-                    field.classList.remove('is-invalid');
-                    const error = field.parentNode.querySelector('.error-message');
-                    if (error) error.remove();
-                }
-            });
-            
-            if (isValid) {
+            if (form.checkValidity()) {
                 // Show success animation
                 const submitBtn = form.querySelector('.submit-button');
                 const originalText = submitBtn.querySelector('.button-text').textContent;
@@ -1473,16 +1451,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.querySelector('.button-text').textContent = 'Submitting...';
                 submitBtn.disabled = true;
                 
-                // Simulate API call
-                setTimeout(() => {
-                    showApplicationSuccess();
-                    
-                    // Reset button
-                    setTimeout(() => {
-                        submitBtn.querySelector('.button-text').textContent = originalText;
-                        submitBtn.disabled = false;
-                    }, 2000);
-                }, 1500);
+                // Real API call to Django backend
+                const formData = new FormData(this);
+                const csrfToken = this.querySelector('[name=csrfmiddlewaretoken]').value;
+                
+                fetch('', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrfToken
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showApplicationSuccess();
+                        form.reset();
+                    } else {
+                        // Handle errors
+                        let errorMessage = 'Please correct the errors: ';
+                        if (data.errors) {
+                            for (let field in data.errors) {
+                                errorMessage += `\n${field}: ${data.errors[field].join(', ')}`;
+                            }
+                        }
+                        alert(errorMessage);
+                    }
+                    submitBtn.querySelector('.button-text').textContent = originalText;
+                    submitBtn.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                    submitBtn.querySelector('.button-text').textContent = originalText;
+                    submitBtn.disabled = false;
+                });
             } else {
                 // Shake form for attention
                 form.classList.add('shake');
@@ -1519,22 +1523,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showUploadSuccess(area) {
-    area.innerHTML = '<i class="fas fa-check-circle text-success"></i><p class="mt-2">File uploaded successfully!</p>';
+    const icon = area.querySelector('i');
+    const text = area.querySelector('p');
+    const fileInput = area.querySelector('.file-input');
+    const fileName = fileInput.files[0] ? fileInput.files[0].name : 'File';
+    
+    const originalIconClass = 'fas fa-cloud-upload-alt';
+    const originalText = 'Drag & drop or click to upload';
+    
+    area.classList.add('upload-success');
+    icon.className = 'fas fa-check-circle text-success';
+    text.innerHTML = `<strong>${fileName}</strong><br><span style="font-size: 0.8rem; color: #4CAF50;">Uploaded successfully!</span>`;
     area.style.borderColor = '#4CAF50';
     area.style.background = 'rgba(76, 175, 80, 0.1)';
     
-    // Revert after 3 seconds
-    setTimeout(() => {
-        area.innerHTML = '<i class="fas fa-cloud-upload-alt"></i><p>Drag & drop or click to upload</p><input type="file" class="file-input">';
-        area.style.borderColor = '';
-        area.style.background = '';
-        
-        // Re-attach event listeners
-        const newInput = area.querySelector('.file-input');
-        newInput.addEventListener('change', function() {
-            if (this.files.length) showUploadSuccess(area);
-        });
-    }, 3000);
+    // We don't revert immediately so the user can see which file is selected
+    // But we remove the timeout that was resetting the HTML and destroying the input
 }
 
 function showApplicationSuccess() {
