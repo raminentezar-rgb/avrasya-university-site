@@ -40,7 +40,7 @@ def application_form(request):
                 html_message = render_to_string('international/emails/application_notification.html', context)
                 plain_message = strip_tags(html_message)
                 from_email = settings.DEFAULT_FROM_EMAIL
-                recipient_list = ['erasmus@avrasya.edu.tr']
+                recipient_list = ['international@avrasya.edu.tr']
                 
                 send_mail(subject, plain_message, from_email, recipient_list, html_message=html_message, fail_silently=False)
             except Exception as e:
