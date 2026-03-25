@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load cache %}
 {% get_current_language as CURRENT_LANG %}
-{% cache 3600 navbar CURRENT_LANG %}
+{% get_current_language as CURRENT_LANG %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 <!-- templates/core/mega_navbar.html -->
 <nav class="navbar navbar-expand-lg">
@@ -567,6 +567,12 @@
                                     <li><a class="dropdown-item" href="{% url 'accounts:login' %}">{% trans "Giriş Yapmak" %}</a></li>
                                     
                                     <li><a class="dropdown-item" href="{% url 'chat:index' %}">{% trans "Meslektaşlarla iletişim" %}</a></li>
+                                    
+                                    {% if user.is_superuser %}
+                                        <li><a class="dropdown-item text-primary font-weight-bold" href="{% url 'accounts:crm_dashboard' %}">
+                                            <i class="fas fa-chart-line mr-1"></i> CRM Dashboard
+                                        </a></li>
+                                    {% endif %}
                                     
                                 </ul>
                             </div>
@@ -1673,4 +1679,3 @@
         window.addEventListener('languageChanged', updateLanguageFromCookie);
     });
 </script>
-{% endcache %}

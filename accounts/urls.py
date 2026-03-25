@@ -57,4 +57,6 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
+
+    path("crm-dashboard/", views.crm_dashboard, name="crm_dashboard"),
 ]

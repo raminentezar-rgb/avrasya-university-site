@@ -321,5 +321,56 @@
         background: rgba(155, 89, 182, 0.15);
         color: #8e44ad;
     }
+
+       /* Hero Section */
+    .hero-section {
+        min-height: 500px;
+        background: var(--p-primary);
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: white;
+        padding-top: 180px;
+        /* Clear the fixed header area */
+        z-index: 10;
+        margin-top: -10px;
+    }
+
+    .hero-container {
+        position: relative;
+        z-index: 5;
+        margin-top: 30px;
+    }
+
+    .hero-glow-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .hero-glow-1 {
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(228, 149, 22, 0.2) 0%, transparent 70%);
+        filter: blur(50px);
+    }
+
+    .hero-glow-2 {
+        position: absolute;
+        bottom: -100px;
+        right: -100px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(141, 212, 227, 0.15) 0%, transparent 70%);
+        filter: blur(50px);
+    }
 </style>
 {% endblock %}

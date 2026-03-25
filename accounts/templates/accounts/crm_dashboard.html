@@ -1,0 +1,547 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="margin-top: 150px; margin-top: 220px;">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 class="text-white bg-dark p-4 rounded-lg shadow-lg border-primary border">
+                <i class="fas fa-users-cog mr-2"></i> {% trans "CRM Dashboard - User Management" %}
+            </h2>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-5 text-center">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3 shadow-lg border-0 stats-card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-users"></i> {% trans "Total Users" %}</h5>
+                    <p class="card-text display-4 font-weight-bold">{{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3 shadow-lg border-0 stats-card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-user-graduate"></i> {% trans "Students" %}</h5>
+                    <p class="card-text display-4 font-weight-bold">{{ students_count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3 shadow-lg border-0 stats-card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-user-tie"></i> {% trans "Staff" %}</h5>
+                    <p class="card-text display-4 font-weight-bold">{{ staff_count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3 shadow-lg border-0 stats-card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-chalkboard-teacher"></i> {% trans "Professors" %}</h5>
+                    <p class="card-text display-4 font-weight-bold">{{ professors_count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-lg border-0 user-list-card">
+                <div class="card-header bg-white py-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0 text-primary"><i class="fas fa-list"></i> {% trans "All Registered Users" %}</h4>
+                        <div class="input-group" style="width: 300px;">
+                            <input type="text" id="userSearch" class="form-control" placeholder="{% trans 'Search users...' %}">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-primary text-white border-0"><i class="fas fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped mb-0 text-center" id="userTable">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>{% trans "Avatar" %}</th>
+                                    <th>{% trans "Username" %}</th>
+                                    <th>{% trans "Email" %}</th>
+                                    <th>{% trans "Role" %}</th>
+                                    <th>{% trans "Department" %}</th>
+                                    <th>{% trans "Joined Date" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in all_users %}
+                                <tr>
+                                    <td>
+                                        {% if user.profile.avatar %}
+                                            <img src="{{ user.profile.avatar.url }}" class="rounded-circle shadow-sm" style="width: 40px; height: 40px; object-fit: cover;">
+                                        {% else %}
+                                            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white mx-auto shadow-sm" style="width: 40px; height: 40px;">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                    <td class="font-weight-bold">{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>
+                                        <span class="badge badge-pill 
+                                            {% if user.profile.role == 'student' %}badge-success
+                                            {% elif user.profile.role == 'staff' %}badge-info
+                                            {% elif user.profile.role == 'professor' %}badge-warning
+                                            {% else %}badge-secondary{% endif %} px-3 py-2">
+                                            {{ user.profile.get_role_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ user.profile.department.name|default:"-" }}</td>
+                                    <td class="text-muted">{{ user.date_joined|date:"Y-m-d H:i" }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="text-center py-5 text-muted">{% trans "No users found." %}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ===== ENHANCED MODERN STYLES ===== */
+    /* Preserving all original classes while adding premium visual upgrades */
+    
+    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+    
+    body {
+        background: linear-gradient(135deg, #0a1a2f 0%, #0f2b3f 50%, #1a3a4f 100%);
+        min-height: 100vh;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        position: relative;
+    }
+    
+    /* Animated background particles effect */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(circle at 25% 40%, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    /* Enhanced container with floating animation */
+    .container {
+        position: relative;
+        z-index: 2;
+        animation: fadeInUp 0.6s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Modern header styling - preserve original classes but enhance */
+    .container > .row:first-child .col-12 h2 {
+        background: linear-gradient(135deg, rgba(10, 25, 47, 0.95) 0%, rgba(20, 45, 80, 0.95) 100%);
+        backdrop-filter: blur(10px);
+        border-radius: 24px !important;
+        border: 1px solid rgba(59, 130, 246, 0.4) !important;
+        box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.2) inset !important;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .container > .row:first-child .col-12 h2:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.4) inset !important;
+    }
+    
+    /* ===== STATS CARDS ENHANCEMENTS ===== */
+    /* Keep original classes, add premium styling */
+    .stats-card {
+        transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        border-radius: 28px !important;
+        overflow: hidden;
+        position: relative;
+        backdrop-filter: blur(4px);
+    }
+    
+    .stats-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2), rgba(255,255,255,0.8));
+        opacity: 0.7;
+    }
+    
+    .stats-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30%;
+        background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+        pointer-events: none;
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    /* Card body enhancements */
+    .stats-card .card-body {
+        padding: 1.8rem 1rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .stats-card .card-title {
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        opacity: 0.95;
+    }
+    
+    .stats-card .card-title i {
+        margin-right: 8px;
+        font-size: 1.1rem;
+    }
+    
+    .stats-card .display-4 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-bottom: 0;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        letter-spacing: -1px;
+    }
+    
+    /* Individual card gradient overlays (preserve original bg colors but enhance) */
+    .stats-card.bg-primary {
+        background: linear-gradient(135deg, #1e4b8f 0%, #2563eb 100%) !important;
+    }
+    
+    .stats-card.bg-success {
+        background: linear-gradient(135deg, #0e6b4a 0%, #10b981 100%) !important;
+    }
+    
+    .stats-card.bg-info {
+        background: linear-gradient(135deg, #0e6b7c 0%, #06b6d4 100%) !important;
+    }
+    
+    .stats-card.bg-warning {
+        background: linear-gradient(135deg, #c2410c 0%, #f59e0b 100%) !important;
+    }
+    
+    /* ===== USER LIST CARD ENHANCEMENTS ===== */
+    .user-list-card {
+        border-radius: 28px !important;
+        overflow: hidden;
+        backdrop-filter: blur(2px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: rgba(255, 255, 255, 0.98);
+    }
+    
+    .user-list-card:hover {
+        box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    /* Card header modern styling */
+    .user-list-card .card-header {
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%) !important;
+        border-bottom: 2px solid rgba(37, 99, 235, 0.15);
+        padding: 1.2rem 1.5rem !important;
+    }
+    
+    .user-list-card .card-header h4 {
+        font-weight: 700;
+        background: linear-gradient(135deg, #1e4b8f, #3b82f6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: -0.3px;
+    }
+    
+    .user-list-card .card-header h4 i {
+        background: none;
+        color: #3b82f6;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+    }
+    
+    /* Search input modern styling */
+    #userSearch {
+        border-radius: 40px 0 0 40px !important;
+        border: 1px solid #e2e8f0;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        background: #ffffff;
+    }
+    
+    #userSearch:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+    
+    .input-group-text {
+        border-radius: 0 40px 40px 0 !important;
+        background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .input-group-text:hover {
+        background: linear-gradient(135deg, #2563eb, #1e4b8f) !important;
+        transform: scale(1.02);
+    }
+    
+    /* ===== TABLE ENHANCEMENTS ===== */
+    .table {
+        margin-bottom: 0;
+        font-size: 0.9rem;
+    }
+    
+    .table td, .table th {
+        vertical-align: middle;
+        padding: 1rem 1rem;
+        border-bottom: 1px solid #f0f2f5;
+    }
+    
+    /* Modern table header */
+    .thead-dark th {
+        background: linear-gradient(135deg, #1a2c3e 0%, #0f212f 100%) !important;
+        color: #ffffff;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.8px;
+        border-bottom: none;
+        padding: 1.2rem 1rem;
+    }
+    
+    /* Table rows with hover effect */
+    .table-hover tbody tr {
+        transition: all 0.25s ease;
+    }
+    
+    .table-hover tbody tr:hover {
+        background: linear-gradient(90deg, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.02));
+        transform: scale(1.002);
+    }
+    
+    /* Avatar styling enhancements */
+    .rounded-circle[style*="width: 40px"] {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .rounded-circle[style*="width: 40px"]:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+    }
+    
+    /* Modern badge styling */
+    .badge-pill {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+        padding: 0.5rem 1rem !important;
+        border-radius: 40px !important;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .badge-pill:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.05);
+    }
+    
+    /* Role-specific badge enhancements (preserve original classes) */
+    .badge-success {
+        background: linear-gradient(135deg, #10b981, #059669) !important;
+        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+    
+    .badge-info {
+        background: linear-gradient(135deg, #06b6d4, #0891b2) !important;
+        box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+    }
+    
+    .badge-warning {
+        background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+        box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+    }
+    
+    .badge-secondary {
+        background: linear-gradient(135deg, #6c757d, #5a6268) !important;
+    }
+    
+    /* Department styling */
+    .table td:nth-child(5) {
+        font-weight: 500;
+        color: #4b5563;
+    }
+    
+    /* Date styling */
+    .text-muted {
+        color: #6c86a3 !important;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    /* Empty state styling */
+    .text-center.py-5 {
+        background: #fafcff;
+    }
+    
+    /* Scrollbar styling */
+    .table-responsive::-webkit-scrollbar {
+        height: 6px;
+        width: 6px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-track {
+        background: #eef2ff;
+        border-radius: 10px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+    
+    /* ===== ANIMATIONS & ADDITIONAL POLISH ===== */
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+    
+    /* Loading skeleton effect for cards (optional enhancement) */
+    .stats-card {
+        animation: fadeInUp 0.4s ease-out backwards;
+    }
+    
+    .stats-card:nth-child(1) { animation-delay: 0.05s; }
+    .stats-card:nth-child(2) { animation-delay: 0.1s; }
+    .stats-card:nth-child(3) { animation-delay: 0.15s; }
+    .stats-card:nth-child(4) { animation-delay: 0.2s; }
+    
+    .user-list-card {
+        animation: fadeInUp 0.5s ease-out 0.25s backwards;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .stats-card .display-4 {
+            font-size: 2rem;
+        }
+        
+        .stats-card .card-title {
+            font-size: 0.85rem;
+        }
+        
+        .table td, .table th {
+            padding: 0.75rem 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .badge-pill {
+            padding: 0.35rem 0.75rem !important;
+            font-size: 0.65rem;
+        }
+        
+        .user-list-card .card-header .d-flex {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .input-group {
+            width: 100% !important;
+        }
+    }
+    
+    /* Subtle glow effect for primary elements */
+    .text-primary {
+        color: #3b82f6 !important;
+    }
+    
+    .bg-primary {
+        background: linear-gradient(135deg, #3b82f6, #1e4b8f) !important;
+    }
+    
+    /* Smooth transitions for all interactive elements */
+    .stats-card, .user-list-card, .badge-pill, .rounded-circle, .input-group-text {
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    
+    /* Modern focus outline */
+    *:focus {
+        outline: none;
+    }
+    
+    .btn:focus, .form-control:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    }
+    
+    /* Enhanced shadow depth */
+    .shadow-lg {
+        box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.25) !important;
+    }
+    
+    /* Table striped enhancement */
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(59, 130, 246, 0.02);
+    }
+</style>
+
+<script>
+    document.getElementById('userSearch').addEventListener('keyup', function() {
+        var value = this.value.toLowerCase();
+        var rows = document.querySelectorAll('#userTable tbody tr');
+        rows.forEach(function(row) {
+            row.style.display = row.textContent.toLowerCase().indexOf(value) > -1 ? '' : 'none';
+        });
+    });
+</script>
+{% endblock %}
