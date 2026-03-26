@@ -1,4 +1,4 @@
-﻿from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -14,15 +14,22 @@ from django.utils.timesince import timesince
 @login_required
 def chat_index(request):
     """Render the main chat interface."""
-    # Sadece geÃ§erli diÄŸer kullanÄ±cÄ±sÄ± olan thread'leri al
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        messages.error(request, 'Bu sayfaya erişim yetkiniz yok.')
+        return redirect('core:home')
+
+    # Sadece geçerli diğer kullanıcısı olan thread'leri al
     threads = request.user.threads.filter(is_active=True).prefetch_related(
         'participants', 'messages'
     ).annotate(
         unread_count=Count('messages', filter=Q(messages__is_read=False) & ~Q(messages__sender=request.user))
     )
     
-    # Get all users for starting new chats (kullanÄ±cÄ±yÄ± hariÃ§ tut)
-    users = User.objects.exclude(id=request.user.id).select_related('profile')
+    # Get only staff and professor users for starting new chats (kullanıcıyı hariç tut)
+    users = User.objects.exclude(id=request.user.id).filter(
+        profile__role__in=['staff', 'professor']
+    ).select_related('profile')
     
     # Prepare support threads for staff
     support_threads = []
@@ -30,7 +37,7 @@ def chat_index(request):
         from .models import SupportThread
         support_threads = SupportThread.objects.filter(is_active=True).order_by('-updated_at')
     
-    # Prepare threads data with other participant - sadece geÃ§erli olanlarÄ± ekle
+    # Prepare threads data with other participant - sadece geçerli olanları ekle
     threads_with_participants = []
     for thread in threads:
         other_user = thread.get_other_participant(request.user)
@@ -42,7 +49,7 @@ def chat_index(request):
                 'last_message': thread.get_last_message()
             })
     
-    # EÄŸer hiÃ§ geÃ§erli thread yoksa, boÅŸ liste gÃ¶nder
+    # Eğer hiç geçerli thread yoksa, boş liste gönder
     context = {
         'threads_with_participants': threads_with_participants,
         'support_threads': support_threads,
@@ -56,6 +63,10 @@ def chat_index(request):
 @login_required
 def thread_messages(request, thread_id):
     """Return JSON list of messages for a given thread."""
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        return JsonResponse({'error': 'Yetkisiz erişim'}, status=403)
+
     try:
         thread = request.user.threads.get(id=thread_id)
     except Thread.DoesNotExist:
@@ -113,6 +124,10 @@ def thread_messages(request, thread_id):
 @login_required
 def send_message(request):
     """AJAX endpoint to send a message to a thread. (With notifications)"""
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        return JsonResponse({'error': 'Yetkisiz erişim'}, status=403)
+
     if request.method == 'POST':
         thread_id = request.POST.get('thread_id')
         text = request.POST.get('text', '').strip()
@@ -175,10 +190,20 @@ def send_message(request):
 @login_required
 def start_thread(request):
     """Start a new thread with a selected user."""
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        messages.error(request, 'Bu işlemi yapma yetkiniz yok.')
+        return redirect('core:home')
+
     if request.method == 'POST':
         target_user_id = request.POST.get('target_user_id')
         target_user = get_object_or_404(User, id=target_user_id)
         
+        # Hedef kullanıcının da staff veya professor olduğunu kontrol et
+        if not hasattr(target_user, 'profile') or target_user.profile.role not in ['staff', 'professor']:
+            messages.error(request, 'Bu kullanıcı ile sohbet başlatamazsınız.')
+            return redirect('chat:index')
+
         # Check if thread already exists between these two users (including inactive)
         thread = Thread.objects.filter(
             participants=request.user
@@ -203,6 +228,10 @@ def start_thread(request):
 @login_required
 def mark_as_read(request):
     """Mark messages as read."""
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        return JsonResponse({'error': 'Yetkisiz erişim'}, status=403)
+
     if request.method == 'POST':
         data = json.loads(request.body)
         thread_id = data.get('thread_id')
@@ -220,6 +249,10 @@ def mark_as_read(request):
 @login_required
 def delete_thread(request, thread_id):
     """Soft delete a thread."""
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        return JsonResponse({'error': 'Yetkisiz erişim'}, status=403)
+
     if request.method == 'POST':
         try:
             thread = request.user.threads.get(id=thread_id)
@@ -234,15 +267,22 @@ def delete_thread(request, thread_id):
 @login_required
 def search_users(request):
     """Search for users to start a chat with."""
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        return JsonResponse({'users': []})
+
     query = request.GET.get('q', '')
     if len(query) < 2:
         return JsonResponse({'users': []})
     
+    # Sadece staff ve professor rollerindeki kullanıcıları ara
     users = User.objects.exclude(id=request.user.id).filter(
         Q(username__icontains=query) |
         Q(first_name__icontains=query) |
         Q(last_name__icontains=query) |
         Q(email__icontains=query)
+    ).filter(
+        profile__role__in=['staff', 'professor']
     ).select_related('profile')[:10]
     
     data = [{
@@ -296,6 +336,10 @@ def edit_profile(request):
 
 @login_required
 def get_notifications(request):
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        return JsonResponse({'error': 'Yetkisiz erişim'}, status=403)
+
     notifications = Notification.objects.filter(user=request.user).order_by('-created_at')[:50]
     unread_count = Notification.objects.filter(user=request.user, is_read=False).count()
     data = []
@@ -314,6 +358,10 @@ def get_notifications(request):
 
 @login_required
 def mark_notification_read(request):
+    # Sadece staff ve professor rollerine izin ver
+    if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
+        return JsonResponse({'error': 'Yetkisiz erişim'}, status=403)
+
     if request.method == 'POST':
         import json
         try:

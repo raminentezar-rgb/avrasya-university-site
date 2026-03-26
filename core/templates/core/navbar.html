@@ -566,7 +566,9 @@
                                 <ul class="list-unstyled menu-list">
                                     <li><a class="dropdown-item" href="{% url 'accounts:login' %}">{% trans "Giriş Yapmak" %}</a></li>
                                     
+                                    {% if user.profile.role == 'staff' or user.profile.role == 'professor' %}
                                     <li><a class="dropdown-item" href="{% url 'chat:index' %}">{% trans "Meslektaşlarla iletişim" %}</a></li>
+                                    {% endif %}
                                     
                                     {% if user.is_superuser %}
                                         <li><a class="dropdown-item text-primary font-weight-bold" href="{% url 'accounts:crm_dashboard' %}">
