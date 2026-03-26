@@ -304,12 +304,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 if not DEBUG:
     # Optimize WhiteNoise for production memory/performance
+    # Using CompressedStaticFilesStorage (without manifest) to avoid MissingFileErrors for referenced map files
     STORAGES = {
         "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
         },
     }
-    WHITENOISE_MANIFEST_STRICT = False
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
