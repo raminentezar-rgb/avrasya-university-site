@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -199,14 +200,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'avrasya_site.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'avrasya_db',
-        'USER': 'postgres',
-        'PASSWORD': os.environ.get('DB_PASSWORD', '1136130@NaNa'),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=f'postgresql://postgres:{os.environ.get("DB_PASSWORD", "1136130@NaNa")}@127.0.0.1:5432/avrasya_db',
+        conn_max_age=600
+    )
 }
 
 # Password validation
@@ -275,6 +272,10 @@ LANGUAGES_BIDI = ["ar", "fa", "he", "ur"]
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'avrasya.edu.tr,www.avrasya.edu.tr,localhost,127.0.0.1').split(',')
+if os.environ.get('RENDER_EXTERNAL_HOSTNAME'):
+    ALLOWED_HOST_RENDER = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+    if ALLOWED_HOST_RENDER not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(ALLOWED_HOST_RENDER)
 
 # --- Security Hardening ---
 if not DEBUG:
