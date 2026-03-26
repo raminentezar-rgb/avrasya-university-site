@@ -338,6 +338,8 @@ AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 1  # 1 hour
 AXES_LOCKOUT_TEMPLATE = None # Can be a custom template
 AXES_RESET_ON_SUCCESS = True
+AXES_IP_GETTER = 'axes.helpers.get_ip'
+AXES_PROXY_COUNT = 1
 
 
 
