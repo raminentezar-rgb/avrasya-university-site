@@ -704,17 +704,64 @@
 
 <style>
     /* Clean and Simplified Styles */
+    .mega-menu-content .row {
+        display: flex !important;
+        align-items: stretch !important;
+    }
+
     .menu-section {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
         border-radius: 8px;
-        padding: 15px;
-        height: 100%;
-        border: 1px solid rgba(141, 212, 227, 0.0);
-        transition: all 0.2s ease;
+        padding: 20px;
+        height: 100% !important;
+        border: 1px solid rgba(141, 212, 227, 0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Mega Menu Positioning Fix */
+    @media (min-width: 992px) {
+        .navbar {
+            position: relative !important;
+        }
+
+        .nav-item.mega-menu {
+            position: static !important;
+        }
+
+        .mega-menu-content {
+            width: 100% !important;
+            max-width: 1140px !important;
+            left: 0 !important;
+            right: 0 !important;
+            margin: 0 auto !important;
+            top: 100% !important;
+            position: absolute !important;
+            transform: none !important; /* Ensure no translateX conflict */
+            display: none;
+            visibility: visible;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px) !important;
+            border-radius: 0 0 20px 20px !important;
+            border: 1px solid rgba(141, 212, 227, 0.2) !important;
+            box-shadow: 0 15px 40px rgba(9, 36, 66, 0.2) !important;
+            z-index: 1050 !important;
+        }
+
+        .mega-menu.show .mega-menu-content {
+            display: block !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
     }
 
     .menu-section:hover {
-        background: rgba(255, 255, 255, 1);
+        background: rgba(255, 255, 255, 1) !important;
+        box-shadow: 0 10px 30px rgba(9, 36, 66, 0.1) !important;
+        transform: translateY(-5px);
     }
 
     .section-title {
@@ -749,7 +796,7 @@
     }
 
     .menu-list .dropdown-item {
-        padding: 6px 8px;
+        padding: 6px 12px;
         margin-bottom: 4px;
         color: var(--text-dark);
         transition: all 0.2s ease;
@@ -757,6 +804,10 @@
         font-weight: 500;
         border-radius: 4px;
         position: relative;
+        white-space: normal !important;
+        line-height: 1.4 !important;
+        display: block !important;
+        width: 100%;
     }
 
     .menu-list .dropdown-item:hover {
@@ -766,7 +817,7 @@
     }
 
     .menu-list .dropdown-item::before {
-        content: "›";
+        
         color: var(--accent-light-blue);
         margin-right: 6px;
         font-size: 14px;
@@ -838,7 +889,7 @@
         color: white;
         font-family: 'Metropolis', sans-serif;
         font-weight: 900;
-        margin-left: 50px;
+        margin-left: 30px;
         text-transform: uppercase;
     }
 
@@ -902,7 +953,9 @@
         color: rgba(255, 255, 255, 0.85) !important;
         padding-left: 10px !important;
         padding-right: 10px !important;
-        font-size: 13px;
+        font-size: 14px;
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 900;
         white-space: nowrap;
     }
 
@@ -1304,191 +1357,115 @@
 </style>
 
 <script>
-
-
-    // اصلاح شده: مدیریت بهتر هاور برای منوها
     document.addEventListener('DOMContentLoaded', function () {
-        // فقط برای دسکتاپ
-        if (window.innerWidth >= 992) {
-            const megaMenus = document.querySelectorAll('.mega-menu');
-            let closeTimer;
+        const navbar = document.querySelector('.navbar');
+        const megaMenus = document.querySelectorAll('.mega-menu');
+        const iconContainers = document.querySelectorAll('.header_icon_container');
+        const threshold = 100;
+        let closeTimer;
 
+        // --- Mega Menu Logic (Desktop Hover) ---
+        if (window.innerWidth >= 992) {
             megaMenus.forEach(menu => {
                 const dropdownToggle = menu.querySelector('.dropdown-toggle');
                 const dropdownMenu = menu.querySelector('.dropdown-menu');
 
                 if (!dropdownToggle || !dropdownMenu) return;
 
-                // هاور روی کل منو
                 menu.addEventListener('mouseenter', function () {
                     clearTimeout(closeTimer);
-
-                    // بستن بقیه منوها
                     megaMenus.forEach(otherMenu => {
                         if (otherMenu !== menu) {
                             otherMenu.classList.remove('show');
-                            otherMenu.querySelector('.dropdown-menu')?.classList.remove('show');
                         }
                     });
-
-                    // باز کردن منوی جاری
                     menu.classList.add('show');
-                    dropdownMenu.classList.add('show');
-
-                    // برای Bootstrap
-                    if (dropdownToggle.getAttribute('data-bs-toggle') === 'dropdown') {
-                        const bsDropdown = bootstrap.Dropdown.getInstance(dropdownToggle);
-                        if (!bsDropdown) {
-                            new bootstrap.Dropdown(dropdownToggle).show();
-                        } else {
-                            bsDropdown.show();
-                        }
-                    }
                 });
 
-                // خروج از منو
                 menu.addEventListener('mouseleave', function (e) {
-                    // تاخیر برای بستن (300ms)
                     closeTimer = setTimeout(() => {
-                        // بررسی اگر کاربر به منوی دیگر رفته
-                        const relatedTarget = e.relatedTarget;
-                        if (!menu.contains(relatedTarget)) {
+                        if (!menu.contains(e.relatedTarget)) {
                             menu.classList.remove('show');
-                            dropdownMenu.classList.remove('show');
-
-                            // برای Bootstrap
-                            if (dropdownToggle.getAttribute('data-bs-toggle') === 'dropdown') {
-                                const bsDropdown = bootstrap.Dropdown.getInstance(dropdownToggle);
-                                if (bsDropdown) {
-                                    bsDropdown.hide();
-                                }
-                            }
                         }
                     }, 300);
                 });
 
-                // هاور روی خود منوی باز شده
-                dropdownMenu.addEventListener('mouseenter', function () {
-                    clearTimeout(closeTimer);
-                });
-
-                dropdownMenu.addEventListener('mouseleave', function (e) {
-                    closeTimer = setTimeout(() => {
-                        const relatedTarget = e.relatedTarget;
-                        if (!menu.contains(relatedTarget)) {
-                            menu.classList.remove('show');
-                            dropdownMenu.classList.remove('show');
-
-                            // برای Bootstrap
-                            if (dropdownToggle.getAttribute('data-bs-toggle') === 'dropdown') {
-                                const bsDropdown = bootstrap.Dropdown.getInstance(dropdownToggle);
-                                if (bsDropdown) {
-                                    bsDropdown.hide();
-                                }
-                            }
-                        }
-                    }, 300);
-                });
-            });
-
-            // بستن تمام منوها هنگام کلیک بیرون
-            document.addEventListener('click', function (e) {
-                if (!e.target.closest('.mega-menu')) {
-                    megaMenus.forEach(menu => {
-                        menu.classList.remove('show');
-                        menu.querySelector('.dropdown-menu')?.classList.remove('show');
-                    });
-                }
+                dropdownMenu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
             });
         }
 
-        // مدیریت ریسپانسیو (موبایل) - مثل قبل
+        // --- Responsive Menu Logic (Mobile Click) ---
         if (window.innerWidth < 992) {
             const megaMenuToggles = document.querySelectorAll('.mega-menu .dropdown-toggle');
-
             megaMenuToggles.forEach(toggle => {
                 toggle.addEventListener('click', function (e) {
                     e.preventDefault();
                     e.stopPropagation();
-
-                    // Close other open menus
-                    document.querySelectorAll('.mega-menu').forEach(menu => {
-                        if (menu !== this.parentElement) {
-                            menu.classList.remove('show');
-                        }
-                    });
-
-                    // Toggle current menu
                     const megaMenu = this.parentElement;
+                    megaMenus.forEach(m => {
+                        if (m !== megaMenu) m.classList.remove('show');
+                    });
                     megaMenu.classList.toggle('show');
+                });
+            });
+
+            // Close mega menu on mobile scroll
+            window.addEventListener('scroll', function () {
+                megaMenus.forEach(m => m.classList.remove('show'));
+            }, { passive: true });
+        }
+
+        // --- Global Click to Close ---
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.mega-menu')) {
+                megaMenus.forEach(m => m.classList.remove('show'));
+            }
+        });
+
+        // --- Header Icon Dropdowns (Desktop Hover) ---
+        if (window.innerWidth >= 992) {
+            iconContainers.forEach(container => {
+                const dropdownMenu = container.querySelector('.dropdown-menu');
+                if (!dropdownMenu) return;
+
+                container.addEventListener('mouseenter', function () {
+                    dropdownMenu.style.display = 'block';
+                    dropdownMenu.style.opacity = '0';
+                    dropdownMenu.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        dropdownMenu.style.opacity = '1';
+                        dropdownMenu.style.transform = 'translateY(0)';
+                        dropdownMenu.style.transition = 'all 0.3s ease';
+                    }, 10);
+                });
+
+                container.addEventListener('mouseleave', function (e) {
+                    if (!container.contains(e.relatedTarget)) {
+                        dropdownMenu.style.opacity = '0';
+                        dropdownMenu.style.transform = 'translateY(10px)';
+                        setTimeout(() => {
+                            dropdownMenu.style.display = 'none';
+                        }, 300);
+                    }
                 });
             });
         }
-    });
 
-
-
-
-
-
-
-    // Simple JavaScript for Mega Menu
-    document.addEventListener('DOMContentLoaded', function () {
-        const megaMenuToggles = document.querySelectorAll('.mega-menu .dropdown-toggle');
-
-        megaMenuToggles.forEach(toggle => {
-            toggle.addEventListener('click', function (e) {
-                if (window.innerWidth < 992) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    // Close other open menus
-                    document.querySelectorAll('.mega-menu').forEach(menu => {
-                        if (menu !== this.parentElement) {
-                            menu.classList.remove('show');
-                        }
-                    });
-
-                    // Toggle current menu
-                    const megaMenu = this.parentElement;
-                    megaMenu.classList.toggle('show');
-                }
-            });
-        });
-
-        // Close mega menu when clicking outside
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('.mega-menu')) {
-                document.querySelectorAll('.mega-menu').forEach(menu => {
-                    menu.classList.remove('show');
-                });
+        // --- Scroll Effect ---
+        function handleScroll() {
+            if (window.scrollY > threshold) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-        });
+        }
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Initial check
 
-        // Close mega menu on mobile scroll
-        window.addEventListener('scroll', function () {
-            if (window.innerWidth < 992) {
-                document.querySelectorAll('.mega-menu').forEach(menu => {
-                    menu.classList.remove('show');
-                });
-            }
-        });
-
-        // Simple hover effect for menu items
-        const menuItems = document.querySelectorAll('.menu-list .dropdown-item');
-        menuItems.forEach(item => {
-            item.addEventListener('mouseenter', function () {
-                this.style.transition = 'all 0.15s ease';
-            });
-        });
-
-        // Auto-adjust menu list heights based on content
+        // --- Menu List Height Adjustment ---
         function adjustMenuHeights() {
-            const menuLists = document.querySelectorAll('.menu-list');
-            menuLists.forEach(list => {
-                const items = list.querySelectorAll('li');
-                const itemCount = items.length;
-
+            document.querySelectorAll('.menu-list').forEach(list => {
+                const itemCount = list.querySelectorAll('li').length;
                 if (itemCount > 7) {
                     list.style.maxHeight = '250px';
                     list.style.overflowY = 'auto';
@@ -1498,87 +1475,20 @@
                 }
             });
         }
-
-        // Initialize
         adjustMenuHeights();
-
-        // Re-adjust on window resize
         window.addEventListener('resize', adjustMenuHeights);
-
-        // اسکریپت جدید برای تغییر رنگ هنگام اسکرول
-        const navbar = document.querySelector('.navbar');
-        const threshold = 100;
-
-        function handleScroll() {
-            if (window.scrollY > threshold) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll);
-
-        if (window.scrollY > threshold) {
-            navbar.classList.add('scrolled');
-        }
-
-        // مدیریت منوهای آیکون‌ها برای دسکتاپ
-        if (window.innerWidth >= 992) {
-            const iconContainers = document.querySelectorAll('.header_icon_container');
-
-            iconContainers.forEach(container => {
-                const dropdownMenu = container.querySelector('.dropdown-menu');
-
-                container.addEventListener('mouseenter', function () {
-                    if (dropdownMenu) {
-                        dropdownMenu.style.display = 'block';
-                        dropdownMenu.style.opacity = '0';
-                        dropdownMenu.style.transform = 'translateY(10px)';
-
-                        setTimeout(() => {
-                            dropdownMenu.style.opacity = '1';
-                            dropdownMenu.style.transform = 'translateY(0)';
-                            dropdownMenu.style.transition = 'all 0.3s ease';
-                        }, 10);
-                    }
-                });
-
-                container.addEventListener('mouseleave', function (e) {
-                    if (dropdownMenu && !container.contains(e.relatedTarget)) {
-                        dropdownMenu.style.opacity = '0';
-                        dropdownMenu.style.transform = 'translateY(10px)';
-
-                        setTimeout(() => {
-                            dropdownMenu.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            });
-        }
     });
 
-    function changeLanguage(lang) {
-        document.getElementById('lang-code').value = lang;
-        document.getElementById('lang-form').submit();
-    }
-
-    // Language Change Function - Keep only one version
+    // Language Change Function
     function changeLanguage(lang) {
         const form = document.getElementById('lang-form');
         const langInput = document.getElementById('lang-code');
-
-        // Set selected language
-        langInput.value = lang;
-
-        // Optional: Add loading indicator
-        const currentLang = document.querySelector('.current-language');
-        if (currentLang) {
-            currentLang.style.opacity = '0.7';
+        if (form && langInput) {
+            langInput.value = lang;
+            const currentLang = document.querySelector('.current-language');
+            if (currentLang) currentLang.style.opacity = '0.5';
+            form.submit();
         }
-
-        // Submit form
-        form.submit();
     }
 
     // Set default language to Turkish on page load if not set
