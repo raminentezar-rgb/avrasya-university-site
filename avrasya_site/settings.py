@@ -303,9 +303,10 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 if not DEBUG:
-    # Optimize WhiteNoise for production memory/performance
-    # Using CompressedStaticFilesStorage (without manifest) to avoid MissingFileErrors for referenced map files
     STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
         "staticfiles": {
             "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
         },
