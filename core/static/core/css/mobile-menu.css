@@ -1,0 +1,130 @@
+/* mobile-menu.css - استایل‌های ساده و مستقل برای منوی موبایل */
+
+/* دکمه همبرگری */
+.hamburger_container {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    right: 20px !important;
+    cursor: pointer !important;
+    z-index: 100 !important;
+}
+
+/* در موبایل نمایش داده شود */
+@media (max-width: 992px) {
+    .hamburger_container {
+        display: block !important;
+    }
+    
+    .main_nav_container {
+        display: none !important;
+    }
+}
+
+/* در دسکتاپ پنهان شود */
+@media (min-width: 993px) {
+    .hamburger_container {
+        display: none !important;
+    }
+}
+
+.hamburger_container i {
+    font-size: 28px !important;
+    color: white !important;
+    padding: 10px !important;
+}
+
+/* منوی موبایل */
+.menu_container {
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    width: 280px !important;
+    height: 100vh !important;
+    background: #092442 !important;
+    z-index: 9999 !important;
+    transition: right 0.3s ease !important;
+    overflow-y: auto !important;
+}
+
+.menu_container.active {
+    right: 0 !important;
+}
+
+/* دکمه بستن منو */
+.menu_close_container {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    width: 35px !important;
+    height: 35px !important;
+    cursor: pointer !important;
+    z-index: 10000 !important;
+    background: rgba(255,255,255,0.2) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.menu_close {
+    position: relative !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.menu_close::before,
+.menu_close::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 9px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 2px !important;
+    background: white !important;
+}
+
+.menu_close::before {
+    transform: rotate(45deg) !important;
+}
+
+.menu_close::after {
+    transform: rotate(-45deg) !important;
+}
+
+/* آیتم‌های منو */
+.menu_inner {
+    padding: 60px 20px 20px !important;
+}
+
+.menu_list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.menu_item {
+    margin-bottom: 15px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.menu_item a {
+    display: block !important;
+    padding: 12px 0 !important;
+    color: white !important;
+    font-size: 16px !important;
+    text-decoration: none !important;
+    transition: all 0.3s !important;
+}
+
+.menu_item a:hover {
+    color: #8dd4e3 !important;
+    padding-left: 10px !important;
+}
+
+/* در دسکتاپ منوی موبایل نمایش داده نشود */
+@media (min-width: 993px) {
+    .menu_container {
+        display: none !important;
+    }
+}

@@ -20,6 +20,23 @@
     
     <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/responsive.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @media (max-width: 992px) {
+            .header {
+                height: 100px !important;
+                top: 15px !important;
+            }
+            .logo_container {
+                padding-left: 20px !important;
+            }
+            .logo img {
+                height: 65px !important;
+            }
+            .hamburger_container {
+                right: 20px !important;
+            }
+        }
+    </style>
 </head>
 <body>
 {% include "chat/support_widget.html" %}
@@ -76,45 +93,33 @@
                     {% include 'core/navbar.html' %}
                 </div>
             </nav>
-        </div>
-
-        <!-- Hamburger -->
-        <div class="hamburger_container">
-            <i class="fas fa-bars trans_200"></i>
+            <!-- Hamburger (CSS-based bars) -->
+            <div class="hamburger_container">
+                <div class="hamburger_bars">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
     </header>
     
-    <!-- Menu -->
+    <!-- Menu (Mobile Menu Panel) - این بخش مهم است -->
     <div class="menu_container menu_mm">
-        <!-- Menu Close Button -->
         <div class="menu_close_container">
             <div class="menu_close"></div>
         </div>
-
-        <!-- Menu Items -->
         <div class="menu_inner menu_mm">
             <div class="menu menu_mm">
                 <ul class="menu_list menu_mm">
-                    <li class="menu_item menu_mm"><a href="#">{% trans "Üniversitemiz" %}</a></li>
-                    <li class="menu_item menu_mm"><a href="#">{% trans "About us" %}</a></li>
-                    <li class="menu_item menu_mm"><a href="courses.html">{% trans "Courses" %}</a></li>
-                    <li class="menu_item menu_mm"><a href="elements.html">{% trans "Elements" %}</a></li>
-                    <li class="menu_item menu_mm"><a href="news.html">{% trans "News" %}</a></li>
-                    <li class="menu_item menu_mm"><a href="contact.html">{% trans "Contact" %}</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'core:index' %}">{% trans "Anasayfa" %}</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'aday_ogrenci:aday_anasayfa' %}">{% trans "Aday Öğrenci" %}</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'ogrenci_isleri:ogrenci_isleri' %}">{% trans "Eğitim-Öğretim" %}</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'akademik:akademik' %}">{% trans "Akademik" %}</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'idari_birimler:idari_birimler' %}">{% trans "İdari" %}</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'arastirma:home' %}">{% trans "Araştırma" %}</a></li>
+                    <li class="menu_item menu_mm"><a href="{% url 'core:iletisim' %}">{% trans "İletişim" %}</a></li>
                 </ul>
-
-                <!-- Menu Social -->
-                <div class="menu_social_container menu_mm">
-                    <ul class="menu_social menu_mm">
-                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="menu_social_item menu_mm"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                </div>
-
-                <div class="menu_copyright menu_mm">Colorlib All rights reserved</div>
             </div>
         </div>
     </div>
@@ -5387,7 +5392,7 @@ input:last-of-type { margin-bottom: 0px; }
 
 
 
-
+ 
 
 
 
@@ -5574,6 +5579,56 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.stopPropagation();
             });
         });
+    }
+});
+
+
+// Mobile Menu Toggle - Simple and reliable
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded - checking for hamburger');
+    
+    var hamburger = document.querySelector('.hamburger_container');
+    var menuContainer = document.querySelector('.menu_container');
+    var menuClose = document.querySelector('.menu_close_container');
+    
+    console.log('Hamburger found:', hamburger);
+    console.log('Menu container found:', menuContainer);
+    
+    if (hamburger && menuContainer) {
+        // Open menu when clicking hamburger
+        hamburger.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            menuContainer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            console.log('Menu opened');
+            return false;
+        };
+        
+        // Close menu when clicking close button
+        if (menuClose) {
+            menuClose.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                menuContainer.classList.remove('active');
+                document.body.style.overflow = '';
+                console.log('Menu closed');
+                return false;
+            };
+        }
+        
+        // Close menu when clicking outside (on the overlay)
+        menuContainer.onclick = function(e) {
+            if (e.target === menuContainer) {
+                menuContainer.classList.remove('active');
+                document.body.style.overflow = '';
+                console.log('Menu closed by clicking overlay');
+            }
+        };
+    } else {
+        console.log('Hamburger or menu container NOT found!');
+        console.log('hamburger:', hamburger);
+        console.log('menuContainer:', menuContainer);
     }
 });
 
