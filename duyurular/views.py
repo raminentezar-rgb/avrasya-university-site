@@ -16,6 +16,7 @@ def duyuru_listesi(request):
         duyurular = duyurular.filter(
             Q(baslik__icontains=search_query) | 
             Q(icerik__icontains=search_query) |
+            Q(fakulte__icontains=search_query) |
             Q(ozet__icontains=search_query)
         )
     

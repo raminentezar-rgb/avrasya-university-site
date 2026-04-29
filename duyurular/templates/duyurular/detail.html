@@ -202,6 +202,9 @@
                                 Paylaş
                             </h4>
                             <div class="share-buttons">
+                                <button class="share-btn whatsapp" onclick="shareOnWhatsapp()">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
                                 <button class="share-btn facebook" onclick="shareOnFacebook()">
                                     <i class="fab fa-facebook-f"></i>
                                 </button>
@@ -212,7 +215,7 @@
                                     <i class="fab fa-linkedin-in"></i>
                                 </button>
                                 <button class="share-btn copy" onclick="copyToClipboard()">
-                                    <i class="fas fa-link"></i>
+                                    <i class="fa fa-link"></i>
                                 </button>
                             </div>
                         </div>
@@ -650,6 +653,18 @@
     font-size: 1.1rem;
 }
 
+/* WhatsApp Button Style */
+.share-btn.whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.share-btn.whatsapp:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
 .share-btn.facebook {
     background: #3b5998;
     color: white;
@@ -742,6 +757,13 @@
 </style>
 
 <script>
+// Corrected WhatsApp share function
+function shareOnWhatsapp() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('{{ duyuru.baslik }}');
+    window.open(`https://wa.me/?text=${text}%20-%20${url}`, '_blank');
+}
+
 function shareOnFacebook() {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent('{{ duyuru.baslik }}');
@@ -759,7 +781,7 @@ function shareOnLinkedIn() {
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
 }
 
-function copyToClipboard() {
+function copyToClipboard(event) {
     const url = window.location.href;
     navigator.clipboard.writeText(url).then(() => {
         // Show success message

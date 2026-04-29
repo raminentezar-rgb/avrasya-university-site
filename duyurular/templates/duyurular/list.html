@@ -22,6 +22,7 @@
                         
                         <div class="header-content">
                             <div class="title-section">
+                                
                                 <h1 class="page-title">Duyurular</h1>
                                 <p class="page-subtitle">Avrasya Üniversitesi'nden en güncel duyurular ve haberler</p>
                             </div>
@@ -68,7 +69,7 @@
                                         <input type="text" 
                                                name="q" 
                                                value="{{ search_query }}"
-                                               placeholder="Başlık, özet veya içerikte ara...">
+                                               placeholder="Fakülte, Başlık, özet veya içerikte ara...">
                                     </div>
                                     <div class="date-field">
                                         <i class="far fa-calendar"></i>
@@ -112,7 +113,7 @@
                                 <span class="category-badge faculty">{{ duyuru.get_fakulte_display }}</span>
                                 {% if duyuru.bolumler.exists %}
                                     {% for bolum in duyuru.bolumler.all|slice:":2" %}
-                                        <span class="category-badge department">{{ bolum.ad }}</span>
+                                        <span class="category-badge department" >{{ bolum.ad }}</span>
                                     {% endfor %}
                                     {% if duyuru.bolumler.count > 2 %}
                                         <span class="category-badge more">+{{ duyuru.bolumler.count|add:"-2" }}</span>
@@ -253,9 +254,9 @@
 }
 
 .page-title {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Metropolis', sans-serif;
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--primary-dark-blue);
     margin-bottom: 10px;
     line-height: 1.2;
@@ -493,6 +494,7 @@
     font-size: 0.75rem;
     font-weight: 600;
     white-space: nowrap;
+    margin-bottom: 14px;
 }
 
 .category-badge.faculty {
