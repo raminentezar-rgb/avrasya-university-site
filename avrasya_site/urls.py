@@ -122,6 +122,7 @@ urlpatterns += i18n_patterns(
     path('yonetim_bilisim_sistemleri/', include('yonetim_bilisim_sistemleri.urls')),
     path('gastronomi_mutfak_sanatlari/', include('gastronomi_mutfak_sanatlari.urls')),
     path('sks/', include('sks.urls')),
+    path('odeme/', include('tuition.urls', namespace='tuition')),
     prefix_default_language=False
 )
 

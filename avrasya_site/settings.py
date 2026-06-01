@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'sks',
     'channels',
     'chat',
+    'tuition',
     
     #MYO
     'adalet',
