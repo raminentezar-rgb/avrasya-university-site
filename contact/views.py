@@ -17,9 +17,9 @@ def contact_view(request):
             subject = form.cleaned_data['subject']
             message_body = form.cleaned_data['message']
 
-            # ۲. ارسال ایمیل اطلاع‌رسانی به مدیریت (شما)
-            admin_subject = f"فرم تماس جدید: {subject}"
-            admin_message = f"نام فرستنده: {name}\nایمیل: {student_email}\n\nمتن پیام:\n{message_body}"
+            # ۲. ارسال ایمیل اطلاع‌رسانی به مدیریت (دانشگاه)
+            admin_subject = f"Yeni İletişim Formu Mesajı: {subject}"
+            admin_message = f"Gönderen Adı: {name}\nE-posta: {student_email}\n\nMesaj Metni:\n{message_body}"
             
             try:
                 # ارسال به مدیریت
@@ -27,7 +27,7 @@ def contact_view(request):
                     admin_subject,
                     admin_message,
                     settings.DEFAULT_FROM_EMAIL,
-                    [settings.EMAIL_HOST_USER], # ایمیل شما که در settings تعریف شده
+                    ['iletisim@avrasya.edu.tr'],
                     fail_silently=False,
                 )
 
