@@ -51,15 +51,15 @@
                                         <!-- Dekan -->
                                         <div class="personnel-management-card">
                                             <div class="personnel-image-container">
-                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2024/03/bos-a.jpg" alt="Prof. Dr. Birol DOĞAN" class="personnel-image">
+                                                <img src="{% static 'core/img/teacher/cemal-biyik.jpeg' %}" alt="Prof. Dr. Birol DOĞAN" class="personnel-image">
                                             </div>
                                             <div class="personnel-info">
-                                                <h4>Prof. Dr. Birol DOĞAN</h4>
+                                                <h4>Prof. Dr. Cemal BIYIK</h4>
                                                 <p class="personnel-title">Dekan</p>
                                                 <div class="personnel-contact-info">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:birol.dogan@avrasya.edu.tr">birol.dogan@avrasya.edu.tr</a></p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="cemal.biyik@avrasya.edu.tr">cemal.biyik@avrasya.edu.tr</a></p>
                                                     <p><i class="fas fa-phone"></i> +90 462 334 05 50</p>
-                                                    <p><i class="fas fa-user"></i> Özgeçmiş</p>
+                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/6582d73d8c225&dil=0">Özgeçmiş</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -67,34 +67,21 @@
                                         <!-- Dekan Yardımcısı 1 -->
                                         <div class="personnel-management-card">
                                             <div class="personnel-image-container">
-                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2023/09/a19.jpg" alt="Dr. Öğr. Üyesi Gül ERTEM" class="personnel-image">
+                                                <img src="{% static 'core/img/teacher/Selfiye-Hoca-IletisimF.png' %}" alt="Dr. Öğr. Üyesi Gül ERTEM" class="personnel-image">
                                             </div>
                                             <div class="personnel-info">
-                                                <h4>Dr. Öğr. Üyesi Gül ERTEM</h4>
+                                                <h4>Dr. Öğr. Üyesi Selfiye ÖZKAN</h4>
                                                 <p class="personnel-title">Dekan Yardımcısı</p>
                                                 <div class="personnel-contact-info">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:gul.cavusoglu@avrasya.edu.tr">gul.cavusoglu@avrasya.edu.tr</a></p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:selfiye.ozkan@avrasya.edu.tr">selfiye.ozkan@avrasya.edu.tr</a></p>
                                                     <p><i class="fas fa-phone"></i> +90 462 334 05 50</p>
-                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c936c2d0a37&amp;dil=0">Özgeçmiş</a></p>
+                                                    <p><i class="fas fa-user"></i> <a href="">Özgeçmiş</a></p>
                                                 </div>
                                             </div>
                                         </div>
                                         
-                                        <!-- Dekan Yardımcısı 2 -->
-                                        <div class="personnel-management-card">
-                                            <div class="personnel-image-container">
-                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2024/11/Ogr.-Gor.-Mehmet-DERELIOGLU.jpg" alt="Dr. Öğr. Üyesi Mehmet DERELİOĞLU" class="personnel-image">
-                                            </div>
-                                            <div class="personnel-info">
-                                                <h4>Dr. Öğr. Üyesi Mehmet DERELİOĞLU</h4>
-                                                <p class="personnel-title">Dekan Yardımcısı</p>
-                                                <div class="personnel-contact-info">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:mehmet.derelioglu@avrasya.edu.tr">mehmet.derelioglu@avrasya.edu.tr</a></p>
-                                                    <p><i class="fas fa-phone"></i> +90 462 334 05 50</p>
-                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c938fe957a6&amp;dil=0">Özgeçmiş</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +164,43 @@
     --card-shadow: 0 5px 20px rgba(0,0,0,0.1);
     --hover-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
+/* Hero Section */
+.research-hero {
+    background: linear-gradient(135deg, #4a6fa5 0%, #2e4a7d 100%);
+    padding: 80px 0 60px;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    margin-top: -120px;
+}
 
+.research-hero:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+    background-size: cover;
+}
+
+.research-hero-content h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.research-hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
 /* Layout */
 .main-container {
     max-width: 1400px;

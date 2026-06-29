@@ -331,8 +331,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'ramin.entezar@avrasya.edu.tr'
 # پسورد ایمیل را در سرور به صورت متغیر محیطی تعریف می‌کنیم
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'Avu202561.*') 
-DEFAULT_FROM_EMAIL = 'avu.web@avrasya.edu.tr'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '1136130@NaNa') 
+DEFAULT_FROM_EMAIL = 'ramin.entezar@avrasya.edu.tr'
 SERVER_EMAIL = 'noreply@avrasya.edu.tr'
 
 LOGIN_REDIRECT_URL = '/'
