@@ -85,7 +85,7 @@
                         </small>
                     </div>
                     
-                    <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm mt-3">
+                    <a href="{% url 'arastirma:bap_detail' project.id %}" class="btn btn-outline-primary btn-sm mt-3">
                         Proje Detayları <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -105,7 +105,7 @@
     </div>
 </section>
 
-<!-- آزمایشگاه‌ها -->
+{% comment %} <!-- آزمایشگاه‌ها -->
 <section class="research-section">
     <div class="container">
         <div class="section-title">
@@ -135,7 +135,7 @@
                         </small>
                     </div>
                     
-                    <a href="{{ lab.get_absolute_url }}" class="btn btn-outline-primary btn-sm mt-3">
+                    <a href="{% url 'arastirma:lab_detail' lab.id %}" class="btn btn-outline-primary btn-sm mt-3">
                         Laboratuvar Detayı <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -153,7 +153,7 @@
             </a>
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
 <!-- بخش آمار -->
 {% include 'arastirma/includes/stats.html' %}

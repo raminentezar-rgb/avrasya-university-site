@@ -18,6 +18,9 @@ class ResearchPolicy(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('arastirma:policy_detail', args=[self.id])
+
 class BAPProject(models.Model):
     title = models.CharField(max_length=400, verbose_name="Proje Başlığı")
     coordinator = models.CharField(max_length=200, verbose_name="Koordinatör")
@@ -37,6 +40,9 @@ class BAPProject(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('arastirma:bap_detail', args=[self.id])
+
 class Laboratory(models.Model):
     name = models.CharField(max_length=300, verbose_name="Laboratuvar Adı")
     faculty = models.CharField(max_length=150, verbose_name="Fakülte/Bölüm")
@@ -51,6 +57,9 @@ class Laboratory(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('arastirma:lab_detail', args=[self.id])
     
 
 
