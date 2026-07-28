@@ -4,6 +4,9 @@
 {% block title %}Avrasya Üniversitesi - Aday Öğrenci{% endblock %}
 
 {% block content %}
+<!-- DearFlip CSS -->
+<link href="https://unpkg.com/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/css/dflip.min.css" rel="stylesheet" type="text/css">
+<link href="https://unpkg.com/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/css/themify-icons.min.css" rel="stylesheet" type="text/css">
 
 <!-- Hero Section -->
 <section class="research-hero">
@@ -17,7 +20,40 @@
 {% include "chat/support_widget.html" %}
 
 <!-- Main Content -->
-<!-- Main Content -->
+
+<!-- Presentations Section -->
+<div class="presentations-section container-fluid">
+    <div class="container text-center">
+        <h2 class="presentations-title mb-3">{% trans "Üniversitemiz" %}</h2>
+        <p class="presentations-subtitle mb-5">{% trans "Tanıtım sunumlarımıza aşağıdaki formatlarda ulaşabilirsiniz." %}</p>
+        
+        <div class="d-flex justify-content-center align-items-center flex-wrap" style="gap: 3rem;">
+            <!-- Turkish -->
+            <div class="_df_button presentation-flag-btn" source="{% static 'pdf/TURKCE-SUNUM.pdf' %}" style="cursor: pointer;">
+                <div class="flag-container">
+                    <img src="{% static 'core/img/flags/tr.svg' %}" class="flag-svg" alt="Türkçe">
+                </div>
+            </div>
+            
+            <!-- Chinese -->
+            <div class="_df_button presentation-flag-btn" source="{% static 'pdf/CINCE-SUNUM.pdf' %}" style="cursor: pointer;">
+                <div class="flag-container">
+                    <img src="{% static 'core/img/flags/cn.svg' %}" class="flag-svg" alt="Çince">
+                </div>
+            </div>
+            
+            <!-- German -->
+            <div class="_df_button presentation-flag-btn" source="{% static 'pdf/ALMANCA-SUNUM.pdf' %}" style="cursor: pointer;">
+                <div class="flag-container">
+                    <img src="{% static 'core/img/flags/de.svg' %}" class="flag-svg" alt="Almanca">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container">
     <!-- Quick Access Cards -->
     <div class="row mb-5">
@@ -223,6 +259,140 @@
         
     </div>
     
+</div>
+
+
+
+
+
+
+<!-- Brochure Flipbook Section -->
+<div class="container mb-5 mt-5" style="position: relative; z-index: 10;">
+    <div class="row">
+        <div class="col-12 mb-4 mt-5">
+            <h2 class="section-title text-center mb-4">{% trans "Üniversitemiz Broşürü" %}</h2>
+        </div>
+        <div class="col-12">
+            <div class="_df_book" 
+                 style="height: 700px; width: 100%; display: block;"
+                 webgl="true" 
+                 backgroundcolor="transparent"
+                 source="{% static 'pdf/BROSUR-K.pdf' %}" 
+                 id="brosur_flipbook">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Fakulteler Section -->
+<div class="fakulteler-section container-fluid mb-5">
+    <div class="container">
+        <h2 class="fakulteler-title">{% trans "Fakülteler" %}</h2>
+        
+        <div class="fakulte-grid">
+            <a href="{% url 'lee:lee' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/resimler-scaled.jpg' %}" class="fakulte-img" alt="Lisansüstü Eğitim Enstitüsü">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">LİSANSÜSTÜ EĞİTİM ENSTİTÜSÜ</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'muhendislik_mimarlik:muhendislik_mimarlik' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/yomra2.png' %}" class="fakulte-img" alt="Mühendislik ve Doğa Bilimleri Fakültesi">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">MÜHENDİSLİK VE DOĞA BİLİMLERİ FAKÜLTESİ</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'saglik_bilimleri:saglik_bilimleri' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/yalincak_gallery.jpg' %}" class="fakulte-img" alt="Sağlık Bilimleri Fakültesi">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">SAĞLIK BİLİMLERİ FAKÜLTESİ</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'fen_edebiyat:fen_edebiyat' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/yomra.png' %}" class="fakulte-img" alt="İnsan ve Toplum Bilimleri Fakültesi">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">İNSAN VE TOPLUM BİLİMLERİ FAKÜLTESİ</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'iktisadi_idari:iktisadi_idari' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/Pelitli-Gece-scaled.jpg' %}" class="fakulte-img" alt="İktisadi ve İdari Bilimler Fakültesi">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">İKTİSADİ VE İDARİ BİLİMLER FAKÜLTESİ</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'iletisim:iletisim_anasayfa' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/avrasya.jpg' %}" class="fakulte-img" alt="İletişim Fakültesi">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">İLETİŞİM FAKÜLTESİ</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'spor_bilimleri:spor_bilimleri' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/k3.png' %}" class="fakulte-img" alt="Spor Bilimleri Fakültesi">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">SPOR BİLİMLERİ FAKÜLTESİ</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'saglik_hizmetleri_myo:saglik_hizmetleri_myo' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/genel5-1024x683-1.jpg' %}" class="fakulte-img" alt="Sağlık Hizmetleri Meslek Yüksekokulu">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">SAĞLIK HİZMETLERİ MESLEK YÜKSEKOKULU</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'uygulamali_bilimler:uygulamali_bilimler' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/IMG_0536-2-scaled.jpg' %}" class="fakulte-img" alt="Uygulamalı Bilimler Yüksekokulu">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">UYGULAMALI BİLİMLER YÜKSEKOKULU</h3>
+                </div>
+            </a>
+            
+            <a href="{% url 'meslek_yuksekokulu:meslek_yuksekokulu' %}" class="fakulte-card">
+                <div class="fakulte-img-wrapper">
+                    <img src="{% static 'core/img/akademik/kasustu-1024x683-1.jpg' %}" class="fakulte-img" alt="Meslek Yüksekokulu">
+                </div>
+                <div class="fakulte-content">
+                    <h3 class="fakulte-title">MESLEK YÜKSEKOKULU</h3>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
 
 <!-- CTA Section -->
@@ -595,12 +765,162 @@
         font-size: 1rem;
     }
 
+}
 
+/* Presentations Section Styles */
+.presentations-section {
+    background: transparent;
+    padding: 70px 0;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+}
 
+.presentations-title {
+    color: #ffa500;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    font-size: 2.2rem;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.05);
+}
 
+.presentations-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
 
+.presentation-flag-btn {
+    text-decoration: none !important;
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: white;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+}
 
-    
+.presentation-flag-btn:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    border-color: rgba(255, 165, 0, 0.3);
+}
+
+.flag-container {
+    width: 100px;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.flag-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 576px) {
+    .presentations-title {
+        font-size: 1.8rem;
+    }
+    .flag-container {
+        width: 80px;
+        height: 56px;
+    }
+    .presentation-flag-btn {
+        padding: 10px;
+    }
+}
+
+/* Fakulteler Section Styles */
+.fakulteler-section {
+    padding: 60px 0;
+    background: transparent;
+}
+
+.fakulteler-title {
+    color: #ffa500;
+    font-weight: 800;
+    font-family: 'Metropolis', sans-serif;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.fakulte-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+}
+
+.fakulte-card {
+    position: relative;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    text-decoration: none !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.fakulte-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 22px 40px rgba(0,0,0,0.15);
+}
+
+.fakulte-img-wrapper {
+    width: 100%;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+    position: relative;
+    overflow: hidden;
+}
+
+.fakulte-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.fakulte-card:hover .fakulte-img {
+    transform: scale(1.1);
+}
+
+.fakulte-content {
+    padding: 1.5rem 1rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: relative;
+    z-index: 2;
+}
+
+.fakulte-title {
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    font-family: 'Metropolis', sans-serif;
+    transition: color 0.3s ease;
+    line-height: 1.4;
+}
+
+.fakulte-card:hover .fakulte-title {
+    color: #ffa500;
 }
 </style>
 
@@ -622,4 +942,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<!-- DearFlip JS -->
+<script>
+    var dFlipLocation = "https://unpkg.com/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/";
+</script>
+<script src="https://unpkg.com/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/js/dflip.min.js"></script>
 {% endblock %}
