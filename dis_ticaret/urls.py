@@ -2,7 +2,6 @@
 
 from django.urls import path
 from . import views
-
 app_name = 'dis_ticaret'
 
 urlpatterns = [
@@ -17,8 +16,10 @@ urlpatterns = [
     
     # URLهای فعالیت‌ها
     path('idari_faaliyetler_2024_2025/', views.idari_faaliyetler_2024_2025, name='idari_faaliyetler_2024_2025'),
+    path('idari_faaliyetler_2025_2026/', views.idari_faaliyetler_2025_2026, name='idari_faaliyetler_2025_2026'),
     
-    path('diğer_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
+    path('diger_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
+    path('diger_faaliyetler_2025_2026/', views.diger_faaliyetler_2025_2026, name='diger_faaliyetler_2025_2026'),
     
     # URLهای فعالیت‌ها
     path('etkinlikler/', views.etkinlik_listesi, name='etkinlik_listesi'),

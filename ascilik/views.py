@@ -126,8 +126,14 @@ def asciilik(request):
 def idari_faaliyetler_2024_2025(request):
     return render(request, 'ascilik/includes/idari_faaliyetler_2024_2025.html')
 
+def idari_faaliyetler_2025_2026(request):
+    return render(request, 'ascilik/includes/idari_faaliyetler_2025_2026.html')
+
 def diger_faaliyetler_2024_2025(request):
     return render(request, 'ascilik/includes/diger_faaliyetler_2024_2025.html')
+
+def diger_faaliyetler_2025_2026(request):
+    return render(request, 'ascilik/includes/diger_faaliyetler_2025_2026.html')
 
 def kalite_yonetimi(request):
     return render(request, 'ascilik/includes/kalite_yonetimi.html')

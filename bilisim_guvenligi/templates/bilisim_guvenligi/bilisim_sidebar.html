@@ -1,4 +1,4 @@
-﻿{% load static %}
+{% load static %}
 {% load i18n %}
 <!-- سایدبار مخصوص صفحات Akademik -->
 <aside class="policy-sidebar-new">
@@ -55,24 +55,32 @@
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'bilisim_guvenligi:idari_faaliyetler_2024_2025' %}" class="main-link">{% trans "İdari Faaliyetler" %}</a>
+                            <a href="#" class="main-link">{% trans "İdari Faaliyetler" %} <i class="fas fa-chevron-down toggle-icon"></i></a>
                         </span>
                         <span class="nav-check submenu-toggle">
-                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                            <i class="fas fa-chevron-down"></i>
                         </span>
-                
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="{% url 'bilisim_guvenligi:idari_faaliyetler_2025_2026' %}" class="submenu-link">İdari Faaliyetler (2025-2026)</a></li>
+                        <li><a href="{% url 'bilisim_guvenligi:idari_faaliyetler_2024_2025' %}" class="submenu-link">İdari Faaliyetler (2024-2025)</a></li>
+                    </ul>
                 </li>
 
                 <!-- Taban Puanlar -->
                 <li class="nav-item has-submenu">
                     <div class="nav-link-wrapper">
                         <span class="nav-text">
-                            <a href="{% url 'bilisim_guvenligi:diger_faaliyetler_2024_2025' %}" class="main-link">{% trans "Diğer Faaliyetler" %}</a>
+                            <a href="#" class="main-link">{% trans "Diğer Faaliyetler" %} <i class="fas fa-chevron-down toggle-icon"></i></a>
                         </span>
                         <span class="nav-check submenu-toggle">
-                            {% comment %} <i class="fas fa-chevron-down"></i> {% endcomment %}
+                            <i class="fas fa-chevron-down"></i>
                         </span>
                     </div>
+                    <ul class="submenu">
+                        <li><a href="{% url 'bilisim_guvenligi:diger_faaliyetler_2025_2026' %}" class="submenu-link">Diğer Faaliyetler (2025-2026)</a></li>
+                        <li><a href="{% url 'bilisim_guvenligi:diger_faaliyetler_2024_2025' %}" class="submenu-link">Diğer Faaliyetler (2024-2025)</a></li>
+                    </ul>
                 </li>
 
                 <!-- Taban Puanlar -->

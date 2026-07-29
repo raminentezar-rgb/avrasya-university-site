@@ -121,11 +121,23 @@ def ders_programi(request):
 def insaat_teknolojisi_bolumu(request):
     return render(request, 'insaat_teknolojisi/includes/insaat_teknolojisi.html')
 
+def idari_faaliyetler_2023_2024(request):
+    return render(request, 'insaat_teknolojisi/includes/idari_faaliyetler_2023_2024.html')
+
 def idari_faaliyetler_2024_2025(request):
     return render(request, 'insaat_teknolojisi/includes/idari_faaliyetler_2024_2025.html')
 
+def idari_faaliyetler_2025_2026(request):
+    return render(request, 'insaat_teknolojisi/includes/idari_faaliyetler_2025_2026.html')
+
+def diger_faaliyetler_2023_2024(request):
+    return render(request, 'insaat_teknolojisi/includes/diger_faaliyetler_2023_2024.html')
+
 def diger_faaliyetler_2024_2025(request):
     return render(request, 'insaat_teknolojisi/includes/diger_faaliyetler_2024_2025.html')
+
+def diger_faaliyetler_2025_2026(request):
+    return render(request, 'insaat_teknolojisi/includes/diger_faaliyetler_2025_2026.html')
 
 def kalite_yonetimi(request):
     return render(request, 'insaat_teknolojisi/includes/kalite_yonetimi.html')

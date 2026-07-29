@@ -126,8 +126,17 @@ def bilgisayar_programciligi_bolumu(request):
 def idari_faaliyetler_2024_2025(request):
     return render(request, 'bilgisayar_programciligi/includes/idari_faaliyetler_2024_2025.html')
 
+def idari_faaliyetler_2025_2026(request):
+    return render(request, 'bilgisayar_programciligi/includes/idari_faaliyetler_2025_2026.html')
+
+def diger_faaliyetler_2023_2024(request):
+    return render(request, 'bilgisayar_programciligi/includes/diger_faaliyetler_2023_2024.html')
+
 def diger_faaliyetler_2024_2025(request):
     return render(request, 'bilgisayar_programciligi/includes/diger_faaliyetler_2024_2025.html')
+
+def diger_faaliyetler_2025_2026(request):
+    return render(request, 'bilgisayar_programciligi/includes/diger_faaliyetler_2025_2026.html')
 
 def kalite_yonetimi(request):
     return render(request, 'bilgisayar_programciligi/includes/kalite_yonetimi.html')

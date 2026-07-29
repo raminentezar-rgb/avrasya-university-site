@@ -19,14 +19,87 @@
 <div class="container-fluid main-container">
     <div class="row g-4">
         <!-- سایدبار سمت چپ -->
-        {% comment %} <div class="col-lg-3 col-xxl-2">
+         <div class="col-lg-3 col-xxl-2">
             <div class="sidebar-wrapper">
                 {% include 'ogrenci_isleri/orenci_sidebar.html' %}
             </div>
-        </div> {% endcomment %}
+        </div> 
         
         <!-- محتوای اصلی -->
-        
+        <div class="col-lg-9 col-xxl-10">
+            <div class="content-wrapper p-4 p-md-5 rounded-4 bg-white" style="box-shadow: 0 10px 40px rgba(0,0,0,0.05); border: 1px solid rgba(141, 212, 227, 0.1);">
+                
+                <!-- Başlık -->
+                <div class="section-title mb-5 pb-3 border-bottom border-1" style="border-color: rgba(9, 36, 66, 0.1) !important;">
+                    <h2 class="fw-bold mb-3 d-flex align-items-center" style="color: var(--primary-dark-blue);">
+                        <i class="fas fa-graduation-cap me-3" style="color: var(--secondary-medium-blue); font-size: 2.2rem;"></i>
+                        Burs ve İndirim Olanakları
+                    </h2>
+                    <p class="fs-5 text-muted mb-0" style="line-height: 1.6;">Avrasya Üniversitesi’nde sağlanan resmi burslar ve eğitim ücreti muafiyetlerine ait bilgiler aşağıda yer almaktadır.</p>
+                </div>
+
+                <!-- ÖSYM Bursları Kartı -->
+                <div class="scholarship-card p-4 p-lg-5 rounded-4 mb-4 position-relative overflow-hidden">
+                    <div class="card-bg-shape"></div>
+                    
+                    <div class="d-flex flex-column flex-md-row align-items-md-center mb-4 position-relative z-index-1">
+                        <div class="icon-box-large flex-shrink-0 mb-3 mb-md-0 me-4 me-md-5">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div>
+                            <span class="badge bg-primary-dark-subtle text-primary-dark mb-2 px-3 py-2 rounded-pill fw-semibold" style="font-size: 0.9rem;">Tam Burs / %50 İndirim</span>
+                            <h3 class="fw-bold mb-0" style="color: var(--primary-dark-blue);">ÖSYM Bursları</h3>
+                        </div>
+                    </div>
+                    
+                    <p class="fs-5 mb-5 position-relative z-index-1" style="color: var(--text-dark); line-height: 1.7;">
+                        ÖSYM YKS Kılavuzunda Üniversitemizin %100 Burslu ve %50 İndirimli kontenjanlarına yerleştirilen öğrencilere sağlanan <strong>karşılıksız</strong> eğitim burslarıdır.
+                    </p>
+                    
+                    <div class="row g-4 position-relative z-index-1">
+                        <!-- Kapsam -->
+                        <div class="col-md-4">
+                            <div class="feature-box h-100 p-4 rounded-4 bg-white border-start border-4 feature-border-1 hover-lift transition-all">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="feature-icon me-4">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-0" style="color: var(--primary-dark-blue);">Kapsam</h5>
+                                </div>
+                                <p class="mb-0 text-muted">Sadece <strong>öğrenim ücretini</strong> kapsar; barınma, beslenme ve ulaşım gibi kişisel giderleri kapsamaz.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Güvence -->
+                        <div class="col-md-4">
+                            <div class="feature-box h-100 p-4 rounded-4 bg-white border-start border-4 feature-border-2 hover-lift transition-all">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="feature-icon me-4">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-0" style="color: var(--secondary-medium-blue);">Eğitim Güvencesi</h5>
+                                </div>
+                                <p class="mb-0 text-muted">ÖSYM bursları, normal öğrenim süresi boyunca (Ön lisans: 2 yıl, Lisans: 4 yıl, Hazırlık: ek 1 yıl) akademik başarı durumu <strong>ne olursa olsun kesintiye uğramaz</strong>.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Disiplin -->
+                        <div class="col-md-4">
+                            <div class="feature-box h-100 p-4 rounded-4 bg-white border-start border-4 feature-border-3 hover-lift transition-all">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="feature-icon me-4">
+                                        <i class="fas fa-user-shield"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-0" style="color: #6c757d;">Disiplin Durumu</h5>
+                                </div>
+                                <p class="mb-0 text-muted">Ağır disiplin suçu işlenmesi halleri dışında burs hakkı <strong>normal öğrenim süresince korunur</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 
@@ -696,6 +769,91 @@
     .person-contact-card:hover, .responsibilities-list li:hover {
         transform: none;
     }
+}
+/* --- Burslar Özel Stilleri --- */
+.bg-primary-dark-subtle { background-color: rgba(9, 36, 66, 0.08); }
+.text-primary-dark { color: var(--primary-dark-blue); }
+
+.scholarship-card {
+    background: var(--neutral-cream);
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    transition: all 0.4s ease;
+}
+
+.scholarship-card:hover {
+    box-shadow: 0 15px 40px rgba(9, 36, 66, 0.08);
+    transform: translateY(-5px);
+}
+
+.card-bg-shape {
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(141, 212, 227, 0.3) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+.icon-box-large {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--secondary-medium-blue), var(--primary-dark-blue));
+    color: white;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    box-shadow: 0 10px 20px rgba(9, 36, 66, 0.2);
+    margin-right: 1.5rem !important;
+}
+
+.feature-box {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+}
+
+.feature-border-1 { border-color: var(--primary-dark-blue) !important; }
+.feature-border-2 { border-color: var(--secondary-medium-blue) !important; }
+.feature-border-3 { border-color: var(--accent-light-blue) !important; }
+
+.feature-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-right: 1rem !important;
+}
+
+.feature-border-1 .feature-icon {
+    background: rgba(9, 36, 66, 0.1);
+    color: var(--primary-dark-blue);
+}
+.feature-border-2 .feature-icon {
+    background: rgba(29, 97, 169, 0.1);
+    color: var(--secondary-medium-blue);
+}
+.feature-border-3 .feature-icon {
+    background: rgba(141, 212, 227, 0.4);
+    color: #3b7d8d;
+}
+
+.hover-lift {
+    transition: all 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
 }
 </style>
 
