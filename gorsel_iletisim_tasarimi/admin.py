@@ -1,7 +1,9 @@
 # app_name: gorsel_iletisim_tasarimi/admin.py
 
 from django.contrib import admin
-from .models import GorselIletisimTasarimiDuyuru, Gorsel_Etkinlik, GorselDersProgrami
+from .models import (
+    Gorsel_Etkinlik, GorselIletisimTasarimiFaaliyet, GorselDersProgrami, GorselIletisimTasarimiDuyuru, GorselIletisimTasarimiFaaliyetGorseli, GorselIletisimTasarimiFaaliyetGrubu
+)
 
 @admin.register(Gorsel_Etkinlik)
 class Gorsel_EtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class GorselDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class GorselIletisimTasarimiFaaliyetGorseliInline(admin.TabularInline):
+    model = GorselIletisimTasarimiFaaliyetGorseli
+    extra = 1
+
+@admin.register(GorselIletisimTasarimiFaaliyetGrubu)
+class GorselIletisimTasarimiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(GorselIletisimTasarimiFaaliyet)
+class GorselIletisimTasarimiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [GorselIletisimTasarimiFaaliyetGorseliInline]

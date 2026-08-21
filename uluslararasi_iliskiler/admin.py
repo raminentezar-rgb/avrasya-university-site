@@ -1,7 +1,9 @@
 # app_name: uluslararasi_iliskiler/admin.py
 
 from django.contrib import admin
-from .models import UluslararasiIliskilerDuyuru, UluslararasiIliskilerEtkinlik, UluslararasiIliskilerDersProgrami
+from .models import (
+    UluslararasiIliskilerDersProgrami, UluslararasiIliskilerFaaliyet, UluslararasiIliskilerFaaliyetGrubu, UluslararasiIliskilerDuyuru, UluslararasiIliskilerFaaliyetGorseli, UluslararasiIliskilerEtkinlik
+)
 
 @admin.register(UluslararasiIliskilerEtkinlik)
 class UluslararasiIliskilerEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class UluslararasiIliskilerDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class UluslararasiIliskilerFaaliyetGorseliInline(admin.TabularInline):
+    model = UluslararasiIliskilerFaaliyetGorseli
+    extra = 1
+
+@admin.register(UluslararasiIliskilerFaaliyetGrubu)
+class UluslararasiIliskilerFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(UluslararasiIliskilerFaaliyet)
+class UluslararasiIliskilerFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [UluslararasiIliskilerFaaliyetGorseliInline]

@@ -1,7 +1,9 @@
 # app_name: turk_dili_edebiyati/admin.py
 
 from django.contrib import admin
-from .models import TurkDiliEdebiyatiDuyuru, TurkDiliEdebiyatiEtkinlik, TurkDiliEdebiyatiDersProgrami
+from .models import (
+    TurkDiliEdebiyatiFaaliyetGorseli, TurkDiliEdebiyatiDersProgrami, TurkDiliEdebiyatiEtkinlik, TurkDiliEdebiyatiFaaliyet, TurkDiliEdebiyatiDuyuru, TurkDiliEdebiyatiFaaliyetGrubu
+)
 
 @admin.register(TurkDiliEdebiyatiEtkinlik)
 class TurkDiliEdebiyatiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class TurkDiliEdebiyatiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class TurkDiliEdebiyatiFaaliyetGorseliInline(admin.TabularInline):
+    model = TurkDiliEdebiyatiFaaliyetGorseli
+    extra = 1
+
+@admin.register(TurkDiliEdebiyatiFaaliyetGrubu)
+class TurkDiliEdebiyatiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(TurkDiliEdebiyatiFaaliyet)
+class TurkDiliEdebiyatiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [TurkDiliEdebiyatiFaaliyetGorseliInline]

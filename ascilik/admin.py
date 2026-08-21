@@ -1,7 +1,9 @@
 # app_name: ascilik/admin.py
 
 from django.contrib import admin
-from .models import AscilikDuyuru, Ascilik_Etkinlik, AscilikDersProgrami
+from .models import (
+    AscilikDuyuru, AscilikDersProgrami, Ascilik_Etkinlik, AscilikFaaliyetGrubu, AscilikFaaliyetGorseli, AscilikFaaliyet
+)
 
 @admin.register(Ascilik_Etkinlik)
 class Ascilik_EtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class AscilikDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class AscilikFaaliyetGorseliInline(admin.TabularInline):
+    model = AscilikFaaliyetGorseli
+    extra = 1
+
+@admin.register(AscilikFaaliyetGrubu)
+class AscilikFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(AscilikFaaliyet)
+class AscilikFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [AscilikFaaliyetGorseliInline]

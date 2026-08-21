@@ -1,8 +1,9 @@
 from django.contrib import admin
+from .models import (
+    News, Announcement, Category
+)
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from .models import Category, News, Announcement
-
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -11,7 +12,6 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['name']
     prepopulated_fields = {'slug': ('name',)}
     list_editable = ['is_active']
-
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
@@ -67,7 +67,6 @@ class NewsAdmin(admin.ModelAdmin):
     def make_unfeatured(self, request, queryset):
         queryset.update(is_featured=False)
     make_unfeatured.short_description = _('Öne Çıkarılanı Kaldır')
-
 
 @admin.register(Announcement)
 class AnnouncementAdmin(admin.ModelAdmin):

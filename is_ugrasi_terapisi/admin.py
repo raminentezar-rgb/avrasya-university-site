@@ -1,7 +1,9 @@
 # is_ugrasi_terapisi/admin.py
 
 from django.contrib import admin
-from .models import IsUgrasiTerapisiDuyuru, IsUgrasiTerapisiEtkinlik, IsUgrasiTerapisiDersProgrami
+from .models import (
+    IsUgrasiTerapisiDuyuru, IsUgrasiTerapisiEtkinlik, IsUgrasiTerapisiDersProgrami, IsUgrasiTerapisiFaaliyet, IsUgrasiTerapisiFaaliyetGrubu, IsUgrasiTerapisiFaaliyetGorseli
+)
 
 @admin.register(IsUgrasiTerapisiEtkinlik)
 class IsUgrasiTerapisiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class IsUgrasiTerapisiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class IsUgrasiTerapisiFaaliyetGorseliInline(admin.TabularInline):
+    model = IsUgrasiTerapisiFaaliyetGorseli
+    extra = 1
+
+@admin.register(IsUgrasiTerapisiFaaliyetGrubu)
+class IsUgrasiTerapisiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(IsUgrasiTerapisiFaaliyet)
+class IsUgrasiTerapisiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [IsUgrasiTerapisiFaaliyetGorseliInline]

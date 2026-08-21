@@ -17,10 +17,10 @@ urlpatterns = [
     path('ders_programi/', views.ders_programi, name='ders_programi'),
     
     # فعالیت‌های اداری
-    path('idari_faaliyetler_2024_2025/', views.idari_faaliyetler_2024_2025, name='idari_faaliyetler_2024_2025'),
+    path('idari_faaliyetler/', views.idari_faaliyetler, name='idari_faaliyetler'),
     
     # سایر فعالیت‌ها
-    path('diger_faaliyetler_2024_2025/', views.diger_faaliyetler_2024_2025, name='diger_faaliyetler_2024_2025'),
+    path('diger_faaliyetler/', views.diger_faaliyetler, name='diger_faaliyetler'),
     
     # رویدادها
     path('etkinlikler/', views.etkinlik_listesi, name='etkinlik_listesi'),

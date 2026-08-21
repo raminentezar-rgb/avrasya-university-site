@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import OrtopedikProtezDuyuru, OrtopedikProtezEtkinlik, OrtopedikProtezDersProgrami
+from .models import OrtopedikProtezDuyuru, OrtopedikProtezEtkinlik, OrtopedikProtezDersProgrami, OrtopedikProtezFaaliyetGrubu
 from django.utils import timezone
 
 def etkinlik_listesi(request):
@@ -123,14 +123,17 @@ def ders_programi(request):
 def ortopedik_protez_bolumu(request):
     return render(request, 'ortopedik_protez/includes/ortopedik_protez.html')
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'ortopedik_protez/includes/idari_faaliyetler_2024_2025.html')
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'ortopedik_protez/includes/diger_faaliyetler_2024_2025.html')
 
 def kalite_yonetimi(request):
     return render(request, 'ortopedik_protez/includes/kalite_yonetimi.html')
 
 def toplumsal_katki(request):
     return render(request, 'ortopedik_protez/includes/toplumsal_katki.html')
+def idari_faaliyetler(request):
+    gruplar = OrtopedikProtezFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'ortopedik_protez/includes/idari_faaliyetler.html', {'gruplar': gruplar})
+
+def diger_faaliyetler(request):
+    gruplar = OrtopedikProtezFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'ortopedik_protez/includes/diger_faaliyetler.html', {'gruplar': gruplar})

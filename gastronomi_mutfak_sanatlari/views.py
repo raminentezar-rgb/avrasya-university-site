@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import GastronomiDuyuru, GastronomiEtkinlik, GastronomiDersProgrami
+from .models import GastronomiDuyuru, GastronomiEtkinlik, GastronomiDersProgrami, GastronomiMutfakSanatlariFaaliyetGrubu
 from django.utils import timezone
 
 
@@ -127,12 +127,8 @@ def gastronomi_bolumu(request):
     return render(request, 'gastronomi_mutfak_sanatlari/includes/gastronomi.html')
 
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'gastronomi_mutfak_sanatlari/includes/idari_faaliyetler_2024_2025.html')
 
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'gastronomi_mutfak_sanatlari/includes/diger_faaliyetler_2024_2025.html')
 
 
 def kalite_yonetimi(request):
@@ -141,3 +137,10 @@ def kalite_yonetimi(request):
 
 def toplumsal_katki(request):
     return render(request, 'gastronomi_mutfak_sanatlari/includes/toplumsal_katki.html')
+def idari_faaliyetler(request):
+    gruplar = GastronomiMutfakSanatlariFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'gastronomi_mutfak_sanatlari/includes/idari_faaliyetler.html', {'gruplar': gruplar})
+
+def diger_faaliyetler(request):
+    gruplar = GastronomiMutfakSanatlariFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'gastronomi_mutfak_sanatlari/includes/diger_faaliyetler.html', {'gruplar': gruplar})

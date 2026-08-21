@@ -1,7 +1,9 @@
 # app_name: molekuler_biyoloji_genetik/admin.py
 
 from django.contrib import admin
-from .models import MolekulerBiyolojiGenetikDuyuru, MolekulerBiyolojiGenetikEtkinlik, MolekulerBiyolojiGenetikDersProgrami
+from .models import (
+    MolekulerBiyolojiGenetikEtkinlik, MolekulerBiyolojiGenetikFaaliyetGorseli, MolekulerBiyolojiGenetikDuyuru, MolekulerBiyolojiGenetikFaaliyetGrubu, MolekulerBiyolojiGenetikFaaliyet, MolekulerBiyolojiGenetikDersProgrami
+)
 
 @admin.register(MolekulerBiyolojiGenetikEtkinlik)
 class MolekulerBiyolojiGenetikEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class MolekulerBiyolojiGenetikDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class MolekulerBiyolojiGenetikFaaliyetGorseliInline(admin.TabularInline):
+    model = MolekulerBiyolojiGenetikFaaliyetGorseli
+    extra = 1
+
+@admin.register(MolekulerBiyolojiGenetikFaaliyetGrubu)
+class MolekulerBiyolojiGenetikFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(MolekulerBiyolojiGenetikFaaliyet)
+class MolekulerBiyolojiGenetikFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [MolekulerBiyolojiGenetikFaaliyetGorseliInline]

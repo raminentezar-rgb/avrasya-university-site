@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import IcMimarlikDuyuru, IcMimarlikEtkinlik, IcMimarlikDersProgrami
+from .models import IcMimarlikDuyuru, IcMimarlikEtkinlik, IcMimarlikDersProgrami, IcMimarlikFaaliyetGrubu
 from django.utils import timezone
 
 
@@ -131,12 +131,8 @@ def ic_mimarlik_bolumu(request):
     return render(request, 'ic_mimarlik/includes/ic_mimarlik.html')
 
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'ic_mimarlik/includes/idari_faaliyetler_2024_2025.html')
 
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'ic_mimarlik/includes/diger_faaliyetler_2024_2025.html')
 
 
 def kalite_yonetimi(request):
@@ -145,3 +141,10 @@ def kalite_yonetimi(request):
 
 def toplumsal_katki(request):
     return render(request, 'ic_mimarlik/includes/toplumsal_katki.html')
+def idari_faaliyetler(request):
+    gruplar = IcMimarlikFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'ic_mimarlik/includes/idari_faaliyetler.html', {'gruplar': gruplar})
+
+def diger_faaliyetler(request):
+    gruplar = IcMimarlikFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'ic_mimarlik/includes/diger_faaliyetler.html', {'gruplar': gruplar})

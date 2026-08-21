@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import AcilDurumDuyuru, AcilDurumEtkinlik, AcilDurumDersProgrami
+from .models import AcilDurumDuyuru, AcilDurumEtkinlik, AcilDurumDersProgrami, AcilDurumFaaliyetGrubu
 from django.utils import timezone
 
 def etkinlik_listesi(request):
@@ -123,11 +123,13 @@ def ders_programi(request):
 def acil_durum_bolumu(request):
     return render(request, 'acil_durum/includes/acil_durum.html')
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'acil_durum/includes/idari_faaliyetler_2024_2025.html')
+def idari_faaliyetler(request):
+    gruplar = AcilDurumFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'acil_durum/includes/idari_faaliyetler.html', {'gruplar': gruplar})
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'acil_durum/includes/diger_faaliyetler_2024_2025.html')
+def diger_faaliyetler(request):
+    gruplar = AcilDurumFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'acil_durum/includes/diger_faaliyetler.html', {'gruplar': gruplar})
 
 def kalite_yonetimi(request):
     return render(request, 'acil_durum/includes/kalite_yonetimi.html')

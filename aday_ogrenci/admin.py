@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import AdayMenu, AdaySayfa, AdaySlider, AdayIletisim
+from .models import (
+    AdaySayfa, AdayMenu, AdaySlider, AdayIletisim
+)
 
 @admin.register(AdayMenu)
 class AdayMenuAdmin(admin.ModelAdmin):

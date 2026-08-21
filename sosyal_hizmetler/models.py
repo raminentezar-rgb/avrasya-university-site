@@ -115,3 +115,49 @@ class SosyalHizmetlerDersProgrami(models.Model):
     
     def __str__(self):
         return f"{self.baslik} - {self.get_sinif_display()}"
+
+class SosyalHizmetlerFaaliyetGrubu(models.Model):
+    TUR_CHOICES = [
+        ('idari', 'İdari Faaliyetler'),
+        ('diger', 'Diğer Faaliyetler'),
+    ]
+    
+    baslik = models.CharField(max_length=200, verbose_name="Grup Başlığı (Örn: İdari Faaliyetler 2023-2024)")
+    faaliyet_turu = models.CharField(max_length=10, choices=TUR_CHOICES, verbose_name="Faaliyet Türü")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Grubu (Sosyal Hizmetler)"
+        verbose_name_plural = "Faaliyet Grupları (Sosyal Hizmetler)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return f"{self.baslik} ({self.get_faaliyet_turu_display()})"
+
+class SosyalHizmetlerFaaliyet(models.Model):
+    grup = models.ForeignKey(SosyalHizmetlerFaaliyetGrubu, on_delete=models.CASCADE, related_name='faaliyetler', verbose_name="Faaliyet Grubu")
+    baslik = models.CharField(max_length=300, verbose_name="Faaliyet Başlığı")
+    tarih = models.CharField(max_length=100, blank=True, verbose_name="Tarih / Dönem")
+    icerik = models.TextField(blank=True, verbose_name="İçerik")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet (Sosyal Hizmetler)"
+        verbose_name_plural = "Faaliyetler (Sosyal Hizmetler)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return self.baslik
+
+class SosyalHizmetlerFaaliyetGorseli(models.Model):
+    faaliyet = models.ForeignKey(SosyalHizmetlerFaaliyet, on_delete=models.CASCADE, related_name='gorseller', verbose_name="Faaliyet")
+    gorsel = models.ImageField(upload_to=f'faaliyetler/sosyal_hizmetler/', verbose_name="Görsel")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Görseli (Sosyal Hizmetler)"
+        verbose_name_plural = "Faaliyet Görselleri (Sosyal Hizmetler)"
+        ordering = ['sira', 'id']
+        
+    def __str__(self):
+        return f"{self.faaliyet.baslik} - Görsel {self.id}"

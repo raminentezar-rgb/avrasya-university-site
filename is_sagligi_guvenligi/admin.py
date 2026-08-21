@@ -1,7 +1,9 @@
 # app_name: is_sagligi_guvenligi/admin.py
 
 from django.contrib import admin
-from .models import IsSagligiGuvenligiDuyuru, IsSagligiGuvenligiEtkinlik, IsSagligiGuvenligiDersProgrami
+from .models import (
+    IsSagligiGuvenligiDuyuru, IsSagligiGuvenligiFaaliyet, IsSagligiGuvenligiFaaliyetGorseli, IsSagligiGuvenligiDersProgrami, IsSagligiGuvenligiEtkinlik, IsSagligiGuvenligiFaaliyetGrubu
+)
 
 @admin.register(IsSagligiGuvenligiEtkinlik)
 class IsSagligiGuvenligiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class IsSagligiGuvenligiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class IsSagligiGuvenligiFaaliyetGorseliInline(admin.TabularInline):
+    model = IsSagligiGuvenligiFaaliyetGorseli
+    extra = 1
+
+@admin.register(IsSagligiGuvenligiFaaliyetGrubu)
+class IsSagligiGuvenligiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(IsSagligiGuvenligiFaaliyet)
+class IsSagligiGuvenligiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [IsSagligiGuvenligiFaaliyetGorseliInline]

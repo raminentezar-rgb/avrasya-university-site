@@ -1,7 +1,9 @@
 # app_name: beslenme_diyetetik/admin.py
 
 from django.contrib import admin
-from .models import BeslenmeDiyetetikDuyuru, BeslenmeDiyetetikEtkinlik, BeslenmeDiyetetikDersProgrami
+from .models import (
+    BeslenmeDiyetetikFaaliyetGorseli, BeslenmeDiyetetikDersProgrami, BeslenmeDiyetetikFaaliyet, BeslenmeDiyetetikEtkinlik, BeslenmeDiyetetikFaaliyetGrubu, BeslenmeDiyetetikDuyuru
+)
 
 @admin.register(BeslenmeDiyetetikEtkinlik)
 class BeslenmeDiyetetikEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class BeslenmeDiyetetikDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class BeslenmeDiyetetikFaaliyetGorseliInline(admin.TabularInline):
+    model = BeslenmeDiyetetikFaaliyetGorseli
+    extra = 1
+
+@admin.register(BeslenmeDiyetetikFaaliyetGrubu)
+class BeslenmeDiyetetikFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(BeslenmeDiyetetikFaaliyet)
+class BeslenmeDiyetetikFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [BeslenmeDiyetetikFaaliyetGorseliInline]

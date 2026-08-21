@@ -1,8 +1,9 @@
 # app_name: cocuk_gelisimi/admin.py
 
 from django.contrib import admin
-from .models import CocukGelisimiDuyuru, CocukGelisimiEtkinlik, CocukGelisimiDersProgrami
-
+from .models import (
+    CocukGelisimiEtkinlik, CocukGelisimiDuyuru, CocukGelisimiFaaliyetGorseli, CocukGelisimiFaaliyet, CocukGelisimiFaaliyetGrubu, CocukGelisimiDersProgrami
+)
 
 @admin.register(CocukGelisimiEtkinlik)
 class CocukGelisimiEtkinlikAdmin(admin.ModelAdmin):
@@ -27,7 +28,6 @@ class CocukGelisimiEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(CocukGelisimiDuyuru)
 class CocukGelisimiDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -36,7 +36,6 @@ class CocukGelisimiDuyuruAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return CocukGelisimiDuyuru.objects.all()
-
 
 @admin.register(CocukGelisimiDersProgrami)
 class CocukGelisimiDersProgramiAdmin(admin.ModelAdmin):
@@ -53,3 +52,21 @@ class CocukGelisimiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class CocukGelisimiFaaliyetGorseliInline(admin.TabularInline):
+    model = CocukGelisimiFaaliyetGorseli
+    extra = 1
+
+@admin.register(CocukGelisimiFaaliyetGrubu)
+class CocukGelisimiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(CocukGelisimiFaaliyet)
+class CocukGelisimiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [CocukGelisimiFaaliyetGorseliInline]

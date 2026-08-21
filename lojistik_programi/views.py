@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import LojistikProgramiDuyuru, LojistikProgramiEtkinlik, LojistikProgramiDersProgrami
+from .models import LojistikProgramiDuyuru, LojistikProgramiEtkinlik, LojistikProgramiDersProgrami, LojistikProgramiFaaliyetGrubu
 from django.utils import timezone
 
 def etkinlik_listesi(request):
@@ -123,14 +123,17 @@ def ders_programi(request):
 def lojistik_programi_bolumu(request):
     return render(request, 'lojistik_programi/includes/lojistik_programi.html')
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'lojistik_programi/includes/idari_faaliyetler_2024_2025.html')
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'lojistik_programi/includes/diger_faaliyetler_2024_2025.html')
 
 def kalite_yonetimi(request):
     return render(request, 'lojistik_programi/includes/kalite_yonetimi.html')
 
 def toplumsal_katki(request):
     return render(request, 'lojistik_programi/includes/toplumsal_katki.html')
+def idari_faaliyetler(request):
+    gruplar = LojistikProgramiFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'lojistik_programi/includes/idari_faaliyetler.html', {'gruplar': gruplar})
+
+def diger_faaliyetler(request):
+    gruplar = LojistikProgramiFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'lojistik_programi/includes/diger_faaliyetler.html', {'gruplar': gruplar})

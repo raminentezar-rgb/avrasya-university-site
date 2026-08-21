@@ -1,6 +1,8 @@
 # uygulamali_bilimler/admin.py
 from django.contrib import admin
-from .models import UygulamaliBilimlerDuyuru
+from .models import (
+    UygulamaliBilimlerDuyuru
+)
 
 @admin.register(UygulamaliBilimlerDuyuru)
 class UygulamaliBilimlerDuyuruAdmin(admin.ModelAdmin):

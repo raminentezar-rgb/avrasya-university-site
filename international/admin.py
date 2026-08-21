@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import InternationalApplication
+from .models import (
+    InternationalApplication
+)
 
 @admin.register(InternationalApplication)
 class InternationalApplicationAdmin(admin.ModelAdmin):

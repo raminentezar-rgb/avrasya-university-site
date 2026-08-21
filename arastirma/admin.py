@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import ResearchPolicy, BAPProject, Laboratory, ResearchCenter, IntellectualProperty, ResearchOutput, Award
+from .models import (
+    IntellectualProperty, ResearchOutput, BAPProject, ResearchPolicy, Award, ResearchCenter, Laboratory
+)
 
 @admin.register(ResearchPolicy)
 class ResearchPolicyAdmin(admin.ModelAdmin):

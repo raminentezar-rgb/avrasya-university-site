@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import AdaletDuyuru, AdaletEtkinlik, AdaletDersProgrami
+from .models import AdaletDuyuru, AdaletEtkinlik, AdaletDersProgrami, AdaletFaaliyetGrubu
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
@@ -124,14 +124,17 @@ def ders_programi(request):
 def adalet_bolumu(request):
     return render(request, 'adalet/includes/adalet.html')
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'adalet/includes/idari_faaliyetler_2024_2025.html')
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'adalet/includes/diger_faaliyetler_2024_2025.html')
 
 def kalite_yonetimi(request):
     return render(request, 'adalet/includes/kalite_yonetimi.html')
 
 def toplumsal_katki(request):
     return render(request, 'adalet/includes/toplumsal_katki.html')
+def idari_faaliyetler(request):
+    gruplar = AdaletFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'adalet/includes/idari_faaliyetler.html', {'gruplar': gruplar})
+
+def diger_faaliyetler(request):
+    gruplar = AdaletFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'adalet/includes/diger_faaliyetler.html', {'gruplar': gruplar})

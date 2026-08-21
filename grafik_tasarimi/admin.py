@@ -1,7 +1,9 @@
 # app_name: grafik_tasarimi/admin.py
 
 from django.contrib import admin
-from .models import GrafikTasarimiDuyuru, GrafikTasarimiEtkinlik, GrafikTasarimiDersProgrami
+from .models import (
+    GrafikTasarimiFaaliyetGorseli, GrafikTasarimiEtkinlik, GrafikTasarimiDersProgrami, GrafikTasarimiDuyuru, GrafikTasarimiFaaliyetGrubu, GrafikTasarimiFaaliyet
+)
 
 @admin.register(GrafikTasarimiEtkinlik)
 class GrafikTasarimiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class GrafikTasarimiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class GrafikTasarimiFaaliyetGorseliInline(admin.TabularInline):
+    model = GrafikTasarimiFaaliyetGorseli
+    extra = 1
+
+@admin.register(GrafikTasarimiFaaliyetGrubu)
+class GrafikTasarimiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(GrafikTasarimiFaaliyet)
+class GrafikTasarimiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [GrafikTasarimiFaaliyetGorseliInline]

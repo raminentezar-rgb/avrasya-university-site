@@ -1,8 +1,9 @@
 # app_name: sosyal_hizmet/admin.py
 
 from django.contrib import admin
-from .models import SosyalHizmetDuyuru, SosyalHizmetEtkinlik, SosyalHizmetDersProgrami
-
+from .models import (
+    SosyalHizmetFaaliyetGrubu, SosyalHizmetDuyuru, SosyalHizmetDersProgrami, SosyalHizmetFaaliyet, SosyalHizmetFaaliyetGorseli, SosyalHizmetEtkinlik
+)
 
 @admin.register(SosyalHizmetEtkinlik)
 class SosyalHizmetEtkinlikAdmin(admin.ModelAdmin):
@@ -27,7 +28,6 @@ class SosyalHizmetEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(SosyalHizmetDuyuru)
 class SosyalHizmetDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -36,7 +36,6 @@ class SosyalHizmetDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return SosyalHizmetDuyuru.objects.all()
-
 
 @admin.register(SosyalHizmetDersProgrami)
 class SosyalHizmetDersProgramiAdmin(admin.ModelAdmin):
@@ -53,3 +52,21 @@ class SosyalHizmetDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class SosyalHizmetFaaliyetGorseliInline(admin.TabularInline):
+    model = SosyalHizmetFaaliyetGorseli
+    extra = 1
+
+@admin.register(SosyalHizmetFaaliyetGrubu)
+class SosyalHizmetFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(SosyalHizmetFaaliyet)
+class SosyalHizmetFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [SosyalHizmetFaaliyetGorseliInline]

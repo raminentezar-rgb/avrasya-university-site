@@ -1,7 +1,9 @@
 # app_name: moda_tasarimi/admin.py
 
 from django.contrib import admin
-from .models import ModaTasarimiDuyuru, ModaTasarimiEtkinlik, ModaTasarimiDersProgrami
+from .models import (
+    ModaTasarimiDuyuru, ModaTasarimiFaaliyetGrubu, ModaTasarimiDersProgrami, ModaTasarimiEtkinlik, ModaTasarimiFaaliyetGorseli, ModaTasarimiFaaliyet
+)
 
 @admin.register(ModaTasarimiEtkinlik)
 class ModaTasarimiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class ModaTasarimiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class ModaTasarimiFaaliyetGorseliInline(admin.TabularInline):
+    model = ModaTasarimiFaaliyetGorseli
+    extra = 1
+
+@admin.register(ModaTasarimiFaaliyetGrubu)
+class ModaTasarimiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(ModaTasarimiFaaliyet)
+class ModaTasarimiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [ModaTasarimiFaaliyetGorseliInline]

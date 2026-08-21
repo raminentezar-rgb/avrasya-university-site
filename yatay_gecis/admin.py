@@ -1,6 +1,8 @@
 from django.contrib import admin
+from .models import (
+    CallbackRequest
+)
 from django.utils.html import format_html
-from .models import CallbackRequest
 
 @admin.register(CallbackRequest)
 class CallbackRequestAdmin(admin.ModelAdmin):

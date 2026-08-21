@@ -1,7 +1,9 @@
 # app_name: diyaliz/admin.py
 
 from django.contrib import admin
-from .models import DiyalizDuyuru, DiyalizEtkinlik, DiyalizDersProgrami
+from .models import (
+    DiyalizFaaliyet, DiyalizDuyuru, DiyalizFaaliyetGorseli, DiyalizEtkinlik, DiyalizFaaliyetGrubu, DiyalizDersProgrami
+)
 
 @admin.register(DiyalizEtkinlik)
 class DiyalizEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class DiyalizDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class DiyalizFaaliyetGorseliInline(admin.TabularInline):
+    model = DiyalizFaaliyetGorseli
+    extra = 1
+
+@admin.register(DiyalizFaaliyetGrubu)
+class DiyalizFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(DiyalizFaaliyet)
+class DiyalizFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [DiyalizFaaliyetGorseliInline]

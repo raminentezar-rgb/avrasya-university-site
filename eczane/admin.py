@@ -1,7 +1,9 @@
 # app_name: eczane/admin.py
 
 from django.contrib import admin
-from .models import EczaneDuyuru, EczaneEtkinlik, EczaneDersProgrami
+from .models import (
+    EczaneFaaliyet, EczaneEtkinlik, EczaneFaaliyetGrubu, EczaneDuyuru, EczaneFaaliyetGorseli, EczaneDersProgrami
+)
 
 @admin.register(EczaneEtkinlik)
 class EczaneEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class EczaneDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class EczaneFaaliyetGorseliInline(admin.TabularInline):
+    model = EczaneFaaliyetGorseli
+    extra = 1
+
+@admin.register(EczaneFaaliyetGrubu)
+class EczaneFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(EczaneFaaliyet)
+class EczaneFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [EczaneFaaliyetGorseliInline]

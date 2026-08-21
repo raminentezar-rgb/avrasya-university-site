@@ -1,8 +1,9 @@
 # app_name: harita_muhendisligi/admin.py
 
 from django.contrib import admin
-from .models import HaritaMuhendisligiDuyuru, HaritaMuhendisligiEtkinlik, HaritaMuhendisligiDersProgrami
-
+from .models import (
+    HaritaMuhendisligiDuyuru, HaritaMuhendisligiFaaliyet, HaritaMuhendisligiFaaliyetGrubu, HaritaMuhendisligiFaaliyetGorseli, HaritaMuhendisligiEtkinlik, HaritaMuhendisligiDersProgrami
+)
 
 @admin.register(HaritaMuhendisligiEtkinlik)
 class HaritaMuhendisligiEtkinlikAdmin(admin.ModelAdmin):
@@ -27,7 +28,6 @@ class HaritaMuhendisligiEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(HaritaMuhendisligiDuyuru)
 class HaritaMuhendisligiDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -36,7 +36,6 @@ class HaritaMuhendisligiDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return HaritaMuhendisligiDuyuru.objects.all()
-
 
 @admin.register(HaritaMuhendisligiDersProgrami)
 class HaritaMuhendisligiDersProgramiAdmin(admin.ModelAdmin):
@@ -53,3 +52,21 @@ class HaritaMuhendisligiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class HaritaMuhendisligiFaaliyetGorseliInline(admin.TabularInline):
+    model = HaritaMuhendisligiFaaliyetGorseli
+    extra = 1
+
+@admin.register(HaritaMuhendisligiFaaliyetGrubu)
+class HaritaMuhendisligiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(HaritaMuhendisligiFaaliyet)
+class HaritaMuhendisligiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [HaritaMuhendisligiFaaliyetGorseliInline]

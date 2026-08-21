@@ -1,7 +1,9 @@
 # app_name: web_tasarimi/admin.py
 
 from django.contrib import admin
-from .models import WebTasarimiDuyuru, WebTasarimiEtkinlik, WebTasarimiDersProgrami
+from .models import (
+    WebTasarimiFaaliyetGorseli, WebTasarimiEtkinlik, WebTasarimiDuyuru, WebTasarimiDersProgrami, WebTasarimiFaaliyet, WebTasarimiFaaliyetGrubu
+)
 
 @admin.register(WebTasarimiEtkinlik)
 class WebTasarimiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class WebTasarimiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class WebTasarimiFaaliyetGorseliInline(admin.TabularInline):
+    model = WebTasarimiFaaliyetGorseli
+    extra = 1
+
+@admin.register(WebTasarimiFaaliyetGrubu)
+class WebTasarimiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(WebTasarimiFaaliyet)
+class WebTasarimiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [WebTasarimiFaaliyetGorseliInline]

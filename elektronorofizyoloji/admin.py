@@ -1,7 +1,9 @@
 # app_name: elektronorofizyoloji/admin.py
 
 from django.contrib import admin
-from .models import ElektronorofizyolojiDuyuru, ElektronorofizyolojiEtkinlik, ElektronorofizyolojiDersProgrami
+from .models import (
+    ElektronorofizyolojiEtkinlik, ElektronorofizyolojiFaaliyetGorseli, ElektronorofizyolojiDersProgrami, ElektronorofizyolojiDuyuru, ElektronorofizyolojiFaaliyetGrubu, ElektronorofizyolojiFaaliyet
+)
 
 @admin.register(ElektronorofizyolojiEtkinlik)
 class ElektronorofizyolojiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class ElektronorofizyolojiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class ElektronorofizyolojiFaaliyetGorseliInline(admin.TabularInline):
+    model = ElektronorofizyolojiFaaliyetGorseli
+    extra = 1
+
+@admin.register(ElektronorofizyolojiFaaliyetGrubu)
+class ElektronorofizyolojiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(ElektronorofizyolojiFaaliyet)
+class ElektronorofizyolojiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [ElektronorofizyolojiFaaliyetGorseliInline]

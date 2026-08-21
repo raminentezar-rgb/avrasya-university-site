@@ -1,7 +1,9 @@
 # app_name: saglik_kurumlari/admin.py
 
 from django.contrib import admin
-from .models import SaglikKurumlariDuyuru, SaglikKurumlariEtkinlik, SaglikKurumlariDersProgrami
+from .models import (
+    SaglikKurumlariDuyuru, SaglikKurumlariDersProgrami, SaglikKurumlariFaaliyetGorseli, SaglikKurumlariEtkinlik, SaglikKurumlariFaaliyetGrubu, SaglikKurumlariFaaliyet
+)
 
 @admin.register(SaglikKurumlariEtkinlik)
 class SaglikKurumlariEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class SaglikKurumlariDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class SaglikKurumlariFaaliyetGorseliInline(admin.TabularInline):
+    model = SaglikKurumlariFaaliyetGorseli
+    extra = 1
+
+@admin.register(SaglikKurumlariFaaliyetGrubu)
+class SaglikKurumlariFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(SaglikKurumlariFaaliyet)
+class SaglikKurumlariFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [SaglikKurumlariFaaliyetGorseliInline]

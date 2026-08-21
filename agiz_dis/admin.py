@@ -1,7 +1,9 @@
 # app_name: agiz_dis/admin.py
 
 from django.contrib import admin
-from .models import AgizDisDuyuru, AgizDisEtkinlik, AgizDisDersProgrami
+from .models import (
+    AgizDisDuyuru, AgizDisFaaliyet, AgizDisFaaliyetGorseli, AgizDisDersProgrami, AgizDisFaaliyetGrubu, AgizDisEtkinlik
+)
 
 @admin.register(AgizDisEtkinlik)
 class AgizDisEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class AgizDisDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class AgizDisFaaliyetGorseliInline(admin.TabularInline):
+    model = AgizDisFaaliyetGorseli
+    extra = 1
+
+@admin.register(AgizDisFaaliyetGrubu)
+class AgizDisFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(AgizDisFaaliyet)
+class AgizDisFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [AgizDisFaaliyetGorseliInline]

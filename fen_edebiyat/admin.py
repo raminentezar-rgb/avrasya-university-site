@@ -1,6 +1,8 @@
 # fen_edebiyat/admin.py
 from django.contrib import admin
-from .models import FenEdebiyatDuyuru
+from .models import (
+    FenEdebiyatDuyuru
+)
 
 @admin.register(FenEdebiyatDuyuru)
 class FenEdebiyatDuyuruAdmin(admin.ModelAdmin):

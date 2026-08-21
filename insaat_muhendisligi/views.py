@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import InsaatMuhendisligiDuyuru, InsaatMuhendisligiEtkinlik, InsaatMuhendisligiDersProgrami
+from .models import InsaatMuhendisligiDuyuru, InsaatMuhendisligiEtkinlik, InsaatMuhendisligiDersProgrami, InsaatMuhendisligiFaaliyetGrubu
 from django.utils import timezone
 
 def etkinlik_listesi(request):
@@ -108,14 +108,17 @@ def ders_programi(request):
 def insaat_muhendisligi_bolumu(request):
     return render(request, 'insaat_muhendisligi/includes/insaat_muhendisligi.html')
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'insaat_muhendisligi/includes/idari_faaliyetler_2024_2025.html')
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'insaat_muhendisligi/includes/diger_faaliyetler_2024_2025.html')
 
 def kalite_yonetimi(request):
     return render(request, 'insaat_muhendisligi/includes/kalite_yonetimi.html')
 
 def toplumsal_katki(request):
     return render(request, 'insaat_muhendisligi/includes/toplumsal_katki.html')
+def idari_faaliyetler(request):
+    gruplar = InsaatMuhendisligiFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'insaat_muhendisligi/includes/idari_faaliyetler.html', {'gruplar': gruplar})
+
+def diger_faaliyetler(request):
+    gruplar = InsaatMuhendisligiFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'insaat_muhendisligi/includes/diger_faaliyetler.html', {'gruplar': gruplar})

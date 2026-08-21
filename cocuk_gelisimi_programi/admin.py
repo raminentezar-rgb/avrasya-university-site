@@ -1,7 +1,9 @@
 # app_name: cocuk_gelisimi_programi/admin.py
 
 from django.contrib import admin
-from .models import CocukGelisimiDuyuru, CocukGelisimiEtkinlik, CocukGelisimiDersProgrami
+from .models import (
+    CocukGelisimiEtkinlik, CocukGelisimiDuyuru, CocukGelisimiProgramiFaaliyetGorseli, CocukGelisimiProgramiFaaliyet, CocukGelisimiProgramiFaaliyetGrubu, CocukGelisimiDersProgrami
+)
 
 @admin.register(CocukGelisimiEtkinlik)
 class CocukGelisimiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class CocukGelisimiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class CocukGelisimiProgramiFaaliyetGorseliInline(admin.TabularInline):
+    model = CocukGelisimiProgramiFaaliyetGorseli
+    extra = 1
+
+@admin.register(CocukGelisimiProgramiFaaliyetGrubu)
+class CocukGelisimiProgramiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(CocukGelisimiProgramiFaaliyet)
+class CocukGelisimiProgramiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [CocukGelisimiProgramiFaaliyetGorseliInline]

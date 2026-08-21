@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Duyuru, DuyuruDosya, Bolum
+from .models import (
+    DuyuruDosya, Duyuru, Bolum
+)
+
 from modeltranslation.admin import TranslationAdmin
 
 class BolumAdmin(admin.ModelAdmin):

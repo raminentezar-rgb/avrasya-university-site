@@ -1,7 +1,9 @@
 # app_name: yeni_medya_iletisim/admin.py
 
 from django.contrib import admin
-from .models import YeniMedyaIletisimDuyuru, YeniMedya_Etkinlik, YeniMedyaDersProgrami
+from .models import (
+    YeniMedyaIletisimDuyuru, YeniMedyaIletisimFaaliyetGrubu, YeniMedyaIletisimFaaliyet, YeniMedya_Etkinlik, YeniMedyaIletisimFaaliyetGorseli, YeniMedyaDersProgrami
+)
 
 @admin.register(YeniMedya_Etkinlik)
 class YeniMedya_EtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class YeniMedyaDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class YeniMedyaIletisimFaaliyetGorseliInline(admin.TabularInline):
+    model = YeniMedyaIletisimFaaliyetGorseli
+    extra = 1
+
+@admin.register(YeniMedyaIletisimFaaliyetGrubu)
+class YeniMedyaIletisimFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(YeniMedyaIletisimFaaliyet)
+class YeniMedyaIletisimFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [YeniMedyaIletisimFaaliyetGorseliInline]

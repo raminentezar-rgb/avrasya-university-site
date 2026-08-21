@@ -1,7 +1,9 @@
 # app_name: tibbi_goruntuleme/admin.py
 
 from django.contrib import admin
-from .models import TibbiGoruntulemeDuyuru, TibbiGoruntulemeEtkinlik, TibbiGoruntulemeDersProgrami
+from .models import (
+    TibbiGoruntulemeFaaliyet, TibbiGoruntulemeEtkinlik, TibbiGoruntulemeFaaliyetGrubu, TibbiGoruntulemeFaaliyetGorseli, TibbiGoruntulemeDersProgrami, TibbiGoruntulemeDuyuru
+)
 
 @admin.register(TibbiGoruntulemeEtkinlik)
 class TibbiGoruntulemeEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class TibbiGoruntulemeDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class TibbiGoruntulemeFaaliyetGorseliInline(admin.TabularInline):
+    model = TibbiGoruntulemeFaaliyetGorseli
+    extra = 1
+
+@admin.register(TibbiGoruntulemeFaaliyetGrubu)
+class TibbiGoruntulemeFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(TibbiGoruntulemeFaaliyet)
+class TibbiGoruntulemeFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [TibbiGoruntulemeFaaliyetGorseliInline]

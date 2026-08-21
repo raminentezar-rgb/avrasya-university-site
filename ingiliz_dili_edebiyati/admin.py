@@ -1,7 +1,9 @@
 # app_name: ingiliz_dili_edebiyati/admin.py
 
 from django.contrib import admin
-from .models import IngilizDiliEdebiyatiDuyuru, Ing_Etkinlik, DersProgrami
+from .models import (
+    IngilizDiliEdebiyatiFaaliyetGorseli, IngilizDiliEdebiyatiFaaliyetGrubu, DersProgrami, Ing_Etkinlik, IngilizDiliEdebiyatiFaaliyet, IngilizDiliEdebiyatiDuyuru
+)
 
 @admin.register(Ing_Etkinlik)
 class Ing_EtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class DersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class IngilizDiliEdebiyatiFaaliyetGorseliInline(admin.TabularInline):
+    model = IngilizDiliEdebiyatiFaaliyetGorseli
+    extra = 1
+
+@admin.register(IngilizDiliEdebiyatiFaaliyetGrubu)
+class IngilizDiliEdebiyatiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(IngilizDiliEdebiyatiFaaliyet)
+class IngilizDiliEdebiyatiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [IngilizDiliEdebiyatiFaaliyetGorseliInline]

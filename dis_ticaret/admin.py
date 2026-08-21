@@ -1,7 +1,9 @@
 # app_name: dis_ticaret/admin.py
 
 from django.contrib import admin
-from .models import DisTicaretDuyuru, DisTicaretEtkinlik, DisTicaretDersProgrami
+from .models import (
+    DisTicaretDuyuru, DisTicaretFaaliyet, DisTicaretFaaliyetGorseli, DisTicaretFaaliyetGrubu, DisTicaretEtkinlik, DisTicaretDersProgrami
+)
 
 @admin.register(DisTicaretEtkinlik)
 class DisTicaretEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class DisTicaretDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class DisTicaretFaaliyetGorseliInline(admin.TabularInline):
+    model = DisTicaretFaaliyetGorseli
+    extra = 1
+
+@admin.register(DisTicaretFaaliyetGrubu)
+class DisTicaretFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(DisTicaretFaaliyet)
+class DisTicaretFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [DisTicaretFaaliyetGorseliInline]

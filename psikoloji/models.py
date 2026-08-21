@@ -115,3 +115,49 @@ class PsikolojiDersProgrami(models.Model):
     
     def __str__(self):
         return f"{self.baslik} - {self.get_sinif_display()}"
+
+class PsikolojiFaaliyetGrubu(models.Model):
+    TUR_CHOICES = [
+        ('idari', 'İdari Faaliyetler'),
+        ('diger', 'Diğer Faaliyetler'),
+    ]
+    
+    baslik = models.CharField(max_length=200, verbose_name="Grup Başlığı (Örn: İdari Faaliyetler 2023-2024)")
+    faaliyet_turu = models.CharField(max_length=10, choices=TUR_CHOICES, verbose_name="Faaliyet Türü")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Grubu (Psikoloji)"
+        verbose_name_plural = "Faaliyet Grupları (Psikoloji)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return f"{self.baslik} ({self.get_faaliyet_turu_display()})"
+
+class PsikolojiFaaliyet(models.Model):
+    grup = models.ForeignKey(PsikolojiFaaliyetGrubu, on_delete=models.CASCADE, related_name='faaliyetler', verbose_name="Faaliyet Grubu")
+    baslik = models.CharField(max_length=300, verbose_name="Faaliyet Başlığı")
+    tarih = models.CharField(max_length=100, blank=True, verbose_name="Tarih / Dönem")
+    icerik = models.TextField(blank=True, verbose_name="İçerik")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet (Psikoloji)"
+        verbose_name_plural = "Faaliyetler (Psikoloji)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return self.baslik
+
+class PsikolojiFaaliyetGorseli(models.Model):
+    faaliyet = models.ForeignKey(PsikolojiFaaliyet, on_delete=models.CASCADE, related_name='gorseller', verbose_name="Faaliyet")
+    gorsel = models.ImageField(upload_to=f'faaliyetler/psikoloji/', verbose_name="Görsel")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Görseli (Psikoloji)"
+        verbose_name_plural = "Faaliyet Görselleri (Psikoloji)"
+        ordering = ['sira', 'id']
+        
+    def __str__(self):
+        return f"{self.faaliyet.baslik} - Görsel {self.id}"

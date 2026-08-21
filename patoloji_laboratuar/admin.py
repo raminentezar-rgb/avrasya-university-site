@@ -1,7 +1,9 @@
 # app_name: patoloji_laboratuar/admin.py
 
 from django.contrib import admin
-from .models import PatolojiLaboratuarDuyuru, PatolojiLaboratuarEtkinlik, PatolojiLaboratuarDersProgrami
+from .models import (
+    PatolojiLaboratuarEtkinlik, PatolojiLaboratuarDuyuru, PatolojiLaboratuarFaaliyetGorseli, PatolojiLaboratuarFaaliyetGrubu, PatolojiLaboratuarDersProgrami, PatolojiLaboratuarFaaliyet
+)
 
 @admin.register(PatolojiLaboratuarEtkinlik)
 class PatolojiLaboratuarEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class PatolojiLaboratuarDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class PatolojiLaboratuarFaaliyetGorseliInline(admin.TabularInline):
+    model = PatolojiLaboratuarFaaliyetGorseli
+    extra = 1
+
+@admin.register(PatolojiLaboratuarFaaliyetGrubu)
+class PatolojiLaboratuarFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(PatolojiLaboratuarFaaliyet)
+class PatolojiLaboratuarFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [PatolojiLaboratuarFaaliyetGorseliInline]

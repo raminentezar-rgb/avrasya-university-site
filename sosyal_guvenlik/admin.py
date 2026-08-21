@@ -1,7 +1,9 @@
 # app_name: sosyal_guvenlik/admin.py
 
 from django.contrib import admin
-from .models import SosyalGuvenlikDuyuru, SosyalGuvenlikEtkinlik, SosyalGuvenlikDersProgrami
+from .models import (
+    SosyalGuvenlikEtkinlik, SosyalGuvenlikFaaliyet, SosyalGuvenlikDuyuru, SosyalGuvenlikFaaliyetGorseli, SosyalGuvenlikFaaliyetGrubu, SosyalGuvenlikDersProgrami
+)
 
 @admin.register(SosyalGuvenlikEtkinlik)
 class SosyalGuvenlikEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class SosyalGuvenlikDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class SosyalGuvenlikFaaliyetGorseliInline(admin.TabularInline):
+    model = SosyalGuvenlikFaaliyetGorseli
+    extra = 1
+
+@admin.register(SosyalGuvenlikFaaliyetGrubu)
+class SosyalGuvenlikFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(SosyalGuvenlikFaaliyet)
+class SosyalGuvenlikFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [SosyalGuvenlikFaaliyetGorseliInline]

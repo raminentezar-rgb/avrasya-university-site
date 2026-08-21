@@ -1,7 +1,9 @@
 # app_name: ilk_acil_yardim/admin.py
 
 from django.contrib import admin
-from .models import IlkAcilYardimDuyuru, IlkAcilYardimEtkinlik, IlkAcilYardimDersProgrami
+from .models import (
+    IlkAcilYardimDuyuru, IlkAcilYardimFaaliyetGorseli, IlkAcilYardimDersProgrami, IlkAcilYardimFaaliyetGrubu, IlkAcilYardimEtkinlik, IlkAcilYardimFaaliyet
+)
 
 @admin.register(IlkAcilYardimEtkinlik)
 class IlkAcilYardimEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class IlkAcilYardimDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class IlkAcilYardimFaaliyetGorseliInline(admin.TabularInline):
+    model = IlkAcilYardimFaaliyetGorseli
+    extra = 1
+
+@admin.register(IlkAcilYardimFaaliyetGrubu)
+class IlkAcilYardimFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(IlkAcilYardimFaaliyet)
+class IlkAcilYardimFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [IlkAcilYardimFaaliyetGorseliInline]

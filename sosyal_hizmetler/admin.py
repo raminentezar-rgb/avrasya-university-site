@@ -1,7 +1,9 @@
 # app_name: sosyal_hizmetler/admin.py
 
 from django.contrib import admin
-from .models import SosyalHizmetlerDuyuru, SosyalHizmetlerEtkinlik, SosyalHizmetlerDersProgrami
+from .models import (
+    SosyalHizmetlerFaaliyet, SosyalHizmetlerFaaliyetGorseli, SosyalHizmetlerDersProgrami, SosyalHizmetlerFaaliyetGrubu, SosyalHizmetlerDuyuru, SosyalHizmetlerEtkinlik
+)
 
 @admin.register(SosyalHizmetlerEtkinlik)
 class SosyalHizmetlerEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class SosyalHizmetlerDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class SosyalHizmetlerFaaliyetGorseliInline(admin.TabularInline):
+    model = SosyalHizmetlerFaaliyetGorseli
+    extra = 1
+
+@admin.register(SosyalHizmetlerFaaliyetGrubu)
+class SosyalHizmetlerFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(SosyalHizmetlerFaaliyet)
+class SosyalHizmetlerFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [SosyalHizmetlerFaaliyetGorseliInline]

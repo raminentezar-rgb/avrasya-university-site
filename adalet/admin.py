@@ -1,7 +1,9 @@
 # app_name: adalet/admin.py
 
 from django.contrib import admin
-from .models import AdaletDuyuru, AdaletEtkinlik, AdaletDersProgrami
+from .models import (
+    AdaletEtkinlik, AdaletDersProgrami, AdaletFaaliyet, AdaletDuyuru, AdaletFaaliyetGrubu, AdaletFaaliyetGorseli
+)
 
 @admin.register(AdaletEtkinlik)
 class AdaletEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class AdaletDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class AdaletFaaliyetGorseliInline(admin.TabularInline):
+    model = AdaletFaaliyetGorseli
+    extra = 1
+
+@admin.register(AdaletFaaliyetGrubu)
+class AdaletFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(AdaletFaaliyet)
+class AdaletFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [AdaletFaaliyetGorseliInline]

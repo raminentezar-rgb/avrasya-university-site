@@ -1,7 +1,9 @@
 # app_name: odyometri/admin.py
 
 from django.contrib import admin
-from .models import OdyometriDuyuru, OdyometriEtkinlik, OdyometriDersProgrami
+from .models import (
+    OdyometriEtkinlik, OdyometriFaaliyet, OdyometriFaaliyetGrubu, OdyometriFaaliyetGorseli, OdyometriDuyuru, OdyometriDersProgrami
+)
 
 @admin.register(OdyometriEtkinlik)
 class OdyometriEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class OdyometriDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class OdyometriFaaliyetGorseliInline(admin.TabularInline):
+    model = OdyometriFaaliyetGorseli
+    extra = 1
+
+@admin.register(OdyometriFaaliyetGrubu)
+class OdyometriFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(OdyometriFaaliyet)
+class OdyometriFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [OdyometriFaaliyetGorseliInline]

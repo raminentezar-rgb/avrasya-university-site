@@ -1,6 +1,8 @@
 # saglik_hizmetleri_myo/admin.py
 from django.contrib import admin
-from .models import SaglikHizmetleriMYODuyuru
+from .models import (
+    SaglikHizmetleriMYODuyuru
+)
 
 @admin.register(SaglikHizmetleriMYODuyuru)
 class SaglikHizmetleriMYODuyuruAdmin(admin.ModelAdmin):

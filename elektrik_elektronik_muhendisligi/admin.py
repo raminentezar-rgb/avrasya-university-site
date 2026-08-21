@@ -1,7 +1,9 @@
 # app_name: elektrik_elektronik_muhendisligi/admin.py
 
 from django.contrib import admin
-from .models import ElektrikElektronikMuhendisligiDuyuru, ElektrikElektronikMuhendisligiEtkinlik, ElektrikElektronikMuhendisligiDersProgrami
+from .models import (
+    ElektrikElektronikMuhendisligiDuyuru, ElektrikElektronikMuhendisligiFaaliyetGrubu, ElektrikElektronikMuhendisligiFaaliyetGorseli, ElektrikElektronikMuhendisligiEtkinlik, ElektrikElektronikMuhendisligiDersProgrami, ElektrikElektronikMuhendisligiFaaliyet
+)
 
 @admin.register(ElektrikElektronikMuhendisligiEtkinlik)
 class ElektrikElektronikMuhendisligiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class ElektrikElektronikMuhendisligiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class ElektrikElektronikMuhendisligiFaaliyetGorseliInline(admin.TabularInline):
+    model = ElektrikElektronikMuhendisligiFaaliyetGorseli
+    extra = 1
+
+@admin.register(ElektrikElektronikMuhendisligiFaaliyetGrubu)
+class ElektrikElektronikMuhendisligiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(ElektrikElektronikMuhendisligiFaaliyet)
+class ElektrikElektronikMuhendisligiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [ElektrikElektronikMuhendisligiFaaliyetGorseliInline]

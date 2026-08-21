@@ -1,7 +1,9 @@
 # app_name: sivil_havacilik/admin.py
 
 from django.contrib import admin
-from .models import SivilHavacilikDuyuru, SivilHavacilikEtkinlik, SivilHavacilikDersProgrami
+from .models import (
+    SivilHavacilikEtkinlik, SivilHavacilikFaaliyetGrubu, SivilHavacilikFaaliyetGorseli, SivilHavacilikDersProgrami, SivilHavacilikFaaliyet, SivilHavacilikDuyuru
+)
 
 @admin.register(SivilHavacilikEtkinlik)
 class SivilHavacilikEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class SivilHavacilikDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class SivilHavacilikFaaliyetGorseliInline(admin.TabularInline):
+    model = SivilHavacilikFaaliyetGorseli
+    extra = 1
+
+@admin.register(SivilHavacilikFaaliyetGrubu)
+class SivilHavacilikFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(SivilHavacilikFaaliyet)
+class SivilHavacilikFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [SivilHavacilikFaaliyetGorseliInline]

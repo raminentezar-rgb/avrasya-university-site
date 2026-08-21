@@ -1,6 +1,8 @@
 # fen_edebiyat/admin.py
 from django.contrib import admin
-from .models import LeeDuyuru, Lee_Etkinlik
+from .models import (
+    LeeDuyuru, Lee_Etkinlik
+)
 
 @admin.register(LeeDuyuru)
 class LeeDuyuruAdmin(admin.ModelAdmin):
@@ -21,7 +23,6 @@ class LeeDuyuruAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).order_by('-onemli', '-yayin_tarihi')
     
-
 
 @admin.register(Lee_Etkinlik)
 class Lee_EtkinlikAdmin(admin.ModelAdmin):

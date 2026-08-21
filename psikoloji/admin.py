@@ -1,7 +1,9 @@
 # app_name: psikoloji/admin.py
 
 from django.contrib import admin
-from .models import PsikolojiDuyuru, PsikolojiEtkinlik, PsikolojiDersProgrami
+from .models import (
+    PsikolojiDuyuru, PsikolojiEtkinlik, PsikolojiFaaliyet, PsikolojiDersProgrami, PsikolojiFaaliyetGorseli, PsikolojiFaaliyetGrubu
+)
 
 @admin.register(PsikolojiEtkinlik)
 class PsikolojiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class PsikolojiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class PsikolojiFaaliyetGorseliInline(admin.TabularInline):
+    model = PsikolojiFaaliyetGorseli
+    extra = 1
+
+@admin.register(PsikolojiFaaliyetGrubu)
+class PsikolojiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(PsikolojiFaaliyet)
+class PsikolojiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [PsikolojiFaaliyetGorseliInline]

@@ -1,8 +1,9 @@
 # app_name: ergoterapi/admin.py
 
 from django.contrib import admin
-from .models import ErgoterapiDuyuru, ErgoterapiEtkinlik, ErgoterapiDersProgrami
-
+from .models import (
+    ErgoterapiFaaliyet, ErgoterapiFaaliyetGrubu, ErgoterapiDersProgrami, ErgoterapiFaaliyetGorseli, ErgoterapiEtkinlik, ErgoterapiDuyuru
+)
 
 @admin.register(ErgoterapiEtkinlik)
 class ErgoterapiEtkinlikAdmin(admin.ModelAdmin):
@@ -27,7 +28,6 @@ class ErgoterapiEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(ErgoterapiDuyuru)
 class ErgoterapiDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -36,7 +36,6 @@ class ErgoterapiDuyuruAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return ErgoterapiDuyuru.objects.all()
-
 
 @admin.register(ErgoterapiDersProgrami)
 class ErgoterapiDersProgramiAdmin(admin.ModelAdmin):
@@ -53,3 +52,21 @@ class ErgoterapiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class ErgoterapiFaaliyetGorseliInline(admin.TabularInline):
+    model = ErgoterapiFaaliyetGorseli
+    extra = 1
+
+@admin.register(ErgoterapiFaaliyetGrubu)
+class ErgoterapiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(ErgoterapiFaaliyet)
+class ErgoterapiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [ErgoterapiFaaliyetGorseliInline]

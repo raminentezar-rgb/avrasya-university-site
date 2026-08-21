@@ -1,7 +1,9 @@
 # app_name: isletme/admin.py
 
 from django.contrib import admin
-from .models import IsletmeDuyuru, IsletmeEtkinlik, IsletmeDersProgrami
+from .models import (
+    IsletmeDersProgrami, IsletmeFaaliyetGorseli, IsletmeFaaliyetGrubu, IsletmeEtkinlik, IsletmeDuyuru, IsletmeFaaliyet
+)
 
 @admin.register(IsletmeEtkinlik)
 class IsletmeEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class IsletmeDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class IsletmeFaaliyetGorseliInline(admin.TabularInline):
+    model = IsletmeFaaliyetGorseli
+    extra = 1
+
+@admin.register(IsletmeFaaliyetGrubu)
+class IsletmeFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(IsletmeFaaliyet)
+class IsletmeFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [IsletmeFaaliyetGorseliInline]

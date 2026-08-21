@@ -1,7 +1,9 @@
 # app_name: ortopedik_protez/admin.py
 
 from django.contrib import admin
-from .models import OrtopedikProtezDuyuru, OrtopedikProtezEtkinlik, OrtopedikProtezDersProgrami
+from .models import (
+    OrtopedikProtezFaaliyetGorseli, OrtopedikProtezFaaliyetGrubu, OrtopedikProtezDersProgrami, OrtopedikProtezEtkinlik, OrtopedikProtezDuyuru, OrtopedikProtezFaaliyet
+)
 
 @admin.register(OrtopedikProtezEtkinlik)
 class OrtopedikProtezEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class OrtopedikProtezDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class OrtopedikProtezFaaliyetGorseliInline(admin.TabularInline):
+    model = OrtopedikProtezFaaliyetGorseli
+    extra = 1
+
+@admin.register(OrtopedikProtezFaaliyetGrubu)
+class OrtopedikProtezFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(OrtopedikProtezFaaliyet)
+class OrtopedikProtezFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [OrtopedikProtezFaaliyetGorseliInline]

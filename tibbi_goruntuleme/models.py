@@ -115,3 +115,49 @@ class TibbiGoruntulemeDersProgrami(models.Model):
     
     def __str__(self):
         return f"{self.baslik} - {self.get_sinif_display()}"
+
+class TibbiGoruntulemeFaaliyetGrubu(models.Model):
+    TUR_CHOICES = [
+        ('idari', 'İdari Faaliyetler'),
+        ('diger', 'Diğer Faaliyetler'),
+    ]
+    
+    baslik = models.CharField(max_length=200, verbose_name="Grup Başlığı (Örn: İdari Faaliyetler 2023-2024)")
+    faaliyet_turu = models.CharField(max_length=10, choices=TUR_CHOICES, verbose_name="Faaliyet Türü")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Grubu (Tibbi Goruntuleme)"
+        verbose_name_plural = "Faaliyet Grupları (Tibbi Goruntuleme)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return f"{self.baslik} ({self.get_faaliyet_turu_display()})"
+
+class TibbiGoruntulemeFaaliyet(models.Model):
+    grup = models.ForeignKey(TibbiGoruntulemeFaaliyetGrubu, on_delete=models.CASCADE, related_name='faaliyetler', verbose_name="Faaliyet Grubu")
+    baslik = models.CharField(max_length=300, verbose_name="Faaliyet Başlığı")
+    tarih = models.CharField(max_length=100, blank=True, verbose_name="Tarih / Dönem")
+    icerik = models.TextField(blank=True, verbose_name="İçerik")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet (Tibbi Goruntuleme)"
+        verbose_name_plural = "Faaliyetler (Tibbi Goruntuleme)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return self.baslik
+
+class TibbiGoruntulemeFaaliyetGorseli(models.Model):
+    faaliyet = models.ForeignKey(TibbiGoruntulemeFaaliyet, on_delete=models.CASCADE, related_name='gorseller', verbose_name="Faaliyet")
+    gorsel = models.ImageField(upload_to=f'faaliyetler/tibbi_goruntuleme/', verbose_name="Görsel")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Görseli (Tibbi Goruntuleme)"
+        verbose_name_plural = "Faaliyet Görselleri (Tibbi Goruntuleme)"
+        ordering = ['sira', 'id']
+        
+    def __str__(self):
+        return f"{self.faaliyet.baslik} - Görsel {self.id}"

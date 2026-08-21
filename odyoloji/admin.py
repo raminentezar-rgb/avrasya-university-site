@@ -1,7 +1,9 @@
 # app_name: odyoloji/admin.py
 
 from django.contrib import admin
-from .models import OdyolojiDuyuru, OdyolojiEtkinlik, OdyolojiDersProgrami
+from .models import (
+    OdyolojiEtkinlik, OdyolojiFaaliyet, OdyolojiDuyuru, OdyolojiDersProgrami, OdyolojiFaaliyetGrubu, OdyolojiFaaliyetGorseli
+)
 
 @admin.register(OdyolojiEtkinlik)
 class OdyolojiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class OdyolojiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class OdyolojiFaaliyetGorseliInline(admin.TabularInline):
+    model = OdyolojiFaaliyetGorseli
+    extra = 1
+
+@admin.register(OdyolojiFaaliyetGrubu)
+class OdyolojiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(OdyolojiFaaliyet)
+class OdyolojiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [OdyolojiFaaliyetGorseliInline]

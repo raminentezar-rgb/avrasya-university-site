@@ -1,7 +1,9 @@
 # harita_kadastro/admin.py
 
 from django.contrib import admin
-from .models import HaritaKadastroDuyuru, HaritaKadastroEtkinlik, HaritaKadastroDersProgrami
+from .models import (
+    HaritaKadastroDuyuru, HaritaKadastroFaaliyetGrubu, HaritaKadastroEtkinlik, HaritaKadastroFaaliyet, HaritaKadastroFaaliyetGorseli, HaritaKadastroDersProgrami
+)
 
 @admin.register(HaritaKadastroEtkinlik)
 class HaritaKadastroEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class HaritaKadastroDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class HaritaKadastroFaaliyetGorseliInline(admin.TabularInline):
+    model = HaritaKadastroFaaliyetGorseli
+    extra = 1
+
+@admin.register(HaritaKadastroFaaliyetGrubu)
+class HaritaKadastroFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(HaritaKadastroFaaliyet)
+class HaritaKadastroFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [HaritaKadastroFaaliyetGorseliInline]

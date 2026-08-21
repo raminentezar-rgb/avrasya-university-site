@@ -1,7 +1,9 @@
 # app_name: mimari_restorasyon/admin.py
 
 from django.contrib import admin
-from .models import MimariRestorasyonDuyuru, MimariRestorasyonEtkinlik, MimariRestorasyonDersProgrami
+from .models import (
+    MimariRestorasyonFaaliyet, MimariRestorasyonDuyuru, MimariRestorasyonFaaliyetGorseli, MimariRestorasyonFaaliyetGrubu, MimariRestorasyonEtkinlik, MimariRestorasyonDersProgrami
+)
 
 @admin.register(MimariRestorasyonEtkinlik)
 class MimariRestorasyonEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class MimariRestorasyonDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class MimariRestorasyonFaaliyetGorseliInline(admin.TabularInline):
+    model = MimariRestorasyonFaaliyetGorseli
+    extra = 1
+
+@admin.register(MimariRestorasyonFaaliyetGrubu)
+class MimariRestorasyonFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(MimariRestorasyonFaaliyet)
+class MimariRestorasyonFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [MimariRestorasyonFaaliyetGorseliInline]

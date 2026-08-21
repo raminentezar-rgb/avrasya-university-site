@@ -2,11 +2,8 @@
 
 from django.contrib import admin
 from .models import (
-    FizyoterapiRehabilitasyonDuyuru,
-    FizyoterapiRehabilitasyonEtkinlik,
-    FizyoterapiRehabilitasyonDersProgrami
+    FizyoterapiRehabilitasyonDersProgrami, FizyoterapiRehabilitasyonFaaliyetGorseli, FizyoterapiRehabilitasyonEtkinlik, FizyoterapiRehabilitasyonDuyuru, FizyoterapiRehabilitasyonFaaliyetGrubu, FizyoterapiRehabilitasyonFaaliyet
 )
-
 
 @admin.register(FizyoterapiRehabilitasyonEtkinlik)
 class FizyoterapiRehabilitasyonEtkinlikAdmin(admin.ModelAdmin):
@@ -31,7 +28,6 @@ class FizyoterapiRehabilitasyonEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(FizyoterapiRehabilitasyonDuyuru)
 class FizyoterapiRehabilitasyonDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -40,7 +36,6 @@ class FizyoterapiRehabilitasyonDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return FizyoterapiRehabilitasyonDuyuru.objects.all()
-
 
 @admin.register(FizyoterapiRehabilitasyonDersProgrami)
 class FizyoterapiRehabilitasyonDersProgramiAdmin(admin.ModelAdmin):
@@ -57,3 +52,21 @@ class FizyoterapiRehabilitasyonDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class FizyoterapiRehabilitasyonFaaliyetGorseliInline(admin.TabularInline):
+    model = FizyoterapiRehabilitasyonFaaliyetGorseli
+    extra = 1
+
+@admin.register(FizyoterapiRehabilitasyonFaaliyetGrubu)
+class FizyoterapiRehabilitasyonFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(FizyoterapiRehabilitasyonFaaliyet)
+class FizyoterapiRehabilitasyonFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [FizyoterapiRehabilitasyonFaaliyetGorseliInline]

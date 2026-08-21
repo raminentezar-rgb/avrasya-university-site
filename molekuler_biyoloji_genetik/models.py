@@ -115,3 +115,49 @@ class MolekulerBiyolojiGenetikDersProgrami(models.Model):
     
     def __str__(self):
         return f"{self.baslik} - {self.get_sinif_display()}"
+
+class MolekulerBiyolojiGenetikFaaliyetGrubu(models.Model):
+    TUR_CHOICES = [
+        ('idari', 'İdari Faaliyetler'),
+        ('diger', 'Diğer Faaliyetler'),
+    ]
+    
+    baslik = models.CharField(max_length=200, verbose_name="Grup Başlığı (Örn: İdari Faaliyetler 2023-2024)")
+    faaliyet_turu = models.CharField(max_length=10, choices=TUR_CHOICES, verbose_name="Faaliyet Türü")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Grubu (Molekuler Biyoloji Genetik)"
+        verbose_name_plural = "Faaliyet Grupları (Molekuler Biyoloji Genetik)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return f"{self.baslik} ({self.get_faaliyet_turu_display()})"
+
+class MolekulerBiyolojiGenetikFaaliyet(models.Model):
+    grup = models.ForeignKey(MolekulerBiyolojiGenetikFaaliyetGrubu, on_delete=models.CASCADE, related_name='faaliyetler', verbose_name="Faaliyet Grubu")
+    baslik = models.CharField(max_length=300, verbose_name="Faaliyet Başlığı")
+    tarih = models.CharField(max_length=100, blank=True, verbose_name="Tarih / Dönem")
+    icerik = models.TextField(blank=True, verbose_name="İçerik")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet (Molekuler Biyoloji Genetik)"
+        verbose_name_plural = "Faaliyetler (Molekuler Biyoloji Genetik)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return self.baslik
+
+class MolekulerBiyolojiGenetikFaaliyetGorseli(models.Model):
+    faaliyet = models.ForeignKey(MolekulerBiyolojiGenetikFaaliyet, on_delete=models.CASCADE, related_name='gorseller', verbose_name="Faaliyet")
+    gorsel = models.ImageField(upload_to=f'faaliyetler/molekuler_biyoloji_genetik/', verbose_name="Görsel")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Görseli (Molekuler Biyoloji Genetik)"
+        verbose_name_plural = "Faaliyet Görselleri (Molekuler Biyoloji Genetik)"
+        ordering = ['sira', 'id']
+        
+    def __str__(self):
+        return f"{self.faaliyet.baslik} - Görsel {self.id}"

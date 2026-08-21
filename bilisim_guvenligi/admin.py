@@ -1,7 +1,9 @@
 # app_name: bilisim_guvenligi/admin.py
 
 from django.contrib import admin
-from .models import BilisimGuvenligiDuyuru, BilisimGuvenligiEtkinlik, BilisimGuvenligiDersProgrami
+from .models import (
+    BilisimGuvenligiFaaliyetGrubu, BilisimGuvenligiFaaliyetGorseli, BilisimGuvenligiDersProgrami, BilisimGuvenligiFaaliyet, BilisimGuvenligiDuyuru, BilisimGuvenligiEtkinlik
+)
 
 @admin.register(BilisimGuvenligiEtkinlik)
 class BilisimGuvenligiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class BilisimGuvenligiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class BilisimGuvenligiFaaliyetGorseliInline(admin.TabularInline):
+    model = BilisimGuvenligiFaaliyetGorseli
+    extra = 1
+
+@admin.register(BilisimGuvenligiFaaliyetGrubu)
+class BilisimGuvenligiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(BilisimGuvenligiFaaliyet)
+class BilisimGuvenligiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [BilisimGuvenligiFaaliyetGorseliInline]

@@ -1,7 +1,9 @@
 # app_name: acil_durum/admin.py
 
 from django.contrib import admin
-from .models import AcilDurumDuyuru, AcilDurumEtkinlik, AcilDurumDersProgrami
+from .models import (
+    AcilDurumFaaliyetGrubu, AcilDurumDersProgrami, AcilDurumFaaliyet, AcilDurumEtkinlik, AcilDurumFaaliyetGorseli, AcilDurumDuyuru
+)
 
 @admin.register(AcilDurumEtkinlik)
 class AcilDurumEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class AcilDurumDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class AcilDurumFaaliyetGorseliInline(admin.TabularInline):
+    model = AcilDurumFaaliyetGorseli
+    extra = 1
+
+@admin.register(AcilDurumFaaliyetGrubu)
+class AcilDurumFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(AcilDurumFaaliyet)
+class AcilDurumFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [AcilDurumFaaliyetGorseliInline]

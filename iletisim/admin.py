@@ -1,6 +1,8 @@
 # iletisim/admin.py
 from django.contrib import admin
-from .models import IletisimDuyuru
+from .models import (
+    IletisimDuyuru
+)
 
 @admin.register(IletisimDuyuru)
 class IletisimDuyuruAdmin(admin.ModelAdmin):

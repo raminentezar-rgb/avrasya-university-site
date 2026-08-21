@@ -1,7 +1,9 @@
 # app_name: optisyenlik/admin.py
 
 from django.contrib import admin
-from .models import OptisyenlikDuyuru, OptisyenlikEtkinlik, OptisyenlikDersProgrami
+from .models import (
+    OptisyenlikFaaliyetGrubu, OptisyenlikDuyuru, OptisyenlikEtkinlik, OptisyenlikDersProgrami, OptisyenlikFaaliyetGorseli, OptisyenlikFaaliyet
+)
 
 @admin.register(OptisyenlikEtkinlik)
 class OptisyenlikEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class OptisyenlikDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class OptisyenlikFaaliyetGorseliInline(admin.TabularInline):
+    model = OptisyenlikFaaliyetGorseli
+    extra = 1
+
+@admin.register(OptisyenlikFaaliyetGrubu)
+class OptisyenlikFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(OptisyenlikFaaliyet)
+class OptisyenlikFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [OptisyenlikFaaliyetGorseliInline]

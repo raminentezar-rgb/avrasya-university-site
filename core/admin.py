@@ -1,6 +1,9 @@
 from django.contrib import admin
+from .models import (
+    Page, SliderItem
+)
 from modeltranslation.admin import TranslationAdmin # اضافه کردن کلاس ترجمه ادمین
-from .models import SliderItem, Page
+
 from django.urls import reverse
 from django.utils.html import format_html
 

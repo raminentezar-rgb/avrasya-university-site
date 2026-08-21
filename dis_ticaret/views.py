@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import DisTicaretDuyuru, DisTicaretEtkinlik, DisTicaretDersProgrami
+from .models import DisTicaretDuyuru, DisTicaretEtkinlik, DisTicaretDersProgrami, DisTicaretFaaliyetGrubu
 from django.utils import timezone
 
 def etkinlik_listesi(request):
@@ -123,20 +123,19 @@ def ders_programi(request):
 def dis_ticaret_bolumu(request):
     return render(request, 'dis_ticaret/includes/dis_ticaret.html')
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'dis_ticaret/includes/idari_faaliyetler_2024_2025.html')
 
-def idari_faaliyetler_2025_2026(request):
-    return render(request, 'dis_ticaret/includes/idari_faaliyetler_2025_2026.html')
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'dis_ticaret/includes/diger_faaliyetler_2024_2025.html')
 
-def diger_faaliyetler_2025_2026(request):
-    return render(request, 'dis_ticaret/includes/diger_faaliyetler_2025_2026.html')
 
 def kalite_yonetimi(request):
     return render(request, 'dis_ticaret/includes/kalite_yonetimi.html')
 
 def toplumsal_katki(request):
     return render(request, 'dis_ticaret/includes/toplumsal_katki.html')
+def idari_faaliyetler(request):
+    gruplar = DisTicaretFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'dis_ticaret/includes/idari_faaliyetler.html', {'gruplar': gruplar})
+
+def diger_faaliyetler(request):
+    gruplar = DisTicaretFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'dis_ticaret/includes/diger_faaliyetler.html', {'gruplar': gruplar})

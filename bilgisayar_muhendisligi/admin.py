@@ -1,7 +1,9 @@
 # app_name: bilgisayar_muhendisligi/admin.py
 
 from django.contrib import admin
-from .models import BilgisayarMuhendisligiDuyuru, BilgisayarMuhendisligiEtkinlik, BilgisayarMuhendisligiDersProgrami
+from .models import (
+    BilgisayarMuhendisligiFaaliyet, BilgisayarMuhendisligiFaaliyetGorseli, BilgisayarMuhendisligiDuyuru, BilgisayarMuhendisligiDersProgrami, BilgisayarMuhendisligiFaaliyetGrubu, BilgisayarMuhendisligiEtkinlik
+)
 
 @admin.register(BilgisayarMuhendisligiEtkinlik)
 class BilgisayarMuhendisligiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class BilgisayarMuhendisligiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class BilgisayarMuhendisligiFaaliyetGorseliInline(admin.TabularInline):
+    model = BilgisayarMuhendisligiFaaliyetGorseli
+    extra = 1
+
+@admin.register(BilgisayarMuhendisligiFaaliyetGrubu)
+class BilgisayarMuhendisligiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(BilgisayarMuhendisligiFaaliyet)
+class BilgisayarMuhendisligiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [BilgisayarMuhendisligiFaaliyetGorseliInline]

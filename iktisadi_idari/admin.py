@@ -1,6 +1,8 @@
 # iktisadi_idari/admin.py
 from django.contrib import admin
-from .models import IktisadiIdariDuyuru
+from .models import (
+    IktisadiIdariDuyuru
+)
 
 @admin.register(IktisadiIdariDuyuru)
 class IktisadiIdariDuyuruAdmin(admin.ModelAdmin):

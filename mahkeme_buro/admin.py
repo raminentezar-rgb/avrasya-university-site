@@ -1,7 +1,9 @@
 # app_name: mahkeme_buro/admin.py
 
 from django.contrib import admin
-from .models import MahkemeBuroDuyuru, MahkemeBuroEtkinlik, MahkemeBuroDersProgrami
+from .models import (
+    MahkemeBuroEtkinlik, MahkemeBuroFaaliyet, MahkemeBuroDuyuru, MahkemeBuroFaaliyetGrubu, MahkemeBuroDersProgrami, MahkemeBuroFaaliyetGorseli
+)
 
 @admin.register(MahkemeBuroEtkinlik)
 class MahkemeBuroEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class MahkemeBuroDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class MahkemeBuroFaaliyetGorseliInline(admin.TabularInline):
+    model = MahkemeBuroFaaliyetGorseli
+    extra = 1
+
+@admin.register(MahkemeBuroFaaliyetGrubu)
+class MahkemeBuroFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(MahkemeBuroFaaliyet)
+class MahkemeBuroFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [MahkemeBuroFaaliyetGorseliInline]

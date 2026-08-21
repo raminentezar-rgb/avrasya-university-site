@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from duyurular.models import Duyuru, Bolum
-from .models import AscilikDuyuru, Ascilik_Etkinlik, AscilikDersProgrami
+from .models import AscilikDuyuru, Ascilik_Etkinlik, AscilikDersProgrami, AscilikFaaliyetGrubu
 from django.utils import timezone
 
 def etkinlik_listesi(request):
@@ -123,20 +123,19 @@ def ders_programi(request):
 def asciilik(request):
     return render(request, 'ascilik/includes/ascilik.html')
 
-def idari_faaliyetler_2024_2025(request):
-    return render(request, 'ascilik/includes/idari_faaliyetler_2024_2025.html')
 
-def idari_faaliyetler_2025_2026(request):
-    return render(request, 'ascilik/includes/idari_faaliyetler_2025_2026.html')
 
-def diger_faaliyetler_2024_2025(request):
-    return render(request, 'ascilik/includes/diger_faaliyetler_2024_2025.html')
 
-def diger_faaliyetler_2025_2026(request):
-    return render(request, 'ascilik/includes/diger_faaliyetler_2025_2026.html')
 
 def kalite_yonetimi(request):
     return render(request, 'ascilik/includes/kalite_yonetimi.html')
 
 def toplumsal_katki(request):
     return render(request, 'ascilik/includes/toplumsal_katki.html')
+def idari_faaliyetler(request):
+    gruplar = AscilikFaaliyetGrubu.objects.filter(faaliyet_turu='idari').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'ascilik/includes/idari_faaliyetler.html', {'gruplar': gruplar})
+
+def diger_faaliyetler(request):
+    gruplar = AscilikFaaliyetGrubu.objects.filter(faaliyet_turu='diger').prefetch_related('faaliyetler__gorseller')
+    return render(request, 'ascilik/includes/diger_faaliyetler.html', {'gruplar': gruplar})

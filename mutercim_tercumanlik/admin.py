@@ -1,7 +1,9 @@
 # app_name: mutercim_tercumanlik/admin.py
 
 from django.contrib import admin
-from .models import MuterimTercumanlikDuyuru, MuterimTercumanlikEtkinlik, MuterimTercumanlikDersProgrami
+from .models import (
+    MuterimTercumanlikDersProgrami, MuterimTercumanlikEtkinlik, MutercimTercumanlikFaaliyetGorseli, MutercimTercumanlikFaaliyetGrubu, MuterimTercumanlikDuyuru, MutercimTercumanlikFaaliyet
+)
 
 @admin.register(MuterimTercumanlikEtkinlik)
 class MuterimTercumanlikEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class MuterimTercumanlikDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class MutercimTercumanlikFaaliyetGorseliInline(admin.TabularInline):
+    model = MutercimTercumanlikFaaliyetGorseli
+    extra = 1
+
+@admin.register(MutercimTercumanlikFaaliyetGrubu)
+class MutercimTercumanlikFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(MutercimTercumanlikFaaliyet)
+class MutercimTercumanlikFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [MutercimTercumanlikFaaliyetGorseliInline]

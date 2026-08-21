@@ -1,8 +1,9 @@
 # app_name: antrenorluk_egitimi/admin.py
 
 from django.contrib import admin
-from .models import AntrenorlukEgitimiDuyuru, AntrenorlukEgitimiEtkinlik, AntrenorlukEgitimiDersProgrami
-
+from .models import (
+    AntrenorlukEgitimiFaaliyet, AntrenorlukEgitimiFaaliyetGorseli, AntrenorlukEgitimiEtkinlik, AntrenorlukEgitimiDersProgrami, AntrenorlukEgitimiDuyuru, AntrenorlukEgitimiFaaliyetGrubu
+)
 
 @admin.register(AntrenorlukEgitimiEtkinlik)
 class AntrenorlukEgitimiEtkinlikAdmin(admin.ModelAdmin):
@@ -27,7 +28,6 @@ class AntrenorlukEgitimiEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(AntrenorlukEgitimiDuyuru)
 class AntrenorlukEgitimiDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -36,7 +36,6 @@ class AntrenorlukEgitimiDuyuruAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return AntrenorlukEgitimiDuyuru.objects.all()
-
 
 @admin.register(AntrenorlukEgitimiDersProgrami)
 class AntrenorlukEgitimiDersProgramiAdmin(admin.ModelAdmin):
@@ -53,3 +52,21 @@ class AntrenorlukEgitimiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class AntrenorlukEgitimiFaaliyetGorseliInline(admin.TabularInline):
+    model = AntrenorlukEgitimiFaaliyetGorseli
+    extra = 1
+
+@admin.register(AntrenorlukEgitimiFaaliyetGrubu)
+class AntrenorlukEgitimiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(AntrenorlukEgitimiFaaliyet)
+class AntrenorlukEgitimiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [AntrenorlukEgitimiFaaliyetGorseliInline]

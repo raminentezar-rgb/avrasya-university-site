@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import InsaatTeknolojisiDuyuru, InsaatTeknolojisiEtkinlik, InsaatTeknolojisiDersProgrami
+from .models import (
+    InsaatTeknolojisiFaaliyetGorseli, InsaatTeknolojisiDersProgrami, InsaatTeknolojisiDuyuru, InsaatTeknolojisiEtkinlik, InsaatTeknolojisiFaaliyet, InsaatTeknolojisiFaaliyetGrubu
+)
 
 @admin.register(InsaatTeknolojisiEtkinlik)
 class InsaatTeknolojisiEtkinlikAdmin(admin.ModelAdmin):
@@ -48,3 +50,21 @@ class InsaatTeknolojisiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class InsaatTeknolojisiFaaliyetGorseliInline(admin.TabularInline):
+    model = InsaatTeknolojisiFaaliyetGorseli
+    extra = 1
+
+@admin.register(InsaatTeknolojisiFaaliyetGrubu)
+class InsaatTeknolojisiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(InsaatTeknolojisiFaaliyet)
+class InsaatTeknolojisiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [InsaatTeknolojisiFaaliyetGorseliInline]

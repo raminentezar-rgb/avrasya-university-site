@@ -1,8 +1,9 @@
 # app_name: gastronomi_mutfak_sanatlari/admin.py
 
 from django.contrib import admin
-from .models import GastronomiDuyuru, GastronomiEtkinlik, GastronomiDersProgrami
-
+from .models import (
+    GastronomiDuyuru, GastronomiDersProgrami, GastronomiEtkinlik, GastronomiMutfakSanatlariFaaliyet, GastronomiMutfakSanatlariFaaliyetGrubu, GastronomiMutfakSanatlariFaaliyetGorseli
+)
 
 @admin.register(GastronomiEtkinlik)
 class GastronomiEtkinlikAdmin(admin.ModelAdmin):
@@ -27,7 +28,6 @@ class GastronomiEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(GastronomiDuyuru)
 class GastronomiDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -36,7 +36,6 @@ class GastronomiDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return GastronomiDuyuru.objects.all()
-
 
 @admin.register(GastronomiDersProgrami)
 class GastronomiDersProgramiAdmin(admin.ModelAdmin):
@@ -53,3 +52,21 @@ class GastronomiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class GastronomiMutfakSanatlariFaaliyetGorseliInline(admin.TabularInline):
+    model = GastronomiMutfakSanatlariFaaliyetGorseli
+    extra = 1
+
+@admin.register(GastronomiMutfakSanatlariFaaliyetGrubu)
+class GastronomiMutfakSanatlariFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(GastronomiMutfakSanatlariFaaliyet)
+class GastronomiMutfakSanatlariFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [GastronomiMutfakSanatlariFaaliyetGorseliInline]

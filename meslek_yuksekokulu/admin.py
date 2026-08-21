@@ -1,6 +1,8 @@
 # meslek_yuksekokulu/admin.py
 from django.contrib import admin
-from .models import MeslekYuksekokuluDuyuru
+from .models import (
+    MeslekYuksekokuluDuyuru
+)
 
 @admin.register(MeslekYuksekokuluDuyuru)
 class MeslekYuksekokuluDuyuruAdmin(admin.ModelAdmin):

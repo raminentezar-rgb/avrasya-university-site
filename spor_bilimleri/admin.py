@@ -1,6 +1,8 @@
 # spor_bilimleri/admin.py
 from django.contrib import admin
-from .models import SporBilimleriDuyuru
+from .models import (
+    SporBilimleriDuyuru
+)
 
 @admin.register(SporBilimleriDuyuru)
 class SporBilimleriDuyuruAdmin(admin.ModelAdmin):

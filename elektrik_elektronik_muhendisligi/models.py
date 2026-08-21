@@ -115,3 +115,49 @@ class ElektrikElektronikMuhendisligiDersProgrami(models.Model):
     
     def __str__(self):
         return f"{self.baslik} - {self.get_sinif_display()}"
+
+class ElektrikElektronikMuhendisligiFaaliyetGrubu(models.Model):
+    TUR_CHOICES = [
+        ('idari', 'İdari Faaliyetler'),
+        ('diger', 'Diğer Faaliyetler'),
+    ]
+    
+    baslik = models.CharField(max_length=200, verbose_name="Grup Başlığı (Örn: İdari Faaliyetler 2023-2024)")
+    faaliyet_turu = models.CharField(max_length=10, choices=TUR_CHOICES, verbose_name="Faaliyet Türü")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Grubu (Elektrik Elektronik Muhendisligi)"
+        verbose_name_plural = "Faaliyet Grupları (Elektrik Elektronik Muhendisligi)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return f"{self.baslik} ({self.get_faaliyet_turu_display()})"
+
+class ElektrikElektronikMuhendisligiFaaliyet(models.Model):
+    grup = models.ForeignKey(ElektrikElektronikMuhendisligiFaaliyetGrubu, on_delete=models.CASCADE, related_name='faaliyetler', verbose_name="Faaliyet Grubu")
+    baslik = models.CharField(max_length=300, verbose_name="Faaliyet Başlığı")
+    tarih = models.CharField(max_length=100, blank=True, verbose_name="Tarih / Dönem")
+    icerik = models.TextField(blank=True, verbose_name="İçerik")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet (Elektrik Elektronik Muhendisligi)"
+        verbose_name_plural = "Faaliyetler (Elektrik Elektronik Muhendisligi)"
+        ordering = ['sira', '-id']
+        
+    def __str__(self):
+        return self.baslik
+
+class ElektrikElektronikMuhendisligiFaaliyetGorseli(models.Model):
+    faaliyet = models.ForeignKey(ElektrikElektronikMuhendisligiFaaliyet, on_delete=models.CASCADE, related_name='gorseller', verbose_name="Faaliyet")
+    gorsel = models.ImageField(upload_to=f'faaliyetler/elektrik_elektronik_muhendisligi/', verbose_name="Görsel")
+    sira = models.IntegerField(default=0, verbose_name="Sıralama")
+    
+    class Meta:
+        verbose_name = "Faaliyet Görseli (Elektrik Elektronik Muhendisligi)"
+        verbose_name_plural = "Faaliyet Görselleri (Elektrik Elektronik Muhendisligi)"
+        ordering = ['sira', 'id']
+        
+    def __str__(self):
+        return f"{self.faaliyet.baslik} - Görsel {self.id}"

@@ -1,8 +1,9 @@
 # app_name: ic_mimarlik/admin.py
 
 from django.contrib import admin
-from .models import IcMimarlikDuyuru, IcMimarlikEtkinlik, IcMimarlikDersProgrami
-
+from .models import (
+    IcMimarlikFaaliyetGrubu, IcMimarlikDersProgrami, IcMimarlikEtkinlik, IcMimarlikFaaliyetGorseli, IcMimarlikFaaliyet, IcMimarlikDuyuru
+)
 
 @admin.register(IcMimarlikEtkinlik)
 class IcMimarlikEtkinlikAdmin(admin.ModelAdmin):
@@ -27,7 +28,6 @@ class IcMimarlikEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(IcMimarlikDuyuru)
 class IcMimarlikDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -36,7 +36,6 @@ class IcMimarlikDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return IcMimarlikDuyuru.objects.all()
-
 
 @admin.register(IcMimarlikDersProgrami)
 class IcMimarlikDersProgramiAdmin(admin.ModelAdmin):
@@ -53,3 +52,21 @@ class IcMimarlikDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class IcMimarlikFaaliyetGorseliInline(admin.TabularInline):
+    model = IcMimarlikFaaliyetGorseli
+    extra = 1
+
+@admin.register(IcMimarlikFaaliyetGrubu)
+class IcMimarlikFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(IcMimarlikFaaliyet)
+class IcMimarlikFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [IcMimarlikFaaliyetGorseliInline]

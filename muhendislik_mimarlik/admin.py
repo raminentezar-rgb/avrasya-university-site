@@ -1,6 +1,8 @@
 # muhendislik_mimarlik/admin.py
 from django.contrib import admin
-from .models import MuhendislikMimarlikDuyuru
+from .models import (
+    MuhendislikMimarlikDuyuru
+)
 
 @admin.register(MuhendislikMimarlikDuyuru)
 class MuhendislikMimarlikDuyuruAdmin(admin.ModelAdmin):

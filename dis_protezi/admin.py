@@ -1,7 +1,9 @@
 # file name: dis_protezi/admin.py
 
 from django.contrib import admin
-from .models import DisProteziDuyuru, DisProteziEtkinlik, DisProteziDersProgrami
+from .models import (
+    DisProteziFaaliyetGorseli, DisProteziFaaliyet, DisProteziDersProgrami, DisProteziFaaliyetGrubu, DisProteziDuyuru, DisProteziEtkinlik
+)
 
 @admin.register(DisProteziEtkinlik)
 class DisProteziEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class DisProteziDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class DisProteziFaaliyetGorseliInline(admin.TabularInline):
+    model = DisProteziFaaliyetGorseli
+    extra = 1
+
+@admin.register(DisProteziFaaliyetGrubu)
+class DisProteziFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(DisProteziFaaliyet)
+class DisProteziFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [DisProteziFaaliyetGorseliInline]

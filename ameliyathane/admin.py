@@ -1,7 +1,9 @@
 # app_name: ameliyathane/admin.py
 
 from django.contrib import admin
-from .models import AmeliyathaneDuyuru, AmeliyathaneEtkinlik, AmeliyathaneDersProgrami
+from .models import (
+    AmeliyathaneDuyuru, AmeliyathaneFaaliyetGrubu, AmeliyathaneFaaliyetGorseli, AmeliyathaneEtkinlik, AmeliyathaneDersProgrami, AmeliyathaneFaaliyet
+)
 
 @admin.register(AmeliyathaneEtkinlik)
 class AmeliyathaneEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class AmeliyathaneDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class AmeliyathaneFaaliyetGorseliInline(admin.TabularInline):
+    model = AmeliyathaneFaaliyetGorseli
+    extra = 1
+
+@admin.register(AmeliyathaneFaaliyetGrubu)
+class AmeliyathaneFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(AmeliyathaneFaaliyet)
+class AmeliyathaneFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [AmeliyathaneFaaliyetGorseliInline]

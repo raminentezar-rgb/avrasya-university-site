@@ -1,8 +1,9 @@
 # app_name: yonetim_bilisim_sistemleri/admin.py
 
 from django.contrib import admin
-from .models import YonetimBilisimDuyuru, YonetimBilisimEtkinlik, YonetimBilisimDersProgrami
-
+from .models import (
+    YonetimBilisimDersProgrami, YonetimBilisimSistemleriFaaliyetGorseli, YonetimBilisimEtkinlik, YonetimBilisimDuyuru, YonetimBilisimSistemleriFaaliyet, YonetimBilisimSistemleriFaaliyetGrubu
+)
 
 @admin.register(YonetimBilisimEtkinlik)
 class YonetimBilisimEtkinlikAdmin(admin.ModelAdmin):
@@ -27,7 +28,6 @@ class YonetimBilisimEtkinlikAdmin(admin.ModelAdmin):
         }),
     )
 
-
 @admin.register(YonetimBilisimDuyuru)
 class YonetimBilisimDuyuruAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'fakulte', 'yayin_tarihi', 'yayinda']
@@ -36,7 +36,6 @@ class YonetimBilisimDuyuruAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return YonetimBilisimDuyuru.objects.all()
-
 
 @admin.register(YonetimBilisimDersProgrami)
 class YonetimBilisimDersProgramiAdmin(admin.ModelAdmin):
@@ -53,3 +52,21 @@ class YonetimBilisimDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class YonetimBilisimSistemleriFaaliyetGorseliInline(admin.TabularInline):
+    model = YonetimBilisimSistemleriFaaliyetGorseli
+    extra = 1
+
+@admin.register(YonetimBilisimSistemleriFaaliyetGrubu)
+class YonetimBilisimSistemleriFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(YonetimBilisimSistemleriFaaliyet)
+class YonetimBilisimSistemleriFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [YonetimBilisimSistemleriFaaliyetGorseliInline]

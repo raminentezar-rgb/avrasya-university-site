@@ -1,8 +1,9 @@
 from django.contrib import admin
+from .models import (
+    NewsImage, News, NewsAttachment
+)
 from modeltranslation.admin import TranslationAdmin
 from django.utils.html import format_html
-from .models import News, NewsImage, NewsAttachment
-
 
 class NewsImageInline(admin.TabularInline):
     model = NewsImage
@@ -10,13 +11,11 @@ class NewsImageInline(admin.TabularInline):
     fields = ('image', 'caption', 'order')
     classes = ('collapse',)
 
-
 class NewsAttachmentInline(admin.TabularInline):
     model = NewsAttachment
     extra = 1
     fields = ('file', 'title', 'file_type', 'description')
     classes = ('collapse',)
-
 
 @admin.register(News)
 class NewsAdmin(TranslationAdmin):
@@ -34,7 +33,6 @@ class NewsAdmin(TranslationAdmin):
         return obj.attachments.count()
     attachment_count.short_description = 'تعداد پیوست‌ها'
 
-
 @admin.register(NewsImage)
 class NewsImageAdmin(admin.ModelAdmin):
     list_display = ('news', 'image_preview', 'caption', 'order')
@@ -46,7 +44,6 @@ class NewsImageAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="max-height: 50px; max-width: 50px;" />', obj.image.url)
         return "-"
     image_preview.short_description = 'پیش‌نمایش'
-
 
 @admin.register(NewsAttachment)
 class NewsAttachmentAdmin(admin.ModelAdmin):

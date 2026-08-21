@@ -1,7 +1,9 @@
 # app_name: ic_mekan/admin.py
 
 from django.contrib import admin
-from .models import IcMekanDuyuru, IcMekanEtkinlik, IcMekanDersProgrami
+from .models import (
+    IcMekanEtkinlik, IcMekanFaaliyetGorseli, IcMekanFaaliyet, IcMekanDuyuru, IcMekanDersProgrami, IcMekanFaaliyetGrubu
+)
 
 @admin.register(IcMekanEtkinlik)
 class IcMekanEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class IcMekanDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class IcMekanFaaliyetGorseliInline(admin.TabularInline):
+    model = IcMekanFaaliyetGorseli
+    extra = 1
+
+@admin.register(IcMekanFaaliyetGrubu)
+class IcMekanFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(IcMekanFaaliyet)
+class IcMekanFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [IcMekanFaaliyetGorseliInline]

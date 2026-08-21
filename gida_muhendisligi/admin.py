@@ -1,7 +1,9 @@
 # app_name: gida_muhendisligi/admin.py
 
 from django.contrib import admin
-from .models import GidaMuhendisligiDuyuru, GidaMuhendisligiEtkinlik, GidaMuhendisligiDersProgrami
+from .models import (
+    GidaMuhendisligiEtkinlik, GidaMuhendisligiDuyuru, GidaMuhendisligiDersProgrami, GidaMuhendisligiFaaliyetGrubu, GidaMuhendisligiFaaliyetGorseli, GidaMuhendisligiFaaliyet
+)
 
 @admin.register(GidaMuhendisligiEtkinlik)
 class GidaMuhendisligiEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class GidaMuhendisligiDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class GidaMuhendisligiFaaliyetGorseliInline(admin.TabularInline):
+    model = GidaMuhendisligiFaaliyetGorseli
+    extra = 1
+
+@admin.register(GidaMuhendisligiFaaliyetGrubu)
+class GidaMuhendisligiFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(GidaMuhendisligiFaaliyet)
+class GidaMuhendisligiFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [GidaMuhendisligiFaaliyetGorseliInline]

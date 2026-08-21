@@ -1,6 +1,8 @@
 # saglik_bilimleri/admin.py
 from django.contrib import admin
-from .models import SaglikBilimleriDuyuru
+from .models import (
+    SaglikBilimleriDuyuru
+)
 
 @admin.register(SaglikBilimleriDuyuru)
 class SaglikBilimleriDuyuruAdmin(admin.ModelAdmin):

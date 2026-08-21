@@ -1,7 +1,9 @@
 # app_name: e_ticaret/admin.py
 
 from django.contrib import admin
-from .models import ETicaretDuyuru, ETicaretEtkinlik, ETicaretDersProgrami
+from .models import (
+    ETicaretDersProgrami, ETicaretFaaliyetGorseli, ETicaretFaaliyet, ETicaretFaaliyetGrubu, ETicaretDuyuru, ETicaretEtkinlik
+)
 
 @admin.register(ETicaretEtkinlik)
 class ETicaretEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class ETicaretDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class ETicaretFaaliyetGorseliInline(admin.TabularInline):
+    model = ETicaretFaaliyetGorseli
+    extra = 1
+
+@admin.register(ETicaretFaaliyetGrubu)
+class ETicaretFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(ETicaretFaaliyet)
+class ETicaretFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [ETicaretFaaliyetGorseliInline]

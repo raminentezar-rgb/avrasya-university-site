@@ -1,7 +1,9 @@
 # app_name: maliye/admin.py
 
 from django.contrib import admin
-from .models import MaliyeDuyuru, MaliyeEtkinlik, MaliyeDersProgrami
+from .models import (
+    MaliyeDersProgrami, MaliyeFaaliyetGrubu, MaliyeFaaliyet, MaliyeFaaliyetGorseli, MaliyeDuyuru, MaliyeEtkinlik
+)
 
 @admin.register(MaliyeEtkinlik)
 class MaliyeEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class MaliyeDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class MaliyeFaaliyetGorseliInline(admin.TabularInline):
+    model = MaliyeFaaliyetGorseli
+    extra = 1
+
+@admin.register(MaliyeFaaliyetGrubu)
+class MaliyeFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(MaliyeFaaliyet)
+class MaliyeFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [MaliyeFaaliyetGorseliInline]

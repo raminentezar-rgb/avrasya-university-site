@@ -1,7 +1,9 @@
 # app_name: halkla_iliskiler/admin.py
 
 from django.contrib import admin
-from .models import HalklaIliskilerDuyuru, HalklaIliskilerEtkinlik, HalklaIliskilerDersProgrami
+from .models import (
+    HalklaIliskilerFaaliyet, HalklaIliskilerDersProgrami, HalklaIliskilerFaaliyetGrubu, HalklaIliskilerFaaliyetGorseli, HalklaIliskilerDuyuru, HalklaIliskilerEtkinlik
+)
 
 @admin.register(HalklaIliskilerEtkinlik)
 class HalklaIliskilerEtkinlikAdmin(admin.ModelAdmin):
@@ -50,3 +52,21 @@ class HalklaIliskilerDersProgramiAdmin(admin.ModelAdmin):
             'fields': ('sinif', 'aktif')
         }),
     )
+
+class HalklaIliskilerFaaliyetGorseliInline(admin.TabularInline):
+    model = HalklaIliskilerFaaliyetGorseli
+    extra = 1
+
+@admin.register(HalklaIliskilerFaaliyetGrubu)
+class HalklaIliskilerFaaliyetGrubuAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'faaliyet_turu', 'sira']
+    list_filter = ['faaliyet_turu']
+    list_editable = ['sira']
+
+@admin.register(HalklaIliskilerFaaliyet)
+class HalklaIliskilerFaaliyetAdmin(admin.ModelAdmin):
+    list_display = ['baslik', 'grup', 'tarih', 'sira']
+    list_filter = ['grup__faaliyet_turu', 'grup']
+    list_editable = ['sira']
+    search_fields = ['baslik', 'icerik']
+    inlines = [HalklaIliskilerFaaliyetGorseliInline]
