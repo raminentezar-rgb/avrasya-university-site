@@ -1,4 +1,5 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     GalleryImage, GalleryCategory
 )
@@ -12,7 +13,7 @@ class GalleryCategoryAdmin(admin.ModelAdmin):
     list_editable = ['order', 'is_active']
 
 @admin.register(GalleryImage)
-class GalleryImageAdmin(admin.ModelAdmin):
+class GalleryImageAdmin(TranslationAdmin):
     list_display = ['title', 'category', 'upload_date', 'is_active', 'order']
     list_filter = ['category', 'is_active', 'upload_date']
     search_fields = ['title', 'description']

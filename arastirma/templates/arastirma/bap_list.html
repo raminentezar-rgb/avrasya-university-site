@@ -1,4 +1,5 @@
 {% extends 'arastirma/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}BAP Projeleri - Avrasya University{% endblock %}
@@ -7,8 +8,8 @@
 <section class="research-hero" style="background: linear-gradient(135deg, #8dd4e3 0%, #1d61a9 100%); padding: 100px 0 60px;">
     <div class="container">
         <div class="research-hero-content">
-            <h1>BAP Projeleri</h1>
-            <p>Bilimsel Araştırma Projeleri</p>
+            <h1>{% trans "BAP Projeleri" %}</h1>
+            <p>{% trans "Bilimsel Araştırma Projeleri" %}</p>
         </div>
     </div>
 </section>
@@ -29,19 +30,19 @@
                         <div class="col-md-4">
                             <div class="stat-box text-center">
                                 <h3>{{ project_count }}</h3>
-                                <p>Toplam Proje</p>
+                                <p>{% trans "Toplam Proje" %}</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="stat-box text-center">
                                 <h3>{{ total_budget|floatformat:0 }} TL</h3>
-                                <p>Toplam Bütçe</p>
+                                <p>{% trans "Toplam Bütçe" %}</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="stat-box text-center">
                                 <h3>{{ projects|length }}</h3>
-                                <p>Gösterilen Proje</p>
+                                <p>{% trans "Gösterilen Proje" %}</p>
                             </div>
                         </div>
                     </div>
@@ -49,11 +50,11 @@
 
                 <!-- فیلتر وضعیت -->
                 <div class="research-card mb-4">
-                    <h5 class="mb-3">Proje Filtreleme</h5>
+                    <h5 class="mb-3">{% trans "Proje Filtreleme" %}</h5>
                     <div class="btn-group" role="group">
-                        <a href="{% url 'arastirma:bap_list' %}" class="btn btn-outline-primary">Tümü</a>
-                        <a href="{% url 'arastirma:bap_list' %}?status=ongoing" class="btn btn-outline-primary">Devam Eden</a>
-                        <a href="{% url 'arastirma:bap_list' %}?status=completed" class="btn btn-outline-primary">Tamamlanan</a>
+                        <a href="{% url 'arastirma:bap_list' %}" class="btn btn-outline-primary">{% trans "Tümü" %}</a>
+                        <a href="{% url 'arastirma:bap_list' %}?status=ongoing" class="btn btn-outline-primary">{% trans "Devam Eden" %}</a>
+                        <a href="{% url 'arastirma:bap_list' %}?status=completed" class="btn btn-outline-primary">{% trans "Tamamlanan" %}</a>
                     </div>
                 </div>
 
@@ -84,14 +85,14 @@
                             <i class="fas fa-calendar"></i> Başlangıç: {{ project.start_date|date:"d M Y" }}
                         </small>
                         <a href="{% url 'arastirma:bap_detail' project.id %}" class="btn btn-primary">
-                            Detayları Gör <i class="fas fa-arrow-right"></i>
+                            {% trans "Detayları Gör" %} <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
                 {% empty %}
                 <div class="text-center py-5">
                     <i class="fas fa-project-diagram fa-3x text-muted mb-3"></i>
-                    <h4 class="text-muted">Henüz proje eklenmemiş</h4>
+                    <h4 class="text-muted">{% trans "Henüz proje eklenmemiş" %}</h4>
                 </div>
                 {% endfor %}
             </div>

@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Duyurular - Avrasya Üniversitesi{% endblock %}
 
@@ -14,8 +15,8 @@
                         <div class="breadcrumb-container">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
-                                    <li class="breadcrumb-item active">Duyurular</li>
+                                    <li class="breadcrumb-item"><a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a></li>
+                                    <li class="breadcrumb-item active">{% trans "Duyurular" %}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -23,13 +24,13 @@
                         <div class="header-content">
                             <div class="title-section">
                                 
-                                <h1 class="page-title">Duyurular</h1>
-                                <p class="page-subtitle">Avrasya Üniversitesi'nden en güncel duyurular ve haberler</p>
+                                <h1 class="page-title">{% trans "Duyurular" %}</h1>
+                                <p class="page-subtitle">{% trans "Avrasya Üniversitesi'nden en güncel duyurular ve haberler" %}</p>
                             </div>
                             <div class="header-stats">
                                 <div class="stat-item">
                                     <span class="stat-number">{{ toplam_duyuru }}</span>
-                                    <span class="stat-label">Toplam Duyuru</span>
+                                    <span class="stat-label">{% trans "Toplam Duyuru" %}</span>
                                 </div>
                             </div>
                         </div>
@@ -44,12 +45,12 @@
                         <!-- Faculty Filter -->
                         <div class="filter-section">
                             <h5 class="filter-title">
-                                <i class="fas fa-filter"></i> Fakülte/Bölüm Filtresi
+                                <i class="fas fa-filter"></i> {% trans "Fakülte/Bölüm Filtresi" %}
                             </h5>
                             <div class="filter-tags">
                                 <a href="{% url 'duyurular:liste' %}" 
                                    class="filter-tag {% if not fakulte_filter and not bolum_filter %}active{% endif %}">
-                                    Tümü
+                                    {% trans "Tümü" %}
                                 </a>
                                 {% for fakulte in fakulteler %}
                                 <a href="?fakulte={{ fakulte.kod }}" 
@@ -69,17 +70,17 @@
                                         <input type="text" 
                                                name="q" 
                                                value="{{ search_query }}"
-                                               placeholder="Fakülte, Başlık, özet veya içerikte ara...">
+                                               placeholder="{% trans 'Fakülte, Başlık, özet veya içerikte ara...' %}">
                                     </div>
                                     <div class="date-field">
                                         <i class="far fa-calendar"></i>
                                         <input type="date" 
                                                name="tarih" 
                                                value="{{ tarih_query }}"
-                                               placeholder="Tarihe göre filtrele">
+                                               placeholder="{% trans 'Tarihe göre filtrele' %}">
                                     </div>
                                     <button type="submit" class="search-btn">
-                                        Ara
+                                        {% trans "Ara" %}
                                     </button>
                                 </div>
                             </form>
@@ -87,7 +88,7 @@
 
                         {% if search_query or tarih_query or fakulte_filter or bolum_filter %}
                         <div class="active-filters">
-                            <span class="filters-label">Aktif Filtreler:</span>
+                            <span class="filters-label">{% trans "Aktif Filtreler:" %}</span>
                             {% if search_query %}
                             <span class="active-filter">Aranan: "{{ search_query }}"</span>
                             {% endif %}
@@ -95,7 +96,7 @@
                             <span class="active-filter">Tarih: {{ tarih_query }}</span>
                             {% endif %}
                             <a href="{% url 'duyurular:liste' %}" class="clear-filters">
-                                <i class="fas fa-times"></i> Tümünü Temizle
+                                <i class="fas fa-times"></i> {% trans "Tümünü Temizle" %}
                             </a>
                         </div>
                         {% endif %}
@@ -166,7 +167,7 @@
 
                         <div class="card-footer">
                             <a href="{{ duyuru.get_absolute_url }}" class="read-more-btn">
-                                Devamını Oku
+                                {% trans "Devamını Oku" %}
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                             <div class="time-ago">
@@ -181,7 +182,7 @@
                         <div class="empty-icon">
                             <i class="fas fa-bullhorn"></i>
                         </div>
-                        <h3>Duyuru Bulunamadı</h3>
+                        <h3>{% trans "Duyuru Bulunamadı" %}</h3>
                         <p>
                             {% if search_query or tarih_query or fakulte_filter or bolum_filter %}
                                 Arama kriterlerinize uygun duyuru bulunamadı.
@@ -191,7 +192,7 @@
                         </p>
                         {% if search_query or tarih_query or fakulte_filter or bolum_filter %}
                         <a href="{% url 'duyurular:liste' %}" class="btn-primary">
-                            Tüm Duyuruları Görüntüle
+                            {% trans "Tüm Duyuruları Görüntüle" %}
                         </a>
                         {% endif %}
                     </div>
@@ -206,7 +207,7 @@
                     <a href="?page={{ duyurular.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if tarih_query %}&tarih={{ tarih_query }}{% endif %}{% if fakulte_filter %}&fakulte={{ fakulte_filter }}{% endif %}" 
                        class="load-more-btn">
                         <i class="fas fa-spinner"></i>
-                        Daha Fazla Yükle
+                        {% trans "Daha Fazla Yükle" %}
                     </a>
                 </div>
             </div>

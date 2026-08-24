@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!-- templates/core/mega_navbar.html - نسخه شفاف ثابت -->
 
@@ -5,18 +6,18 @@
 <div class="top-systems-bar">
     <div class="container">
         <div class="systems-links">
-            <a href="https://obs.avrasya.edu.tr/" target="_blank">OBS</a>
-            <a href="https://avukalite.avrasya.edu.tr/" target="_blank">Kalite</a>
-            <a href="https://ebys.avrasya.edu.tr/" target="_blank">EBYS</a>
-            <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/" target="_blank">Bologna</a>
-            <a href="https://kampus.avrasya.edu.tr/" target="_blank">Online Eğitim</a>
-            <a href="https://login.microsoftonline.com/" target="_blank">Mail</a>
-            <a href="#">Kütüphane</a>
+            <a href="https://obs.avrasya.edu.tr/" target="_blank">{% trans "OBS" %}</a>
+            <a href="https://avukalite.avrasya.edu.tr/" target="_blank">{% trans "Kalite" %}</a>
+            <a href="https://ebys.avrasya.edu.tr/" target="_blank">{% trans "EBYS" %}</a>
+            <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/" target="_blank">{% trans "Bologna" %}</a>
+            <a href="https://kampus.avrasya.edu.tr/" target="_blank">{% trans "Online Eğitim" %}</a>
+            <a href="https://login.microsoftonline.com/" target="_blank">{% trans "Mail" %}</a>
+            <a href="#">{% trans "Kütüphane" %}</a>
         </div>
         <div class="language-switcher">
-            <span>TR</span>
+            <span>{% trans "TR" %}</span>
             <span class="divider">|</span>
-            <a href="#">EN</a>
+            <a href="#">{% trans "EN" %}</a>
         </div>
     </div>
 </div>
@@ -26,42 +27,42 @@
     <div class="nav-container">
         <!-- لوگو -->
         <a class="navbar-brand" href="{% url 'core:index' %}">
-            <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="Avrasya University" class="nav-logo">
-            <span class="logo-text">AVRASYA ÜNİVERSİTESİ</span>
+            <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="{% trans 'Avrasya University' %}" class="nav-logo">
+            <span class="logo-text">{% trans "AVRASYA ÜNİVERSİTESİ" %}</span>
         </a>
 
         <!-- دکمه‌های سریع -->
         <div class="quick-access">
             <a href="https://adaylar.bogazici.edu.tr" target="_blank" class="quick-btn">
                 <i class="fas fa-user-plus"></i>
-                <span>Aday Öğrenci</span>
+                <span>{% trans "Aday Öğrenci" %}</span>
             </a>
             <a href="https://ogrenciler.bogazici.edu.tr" target="_blank" class="quick-btn">
                 <i class="fas fa-user-graduate"></i>
-                <span>Öğrenci</span>
+                <span>{% trans "Öğrenci" %}</span>
             </a>
             <a href="https://mezun.bogazici.edu.tr" target="_blank" class="quick-btn">
                 <i class="fas fa-graduation-cap"></i>
-                <span>Mezun</span>
+                <span>{% trans "Mezun" %}</span>
             </a>
             <a href="https://personel.bogazici.edu.tr/" target="_blank" class="quick-btn">
                 <i class="fas fa-user-tie"></i>
-                <span>Personel</span>
+                <span>{% trans "Personel" %}</span>
             </a>
         </div>
 
         <!-- آیکون‌های کناری -->
         <div class="nav-icons">
-            <a href="#" class="nav-icon" title="Harita">
+            <a href="#" class="nav-icon" title="{% trans 'Harita' %}">
                 <i class="fas fa-map-marker-alt"></i>
             </a>
-            <a href="#" class="nav-icon" title="Paylaş">
+            <a href="#" class="nav-icon" title="{% trans 'Paylaş' %}">
                 <i class="fas fa-share-alt"></i>
             </a>
-            <a href="#" class="nav-icon" title="Kullanıcı">
+            <a href="#" class="nav-icon" title="{% trans 'Kullanıcı' %}">
                 <i class="fas fa-user-circle"></i>
             </a>
-            <a href="#" class="nav-icon" title="Dil">
+            <a href="#" class="nav-icon" title="{% trans 'Dil' %}">
                 <i class="fas fa-globe"></i>
             </a>
         </div>
@@ -79,17 +80,17 @@
             <li class="nav-item mega-menu-item">
                 <a class="nav-link" href="/">
                     <i class="fas fa-home"></i>
-                    Anasayfa
+                    {% trans "Anasayfa" %}
                 </a>
                 <div class="mega-dropdown">
                     <div class="container">
                         <ul class="list-unstyled">
-                                            <li><a class="dropdown-item" href="/">Ana Sayfa</a></li>
-                                            <li><a class="dropdown-item" href="{% url 'avrasya_universitesi_hakkinda:anasayfa' %}">Hakkımızda</a></li>
-                                            <li><a class="dropdown-item" href="{% url 'avrasya_universitesi_yonetim:mutevelli_heyeti' %}">Yönetim</a>
-                                            <li><a class="dropdown-item" href="/#news">Son Haberler</a></li>
-                                            <li><a class="dropdown-item" href="/#events">Etkinlikler</a></li>
-                                            <li><a class="dropdown-item" href="{% url 'gallery:main' %}">Galeri</a></li>
+                                            <li><a class="dropdown-item" href="/">{% trans "Ana Sayfa" %}</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'avrasya_universitesi_hakkinda:anasayfa' %}">{% trans "Hakkımızda" %}</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'avrasya_universitesi_yonetim:mutevelli_heyeti' %}">{% trans "Yönetim" %}</a>
+                                            <li><a class="dropdown-item" href="/#news">{% trans "Son Haberler" %}</a></li>
+                                            <li><a class="dropdown-item" href="/#events">{% trans "Etkinlikler" %}</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'gallery:main' %}">{% trans "Galeri" %}</a></li>
                                         </ul> محتوای مگا منوی Anasayfa شما -->
                         <!-- کد فعلی شما بدون تغییر -->
                     </div>
@@ -100,7 +101,7 @@
             <li class="nav-item mega-menu-item">
                 <a class="nav-link" href="{% url 'aday_ogrenci:aday_anasayfa' %}">
                     <i class="fas fa-user-plus"></i>
-                    Aday Öğrenci
+                    {% trans "Aday Öğrenci" %}
                 </a>
                 <div class="mega-dropdown">
                     <div class="container">
@@ -113,7 +114,7 @@
             <li class="nav-item mega-menu-item">
                 <a class="nav-link" href="{% url 'aday_ogrenci:aday_anasayfa' %}">
                     <i class="fas fa-user-plus"></i>
-                    Aday Öğrenci
+                    {% trans "Aday Öğrenci" %}
                 </a>
                 <div class="mega-dropdown">
                     <div class="container">
@@ -126,7 +127,7 @@
             <li class="nav-item mega-menu-item">
                 <a class="nav-link" href="{% url 'aday_ogrenci:aday_anasayfa' %}">
                     <i class="fas fa-user-plus"></i>
-                    Aday Öğrenci
+                    {% trans "Aday Öğrenci" %}
                 </a>
                 <div class="mega-dropdown">
                     <div class="container">
@@ -139,7 +140,7 @@
             <li class="nav-item mega-menu-item">
                 <a class="nav-link" href="{% url 'aday_ogrenci:aday_anasayfa' %}">
                     <i class="fas fa-user-plus"></i>
-                    Aday Öğrenci
+                    {% trans "Aday Öğrenci" %}
                 </a>
                 <div class="mega-dropdown">
                     <div class="container">

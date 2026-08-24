@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi -  Kütüphane{% endblock %}
 
@@ -16,19 +17,19 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">Kütüphanemize Hoşgeldiniz</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "Kütüphanemize Hoşgeldiniz" %}</h1>
                         <p class="lead mb-4">
-                            Avrasya Üniversitesi Kütüphanesi, akademik başarınızı desteklemek için geniş kaynaklar ve hizmetler sunmaktadır.
+                            {% trans "Avrasya Üniversitesi Kütüphanesi, akademik başarınızı desteklemek için geniş kaynaklar ve hizmetler sunmaktadır." %}
                         </p>
                          <div class="d-flex gap-3">
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-calendar me-1"></i>1999'dan Beri
+                                <i class="bi bi-calendar me-1"></i>{% trans "1999'dan Beri" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-building me-1"></i>5 Bölüm
+                                <i class="bi bi-building me-1"></i>{% trans "5 Bölüm" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-award me-1"></i>25 Yıllık Deneyim
+                                <i class="bi bi-award me-1"></i>{% trans "25 Yıllık Deneyim" %}
                             </span>
                         </div> 
                     </div>
@@ -42,7 +43,7 @@
         <!-- Services Section -->
         <div class="row mb-5">
             <div class="col-12">
-                <h2 class="mb-4 border-bottom pb-2">Kütüphane Hizmetleri</h2>
+                <h2 class="mb-4 border-bottom pb-2">{% trans "Kütüphane Hizmetleri" %}</h2>
             </div>
             
             <!-- Veritabanları -->
@@ -53,10 +54,10 @@
                             <div class="bg-primary rounded-circle p-3 me-3">
                                 <i class="bi bi-database text-white fs-4"></i>
                             </div>
-                            <h4 class="card-title mb-0">VERİTABANLARI</h4>
+                            <h4 class="card-title mb-0">{% trans "VERİTABANLARI" %}</h4>
                         </div>
-                        <p class="card-text">Akademik çalışmalarınız için geniş veritabanı koleksiyonuna erişim sağlayın.</p>
-                        <a href="https://katalog.avrasya.edu.tr/vetisbt/?dil=tr&p=1&veritabani=" class="btn btn-primary">Erişim Sağla</a>
+                        <p class="card-text">{% trans "Akademik çalışmalarınız için geniş veritabanı koleksiyonuna erişim sağlayın." %}</p>
+                        <a href="https://katalog.avrasya.edu.tr/vetisbt/?dil=tr&p=1&veritabani=" class="btn btn-primary">{% trans "Erişim Sağla" %}</a>
                     </div>
                 </div>
             </div>
@@ -69,10 +70,10 @@
                             <div class="bg-primary rounded-circle p-3 me-3">
                                 <i class="bi bi-search text-white fs-4"></i>
                             </div>
-                            <h4 class="card-title mb-0">KÜTÜPHANE KATALOĞU</h4>
+                            <h4 class="card-title mb-0">{% trans "KÜTÜPHANE KATALOĞU" %}</h4>
                         </div>
-                        <p class="card-text">Kütüphanemizdeki tüm materyalleri arayın ve keşfedin.</p>
-                        <a href="https://katalog.avrasya.edu.tr/yordam/" class="btn btn-primary">Kataloğu Görüntüle</a>
+                        <p class="card-text">{% trans "Kütüphanemizdeki tüm materyalleri arayın ve keşfedin." %}</p>
+                        <a href="https://katalog.avrasya.edu.tr/yordam/" class="btn btn-primary">{% trans "Kataloğu Görüntüle" %}</a>
                     </div>
                 </div>
             </div>
@@ -85,10 +86,10 @@
                             <div class="bg-primary rounded-circle p-3 me-3">
                                 <i class="bi bi-archive text-white fs-4"></i>
                             </div>
-                            <h4 class="card-title mb-0">AKADEMİK KURUMSAL ARŞİV</h4>
+                            <h4 class="card-title mb-0">{% trans "AKADEMİK KURUMSAL ARŞİV" %}</h4>
                         </div>
-                        <p class="card-text">Üniversitemizin akademik çıktılarını ve yayınlarını keşfedin.</p>
-                        <a href="https://acikerisim.avrasya.edu.tr/" class="btn btn-primary">Arşivi Keşfet</a>
+                        <p class="card-text">{% trans "Üniversitemizin akademik çıktılarını ve yayınlarını keşfedin." %}</p>
+                        <a href="https://acikerisim.avrasya.edu.tr/" class="btn btn-primary">{% trans "Arşivi Keşfet" %}</a>
                     </div>
                 </div>
             </div>
@@ -101,10 +102,10 @@
                             <div class="bg-primary rounded-circle p-3 me-3">
                                 <i class="bi bi-globe text-white fs-4"></i>
                             </div>
-                            <h4 class="card-title mb-0">KURUM DIŞI ERİŞİM</h4>
+                            <h4 class="card-title mb-0">{% trans "KURUM DIŞI ERİŞİM" %}</h4>
                         </div>
-                        <p class="card-text">Kampüs dışından kütüphane kaynaklarına erişim sağlayın.</p>
-                        <a href="https://katalog.avrasya.edu.tr/vetisbt/?dil=tr&p=1&veritabani=" class="btn btn-primary">Erişim Bilgileri</a>
+                        <p class="card-text">{% trans "Kampüs dışından kütüphane kaynaklarına erişim sağlayın." %}</p>
+                        <a href="https://katalog.avrasya.edu.tr/vetisbt/?dil=tr&p=1&veritabani=" class="btn btn-primary">{% trans "Erişim Bilgileri" %}</a>
                     </div>
                 </div>
             </div>
@@ -113,7 +114,7 @@
         <!-- Tools Section -->
         <div class="row mb-5">
             <div class="col-12">
-                <h2 class="mb-4 border-bottom pb-2">Akademik Araçlar</h2>
+                <h2 class="mb-4 border-bottom pb-2">{% trans "Akademik Araçlar" %}</h2>
             </div>
             
             <!-- Turnitin -->
@@ -123,9 +124,9 @@
                         <div class="bg-warning rounded-circle p-3 mx-auto mb-3" style="width: 80px; height: 80px;">
                             <i class="bi bi-file-earmark-check text-white fs-3"></i>
                         </div>
-                        <h5 class="card-title">TURNITIN</h5>
-                        <p class="card-text">Akademik intihal tespit aracı</p>
-                        <a href="https://www.turnitin.com/login_page.asp?err=3400&lang=tr" class="btn btn-outline-primary btn-sm">Kullan</a>
+                        <h5 class="card-title">{% trans "TURNITIN" %}</h5>
+                        <p class="card-text">{% trans "Akademik intihal tespit aracı" %}</p>
+                        <a href="https://www.turnitin.com/login_page.asp?err=3400&lang=tr" class="btn btn-outline-primary btn-sm">{% trans "Kullan" %}</a>
                     </div>
                 </div>
             </div>
@@ -137,9 +138,9 @@
                         <div class="bg-warning rounded-circle p-3 mx-auto mb-3" style="width: 80px; height: 80px;">
                             <i class="bi bi-shield-check text-white fs-3"></i>
                         </div>
-                        <h5 class="card-title">ITHENTICATE</h5>
-                        <p class="card-text">Profesyonel intihal tespit</p>
-                        <a href="https://app.ithenticate.com/en_us/login" class="btn btn-outline-primary btn-sm">Kullan</a>
+                        <h5 class="card-title">{% trans "ITHENTICATE" %}</h5>
+                        <p class="card-text">{% trans "Profesyonel intihal tespit" %}</p>
+                        <a href="https://app.ithenticate.com/en_us/login" class="btn btn-outline-primary btn-sm">{% trans "Kullan" %}</a>
                     </div>
                 </div>
             </div>
@@ -151,9 +152,9 @@
                         <div class="bg-warning rounded-circle p-3 mx-auto mb-3" style="width: 80px; height: 80px;">
                             <i class="bi bi-collection text-white fs-3"></i>
                         </div>
-                        <h5 class="card-title">TO-KAT</h5>
-                        <p class="card-text">Katalog tarama sistemi</p>
-                        <a href="https://toplukatalog.tr/" class="btn btn-outline-primary btn-sm">Kullan</a>
+                        <h5 class="card-title">{% trans "TO-KAT" %}</h5>
+                        <p class="card-text">{% trans "Katalog tarama sistemi" %}</p>
+                        <a href="https://toplukatalog.tr/" class="btn btn-outline-primary btn-sm">{% trans "Kullan" %}</a>
                     </div>
                 </div>
             </div>
@@ -165,9 +166,9 @@
                         <div class="bg-warning rounded-circle p-3 mx-auto mb-3" style="width: 80px; height: 80px;">
                             <i class="bi bi-search-heart text-white fs-3"></i>
                         </div>
-                        <h5 class="card-title">EKUAL TARAMA</h5>
-                        <p class="card-text">Akademik tarama sistemi</p>
-                        <a href="https://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=eds" class="btn btn-outline-primary btn-sm">Kullan</a>
+                        <h5 class="card-title">{% trans "EKUAL TARAMA" %}</h5>
+                        <p class="card-text">{% trans "Akademik tarama sistemi" %}</p>
+                        <a href="https://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=eds" class="btn btn-outline-primary btn-sm">{% trans "Kullan" %}</a>
                     </div>
                 </div>
             </div>
@@ -176,7 +177,7 @@
         <!-- Stats Section -->
         <div class="row mb-5">
             <div class="col-12">
-                <h2 class="mb-4 border-bottom pb-2">Kütüphane İstatistikleri</h2>
+                <h2 class="mb-4 border-bottom pb-2">{% trans "Kütüphane İstatistikleri" %}</h2>
             </div>
             
             <div class="col-md-3 col-sm-6 mb-4 text-center">
@@ -184,7 +185,7 @@
                     <i class="bi bi-book fs-2"></i>
                 </div>
                 <h3 class="fw-bold">50,000+</h3>
-                <p class="text-muted">Basılı Kitap</p>
+                <p class="text-muted">{% trans "Basılı Kitap" %}</p>
             </div>
             
             <div class="col-md-3 col-sm-6 mb-4 text-center">
@@ -192,7 +193,7 @@
                     <i class="bi bi-journal fs-2"></i>
                 </div>
                 <h3 class="fw-bold">15,000+</h3>
-                <p class="text-muted">E-Kitap</p>
+                <p class="text-muted">{% trans "E-Kitap" %}</p>
             </div>
             
             <div class="col-md-3 col-sm-6 mb-4 text-center">
@@ -200,7 +201,7 @@
                     <i class="bi bi-newspaper fs-2"></i>
                 </div>
                 <h3 class="fw-bold">200+</h3>
-                <p class="text-muted">Dergi Aboneliği</p>
+                <p class="text-muted">{% trans "Dergi Aboneliği" %}</p>
             </div>
             
             <div class="col-md-3 col-sm-6 mb-4 text-center">
@@ -208,7 +209,7 @@
                     <i class="bi bi-database fs-2"></i>
                 </div>
                 <h3 class="fw-bold">30+</h3>
-                <p class="text-muted">Veritabanı</p>
+                <p class="text-muted">{% trans "Veritabanı" %}</p>
             </div>
         </div>
     </div>

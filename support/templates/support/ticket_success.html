@@ -1,10 +1,11 @@
 {% extends "core/base.html" %}
+{% load i18n %}
 {% block content %}
 
 <div class="support-hero">
     <div class="container">
-        <h1>Thank You!</h1>
-        <p>Your support request has been submitted successfully</p>
+        <h1>{% trans "Thank You!" %}</h1>
+        <p>{% trans "Your support request has been submitted successfully" %}</p>
     </div>
 </div>
 
@@ -18,45 +19,45 @@
                     </div>
                 </div>
                 
-                <h2>Talebiniz Başarıyla Alındı</h2>
+                <h2>{% trans "Talebiniz Başarıyla Alındı" %}</h2>
                 
                 <div class="ticket-info mt-4 mb-4">
                     <div class="info-item">
-                        <strong>Ticket ID:</strong> #{{ ticket_id|stringformat:"04d" }}
+                        <strong>{% trans "Ticket ID:" %}</strong> #{{ ticket_id|stringformat:"04d" }}
                     </div>
                     <div class="info-item">
-                        <strong>Department:</strong> {{ department_name }}
+                        <strong>{% trans "Department:" %}</strong> {{ department_name }}
                     </div>
                     <div class="info-item">
-                        <strong>Submitted:</strong> {{ submitted_date|date:"d.m.Y H:i" }}
+                        <strong>{% trans "Submitted:" %}</strong> {{ submitted_date|date:"d.m.Y H:i" }}
                     </div>
                 </div>
                 
                 <div class="alert alert-info text-left">
                     <i class="fas fa-clock mr-2"></i>
-                    <strong>What happens next?</strong>
+                    <strong>{% trans "What happens next?" %}</strong>
                     <ul class="mb-0 mt-2 pl-3">
-                        <li>Your ticket has been assigned to the relevant department</li>
-                        <li>You'll receive an email confirmation shortly</li>
-                        <li>The department will respond within 1-2 business days</li>
-                        <li>You can track your ticket from "My Tickets" section</li>
+                        <li>{% trans "Your ticket has been assigned to the relevant department" %}</li>
+                        <li>{% trans "You'll receive an email confirmation shortly" %}</li>
+                        <li>{% trans "The department will respond within 1-2 business days" %}</li>
+                        <li>{% trans "You can track your ticket from \"My Tickets\" section" %}</li>
                     </ul>
                 </div>
                 
                 <p class="mt-4">
-                    <strong>Destek talebiniz ilgili birime iletilmiştir.</strong><br>
-                    En kısa sürede sizinle iletişime geçilecektir.
+                    <strong>{% trans "Destek talebiniz ilgili birime iletilmiştir." %}</strong><br>
+                    {% trans "En kısa sürede sizinle iletişime geçilecektir." %}
                 </p>
 
                 <div class="d-flex justify-content-center gap-3 mt-4">
                     <a href="{% url 'support:my_tickets' %}" class="btn-support">
-                        <i class="fas fa-ticket-alt"></i> View My Tickets
+                        <i class="fas fa-ticket-alt"></i> {% trans "View My Tickets" %}
                     </a>
                     <a href="{% url 'support:search' %}" class="btn-support-secondary">
-                        <i class="fas fa-home"></i> Destek Merkezine Dön
+                        <i class="fas fa-home"></i> {% trans "Destek Merkezine Dön" %}
                     </a>
                     <a href="{% url 'support:create_ticket' %}" class="btn-support-secondary">
-                        <i class="fas fa-plus"></i> New Ticket
+                        <i class="fas fa-plus"></i> {% trans "New Ticket" %}
                     </a>
                 </div>
             </div>

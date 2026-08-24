@@ -1,4 +1,5 @@
 {% extends 'arastirma/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Araştırma Merkezleri - Avrasya University{% endblock %}
@@ -7,8 +8,8 @@
 <section class="research-hero" style="background: linear-gradient(135deg, #1d61a9 0%, #092442 100%); padding: 100px 0 60px;">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Araştırma Merkezleri</h1>
-            <p>Üniversitemizin Araştırma Merkezleri</p>
+            <h1>{% trans "Araştırma Merkezleri" %}</h1>
+            <p>{% trans "Üniversitemizin Araştırma Merkezleri" %}</p>
         </div>
     </div>
 </section>
@@ -30,9 +31,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:kadin' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1 kopya.png' %}" alt="Kadın Çalışmaları Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1 kopya.png' %}" alt="{% trans 'Kadın Çalışmaları Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Kadın Çalışmaları Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Kadın Çalışmaları Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -42,9 +43,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:bagimlilikla_mucadele' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1 kopya 2.png' %}" alt="Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1 kopya 2.png' %}" alt="{% trans 'Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -54,9 +55,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:uzaktan_egitim' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1.png' %}" alt="Uzaktan Eğitim Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 1.png' %}" alt="{% trans 'Uzaktan Eğitim Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Uzaktan Eğitim Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Uzaktan Eğitim Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -72,9 +73,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:girisimcilik_yenilikcilik' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 3.png' %}" alt="Girişimcilik ve Yenilikçilik Uygulama Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 3.png' %}" alt="{% trans 'Girişimcilik ve Yenilikçilik Uygulama Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Girişimcilik ve Yenilikçilik Uygulama Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Girişimcilik ve Yenilikçilik Uygulama Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -84,9 +85,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:gida_egitim' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 4.png' %}" alt="Gıda Eğitim Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 4.png' %}" alt="{% trans 'Gıda Eğitim Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Gıda Eğitim Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Gıda Eğitim Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -96,9 +97,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:goc_calismalari' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 6.png' %}" alt="Göç Çalışmaları Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 6.png' %}" alt="{% trans 'Göç Çalışmaları Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Göç Çalışmaları Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Göç Çalışmaları Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -114,9 +115,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:turkce_ogretimi' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 5.png' %}" alt="Türkçe Öğretimi Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 5.png' %}" alt="{% trans 'Türkçe Öğretimi Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Türkçe Öğretimi Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Türkçe Öğretimi Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -126,9 +127,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:kariyer_gelistirme' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 2.png' %}" alt="Kariyer Geliştirme Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 2.png' %}" alt="{% trans 'Kariyer Geliştirme Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Kariyer Geliştirme Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Kariyer Geliştirme Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -138,9 +139,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:ulastirma_uygulama' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 7.png' %}" alt="Ulaştırma Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 7.png' %}" alt="{% trans 'Ulaştırma Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Ulaştırma Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Ulaştırma Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -156,9 +157,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:teknoloji_transfer' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 8.png' %}" alt="Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 8.png' %}" alt="{% trans 'Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -168,9 +169,9 @@
                         <div class="research-center-card">
                             <div class="card-image">
                                 <a href="{% url 'arastirma:surekli_egitim' %}">
-                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 9.png' %}" alt="Sürekli Eğitim Uygulama ve Araştırma Merkezi">
+                                <img src="{% static 'core/img/arastirma/Çalışma yüzeyi 9.png' %}" alt="{% trans 'Sürekli Eğitim Uygulama ve Araştırma Merkezi' %}">
                                 <div class="card-title-overlay">
-                                    <h4>Sürekli Eğitim Uygulama ve Araştırma Merkezi</h4></a>
+                                    <h4>{% trans "Sürekli Eğitim Uygulama ve Araştırma Merkezi" %}</h4></a>
                                 </div>
                             </div>
                         </div>

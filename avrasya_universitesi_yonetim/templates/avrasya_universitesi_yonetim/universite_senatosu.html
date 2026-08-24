@@ -1,4 +1,5 @@
 {% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Üniversite Senatosu{% endblock %}
@@ -9,14 +10,13 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">ÜNİVERSİTE SENATOSU</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "ÜNİVERSİTE SENATOSU" %}</h1>
                 <p class="lead mb-4">
-                    Üniversitemizin en yüksek akademik organı olan Senato, 
-                    akademik politikaların belirlenmesinden sorumludur.
+                    {% trans "Üniversitemizin en yüksek akademik organı olan Senato, akademik politikaların belirlenmesinden sorumludur." %}
                 </p>
                 <div class="d-flex align-items-center">
                     <i class="bi bi-building me-2"></i>
-                    <span>Avrasya Üniversitesi</span>
+                    <span>{% trans "Avrasya Üniversitesi" %}</span>
                 </div>
             </div>
             <div class="col-md-4 text-center">
@@ -30,29 +30,29 @@
 <div class="d-flex justify-content-end mb-4">
     <div class="view-toggle">
         <button id="cardViewBtn" class="active">
-            <i class="bi bi-grid-3x3-gap me-1"></i> Kart Görünümü
+            <i class="bi bi-grid-3x3-gap me-1"></i> {% trans "Kart Görünümü" %}
         </button>
         <button id="tableViewBtn">
-            <i class="bi bi-table me-1"></i> Tablo Görünümü
+            <i class="bi bi-table me-1"></i> {% trans "Tablo Görünümü" %}
         </button>
     </div>
 </div>
 
 <!-- Card View -->
 <div id="cardView">
-    <h2 class="section-title">Senato Üyeleri</h2>
+    <h2 class="section-title">{% trans "Senato Üyeleri" %}</h2>
     <div class="row">
         <!-- Rektör -->
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-person-badge member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Mahir KADAKAL</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Mahir KADAKAL" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Rektör</div>
-                    <div class="member-role">Rektör</div>
-                    <div class="member-department">Fen Edebiyat Fakültesi Dekan V.</div>
+                    <div class="member-title">{% trans "Rektör" %}</div>
+                    <div class="member-role">{% trans "Rektör" %}</div>
+                    <div class="member-department">{% trans "Fen Edebiyat Fakültesi Dekan V." %}</div>
                 </div>
             </div>
         </div>
@@ -62,12 +62,12 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-person-check member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Yavuz ÖZORAN</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Yavuz ÖZORAN" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Rektör Yardımcısı</div>
-                    <div class="member-role">Rektör Yardımcısı</div>
-                    <div class="member-department">Sağlık Bilimleri Fakültesi Dekan V.</div>
+                    <div class="member-title">{% trans "Rektör Yardımcısı" %}</div>
+                    <div class="member-role">{% trans "Rektör Yardımcısı" %}</div>
+                    <div class="member-department">{% trans "Sağlık Bilimleri Fakültesi Dekan V." %}</div>
                 </div>
             </div>
         </div>
@@ -76,11 +76,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-person-check member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Celalettin KARALİ</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Celalettin KARALİ" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Rektör Yardımcısı</div>
-                    <div class="member-role">Rektör Yardımcısı</div>
+                    <div class="member-title">{% trans "Rektör Yardımcısı" %}</div>
+                    <div class="member-role">{% trans "Rektör Yardımcısı" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -91,12 +91,12 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-mortarboard member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Cemal BIYIK</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Cemal BIYIK" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Dekan</div>
-                    <div class="member-role">İletişim Fakültesi Dekanı</div>
-                    <div class="member-department">M.M.F. Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-title">{% trans "Dekan" %}</div>
+                    <div class="member-role">{% trans "İletişim Fakültesi Dekanı" %}</div>
+                    <div class="member-department">{% trans "M.M.F. Fak. Kur. Seç. Tem. Üye" %}</div>
                 </div>
             </div>
         </div>
@@ -105,11 +105,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-mortarboard member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Birol DOĞAN</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Birol DOĞAN" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Dekan</div>
-                    <div class="member-role">Spor Bilimleri Fakültesi Dekanı</div>
+                    <div class="member-title">{% trans "Dekan" %}</div>
+                    <div class="member-role">{% trans "Spor Bilimleri Fakültesi Dekanı" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -119,11 +119,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-mortarboard member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Orhan DURGUN</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Orhan DURGUN" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Dekan</div>
-                    <div class="member-role">Mühendislik Mimarlık Fakültesi Dekanı</div>
+                    <div class="member-title">{% trans "Dekan" %}</div>
+                    <div class="member-role">{% trans "Mühendislik Mimarlık Fakültesi Dekanı" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -133,11 +133,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-mortarboard member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Ümit UZMAN</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Ümit UZMAN" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Dekan</div>
-                    <div class="member-role">İktisadi ve İdari Bilimler Fakültesi Dekanı</div>
+                    <div class="member-title">{% trans "Dekan" %}</div>
+                    <div class="member-role">{% trans "İktisadi ve İdari Bilimler Fakültesi Dekanı" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -148,11 +148,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-building member-icon"></i>
-                    <h4 class="member-name">Dr. Öğr. Üyesi Hülya UYSAL</h4>
+                    <h4 class="member-name">{% trans "Dr. Öğr. Üyesi Hülya UYSAL" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Yüksekokul Müdürü</div>
-                    <div class="member-role">Yabancı Diller Yüksekokulu Müdürü</div>
+                    <div class="member-title">{% trans "Yüksekokul Müdürü" %}</div>
+                    <div class="member-role">{% trans "Yabancı Diller Yüksekokulu Müdürü" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -162,11 +162,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-building member-icon"></i>
-                    <h4 class="member-name">Dr. Öğr. Üyesi İsmail Hakkı KOFOĞLU</h4>
+                    <h4 class="member-name">{% trans "Dr. Öğr. Üyesi İsmail Hakkı KOFOĞLU" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Yüksekokul Müdürü</div>
-                    <div class="member-role">Meslek Yüksekokulu Müdürü</div>
+                    <div class="member-title">{% trans "Yüksekokul Müdürü" %}</div>
+                    <div class="member-role">{% trans "Meslek Yüksekokulu Müdürü" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -176,11 +176,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-building member-icon"></i>
-                    <h4 class="member-name">Dr. Öğr. Üyesi H. Emre ENGİN</h4>
+                    <h4 class="member-name">{% trans "Dr. Öğr. Üyesi H. Emre ENGİN" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Enstitü Müdürü</div>
-                    <div class="member-role">Lisansüstü Eğitim Enstitüsü Müdürü</div>
+                    <div class="member-title">{% trans "Enstitü Müdürü" %}</div>
+                    <div class="member-role">{% trans "Lisansüstü Eğitim Enstitüsü Müdürü" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -190,11 +190,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-building member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Fikret Nafi ÇOKSÖYLER</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Fikret Nafi ÇOKSÖYLER" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Yüksekokul Müdürü</div>
-                    <div class="member-role">Uygulamalı Bilimler Yüksekokulu Müdürü</div>
+                    <div class="member-title">{% trans "Yüksekokul Müdürü" %}</div>
+                    <div class="member-role">{% trans "Uygulamalı Bilimler Yüksekokulu Müdürü" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -204,11 +204,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-building member-icon"></i>
-                    <h4 class="member-name">Dr. Öğr. Üyesi Eren URTEKİN</h4>
+                    <h4 class="member-name">{% trans "Dr. Öğr. Üyesi Eren URTEKİN" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Yüksekokul Müdürü</div>
-                    <div class="member-role">Sağlık Hiz. Mes. Yüksekokulu Müdürü</div>
+                    <div class="member-title">{% trans "Yüksekokul Müdürü" %}</div>
+                    <div class="member-role">{% trans "Sağlık Hiz. Mes. Yüksekokulu Müdürü" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -219,11 +219,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-person member-icon"></i>
-                    <h4 class="member-name">Prof. Dr. Gülay YEĞİNOĞLU</h4>
+                    <h4 class="member-name">{% trans "Prof. Dr. Gülay YEĞİNOĞLU" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Fakülte Temsilcisi</div>
-                    <div class="member-role">Sağlık Bilimleri Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-title">{% trans "Fakülte Temsilcisi" %}</div>
+                    <div class="member-role">{% trans "Sağlık Bilimleri Fak. Kur. Seç. Tem. Üye" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -233,11 +233,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-person member-icon"></i>
-                    <h4 class="member-name">Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR</h4>
+                    <h4 class="member-name">{% trans "Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Fakülte Temsilcisi</div>
-                    <div class="member-role">İ.İ.B.F. Kur. Seç. Tem. Üye</div>
+                    <div class="member-title">{% trans "Fakülte Temsilcisi" %}</div>
+                    <div class="member-role">{% trans "İ.İ.B.F. Kur. Seç. Tem. Üye" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -247,11 +247,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-person member-icon"></i>
-                    <h4 class="member-name">Dr. Öğr. Üyesi Zeynep Nihan BAKIR</h4>
+                    <h4 class="member-name">{% trans "Dr. Öğr. Üyesi Zeynep Nihan BAKIR" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Fakülte Temsilcisi</div>
-                    <div class="member-role">İletişim Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-title">{% trans "Fakülte Temsilcisi" %}</div>
+                    <div class="member-role">{% trans "İletişim Fak. Kur. Seç. Tem. Üye" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -261,11 +261,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-person member-icon"></i>
-                    <h4 class="member-name">Dr. Öğr. Üyesi Mehmet DERELİOĞLU</h4>
+                    <h4 class="member-name">{% trans "Dr. Öğr. Üyesi Mehmet DERELİOĞLU" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Fakülte Temsilcisi</div>
-                    <div class="member-role">Spor Bil. Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-title">{% trans "Fakülte Temsilcisi" %}</div>
+                    <div class="member-role">{% trans "Spor Bil. Fak. Kur. Seç. Tem. Üye" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -275,11 +275,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-person member-icon"></i>
-                    <h4 class="member-name">Dr. Öğr. Üyesi Abdullah ÇELİK</h4>
+                    <h4 class="member-name">{% trans "Dr. Öğr. Üyesi Abdullah ÇELİK" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Fakülte Temsilcisi</div>
-                    <div class="member-role">Fen Edebiyat Fak. Kur. Seç. Tem. Üye</div>
+                    <div class="member-title">{% trans "Fakülte Temsilcisi" %}</div>
+                    <div class="member-role">{% trans "Fen Edebiyat Fak. Kur. Seç. Tem. Üye" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -290,11 +290,11 @@
             <div class="member-card">
                 <div class="member-header">
                     <i class="bi bi-clipboard-data member-icon"></i>
-                    <h4 class="member-name">Gülay YENÇERİ</h4>
+                    <h4 class="member-name">{% trans "Gülay YENÇERİ" %}</h4>
                 </div>
                 <div class="member-body">
-                    <div class="member-title">Genel Sekreter</div>
-                    <div class="member-role">Genel Sekreter (Raportör)</div>
+                    <div class="member-title">{% trans "Genel Sekreter" %}</div>
+                    <div class="member-role">{% trans "Genel Sekreter (Raportör)" %}</div>
                     <div class="member-department">-</div>
                 </div>
             </div>
@@ -306,125 +306,125 @@
 <div id="tableView" class="d-none">
     <div class="card border-0 table-section">
         <div class="card-body">
-            <h3 class="text-primary mb-4 section-title">Senato Üyeleri</h3>
+            <h3 class="text-primary mb-4 section-title">{% trans "Senato Üyeleri" %}</h3>
             
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Üye</th>
-                            <th>Unvan</th>
-                            <th>Görevi</th>
-                            <th>Fakülte/Birim</th>
+                            <th>{% trans "Üye" %}</th>
+                            <th>{% trans "Unvan" %}</th>
+                            <th>{% trans "Görevi" %}</th>
+                            <th>{% trans "Fakülte/Birim" %}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Prof. Dr. Mahir KADAKAL</td>
-                            <td>Rektör</td>
-                            <td>Rektör</td>
-                            <td>Fen Edebiyat Fakültesi Dekan V.</td>
+                            <td>{% trans "Prof. Dr. Mahir KADAKAL" %}</td>
+                            <td>{% trans "Rektör" %}</td>
+                            <td>{% trans "Rektör" %}</td>
+                            <td>{% trans "Fen Edebiyat Fakültesi Dekan V." %}</td>
                         </tr>
                         <tr>
-                            <td>Prof. Dr. Yavuz ÖZORAN</td>
-                            <td>Rektör Yardımcısı</td>
-                            <td>Rektör Yardımcısı</td>
-                            <td>Sağlık Bilimleri Fakültesi Dekan V.</td>
+                            <td>{% trans "Prof. Dr. Yavuz ÖZORAN" %}</td>
+                            <td>{% trans "Rektör Yardımcısı" %}</td>
+                            <td>{% trans "Rektör Yardımcısı" %}</td>
+                            <td>{% trans "Sağlık Bilimleri Fakültesi Dekan V." %}</td>
                         </tr>
                         <tr>
-                            <td>Prof. Dr. Celalettin KARALİ</td>
-                            <td>Rektör Yardımcısı</td>
-                            <td>Rektör Yardımcısı</td>
+                            <td>{% trans "Prof. Dr. Celalettin KARALİ" %}</td>
+                            <td>{% trans "Rektör Yardımcısı" %}</td>
+                            <td>{% trans "Rektör Yardımcısı" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Prof. Dr. Cemal BIYIK</td>
-                            <td>Dekan</td>
-                            <td>İletişim Fakültesi Dekanı</td>
-                            <td>M.M.F. Fak. Kur. Seç. Tem. Üye</td>
+                            <td>{% trans "Prof. Dr. Cemal BIYIK" %}</td>
+                            <td>{% trans "Dekan" %}</td>
+                            <td>{% trans "İletişim Fakültesi Dekanı" %}</td>
+                            <td>{% trans "M.M.F. Fak. Kur. Seç. Tem. Üye" %}</td>
                         </tr>
                         <tr>
-                            <td>Prof. Dr. Birol DOĞAN</td>
-                            <td>Dekan</td>
-                            <td>Spor Bilimleri Fakültesi Dekanı</td>
+                            <td>{% trans "Prof. Dr. Birol DOĞAN" %}</td>
+                            <td>{% trans "Dekan" %}</td>
+                            <td>{% trans "Spor Bilimleri Fakültesi Dekanı" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Prof. Dr. Orhan DURGUN</td>
-                            <td>Dekan</td>
-                            <td>Mühendislik Mimarlık Fakültesi Dekanı</td>
+                            <td>{% trans "Prof. Dr. Orhan DURGUN" %}</td>
+                            <td>{% trans "Dekan" %}</td>
+                            <td>{% trans "Mühendislik Mimarlık Fakültesi Dekanı" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Prof. Dr. Ümit UZMAN</td>
-                            <td>Dekan</td>
-                            <td>İktisadi ve İdari Bilimler Fakültesi Dekanı</td>
+                            <td>{% trans "Prof. Dr. Ümit UZMAN" %}</td>
+                            <td>{% trans "Dekan" %}</td>
+                            <td>{% trans "İktisadi ve İdari Bilimler Fakültesi Dekanı" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Dr. Öğr. Üyesi Hülya UYSAL</td>
-                            <td>Yüksekokul Müdürü</td>
-                            <td>Yabancı Diller Yüksekokulu Müdürü</td>
+                            <td>{% trans "Dr. Öğr. Üyesi Hülya UYSAL" %}</td>
+                            <td>{% trans "Yüksekokul Müdürü" %}</td>
+                            <td>{% trans "Yabancı Diller Yüksekokulu Müdürü" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Dr. Öğr. Üyesi İsmail Hakkı KOFOĞLU</td>
-                            <td>Yüksekokul Müdürü</td>
-                            <td>Meslek Yüksekokulu Müdürü</td>
+                            <td>{% trans "Dr. Öğr. Üyesi İsmail Hakkı KOFOĞLU" %}</td>
+                            <td>{% trans "Yüksekokul Müdürü" %}</td>
+                            <td>{% trans "Meslek Yüksekokulu Müdürü" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Dr. Öğr. Üyesi H. Emre ENGİN</td>
-                            <td>Enstitü Müdürü</td>
-                            <td>Lisansüstü Eğitim Enstitüsü Müdürü</td>
+                            <td>{% trans "Dr. Öğr. Üyesi H. Emre ENGİN" %}</td>
+                            <td>{% trans "Enstitü Müdürü" %}</td>
+                            <td>{% trans "Lisansüstü Eğitim Enstitüsü Müdürü" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Prof. Dr. Fikret Nafi ÇOKSÖYLER</td>
-                            <td>Yüksekokul Müdürü</td>
-                            <td>Uygulamalı Bilimler Yüksekokulu Müdürü</td>
+                            <td>{% trans "Prof. Dr. Fikret Nafi ÇOKSÖYLER" %}</td>
+                            <td>{% trans "Yüksekokul Müdürü" %}</td>
+                            <td>{% trans "Uygulamalı Bilimler Yüksekokulu Müdürü" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Dr. Öğr. Üyesi Eren URTEKİN</td>
-                            <td>Yüksekokul Müdürü</td>
-                            <td>Sağlık Hiz. Mes. Yüksekokulu Müdürü</td>
+                            <td>{% trans "Dr. Öğr. Üyesi Eren URTEKİN" %}</td>
+                            <td>{% trans "Yüksekokul Müdürü" %}</td>
+                            <td>{% trans "Sağlık Hiz. Mes. Yüksekokulu Müdürü" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Prof. Dr. Gülay YEĞİNOĞLU</td>
-                            <td>Fakülte Temsilcisi</td>
-                            <td>Sağlık Bilimleri Fak. Kur. Seç. Tem. Üye</td>
+                            <td>{% trans "Prof. Dr. Gülay YEĞİNOĞLU" %}</td>
+                            <td>{% trans "Fakülte Temsilcisi" %}</td>
+                            <td>{% trans "Sağlık Bilimleri Fak. Kur. Seç. Tem. Üye" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR</td>
-                            <td>Fakülte Temsilcisi</td>
-                            <td>İ.İ.B.F. Kur. Seç. Tem. Üye</td>
+                            <td>{% trans "Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR" %}</td>
+                            <td>{% trans "Fakülte Temsilcisi" %}</td>
+                            <td>{% trans "İ.İ.B.F. Kur. Seç. Tem. Üye" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Dr. Öğr. Üyesi Zeynep Nihan BAKIR</td>
-                            <td>Fakülte Temsilcisi</td>
-                            <td>İletişim Fak. Kur. Seç. Tem. Üye</td>
+                            <td>{% trans "Dr. Öğr. Üyesi Zeynep Nihan BAKIR" %}</td>
+                            <td>{% trans "Fakülte Temsilcisi" %}</td>
+                            <td>{% trans "İletişim Fak. Kur. Seç. Tem. Üye" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Dr. Öğr. Üyesi Mehmet DERELİOĞLU</td>
-                            <td>Fakülte Temsilcisi</td>
-                            <td>Spor Bil. Fak. Kur. Seç. Tem. Üye</td>
+                            <td>{% trans "Dr. Öğr. Üyesi Mehmet DERELİOĞLU" %}</td>
+                            <td>{% trans "Fakülte Temsilcisi" %}</td>
+                            <td>{% trans "Spor Bil. Fak. Kur. Seç. Tem. Üye" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Dr. Öğr. Üyesi Abdullah ÇELİK</td>
-                            <td>Fakülte Temsilcisi</td>
-                            <td>Fen Edebiyat Fak. Kur. Seç. Tem. Üye</td>
+                            <td>{% trans "Dr. Öğr. Üyesi Abdullah ÇELİK" %}</td>
+                            <td>{% trans "Fakülte Temsilcisi" %}</td>
+                            <td>{% trans "Fen Edebiyat Fak. Kur. Seç. Tem. Üye" %}</td>
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>Gülay YENÇERİ</td>
-                            <td>Genel Sekreter</td>
-                            <td>Genel Sekreter (Raportör)</td>
+                            <td>{% trans "Gülay YENÇERİ" %}</td>
+                            <td>{% trans "Genel Sekreter" %}</td>
+                            <td>{% trans "Genel Sekreter (Raportör)" %}</td>
                             <td>-</td>
                         </tr>
                     </tbody>

@@ -1,5 +1,6 @@
 <!-- mütevelli_heyeti.html -->
 {% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Mütevelli Heyeti{% endblock %}
@@ -10,10 +11,9 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">MÜTEVELLİ HEYETİ</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "MÜTEVELLİ HEYETİ" %}</h1>
                 <p class="lead mb-4">
-                    Üniversitemizin en yüksek karar organı olan Mütevelli Heyeti, 
-                    stratejik yönlendirme ve denetim görevlerini üstlenmektedir.
+                    {% trans "Üniversitemizin en yüksek karar organı olan Mütevelli Heyeti, stratejik yönlendirme ve denetim görevlerini üstlenmektedir." %}
                 </p>
             </div>
             <div class="col-md-4 text-center">
@@ -28,7 +28,7 @@
     <div class="col-12">
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
-                <h3 class="text-primary mb-4 text-center">Mütevelli Heyeti Üyeleri</h3>
+                <h3 class="text-primary mb-4 text-center">{% trans "Mütevelli Heyeti Üyeleri" %}</h3>
                 
                 <!-- Board Chairman - Special Card -->
                 <div class="row justify-content-center mb-5">
@@ -36,12 +36,12 @@
                         <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, #0d6efd 0%, #6a90c9ff 100%);">
                             <div class="card-body text-center text-white p-5">
                                 <div class="member-photo mb-4 mx-auto">
-                                    <img src="{% static 'avrasya_universitesi_yonetim/images/DrÖmerYILDIZ.jpg' %}" alt="Dr. Ömer YILDIZ" 
+                                    <img src="{% static 'avrasya_universitesi_yonetim/images/DrÖmerYILDIZ.jpg' %}" alt="{% trans 'Dr. Ömer YILDIZ' %}" 
                                          class="img-fluid rounded-circle border-4 border-white shadow" 
                                          style="width: 180px; height: 180px; object-fit: cover;">
                                 </div>
-                                <h4 class="card-title mb-2 fs-3">Dr. Ömer YILDIZ</h4>
-                                <p class="mb-0 opacity-90 fs-5">Başkan</p>
+                                <h4 class="card-title mb-2 fs-3">{% trans "Dr. Ömer YILDIZ" %}</h4>
+                                <p class="mb-0 opacity-90 fs-5">{% trans "Başkan" %}</p>
                             </div>
                         </div>
                     </div>

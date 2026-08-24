@@ -1,4 +1,5 @@
 {% extends 'yatay_gecis/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Yatay Geçiş Bursları ve Öğretim Ücretleri{% endblock %}
 
@@ -8,8 +9,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Yatay Geçiş Bursları ve Öğretim Ücretleri</h1>
-            <p>2025-2026 Eğitim ve Öğretim Yılı Yatay Geçiş İle Kayıt Olacak Öğrencilerin Eğitim Ücretleri ve İndirim Olanakları</p>
+            <h1>{% trans "Yatay Geçiş Bursları ve Öğretim Ücretleri" %}</h1>
+            <p>{% trans "2025-2026 Eğitim ve Öğretim Yılı Yatay Geçiş İle Kayıt Olacak Öğrencilerin Eğitim Ücretleri ve İndirim Olanakları" %}</p>
         </div>
     </div>
 </section>
@@ -27,8 +28,8 @@
         <div class="col-lg-9 col-xxl-10">
             <div class="content-wrapper">
                 <div class="page-intro">
-                    <h2 class="section-title">Yatay Geçiş Eğitim Ücretleri</h2>
-                    <p class="section-subtitle">2025-2026 eğitim-öğretim yılında yatay geçiş ile Avrasya Üniversitesi'ne kayıt olacak öğrenciler için geçerli eğitim ücretleri ve indirim olanakları aşağıda belirtilmiştir.</p>
+                    <h2 class="section-title">{% trans "Yatay Geçiş Eğitim Ücretleri" %}</h2>
+                    <p class="section-subtitle">{% trans "2025-2026 eğitim-öğretim yılında yatay geçiş ile Avrasya Üniversitesi'ne kayıt olacak öğrenciler için geçerli eğitim ücretleri ve indirim olanakları aşağıda belirtilmiştir." %}</p>
                 </div>
                 
                 <!-- بخش اطلاعیه‌های مهم -->
@@ -41,7 +42,7 @@
                                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                 </svg>
                             </div>
-                            <h3>Genel Bilgiler ve Önemli Notlar</h3>
+                            <h3>{% trans "Genel Bilgiler ve Önemli Notlar" %}</h3>
                         </div>
                         
                         <div class="kosul-content">
@@ -49,21 +50,21 @@
                                 <div class="kosul-item">
                                     <div class="kosul-number">1</div>
                                     <div class="kosul-content">
-                                        <p><strong>Burs/İndirim Süresi:</strong> İndirimli kontenjandan yerleşen adayın kazanmış olduğu burs/indirim oranı "Hazırlık sınıfı, kayıt dondurma süreleri hariç olmak üzere verilen burs veya indirimler önlisans programları için 2 yıl, lisans programlarımız için ise 4 yıl" geçerli olacaktır.</p>
+                                        <p><strong>{% trans "Burs/İndirim Süresi:" %}</strong> {% trans "İndirimli kontenjandan yerleşen adayın kazanmış olduğu burs/indirim oranı \"Hazırlık sınıfı, kayıt dondurma süreleri hariç olmak üzere verilen burs veya indirimler önlisans programları için 2 yıl, lisans programlarımız için ise 4 yıl\" geçerli olacaktır." %}</p>
                                     </div>
                                 </div>
                                 
                                 <div class="kosul-item">
                                     <div class="kosul-number">2</div>
                                     <div class="kosul-content">
-                                        <p><strong>KDV Durumu:</strong> Ücretlerimize KDV dahildir.</p>
+                                        <p><strong>{% trans "KDV Durumu:" %}</strong> {% trans "Ücretlerimize KDV dahildir." %}</p>
                                     </div>
                                 </div>
                                 
                                 <div class="kosul-item">
                                     <div class="kosul-number">3</div>
                                     <div class="kosul-content">
-                                        <p><strong>İndirim Olanağı:</strong> Yatay geçiş ile kurum dışından kayıt olacak olan tüm öğrencilerimiz %50 ve %25 indirim imkanından yararlanacaktır.</p>
+                                        <p><strong>{% trans "İndirim Olanağı:" %}</strong> {% trans "Yatay geçiş ile kurum dışından kayıt olacak olan tüm öğrencilerimiz %50 ve %25 indirim imkanından yararlanacaktır." %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -76,11 +77,11 @@
                     <table class="table table-hover table-striped align-middle" id="tuitionTable">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col" width="25%">Fakülte/Yüksekokul</th>
-                                <th scope="col" width="30%">Program Adı</th>
-                                <th scope="col" width="15%" class="text-center">%25 İndirimli<br><small>(Yatay Geçiş İndirimi)</small></th>
-                                <th scope="col" width="15%" class="text-center">%50 İndirimli<br><small>(Yatay Geçiş İndirimi)</small></th>
-                                <th scope="col" width="15%" class="text-center">Tam Ücretli</th>
+                                <th scope="col" width="25%">{% trans "Fakülte/Yüksekokul" %}</th>
+                                <th scope="col" width="30%">{% trans "Program Adı" %}</th>
+                                <th scope="col" width="15%" class="text-center">{% trans "%25 İndirimli" %}<br><small>{% trans "(Yatay Geçiş İndirimi)" %}</small></th>
+                                <th scope="col" width="15%" class="text-center">{% trans "%50 İndirimli" %}<br><small>{% trans "(Yatay Geçiş İndirimi)" %}</small></th>
+                                <th scope="col" width="15%" class="text-center">{% trans "Tam Ücretli" %}</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody">
@@ -94,11 +95,11 @@
                     <div class="col-md-4 mb-4">
                         <div class="card border-primary h-100">
                             <div class="card-header bg-primary text-white">
-                                <h5 style="color:white;" class="mb-0">Toplam Program</h5>
+                                <h5 style="color:white;" class="mb-0">{% trans "Toplam Program" %}</h5>
                             </div>
                             <div class="card-body text-center">
                                 <h2 class="display-4 text-primary" id="totalPrograms">0</h2>
-                                <p class="card-text">Farklı program</p>
+                                <p class="card-text">{% trans "Farklı program" %}</p>
                             </div>
                         </div>
                     </div>
@@ -106,11 +107,11 @@
                     <div class="col-md-4 mb-4">
                         <div class="card border-success h-100">
                             <div class="card-header bg-success text-white">
-                                <h5 style="color:white;"  class="mb-0">%50 İndirimli</h5>
+                                <h5 style="color:white;"  class="mb-0">{% trans "%50 İndirimli" %}</h5>
                             </div>
                             <div class="card-body text-center">
                                 <h2 class="display-4 text-success" id="discount50Count">0</h2>
-                                <p class="card-text">Program</p>
+                                <p class="card-text">{% trans "Program" %}</p>
                             </div>
                         </div>
                     </div>
@@ -118,11 +119,11 @@
                     <div class="col-md-4 mb-4">
                         <div class="card border-info h-100">
                             <div class="card-header bg-info text-white">
-                                <h5 style="color:white;" class="mb-0">%25 İndirimli</h5>
+                                <h5 style="color:white;" class="mb-0">{% trans "%25 İndirimli" %}</h5>
                             </div>
                             <div class="card-body text-center">
                                 <h2 class="display-4 text-info" id="discount25Count">0</h2>
-                                <p class="card-text">Program</p>
+                                <p class="card-text">{% trans "Program" %}</p>
                             </div>
                         </div>
                     </div>
@@ -139,17 +140,17 @@
                             </svg>
                         </div>
                         <div class="pdf-content">
-                            <h4>Resmi PDF Dokümanını İndirin</h4>
-                            <p>2025-2026 eğitim-öğretim yılı yatay geçiş eğitim ücretleri tablosunun resmi PDF versiyonunu bilgisayarınıza indirebilirsiniz.</p>
+                            <h4>{% trans "Resmi PDF Dokümanını İndirin" %}</h4>
+                            <p>{% trans "2025-2026 eğitim-öğretim yılı yatay geçiş eğitim ücretleri tablosunun resmi PDF versiyonunu bilgisayarınıza indirebilirsiniz." %}</p>
                             <a href="/media/documents/yatay-gecis-ucreti-25.07.2025-2.pdf" class="btn btn-primary btn-lg pdf-download-btn" download>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
                                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                                     <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                                 </svg>
-                                PDF İndir (yatay-gecis-ucreti-25.07.2025-2.pdf)
+                                {% trans "PDF İndir (yatay-gecis-ucreti-25.07.2025-2.pdf)" %}
                             </a>
                             <div class="pdf-info mt-3">
-                                <small><strong>Dosya Boyutu:</strong> ~250 KB | <strong>Format:</strong> PDF | <strong>Son Güncelleme:</strong> 25.07.2025</small>
+                                <small><strong>{% trans "Dosya Boyutu:" %}</strong> {% trans "~250 KB |" %} <strong>{% trans "Format:" %}</strong> {% trans "PDF |" %} <strong>{% trans "Son Güncelleme:" %}</strong> 25.07.2025</small>
                             </div>
                         </div>
                     </div>
@@ -161,7 +162,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z"/>
                         </svg>
-                        <h4>Bilgi ve İletişim</h4>
+                        <h4>{% trans "Bilgi ve İletişim" %}</h4>
                     </div>
                     
                     <div class="contact-content">
@@ -172,12 +173,12 @@
                                 </svg>
                             </div>
                             <div class="contact-details">
-                                <h5>Öğrenci İşleri ve Finans</h5>
-                                <p><span>Telefon:</span> (0462) XXX XX XX</p>
-                                <p><span>E-posta:</span> ogrenciisleri@avrasya.edu.tr</p>
-                                <p><span>Finans E-posta:</span> finans@avrasya.edu.tr</p>
-                                <p><span>Adres:</span> Avrasya Üniversitesi, Yomra, Trabzon</p>
-                                <p><span>Çalışma Saatleri:</span> 09:00 - 17:00 (Pazartesi - Cuma)</p>
+                                <h5>{% trans "Öğrenci İşleri ve Finans" %}</h5>
+                                <p><span>{% trans "Telefon:" %}</span> {% trans "(0462) XXX XX XX" %}</p>
+                                <p><span>{% trans "E-posta:" %}</span> {% trans "ogrenciisleri@avrasya.edu.tr" %}</p>
+                                <p><span>{% trans "Finans E-posta:" %}</span> {% trans "finans@avrasya.edu.tr" %}</p>
+                                <p><span>{% trans "Adres:" %}</span> {% trans "Avrasya Üniversitesi, Yomra, Trabzon" %}</p>
+                                <p><span>{% trans "Çalışma Saatleri:" %}</span> {% trans "09:00 - 17:00 (Pazartesi - Cuma)" %}</p>
                             </div>
                         </div>
                     </div>

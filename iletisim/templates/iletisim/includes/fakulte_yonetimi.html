@@ -1,4 +1,5 @@
 {% extends 'iletisim/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - İletişim Fakültesi - Yönetim{% endblock %}
 
@@ -8,7 +9,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>İletişim Fakültesi - Yönetim</h1>
+            <h1>{% trans "İletişim Fakültesi - Yönetim" %}</h1>
             <p></p>
         </div>
     </div>
@@ -32,10 +33,10 @@
                         <div class="tab-header">
                             <ul class="tab-menu">
                                 <li class="tab-menu-item active" data-tab="tab1">
-                                    <i class="fas fa-user-tie"></i> Fakülte Yönetimi
+                                    <i class="fas fa-user-tie"></i> {% trans "Fakülte Yönetimi" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab2">
-                                    <i class="fas fa-users"></i> Bölüm Başkanları
+                                    <i class="fas fa-users"></i> {% trans "Bölüm Başkanları" %}
                                 </li>
                             </ul>
                         </div>
@@ -44,22 +45,22 @@
                             <!-- Tab 1: Fakülte Yönetimi -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3 style="font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-user-tie"></i> Fakülte Yönetimi</h3>
+                                    <h3 style="font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-user-tie"></i> {% trans "Fakülte Yönetimi" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="personnel-management-grid">
                                         <!-- Dekan -->
                                         <div class="personnel-management-card">
                                             <div class="personnel-image-container">
-                                                <img src="{% static 'core/img/teacher/cemal-biyik.jpeg' %}" alt="Prof. Dr. Birol DOĞAN" class="personnel-image">
+                                                <img src="{% static 'core/img/teacher/cemal-biyik.jpeg' %}" alt="{% trans 'Prof. Dr. Birol DOĞAN' %}" class="personnel-image">
                                             </div>
                                             <div class="personnel-info">
-                                                <h4>Prof. Dr. Cemal BIYIK</h4>
-                                                <p class="personnel-title">Dekan</p>
+                                                <h4>{% trans "Prof. Dr. Cemal BIYIK" %}</h4>
+                                                <p class="personnel-title">{% trans "Dekan" %}</p>
                                                 <div class="personnel-contact-info">
-                                                    <p><i class="fas fa-envelope"></i> <a href="cemal.biyik@avrasya.edu.tr">cemal.biyik@avrasya.edu.tr</a></p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="cemal.biyik@avrasya.edu.tr">{% trans "cemal.biyik@avrasya.edu.tr" %}</a></p>
                                                     <p><i class="fas fa-phone"></i> +90 462 334 05 50</p>
-                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/6582d73d8c225&dil=0">Özgeçmiş</a></p>
+                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/6582d73d8c225&dil=0">{% trans "Özgeçmiş" %}</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -67,15 +68,15 @@
                                         <!-- Dekan Yardımcısı 1 -->
                                         <div class="personnel-management-card">
                                             <div class="personnel-image-container">
-                                                <img src="{% static 'core/img/teacher/Selfiye-Hoca-IletisimF.png' %}" alt="Dr. Öğr. Üyesi Gül ERTEM" class="personnel-image">
+                                                <img src="{% static 'core/img/teacher/Selfiye-Hoca-IletisimF.png' %}" alt="{% trans 'Dr. Öğr. Üyesi Gül ERTEM' %}" class="personnel-image">
                                             </div>
                                             <div class="personnel-info">
-                                                <h4>Dr. Öğr. Üyesi Selfiye ÖZKAN</h4>
-                                                <p class="personnel-title">Dekan Yardımcısı</p>
+                                                <h4>{% trans "Dr. Öğr. Üyesi Selfiye ÖZKAN" %}</h4>
+                                                <p class="personnel-title">{% trans "Dekan Yardımcısı" %}</p>
                                                 <div class="personnel-contact-info">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:selfiye.ozkan@avrasya.edu.tr">selfiye.ozkan@avrasya.edu.tr</a></p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:selfiye.ozkan@avrasya.edu.tr">{% trans "selfiye.ozkan@avrasya.edu.tr" %}</a></p>
                                                     <p><i class="fas fa-phone"></i> +90 462 334 05 50</p>
-                                                    <p><i class="fas fa-user"></i> <a href="">Özgeçmiş</a></p>
+                                                    <p><i class="fas fa-user"></i> <a href="">{% trans "Özgeçmiş" %}</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,22 +90,22 @@
                             <!-- Tab 2: Bölüm Başkanları -->
                             <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3 style="font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-users"></i> Bölüm Başkanları</h3>
+                                    <h3 style="font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-users"></i> {% trans "Bölüm Başkanları" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="department-heads-grid">
                                         <!-- Egzersiz ve Spor Bilimleri Bölüm Başkanı -->
                                         <div class="department-head-card">
                                             <div class="department-head-image-container">
-                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2023/09/a19.jpg" alt="Dr. Öğr. Üyesi Gül ERTEM" class="department-head-image">
+                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2023/09/a19.jpg" alt="{% trans 'Dr. Öğr. Üyesi Gül ERTEM' %}" class="department-head-image">
                                             </div>
                                             <div class="department-head-info">
-                                                <h4>Dr. Öğr. Üyesi Gül ERTEM</h4>
-                                                <p class="department-title">Egzersiz ve Spor Bilimleri Bölüm Başkanı</p>
+                                                <h4>{% trans "Dr. Öğr. Üyesi Gül ERTEM" %}</h4>
+                                                <p class="department-title">{% trans "Egzersiz ve Spor Bilimleri Bölüm Başkanı" %}</p>
                                                 <div class="department-head-contact-info">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:gul.cavusoglu@avrasya.edu.tr">gul.cavusoglu@avrasya.edu.tr</a></p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:gul.cavusoglu@avrasya.edu.tr">{% trans "gul.cavusoglu@avrasya.edu.tr" %}</a></p>
                                                     <p><i class="fas fa-phone"></i> +90 462 334 05 50</p>
-                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c936c2d0a37&amp;dil=0">Özgeçmiş</a></p>
+                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c936c2d0a37&amp;dil=0">{% trans "Özgeçmiş" %}</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,15 +113,15 @@
                                         <!-- Spor Yöneticiliği Bölüm Başkanı -->
                                         <div class="department-head-card">
                                             <div class="department-head-image-container">
-                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2024/11/Ogr.-Gor.-Mehmet-DERELIOGLU.jpg" alt="Dr. Öğr. Üyesi Mehmet DERELİOĞLU" class="department-head-image">
+                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2024/11/Ogr.-Gor.-Mehmet-DERELIOGLU.jpg" alt="{% trans 'Dr. Öğr. Üyesi Mehmet DERELİOĞLU' %}" class="department-head-image">
                                             </div>
                                             <div class="department-head-info">
-                                                <h4>Dr. Öğr. Üyesi Mehmet DERELİOĞLU</h4>
-                                                <p class="department-title">Spor Yöneticiliği Bölüm Başkanı</p>
+                                                <h4>{% trans "Dr. Öğr. Üyesi Mehmet DERELİOĞLU" %}</h4>
+                                                <p class="department-title">{% trans "Spor Yöneticiliği Bölüm Başkanı" %}</p>
                                                 <div class="department-head-contact-info">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:mehmet.derelioglu@avrasya.edu.tr">mehmet.derelioglu@avrasya.edu.tr</a></p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:mehmet.derelioglu@avrasya.edu.tr">{% trans "mehmet.derelioglu@avrasya.edu.tr" %}</a></p>
                                                     <p><i class="fas fa-phone"></i> +90 462 334 05 50</p>
-                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c938fe957a6&amp;dil=0">Özgeçmiş</a></p>
+                                                    <p><i class="fas fa-user"></i> <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c938fe957a6&amp;dil=0">{% trans "Özgeçmiş" %}</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,15 +129,15 @@
                                         <!-- Rekreasyon Bölüm Başkanı -->
                                         <div class="department-head-card">
                                             <div class="department-head-image-container">
-                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2024/03/bos-a.jpg" alt="Dr. Öğr. Üyesi Tarık SİVRİKAYA" class="department-head-image">
+                                                <img src="https://sporbilimleri.avrasya.edu.tr/wp-content/uploads/2024/03/bos-a.jpg" alt="{% trans 'Dr. Öğr. Üyesi Tarık SİVRİKAYA' %}" class="department-head-image">
                                             </div>
                                             <div class="department-head-info">
-                                                <h4>Dr. Öğr. Üyesi Tarık SİVRİKAYA</h4>
-                                                <p class="department-title">Rekreasyon Bölüm Başkanı</p>
+                                                <h4>{% trans "Dr. Öğr. Üyesi Tarık SİVRİKAYA" %}</h4>
+                                                <p class="department-title">{% trans "Rekreasyon Bölüm Başkanı" %}</p>
                                                 <div class="department-head-contact-info">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:tarik.sivrikaya@avrasya.edu.tr">tarik.sivrikaya@avrasya.edu.tr</a></p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:tarik.sivrikaya@avrasya.edu.tr">{% trans "tarik.sivrikaya@avrasya.edu.tr" %}</a></p>
                                                     <p><i class="fas fa-phone"></i> +90 462 334 05 50</p>
-                                                    <p><i class="fas fa-user"></i> Özgeçmiş</p>
+                                                    <p><i class="fas fa-user"></i> {% trans "Özgeçmiş" %}</p>
                                                 </div>
                                             </div>
                                         </div>

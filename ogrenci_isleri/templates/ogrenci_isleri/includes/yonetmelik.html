@@ -1,4 +1,5 @@
 {% extends 'ogrenci_isleri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Yönetmelik ve Yönergeler{% endblock %}
 
@@ -9,7 +10,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Yönetmelik ve Yönergeler</h1>
+            <h1>{% trans "Yönetmelik ve Yönergeler" %}</h1>
 
             <p></p>
         </div>
@@ -29,8 +30,8 @@
 <div class="col-lg-9 col-xxl-10">
     <div class="content-wrapper">
         <div class="page-intro">
-            <h2 class="section-title">Yönetmelik ve Yönergeler</h2>
-            <p class="section-subtitle">Avrasya Üniversitesi'nin yürürlükte olan tüm yönetmelik ve yönergelerine buradan ulaşabilirsiniz. Dokümanları indirmek için ilgili bağlantılara tıklayınız.</p>
+            <h2 class="section-title">{% trans "Yönetmelik ve Yönergeler" %}</h2>
+            <p class="section-subtitle">{% trans "Avrasya Üniversitesi'nin yürürlükte olan tüm yönetmelik ve yönergelerine buradan ulaşabilirsiniz. Dokümanları indirmek için ilgili bağlantılara tıklayınız." %}</p>
         </div>
 
         <!-- تب‌ها -->
@@ -40,15 +41,15 @@
                     <ul class="tab-menu">
                         <li class="tab-menu-item active" data-tab="yonetmelik-tab">
                             <i class="fas fa-gavel"></i>
-                            Yönetmelikler
+                            {% trans "Yönetmelikler" %}
                         </li>
                         <li class="tab-menu-item" data-tab="yonerge-tab">
                             <i class="fas fa-file-alt"></i>
-                            Yönergeler
+                            {% trans "Yönergeler" %}
                         </li>
                         <li class="tab-menu-item" data-tab="stratejik-tab">
                             <i class="fas fa-chart-line"></i>
-                            Stratejik Plan
+                            {% trans "Stratejik Plan" %}
                         </li>
                     </ul>
                 </div>
@@ -57,23 +58,23 @@
                     <!-- تب Yönetmelikler -->
                     <div id="yonetmelik-tab" class="tab-content active">
                         <div class="tab-content-header">
-                            <h3><i class="fas fa-gavel"></i> Yürürlükteki Yönetmelikler</h3>
+                            <h3><i class="fas fa-gavel"></i> {% trans "Yürürlükteki Yönetmelikler" %}</h3>
                         </div>
                         <div class="tab-content-body">
-                            <p>Avrasya Üniversitesi'nin yürürlükte olan tüm yönetmeliklerini aşağıdan görüntüleyebilir ve indirebilirsiniz.</p>
+                            <p>{% trans "Avrasya Üniversitesi'nin yürürlükte olan tüm yönetmeliklerini aşağıdan görüntüleyebilir ve indirebilirsiniz." %}</p>
                             
                             <div class="highlight-box">
-                                <h4><i class="fas fa-info-circle"></i> Önemli Bilgi</h4>
-                                <p>Yönetmelikler PDF formatında sunulmaktadır. İndirme işlemi için bağlantılara tıklayınız.</p>
+                                <h4><i class="fas fa-info-circle"></i> {% trans "Önemli Bilgi" %}</h4>
+                                <p>{% trans "Yönetmelikler PDF formatında sunulmaktadır. İndirme işlemi için bağlantılara tıklayınız." %}</p>
                             </div>
                             
                             <div class="documents-list">
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h2>Avrasya Üniversitesi Ana Yönetmeliği</h2>
+                                        <h2>{% trans "Avrasya Üniversitesi Ana Yönetmeliği" %}</h2>
                                         <a href="{% static "files/avrasya_universitesi_ana_yonetmeligi.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -81,9 +82,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Lisansüstü Eğitim Öğretim ve Sınav Yönetmeliği</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Lisansüstü Eğitim Öğretim ve Sınav Yönetmeliği" %}</h5>
                                         <a href="{% static "files/22-Ekim-2023-PAZAR.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -91,9 +92,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Önlisans ve Lisans Eğitim Öğretim ve Sınav Yönetmeliği</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Önlisans ve Lisans Eğitim Öğretim ve Sınav Yönetmeliği" %}</h5>
                                         <a href="https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=40328&MevzuatTur=8&MevzuatTertip=5" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -101,9 +102,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Yükseköğretim Kurumları Öğrenci Konseyleri ve Yükseköğretim Kurumları Ulusal Öğrenci Konseyi Yönetmeliği</h5>
+                                        <h5>{% trans "Yükseköğretim Kurumları Öğrenci Konseyleri ve Yükseköğretim Kurumları Ulusal Öğrenci Konseyi Yönetmeliği" %}</h5>
                                         <a href="{% static "files/yonetmelik_ogrenci_konseyi.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -114,18 +115,18 @@
                     <!-- تب Yönergeler -->
                     <div id="yonerge-tab" class="tab-content">
                         <div class="tab-content-header">
-                            <h3><i class="fas fa-file-alt"></i> Yürürlükteki Yönergeler</h3>
+                            <h3><i class="fas fa-file-alt"></i> {% trans "Yürürlükteki Yönergeler" %}</h3>
                         </div>
                         <div class="tab-content-body">
-                            <p>Avrasya Üniversitesi'nin yürürlükte olan tüm yönergelerini aşağıdan görüntüleyebilir ve indirebilirsiniz.</p>
+                            <p>{% trans "Avrasya Üniversitesi'nin yürürlükte olan tüm yönergelerini aşağıdan görüntüleyebilir ve indirebilirsiniz." %}</p>
                             
                             <div class="documents-list">
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Akademik Personel Performans Ölçme Kriterleri Usul ve Esasları Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Akademik Personel Performans Ölçme Kriterleri Usul ve Esasları Yönergesi" %}</h5>
                                         <a href="{% static "files/personel_performans_olcme_kriterleri_usul_esaslari_yonergesi.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -133,9 +134,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Öğretim Üyeliğine Yükseltilme Ve Atanma Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Öğretim Üyeliğine Yükseltilme Ve Atanma Yönergesi" %}</h5>
                                         <a href="{% static "AVU-OGRETIM-UYELIGINE-YUKSELTILME-VE-ATANMA-YONERGESI-1.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -143,9 +144,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Önceden Kazanılmış Yeterliliklerin Tanınması, Kredi Transferi ve İntibak İşlemleri Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Önceden Kazanılmış Yeterliliklerin Tanınması, Kredi Transferi ve İntibak İşlemleri Yönergesi" %}</h5>
                                         <a href="{% static "2022-EYLUL-ONCEDEN-KAZANILMIS-YETERLILIKLERIN-TANINMASI.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -153,9 +154,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi 2013-2014 Eğitim Öğretim Yılından İtibaren Uygulanacak Ders Plan Değişikliklerinde Yapılacak İntibaklara İlişkin Senato Esasları</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi 2013-2014 Eğitim Öğretim Yılından İtibaren Uygulanacak Ders Plan Değişikliklerinde Yapılacak İntibaklara İlişkin Senato Esasları" %}</h5>
                                         <a href="{% static "files/ders_plan_degisikligi_intibak_esaslari.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -163,9 +164,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Diploma Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Diploma Yönergesi" %}</h5>
                                         <a href="{% static "files/2-Diploma-Yonergesi-Ekim-2023.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -173,9 +174,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Bologna Eşgüdüm Komisyonu Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Bologna Eşgüdüm Komisyonu Yönergesi" %}</h5>
                                         <a href="{% static "files/bologna_esgudum_komisyonu_yonergesi.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -183,9 +184,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Yurtdışından veya Yabancı Uyruklu Öğrenci Kabulü Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Yurtdışından veya Yabancı Uyruklu Öğrenci Kabulü Yönergesi" %}</h5>
                                         <a href="{% static "files/01-264-OCAK-2023-SENATO-yurt_disindan_yabanci_uyruklu_ogrenci_kabulu.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -193,9 +194,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Öğrenci Kulüplerinin Kurulması, İşleyişi ve Desteklenmesi Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Öğrenci Kulüplerinin Kurulması, İşleyişi ve Desteklenmesi Yönergesi" %}</h5>
                                         <a href="{% static "files/ÖĞRENCİ-KULÜPLERİNİN-KURULMASI-İŞLEYİŞİ-VE-DESTEKLENMESİ-YÖNERGESİ.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -203,9 +204,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Erasmus ve Diğer Değişim Programları Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Erasmus ve Diğer Değişim Programları Yönergesi" %}</h5>
                                         <a href="{% static "files/erasmus_diger_degisim_programlari_yonergesi.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -213,9 +214,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Önlisans Lisans Öğrencileri için Ödev Hazırlama Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Önlisans Lisans Öğrencileri için Ödev Hazırlama Yönergesi" %}</h5>
                                         <a href="{% static "files/Odev-Hazirlama-Yonergesi-1.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -223,9 +224,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Kampüs Koordinatörlükleri Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Kampüs Koordinatörlükleri Yönergesi" %}</h5>
                                         <a href="Avrasya-Universitesi-Kampus-Koordinatorlukleri-Yonergesi.pdf" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -233,9 +234,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Sağlık Hizmetleri Meslek Yüksekokulu Staj Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Sağlık Hizmetleri Meslek Yüksekokulu Staj Yönergesi" %}</h5>
                                         <a href="{% static "files/Avrasya-Universitesi-Saglik-Hizmetleri-Meslek-Yuksekokulu-Staj-Yonergesi.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -243,9 +244,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Meslek Yüksekokulu Staj Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Meslek Yüksekokulu Staj Yönergesi" %}</h5>
                                         <a href="{% static "files/SAYI-12-MYO-STAJ-YONERGESI.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -253,9 +254,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Arşiv Hizmetleri Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Arşiv Hizmetleri Yönergesi" %}</h5>
                                         <a href="{% static "files/2-NOLU-SENATO-Avu-Arsiv-Hizmetleri-Yonergesi.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -263,9 +264,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Engelli Öğrenci Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Engelli Öğrenci Yönergesi" %}</h5>
                                         <a href="{% static "files/engelli-ogrenci-1.pdf" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -273,9 +274,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Yabancı Diller Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Yabancı Diller Yönergesi" %}</h5>
                                         <a href="{% static "files/Yabanci-Diller-Yonergesi-2018-1 (4).docx" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -283,9 +284,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Uygulamalı Bilimler Yüksekokulu Staj Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Uygulamalı Bilimler Yüksekokulu Staj Yönergesi" %}</h5>
                                         <a href="{% static "files/Avrasya-Universitesi-Uygulamali-Bilimler-Yuksekokulu-Staj-Yonergesi (2).docx" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -293,9 +294,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Öğrenci Yurtları Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Öğrenci Yurtları Yönergesi" %}</h5>
                                         <a href="{% static "files/05173-ogrenci_yurtlari_yonergesi (1).docx" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -303,9 +304,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>Avrasya Üniversitesi Özel Öğrenci Yönergesi</h5>
+                                        <h5>{% trans "Avrasya Üniversitesi Özel Öğrenci Yönergesi" %}</h5>
                                         <a href="{% static "files/18-232-AVU-OZEL-OGRENCI-YONERGESI-Temmuz-2021.doc" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -313,9 +314,9 @@
                                 <div class="document-item">
                                     <i class="fas fa-file-pdf document-icon"></i>
                                     <div class="document-info">
-                                        <h5>2547 Sayılı Kanunun 44. Maddesinin (c) Fıkrasının Uygulanma İlkeleri</h5>
+                                        <h5>{% trans "2547 Sayılı Kanunun 44. Maddesinin (c) Fıkrasının Uygulanma İlkeleri" %}</h5>
                                         <a href="{% static "files/44-madde-azami-ogrenim-suresini-doluran-ogrenciler-uygulama-esaslari-degisikligi-16.08.2021.docx" %}" class="external-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> İndir / Görüntüle
+                                            <i class="fas fa-external-link-alt"></i> {% trans "İndir / Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -323,7 +324,7 @@
                             
                             {% comment %} <div class="text-center mt-4">
                                 <button id="load-more-yonerge" class="btn-load-more">
-                                    <i class="fas fa-chevron-down"></i> Daha Fazla Yönerge Göster
+                                    <i class="fas fa-chevron-down"></i> {% trans "Daha Fazla Yönerge Göster" %}
                                 </button>
                             </div> {% endcomment %}
                         </div>
@@ -332,14 +333,14 @@
                     <!-- تب Stratejik Plan -->
                     <div id="stratejik-tab" class="tab-content">
                         <div class="tab-content-header">
-                            <h3><i class="fas fa-chart-line"></i> Stratejik Plan</h3>
+                            <h3><i class="fas fa-chart-line"></i> {% trans "Stratejik Plan" %}</h3>
                         </div>
                         <div class="tab-content-body">
                             <div class="highlight-box">
-                                <h4><i class="fas fa-bullseye"></i> Avrasya Üniversitesi 2021-2025 Stratejik Planı</h4>
-                                <p>Üniversitemizin 2021-2025 yılları arasında izleyeceği stratejik yol haritasını bu dokümanda bulabilirsiniz.</p>
+                                <h4><i class="fas fa-bullseye"></i> {% trans "Avrasya Üniversitesi 2021-2025 Stratejik Planı" %}</h4>
+                                <p>{% trans "Üniversitemizin 2021-2025 yılları arasında izleyeceği stratejik yol haritasını bu dokümanda bulabilirsiniz." %}</p>
                                 <a href="{% static "files/Avrasya_Universitesi_2021-2025_Stratejik_Plan.pdf" %}" class="external-link" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i> Stratejik Planı İndir
+                                    <i class="fas fa-external-link-alt"></i> {% trans "Stratejik Planı İndir" %}
                                 </a>
                             </div>
                             
@@ -348,16 +349,16 @@
                                     <div class="mv-icon">
                                         <i class="fas fa-flag"></i>
                                     </div>
-                                    <h4>Misyon</h4>
-                                    <p>Avrasya Üniversitesi olarak misyonumuz, evrensel değerleri benimseyen, yenilikçi, araştırmacı, topluma katkı sağlayan bireyler yetiştirmek ve bilgi üretmektir.</p>
+                                    <h4>{% trans "Misyon" %}</h4>
+                                    <p>{% trans "Avrasya Üniversitesi olarak misyonumuz, evrensel değerleri benimseyen, yenilikçi, araştırmacı, topluma katkı sağlayan bireyler yetiştirmek ve bilgi üretmektir." %}</p>
                                 </div>
                                 
                                 <div class="vision-box">
                                     <div class="mv-icon">
                                         <i class="fas fa-eye"></i>
                                     </div>
-                                    <h4>Vizyon</h4>
-                                    <p>Uluslararası düzeyde tanınan, tercih edilen, bölgesel kalkınmaya öncülük eden ve sürdürülebilir gelişmeyi hedefleyen bir üniversite olmaktır.</p>
+                                    <h4>{% trans "Vizyon" %}</h4>
+                                    <p>{% trans "Uluslararası düzeyde tanınan, tercih edilen, bölgesel kalkınmaya öncülük eden ve sürdürülebilir gelişmeyi hedefleyen bir üniversite olmaktır." %}</p>
                                 </div>
                             </div>
                         </div>

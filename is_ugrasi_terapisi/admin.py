@@ -1,12 +1,13 @@
 # is_ugrasi_terapisi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     IsUgrasiTerapisiDuyuru, IsUgrasiTerapisiEtkinlik, IsUgrasiTerapisiDersProgrami, IsUgrasiTerapisiFaaliyet, IsUgrasiTerapisiFaaliyetGrubu, IsUgrasiTerapisiFaaliyetGorseli
 )
 
 @admin.register(IsUgrasiTerapisiEtkinlik)
-class IsUgrasiTerapisiEtkinlikAdmin(admin.ModelAdmin):
+class IsUgrasiTerapisiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class IsUgrasiTerapisiDuyuruAdmin(admin.ModelAdmin):
         return IsUgrasiTerapisiDuyuru.objects.all()
 
 @admin.register(IsUgrasiTerapisiDersProgrami)
-class IsUgrasiTerapisiDersProgramiAdmin(admin.ModelAdmin):
+class IsUgrasiTerapisiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class IsUgrasiTerapisiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(IsUgrasiTerapisiFaaliyetGrubu)
-class IsUgrasiTerapisiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class IsUgrasiTerapisiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(IsUgrasiTerapisiFaaliyet)
-class IsUgrasiTerapisiFaaliyetAdmin(admin.ModelAdmin):
+class IsUgrasiTerapisiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

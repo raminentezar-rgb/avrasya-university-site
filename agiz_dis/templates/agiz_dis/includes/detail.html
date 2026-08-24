@@ -1,4 +1,5 @@
 {% extends 'agiz_dis/base.html' %}
+{% load i18n %}
 {% block title %}{{ duyuru.baslik }} Ağız ve Diş Sağlığı - Avrasya Üniversitesi{% endblock %}
 {% block content %}
 
@@ -506,15 +507,15 @@
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{% url 'duyurular:liste' %}">
-                                <i class="bi bi-house-door me-1"></i>Tüm Duyurular
+                                <i class="bi bi-house-door me-1"></i>{% trans "Tüm Duyurular" %}
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{% url 'agiz_dis:liste' %}">
-                                <i class="bi bi-book me-1"></i>Ağız ve Diş Sağlığı
+                                <i class="bi bi-book me-1"></i>{% trans "Ağız ve Diş Sağlığı" %}
                             </a>
                         </li>
-                        <li class="breadcrumb-item active text-primary fw-semibold">Duyuru Detayı</li>
+                        <li class="breadcrumb-item active text-primary fw-semibold">{% trans "Duyuru Detayı" %}</li>
                     </ol>
                 </nav>
                 
@@ -525,7 +526,7 @@
                             <i class="bi bi-building me-1"></i>{{ duyuru.get_fakulte_display }}
                         </span>
                         <span class="badge-bolum">
-                            <i class="bi bi-book me-1"></i>Ağız ve Diş Sağlığı
+                            <i class="bi bi-book me-1"></i>{% trans "Ağız ve Diş Sağlığı" %}
                         </span>
                     </div>
                     
@@ -556,9 +557,9 @@
                 {% if dosyalar %}
                 <div class="files-section">
                     <h3 class="section-title-detail">
-                        <i class="bi bi-download me-2"></i>İndirilebilir Dosyalar
+                        <i class="bi bi-download me-2"></i>{% trans "İndirilebilir Dosyalar" %}
                     </h3>
-                    <p class="text-muted mb-4">Bu duyuruya ait ekli dosyaları aşağıdan indirebilirsiniz.</p>
+                    <p class="text-muted mb-4">{% trans "Bu duyuruya ait ekli dosyaları aşağıdan indirebilirsiniz." %}</p>
                     
                     <div class="row g-4">
                         {% for dosya in dosyalar %}
@@ -590,9 +591,9 @@
             {% if ilgili_duyurular %}
             <div class="related-section">
                 <h3 class="section-title-detail">
-                    <i class="bi bi-link me-2"></i>Diğer Ağız ve Diş Sağlığı Duyuruları
+                    <i class="bi bi-link me-2"></i>{% trans "Diğer Ağız ve Diş Sağlığı Duyuruları" %}
                 </h3>
-                <p class="text-muted mb-4">Aşağıda benzer Ağız ve Diş Sağlığı duyurularını inceleyebilirsiniz.</p>
+                <p class="text-muted mb-4">{% trans "Aşağıda benzer Ağız ve Diş Sağlığı duyurularını inceleyebilirsiniz." %}</p>
 
                 <div class="row g-4">
                     {% for ilgili in ilgili_duyurular %}
@@ -600,7 +601,7 @@
                         <div class="related-card">
                             <div class="related-badges">
                                 <span class="badge bg-primary">{{ ilgili.get_fakulte_display }}</span>
-                                <span class="badge bg-success">Ağız ve Diş Sağlığı</span>
+                                <span class="badge bg-success">{% trans "Ağız ve Diş Sağlığı" %}</span>
                             </div>
                             <h4 class="related-title">{{ ilgili.baslik }}</h4>
                             <div class="related-date">
@@ -608,7 +609,7 @@
                                 {{ ilgili.yayin_tarihi|date:'d M Y' }}
                             </div>
                             <a href="{% url 'agiz_dis:detay' ilgili.slug %}" class="related-link">
-                                Detaylı İncele
+                                {% trans "Detaylı İncele" %}
                                 <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
@@ -623,7 +624,7 @@
                 <div class="nav-buttons">
                     <a href="{% url 'agiz_dis:liste' %}" class="nav-btn nav-btn-outline">
                         <i class="bi bi-arrow-left"></i>
-                        Tüm Ağız ve Diş Sağlığı Duyuruları
+                        {% trans "Tüm Ağız ve Diş Sağlığı Duyuruları" %}
                     </a>
                     
                     <div class="d-flex gap-3">
@@ -633,7 +634,7 @@
                         </a>
                         <a href="{% url 'duyurular:liste' %}" class="nav-btn nav-btn-outline">
                             <i class="bi bi-grid"></i>
-                            Tüm Duyurular
+                            {% trans "Tüm Duyurular" %}
                         </a>
                     </div>
                 </div>

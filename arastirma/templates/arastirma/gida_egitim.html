@@ -1,4 +1,5 @@
 {% extends 'arastirma/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Gıda Uygulama ve Araştırma Merkezi - Avrasya Üniversitesi{% endblock %}
@@ -7,8 +8,8 @@
 <section class="research-hero" style="background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%); color: white; padding: 160px 0 80px; margin-top: -104px; position: relative; overflow: hidden;">
     <div class="container">
         <div class="research-hero-content text-center">
-            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(45deg, #fff, var(--accent-light-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Gıda Uygulama ve Araştırma Merkezi</h1>
-            <p class="lead" style="font-size: 1.3rem; color: white; opacity: 0.9; max-width: 800px; margin: 0 auto;">Gıda ile ilgili konularda bilimsel araştırmalar yapmak, üniversite ve sanayi arasında işbirliği sağlamak</p>
+            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(45deg, #fff, var(--accent-light-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">{% trans "Gıda Uygulama ve Araştırma Merkezi" %}</h1>
+            <p class="lead" style="font-size: 1.3rem; color: white; opacity: 0.9; max-width: 800px; margin: 0 auto;">{% trans "Gıda ile ilgili konularda bilimsel araştırmalar yapmak, üniversite ve sanayi arasında işbirliği sağlamak" %}</p>
         </div>
     </div>
 </section>
@@ -28,11 +29,11 @@
                     <div class="research-card mb-4">
                         <div class="row align-items-center">
                             <div class="col-md-3 text-center mb-3 mb-md-0">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2021/02/isimsiz-1.jpg" alt="Gıda Uygulama ve Araştırma Merkezi" class="img-fluid rounded" style="max-height: 200px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2021/02/isimsiz-1.jpg" alt="{% trans 'Gıda Uygulama ve Araştırma Merkezi' %}" class="img-fluid rounded" style="max-height: 200px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                             </div>
                             <div class="col-md-9">
-                                <h2 class="h4 mb-3" style="color: var(--primary-dark-blue);">Merkez Hakkında</h2>
-                                <p class="text-justify">Gıda Uygulama ve Araştırma Merkezi'nin amacı; gıda ile ilgili konularda bilimsel araştırmalar yapmak, Üniversite ve sanayi arasında çalışma konularıyla ilgili işbirliğinde bulunmak, gıda endüstrisinin problemlerini çözecek bilimsel ve uygulamalı çalışmalar yapmak ve bu çalışmaları yönetmektir.</p>
+                                <h2 class="h4 mb-3" style="color: var(--primary-dark-blue);">{% trans "Merkez Hakkında" %}</h2>
+                                <p class="text-justify">{% trans "Gıda Uygulama ve Araştırma Merkezi'nin amacı; gıda ile ilgili konularda bilimsel araştırmalar yapmak, Üniversite ve sanayi arasında çalışma konularıyla ilgili işbirliğinde bulunmak, gıda endüstrisinin problemlerini çözecek bilimsel ve uygulamalı çalışmalar yapmak ve bu çalışmaları yönetmektir." %}</p>
                             </div>
                         </div>
                     </div>
@@ -40,7 +41,7 @@
                     <!-- Merkez müdürü -->
                     <div class="research-card mb-4">
                         <div class="card-header-custom" style="background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%); color: white; padding: 15px 20px; border-radius: 10px 10px 0 0;">
-                            <h3  style="color:white;"   class="h5 mb-0">Merkez Müdürü</h3>
+                            <h3  style="color:white;"   class="h5 mb-0">{% trans "Merkez Müdürü" %}</h3>
                         </div>
                         <div class="card-body" style="padding: 20px;">
                             <div class="row align-items-center">
@@ -50,10 +51,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <h4 class="h5" style="color: var(--primary-dark-blue);">Prof. Dr. [Ad Soyad]</h4>
-                                    <p class="mb-2"><strong>Unvan:</strong> Merkez Müdürü</p>
-                                    <p class="mb-2"><strong>İletişim:</strong> e-posta@avrasya.edu.tr</p>
-                                    <p class="mb-0"><strong>Telefon:</strong> +90 462 334 XX XX</p>
+                                    <h4 class="h5" style="color: var(--primary-dark-blue);">{% trans "Prof. Dr. [Ad Soyad]" %}</h4>
+                                    <p class="mb-2"><strong>{% trans "Unvan:" %}</strong> {% trans "Merkez Müdürü" %}</p>
+                                    <p class="mb-2"><strong>{% trans "İletişim:" %}</strong> {% trans "e-posta@avrasya.edu.tr" %}</p>
+                                    <p class="mb-0"><strong>{% trans "Telefon:" %}</strong> {% trans "+90 462 334 XX XX" %}</p>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +63,7 @@
                     <!-- Faaliyet alanları -->
                     <div class="research-card mb-4">
                         <div class="card-header-custom" style="background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%); color: white; padding: 15px 20px; border-radius: 10px 10px 0 0;">
-                            <h3 style="color:white;" class="h5 mb-0">Merkezin Faaliyet Alanları</h3>
+                            <h3 style="color:white;" class="h5 mb-0">{% trans "Merkezin Faaliyet Alanları" %}</h3>
                         </div>
                         <div class="card-body" style="padding: 20px;">
                             <div class="activity-list">
@@ -72,8 +73,8 @@
                                             <i class="fas fa-flask fa-lg"></i>
                                         </div>
                                         <div>
-                                            <h4 class="h6" style="color: var(--primary-dark-blue);">Katma Değeri Yüksek Gıda Maddesi Tasarımı ve Üretimi</h4>
-                                            <p class="text-justify mb-0">Katma değeri yüksek gıda maddesi tasarımı ve üretimi, gıda ve sağlık, gıda ve beslenme, gıda kalite ve güvenliği, gıda ve tüketici konularında sektör temsilcileri ile işbirliği halinde araştırma ve geliştirme projeleri gerçekleştirmek.</p>
+                                            <h4 class="h6" style="color: var(--primary-dark-blue);">{% trans "Katma Değeri Yüksek Gıda Maddesi Tasarımı ve Üretimi" %}</h4>
+                                            <p class="text-justify mb-0">{% trans "Katma değeri yüksek gıda maddesi tasarımı ve üretimi, gıda ve sağlık, gıda ve beslenme, gıda kalite ve güvenliği, gıda ve tüketici konularında sektör temsilcileri ile işbirliği halinde araştırma ve geliştirme projeleri gerçekleştirmek." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -84,8 +85,8 @@
                                             <i class="fas fa-microscope fa-lg"></i>
                                         </div>
                                         <div>
-                                            <h4 class="h6" style="color: var(--primary-dark-blue);">Analitik Çalışmalar</h4>
-                                            <p class="text-justify mb-0">Gıda alanında gereksinim duyulan her türlü analiz çalışmalarını yapmak, ulusal ve/veya uluslararası mevzuat çerçevesinde gıda analiz laboratuvarında yapılacak analizler de dahil olmak üzere gereken her türlü hizmeti gerçekleştirmek.</p>
+                                            <h4 class="h6" style="color: var(--primary-dark-blue);">{% trans "Analitik Çalışmalar" %}</h4>
+                                            <p class="text-justify mb-0">{% trans "Gıda alanında gereksinim duyulan her türlü analiz çalışmalarını yapmak, ulusal ve/veya uluslararası mevzuat çerçevesinde gıda analiz laboratuvarında yapılacak analizler de dahil olmak üzere gereken her türlü hizmeti gerçekleştirmek." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -96,8 +97,8 @@
                                             <i class="fas fa-chart-line fa-lg"></i>
                                         </div>
                                         <div>
-                                            <h4 class="h6" style="color: var(--primary-dark-blue);">Küresel Eğilimleri Takip Etmek</h4>
-                                            <p class="text-justify mb-0">Gıda sektöründe küresel düzeyde eğilimleri yakından takip etmek, bu eğilimlere paralel araştırmalar yapmak ve bilgi üretmek, veri tabanları oluşturmak, bu bilgileri ulusal gıda sektörünün hizmetine sunmak.</p>
+                                            <h4 class="h6" style="color: var(--primary-dark-blue);">{% trans "Küresel Eğilimleri Takip Etmek" %}</h4>
+                                            <p class="text-justify mb-0">{% trans "Gıda sektöründe küresel düzeyde eğilimleri yakından takip etmek, bu eğilimlere paralel araştırmalar yapmak ve bilgi üretmek, veri tabanları oluşturmak, bu bilgileri ulusal gıda sektörünün hizmetine sunmak." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -108,8 +109,8 @@
                                             <i class="fas fa-globe fa-lg"></i>
                                         </div>
                                         <div>
-                                            <h4 class="h6" style="color: var(--primary-dark-blue);">Yurtiçi ve Yurtdışı Gelişmeleri İzlemek</h4>
-                                            <p class="text-justify mb-0">Yurtdışında ve yurtiçinde gıda ile ilgili gelişmeleri izlemek, kamuoyuna bu konularda doğru ve güvenilir açıklamalar yapmak, bilgilendirici bültenler yayınlamak.</p>
+                                            <h4 class="h6" style="color: var(--primary-dark-blue);">{% trans "Yurtiçi ve Yurtdışı Gelişmeleri İzlemek" %}</h4>
+                                            <p class="text-justify mb-0">{% trans "Yurtdışında ve yurtiçinde gıda ile ilgili gelişmeleri izlemek, kamuoyuna bu konularda doğru ve güvenilir açıklamalar yapmak, bilgilendirici bültenler yayınlamak." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -120,8 +121,8 @@
                                             <i class="fas fa-graduation-cap fa-lg"></i>
                                         </div>
                                         <div>
-                                            <h4 class="h6" style="color: var(--primary-dark-blue);">Eğitim ve Öğretim Programları</h4>
-                                            <p class="text-justify mb-0">Gıda ile ilgili konularda ulusal ve uluslararası düzeyde sertifikaya yönelik eğitim ve öğretim programları düzenlemek.</p>
+                                            <h4 class="h6" style="color: var(--primary-dark-blue);">{% trans "Eğitim ve Öğretim Programları" %}</h4>
+                                            <p class="text-justify mb-0">{% trans "Gıda ile ilgili konularda ulusal ve uluslararası düzeyde sertifikaya yönelik eğitim ve öğretim programları düzenlemek." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +133,7 @@
                     <!-- İletişim bilgileri -->
                     <div class="research-card">
                         <div class="card-header-custom" style="background: linear-gradient(135deg, var(--primary-dark-blue) 0%, var(--secondary-medium-blue) 100%); color: white; padding: 15px 20px; border-radius: 10px 10px 0 0;">
-                            <h3 style="color:white;" class="h5 mb-0">İletişim Bilgileri</h3>
+                            <h3 style="color:white;" class="h5 mb-0">{% trans "İletişim Bilgileri" %}</h3>
                         </div>
                         <div class="card-body" style="padding: 20px;">
                             <div class="row">
@@ -144,8 +145,8 @@
                                                     <i class="fas fa-map-marker-alt fa-lg"></i>
                                                 </div>
                                                 <div>
-                                                    <strong>Adres:</strong>
-                                                    <p class="mb-0">Avrasya Üniversitesi Rektörlüğü, Pelitli Mahallesi Rize caddesi No:226 TRABZON</p>
+                                                    <strong>{% trans "Adres:" %}</strong>
+                                                    <p class="mb-0">{% trans "Avrasya Üniversitesi Rektörlüğü, Pelitli Mahallesi Rize caddesi No:226 TRABZON" %}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -155,7 +156,7 @@
                                                     <i class="fas fa-phone fa-lg"></i>
                                                 </div>
                                                 <div>
-                                                    <strong>Telefon:</strong>
+                                                    <strong>{% trans "Telefon:" %}</strong>
                                                     <p class="mb-0">+90 462 334 05 50</p>
                                                 </div>
                                             </div>
@@ -170,8 +171,8 @@
                                                     <i class="fas fa-envelope fa-lg"></i>
                                                 </div>
                                                 <div>
-                                                    <strong>E-posta:</strong>
-                                                    <p class="mb-0"><a href="mailto:iletisim@avrasya.edu.tr" style="color: var(--secondary-medium-blue); text-decoration: none;">iletisim@avrasya.edu.tr</a></p>
+                                                    <strong>{% trans "E-posta:" %}</strong>
+                                                    <p class="mb-0"><a href="mailto:iletisim@avrasya.edu.tr" style="color: var(--secondary-medium-blue); text-decoration: none;">{% trans "iletisim@avrasya.edu.tr" %}</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -181,7 +182,7 @@
                                                     <i class="fab fa-whatsapp fa-lg"></i>
                                                 </div>
                                                 <div>
-                                                    <strong>WhatsApp:</strong>
+                                                    <strong>{% trans "WhatsApp:" %}</strong>
                                                     <p class="mb-0">+90 535 333 4 555</p>
                                                 </div>
                                             </div>

@@ -1,4 +1,5 @@
 {% extends 'saglik_bilimleri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Sağlık Bilimleri Fakültesi{% endblock %}
 
@@ -9,7 +10,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Sağlık Bilimleri Fakültesi</h1>
+            <h1>{% trans "Sağlık Bilimleri Fakültesi" %}</h1>
             <p></p>
         </div>
     </div>
@@ -33,16 +34,16 @@
                         <div class="tab-header">
                             <ul class="tab-menu">
                                 <li class="tab-menu-item active" data-tab="tab1">
-                                    Bölümler
+                                    {% trans "Bölümler" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab2">
-                                    Tarihçe 
+                                    {% trans "Tarihçe" %} 
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab3">
-                                    Misyon & Vizyon
+                                    {% trans "Misyon & Vizyon" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab4">
-                                    Dekan Mesajı
+                                    {% trans "Dekan Mesajı" %}
                                 </li>
                             </ul>
                         </div>
@@ -51,15 +52,15 @@
                             <!-- Tab 1: Bölümler -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-hospital-alt"></i> Bölümler</h3>
-                                    <p>Sağlık Bilimleri Fakültesi bünyesinde yer alan bölümler hakkında detaylı bilgi</p>
+                                    <h3><i class="fas fa-hospital-alt"></i> {% trans "Bölümler" %}</h3>
+                                    <p>{% trans "Sağlık Bilimleri Fakültesi bünyesinde yer alan bölümler hakkında detaylı bilgi" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="departments-section">
                                         <div class="section-intro">
-                                            <h4><i class="fas fa-stethoscope"></i> Sağlık Bilimleri Fakültesi Bölümleri</h4>
-                                            <p>Modern sağlık hizmetleri alanında uzmanlaşmış, donanımlı akademik kadromuz ve güncel müfredatımızla geleceğin sağlık profesyonellerini yetiştiriyoruz.</p>
+                                            <h4><i class="fas fa-stethoscope"></i> {% trans "Sağlık Bilimleri Fakültesi Bölümleri" %}</h4>
+                                            <p>{% trans "Modern sağlık hizmetleri alanında uzmanlaşmış, donanımlı akademik kadromuz ve güncel müfredatımızla geleceğin sağlık profesyonellerini yetiştiriyoruz." %}</p>
                                         </div>
                                         
                                         <div class="departments-grid">
@@ -68,38 +69,38 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
                                                         <i class="fas fa-apple-alt department-icon"></i>
-                                                        <h4>Beslenme ve Diyetetik</h4>
-                                                        <p>Beslenme ve Diyetetik Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 201</span>
+                                                        <h4>{% trans "Beslenme ve Diyetetik" %}</h4>
+                                                        <p>{% trans "Beslenme ve Diyetetik Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 201" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Beslenme ve Diyetetik</h5>
+                                                        <h5>{% trans "Beslenme ve Diyetetik" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 8</span>
+                                                                <span>{% trans "Öğretim Üyesi: 8" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 120</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 120" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Tezli Yüksek Lisans</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Tezli Yüksek Lisans" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'beslenme_diyetetik:beslenme_diyetetik'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -111,38 +112,38 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
                                                         <i class="fas fa-child department-icon"></i>
-                                                        <h4>Çocuk Gelişimi</h4>
-                                                        <p>Çocuk Gelişimi Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 202</span>
+                                                        <h4>{% trans "Çocuk Gelişimi" %}</h4>
+                                                        <p>{% trans "Çocuk Gelişimi Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 202" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Çocuk Gelişimi</h5>
+                                                        <h5>{% trans "Çocuk Gelişimi" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 10</span>
+                                                                <span>{% trans "Öğretim Üyesi: 10" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 180</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 180" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Tezli Yüksek Lisans</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Tezli Yüksek Lisans" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'cocuk_gelisimi:cocuk_gelisimi'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -154,38 +155,38 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
                                                         <i class="fas fa-baby department-icon"></i>
-                                                        <h4>Ebelik</h4>
-                                                        <p>Ebelik Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 203</span>
+                                                        <h4>{% trans "Ebelik" %}</h4>
+                                                        <p>{% trans "Ebelik Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 203" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Ebelik</h5>
+                                                        <h5>{% trans "Ebelik" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 12</span>
+                                                                <span>{% trans "Öğretim Üyesi: 12" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 150</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 150" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Tezli Yüksek Lisans</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Tezli Yüksek Lisans" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'ebelik:ebelik'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -197,38 +198,38 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);">
                                                         <i class="fas fa-hands-helping department-icon"></i>
-                                                        <h4>Ergoterapi</h4>
-                                                        <p>Ergoterapi Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 204</span>
+                                                        <h4>{% trans "Ergoterapi" %}</h4>
+                                                        <p>{% trans "Ergoterapi Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 204" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Ergoterapi</h5>
+                                                        <h5>{% trans "Ergoterapi" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 6</span>
+                                                                <span>{% trans "Öğretim Üyesi: 6" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 80</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 80" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Yeni Bölüm</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Yeni Bölüm" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'ergoterapi:ergoterapi'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -240,39 +241,39 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #f39c12 0%, #d35400 100%);">
                                                         <i class="fas fa-user-md department-icon"></i>
-                                                        <h4>Fizyoterapi ve Rehabilitasyon</h4>
-                                                        <p>Fizyoterapi ve Rehabilitasyon Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 205</span>
+                                                        <h4>{% trans "Fizyoterapi ve Rehabilitasyon" %}</h4>
+                                                        <p>{% trans "Fizyoterapi ve Rehabilitasyon Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 205" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Fizyoterapi ve Rehabilitasyon</h5>
+                                                        <h5>{% trans "Fizyoterapi ve Rehabilitasyon" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 15</span>
+                                                                <span>{% trans "Öğretim Üyesi: 15" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 200</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 200" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Tezli Yüksek Lisans</span>
-                                                                <span class="department-tag">Doktora</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Tezli Yüksek Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Doktora" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'fizyoterapi_rehabilitasyon:fizyoterapi_rehabilitasyon'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -284,39 +285,39 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #e84393 0%, #fd79a8 100%);">
                                                         <i class="fas fa-user-nurse department-icon"></i>
-                                                        <h4>Hemşirelik</h4>
-                                                        <p>Hemşirelik Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 206</span>
+                                                        <h4>{% trans "Hemşirelik" %}</h4>
+                                                        <p>{% trans "Hemşirelik Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 206" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Hemşirelik</h5>
+                                                        <h5>{% trans "Hemşirelik" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 18</span>
+                                                                <span>{% trans "Öğretim Üyesi: 18" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 250</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 250" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Tezli Yüksek Lisans</span>
-                                                                <span class="department-tag">Doktora</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Tezli Yüksek Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Doktora" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'hemsirelik:hemsirelik'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -328,38 +329,38 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #00cec9 0%, #00b894 100%);">
                                                         <i class="fas fa-ear-deaf department-icon"></i>
-                                                        <h4>Odyoloji</h4>
-                                                        <p>Odyoloji Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 207</span>
+                                                        <h4>{% trans "Odyoloji" %}</h4>
+                                                        <p>{% trans "Odyoloji Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 207" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Odyoloji</h5>
+                                                        <h5>{% trans "Odyoloji" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 7</span>
+                                                                <span>{% trans "Öğretim Üyesi: 7" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 90</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 90" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Tezli Yüksek Lisans</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Tezli Yüksek Lisans" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'odyoloji:odyoloji'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -371,38 +372,38 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
                                                         <i class="fas fa-clipboard-list department-icon"></i>
-                                                        <h4>Sağlık Yönetimi</h4>
-                                                        <p>Sağlık Yönetimi Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 208</span>
+                                                        <h4>{% trans "Sağlık Yönetimi" %}</h4>
+                                                        <p>{% trans "Sağlık Yönetimi Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 208" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Sağlık Yönetimi</h5>
+                                                        <h5>{% trans "Sağlık Yönetimi" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 9</span>
+                                                                <span>{% trans "Öğretim Üyesi: 9" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 110</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 110" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Tezli Yüksek Lisans</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Tezli Yüksek Lisans" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'saglik_yonetimi:saglik_yonetimi'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -414,38 +415,38 @@
                                                 <div class="department-card-inner">
                                                     <div class="department-card-front" style="background: linear-gradient(135deg, #fd9644 0%, #fa8231 100%);">
                                                         <i class="fas fa-hands department-icon"></i>
-                                                        <h4>Sosyal Hizmet</h4>
-                                                        <p>Sosyal Hizmet Bölümü</p>
-                                                        <span class="department-code">Bölüm Kodu: 209</span>
+                                                        <h4>{% trans "Sosyal Hizmet" %}</h4>
+                                                        <p>{% trans "Sosyal Hizmet Bölümü" %}</p>
+                                                        <span class="department-code">{% trans "Bölüm Kodu: 209" %}</span>
                                                     </div>
                                                     <div class="department-card-back">
-                                                        <h5>Sosyal Hizmet</h5>
+                                                        <h5>{% trans "Sosyal Hizmet" %}</h5>
                                                         <div class="department-details">
                                                             <div class="department-info">
                                                                 <i class="fas fa-users"></i>
-                                                                <span>Öğretim Üyesi: 11</span>
+                                                                <span>{% trans "Öğretim Üyesi: 11" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-graduation-cap"></i>
-                                                                <span>Öğrenci Sayısı: 130</span>
+                                                                <span>{% trans "Öğrenci Sayısı: 130" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-language"></i>
-                                                                <span>Eğitim Dili: Türkçe</span>
+                                                                <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                             </div>
                                                             <div class="department-info">
                                                                 <i class="fas fa-certificate"></i>
-                                                                <span>AKTS: 240</span>
+                                                                <span>{% trans "AKTS: 240" %}</span>
                                                             </div>
                                                             <div class="department-tags">
-                                                                <span class="department-tag">Lisans</span>
-                                                                <span class="department-tag">Tezli Yüksek Lisans</span>
+                                                                <span class="department-tag">{% trans "Lisans" %}</span>
+                                                                <span class="department-tag">{% trans "Tezli Yüksek Lisans" %}</span>
                                                             </div>
                                                         </div>
                                                         <div class="department-action">
                                                             <a href="{% url 'sosyal_hizmet:sosyal_hizmet'  %}" class="btn-department-detail">
                                                                 <i class="fas fa-info-circle"></i>
-                                                                Detaylı Bilgi
+                                                                {% trans "Detaylı Bilgi" %}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -454,37 +455,37 @@
                                         </div>
                                         
                                         <div class="departments-stats">
-                                            <h4><i class="fas fa-chart-line"></i> Fakülte İstatistikleri</h4>
+                                            <h4><i class="fas fa-chart-line"></i> {% trans "Fakülte İstatistikleri" %}</h4>
                                             <div class="stats-container">
                                                 <div class="stat-item">
                                                     <i class="fas fa-hospital-alt stat-icon"></i>
                                                     <div class="stat-content">
-                                                        <h5>Toplam Bölüm</h5>
+                                                        <h5>{% trans "Toplam Bölüm" %}</h5>
                                                         <div class="stat-number">9</div>
                                                     </div>
                                                 </div>
                                                 <div class="stat-item">
                                                     <i class="fas fa-user-md stat-icon"></i>
                                                     <div class="stat-content">
-                                                        <h5>Akademik Kadro</h5>
+                                                        <h5>{% trans "Akademik Kadro" %}</h5>
                                                         <div class="stat-number">38</div>
-                                                        <span class="stat-unit">Kişi</span>
+                                                        <span class="stat-unit">{% trans "Kişi" %}</span>
                                                     </div>
                                                 </div>
                                                 <div class="stat-item">
                                                     <i class="fas fa-graduation-cap stat-icon"></i>
                                                     <div class="stat-content">
-                                                        <h5>Öğrenci Sayısı</h5>
+                                                        <h5>{% trans "Öğrenci Sayısı" %}</h5>
                                                         <div class="stat-number">1310</div>
-                                                        <span class="stat-unit">Öğrenci</span>
+                                                        <span class="stat-unit">{% trans "Öğrenci" %}</span>
                                                     </div>
                                                 </div>
                                                 <div class="stat-item">
                                                     <i class="fas fa-flask stat-icon"></i>
                                                     <div class="stat-content">
-                                                        <h5>Laboratuvar</h5>
+                                                        <h5>{% trans "Laboratuvar" %}</h5>
                                                         <div class="stat-number">12</div>
-                                                        <span class="stat-unit">Adet</span>
+                                                        <span class="stat-unit">{% trans "Adet" %}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -497,13 +498,13 @@
                             <!-- Tab 3: Haberler -->
                              <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-history"></i> Tarihçe</h3>
-                                    <p>Sağlık Bilimleri Fakültesi'nin kuruluş ve gelişim kronolojisi</p>
+                                    <h3><i class="fas fa-history"></i> {% trans "Tarihçe" %}</h3>
+                                    <p>{% trans "Sağlık Bilimleri Fakültesi'nin kuruluş ve gelişim kronolojisi" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="history-timeline-section">
-                                        <h4><i class="fas fa-clinic-medical"></i> Sağlık Bilimleri Fakültesi Tarihçe Kronolojisi</h4>
+                                        <h4><i class="fas fa-clinic-medical"></i> {% trans "Sağlık Bilimleri Fakültesi Tarihçe Kronolojisi" %}</h4>
                                         
                                         <div class="timeline-container">
                                             <!-- Timeline Item 1 -->
@@ -516,18 +517,18 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>Kuruluş ve İlk Öğrenci Alımı</h5>
+                                                        <h5>{% trans "Kuruluş ve İlk Öğrenci Alımı" %}</h5>
                                                         <span class="timeline-date">2013-2014</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>2013-2014 Eğitim Öğretim yılı güz döneminde Yomra Yerleşkesi Sağlık Bilimleri Fakültesi bünyesinde ilk kez öğrenci alınmıştır:</p>
+                                                        <p>{% trans "2013-2014 Eğitim Öğretim yılı güz döneminde Yomra Yerleşkesi Sağlık Bilimleri Fakültesi bünyesinde ilk kez öğrenci alınmıştır:" %}</p>
                                                         <ul style="list-style: disc; margin-left: 20px; color: var(--text-dark);">
-                                                            <li>Çocuk Gelişimi Bölümü</li>
-                                                            <li>Spor Bilimleri Bölümü</li>
-                                                            <li>Hemşirelik Bölümü</li>
+                                                            <li>{% trans "Çocuk Gelişimi Bölümü" %}</li>
+                                                            <li>{% trans "Spor Bilimleri Bölümü" %}</li>
+                                                            <li>{% trans "Hemşirelik Bölümü" %}</li>
                                                         </ul>
                                                         <div class="detail-note">
-                                                            <i class="fas fa-info-circle"></i> Fakültenin temelleri bu üç bölümle Yomra Yerleşkesi'nde atılmıştır.
+                                                            <i class="fas fa-info-circle"></i> {% trans "Fakültenin temelleri bu üç bölümle Yomra Yerleşkesi'nde atılmıştır." %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -543,12 +544,12 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>Yeni Yerleşkeye Geçiş</h5>
+                                                        <h5>{% trans "Yeni Yerleşkeye Geçiş" %}</h5>
                                                         <span class="timeline-date">2014-2015</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>2014-2015 Eğitim Öğretim yılında Ömer Yıldız Yerleşkesinde yeni derslik ve laboratuvarlarla eğitim öğretim faaliyetlerine devam edilmeye başlanmıştır.</p>
-                                                        <p>Modern altyapı ve donanımlı laboratuvarlarla fakülte eğitim kalitesi artırılmıştır.</p>
+                                                        <p>{% trans "2014-2015 Eğitim Öğretim yılında Ömer Yıldız Yerleşkesinde yeni derslik ve laboratuvarlarla eğitim öğretim faaliyetlerine devam edilmeye başlanmıştır." %}</p>
+                                                        <p>{% trans "Modern altyapı ve donanımlı laboratuvarlarla fakülte eğitim kalitesi artırılmıştır." %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -563,35 +564,35 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>Bölüm Çeşitliliğinin Artması</h5>
+                                                        <h5>{% trans "Bölüm Çeşitliliğinin Artması" %}</h5>
                                                         <span class="timeline-date">2016-2017</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>2016-2017 yılı itibariyle yeni bölümler fakülte bünyesinde eğitim öğretim faaliyetlerine başlamıştır:</p>
+                                                        <p>{% trans "2016-2017 yılı itibariyle yeni bölümler fakülte bünyesinde eğitim öğretim faaliyetlerine başlamıştır:" %}</p>
                                                         <div class="current-departments">
                                                             <div class="department-badge">
                                                                 <i class="fas fa-apple-alt"></i>
-                                                                <span>Beslenme ve Diyetetik</span>
+                                                                <span>{% trans "Beslenme ve Diyetetik" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-baby"></i>
-                                                                <span>Ebelik</span>
+                                                                <span>{% trans "Ebelik" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-child"></i>
-                                                                <span>Çocuk Gelişimi</span>
+                                                                <span>{% trans "Çocuk Gelişimi" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-ear-deaf"></i>
-                                                                <span>Odyoloji</span>
+                                                                <span>{% trans "Odyoloji" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-user-md"></i>
-                                                                <span>Fizyoterapi ve Rehabilitasyon</span>
+                                                                <span>{% trans "Fizyoterapi ve Rehabilitasyon" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-hands"></i>
-                                                                <span>Sosyal Hizmet</span>
+                                                                <span>{% trans "Sosyal Hizmet" %}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -607,30 +608,30 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>Güncel Durum ve Gelecek Planları</h5>
+                                                        <h5>{% trans "Güncel Durum ve Gelecek Planları" %}</h5>
                                                         <span class="timeline-date">2023-2024</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p><strong>Ergoterapi lisans programımız</strong> açılmış olup 2023-2024 yılında öğrenci alımına başlayacaktır.</p>
+                                                        <p><strong>{% trans "Ergoterapi lisans programımız" %}</strong> {% trans "açılmış olup 2023-2024 yılında öğrenci alımına başlayacaktır." %}</p>
                                                         
-                                                        <p><strong>2023 yılı itibariyle fakülte akademik kadrosu:</strong></p>
+                                                        <p><strong>{% trans "2023 yılı itibariyle fakülte akademik kadrosu:" %}</strong></p>
                                                         <ul style="list-style: disc; margin-left: 20px; color: var(--text-dark); margin-bottom: 15px;">
-                                                            <li>5 Profesör</li>
-                                                            <li>2 Doçent</li>
-                                                            <li>20 Doktor Öğretim Üyesi</li>
-                                                            <li>4 Öğretim Görevlisi</li>
-                                                            <li>7 Araştırma Görevlisi</li>
-                                                            <li>2 İdari Personel</li>
+                                                            <li>{% trans "5 Profesör" %}</li>
+                                                            <li>{% trans "2 Doçent" %}</li>
+                                                            <li>{% trans "20 Doktor Öğretim Üyesi" %}</li>
+                                                            <li>{% trans "4 Öğretim Görevlisi" %}</li>
+                                                            <li>{% trans "7 Araştırma Görevlisi" %}</li>
+                                                            <li>{% trans "2 İdari Personel" %}</li>
                                                         </ul>
                                                         
                                                         <div class="detail-badge">
-                                                            <i class="fas fa-chart-line"></i> Toplam Akademik Personel: 38
+                                                            <i class="fas fa-chart-line"></i> {% trans "Toplam Akademik Personel: 38" %}
                                                         </div>
                                                         
                                                         <div class="current-departments">
                                                             <div class="department-badge" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white;">
                                                                 <i class="fas fa-hands-helping"></i>
-                                                                <span>YENİ: Ergoterapi</span>
+                                                                <span>{% trans "YENİ: Ergoterapi" %}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -639,37 +640,37 @@
                                         </div>
                                         
                                         <div class="history-stats-section">
-                                            <h4><i class="fas fa-chart-bar"></i> Tarihsel Gelişim İstatistikleri</h4>
+                                            <h4><i class="fas fa-chart-bar"></i> {% trans "Tarihsel Gelişim İstatistikleri" %}</h4>
                                             <div class="stats-grid">
                                                 <div class="history-stat-card">
                                                     <i class="fas fa-calendar-alt stat-icon"></i>
                                                     <div class="stat-content">
-                                                        <h5>Kuruluş Yılı</h5>
+                                                        <h5>{% trans "Kuruluş Yılı" %}</h5>
                                                         <div class="stat-number">2013</div>
                                                     </div>
                                                 </div>
                                                 <div class="history-stat-card">
                                                     <i class="fas fa-expand-arrows-alt stat-icon"></i>
                                                     <div class="stat-content">
-                                                        <h5>Başlangıç Bölüm</h5>
+                                                        <h5>{% trans "Başlangıç Bölüm" %}</h5>
                                                         <div class="stat-number">3</div>
-                                                        <span class="stat-unit">Bölüm</span>
+                                                        <span class="stat-unit">{% trans "Bölüm" %}</span>
                                                     </div>
                                                 </div>
                                                 <div class="history-stat-card">
                                                     <i class="fas fa-university stat-icon"></i>
                                                     <div class="stat-content">
-                                                        <h5>Güncel Bölüm</h5>
+                                                        <h5>{% trans "Güncel Bölüm" %}</h5>
                                                         <div class="stat-number">9</div>
-                                                        <span class="stat-unit">Bölüm</span>
+                                                        <span class="stat-unit">{% trans "Bölüm" %}</span>
                                                     </div>
                                                 </div>
                                                 <div class="history-stat-card">
                                                     <i class="fas fa-history stat-icon"></i>
                                                     <div class="stat-content">
-                                                        <h5>Yıllık Tecrübe</h5>
+                                                        <h5>{% trans "Yıllık Tecrübe" %}</h5>
                                                         <div class="stat-number">10+</div>
-                                                        <span class="stat-unit">Yıl</span>
+                                                        <span class="stat-unit">{% trans "Yıl" %}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -678,9 +679,9 @@
                                         <div class="info-card history-note">
                                             <div class="info-card-header">
                                                 <i class="fas fa-heartbeat"></i>
-                                                <h3>Sağlık Bilimlerinde Sürekli Gelişim</h3>
+                                                <h3>{% trans "Sağlık Bilimlerinde Sürekli Gelişim" %}</h3>
                                             </div>
-                                            <p>Fakültemiz, kuruluşundan bu yana geçen 10 yıllık süreçte sürekli gelişim ve büyüme içerisinde olmuş, ülkemizin ihtiyaç duyduğu nitelikli sağlık profesyonellerini yetiştirmek için çalışmalarını kararlılıkla sürdürmektedir.</p>
+                                            <p>{% trans "Fakültemiz, kuruluşundan bu yana geçen 10 yıllık süreçte sürekli gelişim ve büyüme içerisinde olmuş, ülkemizin ihtiyaç duyduğu nitelikli sağlık profesyonellerini yetiştirmek için çalışmalarını kararlılıkla sürdürmektedir." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -688,8 +689,8 @@
                             <!-- Tab 3: Misyon & Vizyon -->
                             <div class="tab-content" id="tab3">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-bullseye"></i> Misyon & Vizyon</h3>
-                                    <p>Sağlık Bilimleri Fakültesi'nin misyon, vizyon ve temel değerleri</p>
+                                    <h3><i class="fas fa-bullseye"></i> {% trans "Misyon & Vizyon" %}</h3>
+                                    <p>{% trans "Sağlık Bilimleri Fakültesi'nin misyon, vizyon ve temel değerleri" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
@@ -701,50 +702,50 @@
                                                     <i class="fas fa-bullseye"></i>
                                                 </div>
                                                 <div class="mission-title">
-                                                    <h5>Misyonumuz</h5>
+                                                    <h5>{% trans "Misyonumuz" %}</h5>
                                                     <span class="mission-badge">
                                                         <i class="fas fa-flag"></i>
-                                                        Temel Görevimiz
+                                                        {% trans "Temel Görevimiz" %}
                                                     </span>
                                                 </div>
                                             </div>
                                             
                                             <div class="mission-statement">
-                                                <p>Sağlık alanında disiplinler arası eşgüdüm ve takım çalışması yapabilen, toplumun sağlığını, gelişimini ve yaşam kalitesini yükseltebilmek amacıyla bilim ve teknolojiyi kullanan, araştırmacı, evrensel, kültürel, etik ve insani değerlere saygılı, meslek alanında bilgi ve beceriye sahip kişileri yetiştirmektir.</p>
+                                                <p>{% trans "Sağlık alanında disiplinler arası eşgüdüm ve takım çalışması yapabilen, toplumun sağlığını, gelişimini ve yaşam kalitesini yükseltebilmek amacıyla bilim ve teknolojiyi kullanan, araştırmacı, evrensel, kültürel, etik ve insani değerlere saygılı, meslek alanında bilgi ve beceriye sahip kişileri yetiştirmektir." %}</p>
                                             </div>
                                             
                                             <h5 style="color: var(--primary-dark-blue); margin-top: 30px; margin-bottom: 20px;">
                                                 <i class="fas fa-check-circle" style="color: #3498db; margin-right: 10px;"></i>
-                                                Misyonumuzun Temel Unsurları
+                                                {% trans "Misyonumuzun Temel Unsurları" %}
                                             </h5>
                                             
                                             <div class="mission-pillars">
                                                 <div class="pillar">
                                                     <i class="fas fa-users-cog pillar-icon"></i>
                                                     <div class="pillar-content">
-                                                        <h6>Disiplinler Arası İşbirliği</h6>
-                                                        <p>Sağlık alanında takım çalışması ve eşgüdüm yeteneği</p>
+                                                        <h6>{% trans "Disiplinler Arası İşbirliği" %}</h6>
+                                                        <p>{% trans "Sağlık alanında takım çalışması ve eşgüdüm yeteneği" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="pillar">
                                                     <i class="fas fa-heartbeat pillar-icon"></i>
                                                     <div class="pillar-content">
-                                                        <h6>Toplum Sağlığı Odaklılık</h6>
-                                                        <p>Toplumun sağlık, gelişim ve yaşam kalitesini yükseltme</p>
+                                                        <h6>{% trans "Toplum Sağlığı Odaklılık" %}</h6>
+                                                        <p>{% trans "Toplumun sağlık, gelişim ve yaşam kalitesini yükseltme" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="pillar">
                                                     <i class="fas fa-flask pillar-icon"></i>
                                                     <div class="pillar-content">
-                                                        <h6>Bilim ve Teknoloji Kullanımı</h6>
-                                                        <p>Güncel bilimsel gelişmeler ve teknoloji ile eğitim</p>
+                                                        <h6>{% trans "Bilim ve Teknoloji Kullanımı" %}</h6>
+                                                        <p>{% trans "Güncel bilimsel gelişmeler ve teknoloji ile eğitim" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="pillar">
                                                     <i class="fas fa-handshake pillar-icon"></i>
                                                     <div class="pillar-content">
-                                                        <h6>Etik ve İnsani Değerler</h6>
-                                                        <p>Evrensel, kültürel ve etik değerlere saygılı mezunlar</p>
+                                                        <h6>{% trans "Etik ve İnsani Değerler" %}</h6>
+                                                        <p>{% trans "Evrensel, kültürel ve etik değerlere saygılı mezunlar" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -757,50 +758,50 @@
                                                     <i class="fas fa-eye"></i>
                                                 </div>
                                                 <div class="vision-title">
-                                                    <h5>Vizyonumuz</h5>
+                                                    <h5>{% trans "Vizyonumuz" %}</h5>
                                                     <span class="vision-badge">
                                                         <i class="fas fa-rocket"></i>
-                                                        Gelecek Hedefimiz
+                                                        {% trans "Gelecek Hedefimiz" %}
                                                     </span>
                                                 </div>
                                             </div>
                                             
                                             <div class="vision-statement">
-                                                <p>Alanında özgün bilimsel çalışmalar yapan, ulusal ve uluslararası platformlarda tanınan, dünyada sağlık bilimleri eğitim ve öğretimi üzerine yetkinliği kabul edilen, toplum sağlığı ile ilgili plan ve politikalar oluşturulmasında söz sahibi olan, saygın ve alanında yenilikçi ve öncü bir fakülte olmaktır.</p>
+                                                <p>{% trans "Alanında özgün bilimsel çalışmalar yapan, ulusal ve uluslararası platformlarda tanınan, dünyada sağlık bilimleri eğitim ve öğretimi üzerine yetkinliği kabul edilen, toplum sağlığı ile ilgili plan ve politikalar oluşturulmasında söz sahibi olan, saygın ve alanında yenilikçi ve öncü bir fakülte olmaktır." %}</p>
                                             </div>
                                             
                                             <h5 style="color: var(--primary-dark-blue); margin-top: 30px; margin-bottom: 20px;">
                                                 <i class="fas fa-bullseye" style="color: #3498db; margin-right: 10px;"></i>
-                                                Vizyon Hedeflerimiz
+                                                {% trans "Vizyon Hedeflerimiz" %}
                                             </h5>
                                             
                                             <div class="vision-goals">
                                                 <div class="goal">
                                                     <div class="goal-number">1</div>
                                                     <div class="goal-content">
-                                                        <h6>Özgün Bilimsel Çalışmalar</h6>
-                                                        <p>Alanında yenilikçi ve özgün araştırmalar üretmek</p>
+                                                        <h6>{% trans "Özgün Bilimsel Çalışmalar" %}</h6>
+                                                        <p>{% trans "Alanında yenilikçi ve özgün araştırmalar üretmek" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="goal">
                                                     <div class="goal-number">2</div>
                                                     <div class="goal-content">
-                                                        <h6>Uluslararası Tanınırlık</h6>
-                                                        <p>Dünyada sağlık bilimleri eğitiminde yetkinlik kazanmak</p>
+                                                        <h6>{% trans "Uluslararası Tanınırlık" %}</h6>
+                                                        <p>{% trans "Dünyada sağlık bilimleri eğitiminde yetkinlik kazanmak" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="goal">
                                                     <div class="goal-number">3</div>
                                                     <div class="goal-content">
-                                                        <h6>Toplum Sağlığı Politikaları</h6>
-                                                        <p>Toplum sağlığı planlamasında söz sahibi olmak</p>
+                                                        <h6>{% trans "Toplum Sağlığı Politikaları" %}</h6>
+                                                        <p>{% trans "Toplum sağlığı planlamasında söz sahibi olmak" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="goal">
                                                     <div class="goal-number">4</div>
                                                     <div class="goal-content">
-                                                        <h6>Yenilikçi ve Öncü Rol</h6>
-                                                        <p>Sağlık bilimleri alanında öncü ve yenilikçi olmak</p>
+                                                        <h6>{% trans "Yenilikçi ve Öncü Rol" %}</h6>
+                                                        <p>{% trans "Sağlık bilimleri alanında öncü ve yenilikçi olmak" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -810,50 +811,50 @@
                                         <div class="values-section">
                                             <h4 style="color: var(--primary-dark-blue); margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
                                                 <i class="fas fa-heart" style="color: #e74c3c;"></i>
-                                                Temel Değerlerimiz
+                                                {% trans "Temel Değerlerimiz" %}
                                             </h4>
                                             
                                             <div class="values-grid">
                                                 <div class="value-card">
                                                     <i class="fas fa-user-md value-icon"></i>
                                                     <div class="value-content">
-                                                        <h5>Hasta Odaklılık</h5>
-                                                        <p>Hasta ve toplum sağlığını merkeze alan hizmet anlayışı</p>
+                                                        <h5>{% trans "Hasta Odaklılık" %}</h5>
+                                                        <p>{% trans "Hasta ve toplum sağlığını merkeze alan hizmet anlayışı" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="value-card">
                                                     <i class="fas fa-handshake value-icon"></i>
                                                     <div class="value-content">
-                                                        <h5>Etik ve Profesyonellik</h5>
-                                                        <p>Mesleki etik değerlere sıkı sıkıya bağlılık</p>
+                                                        <h5>{% trans "Etik ve Profesyonellik" %}</h5>
+                                                        <p>{% trans "Mesleki etik değerlere sıkı sıkıya bağlılık" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="value-card">
                                                     <i class="fas fa-users value-icon"></i>
                                                     <div class="value-content">
-                                                        <h5>Takım Çalışması</h5>
-                                                        <p>Disiplinler arası işbirliği ve takım ruhu</p>
+                                                        <h5>{% trans "Takım Çalışması" %}</h5>
+                                                        <p>{% trans "Disiplinler arası işbirliği ve takım ruhu" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="value-card">
                                                     <i class="fas fa-lightbulb value-icon"></i>
                                                     <div class="value-content">
-                                                        <h5>Yenilikçilik</h5>
-                                                        <p>Sürekli gelişim ve yenilikçi yaklaşımlar</p>
+                                                        <h5>{% trans "Yenilikçilik" %}</h5>
+                                                        <p>{% trans "Sürekli gelişim ve yenilikçi yaklaşımlar" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="value-card">
                                                     <i class="fas fa-graduation-cap value-icon"></i>
                                                     <div class="value-content">
-                                                        <h5>Sürekli Eğitim</h5>
-                                                        <p>Hayat boyu öğrenme ve mesleki gelişim</p>
+                                                        <h5>{% trans "Sürekli Eğitim" %}</h5>
+                                                        <p>{% trans "Hayat boyu öğrenme ve mesleki gelişim" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="value-card">
                                                     <i class="fas fa-balance-scale value-icon"></i>
                                                     <div class="value-content">
-                                                        <h5>Şeffaflık ve Hesap Verebilirlik</h5>
-                                                        <p>Açık, şeffaf ve hesap verebilir yönetim</p>
+                                                        <h5>{% trans "Şeffaflık ve Hesap Verebilirlik" %}</h5>
+                                                        <p>{% trans "Açık, şeffaf ve hesap verebilir yönetim" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -865,8 +866,8 @@
                                                 <i class="fas fa-quote-left"></i>
                                             </div>
                                             <div class="quote-content">
-                                                <p>"Sağlık, sadece hastalık ve sakatlığın olmayışı değil, bedensel, ruhsal ve sosyal yönden tam bir iyilik halidir. Misyonumuz, bu iyilik halini toplumun her kesimine yaymak için çalışan sağlık profesyonelleri yetiştirmektir."</p>
-                                                <div class="quote-author">— Sağlık Bilimleri Fakültesi</div>
+                                                <p>{% trans "\"Sağlık, sadece hastalık ve sakatlığın olmayışı değil, bedensel, ruhsal ve sosyal yönden tam bir iyilik halidir. Misyonumuz, bu iyilik halini toplumun her kesimine yaymak için çalışan sağlık profesyonelleri yetiştirmektir.\"" %}</p>
+                                                <div class="quote-author">{% trans "— Sağlık Bilimleri Fakültesi" %}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -876,8 +877,8 @@
                             <!-- Tab 4: Dekan Mesajı -->
                             <div class="tab-content" id="tab4">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-comments"></i> Dekan Mesajı</h3>
-                                    <p>Sağlık Bilimleri Fakültesi Dekanı'nın öğrenci ve ziyaretçilere mesajı</p>
+                                    <h3><i class="fas fa-comments"></i> {% trans "Dekan Mesajı" %}</h3>
+                                    <p>{% trans "Sağlık Bilimleri Fakültesi Dekanı'nın öğrenci ve ziyaretçilere mesajı" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
@@ -890,26 +891,26 @@
                                                     </div>
                                                     <div class="dean-status">
                                                         <div class="status-dot active"></div>
-                                                        <span class="status-text">Çevrimiçi</span>
+                                                        <span class="status-text">{% trans "Çevrimiçi" %}</span>
                                                     </div>
                                                 </div>
                                                 <div class="dean-info">
-                                                    <h3>Prof. Dr. Yavuz ÖZORAN</h3>
+                                                    <h3>{% trans "Prof. Dr. Yavuz ÖZORAN" %}</h3>
                                                     <div class="dean-title">
-                                                        Sağlık Bilimleri Fakültesi Dekanı
+                                                        {% trans "Sağlık Bilimleri Fakültesi Dekanı" %}
                                                     </div>
                                                     <div class="dean-badges">
                                                         <span class="profile-badge">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            Doktora
+                                                            {% trans "Doktora" %}
                                                         </span>
                                                         <span class="profile-badge">
                                                             <i class="fas fa-award"></i>
-                                                            Profesör
+                                                            {% trans "Profesör" %}
                                                         </span>
                                                         <span class="profile-badge">
                                                             <i class="fas fa-clock"></i>
-                                                            20+ Yıl Deneyim
+                                                            {% trans "20+ Yıl Deneyim" %}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -921,8 +922,8 @@
                                                         <i class="fas fa-envelope"></i>
                                                     </div>
                                                     <div class="detail-content">
-                                                        <h5>E-posta</h5>
-                                                        <p>dekan.sbf@avrasya.edu.tr</p>
+                                                        <h5>{% trans "E-posta" %}</h5>
+                                                        <p>{% trans "dekan.sbf@avrasya.edu.tr" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-item">
@@ -930,8 +931,8 @@
                                                         <i class="fas fa-phone"></i>
                                                     </div>
                                                     <div class="detail-content">
-                                                        <h5>Telefon</h5>
-                                                        <p>+90 (462) XXX XX XX</p>
+                                                        <h5>{% trans "Telefon" %}</h5>
+                                                        <p>{% trans "+90 (462) XXX XX XX" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-item">
@@ -939,8 +940,8 @@
                                                         <i class="fas fa-door-open"></i>
                                                     </div>
                                                     <div class="detail-content">
-                                                        <h5>Ofis</h5>
-                                                        <p>Sağlık Bilimleri Fakültesi Binası, Kat 2, Oda 201</p>
+                                                        <h5>{% trans "Ofis" %}</h5>
+                                                        <p>{% trans "Sağlık Bilimleri Fakültesi Binası, Kat 2, Oda 201" %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-item">
@@ -948,8 +949,8 @@
                                                         <i class="fas fa-clock"></i>
                                                     </div>
                                                     <div class="detail-content">
-                                                        <h5>Görüşme Saatleri</h5>
-                                                        <p>Salı-Perşembe: 14:00-16:00</p>
+                                                        <h5>{% trans "Görüşme Saatleri" %}</h5>
+                                                        <p>{% trans "Salı-Perşembe: 14:00-16:00" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -960,8 +961,8 @@
                                                 <i class="fas fa-heartbeat"></i>
                                             </div>
                                             <div class="intro-content">
-                                                <h4>Sevgili Öğrencilerimiz ve Değerli Ziyaretçiler,</h4>
-                                                <p>Sağlık Bilimleri Fakültesi ailesine hoş geldiniz. İnsan sağlığını merkeze alan, bilimsel gelişmeler ışığında eğitim veren fakültemiz hakkında sizleri bilgilendirmek ve bir dekan olarak görüşlerimi paylaşmak istiyorum.</p>
+                                                <h4>{% trans "Sevgili Öğrencilerimiz ve Değerli Ziyaretçiler," %}</h4>
+                                                <p>{% trans "Sağlık Bilimleri Fakültesi ailesine hoş geldiniz. İnsan sağlığını merkeze alan, bilimsel gelişmeler ışığında eğitim veren fakültemiz hakkında sizleri bilgilendirmek ve bir dekan olarak görüşlerimi paylaşmak istiyorum." %}</p>
                                             </div>
                                         </div>
                                         
@@ -970,75 +971,75 @@
                                             <div class="message-paragraph highlight">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">1</div>
-                                                    <h5>Fakültemizin Bölümleri</h5>
+                                                    <h5>{% trans "Fakültemizin Bölümleri" %}</h5>
                                                 </div>
-                                                <p>Fakültemiz bünyesinde Beslenme ve Diyetetik Bölümü, Ebelik Bölümü, Egzersiz ve Spor Bilimleri Bölümü, Çocuk Gelişimi Bölümü, Fizyoterapi ve Rehabilitasyon Bölümü, Hemşirelik Bölümü, Odyoloji Bölümü, Sağlık Yönetimi, Sosyal hizmet Bölümü olmak üzere 9 bölümü içeren bir fakültedir.</p>
+                                                <p>{% trans "Fakültemiz bünyesinde Beslenme ve Diyetetik Bölümü, Ebelik Bölümü, Egzersiz ve Spor Bilimleri Bölümü, Çocuk Gelişimi Bölümü, Fizyoterapi ve Rehabilitasyon Bölümü, Hemşirelik Bölümü, Odyoloji Bölümü, Sağlık Yönetimi, Sosyal hizmet Bölümü olmak üzere 9 bölümü içeren bir fakültedir." %}</p>
                                             </div>
                                             
                                             <!-- Paragraph 2 -->
                                             <div class="message-paragraph">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">2</div>
-                                                    <h5>Akademik Kadromuz</h5>
+                                                    <h5>{% trans "Akademik Kadromuz" %}</h5>
                                                 </div>
-                                                <p>Fakültemiz 2023 yılında 5 profesör, 2 doçent, 20 doktor üyesi, 4 öğretim görevlisi ve 7 araştırma görevlisi ile 2 idari personeli olarak eğitim öğretim vermektedir.</p>
+                                                <p>{% trans "Fakültemiz 2023 yılında 5 profesör, 2 doçent, 20 doktor üyesi, 4 öğretim görevlisi ve 7 araştırma görevlisi ile 2 idari personeli olarak eğitim öğretim vermektedir." %}</p>
                                             </div>
                                             
                                             <!-- Paragraph 3 -->
                                             <div class="message-paragraph">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">3</div>
-                                                    <h5>Tarihsel Gelişimimiz</h5>
+                                                    <h5>{% trans "Tarihsel Gelişimimiz" %}</h5>
                                                 </div>
-                                                <p>Fakültemiz 2013-2014 Eğitim Öğretim yılı güz döneminde Yomra Yerleşkesi Sağlık Bilimleri Fakültesi bünyesinde Çocuk Gelişimi, Spor Bilimleri ve Hemşirelik lisans programları ilk kez öğrenci almıştır. 2014-2015 Eğitim Öğretim yılında Ömer Yıldız Yerleşkesinde yeni derslik ve laboratuvarlarla eğitim öğretim faaliyetlerine devam etmektedir.</p>
+                                                <p>{% trans "Fakültemiz 2013-2014 Eğitim Öğretim yılı güz döneminde Yomra Yerleşkesi Sağlık Bilimleri Fakültesi bünyesinde Çocuk Gelişimi, Spor Bilimleri ve Hemşirelik lisans programları ilk kez öğrenci almıştır. 2014-2015 Eğitim Öğretim yılında Ömer Yıldız Yerleşkesinde yeni derslik ve laboratuvarlarla eğitim öğretim faaliyetlerine devam etmektedir." %}</p>
                                             </div>
                                             
                                             <!-- Paragraph 4 -->
                                             <div class="message-paragraph highlight">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">4</div>
-                                                    <h5>Büyüme ve Gelişme</h5>
+                                                    <h5>{% trans "Büyüme ve Gelişme" %}</h5>
                                                 </div>
-                                                <p>2016-2017 yılı itibariyle Beslenme ve Diyetetik Bölümü, Ebelik Bölümü, Çocuk gelişimi bölümü, Odyoloji bölümü, Fizyoterapi ve Rehabilitasyon Bölümü, Sosyal hizmet bölümü de fakültemiz eğitim öğretim faaliyetlerine başlamıştır.</p>
+                                                <p>{% trans "2016-2017 yılı itibariyle Beslenme ve Diyetetik Bölümü, Ebelik Bölümü, Çocuk gelişimi bölümü, Odyoloji bölümü, Fizyoterapi ve Rehabilitasyon Bölümü, Sosyal hizmet bölümü de fakültemiz eğitim öğretim faaliyetlerine başlamıştır." %}</p>
                                             </div>
                                             
                                             <!-- Special Message -->
                                             <div class="special-message">
-                                                <p>"Ergoterapi lisans programımızda açılmış olup 2023-2024 yılında öğrenci alımına başlayacaktır."</p>
+                                                <p>{% trans "\"Ergoterapi lisans programımızda açılmış olup 2023-2024 yılında öğrenci alımına başlayacaktır.\"" %}</p>
                                             </div>
                                             
                                             <!-- Paragraph 5 -->
                                             <div class="message-paragraph">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">5</div>
-                                                    <h5>Sağlık Bilimlerinin Önemi</h5>
+                                                    <h5>{% trans "Sağlık Bilimlerinin Önemi" %}</h5>
                                                 </div>
-                                                <p>Dünya çapında gerçekleşen tüm durumlar sağlık bilimlerinin önemini daha da ortaya koymuştur. Sağlık Bilimleri alanında eğitim-öğretim gören siz gençlerimizin donanımlı, yetkin ve tutarlı bir şekilde yetiştirilerek topluma kazandırılması en büyük dileğimizdir.</p>
+                                                <p>{% trans "Dünya çapında gerçekleşen tüm durumlar sağlık bilimlerinin önemini daha da ortaya koymuştur. Sağlık Bilimleri alanında eğitim-öğretim gören siz gençlerimizin donanımlı, yetkin ve tutarlı bir şekilde yetiştirilerek topluma kazandırılması en büyük dileğimizdir." %}</p>
                                             </div>
                                             
                                             <!-- Paragraph 6 -->
                                             <div class="message-paragraph">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">6</div>
-                                                    <h5>Üniversite-Öğrenci-Aile İşbirliği</h5>
+                                                    <h5>{% trans "Üniversite-Öğrenci-Aile İşbirliği" %}</h5>
                                                 </div>
-                                                <p>Bu amaçla üniversite-öğrenci-aile etkileşimini de çok önemsiyoruz. Bu üçlünün uyumlu birlikteliği geleceğimizi emanet edeceğimiz siz gençlerin hem bilimsel hem de karakter olarak iyi birer birey olmanızı sağlayacaktır.</p>
+                                                <p>{% trans "Bu amaçla üniversite-öğrenci-aile etkileşimini de çok önemsiyoruz. Bu üçlünün uyumlu birlikteliği geleceğimizi emanet edeceğimiz siz gençlerin hem bilimsel hem de karakter olarak iyi birer birey olmanızı sağlayacaktır." %}</p>
                                             </div>
                                             
                                             <!-- Paragraph 7 -->
                                             <div class="message-paragraph highlight">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">7</div>
-                                                    <h5>Öğrencilerimize Sesleniş</h5>
+                                                    <h5>{% trans "Öğrencilerimize Sesleniş" %}</h5>
                                                 </div>
-                                                <p>Değerli öğrenciler içinizde insan sevgisi, yardım etme dürtüsü varsa ve insan sağlığını önemsiyorsanız tam da size uygun bölümlerimizde eğitim-öğretim alma şansına sahipsiniz. Bütün güzellikler ve başarılar sizlerin olsun.</p>
+                                                <p>{% trans "Değerli öğrenciler içinizde insan sevgisi, yardım etme dürtüsü varsa ve insan sağlığını önemsiyorsanız tam da size uygun bölümlerimizde eğitim-öğretim alma şansına sahipsiniz. Bütün güzellikler ve başarılar sizlerin olsun." %}</p>
                                             </div>
                                             
                                             <!-- Signature -->
                                             <div class="signature">
                                                 <div class="signature-line"></div>
-                                                <p style="font-weight: bold; margin-top: 10px; color: var(--primary-dark-blue);">Prof. Dr. Yavuz ÖZORAN</p>
-                                                <p style="color: #666; font-style: italic;">Sağlık Bilimleri Fakültesi Dekanı</p>
+                                                <p style="font-weight: bold; margin-top: 10px; color: var(--primary-dark-blue);">{% trans "Prof. Dr. Yavuz ÖZORAN" %}</p>
+                                                <p style="color: #666; font-style: italic;">{% trans "Sağlık Bilimleri Fakültesi Dekanı" %}</p>
                                             </div>
                                         </div>
                                     </div>

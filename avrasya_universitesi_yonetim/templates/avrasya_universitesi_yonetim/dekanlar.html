@@ -1,5 +1,6 @@
 <!-- dekanlar.html -->
 {% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Dekanlar{% endblock %}
@@ -10,13 +11,12 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">DEKANLAR</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "DEKANLAR" %}</h1>
                 <p class="lead mb-4">
-                    Fakültelerimizin akademik ve idari yönetiminden sorumlu 
-                            deneyimli dekanlarımız
+                    {% trans "Fakültelerimizin akademik ve idari yönetiminden sorumlu deneyimli dekanlarımız" %}
                 <div class="d-flex align-items-center">
                     <i class="bi bi-building me-2"></i>
-                    <span>Avrasya Üniversitesi</span>
+                    <span>{% trans "Avrasya Üniversitesi" %}</span>
                 </div>
             </div>
             <div class="col-md-4 text-center">
@@ -45,7 +45,7 @@
                             <div class="photo-overlay"></div>
                             {% if dean.title == "Dekan V." %}
                             <div class="dean-badge vekil">
-                                <span>V.</span>
+                                <span>{% trans "V." %}</span>
                             </div>
                             {% endif %}
                         </div>
@@ -61,19 +61,19 @@
                                 <div class="col-4">
                                     <div class="stat">
                                         <h6 class="stat-number">{{ dean.stats.programs }}</h6>
-                                        <p class="stat-label">Program</p>
+                                        <p class="stat-label">{% trans "Program" %}</p>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="stat">
                                         <h6 class="stat-number">{{ dean.stats.students }}+</h6>
-                                        <p class="stat-label">Öğrenci</p>
+                                        <p class="stat-label">{% trans "Öğrenci" %}</p>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="stat">
                                         <h6 class="stat-number">{{ dean.stats.years }}+</h6>
-                                        <p class="stat-label">Yıl</p>
+                                        <p class="stat-label">{% trans "Yıl" %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -95,50 +95,50 @@
                     <div class="card-header bg-primary text-white py-4">
                         <h3 class="mb-0 text-center">
                             <i class="bi bi-building me-2"></i>
-                            Fakülte Bilgileri
+                            {% trans "Fakülte Bilgileri" %}
                         </h3>
                     </div>
                     <div class="card-body p-4">
                         <div class="row">
                             <div class="col-md-6">
-                                <h5 class="text-primary mb-4">Akademik Yapı</h5>
+                                <h5 class="text-primary mb-4">{% trans "Akademik Yapı" %}</h5>
                                 <div class="faculty-structure">
                                     <div class="structure-item">
                                         <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        <span>6 Farklı Fakülte</span>
+                                        <span>{% trans "6 Farklı Fakülte" %}</span>
                                     </div>
                                     <div class="structure-item">
                                         <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        <span>30+ Lisans Programı</span>
+                                        <span>{% trans "30+ Lisans Programı" %}</span>
                                     </div>
                                     <div class="structure-item">
                                         <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        <span>15+ Yüksek Lisans Programı</span>
+                                        <span>{% trans "15+ Yüksek Lisans Programı" %}</span>
                                     </div>
                                     <div class="structure-item">
                                         <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        <span>5000+ Aktif Öğrenci</span>
+                                        <span>{% trans "5000+ Aktif Öğrenci" %}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h5 class="text-primary mb-4">Dekanlık Görevleri</h5>
+                                <h5 class="text-primary mb-4">{% trans "Dekanlık Görevleri" %}</h5>
                                 <div class="dean-responsibilities">
                                     <div class="responsibility-item">
                                         <i class="bi bi-gear-fill text-primary me-2"></i>
-                                        <span>Akademik Program Yönetimi</span>
+                                        <span>{% trans "Akademik Program Yönetimi" %}</span>
                                     </div>
                                     <div class="responsibility-item">
                                         <i class="bi bi-people-fill text-primary me-2"></i>
-                                        <span>Öğretim Üyesi Koordinasyonu</span>
+                                        <span>{% trans "Öğretim Üyesi Koordinasyonu" %}</span>
                                     </div>
                                     <div class="responsibility-item">
                                         <i class="bi bi-graph-up-arrow text-primary me-2"></i>
-                                        <span>Akademik Gelişim Planlaması</span>
+                                        <span>{% trans "Akademik Gelişim Planlaması" %}</span>
                                     </div>
                                     <div class="responsibility-item">
                                         <i class="bi bi-award-fill text-primary me-2"></i>
-                                        <span>Kalite Güvence Süreçleri</span>
+                                        <span>{% trans "Kalite Güvence Süreçleri" %}</span>
                                     </div>
                                 </div>
                             </div>

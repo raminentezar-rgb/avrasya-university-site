@@ -1,4 +1,5 @@
 {% extends 'kutuphane/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Açık Erişim{% endblock %}
 
@@ -8,8 +9,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Açık Erişim</h1>
-            <p>Avrasya Üniversitesi Açık Erişim Sistemi ve Akademik Arşiv Yönergesi</p>
+            <h1>{% trans "Açık Erişim" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi Açık Erişim Sistemi ve Akademik Arşiv Yönergesi" %}</p>
         </div>
     </div>
 </section>
@@ -29,18 +30,18 @@
                 <!-- بخش تب‌های اطلاعات دانشجویی -->
                 <div class="ogrenci-isleri-tab-section">
                     <div class="page-intro">
-                        <h2 class="section-title">Açık Erişim</h2>
-                        <p class="section-subtitle">Avrasya Üniversitesi Açık Erişim Sistemi'ne erişim ve Akademik Açık Arşiv Yönergesi hakkında detaylı bilgiler</p>
+                        <h2 class="section-title">{% trans "Açık Erişim" %}</h2>
+                        <p class="section-subtitle">{% trans "Avrasya Üniversitesi Açık Erişim Sistemi'ne erişim ve Akademik Açık Arşiv Yönergesi hakkında detaylı bilgiler" %}</p>
                     </div>
                     
                     <div class="tab-container">
                         <div class="tab-header">
                             <ul class="tab-menu">
                                 <li class="tab-menu-item active" data-tab="tab1">
-                                    <i class="fas fa-university"></i> Açık Erişim Sayfası
+                                    <i class="fas fa-university"></i> {% trans "Açık Erişim Sayfası" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab2">
-                                    <i class="fas fa-bullseye"></i> Akademik Açık Arşiv Yönergesi
+                                    <i class="fas fa-bullseye"></i> {% trans "Akademik Açık Arşiv Yönergesi" %}
                                 </li>
                             </ul>
                         </div>
@@ -49,10 +50,10 @@
                             <!-- Tab 1: Açık Erişim Sayfası -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-university"></i> Açık Erişim Sistemi</h3>
+                                    <h3><i class="fas fa-university"></i> {% trans "Açık Erişim Sistemi" %}</h3>
                                     <div class="tab-action-buttons">
                                         <a href="https://acikerisim.avrasya.edu.tr/" class="access-portal-btn" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i> Portala Git
+                                            <i class="fas fa-external-link-alt"></i> {% trans "Portala Git" %}
                                         </a>
                                     </div>
                                 </div>
@@ -63,31 +64,31 @@
                                                 <i class="fas fa-globe"></i>
                                             </div>
                                         </div>
-                                        <h4 style="color: var(--primary-dark-blue); margin-top: 20px; margin-bottom: 15px;">Açık Erişim Nedir?</h4>
-                                        <p>Açık erişim, bilimsel ve akademik çalışmaların internet üzerinden ücretsiz, sınırsız ve hızlı bir şekilde erişilebilir olmasını sağlayan bir modeldir. Bu model sayesinde araştırmacılar, öğrenciler ve bilgiye ihtiyaç duyan herkes akademik kaynaklara kolayca ulaşabilir.</p>
+                                        <h4 style="color: var(--primary-dark-blue); margin-top: 20px; margin-bottom: 15px;">{% trans "Açık Erişim Nedir?" %}</h4>
+                                        <p>{% trans "Açık erişim, bilimsel ve akademik çalışmaların internet üzerinden ücretsiz, sınırsız ve hızlı bir şekilde erişilebilir olmasını sağlayan bir modeldir. Bu model sayesinde araştırmacılar, öğrenciler ve bilgiye ihtiyaç duyan herkes akademik kaynaklara kolayca ulaşabilir." %}</p>
                                         
                                         <div class="highlight-box">
-                                            <h4><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Açık Erişim Sistemi Avantajları</h4>
+                                            <h4><i class="fas fa-check-circle"></i> {% trans "Avrasya Üniversitesi Açık Erişim Sistemi Avantajları" %}</h4>
                                             <ul class="responsibilities-list">
                                                 <li>
                                                     <i class="fas fa-rocket"></i>
-                                                    <span><strong>Hızlı Erişim:</strong> Akademik yayınlara anında ve ücretsiz erişim imkanı</span>
+                                                    <span><strong>{% trans "Hızlı Erişim:" %}</strong> {% trans "Akademik yayınlara anında ve ücretsiz erişim imkanı" %}</span>
                                                 </li>
                                                 <li>
                                                     <i class="fas fa-search"></i>
-                                                    <span><strong>Kapsamlı Koleksiyon:</strong> Üniversitemizin tüm akademik yayınları tek platformda</span>
+                                                    <span><strong>{% trans "Kapsamlı Koleksiyon:" %}</strong> {% trans "Üniversitemizin tüm akademik yayınları tek platformda" %}</span>
                                                 </li>
                                                 <li>
                                                     <i class="fas fa-users"></i>
-                                                    <span><strong>Geniş Kullanıcı Kitlesi:</strong> Araştırmacılar, öğrenciler ve akademisyenler için</span>
+                                                    <span><strong>{% trans "Geniş Kullanıcı Kitlesi:" %}</strong> {% trans "Araştırmacılar, öğrenciler ve akademisyenler için" %}</span>
                                                 </li>
                                                 <li>
                                                     <i class="fas fa-chart-line"></i>
-                                                    <span><strong>Görünürlük Artışı:</strong> Yayınların daha geniş kitlelere ulaşması</span>
+                                                    <span><strong>{% trans "Görünürlük Artışı:" %}</strong> {% trans "Yayınların daha geniş kitlelere ulaşması" %}</span>
                                                 </li>
                                                 <li>
                                                     <i class="fas fa-copyright"></i>
-                                                    <span><strong>Telif Haklarına Uygun:</strong> Yasal çerçevede açık erişim sağlanması</span>
+                                                    <span><strong>{% trans "Telif Haklarına Uygun:" %}</strong> {% trans "Yasal çerçevede açık erişim sağlanması" %}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -98,8 +99,8 @@
                                                     <i class="fas fa-door-open"></i>
                                                 </div>
                                                 <div>
-                                                    <h5>Avrasya Açık Erişim Portalı</h5>
-                                                    <p class="portal-description">Üniversitemizin akademik yayınlarına ücretsiz erişim portalı</p>
+                                                    <h5>{% trans "Avrasya Açık Erişim Portalı" %}</h5>
+                                                    <p class="portal-description">{% trans "Üniversitemizin akademik yayınlarına ücretsiz erişim portalı" %}</p>
                                                 </div>
                                             </div>
                                             <div class="portal-card-body">
@@ -107,43 +108,43 @@
                                                     <div class="info-item">
                                                         <i class="fas fa-link"></i>
                                                         <div>
-                                                            <strong>Portal Adresi:</strong>
-                                                            <p>https://acikerisim.avrasya.edu.tr/</p>
+                                                            <strong>{% trans "Portal Adresi:" %}</strong>
+                                                            <p>{% trans "https://acikerisim.avrasya.edu.tr/" %}</p>
                                                         </div>
                                                     </div>
                                                     <div class="info-item">
                                                         <i class="fas fa-user-shield"></i>
                                                         <div>
-                                                            <strong>Erişim:</strong>
-                                                            <p>Üniversite kimlik bilgilerinizle giriş yapabilirsiniz</p>
+                                                            <strong>{% trans "Erişim:" %}</strong>
+                                                            <p>{% trans "Üniversite kimlik bilgilerinizle giriş yapabilirsiniz" %}</p>
                                                         </div>
                                                     </div>
                                                     <div class="info-item">
                                                         <i class="fas fa-database"></i>
                                                         <div>
-                                                            <strong>İçerik:</strong>
-                                                            <p>Tezler, makaleler, bildiriler, raporlar ve daha fazlası</p>
+                                                            <strong>{% trans "İçerik:" %}</strong>
+                                                            <p>{% trans "Tezler, makaleler, bildiriler, raporlar ve daha fazlası" %}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="portal-action">
                                                     <a href="https://acikerisim.avrasya.edu.tr/" class="portal-access-btn" target="_blank">
-                                                        <i class="fas fa-sign-in-alt"></i> Portala Giriş Yap
+                                                        <i class="fas fa-sign-in-alt"></i> {% trans "Portala Giriş Yap" %}
                                                     </a>
-                                                    <p class="portal-note">Portala erişmek için üniversite kimlik bilgileriniz gereklidir.</p>
+                                                    <p class="portal-note">{% trans "Portala erişmek için üniversite kimlik bilgileriniz gereklidir." %}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         <div class="instruction-box" style="background: linear-gradient(135deg, rgba(141, 212, 227, 0.1), rgba(29, 97, 169, 0.05)); border-radius: 12px; padding: 20px; margin-top: 30px; border-left: 4px solid var(--accent-light-blue);">
                                             <h5 style="color: var(--primary-dark-blue); margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                                                <i class="fas fa-info-circle"></i> Portala Erişim İpuçları
+                                                <i class="fas fa-info-circle"></i> {% trans "Portala Erişim İpuçları" %}
                                             </h5>
                                             <ul style="padding-left: 20px; margin-bottom: 0;">
-                                                <li>Portalı kullanmak için aktif bir üniversite hesabınız olmalıdır.</li>
-                                                <li>Yayın yüklemek için akademik personel yetkisi gereklidir.</li>
-                                                <li>Telif hakkı sorunu olmayan yayınlarınızı paylaşabilirsiniz.</li>
-                                                <li>Teknik sorunlar için kütüphane birimimizle iletişime geçebilirsiniz.</li>
+                                                <li>{% trans "Portalı kullanmak için aktif bir üniversite hesabınız olmalıdır." %}</li>
+                                                <li>{% trans "Yayın yüklemek için akademik personel yetkisi gereklidir." %}</li>
+                                                <li>{% trans "Telif hakkı sorunu olmayan yayınlarınızı paylaşabilirsiniz." %}</li>
+                                                <li>{% trans "Teknik sorunlar için kütüphane birimimizle iletişime geçebilirsiniz." %}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -153,106 +154,106 @@
                             <!-- Tab 2: Akademik Açık Arşiv Yönergesi -->
                             <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-bullseye"></i> Akademik Açık Arşiv Yönergesi</h3>
+                                    <h3><i class="fas fa-bullseye"></i> {% trans "Akademik Açık Arşiv Yönergesi" %}</h3>
                                     <div class="tab-action-buttons">
                                         <a href="/media/Kutuphane-Yonergesi_Guncel_s.pdf" class="pdf-download-btn" target="_blank" download>
-                                            <i class="fas fa-file-pdf"></i> PDF İndir
+                                            <i class="fas fa-file-pdf"></i> {% trans "PDF İndir" %}
                                         </a>
                                     </div>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="directive-overview">
-                                        <p>Avrasya Üniversitesi Akademik Açık Arşiv Yönergesi, üniversitemizin akademik yayınlarının dijital ortamda saklanması, yönetilmesi ve açık erişime sunulmasına ilişkin kuralları düzenlemektedir.</p>
+                                        <p>{% trans "Avrasya Üniversitesi Akademik Açık Arşiv Yönergesi, üniversitemizin akademik yayınlarının dijital ortamda saklanması, yönetilmesi ve açık erişime sunulmasına ilişkin kuralları düzenlemektedir." %}</p>
                                         
                                         <div class="highlight-box">
-                                            <h4><i class="fas fa-file-contract"></i> Yönerge Temel İlkeleri</h4>
+                                            <h4><i class="fas fa-file-contract"></i> {% trans "Yönerge Temel İlkeleri" %}</h4>
                                             <ul class="responsibilities-list">
                                                 <li>
                                                     <i class="fas fa-shield-alt"></i>
-                                                    <span><strong>Telif Hakkı Koruma:</strong> Tüm yayınlar telif hakkı yasalarına uygun şekilde yayınlanır.</span>
+                                                    <span><strong>{% trans "Telif Hakkı Koruma:" %}</strong> {% trans "Tüm yayınlar telif hakkı yasalarına uygun şekilde yayınlanır." %}</span>
                                                 </li>
                                                 <li>
                                                     <i class="fas fa-balance-scale"></i>
-                                                    <span><strong>Hukuki Uyumluluk:</strong> Ulusal ve uluslararası mevzuata tam uyum.</span>
+                                                    <span><strong>{% trans "Hukuki Uyumluluk:" %}</strong> {% trans "Ulusal ve uluslararası mevzuata tam uyum." %}</span>
                                                 </li>
                                                 <li>
                                                     <i class="fas fa-user-graduate"></i>
-                                                    <span><strong>Akademik Standartlar:</strong> Yayın kalitesi ve akademik standartların korunması.</span>
+                                                    <span><strong>{% trans "Akademik Standartlar:" %}</strong> {% trans "Yayın kalitesi ve akademik standartların korunması." %}</span>
                                                 </li>
                                                 <li>
                                                     <i class="fas fa-lock-open"></i>
-                                                    <span><strong>Açık Erişim:</strong> Bilimsel bilginin serbest dolaşımının desteklenmesi.</span>
+                                                    <span><strong>{% trans "Açık Erişim:" %}</strong> {% trans "Bilimsel bilginin serbest dolaşımının desteklenmesi." %}</span>
                                                 </li>
                                                 <li>
                                                     <i class="fas fa-archive"></i>
-                                                    <span><strong>Dijital Arşivleme:</strong> Akademik çıktıların uzun vadeli korunması.</span>
+                                                    <span><strong>{% trans "Dijital Arşivleme:" %}</strong> {% trans "Akademik çıktıların uzun vadeli korunması." %}</span>
                                                 </li>
                                             </ul>
                                         </div>
                                         
                                         <div class="directive-details">
-                                            <h4 style="color: var(--primary-dark-blue); margin-top: 30px; margin-bottom: 15px;">Yönerge Kapsamındaki Yayın Türleri:</h4>
+                                            <h4 style="color: var(--primary-dark-blue); margin-top: 30px; margin-bottom: 15px;">{% trans "Yönerge Kapsamındaki Yayın Türleri:" %}</h4>
                                             
                                             <div class="publication-types">
                                                 <div class="publication-card">
                                                     <div class="pub-icon">
                                                         <i class="fas fa-graduation-cap"></i>
                                                     </div>
-                                                    <h5>Tezler</h5>
-                                                    <p>Yüksek lisans ve doktora tezleri</p>
+                                                    <h5>{% trans "Tezler" %}</h5>
+                                                    <p>{% trans "Yüksek lisans ve doktora tezleri" %}</p>
                                                 </div>
                                                 <div class="publication-card">
                                                     <div class="pub-icon">
                                                         <i class="fas fa-newspaper"></i>
                                                     </div>
-                                                    <h5>Makaleler</h5>
-                                                    <p>Akademik dergilerde yayınlanan makaleler</p>
+                                                    <h5>{% trans "Makaleler" %}</h5>
+                                                    <p>{% trans "Akademik dergilerde yayınlanan makaleler" %}</p>
                                                 </div>
                                                 <div class="publication-card">
                                                     <div class="pub-icon">
                                                         <i class="fas fa-book"></i>
                                                     </div>
-                                                    <h5>Kitaplar</h5>
-                                                    <p>Akademik kitaplar ve bölümleri</p>
+                                                    <h5>{% trans "Kitaplar" %}</h5>
+                                                    <p>{% trans "Akademik kitaplar ve bölümleri" %}</p>
                                                 </div>
                                                 <div class="publication-card">
                                                     <div class="pub-icon">
                                                         <i class="fas fa-file-alt"></i>
                                                     </div>
-                                                    <h5>Bildiriler</h5>
-                                                    <p>Konferans ve sempozyum bildirileri</p>
+                                                    <h5>{% trans "Bildiriler" %}</h5>
+                                                    <p>{% trans "Konferans ve sempozyum bildirileri" %}</p>
                                                 </div>
                                             </div>
                                             
                                             <div class="directive-table">
-                                                <h5 style="color: var(--primary-dark-blue); margin-top: 30px; margin-bottom: 15px;">Yayın Yükleme Süreçleri:</h5>
+                                                <h5 style="color: var(--primary-dark-blue); margin-top: 30px; margin-bottom: 15px;">{% trans "Yayın Yükleme Süreçleri:" %}</h5>
                                                 <div class="process-steps">
                                                     <div class="process-step">
                                                         <div class="step-number">1</div>
                                                         <div class="step-content">
-                                                            <h6>Yayın Hazırlığı</h6>
-                                                            <p>Telif hakkı kontrollerinin yapılması ve format uygunluğu</p>
+                                                            <h6>{% trans "Yayın Hazırlığı" %}</h6>
+                                                            <p>{% trans "Telif hakkı kontrollerinin yapılması ve format uygunluğu" %}</p>
                                                         </div>
                                                     </div>
                                                     <div class="process-step">
                                                         <div class="step-number">2</div>
                                                         <div class="step-content">
-                                                            <h6>Sisteme Yükleme</h6>
-                                                            <p>Portal üzerinden yayının sisteme yüklenmesi</p>
+                                                            <h6>{% trans "Sisteme Yükleme" %}</h6>
+                                                            <p>{% trans "Portal üzerinden yayının sisteme yüklenmesi" %}</p>
                                                         </div>
                                                     </div>
                                                     <div class="process-step">
                                                         <div class="step-number">3</div>
                                                         <div class="step-content">
-                                                            <h6>İnceleme Süreci</h6>
-                                                            <p>Kütüphane birimi tarafından kontrol ve onay</p>
+                                                            <h6>{% trans "İnceleme Süreci" %}</h6>
+                                                            <p>{% trans "Kütüphane birimi tarafından kontrol ve onay" %}</p>
                                                         </div>
                                                     </div>
                                                     <div class="process-step">
                                                         <div class="step-number">4</div>
                                                         <div class="step-content">
-                                                            <h6>Yayınlama</h6>
-                                                            <p>Açık erişim portalında yayınlanması</p>
+                                                            <h6>{% trans "Yayınlama" %}</h6>
+                                                            <p>{% trans "Açık erişim portalında yayınlanması" %}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -266,8 +267,8 @@
                                                         <i class="fas fa-file-pdf"></i>
                                                     </div>
                                                     <div>
-                                                        <h5>Tam Metin Yönerge</h5>
-                                                        <p class="pdf-description">Akademik Açık Arşiv Yönergesi'nin tam metnini PDF formatında indirebilirsiniz.</p>
+                                                        <h5>{% trans "Tam Metin Yönerge" %}</h5>
+                                                        <p class="pdf-description">{% trans "Akademik Açık Arşiv Yönergesi'nin tam metnini PDF formatında indirebilirsiniz." %}</p>
                                                     </div>
                                                 </div>
                                                 <div class="pdf-card-body">
@@ -275,30 +276,30 @@
                                                         <div class="pdf-detail">
                                                             <i class="fas fa-calendar-alt"></i>
                                                             <div>
-                                                                <strong>Güncellenme Tarihi:</strong>
+                                                                <strong>{% trans "Güncellenme Tarihi:" %}</strong>
                                                                 <p>10.01.2025</p>
                                                             </div>
                                                         </div>
                                                         <div class="pdf-detail">
                                                             <i class="fas fa-file-signature"></i>
                                                             <div>
-                                                                <strong>Onay Makamı:</strong>
-                                                                <p>Üniversite Senatosu</p>
+                                                                <strong>{% trans "Onay Makamı:" %}</strong>
+                                                                <p>{% trans "Üniversite Senatosu" %}</p>
                                                             </div>
                                                         </div>
                                                         <div class="pdf-detail">
                                                             <i class="fas fa-file-contract"></i>
                                                             <div>
-                                                                <strong>Dosya Boyutu:</strong>
-                                                                <p>Approx. 2.5 MB</p>
+                                                                <strong>{% trans "Dosya Boyutu:" %}</strong>
+                                                                <p>{% trans "Approx. 2.5 MB" %}</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="pdf-action">
                                                         <a href="/media/Kutuphane-Yonergesi_Guncel_s.pdf" class="full-pdf-download-btn" target="_blank" download>
-                                                            <i class="fas fa-download"></i> Tam Metin Yönergeyi İndir
+                                                            <i class="fas fa-download"></i> {% trans "Tam Metin Yönergeyi İndir" %}
                                                         </a>
-                                                        <p class="pdf-note">Yönerge, 10.01.2025 tarihli Senato kararı ile güncellenmiştir.</p>
+                                                        <p class="pdf-note">{% trans "Yönerge, 10.01.2025 tarihli Senato kararı ile güncellenmiştir." %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -306,17 +307,17 @@
                                         
                                         <div class="contact-support" style="background: linear-gradient(135deg, rgba(9, 36, 66, 0.05), rgba(29, 97, 169, 0.08)); border-radius: 12px; padding: 20px; margin-top: 30px; border: 1px solid rgba(141, 212, 227, 0.3);">
                                             <h5 style="color: var(--primary-dark-blue); margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                                                <i class="fas fa-question-circle"></i> Yardım ve Destek
+                                                <i class="fas fa-question-circle"></i> {% trans "Yardım ve Destek" %}
                                             </h5>
-                                            <p>Açık erişim sistemi ve yönerge hakkında sorularınız için kütüphane birimimizle iletişime geçebilirsiniz:</p>
+                                            <p>{% trans "Açık erişim sistemi ve yönerge hakkında sorularınız için kütüphane birimimizle iletişime geçebilirsiniz:" %}</p>
                                             <div class="support-contacts">
                                                 <div class="support-contact">
                                                     <i class="fas fa-envelope"></i>
-                                                    <span>kutuphane@avrasya.edu.tr</span>
+                                                    <span>{% trans "kutuphane@avrasya.edu.tr" %}</span>
                                                 </div>
                                                 <div class="support-contact">
                                                     <i class="fas fa-phone"></i>
-                                                    <span>+90 (462) 377 77 77 (Dahili: 1111)</span>
+                                                    <span>{% trans "+90 (462) 377 77 77 (Dahili: 1111)" %}</span>
                                                 </div>
                                             </div>
                                         </div>

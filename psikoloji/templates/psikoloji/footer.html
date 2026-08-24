@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!-- فوتر مخصوص صفحه تحقیقات -->
 <footer class="footer" style="background: linear-gradient(135deg, var(--primary-dark-blue) 0%, #0a2a4a 100%); margin-top: 0; position: relative; overflow: hidden;">
@@ -15,19 +16,19 @@
                     <div class="logo_container">
                         <div class="logo">
                             <a href="{% url 'psikoloji:psikoloji' %}" class="navbar-brand d-flex align-items-center">
-                                <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="Avrasya University" style="height: 80px; filter: brightness(0) invert(1);">
+                                <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="{% trans 'Avrasya University' %}" style="height: 80px; filter: brightness(0) invert(1);">
                                 <span class="ms-3 fw-bold text-primary"></span>
                                 <span></span>
                             </a>
                         </div>
                     </div>
                     <p class="footer_about_text" style="color: rgba(255,255,255,0.8); margin-top: 20px; line-height: 1.7;">
-                        Avrasya Üniversitesi Psikoloji Bölümü - Bilimin geleceğini şekillendiriyoruz.
+                        {% trans "Avrasya Üniversitesi Psikoloji Bölümü - Bilimin geleceğini şekillendiriyoruz." %}
                     </p>
                     
                     <!-- Social Media Links -->
                     <div class="footer_social mt-4">
-                        <h6 style="color: white; margin-bottom: 15px; font-weight: 600;">Bizi Takip Edin</h6>
+                        <h6 style="color: white; margin-bottom: 15px; font-weight: 600;">{% trans "Bizi Takip Edin" %}</h6>
                         <div class="social-icons d-flex">
                             <a href="#" class="social-icon" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin-right: 10px; transition: all 0.3s ease;">
                                 <i class="fab fa-facebook-f" style="color: white; font-size: 16px;"></i>
@@ -48,7 +49,7 @@
                 <!-- Quick Links -->
                 <div class="col-lg-4 footer_col mb-4 mb-lg-0">
                     <div class="footer_column_title" style="color: white; font-weight: 600; margin-bottom: 20px; position: relative; padding-bottom: 10px;">
-                        Hızlı Erişim
+                        {% trans "Hızlı Erişim" %}
                         <div style="position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--secondary-medium-blue);"></div>
                     </div>
                     <div class="footer_column_content">
@@ -58,51 +59,51 @@
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'psikoloji:psikoloji' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                            Fakülte
+                                            {% trans "Fakülte" %}
                                         </a>
                                     </li>
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'psikoloji:liste' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                            Duyurular
+                                            {% trans "Duyurular" %}
                                         </a>
                                     </li>
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'psikoloji:etkinlik_listesi' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                            Etkinlikleri
+                                            {% trans "Etkinlikleri" %}
                                         </a>
                                     </li>
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'psikoloji:kalite_yonetimi' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                            Kalite Yönetimi
+                                            {% trans "Kalite Yönetimi" %}
                                         </a>
                                     </li>
                                     
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'psikoloji:idari_faaliyetler' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                            İdari Faaliyetle
+                                            {% trans "İdari Faaliyetle" %}
                                         </a>
                                     </li>
 
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'psikoloji:diger_faaliyetler' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                            Diğer Faaliyetler
+                                            {% trans "Diğer Faaliyetler" %}
                                         </a>
                                     </li>
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'psikoloji:toplumsal_katki' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                           Toplumsal Katkı
+                                           {% trans "Toplumsal Katkı" %}
                                         </a>
                                     </li>
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'psikoloji:ders_programi' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                            Ders Programı
+                                            {% trans "Ders Programı" %}
                                         </a>
                                     </li>
                                 </ul>
@@ -113,7 +114,7 @@
                                     <li class="footer_list_item" style="margin-bottom: 12px;">
                                         <a href="{% url 'core:iletisim' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center;">
                                             <i class="fas fa-chevron-right" style="margin-right: 8px; font-size: 10px; color: var(--secondary-medium-blue);"></i>
-                                            İletişim
+                                            {% trans "İletişim" %}
                                         </a>
                                     </li>
                                     
@@ -126,7 +127,7 @@
                 <!-- Contact -->
                 <div class="col-lg-4 footer_col">
                     <div class="footer_column_title" style="color: white; font-weight: 600; margin-bottom: 20px; position: relative; padding-bottom: 10px;">
-                        İletişim
+                        {% trans "İletişim" %}
                         <div style="position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--secondary-medium-blue);"></div>
                     </div>
                     <div class="footer_column_content">
@@ -136,8 +137,8 @@
                                     <i class="fas fa-map-marker-alt" style="color: var(--secondary-medium-blue);"></i>
                                 </div>
                                 <div>
-                                    <strong style="color: white; display: block; margin-bottom: 5px;">Adres</strong>
-                                    <span>Yenişehir Mahallesi, Avrasya Üniversitesi</span>
+                                    <strong style="color: white; display: block; margin-bottom: 5px;">{% trans "Adres" %}</strong>
+                                    <span>{% trans "Yenişehir Mahallesi, Avrasya Üniversitesi" %}</span>
                                 </div>
                             </li>
                             <li class="footer_contact_item" style="color: rgba(255,255,255,0.8); margin-bottom: 20px; display: flex; align-items: flex-start;">
@@ -145,7 +146,7 @@
                                     <i class="fas fa-phone" style="color: var(--secondary-medium-blue);"></i>
                                 </div>
                                 <div>
-                                    <strong style="color: white; display: block; margin-bottom: 5px;">Telefon</strong>
+                                    <strong style="color: white; display: block; margin-bottom: 5px;">{% trans "Telefon" %}</strong>
                                     <span>+90 462 000 0000</span>
                                 </div>
                             </li>
@@ -154,17 +155,17 @@
                                     <i class="fas fa-envelope" style="color: var(--secondary-medium-blue);"></i>
                                 </div>
                                 <div>
-                                    <strong style="color: white; display: block; margin-bottom: 5px;">E-posta</strong>
-                                    <span>arastirma@avrasya.edu.tr</span>
+                                    <strong style="color: white; display: block; margin-bottom: 5px;">{% trans "E-posta" %}</strong>
+                                    <span>{% trans "arastirma@avrasya.edu.tr" %}</span>
                                 </div>
                             </li>
                         </ul>
                         
                         <!-- Newsletter Subscription -->
                         <div class="footer_newsletter mt-4">
-                            <h6 style="color: white; margin-bottom: 15px; font-weight: 600;">Bültenimize Abone Olun</h6>
+                            <h6 style="color: white; margin-bottom: 15px; font-weight: 600;">{% trans "Bültenimize Abone Olun" %}</h6>
                             <div class="input-group">
-                                <input type="email" class="form-control" placeholder="E-posta adresiniz" style="border-radius: 6px 0 0 6px; border: none; padding: 10px 15px; font-size: 14px;">
+                                <input type="email" class="form-control" placeholder="{% trans 'E-posta adresiniz' %}" style="border-radius: 6px 0 0 6px; border: none; padding: 10px 15px; font-size: 14px;">
                                 <button class="btn btn-primary" type="button" style="border-radius: 0 6px 6px 0; background: var(--secondary-medium-blue); border: none; padding: 10px 15px;">
                                     <i class="fas fa-paper-plane"></i>
                                 </button>
@@ -182,9 +183,9 @@
                     © {% now "Y" %} Avrasya University - Tüm hakları saklıdır.
                 </span>
                 <div class="footer_links">
-                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; margin-right: 20px; font-size: 14px; transition: color 0.3s ease;">Gizlilik Politikası</a>
-                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; margin-right: 20px; font-size: 14px; transition: color 0.3s ease;">Kullanım Şartları</a>
-                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">Site Haritası</a>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; margin-right: 20px; font-size: 14px; transition: color 0.3s ease;">{% trans "Gizlilik Politikası" %}</a>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; margin-right: 20px; font-size: 14px; transition: color 0.3s ease;">{% trans "Kullanım Şartları" %}</a>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: color 0.3s ease;">{% trans "Site Haritası" %}</a>
                 </div>
             </div>
         </div>

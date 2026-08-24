@@ -17,11 +17,11 @@
             <div class="research-main_nav">
                 <ul class="research-main_nav_list">
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'core:index' %}">ana sayfa</a>
+                        <a href="{% url 'core:index' %}">{% trans "ana sayfa" %}</a>
                         
                     </li>
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'spor_bilimleri:spor_bilimleri' %}">Fakülte</a>
+                        <a href="{% url 'spor_bilimleri:spor_bilimleri' %}">{% trans "Fakülte" %}</a>
                     
                     </li>
                     
@@ -36,12 +36,12 @@
                     </li>
 
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'spor_bilimleri:fakulte_yonetimi' %}"> Yönetim</a>
+                        <a href="{% url 'spor_bilimleri:fakulte_yonetimi' %}"> {% trans "Yönetim" %}</a>
                         
                     </li>
 
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'spor_bilimleri:akademik_kadro' %}">Akademik Kadro</a>
+                        <a href="{% url 'spor_bilimleri:akademik_kadro' %}">{% trans "Akademik Kadro" %}</a>
                         
                     </li>
 
@@ -51,12 +51,12 @@
                     </li>
 
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx">Bologna</a>
+                        <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/BilgiPaketi/lisans.aspx">{% trans "Bologna" %}</a>
                         
                     </li>
 
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'spor_bilimleri:kalite'  %}">Kalite</a>
+                        <a href="{% url 'spor_bilimleri:kalite'  %}">{% trans "Kalite" %}</a>
                         
                     </li>
 
@@ -87,7 +87,7 @@
     <div class="mobile-nav" id="mobile-nav">
         <div class="mobile-nav-header">
             <div class="mobile-logo">
-                <img src="{% static 'core/img/logos/muhendislik_mimarlik.png' %}" alt="Logo">
+                <img src="{% static 'core/img/logos/muhendislik_mimarlik.png' %}" alt="{% trans 'Logo' %}">
             </div>
             <div class="mobile-close-btn" id="mobile-close-btn">
                 <span style="color: white; font-size: 24px; font-weight: bold;">✕</span>
@@ -103,14 +103,14 @@
             <div class="mobile-language-options">
                 <a href="javascript:void(0)" onclick="changeLanguage('tr')" class="mobile-language-option {% if LANGUAGE_CODE == 'tr' or not LANGUAGE_CODE %}active{% endif %}">
                     <span class="flag-icon flag-icon-tr"></span>
-                    <span class="lang-name">Türkçe</span>
+                    <span class="lang-name">{% trans "Türkçe" %}</span>
                     {% if LANGUAGE_CODE == 'tr' or not LANGUAGE_CODE %}
                         <i class="fas fa-check"></i>
                     {% endif %}
                 </a>
                 <a href="javascript:void(0)" onclick="changeLanguage('en')" class="mobile-language-option {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
                     <span class="flag-icon flag-icon-gb"></span>
-                    <span class="lang-name">English</span>
+                    <span class="lang-name">{% trans "English" %}</span>
                     {% if LANGUAGE_CODE == 'en' %}
                         <i class="fas fa-check"></i>
                     {% endif %}
@@ -138,7 +138,7 @@
                 </a>
                 <a href="javascript:void(0)" onclick="changeLanguage('de')" class="mobile-language-option {% if LANGUAGE_CODE == 'de' %}active{% endif %}">
                     <span class="flag-icon flag-icon-de"></span>
-                    <span class="lang-name">Deutsch</span>
+                    <span class="lang-name">{% trans "Deutsch" %}</span>
                     {% if LANGUAGE_CODE == 'de' %}
                         <i class="fas fa-check"></i>
                     {% endif %}
@@ -204,7 +204,7 @@
         </ul>
         
         <div class="mobile-nav-footer">
-            <p>© 2024 Avrasya Üniversitesi</p>
+            <p>{% trans "© 2024 Avrasya Üniversitesi" %}</p>
         </div>
     </div>
 

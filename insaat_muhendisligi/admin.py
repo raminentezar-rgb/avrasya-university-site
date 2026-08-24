@@ -1,12 +1,13 @@
 # app_name: insaat_muhendisligi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     InsaatMuhendisligiFaaliyetGrubu, InsaatMuhendisligiDersProgrami, InsaatMuhendisligiFaaliyetGorseli, InsaatMuhendisligiFaaliyet, InsaatMuhendisligiEtkinlik, InsaatMuhendisligiDuyuru
 )
 
 @admin.register(InsaatMuhendisligiEtkinlik)
-class InsaatMuhendisligiEtkinlikAdmin(admin.ModelAdmin):
+class InsaatMuhendisligiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class InsaatMuhendisligiDuyuruAdmin(admin.ModelAdmin):
         return InsaatMuhendisligiDuyuru.objects.all()
 
 @admin.register(InsaatMuhendisligiDersProgrami)
-class InsaatMuhendisligiDersProgramiAdmin(admin.ModelAdmin):
+class InsaatMuhendisligiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class InsaatMuhendisligiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(InsaatMuhendisligiFaaliyetGrubu)
-class InsaatMuhendisligiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class InsaatMuhendisligiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(InsaatMuhendisligiFaaliyet)
-class InsaatMuhendisligiFaaliyetAdmin(admin.ModelAdmin):
+class InsaatMuhendisligiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

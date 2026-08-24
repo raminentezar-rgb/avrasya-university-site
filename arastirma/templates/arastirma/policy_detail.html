@@ -1,4 +1,5 @@
 {% extends 'arastirma/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}{{ policy.title }} - Avrasya University{% endblock %}
@@ -8,7 +9,7 @@
     <div class="container">
         <div class="research-hero-content">
             <h1>{{ policy.title }}</h1>
-            <p>Araştırma Politikası</p>
+            <p>{% trans "Araştırma Politikası" %}</p>
         </div>
     </div>
 </section>
@@ -49,14 +50,14 @@
                     <!-- داکیومنت ضمیمه -->
                     {% if policy.document %}
                     <div class="document-section mt-5 p-4" style="background: var(--neutral-cream); border-radius: 8px;">
-                        <h5><i class="fas fa-paperclip"></i> Ekli Doküman</h5>
+                        <h5><i class="fas fa-paperclip"></i> {% trans "Ekli Doküman" %}</h5>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span>
                                 <i class="fas fa-file-pdf text-danger"></i>
                                 {{ policy.document.name|slice:"-4:"|upper }} Dosyası
                             </span>
                             <a href="{{ policy.document.url }}" class="btn btn-primary" target="_blank" download>
-                                <i class="fas fa-download"></i> İndir
+                                <i class="fas fa-download"></i> {% trans "İndir" %}
                             </a>
                         </div>
                     </div>
@@ -67,12 +68,12 @@
                         <div class="row">
                             <div class="col-6">
                                 <a href="{% url 'arastirma:policy_list' %}" class="btn btn-outline-primary">
-                                    <i class="fas fa-arrow-left"></i> Tüm Politikalar
+                                    <i class="fas fa-arrow-left"></i> {% trans "Tüm Politikalar" %}
                                 </a>
                             </div>
                             <div class="col-6 text-right">
                                 <a href="{% url 'arastirma:home' %}" class="btn btn-outline-secondary">
-                                    <i class="fas fa-home"></i> Araştırma Ana Sayfa
+                                    <i class="fas fa-home"></i> {% trans "Araştırma Ana Sayfa" %}
                                 </a>
                             </div>
                         </div>

@@ -1,12 +1,13 @@
 # app_name: beslenme_diyetetik/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     BeslenmeDiyetetikFaaliyetGorseli, BeslenmeDiyetetikDersProgrami, BeslenmeDiyetetikFaaliyet, BeslenmeDiyetetikEtkinlik, BeslenmeDiyetetikFaaliyetGrubu, BeslenmeDiyetetikDuyuru
 )
 
 @admin.register(BeslenmeDiyetetikEtkinlik)
-class BeslenmeDiyetetikEtkinlikAdmin(admin.ModelAdmin):
+class BeslenmeDiyetetikEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class BeslenmeDiyetetikDuyuruAdmin(admin.ModelAdmin):
         return BeslenmeDiyetetikDuyuru.objects.all()
 
 @admin.register(BeslenmeDiyetetikDersProgrami)
-class BeslenmeDiyetetikDersProgramiAdmin(admin.ModelAdmin):
+class BeslenmeDiyetetikDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class BeslenmeDiyetetikFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(BeslenmeDiyetetikFaaliyetGrubu)
-class BeslenmeDiyetetikFaaliyetGrubuAdmin(admin.ModelAdmin):
+class BeslenmeDiyetetikFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(BeslenmeDiyetetikFaaliyet)
-class BeslenmeDiyetetikFaaliyetAdmin(admin.ModelAdmin):
+class BeslenmeDiyetetikFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

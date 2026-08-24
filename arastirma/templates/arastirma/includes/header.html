@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!-- هدر مخصوص صفحه تحقیقات -->
 <style>
@@ -425,7 +426,7 @@
         <div class="research-logo_container">
             <div class="logo">
                 <a href="{% url 'arastirma:home' %}" class="navbar-brand d-flex align-items-center">
-                    <img src="{% static 'core/img/LGOO-ARAŞTIRMA.png' %}" alt="Avrasya University" style="height: 80px;">
+                    <img src="{% static 'core/img/LGOO-ARAŞTIRMA.png' %}" alt="{% trans 'Avrasya University' %}" style="height: 80px;">
                     <span class="ms-3 fw-bold text-primary"></span>
                     <span></span>
                 </a>
@@ -438,7 +439,7 @@
                 <ul class="research-main_nav_list">
                     <!-- Ana Sayfa -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'core:index' %}">Ana Sayfa</a>
+                        <a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a>
                         
                     </li>
 
@@ -447,14 +448,14 @@
 
                     <!-- Araştırma Politikaları Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'arastirma:policy_list' %}">Araştırma Politikaları</a>
+                        <a href="{% url 'arastirma:policy_list' %}">{% trans "Araştırma Politikaları" %}</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
-                                    <h6>Araştırma Politikaları</h6>
+                                    <h6>{% trans "Araştırma Politikaları" %}</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="#">Araştırma Politikaları Danışma Kurulu</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Araştırma Politikaları Komisyonu</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Araştırma Politikaları Danışma Kurulu" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Araştırma Politikaları Komisyonu" %}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -463,15 +464,15 @@
                     
                     <!-- BAP Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'arastirma:bap_list' %}">BAP</a>
+                        <a href="{% url 'arastirma:bap_list' %}">{% trans "BAP" %}</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
-                                    <h6>BAP</h6>
+                                    <h6>{% trans "BAP" %}</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="#">BAP Komisyonu</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Bilim İnsanı Portals</a></li>
-                                        <li><a class="research-dropdown-item" href="#">BAP Koordinatörlüğü</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "BAP Komisyonu" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Bilim İnsanı Portals" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "BAP Koordinatörlüğü" %}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -480,35 +481,35 @@
                     
                     <!-- Laboratuvarlar Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="https://laboratuvar.avrasya.edu.tr/">Laboratuvarlar</a>
+                        <a href="https://laboratuvar.avrasya.edu.tr/">{% trans "Laboratuvarlar" %}</a>
                         
                     </li>
                     
                     <!-- Araştırma Merkezleri Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'arastirma:arastirma_merkezleri' %}">Araştırma Merkezleri</a>
+                        <a href="{% url 'arastirma:arastirma_merkezleri' %}">{% trans "Araştırma Merkezleri" %}</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
-                                    <h6>Araştırma Merkezleri</h6>
+                                    <h6>{% trans "Araştırma Merkezleri" %}</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:kadin' %}">Kadın Çalışmaları Uygulama ve Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:bagimlilikla_mucadele' %}">Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:uzaktan_egitim' %}">Uzaktan Eğitim Uygulama ve Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:girisimcilik_yenilikcilik' %}">Girişimcilik ve Yenilikçilik Uygulama Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:gida_egitim' %}">Gıda Eğitim Uygulama ve Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:goc_calismalari' %}">Göç Çalışmaları Uygulama ve Araştırma Merkezi</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:kadin' %}">{% trans "Kadın Çalışmaları Uygulama ve Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:bagimlilikla_mucadele' %}">{% trans "Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:uzaktan_egitim' %}">{% trans "Uzaktan Eğitim Uygulama ve Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:girisimcilik_yenilikcilik' %}">{% trans "Girişimcilik ve Yenilikçilik Uygulama Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:gida_egitim' %}">{% trans "Gıda Eğitim Uygulama ve Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:goc_calismalari' %}">{% trans "Göç Çalışmaları Uygulama ve Araştırma Merkezi" %}</a></li>
                                          </ul>
                                 </div>
                                 <div class="research-mega-col">
                                     <h6>&nbsp;</h6>
                                     <ul class="research-list-unstyled">
 
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:turkce_ogretimi' %}">Türkçe Öğretimi Uygulama ve Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:kariyer_gelistirme' %}">Kariyer Geliştirme Uygulama ve Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:ulastirma_uygulama' %}">Ulaştırma Uygulama ve Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:teknoloji_transfer' %}">Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:surekli_egitim' %}">Sürekli Eğitim Uygulama ve Araştırma Merkezi</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:turkce_ogretimi' %}">{% trans "Türkçe Öğretimi Uygulama ve Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:kariyer_gelistirme' %}">{% trans "Kariyer Geliştirme Uygulama ve Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:ulastirma_uygulama' %}">{% trans "Ulaştırma Uygulama ve Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:teknoloji_transfer' %}">{% trans "Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'arastirma:surekli_egitim' %}">{% trans "Sürekli Eğitim Uygulama ve Araştırma Merkezi" %}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -517,14 +518,14 @@
                     
                     <!-- Fikri ve Sınai Mülkiyet Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'arastirma:fikri_Sinai_mulkiyet' %}">Fikri ve Sınai Mülkiyet</a>
+                        <a href="{% url 'arastirma:fikri_Sinai_mulkiyet' %}">{% trans "Fikri ve Sınai Mülkiyet" %}</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
-                                    <h6>Fikri ve Sınai Mülkiyet</h6>
+                                    <h6>{% trans "Fikri ve Sınai Mülkiyet" %}</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="#">BD Fikri ve Sınai Mülkiyet Politikası</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Paylaşım Linkler</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "BD Fikri ve Sınai Mülkiyet Politikası" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Paylaşım Linkler" %}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -533,17 +534,17 @@
                     
                     <!-- Araştırma Çıktıları Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'arastirma:arastirma_ciktilari' %}">Araştırma Çıktıları</a>
+                        <a href="{% url 'arastirma:arastirma_ciktilari' %}">{% trans "Araştırma Çıktıları" %}</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
-                                    <h6>Araştırma Çıktıları</h6>
+                                    <h6>{% trans "Araştırma Çıktıları" %}</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="#">Patentler</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Paylaşımlar</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Türkçe</a></li>
-                                        <li><a class="research-dropdown-item" href="#">TÜBİTAK - Ulusal Akademik</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Birimsel Yapı Göstergeleri</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Patentler" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Paylaşımlar" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Türkçe" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "TÜBİTAK - Ulusal Akademik" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Birimsel Yapı Göstergeleri" %}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -552,27 +553,27 @@
                     
                     <!-- Ödüller Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'arastirma:oduller' %}">Ödüller</a>
+                        <a href="{% url 'arastirma:oduller' %}">{% trans "Ödüller" %}</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
-                                    <h6>Ödüller</h6>
+                                    <h6>{% trans "Ödüller" %}</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="#">Bilim Akademisi</a></li>
-                                        <li><a class="research-dropdown-item" href="#">BİVMA</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Nobel Göre Araştırma Programları ve Bankları</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Mustafa N. Parlar Eğitim ve Araştırma Vakfı</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Üçüncü Ödülleri</a></li>
-                                        <li><a class="research-dropdown-item" href="#">TÜBA</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Bilim Akademisi" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "BİVMA" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Nobel Göre Araştırma Programları ve Bankları" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Mustafa N. Parlar Eğitim ve Araştırma Vakfı" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Üçüncü Ödülleri" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "TÜBA" %}</a></li>
                                     </ul>
                                 </div>
                                 <div class="research-mega-col">
                                     <h6>&nbsp;</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="#">TÜBİTAK</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Türkiye Gazeteciler Cemiyeti</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Diğer Ödüller</a></li>
-                                        <li><a class="research-dropdown-item" href="#">Fakülte Doktora Unvanı</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "TÜBİTAK" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Türkiye Gazeteciler Cemiyeti" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Diğer Ödüller" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="#">{% trans "Fakülte Doktora Unvanı" %}</a></li>
                                     </ul>
                                 </div>
                             </div>

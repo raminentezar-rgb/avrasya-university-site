@@ -1,11 +1,12 @@
 # fen_edebiyat/admin.py
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     FenEdebiyatDuyuru
 )
 
 @admin.register(FenEdebiyatDuyuru)
-class FenEdebiyatDuyuruAdmin(admin.ModelAdmin):
+class FenEdebiyatDuyuruAdmin(TranslationAdmin):
     list_display = ['baslik', 'kategori', 'yayin_tarihi', 'yayinda', 'onemli', 'sira']
     list_filter = ['kategori', 'yayinda', 'onemli', 'yayin_tarihi']
     search_fields = ['baslik', 'icerik', 'ozet']

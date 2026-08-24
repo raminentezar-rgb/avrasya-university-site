@@ -1,17 +1,18 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     AdaySayfa, AdayMenu, AdaySlider, AdayIletisim
 )
 
 @admin.register(AdayMenu)
-class AdayMenuAdmin(admin.ModelAdmin):
+class AdayMenuAdmin(TranslationAdmin):
     list_display = ['title', 'icon', 'order', 'is_active',]
     list_editable = ['order', 'is_active']
     list_filter = ['is_active']
     search_fields = ['title']
 
 @admin.register(AdaySayfa)
-class AdaySayfaAdmin(admin.ModelAdmin):
+class AdaySayfaAdmin(TranslationAdmin):
     list_display = [
         'title', 
         'slug', 
@@ -41,7 +42,7 @@ class AdaySayfaAdmin(admin.ModelAdmin):
     has_downloadable_files.short_description = 'Dosya Var'
 
 @admin.register(AdaySlider)
-class AdaySliderAdmin(admin.ModelAdmin):
+class AdaySliderAdmin(TranslationAdmin):
     list_display = ['title', 'order', 'is_active']
     list_editable = ['order', 'is_active']
     list_filter = ['is_active']

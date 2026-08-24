@@ -1,5 +1,6 @@
 <!-- signup.html بهبود یافته -->
 {% extends "core/base.html" %}
+{% load i18n %}
 {% block content %}
 {% load static %}
 
@@ -12,11 +13,11 @@
                 <div class="auth-header">
                     <div class="logo-container mb-4">
                         <div class="logo-circle">
-                            <img src="{% static 'core/img/AVRASYA-PNG-LOGO.png' %}" alt="Avrasya University Logo" class="logo-image">
+                            <img src="{% static 'core/img/AVRASYA-PNG-LOGO.png' %}" alt="{% trans 'Avrasya University Logo' %}" class="logo-image">
                         </div>
                     </div>
-                    <h2 style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">Öğrenci Hesabı Oluştur</h2>
-                    <p class="text-muted">Başlamak için bilgilerinizi doldurun</p>
+                    <h2 style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">{% trans "Öğrenci Hesabı Oluştur" %}</h2>
+                    <p class="text-muted">{% trans "Başlamak için bilgilerinizi doldurun" %}</p>
                 </div>
 
                 <form method="post" class="auth-form" id="signupForm">
@@ -25,9 +26,9 @@
                     {% if form.errors %}
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <i class="fas fa-exclamation-triangle mr-2"></i>
-                        Lütfen aşağıdaki hataları düzeltin.
+                        {% trans "Lütfen aşağıdaki hataları düzeltin." %}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">{% trans "&times;" %}</span>
                         </button>
                     </div>
                     {% endif %}
@@ -36,7 +37,7 @@
                         <!-- Sol Taraf: Kişisel Bilgiler -->
                         <div class="col-md-6">
                             <h5 class="form-section-title" style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">
-                                <i class="fas fa-user-circle"></i> Kişisel Bilgiler
+                                <i class="fas fa-user-circle"></i> {% trans "Kişisel Bilgiler" %}
                             </h5>
                             
                             {% for field in form %}
@@ -44,16 +45,16 @@
                                 <div class="form-group">
                                     <label for="{{ field.id_for_label }}" class="form-label">
                                         {% if field.name == 'username' %}
-                                            <i class="fas fa-user"></i> Kullanıcı Adı
+                                            <i class="fas fa-user"></i> {% trans "Kullanıcı Adı" %}
                                             <span class="text-danger">*</span>
                                         {% elif field.name == 'first_name' %}
-                                            <i class="fas fa-signature"></i> Ad
+                                            <i class="fas fa-signature"></i> {% trans "Ad" %}
                                             <span class="text-danger">*</span>
                                         {% elif field.name == 'last_name' %}
-                                            <i class="fas fa-signature"></i> Soyad
+                                            <i class="fas fa-signature"></i> {% trans "Soyad" %}
                                             <span class="text-danger">*</span>
                                         {% elif field.name == 'email' %}
-                                            <i class="fas fa-envelope"></i> E-posta Adresi
+                                            <i class="fas fa-envelope"></i> {% trans "E-posta Adresi" %}
                                             <span class="text-danger">*</span>
                                         {% endif %}
                                     </label>
@@ -85,7 +86,7 @@
                         <!-- Sağ Taraf: Güvenlik Bilgileri -->
                         <div class="col-md-6">
                             <h5 class="form-section-title" style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">
-                                <i class="fas fa-shield-alt"></i> Güvenlik Bilgileri
+                                <i class="fas fa-shield-alt"></i> {% trans "Güvenlik Bilgileri" %}
                             </h5>
                             
                             {% for field in form %}
@@ -93,10 +94,10 @@
                                 <div class="form-group">
                                     <label for="{{ field.id_for_label }}" class="form-label">
                                         {% if field.name == 'password1' %}
-                                            <i class="fas fa-lock"></i> Şifre
+                                            <i class="fas fa-lock"></i> {% trans "Şifre" %}
                                             <span class="text-danger">*</span>
                                         {% elif field.name == 'password2' %}
-                                            <i class="fas fa-lock"></i> Şifre Tekrar
+                                            <i class="fas fa-lock"></i> {% trans "Şifre Tekrar" %}
                                             <span class="text-danger">*</span>
                                         {% endif %}
                                     </label>
@@ -113,7 +114,7 @@
                                         <div class="strength-bar">
                                             <div class="strength-fill" id="passwordStrength"></div>
                                         </div>
-                                        <small class="strength-text" id="strengthText">Şifre gücü: Zayıf</small>
+                                        <small class="strength-text" id="strengthText">{% trans "Şifre gücü: Zayıf" %}</small>
                                     </div>
                                     {% endif %}
                                     
@@ -133,13 +134,13 @@
                             <!-- Öğrenci Numarası -->
                             <div class="form-group">
                                 <label for="student_number" class="form-label">
-                                    <i class="fas fa-id-card"></i> Öğrenci Numarası
+                                    <i class="fas fa-id-card"></i> {% trans "Öğrenci Numarası" %}
                                 </label>
                                 <div class="input-with-icon">
                                     <input type="text" id="student_number" name="student_number" 
-                                           class="form-control" placeholder="Öğrenci numaranızı giriniz">
+                                           class="form-control" placeholder="{% trans 'Öğrenci numaranızı giriniz' %}">
                                 </div>
-                                <small class="form-text text-muted">Opsiyonel: Üniversite öğrenci numaranız</small>
+                                <small class="form-text text-muted">{% trans "Opsiyonel: Üniversite öğrenci numaranız" %}</small>
                             </div>
                             
                             <!-- Şartlar ve Koşullar -->
@@ -147,8 +148,8 @@
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="terms" required>
                                     <label class="custom-control-label" for="terms">
-                                        <a href="#" class="terms-link">Kullanım Şartları</a>'nı ve 
-                                        <a href="#" class="terms-link">Gizlilik Politikası</a>'nı okudum ve kabul ediyorum
+                                        <a href="#" class="terms-link">{% trans "Kullanım Şartları" %}</a>{% trans "'nı ve" %} 
+                                        <a href="#" class="terms-link">{% trans "Gizlilik Politikası" %}</a>{% trans "'nı okudum ve kabul ediyorum" %}
                                         <span class="text-danger">*</span>
                                     </label>
                                 </div>
@@ -157,47 +158,47 @@
                     </div>
 
                     <button type="submit" class="btn-auth btn-auth-primary btn-block mt-4" id="submitBtn">
-                        <i class="fas fa-user-plus mr-2"></i> Hesap Oluştur
+                        <i class="fas fa-user-plus mr-2"></i> {% trans "Hesap Oluştur" %}
                         <span class="spinner-border spinner-border-sm ml-2 d-none" id="submitSpinner"></span>
                     </button>
 
                     {% comment %} <div class="divider">
-                        <span>veya</span>
+                        <span>{% trans "veya" %}</span>
                     </div>
 
                     <a href="#" class="btn-auth btn-auth-secondary btn-block mb-3">
-                        <i class="fab fa-google mr-2"></i> Google ile Kaydol
+                        <i class="fab fa-google mr-2"></i> {% trans "Google ile Kaydol" %}
                     </a> {% endcomment %}
 
                     <div class="auth-links text-center mt-4">
                         <a href="{% url 'accounts:login' %}" class="auth-link">
-                            <i class="fas fa-sign-in-alt"></i> Zaten hesabınız var mı? Giriş Yapın
+                            <i class="fas fa-sign-in-alt"></i> {% trans "Zaten hesabınız var mı? Giriş Yapın" %}
                         </a>
                     </div>
                 </form>
             </div>
 
             <div class="auth-info-card mt-4">
-                <h5><i class="fas fa-graduation-cap text-primary mr-2"></i> Neden Hesap Oluşturmalısınız?</h5>
+                <h5><i class="fas fa-graduation-cap text-primary mr-2"></i> {% trans "Neden Hesap Oluşturmalısınız?" %}</h5>
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <div class="feature-item mb-3">
                             <i class="fas fa-ticket-alt feature-icon"></i>
-                            <span>Destek talepleri oluşturun ve takip edin</span>
+                            <span>{% trans "Destek talepleri oluşturun ve takip edin" %}</span>
                         </div>
                         <div class="feature-item mb-3">
                             <i class="fas fa-book feature-icon"></i>
-                            <span>Kişiselleştirilmiş üniversite kaynakları</span>
+                            <span>{% trans "Kişiselleştirilmiş üniversite kaynakları" %}</span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="feature-item mb-3">
                             <i class="fas fa-history feature-icon"></i>
-                            <span>Arama geçmişinizi kaydedin</span>
+                            <span>{% trans "Arama geçmişinizi kaydedin" %}</span>
                         </div>
                         <div class="feature-item mb-3">
                             <i class="fas fa-bell feature-icon"></i>
-                            <span>Önemli güncellemelerden haberdar olun</span>
+                            <span>{% trans "Önemli güncellemelerden haberdar olun" %}</span>
                         </div>
                     </div>
                 </div>

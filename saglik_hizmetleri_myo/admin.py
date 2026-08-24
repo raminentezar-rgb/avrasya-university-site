@@ -1,11 +1,12 @@
 # saglik_hizmetleri_myo/admin.py
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     SaglikHizmetleriMYODuyuru
 )
 
 @admin.register(SaglikHizmetleriMYODuyuru)
-class SaglikHizmetleriMYODuyuruAdmin(admin.ModelAdmin):
+class SaglikHizmetleriMYODuyuruAdmin(TranslationAdmin):
     list_display = ['baslik', 'kategori', 'yayin_tarihi', 'yayinda', 'onemli', 'sira']
     list_filter = ['kategori', 'yayinda', 'onemli', 'yayin_tarihi']
     search_fields = ['baslik', 'icerik', 'ozet']

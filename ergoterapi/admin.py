@@ -1,12 +1,13 @@
 # app_name: ergoterapi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     ErgoterapiFaaliyet, ErgoterapiFaaliyetGrubu, ErgoterapiDersProgrami, ErgoterapiFaaliyetGorseli, ErgoterapiEtkinlik, ErgoterapiDuyuru
 )
 
 @admin.register(ErgoterapiEtkinlik)
-class ErgoterapiEtkinlikAdmin(admin.ModelAdmin):
+class ErgoterapiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class ErgoterapiDuyuruAdmin(admin.ModelAdmin):
         return ErgoterapiDuyuru.objects.all()
 
 @admin.register(ErgoterapiDersProgrami)
-class ErgoterapiDersProgramiAdmin(admin.ModelAdmin):
+class ErgoterapiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class ErgoterapiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(ErgoterapiFaaliyetGrubu)
-class ErgoterapiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class ErgoterapiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(ErgoterapiFaaliyet)
-class ErgoterapiFaaliyetAdmin(admin.ModelAdmin):
+class ErgoterapiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

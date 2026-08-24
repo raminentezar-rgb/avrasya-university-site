@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - İletişim Fakültesi İletişim{% endblock %}
 
@@ -17,20 +18,19 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">İletişim Fakültesi İletişim</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "İletişim Fakültesi İletişim" %}</h1>
                         <p class="lead mb-4">
-                            Avrasya Üniversitesi İletişim Fakültesi ile iletişime geçin. 
-                            Aşağıdaki iletişim bilgilerimizden bize ulaşabilirsiniz.
+                            {% trans "Avrasya Üniversitesi İletişim Fakültesi ile iletişime geçin. Aşağıdaki iletişim bilgilerimizden bize ulaşabilirsiniz." %}
                         </p>
                         <div class="d-flex gap-3">
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-geo-alt me-1"></i>Merkez Yerleşke
+                                <i class="bi bi-geo-alt me-1"></i>{% trans "Merkez Yerleşke" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-telephone me-1"></i>7/24 Destek
+                                <i class="bi bi-telephone me-1"></i>{% trans "7/24 Destek" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-envelope me-1"></i>Hızlı Yanıt
+                                <i class="bi bi-envelope me-1"></i>{% trans "Hızlı Yanıt" %}
                             </span>
                         </div>
                     </div>
@@ -49,8 +49,8 @@
                         <div class="contact-icon bg-primary text-white rounded-circle mx-auto mb-3">
                             <i class="bi bi-telephone-fill"></i>
                         </div>
-                        <h5 class="text-primary">Telefon</h5>
-                        <p class="text-muted mb-2">Hızlı destek için bizi arayın</p>
+                        <h5 class="text-primary">{% trans "Telefon" %}</h5>
+                        <p class="text-muted mb-2">{% trans "Hızlı destek için bizi arayın" %}</p>
                         <a href="tel:+904623340550" class="btn btn-outline-primary btn-sm">
                             +90 535 333 45 55
                         </a>
@@ -63,10 +63,10 @@
                         <div class="contact-icon bg-success text-white rounded-circle mx-auto mb-3">
                             <i class="bi bi-envelope-fill"></i>
                         </div>
-                        <h5 class="text-success">E-posta</h5>
-                        <p class="text-muted mb-2">E-posta ile bize ulaşın</p>
+                        <h5 class="text-success">{% trans "E-posta" %}</h5>
+                        <p class="text-muted mb-2">{% trans "E-posta ile bize ulaşın" %}</p>
                         <a href="mailto:fen.edebiyat@avrasya.edu.tr" class="btn btn-outline-success btn-sm">
-                            fen.edebiyat@avrasya.edu.tr
+                            {% trans "fen.edebiyat@avrasya.edu.tr" %}
                         </a>
                     </div>
                 </div>
@@ -77,8 +77,8 @@
                         <div class="contact-icon bg-warning text-white rounded-circle mx-auto mb-3">
                             <i class="bi bi-clock-fill"></i>
                         </div>
-                        <h5 class="text-warning">Çalışma Saatleri</h5>
-                        <p class="text-muted mb-2">Hafta içi her gün</p>
+                        <h5 class="text-warning">{% trans "Çalışma Saatleri" %}</h5>
+                        <p class="text-muted mb-2">{% trans "Hafta içi her gün" %}</p>
                         <span class="badge bg-warning text-dark">08:30 - 17:30</span>
                     </div>
                 </div>
@@ -88,13 +88,13 @@
         <!-- Main Campus Section -->
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-primary text-white py-3">
-                <h4 class="mb-0"><i class="bi bi-geo-alt-fill me-2"></i>Yerleşkemiz</h4>
+                <h4 class="mb-0"><i class="bi bi-geo-alt-fill me-2"></i>{% trans "Yerleşkemiz" %}</h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="campus-info">
-                            <h5 class="text-primary mb-3">Avrasya Üniversitesi Yomra Yerleşkesi</h5>
+                            <h5 class="text-primary mb-3">{% trans "Avrasya Üniversitesi Yomra Yerleşkesi" %}</h5>
                             
                             <div class="contact-details mb-4">
                                 <div class="row">
@@ -104,9 +104,9 @@
                                                 <i class="bi bi-geo-alt-fill"></i>
                                             </div>
                                             <div>
-                                                <h6 class="mb-1">Adres</h6>
+                                                <h6 class="mb-1">{% trans "Adres" %}</h6>
                                                 <p class="text-muted mb-0 small">
-                                                    Sancak Mah. Hükümet Cad. Yomra Yomra/TRABZON<br>
+                                                    {% trans "Sancak Mah. Hükümet Cad. Yomra Yomra/TRABZON" %}<br>
                                                     
                                                 </p>
                                             </div>
@@ -118,7 +118,7 @@
                                                 <i class="bi bi-telephone-fill"></i>
                                             </div>
                                             <div>
-                                                <h6 class="mb-1">Telefon</h6>
+                                                <h6 class="mb-1">{% trans "Telefon" %}</h6>
                                                 <p class="text-muted mb-0">
                                                     <a href="tel:+904623340550" class="text-decoration-none">+90 462 344 05 11</a>
                                                 </p>
@@ -131,9 +131,9 @@
                                                 <i class="bi bi-envelope-fill"></i>
                                             </div>
                                             <div>
-                                                <h6 class="mb-1">E-posta</h6>
+                                                <h6 class="mb-1">{% trans "E-posta" %}</h6>
                                                 <p class="text-muted mb-0">
-                                                    <a href="mailto:info@avrasya.edu.tr" class="text-decoration-none">info@avrasya.edu.tr</a>
+                                                    <a href="mailto:info@avrasya.edu.tr" class="text-decoration-none">{% trans "info@avrasya.edu.tr" %}</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -144,7 +144,7 @@
                                                 <i class="bi bi-fax-fill"></i>
                                             </div>
                                             <div>
-                                                <h6 class="mb-1">Faks</h6>
+                                                <h6 class="mb-1">{% trans "Faks" %}</h6>
                                                 <p class="text-muted mb-0">+90 462 334 05 51</p>
                                             </div>
                                         </div>
@@ -153,21 +153,21 @@
                             </div>
 
                             <div class="campus-features">
-                                <h6 class="text-primary mb-3">Yerleşke Özellikleri</h6>
+                                <h6 class="text-primary mb-3">{% trans "Yerleşke Özellikleri" %}</h6>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <ul class="list-unstyled">
                                             <li class="mb-2">
                                                 <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                                Modern Derslikler
+                                                {% trans "Modern Derslikler" %}
                                             </li>
                                             <li class="mb-2">
                                                 <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                                Gelişmiş Laboratuvarlar
+                                                {% trans "Gelişmiş Laboratuvarlar" %}
                                             </li>
                                             <li class="mb-2">
                                                 <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                                Kütüphane
+                                                {% trans "Kütüphane" %}
                                             </li>
                                         </ul>
                                     </div>
@@ -175,15 +175,15 @@
                                         <ul class="list-unstyled">
                                             <li class="mb-2">
                                                 <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                                Spor Tesisleri
+                                                {% trans "Spor Tesisleri" %}
                                             </li>
                                             <li class="mb-2">
                                                 <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                                Yemekhane & Kafeterya
+                                                {% trans "Yemekhane & Kafeterya" %}
                                             </li>
                                             <li class="mb-2">
                                                 <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                                Otopark
+                                                {% trans "Otopark" %}
                                             </li>
                                         </ul>
                                     </div>
@@ -196,18 +196,18 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body text-center">
                                     <i class="bi bi-map display-4 text-primary mb-3"></i>
-                                    <h6 class="text-primary mb-3">Haritada Konumumuz</h6>
+                                    <h6 class="text-primary mb-3">{% trans "Haritada Konumumuz" %}</h6>
                                     <p class="text-muted small mb-3">
-                                        Üniversitemizin konumunu haritada görüntülemek için aşağıdaki butona tıklayın.
+                                        {% trans "Üniversitemizin konumunu haritada görüntülemek için aşağıdaki butona tıklayın." %}
                                     </p>
                                     <button class="btn btn-primary w-100" onclick="openMap(40.9570823, 39.86042191)">
                                         <i class="bi bi-geo-alt me-2"></i>
-                                        Haritada Aç
+                                        {% trans "Haritada Aç" %}
                                     </button>
                                     <div class="mt-3">
                                         <small class="text-muted">
                                             <i class="bi bi-info-circle me-1"></i>
-                                            Sancak Mah. Hükümet Cad. Yomra Yomra/TRABZON
+                                            {% trans "Sancak Mah. Hükümet Cad. Yomra Yomra/TRABZON" %}
                                         </small>
                                     </div>
                                 </div>
@@ -223,53 +223,53 @@
             <div class="col-lg-8 mb-4">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-primary text-white py-3">
-                        <h4 class="mb-0"><i class="bi bi-send-fill me-2"></i>Mesaj Gönderin</h4>
+                        <h4 class="mb-0"><i class="bi bi-send-fill me-2"></i>{% trans "Mesaj Gönderin" %}</h4>
                     </div>
                     <div class="card-body">
                         <form id="contactForm">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="firstName" class="form-label">Adınız</label>
+                                    <label for="firstName" class="form-label">{% trans "Adınız" %}</label>
                                     <input type="text" class="form-control" id="firstName" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="lastName" class="form-label">Soyadınız</label>
+                                    <label for="lastName" class="form-label">{% trans "Soyadınız" %}</label>
                                     <input type="text" class="form-control" id="lastName" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="email" class="form-label">E-posta Adresiniz</label>
+                                    <label for="email" class="form-label">{% trans "E-posta Adresiniz" %}</label>
                                     <input type="email" class="form-control" id="email" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="phone" class="form-label">Telefon Numaranız</label>
+                                    <label for="phone" class="form-label">{% trans "Telefon Numaranız" %}</label>
                                     <input type="tel" class="form-control" id="phone">
                                 </div>
                                 <div class="col-12">
-                                    <label for="subject" class="form-label">Konu</label>
+                                    <label for="subject" class="form-label">{% trans "Konu" %}</label>
                                     <select class="form-select" id="subject" required>
-                                        <option value="">Konu Seçiniz</option>
-                                        <option value="academic">Akademik Danışmanlık</option>
-                                        <option value="admission">Kayıt ve Kabul</option>
-                                        <option value="course">Ders Bilgileri</option>
-                                        <option value="faculty">Fakülte Hakkında</option>
-                                        <option value="other">Diğer</option>
+                                        <option value="">{% trans "Konu Seçiniz" %}</option>
+                                        <option value="academic">{% trans "Akademik Danışmanlık" %}</option>
+                                        <option value="admission">{% trans "Kayıt ve Kabul" %}</option>
+                                        <option value="course">{% trans "Ders Bilgileri" %}</option>
+                                        <option value="faculty">{% trans "Fakülte Hakkında" %}</option>
+                                        <option value="other">{% trans "Diğer" %}</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <label for="message" class="form-label">Mesajınız</label>
+                                    <label for="message" class="form-label">{% trans "Mesajınız" %}</label>
                                     <textarea class="form-control" id="message" rows="5" required></textarea>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="consent" required>
                                         <label class="form-check-label" for="consent">
-                                            <a href="#" class="text-decoration-none">KVKK Aydınlatma Metni</a>'ni okudum ve onaylıyorum.
+                                            <a href="#" class="text-decoration-none">{% trans "KVKK Aydınlatma Metni" %}</a>{% trans "'ni okudum ve onaylıyorum." %}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary px-4">
-                                        <i class="bi bi-send me-2"></i>Mesajı Gönder
+                                        <i class="bi bi-send me-2"></i>{% trans "Mesajı Gönder" %}
                                     </button>
                                 </div>
                             </div>
@@ -281,48 +281,48 @@
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-success text-white py-3">
-                        <h4 class="mb-0"><i class="bi bi-info-circle me-2"></i>Hızlı İletişim</h4>
+                        <h4 class="mb-0"><i class="bi bi-info-circle me-2"></i>{% trans "Hızlı İletişim" %}</h4>
                     </div>
                     <div class="card-body">
                         <div class="quick-contact-list">
                             <div class="quick-contact-item mb-4">
-                                <h6 class="text-success mb-2">Fakülte Sekreterliği</h6>
+                                <h6 class="text-success mb-2">{% trans "Fakülte Sekreterliği" %}</h6>
                                 <div class="d-flex align-items-center mb-1">
                                     <i class="bi bi-telephone text-success me-2"></i>
                                     <small><a href="tel:+904623340553" class="text-decoration-none">+90 462 344 05 19</a></small>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-envelope text-success me-2"></i>
-                                    <small><a href="mailto:fen.sekreterlik@avrasya.edu.tr" class="text-decoration-none">fen.sekreterlik@avrasya.edu.tr</a></small>
+                                    <small><a href="mailto:fen.sekreterlik@avrasya.edu.tr" class="text-decoration-none">{% trans "fen.sekreterlik@avrasya.edu.tr" %}</a></small>
                                 </div>
                             </div>
 
                             <div class="quick-contact-item mb-4">
-                                <h6 class="text-warning mb-2">Öğrenci İşleri</h6>
+                                <h6 class="text-warning mb-2">{% trans "Öğrenci İşleri" %}</h6>
                                 <div class="d-flex align-items-center mb-1">
                                     <i class="bi bi-telephone text-warning me-2"></i>
                                     <small><a href="tel:+904623340554" class="text-decoration-none">+90 462 334 05 54</a></small>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-envelope text-warning me-2"></i>
-                                    <small><a href="mailto:ogrenci.isleri@avrasya.edu.tr" class="text-decoration-none">ogrenci.isleri@avrasya.edu.tr</a></small>
+                                    <small><a href="mailto:ogrenci.isleri@avrasya.edu.tr" class="text-decoration-none">{% trans "ogrenci.isleri@avrasya.edu.tr" %}</a></small>
                                 </div>
                             </div>
 
                             <div class="quick-contact-item mb-4">
-                                <h6 class="text-info mb-2">Akademik Danışmanlık</h6>
+                                <h6 class="text-info mb-2">{% trans "Akademik Danışmanlık" %}</h6>
                                 <div class="d-flex align-items-center mb-1">
                                     <i class="bi bi-telephone text-info me-2"></i>
                                     <small><a href="tel:+904623340555" class="text-decoration-none">+90 462 334 05 55</a></small>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-envelope text-info me-2"></i>
-                                    <small><a href="mailto:akademik.danismanlik@avrasya.edu.tr" class="text-decoration-none">akademik.danismanlik@avrasya.edu.tr</a></small>
+                                    <small><a href="mailto:akademik.danismanlik@avrasya.edu.tr" class="text-decoration-none">{% trans "akademik.danismanlik@avrasya.edu.tr" %}</a></small>
                                 </div>
                             </div>
 
                             <div class="quick-contact-item">
-                                <h6 class="text-primary mb-2">Sosyal Medya</h6>
+                                <h6 class="text-primary mb-2">{% trans "Sosyal Medya" %}</h6>
                                 <div class="d-flex gap-2">
                                     <a href="https://www.facebook.com/avrasyauniversitesi" class="btn btn-outline-primary btn-sm" target="_blank">
                                         <i class="bi bi-facebook"></i>
@@ -347,41 +347,41 @@
         <!-- Transportation Info -->
         <div class="card border-0 shadow-sm mt-4">
             <div class="card-header bg-info text-white py-3">
-                <h4 class="mb-0"><i class="bi bi-bus-front me-2"></i>Ulaşım Bilgileri</h4>
+                <h4 class="mb-0"><i class="bi bi-bus-front me-2"></i>{% trans "Ulaşım Bilgileri" %}</h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6 class="text-info mb-3">Toplu Taşıma</h6>
+                        <h6 class="text-info mb-3">{% trans "Toplu Taşıma" %}</h6>
                         <ul class="list-unstyled">
                             <li class="mb-2">
                                 <i class="bi bi-bus-front text-info me-2"></i>
-                                <strong>Dolmuş:</strong> Maçka - Ortahisar hattı
+                                <strong>{% trans "Dolmuş:" %}</strong> {% trans "Maçka - Ortahisar hattı" %}
                             </li>
                             <li class="mb-2">
                                 <i class="bi bi-bus-front text-info me-2"></i>
-                                <strong>Otobüs:</strong> 101, 102, 103 numaralı hatlar
+                                <strong>{% trans "Otobüs:" %}</strong> {% trans "101, 102, 103 numaralı hatlar" %}
                             </li>
                             <li class="mb-2">
                                 <i class="bi bi-taxi-front text-info me-2"></i>
-                                <strong>Taksi:</strong> Tüm ilçelerden ulaşım mevcut
+                                <strong>{% trans "Taksi:" %}</strong> {% trans "Tüm ilçelerden ulaşım mevcut" %}
                             </li>
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h6 class="text-info mb-3">Kişisel Araç</h6>
+                        <h6 class="text-info mb-3">{% trans "Kişisel Araç" %}</h6>
                         <ul class="list-unstyled">
                             <li class="mb-2">
                                 <i class="bi bi-p-circle text-info me-2"></i>
-                                <strong>Otopark:</strong> Ücretsiz öğrenci otoparkı
+                                <strong>{% trans "Otopark:" %}</strong> {% trans "Ücretsiz öğrenci otoparkı" %}
                             </li>
                             <li class="mb-2">
                                 <i class="bi bi-geo-alt text-info me-2"></i>
-                                <strong>Konum:</strong> D100 karayoluna 5 dakika
+                                <strong>{% trans "Konum:" %}</strong> {% trans "D100 karayoluna 5 dakika" %}
                             </li>
                             <li class="mb-2">
                                 <i class="bi bi-signpost text-info me-2"></i>
-                                <strong>İşaretler:</strong> Kampüs girişi işaretlenmiştir
+                                <strong>{% trans "İşaretler:" %}</strong> {% trans "Kampüs girişi işaretlenmiştir" %}
                             </li>
                         </ul>
                     </div>

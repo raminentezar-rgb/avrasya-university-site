@@ -1,12 +1,13 @@
 # app_name: mahkeme_buro/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     MahkemeBuroEtkinlik, MahkemeBuroFaaliyet, MahkemeBuroDuyuru, MahkemeBuroFaaliyetGrubu, MahkemeBuroDersProgrami, MahkemeBuroFaaliyetGorseli
 )
 
 @admin.register(MahkemeBuroEtkinlik)
-class MahkemeBuroEtkinlikAdmin(admin.ModelAdmin):
+class MahkemeBuroEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class MahkemeBuroDuyuruAdmin(admin.ModelAdmin):
         return MahkemeBuroDuyuru.objects.all()
 
 @admin.register(MahkemeBuroDersProgrami)
-class MahkemeBuroDersProgramiAdmin(admin.ModelAdmin):
+class MahkemeBuroDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class MahkemeBuroFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(MahkemeBuroFaaliyetGrubu)
-class MahkemeBuroFaaliyetGrubuAdmin(admin.ModelAdmin):
+class MahkemeBuroFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(MahkemeBuroFaaliyet)
-class MahkemeBuroFaaliyetAdmin(admin.ModelAdmin):
+class MahkemeBuroFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

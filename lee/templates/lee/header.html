@@ -17,20 +17,20 @@
             <div class="research-main_nav">
                 <ul class="research-main_nav_list">
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'core:index' %}">ana sayfa</a>
+                        <a href="{% url 'core:index' %}">{% trans "ana sayfa" %}</a>
                         
                     </li>
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'lee:lee' %}">Genel</a>
+                        <a href="{% url 'lee:lee' %}">{% trans "Genel" %}</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
                                     <h6>{% trans "Genel Bilgiler" %}</h6>
                                     <ul class="research-list-unstyled">
                                         <li><a class="research-dropdown-item" href="{% url 'lee:lee' %}">{% trans "Genel Bilgiler" %}</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:duyurular' %}">Duyuruları</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'lee:duyurular' %}">{% trans "Duyuruları" %}</a></li>
                                         <li><a class="research-dropdown-item" href="{% url 'lee:etkinlik_listesi' %}">{% trans "Etkinlikler" %}</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:akademik_kadro' %}">Akademik Kadro</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'lee:akademik_kadro' %}">{% trans "Akademik Kadro" %}</a></li>
                                         
                                 </div>
                                 
@@ -40,15 +40,15 @@
 
 
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="">Programlar</a>
+                        <a href="">{% trans "Programlar" %}</a>
                         <div class="research-mega-menu-content">
                             <div class="research-mega-row">
                                 <div class="research-mega-col">
-                                    <h6>Programlar</h6>
+                                    <h6>{% trans "Programlar" %}</h6>
                                     <ul class="research-list-unstyled">
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:doktora_programları' %}">Doktora Programları</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:tezli_yukseklisans_programlari' %}">Tezli Yükseklisans Programları</a></li>
-                                        <li><a class="research-dropdown-item" href="{% url 'lee:tezsiz_yukseklisans_programlari' %}">Tezsiz Yükseklisans Programları</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'lee:doktora_programları' %}">{% trans "Doktora Programları" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'lee:tezli_yukseklisans_programlari' %}">{% trans "Tezli Yükseklisans Programları" %}</a></li>
+                                        <li><a class="research-dropdown-item" href="{% url 'lee:tezsiz_yukseklisans_programlari' %}">{% trans "Tezsiz Yükseklisans Programları" %}</a></li>
                                         
                                     </ul>
                                 </div>
@@ -63,12 +63,12 @@
                     
                     <!-- Araştırma Merkezleri Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'lee:mevzuat_formlar' %}">Mevzuat&Formlar</a>
+                        <a href="{% url 'lee:mevzuat_formlar' %}">{% trans "Mevzuat&Formlar" %}</a>
                         
                     </li>
                     <!-- Öğrenci İşleri Menu -->
                     <li class="research-main_nav_item research-mega-menu">
-                        <a href="{% url 'lee:on_basvuru_formu' %}">Ön Başvuru</a>
+                        <a href="{% url 'lee:on_basvuru_formu' %}">{% trans "Ön Başvuru" %}</a>
                     </li>
 
                     
@@ -99,7 +99,7 @@
     <div class="mobile-nav" id="mobile-nav">
         <div class="mobile-nav-header">
             <div class="mobile-logo">
-                <img src="{% static 'core/img/logos/lee.png' %}" alt="Logo">
+                <img src="{% static 'core/img/logos/lee.png' %}" alt="{% trans 'Logo' %}">
             </div>
             <div class="mobile-close-btn" id="mobile-close-btn">
                 <span style="color: white; font-size: 24px; font-weight: bold;">✕</span>
@@ -115,14 +115,14 @@
             <div class="mobile-language-options">
                 <a href="javascript:void(0)" onclick="changeLanguage('tr')" class="mobile-language-option {% if LANGUAGE_CODE == 'tr' or not LANGUAGE_CODE %}active{% endif %}">
                     <span class="flag-icon flag-icon-tr"></span>
-                    <span class="lang-name">Türkçe</span>
+                    <span class="lang-name">{% trans "Türkçe" %}</span>
                     {% if LANGUAGE_CODE == 'tr' or not LANGUAGE_CODE %}
                         <i class="fas fa-check"></i>
                     {% endif %}
                 </a>
                 <a href="javascript:void(0)" onclick="changeLanguage('en')" class="mobile-language-option {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
                     <span class="flag-icon flag-icon-gb"></span>
-                    <span class="lang-name">English</span>
+                    <span class="lang-name">{% trans "English" %}</span>
                     {% if LANGUAGE_CODE == 'en' %}
                         <i class="fas fa-check"></i>
                     {% endif %}
@@ -150,7 +150,7 @@
                 </a>
                 <a href="javascript:void(0)" onclick="changeLanguage('de')" class="mobile-language-option {% if LANGUAGE_CODE == 'de' %}active{% endif %}">
                     <span class="flag-icon flag-icon-de"></span>
-                    <span class="lang-name">Deutsch</span>
+                    <span class="lang-name">{% trans "Deutsch" %}</span>
                     {% if LANGUAGE_CODE == 'de' %}
                         <i class="fas fa-check"></i>
                     {% endif %}
@@ -193,7 +193,7 @@
         </ul>
         
         <div class="mobile-nav-footer">
-            <p>© 2024 Avrasya Üniversitesi</p>
+            <p>{% trans "© 2024 Avrasya Üniversitesi" %}</p>
         </div>
     </div>
 

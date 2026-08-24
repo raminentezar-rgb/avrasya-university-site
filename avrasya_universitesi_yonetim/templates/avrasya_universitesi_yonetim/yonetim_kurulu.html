@@ -1,5 +1,6 @@
 <!-- yonetim_kurulu.html -->
 {% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Yönetim Kurulu{% endblock %}
@@ -10,10 +11,9 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">YÖNETİM KURULU</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "YÖNETİM KURULU" %}</h1>
                 <p class="lead mb-4">
-                    Üniversitemizin idari ve akademik yönetiminden sorumlu 
-                            Yönetim Kurulu üyelerimiz
+                    {% trans "Üniversitemizin idari ve akademik yönetiminden sorumlu Yönetim Kurulu üyelerimiz" %}
                 </p>
             </div>
             <div class="col-md-4 text-center">
@@ -33,8 +33,8 @@
                     <div class="card-header-rektor bg-primary text-white py-4">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h2 class="mb-1">Prof. Dr. Mahir KADAKAL</h2>
-                                <p class="mb-0 opacity-75">Rektör</p>
+                                <h2 class="mb-1">{% trans "Prof. Dr. Mahir KADAKAL" %}</h2>
+                                <p class="mb-0 opacity-75">{% trans "Rektör" %}</p>
                             </div>
                             <div class="col-4 text-end">
                                 <i class="bi bi-person-gear display-4 opacity-75"></i>
@@ -46,17 +46,17 @@
                             <div class="col-md-4 text-center mb-3">
                                 <div class="leader-photo-wrapper">
                                     <img src="{% static 'avrasya_universitesi_yonetim/images/mahirkadakal.png' %}" 
-                                         alt="Prof. Dr. Mahir KADAKAL" 
+                                         alt="{% trans 'Prof. Dr. Mahir KADAKAL' %}" 
                                          class="leader-photo img-fluid rounded-circle">
                                     <div class="photo-overlay"></div>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="additional-roles">
-                                    <h6 class="text-primary mb-3">Ek Görevler</h6>
+                                    <h6 class="text-primary mb-3">{% trans "Ek Görevler" %}</h6>
                                     <div class="role-item">
                                         <i class="bi bi-building text-primary me-2"></i>
-                                        <span>Fen Edebiyat Fakültesi Dekan V.</span>
+                                        <span>{% trans "Fen Edebiyat Fakültesi Dekan V." %}</span>
                                     </div>
                                 </div>
                             </div>
@@ -71,8 +71,8 @@
                     <div class="card-header-rektor bg-success text-white py-4">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h2 class="mb-1">Gülay YENÇERİ</h2>
-                                <p class="mb-0 opacity-75">Genel Sekreter</p>
+                                <h2 class="mb-1">{% trans "Gülay YENÇERİ" %}</h2>
+                                <p class="mb-0 opacity-75">{% trans "Genel Sekreter" %}</p>
                             </div>
                             <div class="col-4 text-end">
                                 <i class="bi bi-person-vcard display-4 opacity-75"></i>
@@ -83,12 +83,12 @@
                         <div class="secretary-info">
                             <div class="secretary-role mb-3">
                                 <img src="{% static 'avrasya_universitesi_yonetim/images/gülay yeniçeri.png' %}" 
-                                         alt="Prof. Dr. Mahir KADAKAL" 
+                                         alt="{% trans 'Prof. Dr. Mahir KADAKAL' %}" 
                                          class="leader-photo img-fluid rounded-circle">
-                                <span class="badge bg-success fs-6">Raportör</span>
+                                <span class="badge bg-success fs-6">{% trans "Raportör" %}</span>
                             </div>
                             <p class="text-muted mb-0">
-                                Yönetim Kurulu toplantılarında raportörlük görevi yürütmektedir.
+                                {% trans "Yönetim Kurulu toplantılarında raportörlük görevi yürütmektedir." %}
                             </p>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                     <div class="card-header bg-primary text-white py-4">
                         <h3 class="mb-0">
                             <i class="bi bi-building me-2"></i>
-                            Fakülte Dekanları
+                            {% trans "Fakülte Dekanları" %}
                         </h3>
                     </div>
                     <div class="card-body p-0">
@@ -116,16 +116,16 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="dean-card h-100">
                                     <div class="card-header-dean bg-info text-white">
-                                        <h6 class="mb-0">İletişim Fakültesi</h6>
+                                        <h6 class="mb-0">{% trans "İletişim Fakültesi" %}</h6>
                                     </div>
                                     <div class="card-body text-center p-4">
                                         <div class="dean-photo-wrapper mb-3">
                                             <img src="{% static 'avrasya_universitesi_yonetim/images/cemal-biyik.jpeg' %}" 
-                                                 alt="Prof. Dr. Cemal BIYIK" 
+                                                 alt="{% trans 'Prof. Dr. Cemal BIYIK' %}" 
                                                  class="dean-photo img-fluid rounded-circle">
                                         </div>
-                                        <h5 class="dean-name">Prof. Dr. Cemal BIYIK</h5>
-                                        <p class="dean-title text-muted">Dekan</p>
+                                        <h5 class="dean-name">{% trans "Prof. Dr. Cemal BIYIK" %}</h5>
+                                        <p class="dean-title text-muted">{% trans "Dekan" %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -134,16 +134,16 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="dean-card h-100">
                                     <div class="card-header-dean bg-warning text-dark">
-                                        <h6 class="mb-0">Mühendislik ve Mimarlık Fakültesi</h6>
+                                        <h6 class="mb-0">{% trans "Mühendislik ve Mimarlık Fakültesi" %}</h6>
                                     </div>
                                     <div class="card-body text-center p-4">
                                         <div class="dean-photo-wrapper mb-3">
                                             <img src="{% static 'avrasya_universitesi_yonetim/images/a28.jpg' %}" 
-                                                 alt="Prof. Dr. Orhan DURGUN" 
+                                                 alt="{% trans 'Prof. Dr. Orhan DURGUN' %}" 
                                                  class="dean-photo img-fluid rounded-circle">
                                         </div>
-                                        <h5 class="dean-name">Prof. Dr. Orhan DURGUN</h5>
-                                        <p class="dean-title text-muted">Dekan</p>
+                                        <h5 class="dean-name">{% trans "Prof. Dr. Orhan DURGUN" %}</h5>
+                                        <p class="dean-title text-muted">{% trans "Dekan" %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -152,16 +152,16 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="dean-card h-100">
                                     <div class="card-header-dean bg-danger text-white">
-                                        <h6 class="mb-0">Sağlık Bilimleri Fakültesi</h6>
+                                        <h6 class="mb-0">{% trans "Sağlık Bilimleri Fakültesi" %}</h6>
                                     </div>
                                     <div class="card-body text-center p-4">
                                         <div class="dean-photo-wrapper mb-3">
                                             <img src="{% static 'avrasya_universitesi_yonetim/images/a10.jpg' %}" 
-                                                 alt="Prof. Dr. Yavuz ÖZORAN" 
+                                                 alt="{% trans 'Prof. Dr. Yavuz ÖZORAN' %}" 
                                                  class="dean-photo img-fluid rounded-circle">
                                         </div>
-                                        <h5 class="dean-name">Prof. Dr. Yavuz ÖZORAN</h5>
-                                        <p class="dean-title text-muted">Dekan V.</p>
+                                        <h5 class="dean-name">{% trans "Prof. Dr. Yavuz ÖZORAN" %}</h5>
+                                        <p class="dean-title text-muted">{% trans "Dekan V." %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -170,16 +170,16 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="dean-card h-100">
                                     <div class="card-header-dean bg-success text-white">
-                                        <h6 class="mb-0">Spor Bilimleri Fakültesi</h6>
+                                        <h6 class="mb-0">{% trans "Spor Bilimleri Fakültesi" %}</h6>
                                     </div>
                                     <div class="card-body text-center p-4">
                                         <div class="dean-photo-wrapper mb-3">
                                             <img src="{% static 'avrasya_universitesi_yonetim/images/bos-a.jpg' %}" 
-                                                 alt="Prof. Dr. Birol DOĞAN" 
+                                                 alt="{% trans 'Prof. Dr. Birol DOĞAN' %}" 
                                                  class="dean-photo img-fluid rounded-circle">
                                         </div>
-                                        <h5 class="dean-name">Prof. Dr. Birol DOĞAN</h5>
-                                        <p class="dean-title text-muted">Dekan</p>
+                                        <h5 class="dean-name">{% trans "Prof. Dr. Birol DOĞAN" %}</h5>
+                                        <p class="dean-title text-muted">{% trans "Dekan" %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -188,16 +188,16 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="dean-card h-100">
                                     <div class="card-header-dean bg-dark text-white">
-                                        <h6 class="mb-0">İ.İ.B. Fakültesi</h6>
+                                        <h6 class="mb-0">{% trans "İ.İ.B. Fakültesi" %}</h6>
                                     </div>
                                     <div class="card-body text-center p-4">
                                         <div class="dean-photo-wrapper mb-3">
                                             <img src="{% static 'avrasya_universitesi_yonetim/images/umit-uzman.jpeg' %}" 
-                                                 alt="Prof. Dr. Ümit UZMAN" 
+                                                 alt="{% trans 'Prof. Dr. Ümit UZMAN' %}" 
                                                  class="dean-photo img-fluid rounded-circle">
                                         </div>
-                                        <h5 class="dean-name">Prof. Dr. Ümit UZMAN</h5>
-                                        <p class="dean-title text-muted">Dekan</p>
+                                        <h5 class="dean-name">{% trans "Prof. Dr. Ümit UZMAN" %}</h5>
+                                        <p class="dean-title text-muted">{% trans "Dekan" %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -206,18 +206,18 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="dean-card h-100">
                                     <div class="card-header-dean bg-secondary text-white">
-                                        <h6 class="mb-0">Fen Edebiyat Fakültesi</h6>
+                                        <h6 class="mb-0">{% trans "Fen Edebiyat Fakültesi" %}</h6>
                                     </div>
                                     <div class="card-body text-center p-4">
                                         <div class="dean-photo-wrapper mb-3">
                                             <img src="{% static 'avrasya_universitesi_yonetim/images/mahirkadakal.png' %}" 
-                                                 alt="Prof. Dr. Mahir KADAKAL" 
+                                                 alt="{% trans 'Prof. Dr. Mahir KADAKAL' %}" 
                                                  class="dean-photo img-fluid rounded-circle">
                                         </div>
-                                        <h5 class="dean-name">Prof. Dr. Mahir KADAKAL</h5>
-                                        <p class="dean-title text-muted">Dekan V.</p>
+                                        <h5 class="dean-name">{% trans "Prof. Dr. Mahir KADAKAL" %}</h5>
+                                        <p class="dean-title text-muted">{% trans "Dekan V." %}</p>
                                         <div class="additional-role mt-2">
-                                            <span class="badge bg-primary">Aynı zamanda Rektör</span>
+                                            <span class="badge bg-primary">{% trans "Aynı zamanda Rektör" %}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@
                     <div class="card-header bg-info text-white py-4">
                         <h3 class="mb-0">
                             <i class="bi bi-journal-text me-2"></i>
-                            Senato Temsilci Üyeleri
+                            {% trans "Senato Temsilci Üyeleri" %}
                         </h3>
                     </div>
                     <div class="card-body">
@@ -252,10 +252,10 @@
                                             <i class="bi bi-person-check display-4 text-info"></i>
                                         </div>
                                     </div>
-                                    <h5 class="senate-name">Prof. Dr. Gülay YEGİNOĞLU</h5>
-                                    <p class="senate-role text-muted">Senato'ca Seçilen Temsilci Üye</p>
+                                    <h5 class="senate-name">{% trans "Prof. Dr. Gülay YEGİNOĞLU" %}</h5>
+                                    <p class="senate-role text-muted">{% trans "Senato'ca Seçilen Temsilci Üye" %}</p>
                                     <div class="senate-badge">
-                                        <span class="badge bg-info">Akademik Temsilci</span>
+                                        <span class="badge bg-info">{% trans "Akademik Temsilci" %}</span>
                                     </div>
                                 </div>
                             </div>
@@ -268,10 +268,10 @@
                                             <i class="bi bi-person-check display-4 text-info"></i>
                                         </div>
                                     </div>
-                                    <h5 class="senate-name">Prof. Dr. Ümit UZMAN</h5>
-                                    <p class="senate-role text-muted">Senato'ca Seçilen Temsilci Üye</p>
+                                    <h5 class="senate-name">{% trans "Prof. Dr. Ümit UZMAN" %}</h5>
+                                    <p class="senate-role text-muted">{% trans "Senato'ca Seçilen Temsilci Üye" %}</p>
                                     <div class="senate-badge">
-                                        <span class="badge bg-warning text-dark">Dekan & Senato Üyesi</span>
+                                        <span class="badge bg-warning text-dark">{% trans "Dekan & Senato Üyesi" %}</span>
                                     </div>
                                 </div>
                             </div>
@@ -284,10 +284,10 @@
                                             <i class="bi bi-person-check display-4 text-info"></i>
                                         </div>
                                     </div>
-                                    <h5 class="senate-name">Prof. Dr. Fikret Nafi ÇOKSÖYLER</h5>
-                                    <p class="senate-role text-muted">Senato'ca Seçilen Temsilci Üye</p>
+                                    <h5 class="senate-name">{% trans "Prof. Dr. Fikret Nafi ÇOKSÖYLER" %}</h5>
+                                    <p class="senate-role text-muted">{% trans "Senato'ca Seçilen Temsilci Üye" %}</p>
                                     <div class="senate-badge">
-                                        <span class="badge bg-info">Akademik Temsilci</span>
+                                        <span class="badge bg-info">{% trans "Akademik Temsilci" %}</span>
                                     </div>
                                 </div>
                             </div>

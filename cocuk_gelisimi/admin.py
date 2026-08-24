@@ -1,12 +1,13 @@
 # app_name: cocuk_gelisimi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     CocukGelisimiEtkinlik, CocukGelisimiDuyuru, CocukGelisimiFaaliyetGorseli, CocukGelisimiFaaliyet, CocukGelisimiFaaliyetGrubu, CocukGelisimiDersProgrami
 )
 
 @admin.register(CocukGelisimiEtkinlik)
-class CocukGelisimiEtkinlikAdmin(admin.ModelAdmin):
+class CocukGelisimiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class CocukGelisimiDuyuruAdmin(admin.ModelAdmin):
         return CocukGelisimiDuyuru.objects.all()
 
 @admin.register(CocukGelisimiDersProgrami)
-class CocukGelisimiDersProgramiAdmin(admin.ModelAdmin):
+class CocukGelisimiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class CocukGelisimiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(CocukGelisimiFaaliyetGrubu)
-class CocukGelisimiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class CocukGelisimiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(CocukGelisimiFaaliyet)
-class CocukGelisimiFaaliyetAdmin(admin.ModelAdmin):
+class CocukGelisimiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

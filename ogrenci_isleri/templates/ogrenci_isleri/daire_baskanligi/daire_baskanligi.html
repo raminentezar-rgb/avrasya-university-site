@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Öğrenci İşleri Daire Başkanlığı{% endblock %}
 
@@ -16,19 +17,19 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">Öğrenci İşleri Daire Başkanlığı</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "Öğrenci İşleri Daire Başkanlığı" %}</h1>
                         <p class="lead mb-4">
-                            Öğrenci merkezli bir üniversite anlayışıyla hizmet veriyoruz
+                            {% trans "Öğrenci merkezli bir üniversite anlayışıyla hizmet veriyoruz" %}
                         </p>
                         <div class="d-flex gap-3 flex-wrap">
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-clock me-1"></i>7/24 Hizmet
+                                <i class="bi bi-clock me-1"></i>{% trans "7/24 Hizmet" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-credit-card me-1"></i>Güvenli Ödeme
+                                <i class="bi bi-credit-card me-1"></i>{% trans "Güvenli Ödeme" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-award me-1"></i>Kaliteli Hizmet
+                                <i class="bi bi-award me-1"></i>{% trans "Kaliteli Hizmet" %}
                             </span>
                         </div>
                     </div>
@@ -44,15 +45,15 @@
             <div class="card-body p-4">
                 <div class="row">
                     <div class="col-md-8">
-                        <h2 class="fw-bold mb-4" style="color: #1e3a8a;">Öğrenci İşleri Daire Başkanlığı</h2>
+                        <h2 class="fw-bold mb-4" style="color: #1e3a8a;">{% trans "Öğrenci İşleri Daire Başkanlığı" %}</h2>
                         <p class="lead mb-4">
-                            Öğrenci İşleri Daire Başkanlığı olarak öğrenci merkezli bir üniversite anlayışının bilinciyle akademik ve idari birimlerle uyumlu çalışmayı sağlayıp; planlanan eğitim-öğretim sürecinin yürütülmesini, öğrencilere, adaylara, mezunlara, öğretim elemanlarına ve hizmet vermekte olduğumuz kurumlara, gelişen bilgi ve teknolojileri kullanıp, güvenilir bir ortamda güvenli ve hızlı bilgi-belge hizmet sunarak öğrenci, öğretim elemanı ve çalışanların memnuniyetini ön planda tutan bir birim olma çabasındayız.
+                            {% trans "Öğrenci İşleri Daire Başkanlığı olarak öğrenci merkezli bir üniversite anlayışının bilinciyle akademik ve idari birimlerle uyumlu çalışmayı sağlayıp; planlanan eğitim-öğretim sürecinin yürütülmesini, öğrencilere, adaylara, mezunlara, öğretim elemanlarına ve hizmet vermekte olduğumuz kurumlara, gelişen bilgi ve teknolojileri kullanıp, güvenilir bir ortamda güvenli ve hızlı bilgi-belge hizmet sunarak öğrenci, öğretim elemanı ve çalışanların memnuniyetini ön planda tutan bir birim olma çabasındayız." %}
                         </p>
                         
                         <div class="mb-4">
                             <a href="{% url 'ogrenci_isleri:ogrenci_isleri' %}" class="btn btn-primary btn-lg">
                                 <i class="bi bi-box-arrow-in-right me-2"></i>
-                                ÖĞRENCİ İŞLERİ SİSTEMİ
+                                {% trans "ÖĞRENCİ İŞLERİ SİSTEMİ" %}
                             </a>
                         </div>
                     </div>
@@ -60,17 +61,17 @@
                         <div class="card bg-light border-0">
                             <div class="card-body text-center">
                                 <i class="bi bi-info-circle display-4 text-primary mb-3"></i>
-                                <h5 class="card-title">Hızlı Bilgi</h5>
-                                <p class="card-text">Öğrenci işleri ile ilgili tüm sorularınız için bize ulaşabilirsiniz.</p>
+                                <h5 class="card-title">{% trans "Hızlı Bilgi" %}</h5>
+                                <p class="card-text">{% trans "Öğrenci işleri ile ilgili tüm sorularınız için bize ulaşabilirsiniz." %}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-5">
-                    <h3 class="fw-bold mb-4" style="color: #1e3a8a;">YETKİ, GÖREV VE SORUMLULUKLAR</h3>
+                    <h3 class="fw-bold mb-4" style="color: #1e3a8a;">{% trans "YETKİ, GÖREV VE SORUMLULUKLAR" %}</h3>
                     <p class="mb-4">
-                        Misyon ve vizyon çerçevesinde; çağın teknolojik değişimlerini yakından takip ederek, Öğrenci otomasyon sisteminin koordinasyonunu sağlamak ve ilk kayıttan mezuniyete kadar süren:
+                        {% trans "Misyon ve vizyon çerçevesinde; çağın teknolojik değişimlerini yakından takip ederek, Öğrenci otomasyon sisteminin koordinasyonunu sağlamak ve ilk kayıttan mezuniyete kadar süren:" %}
                     </p>
                     
                     <div class="row">
@@ -78,23 +79,23 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    Yeni öğrencilerin kayıt işlemlerinin organizasyonu
+                                    {% trans "Yeni öğrencilerin kayıt işlemlerinin organizasyonu" %}
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    Her dönem yapılan kayıt yenileme ve ders kayıt işlemlerinin organizasyonu
+                                    {% trans "Her dönem yapılan kayıt yenileme ve ders kayıt işlemlerinin organizasyonu" %}
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    Burs/İndirim işlemlerinin takibi
+                                    {% trans "Burs/İndirim işlemlerinin takibi" %}
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    İstatistiksel bilgilerin hazırlanması
+                                    {% trans "İstatistiksel bilgilerin hazırlanması" %}
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    Akademik takvimin hazırlanması
+                                    {% trans "Akademik takvimin hazırlanması" %}
                                 </li>
                             </ul>
                         </div>
@@ -102,23 +103,23 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    Diploma basım işlemleri
+                                    {% trans "Diploma basım işlemleri" %}
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    Öğrenci kimlik kartı basım işlemleri
+                                    {% trans "Öğrenci kimlik kartı basım işlemleri" %}
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    Öğrenci kayıt işlemleri ile ilgili kılavuzları hazırlamak ve ilan etmek
+                                    {% trans "Öğrenci kayıt işlemleri ile ilgili kılavuzları hazırlamak ve ilan etmek" %}
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    Öğrencilerle ilgili her türlü duyuruyu yayınlamak
+                                    {% trans "Öğrencilerle ilgili her türlü duyuruyu yayınlamak" %}
                                 </li>
                                 <li class="list-group-item d-flex align-items-center">
                                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                    YÖK, ÖSYM, Yurtdışı, KYK, diğer kurum ve kuruluşlar ile üniversitemizin birimleri ile yazışmaların yapılmasını sağlamak
+                                    {% trans "YÖK, ÖSYM, Yurtdışı, KYK, diğer kurum ve kuruluşlar ile üniversitemizin birimleri ile yazışmaların yapılmasını sağlamak" %}
                                 </li>
                             </ul>
                         </div>

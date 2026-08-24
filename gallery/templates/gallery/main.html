@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Fotoğraf Galerisi | Avrasya Üniversitesi{% endblock %}
@@ -10,8 +11,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="gallery-hero-content">
-                    <h1> Avrasya Fotoğraf Galerisi</h1>
-                    <p>Avrasya Üniversitesi'nin anılarını, etkinliklerini ve kampüs yaşamını keşfedin</p>
+                    <h1> {% trans "Avrasya Fotoğraf Galerisi" %}</h1>
+                    <p>{% trans "Avrasya Üniversitesi'nin anılarını, etkinliklerini ve kampüs yaşamını keşfedin" %}</p>
                 </div>
             </div>
         </div>
@@ -23,8 +24,8 @@
 <section class="gallery-categories">
     <div class="container">
         <div class="section-title">
-            <h1>Galeri Kategorileri</h1>
-            <p class="section-subtitle">Keşfetmek istediğiniz kategoriyi seçin</p>
+            <h1>{% trans "Galeri Kategorileri" %}</h1>
+            <p class="section-subtitle">{% trans "Keşfetmek istediğiniz kategoriyi seçin" %}</p>
         </div>
 
         <div class="row">
@@ -41,7 +42,7 @@
                                 </div>
                             {% endif %}
                             <div class="category-overlay">
-                                <span class="view-category">Galeriyi Görüntüle</span>
+                                <span class="view-category">{% trans "Galeriyi Görüntüle" %}</span>
                             </div>
                         </div>
                         <div class="category-info">
@@ -58,8 +59,8 @@
             <div class="col-12">
                 <div class="empty-state">
                     <i class="fas fa-images"></i>
-                    <h4>Henüz kategori eklenmemiş</h4>
-                    <p>Galeri kategorileri yakında eklenecektir.</p>
+                    <h4>{% trans "Henüz kategori eklenmemiş" %}</h4>
+                    <p>{% trans "Galeri kategorileri yakında eklenecektir." %}</p>
                 </div>
             </div>
             {% endfor %}
@@ -71,8 +72,8 @@
 <section class="featured-images">
     <div class="container">
         <div class="section-title">
-            <h1>Son Eklenen Fotoğraflar</h1>
-            <p class="section-subtitle">En güncel görsellerimizden seçkiler</p>
+            <h1>{% trans "Son Eklenen Fotoğraflar" %}</h1>
+            <p class="section-subtitle">{% trans "En güncel görsellerimizden seçkiler" %}</p>
         </div>
 
         <div class="row">
@@ -99,8 +100,8 @@
             <div class="col-12">
                 <div class="empty-state">
                     <i class="fas fa-camera"></i>
-                    <h4>Henüz fotoğraf eklenmemiş</h4>
-                    <p>Fotoğraflar yakında eklenecektir.</p>
+                    <h4>{% trans "Henüz fotoğraf eklenmemiş" %}</h4>
+                    <p>{% trans "Fotoğraflar yakında eklenecektir." %}</p>
                 </div>
             </div>
             {% endfor %}
@@ -117,28 +118,28 @@
                     <i class="fas fa-images"></i>
                 </div>
                 <h3><span class="counter" data-count="{{ categories.count }}">0</span></h3>
-                <p>Kategori</p>
+                <p>{% trans "Kategori" %}</p>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
                     <i class="fas fa-camera"></i>
                 </div>
                 <h3><span class="counter" data-count="{{ featured_images.count }}">0</span></h3>
-                <p>Fotoğraf</p>
+                <p>{% trans "Fotoğraf" %}</p>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
                 <h3>{{ featured_images.0.upload_date|date:"Y" }}</h3>
-                <p>Güncel Yıl</p>
+                <p>{% trans "Güncel Yıl" %}</p>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
                     <i class="fas fa-eye"></i>
                 </div>
                 <h3>+1000</h3>
-                <p>Günlük Görüntülenme</p>
+                <p>{% trans "Günlük Görüntülenme" %}</p>
             </div>
         </div>
     </div>

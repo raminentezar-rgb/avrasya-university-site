@@ -1,4 +1,5 @@
 {% extends 'avrasya_universitesi_hakkinda/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Organizasyon Şeması{% endblock %}
 
@@ -9,7 +10,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Organizasyon Şeması</h1>
+            <h1>{% trans "Organizasyon Şeması" %}</h1>
             <p></p>
         </div>
     </div>
@@ -32,13 +33,13 @@
                 <!-- تصویر اصلی بزرگ -->
                 <div class="large-image-container">
                     <img src="{% static 'core/img/akademik/organizasyonsemasi1.jpg' %}" 
-                         alt="Avrasya Üniversitesi Kalite Politikası"
+                         alt="{% trans 'Avrasya Üniversitesi Kalite Politikası' %}"
                          class="large-image">
                     
                     <!-- Overlay با عنوان -->
                     {% comment %} <div class="image-title-overlay">
-                        <h1>Kalite Politikası</h1>
-                        <p>Avrasya Üniversitesi</p>
+                        <h1>{% trans "Kalite Politikası" %}</h1>
+                        <p>{% trans "Avrasya Üniversitesi" %}</p>
                     </div> {% endcomment %}
                 </div>
 

@@ -46,7 +46,7 @@ class NewsImageAdmin(admin.ModelAdmin):
     image_preview.short_description = 'پیش‌نمایش'
 
 @admin.register(NewsAttachment)
-class NewsAttachmentAdmin(admin.ModelAdmin):
+class NewsAttachmentAdmin(TranslationAdmin):
     list_display = ('news', 'title', 'file_type', 'file_preview', 'created_at')
     list_filter = ('file_type', 'news')
     search_fields = ('title', 'description', 'news__title')

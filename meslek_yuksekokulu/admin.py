@@ -1,11 +1,12 @@
 # meslek_yuksekokulu/admin.py
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     MeslekYuksekokuluDuyuru
 )
 
 @admin.register(MeslekYuksekokuluDuyuru)
-class MeslekYuksekokuluDuyuruAdmin(admin.ModelAdmin):
+class MeslekYuksekokuluDuyuruAdmin(TranslationAdmin):
     list_display = ['baslik', 'kategori', 'yayin_tarihi', 'yayinda', 'onemli', 'sira']
     list_filter = ['kategori', 'yayinda', 'onemli', 'yayin_tarihi']
     search_fields = ['baslik', 'icerik', 'ozet']

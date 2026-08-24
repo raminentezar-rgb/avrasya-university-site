@@ -1,4 +1,5 @@
 {% extends 'international/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Uluslararası Öğrenciler{% endblock %}
 
@@ -9,20 +10,20 @@
 <section class="research-hero">
     <div class="container">
         <div class="hero-content text-center"  style="margin-top: -20px; ">
-            <h1 class="hero-title mb-3" style="color: red">Your Journey Starts Here</h1>
-            <p class="hero-subtitle mb-4"  >Join Avrasya University's International Community</p>
+            <h1 class="hero-title mb-3" style="color: red">{% trans "Your Journey Starts Here" %}</h1>
+            <p class="hero-subtitle mb-4"  >{% trans "Join Avrasya University's International Community" %}</p>
             <div class="hero-stats">
                 <div class="stat-item">
                     <span class="stat-number">150+</span>
-                    <span class="stat-label">Nationalities</span>
+                    <span class="stat-label">{% trans "Nationalities" %}</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">98%</span>
-                    <span class="stat-label">Satisfaction Rate</span>
+                    <span class="stat-label">{% trans "Satisfaction Rate" %}</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">24/7</span>
-                    <span class="stat-label">Support</span>
+                    <span class="stat-label">{% trans "Support" %}</span>
                 </div>
             </div>
         </div>
@@ -44,33 +45,33 @@
                 <!-- Header با انیمیشن -->
                 <div class="text-center mb-6">
                     <div class="application-badge">
-                        <span class="badge-text">2025 Admissions Open</span>
+                        <span class="badge-text">{% trans "2025 Admissions Open" %}</span>
                     </div>
-                    <h1 class="main-title mb-3" style="color: var(--primary-blue); font-family: 'Metropolis', sans-serif; font-weight: 800;">Online Application Form</h1>
-                    <p class="lead-text mb-4" style="color: var(--light-text);">Complete your application in just a few simple steps. Our team is ready to assist you!</p>
+                    <h1 class="main-title mb-3" style="color: var(--primary-blue); font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Online Application Form" %}</h1>
+                    <p class="lead-text mb-4" style="color: var(--light-text);">{% trans "Complete your application in just a few simple steps. Our team is ready to assist you!" %}</p>
                     
                     <!-- Progress Bar -->
                     {% comment %} <div class="application-progress mb-5">
                         <div class="progress-container">
                             <div class="progress-step active" data-step="1">
                                 <div class="step-icon">1</div>
-                                <span class="step-label">Application Type</span>
+                                <span class="step-label">{% trans "Application Type" %}</span>
                             </div>
                             <div class="progress-step" data-step="2">
                                 <div class="step-icon">2</div>
-                                <span class="step-label">Personal Info</span>
+                                <span class="step-label">{% trans "Personal Info" %}</span>
                             </div>
                             <div class="progress-step" data-step="3">
                                 <div class="step-icon">3</div>
-                                <span class="step-label">Academic Info</span>
+                                <span class="step-label">{% trans "Academic Info" %}</span>
                             </div>
                             <div class="progress-step" data-step="4">
                                 <div class="step-icon">4</div>
-                                <span class="step-label">Documents</span>
+                                <span class="step-label">{% trans "Documents" %}</span>
                             </div>
                             <div class="progress-step" data-step="5">
                                 <div class="step-icon">5</div>
-                                <span class="step-label">Submit</span>
+                                <span class="step-label">{% trans "Submit" %}</span>
                             </div>
                         </div>
                     </div> {% endcomment %}
@@ -79,7 +80,7 @@
                 <!-- Application Type Cards با افکت مدرن -->
                 <div class="application-type-section mb-6">
                     {% comment %} <h2 class="section-title-with-icon mb-4" style="color: var(--primary-blue);">
-                        <i class="fas fa-rocket me-2"></i>Choose Your Application Path
+                        <i class="fas fa-rocket me-2"></i>{% trans "Choose Your Application Path" %}
                     </h2> {% endcomment %}
                     <div class="row g-4 justify-content-center">
                         <div class="col-md-6 col-lg-5">
@@ -89,31 +90,31 @@
                                 </div>
                                 <div class="card-image">
                                     <img src="{% static 'core/img/student/LOGIN.png' %}" 
-                                         alt="Individual Application" 
+                                         alt="{% trans 'Individual Application' %}" 
                                          class="img-fluid">
                                     <div class="image-overlay"></div>
                                 </div>
                                 <div class="card-content">
-                                    <h3 style="color: var(--primary-blue);">Individual Application</h3>
-                                    <p class="card-description" style="color: var(--light-text);">Apply directly as an individual student. Perfect for self-sponsored applicants who want full control over their application process.</p>
+                                    <h3 style="color: var(--primary-blue);">{% trans "Individual Application" %}</h3>
+                                    <p class="card-description" style="color: var(--light-text);">{% trans "Apply directly as an individual student. Perfect for self-sponsored applicants who want full control over their application process." %}</p>
                                     <div class="features-list">
                                         <div class="feature-item">
                                             <i class="fas fa-check-circle"></i>
-                                            <span>Direct communication with university</span>
+                                            <span>{% trans "Direct communication with university" %}</span>
                                         </div>
                                         <div class="feature-item">
                                             <i class="fas fa-check-circle"></i>
-                                            <span>Real-time application tracking</span>
+                                            <span>{% trans "Real-time application tracking" %}</span>
                                         </div>
                                         <div class="feature-item">
                                             <i class="fas fa-check-circle"></i>
-                                            <span>Priority support</span>
+                                            <span>{% trans "Priority support" %}</span>
                                         </div>
                                     </div>
                                     <a href="https://obs.avrasya.edu.tr/oibs/foa_app/" 
                                        target="_blank" 
                                        class="app-button btn-individual">
-                                        <i class="fas fa-arrow-right me-2"></i>Start Individual Application
+                                        <i class="fas fa-arrow-right me-2"></i>{% trans "Start Individual Application" %}
                                     </a>
                                 </div>
                             </div>
@@ -125,31 +126,31 @@
                                 </div>
                                 <div class="card-image">
                                     <img src="{% static 'core/img/student/agency.png' %}" 
-                                         alt="Agency Application" 
+                                         alt="{% trans 'Agency Application' %}" 
                                          class="img-fluid">
                                     <div class="image-overlay"></div>
                                 </div>
                                 <div class="card-content">
-                                    <h3 style="color: var(--primary-blue);">Agency Application</h3>
-                                    <p class="card-description" style="color: var(--light-text);">Apply through our registered education partners. Get expert guidance and support throughout your application journey.</p>
+                                    <h3 style="color: var(--primary-blue);">{% trans "Agency Application" %}</h3>
+                                    <p class="card-description" style="color: var(--light-text);">{% trans "Apply through our registered education partners. Get expert guidance and support throughout your application journey." %}</p>
                                     <div class="features-list">
                                         <div class="feature-item">
                                             <i class="fas fa-check-circle"></i>
-                                            <span>Expert guidance and counseling</span>
+                                            <span>{% trans "Expert guidance and counseling" %}</span>
                                         </div>
                                         <div class="feature-item">
                                             <i class="fas fa-check-circle"></i>
-                                            <span>Document preparation assistance</span>
+                                            <span>{% trans "Document preparation assistance" %}</span>
                                         </div>
                                         <div class="feature-item">
                                             <i class="fas fa-check-circle"></i>
-                                            <span>Visa support services</span>
+                                            <span>{% trans "Visa support services" %}</span>
                                         </div>
                                     </div>
                                     <a href="https://obs.avrasya.edu.tr/oibs/foa_app/agency/" 
                                        target="_blank" 
                                        class="app-button btn-agency">
-                                        <i class="fas fa-arrow-right me-2"></i>Start Agency Application
+                                        <i class="fas fa-arrow-right me-2"></i>{% trans "Start Agency Application" %}
                                     </a>
                                 </div>
                             </div>
@@ -162,9 +163,9 @@
                     <div class="form-header">
                         <h2 class="form-title" style="color: var(--primary-blue); font-family: 'Metropolis', sans-serif; font-weight: 800;">
                             <i class="fas fa-file-alt me-2"></i>
-                            Complete Application Form
+                            {% trans "Complete Application Form" %}
                         </h2>
-                        <p class="form-subtitle" style="color: var(--light-text);">Fill in your details below. Estimated completion time: 10-15 minutes</p>
+                        <p class="form-subtitle" style="color: var(--light-text);">{% trans "Fill in your details below. Estimated completion time: 10-15 minutes" %}</p>
                     </div>
 
                     <form id="applicationForm" class="modern-form" method="POST" enctype="multipart/form-data">
@@ -175,8 +176,8 @@
                                 <div class="header-content">
                                     <div class="section-number">01</div>
                                     <div class="section-title-content">
-                                        <h3 style="color: var(--primary-blue);">Personal Information</h3>
-                                        <p style="color: var(--light-text);">Basic details about yourself</p>
+                                        <h3 style="color: var(--primary-blue);">{% trans "Personal Information" %}</h3>
+                                        <p style="color: var(--light-text);">{% trans "Basic details about yourself" %}</p>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-down toggle-icon" id="personalInfoIcon"></i>
@@ -186,7 +187,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
                                             <input type="text" id="firstName" name="first_name" class="form-control" required>
-                                            <label for="firstName" style="color: var(--light-text);">First Name *</label>
+                                            <label for="firstName" style="color: var(--light-text);">{% trans "First Name *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-user"></i>
                                             </div>
@@ -195,7 +196,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
                                             <input type="text" id="lastName" name="last_name" class="form-control" required>
-                                            <label for="lastName" style="color: var(--light-text);">Last Name *</label>
+                                            <label for="lastName" style="color: var(--light-text);">{% trans "Last Name *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-user"></i>
                                             </div>
@@ -204,7 +205,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
                                             <input type="date" id="dob" name="birth_date" class="form-control" required>
-                                            <label for="dob" style="color: var(--light-text);">Date of Birth *</label>
+                                            <label for="dob" style="color: var(--light-text);">{% trans "Date of Birth *" %}</label>
                                             <div class="form-icon">
                                                 {% comment %} <i class="fas fa-calendar-alt"></i> {% endcomment %}
                                             </div>
@@ -214,11 +215,11 @@
                                         <div class="form-group floating-label">
                                             <select id="gender" name="gender" class="form-select" required>
                                                 <option value=""></option>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
-                                                <option value="other">Other</option>
+                                                <option value="male">{% trans "Male" %}</option>
+                                                <option value="female">{% trans "Female" %}</option>
+                                                <option value="other">{% trans "Other" %}</option>
                                             </select>
-                                            <label for="gender" style="color: var(--light-text);">Gender *</label>
+                                            <label for="gender" style="color: var(--light-text);">{% trans "Gender *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-venus-mars"></i>
                                             </div>
@@ -227,7 +228,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
                                             <input type="email" id="email" name="email" class="form-control" required>
-                                            <label for="email" style="color: var(--light-text);">Email Address *</label>
+                                            <label for="email" style="color: var(--light-text);">{% trans "Email Address *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-envelope"></i>
                                             </div>
@@ -236,7 +237,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
                                             <input type="tel" id="phone" name="phone" class="form-control" required>
-                                            <label for="phone" style="color: var(--light-text);">Phone Number *</label>
+                                            <label for="phone" style="color: var(--light-text);">{% trans "Phone Number *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-phone"></i>
                                             </div>
@@ -252,8 +253,8 @@
                                 <div class="header-content">
                                     <div class="section-number">02</div>
                                     <div class="section-title-content">
-                                        <h3 style="color: var(--primary-blue);">Address Information</h3>
-                                        <p style="color: var(--light-text);">Where you currently reside</p>
+                                        <h3 style="color: var(--primary-blue);">{% trans "Address Information" %}</h3>
+                                        <p style="color: var(--light-text);">{% trans "Where you currently reside" %}</p>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-down toggle-icon" id="addressInfoIcon"></i>
@@ -264,13 +265,13 @@
                                         <div class="form-group floating-label">
                                             <select id="country" name="country" class="form-select" required>
                                                 <option value=""></option>
-                                                <option value="tr">Turkey</option>
-                                                <option value="us">United States</option>
-                                                <option value="gb">United Kingdom</option>
-                                                <option value="de">Germany</option>
-                                                <option value="fr">France</option>
+                                                <option value="tr">{% trans "Turkey" %}</option>
+                                                <option value="us">{% trans "United States" %}</option>
+                                                <option value="gb">{% trans "United Kingdom" %}</option>
+                                                <option value="de">{% trans "Germany" %}</option>
+                                                <option value="fr">{% trans "France" %}</option>
                                             </select>
-                                            <label for="country" style="color: var(--light-text);">Country *</label>
+                                            <label for="country" style="color: var(--light-text);">{% trans "Country *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-globe"></i>
                                             </div>
@@ -279,7 +280,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group floating-label">
                                             <input type="text" id="city" name="city" class="form-control" required>
-                                            <label for="city" style="color: var(--light-text);">City *</label>
+                                            <label for="city" style="color: var(--light-text);">{% trans "City *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-city"></i>
                                             </div>
@@ -288,7 +289,7 @@
                                     <div class="col-12">
                                         <div class="form-group floating-label">
                                             <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
-                                            <label for="address" style="color: var(--light-text);">Full Address *</label>
+                                            <label for="address" style="color: var(--light-text);">{% trans "Full Address *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-map-marker-alt"></i>
                                             </div>
@@ -304,8 +305,8 @@
                                 <div class="header-content">
                                     <div class="section-number">03</div>
                                     <div class="section-title-content">
-                                        <h3 style="color: var(--primary-blue);">Academic Information</h3>
-                                        <p style="color: var(--light-text);">Your educational background and goals</p>
+                                        <h3 style="color: var(--primary-blue);">{% trans "Academic Information" %}</h3>
+                                        <p style="color: var(--light-text);">{% trans "Your educational background and goals" %}</p>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-down toggle-icon" id="academicInfoIcon"></i>
@@ -316,13 +317,13 @@
                                         <div class="form-group floating-label">
                                             <select id="program" name="program" class="form-select" required>
                                                 <option value=""></option>
-                                                <option value="computer">Computer Engineering</option>
-                                                <option value="business">Business Administration</option>
-                                                <option value="medicine">Medicine</option>
-                                                <option value="law">Law</option>
-                                                <option value="architecture">Architecture</option>
+                                                <option value="computer">{% trans "Computer Engineering" %}</option>
+                                                <option value="business">{% trans "Business Administration" %}</option>
+                                                <option value="medicine">{% trans "Medicine" %}</option>
+                                                <option value="law">{% trans "Law" %}</option>
+                                                <option value="architecture">{% trans "Architecture" %}</option>
                                             </select>
-                                            <label for="program" style="color: var(--light-text);">Desired Program *</label>
+                                            <label for="program" style="color: var(--light-text);">{% trans "Desired Program *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-graduation-cap"></i>
                                             </div>
@@ -332,11 +333,11 @@
                                         <div class="form-group floating-label">
                                             <select id="semester" name="semester" class="form-select" required>
                                                 <option value=""></option>
-                                                <option value="fall2024">Fall 2024</option>
-                                                <option value="spring2025">Spring 2025</option>
-                                                <option value="fall2025">Fall 2025</option>
+                                                <option value="fall2024">{% trans "Fall 2024" %}</option>
+                                                <option value="spring2025">{% trans "Spring 2025" %}</option>
+                                                <option value="fall2025">{% trans "Fall 2025" %}</option>
                                             </select>
-                                            <label for="semester" style="color: var(--light-text);">Start Date *</label>
+                                            <label for="semester" style="color: var(--light-text);">{% trans "Start Date *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-calendar"></i>
                                             </div>
@@ -346,12 +347,12 @@
                                         <div class="form-group floating-label">
                                             <select id="educationLevel" name="education_level" class="form-select" required>
                                                 <option value=""></option>
-                                                <option value="highschool">High School Diploma</option>
-                                                <option value="bachelor">Bachelor's Degree</option>
-                                                <option value="master">Master's Degree</option>
-                                                <option value="phd">PhD</option>
+                                                <option value="highschool">{% trans "High School Diploma" %}</option>
+                                                <option value="bachelor">{% trans "Bachelor's Degree" %}</option>
+                                                <option value="master">{% trans "Master's Degree" %}</option>
+                                                <option value="phd">{% trans "PhD" %}</option>
                                             </select>
-                                            <label for="educationLevel" style="color: var(--light-text);">Education Level *</label>
+                                            <label for="educationLevel" style="color: var(--light-text);">{% trans "Education Level *" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-university"></i>
                                             </div>
@@ -361,12 +362,12 @@
                                         <div class="form-group floating-label">
                                             <select id="englishLevel" name="english_level" class="form-select">
                                                 <option value=""></option>
-                                                <option value="beginner">Beginner (A1-A2)</option>
-                                                <option value="intermediate">Intermediate (B1-B2)</option>
-                                                <option value="advanced">Advanced (C1-C2)</option>
-                                                <option value="native">Native Speaker</option>
+                                                <option value="beginner">{% trans "Beginner (A1-A2)" %}</option>
+                                                <option value="intermediate">{% trans "Intermediate (B1-B2)" %}</option>
+                                                <option value="advanced">{% trans "Advanced (C1-C2)" %}</option>
+                                                <option value="native">{% trans "Native Speaker" %}</option>
                                             </select>
-                                            <label for="englishLevel" style="color: var(--light-text);">English Proficiency</label>
+                                            <label for="englishLevel" style="color: var(--light-text);">{% trans "English Proficiency" %}</label>
                                             <div class="form-icon">
                                                 <i class="fas fa-language"></i>
                                             </div>
@@ -382,8 +383,8 @@
                                 <div class="header-content">
                                     <div class="section-number">04</div>
                                     <div class="section-title-content">
-                                        <h3 style="color: var(--primary-blue);">Required Documents</h3>
-                                        <p style="color: var(--light-text);">Upload your academic documents</p>
+                                        <h3 style="color: var(--primary-blue);">{% trans "Required Documents" %}</h3>
+                                        <p style="color: var(--light-text);">{% trans "Upload your academic documents" %}</p>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-down toggle-icon" id="documentsInfoIcon"></i>
@@ -391,7 +392,7 @@
                             <div class="section-body" id="documentsInfoBody" style="display: none;">
                                 <div class="upload-info">
                                     <i class="fas fa-info-circle"></i>
-                                    <p>Please upload clear scanned copies of the following documents. Maximum file size: 5MB per document. Supported formats: PDF, JPG, PNG</p>
+                                    <p>{% trans "Please upload clear scanned copies of the following documents. Maximum file size: 5MB per document. Supported formats: PDF, JPG, PNG" %}</p>
                                 </div>
                                 
                                 <div class="upload-grid">
@@ -400,11 +401,11 @@
                                             <i class="fas fa-passport"></i>
                                         </div>
                                         <div class="upload-content">
-                                            <h4 style="color: var(--primary-blue);">Passport Copy</h4>
-                                            <p style="color: var(--light-text);">Clear scan of passport information page</p>
+                                            <h4 style="color: var(--primary-blue);">{% trans "Passport Copy" %}</h4>
+                                            <p style="color: var(--light-text);">{% trans "Clear scan of passport information page" %}</p>
                                             <div class="upload-area" data-type="passport">
                                                 <i class="fas fa-cloud-upload-alt"></i>
-                                                <p>Drag & drop or click to upload</p>
+                                                <p>{% trans "Drag & drop or click to upload" %}</p>
                                                 <input type="file" name="passport_copy" class="file-input" accept=".pdf,.jpg,.png" required>
                                             </div>
                                         </div>
@@ -415,11 +416,11 @@
                                             <i class="fas fa-certificate"></i>
                                         </div>
                                         <div class="upload-content">
-                                            <h4 style="color: var(--primary-blue);">Diploma/Certificate</h4>
-                                            <p style="color: var(--light-text);">High school or previous degree certificate</p>
+                                            <h4 style="color: var(--primary-blue);">{% trans "Diploma/Certificate" %}</h4>
+                                            <p style="color: var(--light-text);">{% trans "High school or previous degree certificate" %}</p>
                                             <div class="upload-area" data-type="diploma">
                                                 <i class="fas fa-cloud-upload-alt"></i>
-                                                <p>Drag & drop or click to upload</p>
+                                                <p>{% trans "Drag & drop or click to upload" %}</p>
                                                 <input type="file" name="diploma_certificate" class="file-input" accept=".pdf,.jpg,.png" required>
                                             </div>
                                         </div>
@@ -430,11 +431,11 @@
                                             <i class="fas fa-file-alt"></i>
                                         </div>
                                         <div class="upload-content">
-                                            <h4 style="color: var(--primary-blue);">Academic Transcript</h4>
-                                            <p style="color: var(--light-text);">Official academic transcripts</p>
+                                            <h4 style="color: var(--primary-blue);">{% trans "Academic Transcript" %}</h4>
+                                            <p style="color: var(--light-text);">{% trans "Official academic transcripts" %}</p>
                                             <div class="upload-area" data-type="transcript">
                                                 <i class="fas fa-cloud-upload-alt"></i>
-                                                <p>Drag & drop or click to upload</p>
+                                                <p>{% trans "Drag & drop or click to upload" %}</p>
                                                 <input type="file" name="academic_transcript" class="file-input" accept=".pdf,.jpg,.png" required>
                                             </div>
                                         </div>
@@ -445,11 +446,11 @@
                                             <i class="fas fa-camera"></i>
                                         </div>
                                         <div class="upload-content">
-                                            <h4 style="color: var(--primary-blue);">Passport Photo</h4>
-                                            <p style="color: var(--light-text);">Passport-sized photo, white background</p>
+                                            <h4 style="color: var(--primary-blue);">{% trans "Passport Photo" %}</h4>
+                                            <p style="color: var(--light-text);">{% trans "Passport-sized photo, white background" %}</p>
                                             <div class="upload-area" data-type="photo">
                                                 <i class="fas fa-cloud-upload-alt"></i>
-                                                <p>Drag & drop or click to upload</p>
+                                                <p>{% trans "Drag & drop or click to upload" %}</p>
                                                 <input type="file" name="passport_photo" class="file-input" accept=".jpg,.jpeg,.png" required>
                                             </div>
                                         </div>
@@ -462,19 +463,19 @@
                         <div class="form-section card-section">
                             <div class="terms-section">
                                 <div class="terms-header">
-                                    <h4 style="color: var(--primary-blue);"><i class="fas fa-shield-alt me-2"></i>Terms & Conditions</h4>
+                                    <h4 style="color: var(--primary-blue);"><i class="fas fa-shield-alt me-2"></i>{% trans "Terms & Conditions" %}</h4>
                                 </div>
                                 <div class="terms-content">
                                     <div class="form-check custom-checkbox">
                                         <input type="checkbox" id="termsCheck" class="form-check-input" required>
                                         <label for="termsCheck" class="form-check-label" style="color: var(--dark-text);">
-                                            I agree to the <a href="#" class="terms-link">Terms and Conditions</a> and <a href="#" class="terms-link">Privacy Policy</a> of Avrasya University. I understand that all information provided is accurate to the best of my knowledge.
+                                            {% trans "I agree to the" %} <a href="#" class="terms-link">{% trans "Terms and Conditions" %}</a> {% trans "and" %} <a href="#" class="terms-link">{% trans "Privacy Policy" %}</a> {% trans "of Avrasya University. I understand that all information provided is accurate to the best of my knowledge." %}
                                         </label>
                                     </div>
                                     <div class="form-check custom-checkbox mt-3">
                                         <input type="checkbox" id="newsletterCheck" name="newsletter_subscription" class="form-check-input">
                                         <label for="newsletterCheck" class="form-check-label" style="color: var(--dark-text);">
-                                            I would like to receive updates, news, and information about scholarships and events from Avrasya University via email.
+                                            {% trans "I would like to receive updates, news, and information about scholarships and events from Avrasya University via email." %}
                                         </label>
                                     </div>
                                 </div>
@@ -482,14 +483,14 @@
                             
                             <div class="submit-section">
                                 <button type="submit" class="submit-button">
-                                    <span class="button-text">Submit Application</span>
+                                    <span class="button-text">{% trans "Submit Application" %}</span>
                                     <span class="button-icon">
                                         <i class="fas fa-paper-plane"></i>
                                     </span>
                                 </button>
                                 <p class="submit-note" style="color: var(--light-text);">
                                     <i class="fas fa-lock me-2"></i>
-                                    Your information is secure and encrypted
+                                    {% trans "Your information is secure and encrypted" %}
                                 </p>
                             </div>
                         </div>
@@ -499,35 +500,35 @@
                 <!-- Success Steps -->
                 <div class="success-steps-section mt-6">
                     <h2 class="section-title-with-icon mb-4" style="color: var(--primary-blue);">
-                        <i class="fas fa-trophy me-2"></i>What Happens Next?
+                        <i class="fas fa-trophy me-2"></i>{% trans "What Happens Next?" %}
                     </h2>
                     <div class="steps-timeline">
                         <div class="step-item">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h4 style="color: var(--primary-blue);">Application Review</h4>
-                                <p style="color: var(--light-text);">Our admissions team reviews your application within 3-5 business days</p>
+                                <h4 style="color: var(--primary-blue);">{% trans "Application Review" %}</h4>
+                                <p style="color: var(--light-text);">{% trans "Our admissions team reviews your application within 3-5 business days" %}</p>
                             </div>
                         </div>
                         <div class="step-item">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h4 style="color: var(--primary-blue);">Interview Schedule</h4>
-                                <p style="color: var(--light-text);">If shortlisted, we'll schedule an online interview at your convenience</p>
+                                <h4 style="color: var(--primary-blue);">{% trans "Interview Schedule" %}</h4>
+                                <p style="color: var(--light-text);">{% trans "If shortlisted, we'll schedule an online interview at your convenience" %}</p>
                             </div>
                         </div>
                         <div class="step-item">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h4 style="color: var(--primary-blue);">Admission Decision</h4>
-                                <p style="color: var(--light-text);">Receive your admission decision within 2 weeks of interview</p>
+                                <h4 style="color: var(--primary-blue);">{% trans "Admission Decision" %}</h4>
+                                <p style="color: var(--light-text);">{% trans "Receive your admission decision within 2 weeks of interview" %}</p>
                             </div>
                         </div>
                         <div class="step-item">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <h4 style="color: var(--primary-blue);">Welcome Package</h4>
-                                <p style="color: var(--light-text);">Get your official acceptance letter and welcome package</p>
+                                <h4 style="color: var(--primary-blue);">{% trans "Welcome Package" %}</h4>
+                                <p style="color: var(--light-text);">{% trans "Get your official acceptance letter and welcome package" %}</p>
                             </div>
                         </div>
                     </div>

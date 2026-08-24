@@ -1,4 +1,5 @@
 {% extends 'lee/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - LEE Fakültesi Duyuruları{% endblock %}
 
@@ -8,8 +9,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>LEE Fakültesi Duyuruları</h1>
-            <p>Akademik Duyurular ve Haberler</p>
+            <h1>{% trans "LEE Fakültesi Duyuruları" %}</h1>
+            <p>{% trans "Akademik Duyurular ve Haberler" %}</p>
         </div>
     </div>
 </section>
@@ -36,9 +37,9 @@
                             </div>
                             <div>
                                 <h3 class="section-sub-title mb-1">
-                                    Önemli Duyurular
+                                    {% trans "Önemli Duyurular" %}
                                 </h3>
-                                <p class="section-sub-description mb-0">Acil dikkat edilmesi gereken duyurular</p>
+                                <p class="section-sub-description mb-0">{% trans "Acil dikkat edilmesi gereken duyurular" %}</p>
                             </div>
                             <span class="badge onemli-badge ms-3">{{ onemli_duyurular|length }}</span>
                         </div>
@@ -61,7 +62,7 @@
                                     </div>
                                     <div class="duyuru-priority">
                                         <span class="priority-dot"></span>
-                                        <span class="priority-text">ÖNEMLİ</span>
+                                        <span class="priority-text">{% trans "ÖNEMLİ" %}</span>
                                     </div>
                                 </div>
                                 <div class="duyuru-card-body">
@@ -84,7 +85,7 @@
                                 </div>
                                 <div class="duyuru-card-footer">
                                     <a href="{% url 'lee:duyuru_detay' duyuru.id %}" class="duyuru-read-more">
-                                        Detayları Gör
+                                        {% trans "Detayları Gör" %}
                                         <i class="bi bi-arrow-right ms-2"></i>
                                     </a>
                                 </div>
@@ -100,34 +101,34 @@
                     <div class="section-header mb-4">
                         <h3 class="section-sub-title mb-3">
                             <i class="bi bi-funnel me-2"></i>
-                            Duyuruları Filtrele
+                            {% trans "Duyuruları Filtrele" %}
                         </h3>
                     </div>
                     <div class="duyuru-filter-buttons">
                         <a href="{% url 'lee:duyurular' %}" 
                            class="filter-btn {% if not kategori %}active{% endif %}">
                             <i class="bi bi-grid-3x3-gap"></i>
-                            <span>Tüm Duyurular</span>
+                            <span>{% trans "Tüm Duyurular" %}</span>
                         </a>
                         <a href="?kategori=akademik" 
                            class="filter-btn {% if kategori == 'akademik' %}active{% endif %}">
                             <i class="bi bi-journal-text"></i>
-                            <span>Akademik</span>
+                            <span>{% trans "Akademik" %}</span>
                         </a>
                         <a href="?kategori=etkinlik" 
                            class="filter-btn {% if kategori == 'etkinlik' %}active{% endif %}">
                             <i class="bi bi-calendar-event"></i>
-                            <span>Etkinlik</span>
+                            <span>{% trans "Etkinlik" %}</span>
                         </a>
                         <a href="?kategori=ogrenci" 
                            class="filter-btn {% if kategori == 'ogrenci' %}active{% endif %}">
                             <i class="bi bi-people"></i>
-                            <span>Öğrenci</span>
+                            <span>{% trans "Öğrenci" %}</span>
                         </a>
                         <a href="?kategori=genel" 
                            class="filter-btn {% if kategori == 'genel' %}active{% endif %}">
                             <i class="bi bi-info-circle"></i>
-                            <span>Genel</span>
+                            <span>{% trans "Genel" %}</span>
                         </a>
                     </div>
                 </div>
@@ -137,9 +138,9 @@
                     <div class="section-header mb-4">
                         <h3 class="section-sub-title mb-3">
                             <i class="bi bi-list-ul me-2"></i>
-                            Tüm Duyurular
+                            {% trans "Tüm Duyurular" %}
                         </h3>
-                        <p class="section-sub-description">Fakültemizdeki tüm güncel duyurular</p>
+                        <p class="section-sub-description">{% trans "Fakültemizdeki tüm güncel duyurular" %}</p>
                     </div>
                     
                     {% if duyurular %}
@@ -154,7 +155,7 @@
                                             {{ duyuru.get_kategori_display }}
                                         </span>
                                         {% if duyuru.onemli %}
-                                        <span class="duyuru-important" title="Önemli Duyuru">
+                                        <span class="duyuru-important" title="{% trans 'Önemli Duyuru' %}">
                                             <i class="bi bi-star-fill"></i>
                                         </span>
                                         {% endif %}
@@ -185,7 +186,7 @@
                                 </div>
                                 <div class="duyuru-card-footer">
                                     <a href="{% url 'lee:duyuru_detay' duyuru.id %}" class="duyuru-read-more">
-                                        Devamını Oku
+                                        {% trans "Devamını Oku" %}
                                         <i class="bi bi-arrow-right ms-2"></i>
                                     </a>
                                 </div>
@@ -199,11 +200,11 @@
                         <div class="empty-state-icon">
                             <i class="bi bi-megaphone"></i>
                         </div>
-                        <h4>Henüz Duyuru Bulunmuyor</h4>
-                        <p>Fakültemizle ilgili duyurular burada listelenecektir.</p>
+                        <h4>{% trans "Henüz Duyuru Bulunmuyor" %}</h4>
+                        <p>{% trans "Fakültemizle ilgili duyurular burada listelenecektir." %}</p>
                         <button class="btn btn-primary mt-3">
                             <i class="bi bi-arrow-clockwise me-2"></i>
-                            Yenile
+                            {% trans "Yenile" %}
                         </button>
                     </div>
                     {% endif %}

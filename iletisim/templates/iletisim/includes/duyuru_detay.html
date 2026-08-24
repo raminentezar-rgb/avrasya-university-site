@@ -1,4 +1,5 @@
 {% extends 'iletisim/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - {{ duyuru.baslik }}{% endblock %}
 
@@ -805,11 +806,11 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="{% url 'iletisim:iletisim_anasayfa' %}">
-                                    <i class="bi bi-house me-1"></i>Ana Sayfa
+                                    <i class="bi bi-house me-1"></i>{% trans "Ana Sayfa" %}
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{% url 'iletisim:duyurular' %}">Duyurular</a>
+                                <a href="{% url 'iletisim:duyurular' %}">{% trans "Duyurular" %}</a>
                             </li>
                             <li class="breadcrumb-item active" title="{{ duyuru.baslik }}">
                                 {{ duyuru.baslik|truncatechars:50 }}
@@ -831,7 +832,7 @@
                                 {% if duyuru.onemli %}
                                 <span class="duyuru-category ms-2" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">
                                     <i class="bi bi-exclamation-triangle me-1"></i>
-                                    Önemli
+                                    {% trans "Önemli" %}
                                 </span>
                                 {% endif %}
                             </div>
@@ -854,11 +855,11 @@
                         <div class="duyuru-meta mt-3">
                             <span class="duyuru-meta-item">
                                 <i class="bi bi-person-circle me-1"></i>
-                                Fen Edebiyat Fakültesi
+                                {% trans "Fen Edebiyat Fakültesi" %}
                             </span>
                             <span class="duyuru-meta-item ms-3">
                                 <i class="bi bi-eye me-1"></i>
-                                0 görüntülenme
+                                {% trans "0 görüntülenme" %}
                             </span>
                         </div>
                     </div>
@@ -874,8 +875,8 @@
                                 <div class="empty-content-icon">
                                     <i class="bi bi-file-text"></i>
                                 </div>
-                                <h4>İçerik Bulunmamaktadır</h4>
-                                <p>Bu duyuru için henüz içerik eklenmemiştir.</p>
+                                <h4>{% trans "İçerik Bulunmamaktadır" %}</h4>
+                                <p>{% trans "Bu duyuru için henüz içerik eklenmemiştir." %}</p>
                             </div>
                         {% endif %}
                     </div>
@@ -886,9 +887,9 @@
                         <div class="section-header mb-4">
                             <h3 class="section-sub-title long-text">
                                 <i class="bi bi-paperclip me-2"></i>
-                                İndirilebilir Dosyalar
+                                {% trans "İndirilebilir Dosyalar" %}
                             </h3>
-                            <p class="section-sub-description long-text">Duyuruyla ilgili ek dosyalar</p>
+                            <p class="section-sub-description long-text">{% trans "Duyuruyla ilgili ek dosyalar" %}</p>
                         </div>
                         
                         <div class="attachments-container">
@@ -902,13 +903,13 @@
                                     <h6 title="{{ duyuru.dosya_adi|default:'Dosya' }}">
                                         {{ duyuru.dosya_adi|default:"Dosya"|truncatechars:80 }}
                                     </h6>
-                                    <small>Ana dosya</small>
+                                    <small>{% trans "Ana dosya" %}</small>
                                 </div>
                                 <div class="attachment-actions">
                                     <a href="{{ duyuru.dosya.url }}" class="btn-download" download>
-                                        <i class="bi bi-download me-1"></i>İndir
+                                        <i class="bi bi-download me-1"></i>{% trans "İndir" %}
                                     </a>
-                                    <span class="file-size">PDF</span>
+                                    <span class="file-size">{% trans "PDF" %}</span>
                                 </div>
                             </div>
                             {% endif %}
@@ -932,7 +933,7 @@
                                         </div>
                                         <div class="attachment-actions">
                                             <a href="{{ dosya.url }}" class="btn-download" download>
-                                                <i class="bi bi-download me-1"></i>İndir
+                                                <i class="bi bi-download me-1"></i>{% trans "İndir" %}
                                             </a>
                                         </div>
                                     </div>
@@ -959,7 +960,7 @@
                                         </div>
                                         <div class="attachment-actions">
                                             <a href="{{ dosya.dosya.url }}" class="btn-download" download>
-                                                <i class="bi bi-download me-1"></i>İndir
+                                                <i class="bi bi-download me-1"></i>{% trans "İndir" %}
                                             </a>
                                             <span class="file-size">{{ dosya.dosya.size|filesizeformat }}</span>
                                         </div>
@@ -977,9 +978,9 @@
                         <div class="section-header mb-4">
                             <h3 class="section-sub-title long-text">
                                 <i class="bi bi-link-45deg me-2"></i>
-                                İlgili Duyurular
+                                {% trans "İlgili Duyurular" %}
                             </h3>
-                            <p class="section-sub-description long-text">Benzer konulardaki diğer duyurular</p>
+                            <p class="section-sub-description long-text">{% trans "Benzer konulardaki diğer duyurular" %}</p>
                         </div>
                         
                         <div class="related-cards">
@@ -1007,7 +1008,7 @@
                                         {{ ilgili.yayin_tarihi|date:"d.m.Y" }}
                                     </small>
                                     <a href="{% url 'iletisim:duyuru_detay' ilgili.id %}" class="related-link">
-                                        Görüntüle
+                                        {% trans "Görüntüle" %}
                                         <i class="bi bi-arrow-right ms-1"></i>
                                     </a>
                                 </div>
@@ -1023,15 +1024,15 @@
                             <a href="{% url 'iletisim:duyurular' %}" class="btn-navigation btn-navigation-prev">
                                 <i class="bi bi-arrow-left me-2"></i>
                                 <div class="long-text">
-                                    <small>Önceki Sayfa</small>
-                                    <div>Tüm Duyurular</div>
+                                    <small>{% trans "Önceki Sayfa" %}</small>
+                                    <div>{% trans "Tüm Duyurular" %}</div>
                                 </div>
                             </a>
                             <a href="{% url 'iletisim:iletisim_anasayfa' %}" class="btn-navigation btn-navigation-home">
                                 <i class="bi bi-house me-2"></i>
                                 <div class="long-text">
-                                    <small>Ana Sayfa</small>
-                                    <div>İletişim Fakültesi</div>
+                                    <small>{% trans "Ana Sayfa" %}</small>
+                                    <div>{% trans "İletişim Fakültesi" %}</div>
                                 </div>
                             </a>
                         </div>

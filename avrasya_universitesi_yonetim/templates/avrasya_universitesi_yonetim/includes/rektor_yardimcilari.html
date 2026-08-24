@@ -1,4 +1,5 @@
 {% extends 'avrasya_universitesi_yonetim/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Rektör Yardımcıları{% endblock %}
 
@@ -10,7 +11,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Rektör Yardımcıları</h1>
+            <h1>{% trans "Rektör Yardımcıları" %}</h1>
 
             <p></p>
         </div>
@@ -31,11 +32,10 @@
             <div class="content-wrapper">
                 <!-- Başlık ve Açıklama -->
                 <div class="page-intro mb-5">
-                    <h2 class="section-title">Rektör Yardımcıları</h2>
+                    <h2 class="section-title">{% trans "Rektör Yardımcıları" %}</h2>
                     
                     <p class="lead text-center text-muted" style="max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
-                        Avrasya Üniversitesi Rektör Yardımcıları, üniversitenin idari ve akademik yönetiminde 
-                        Rektör'e destek olmak ve belirlenen alanlardan sorumlu olmak üzere görev yapmaktadır.
+                        {% trans "Avrasya Üniversitesi Rektör Yardımcıları, üniversitenin idari ve akademik yönetiminde Rektör'e destek olmak ve belirlenen alanlardan sorumlu olmak üzere görev yapmaktadır." %}
                     </p>
                 </div>
 
@@ -51,12 +51,12 @@
                                         <div class="rector-photo-wrapper mb-4">
                                             <div class="rector-photo-frame">
                                                 <img src="https://avrasya.edu.tr/wp-content/uploads/2025/12/Calisma-yuzeyi-3-400x363.png" 
-                                                     alt="Prof. Dr. Yavuz ÖZORAN" 
+                                                     alt="{% trans 'Prof. Dr. Yavuz ÖZORAN' %}" 
                                                      class="img-fluid rounded-3 rector-photo">
                                                 <div class="photo-overlay">
                                                     <div class="overlay-content">
                                                         <i class="fas fa-envelope fa-2x mb-2"></i>
-                                                        <small>İletişim</small>
+                                                        <small>{% trans "İletişim" %}</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,17 +65,17 @@
                                         <!-- Kişisel Bilgiler -->
                                         <div class="personal-info text-center">
                                             <h4 class="rector-name mb-2" style="font-family: 'Metropolis', sans-serif;
-                            font-weight: 800;  font-size: 20px; ">Prof. Dr. Yavuz ÖZORAN</h4>
+                            font-weight: 800;  font-size: 20px; ">{% trans "Prof. Dr. Yavuz ÖZORAN" %}</h4>
                                             <div class="contact-info mb-3">
                                                 <a href="mailto:yavuz.ozoran@avrasya.edu.tr" class="email-link">
                                                     <i class="fas fa-envelope me-2"></i>
-                                                    yavuz.ozoran@avrasya.edu.tr
+                                                    {% trans "yavuz.ozoran@avrasya.edu.tr" %}
                                                 </a>
                                             </div>
                                             <div class="badge-section">
                                                 <span class="badge responsibility-badge">
                                                     <i class="fas fa-tasks me-1"></i>
-                                                    Rektör Yardımcısı
+                                                    {% trans "Rektör Yardımcısı" %}
                                                 </span>
                                             </div>
                                         </div>
@@ -85,7 +85,7 @@
                                     <div class="col-md-7">
                                         <h5 class="responsibility-title mb-4">
                                             <i class="fas fa-list-check me-2"></i>
-                                            Görev Dağılımı
+                                            {% trans "Görev Dağılımı" %}
                                         </h5>
                                         
                                         <div class="responsibilities-list">
@@ -93,14 +93,14 @@
                                             <div class="responsibility-category mb-4">
                                                 <h6 class="category-title">
                                                     {% comment %} <i class="fas fa-university me-2"></i> {% endcomment %}
-                                                    <span>Akademik Birimler</span>
+                                                    <span>{% trans "Akademik Birimler" %}</span>
                                                 </h6>
                                                 <ul class="category-list">
-                                                    <li>Sağlık Bilimleri Fakültesi</li>
-                                                    <li>Uygulamalı Bilimler Yüksekokulu</li>
-                                                    <li>Lisansüstü Eğitim Enstitüsü</li>
-                                                    <li>Sağlık Hizmetleri Meslek Yüksekokulu</li>
-                                                    <li>Yabancı Diller Yüksekokulu</li>
+                                                    <li>{% trans "Sağlık Bilimleri Fakültesi" %}</li>
+                                                    <li>{% trans "Uygulamalı Bilimler Yüksekokulu" %}</li>
+                                                    <li>{% trans "Lisansüstü Eğitim Enstitüsü" %}</li>
+                                                    <li>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</li>
+                                                    <li>{% trans "Yabancı Diller Yüksekokulu" %}</li>
                                                 </ul>
                                             </div>
                                             
@@ -108,15 +108,15 @@
                                             <div class="responsibility-category mb-4">
                                                 <h6 class="category-title">
                                                     {% comment %} <i class="fas fa-flask me-2"></i> {% endcomment %}
-                                                    <span>Araştırma ve Uygulama Merkezleri</span>
+                                                    <span>{% trans "Araştırma ve Uygulama Merkezleri" %}</span>
                                                 </h6>
                                                 <ul class="category-list">
-                                                    <li>Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi</li>
-                                                    <li>Uzaktan Eğitim Uygulama ve Araştırma Merkezi</li>
-                                                    <li>Kariyer Geliştirme Uygulama ve Araştırma Merkezi</li>
-                                                    <li>Gıda Eğitim Uygulama ve Araştırma Merkezi</li>
-                                                    <li>Sürekli Eğitim Merkezi</li>
-                                                    <li>Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi</li>
+                                                    <li>{% trans "Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi" %}</li>
+                                                    <li>{% trans "Uzaktan Eğitim Uygulama ve Araştırma Merkezi" %}</li>
+                                                    <li>{% trans "Kariyer Geliştirme Uygulama ve Araştırma Merkezi" %}</li>
+                                                    <li>{% trans "Gıda Eğitim Uygulama ve Araştırma Merkezi" %}</li>
+                                                    <li>{% trans "Sürekli Eğitim Merkezi" %}</li>
+                                                    <li>{% trans "Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi" %}</li>
                                                 </ul>
                                             </div>
                                             
@@ -126,11 +126,11 @@
                                                     <div class="responsibility-category">
                                                         <h6 class="category-title">
                                                             {% comment %} <i class="fas fa-bullseye me-2"></i> {% endcomment %}
-                                                            <span>Koordinatörlük</span>
+                                                            <span>{% trans "Koordinatörlük" %}</span>
                                                         </h6>
                                                         <ul class="category-list">
-                                                            <li>Kalite ve Akreditasyon Koordinatörlüğü</li>
-                                                            <li>Dış İlişkiler Koordinatörlüğü (Erasmus-Farabi-Mevlana)</li>
+                                                            <li>{% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}</li>
+                                                            <li>{% trans "Dış İlişkiler Koordinatörlüğü (Erasmus-Farabi-Mevlana)" %}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -138,12 +138,12 @@
                                                     <div class="responsibility-category">
                                                         <h6 class="category-title">
                                                             {% comment %} <i class="fas fa-users me-2"></i> {% endcomment %}
-                                                            <span>Komisyonlar</span>
+                                                            <span>{% trans "Komisyonlar" %}</span>
                                                         </h6>
                                                         <ul class="category-list">
-                                                            <li>Etik Kurul Komisyonu</li>
-                                                            <li>Bologna Eşgüdüm Komisyonu</li>
-                                                            <li>Eğitim, Ölçme ve Değerlendirme Komisyonu</li>
+                                                            <li>{% trans "Etik Kurul Komisyonu" %}</li>
+                                                            <li>{% trans "Bologna Eşgüdüm Komisyonu" %}</li>
+                                                            <li>{% trans "Eğitim, Ölçme ve Değerlendirme Komisyonu" %}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -153,7 +153,7 @@
                                             <div class="responsibility-category mt-4">
                                                 <h6 class="category-title">
                                                     {% comment %} <i class="fas fa-clipboard-check me-2"></i> {% endcomment %}
-                                                    <span>Merkezi Sınav Hizmetleri Birimi</span>
+                                                    <span>{% trans "Merkezi Sınav Hizmetleri Birimi" %}</span>
                                                 </h6>
                                             </div>
                                         </div>
@@ -171,12 +171,12 @@
                                         <div class="rector-photo-wrapper mb-4">
                                             <div class="rector-photo-frame">
                                                 <img src="https://avrasya.edu.tr/wp-content/uploads/2025/12/Calisma-yuzeyi-1-400x363.png" 
-                                                     alt="Prof. Dr. Celalettin KARALİ" 
+                                                     alt="{% trans 'Prof. Dr. Celalettin KARALİ' %}" 
                                                      class="img-fluid rounded-3 rector-photo">
                                                 <div class="photo-overlay">
                                                     <div class="overlay-content">
                                                         <i class="fas fa-envelope fa-2x mb-2"></i>
-                                                        <small>İletişim</small>
+                                                        <small>{% trans "İletişim" %}</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,17 +185,17 @@
                                         <!-- Kişisel Bilgiler -->
                                         <div class="personal-info text-center">
                                             <h4 class="rector-name mb-2" style="font-family: 'Metropolis', sans-serif;
-                            font-weight: 800;  font-size: 20px; ">Prof. Dr. Celalettin KARALİ</h4>
+                            font-weight: 800;  font-size: 20px; ">{% trans "Prof. Dr. Celalettin KARALİ" %}</h4>
                                             <div class="contact-info mb-3">
                                                 <a href="mailto:celalettin.karali@avrasya.edu.tr" class="email-link">
                                                     <i class="fas fa-envelope me-2"></i>
-                                                    celalettin.karali@avrasya.edu.tr
+                                                    {% trans "celalettin.karali@avrasya.edu.tr" %}
                                                 </a>
                                             </div>
                                             <div class="badge-section">
                                                 <span class="badge responsibility-badge">
                                                     <i class="fas fa-tasks me-1"></i>
-                                                    Rektör Yardımcısı
+                                                    {% trans "Rektör Yardımcısı" %}
                                                 </span>
                                             </div>
                                         </div>
@@ -205,7 +205,7 @@
                                     <div class="col-md-7">
                                         <h5 class="responsibility-title mb-4">
                                             <i class="fas fa-list-check me-2"></i>
-                                            Görev Dağılımı
+                                            {% trans "Görev Dağılımı" %}
                                         </h5>
                                         
                                         <div class="responsibilities-list">
@@ -213,15 +213,15 @@
                                             <div class="responsibility-category mb-4">
                                                 <h6 class="category-title">
                                                     {% comment %} <i class="fas fa-university me-2"></i> {% endcomment %}
-                                                    <span>Akademik Birimler</span>
+                                                    <span>{% trans "Akademik Birimler" %}</span>
                                                 </h6>
                                                 <ul class="category-list">
-                                                    <li>Fen–Edebiyat Fakültesi</li>
-                                                    <li>Mühendislik Mimarlık Fakültesi</li>
-                                                    <li>İktisadi ve İdari Bilimler Fakültesi</li>
-                                                    <li>Spor Bilimleri Fakültesi</li>
-                                                    <li>Meslek Yüksekokulu</li>
-                                                    <li>İletişim Fakültesi</li>
+                                                    <li>{% trans "Fen–Edebiyat Fakültesi" %}</li>
+                                                    <li>{% trans "Mühendislik Mimarlık Fakültesi" %}</li>
+                                                    <li>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</li>
+                                                    <li>{% trans "Spor Bilimleri Fakültesi" %}</li>
+                                                    <li>{% trans "Meslek Yüksekokulu" %}</li>
+                                                    <li>{% trans "İletişim Fakültesi" %}</li>
                                                 </ul>
                                             </div>
                                             
@@ -229,14 +229,14 @@
                                             <div class="responsibility-category mb-4">
                                                 <h6 class="category-title">
                                                     {% comment %} <i class="fas fa-flask me-2"></i> {% endcomment %}
-                                                    <span>Araştırma ve Uygulama Merkezleri</span>
+                                                    <span>{% trans "Araştırma ve Uygulama Merkezleri" %}</span>
                                                 </h6>
                                                 <ul class="category-list">
-                                                    <li>Kadın Çalışmaları Uygulama ve Araştırma Merkezi</li>
-                                                    <li>Girişimcilik ve Yenilikçilik Uygulama ve Araştırma Merkezi</li>
-                                                    <li>Göç Çalışmaları Uygulama ve Araştırma Merkezi</li>
-                                                    <li>Türkçe Öğretimi Uygulama ve Araştırma Merkezi</li>
-                                                    <li>Ulaştırma Uygulama ve Araştırma Merkezi</li>
+                                                    <li>{% trans "Kadın Çalışmaları Uygulama ve Araştırma Merkezi" %}</li>
+                                                    <li>{% trans "Girişimcilik ve Yenilikçilik Uygulama ve Araştırma Merkezi" %}</li>
+                                                    <li>{% trans "Göç Çalışmaları Uygulama ve Araştırma Merkezi" %}</li>
+                                                    <li>{% trans "Türkçe Öğretimi Uygulama ve Araştırma Merkezi" %}</li>
+                                                    <li>{% trans "Ulaştırma Uygulama ve Araştırma Merkezi" %}</li>
                                                 </ul>
                                             </div>
                                             
@@ -246,11 +246,11 @@
                                                     <div class="responsibility-category">
                                                         <h6 class="category-title">
                                                             {% comment %} <i class="fas fa-bullseye me-2"></i> {% endcomment %}
-                                                            <span>Koordinatörlük</span>
+                                                            <span>{% trans "Koordinatörlük" %}</span>
                                                         </h6>
                                                         <ul class="category-list">
-                                                            <li>Dijital Dönüşüm Ofisi Koordinatörlüğü</li>
-                                                            <li>Bilimsel Araştırma Projeleri (BAP) Koordinatörlüğü</li>
+                                                            <li>{% trans "Dijital Dönüşüm Ofisi Koordinatörlüğü" %}</li>
+                                                            <li>{% trans "Bilimsel Araştırma Projeleri (BAP) Koordinatörlüğü" %}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -258,12 +258,12 @@
                                                     <div class="responsibility-category">
                                                         <h6 class="category-title">
                                                             {% comment %} <i class="fas fa-users me-2"></i> {% endcomment %}
-                                                            <span>Komisyonlar</span>
+                                                            <span>{% trans "Komisyonlar" %}</span>
                                                         </h6>
                                                         <ul class="category-list">
-                                                            <li>Mevzuat Komisyonu</li>
-                                                            <li>Muafiyet ve İntibak Komisyonu</li>
-                                                            <li>Yabancı Uyruklu Öğretim Elemanı İnceleme ve Değerlendirme Komisyonu</li>
+                                                            <li>{% trans "Mevzuat Komisyonu" %}</li>
+                                                            <li>{% trans "Muafiyet ve İntibak Komisyonu" %}</li>
+                                                            <li>{% trans "Yabancı Uyruklu Öğretim Elemanı İnceleme ve Değerlendirme Komisyonu" %}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -284,35 +284,35 @@
                             <div class="stats-card p-4 rounded-4 h-100">
                                 <h5 class="stats-title mb-4">
                                     <i class="fas fa-chart-pie me-2"></i>
-                                    Görev Dağılımı İstatistikleri
+                                    {% trans "Görev Dağılımı İstatistikleri" %}
                                 </h5>
                                 
                                 <div class="stats-list">
                                     <div class="stat-item d-flex justify-content-between align-items-center mb-3">
                                         <span class="stat-label">
                                             <i class="fas fa-university me-2"></i>
-                                            Toplam Akademik Birim
+                                            {% trans "Toplam Akademik Birim" %}
                                         </span>
                                         <span class="stat-value">11</span>
                                     </div>
                                     <div class="stat-item d-flex justify-content-between align-items-center mb-3">
                                         <span class="stat-label">
                                             <i class="fas fa-flask me-2"></i>
-                                            Araştırma Merkezi
+                                            {% trans "Araştırma Merkezi" %}
                                         </span>
                                         <span class="stat-value">11</span>
                                     </div>
                                     <div class="stat-item d-flex justify-content-between align-items-center mb-3">
                                         <span class="stat-label">
                                             <i class="fas fa-bullseye me-2"></i>
-                                            Koordinatörlük
+                                            {% trans "Koordinatörlük" %}
                                         </span>
                                         <span class="stat-value">4</span>
                                     </div>
                                     <div class="stat-item d-flex justify-content-between align-items-center">
                                         <span class="stat-label">
                                             <i class="fas fa-users me-2"></i>
-                                            Komisyon
+                                            {% trans "Komisyon" %}
                                         </span>
                                         <span class="stat-value">6</span>
                                     </div>
@@ -325,7 +325,7 @@
                             <div class="info-card p-4 p-md-5 rounded-4 h-100">
                                 <h5 class="info-title mb-4">
                                     <i class="fas fa-info-circle me-2"></i>
-                                    Rektör Yardımcılarının Görevleri
+                                    {% trans "Rektör Yardımcılarının Görevleri" %}
                                 </h5>
                                 
                                 <div class="info-content">
@@ -333,25 +333,25 @@
                                         <div class="info-icon me-3">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
-                                        <p class="mb-0">Rektör'e bağlı olarak üniversitenin idari ve akademik işleyişini yönetmek</p>
+                                        <p class="mb-0">{% trans "Rektör'e bağlı olarak üniversitenin idari ve akademik işleyişini yönetmek" %}</p>
                                     </div>
                                     <div class="d-flex mb-3">
                                         <div class="info-icon me-3">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
-                                        <p class="mb-0">Sorumlu oldukları birimlerin planlama, yönetim ve denetimini yapmak</p>
+                                        <p class="mb-0">{% trans "Sorumlu oldukları birimlerin planlama, yönetim ve denetimini yapmak" %}</p>
                                     </div>
                                     <div class="d-flex mb-3">
                                         <div class="info-icon me-3">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
-                                        <p class="mb-0">Üniversitenin akademik ve idari politikalarının uygulanmasını sağlamak</p>
+                                        <p class="mb-0">{% trans "Üniversitenin akademik ve idari politikalarının uygulanmasını sağlamak" %}</p>
                                     </div>
                                     <div class="d-flex">
                                         <div class="info-icon me-3">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
-                                        <p class="mb-0">Rektör'ün olmadığı durumlarda görevlerini yerine getirmek</p>
+                                        <p class="mb-0">{% trans "Rektör'ün olmadığı durumlarda görevlerini yerine getirmek" %}</p>
                                     </div>
                                 </div>
                             </div>

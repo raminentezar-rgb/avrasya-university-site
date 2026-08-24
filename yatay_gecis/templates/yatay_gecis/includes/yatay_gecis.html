@@ -1,4 +1,5 @@
 {% extends 'yatay_gecis/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Yatay Geçiş{% endblock %}
 
@@ -8,8 +9,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Yatay Geçiş</h1>
-            <p>Avrasya Üniversitesi'ne, Yükseköğretim Kurulu (YÖK) tarafından hazırlanan Yönetmelik ve Üniversite tarafından belirlenen esaslar çerçevesinde yatay geçiş yapabilirsiniz.</p>
+            <h1>{% trans "Yatay Geçiş" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi'ne, Yükseköğretim Kurulu (YÖK) tarafından hazırlanan Yönetmelik ve Üniversite tarafından belirlenen esaslar çerçevesinde yatay geçiş yapabilirsiniz." %}</p>
         </div>
     </div>
 </section>
@@ -28,8 +29,8 @@
             <div class="content-wrapper">
                 <!-- عناوین صفحه -->
                 <div class="page-intro mb-5">
-                    <h2 class="section-title">Yatay Geçiş Başvuru, Kayıt ve Esasları</h2>
-                    <p class="section-subtitle text-center">Aşağıdaki bağlantılardan ilgilendiğiniz konulara ulaşabilirsiniz</p>
+                    <h2 class="section-title">{% trans "Yatay Geçiş Başvuru, Kayıt ve Esasları" %}</h2>
+                    <p class="section-subtitle text-center">{% trans "Aşağıdaki bağlantılardan ilgilendiğiniz konulara ulaşabilirsiniz" %}</p>
                 </div>
                 
                 <!-- Grid کارت‌ها -->
@@ -37,17 +38,17 @@
                     <!-- کارت 1: Yatay Geçiş Kontenjanları -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay1.png' %}" alt="Yatay Geçiş Kontenjanları">
+                            <img src="{% static 'core/img/yatay/yatay1.png' %}" alt="{% trans 'Yatay Geçiş Kontenjanları' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             {% comment %} <div class="yatay-card-icon">
                                 <i class="fas fa-list-alt"></i>
                             </div> {% endcomment %}
-                            <h3 class="yatay-card-title">Yatay Geçiş Kontenjanları</h3>
-                            <p class="yatay-card-description">Programlarımızın yatay geçiş kontenjanlarını görüntüleyin</p>
+                            <h3 class="yatay-card-title">{% trans "Yatay Geçiş Kontenjanları" %}</h3>
+                            <p class="yatay-card-description">{% trans "Programlarımızın yatay geçiş kontenjanlarını görüntüleyin" %}</p>
                             <a href="{% url 'yatay_gecis:yatay_Kontenjanlar' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -56,20 +57,20 @@
                     <!-- کارت 2: Yatay Geçiş Başvuru Formu -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay2.png' %}" alt="Yatay Geçiş Başvuru Formu">
+                            <img src="{% static 'core/img/yatay/yatay2.png' %}" alt="{% trans 'Yatay Geçiş Başvuru Formu' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Yatay Geçiş Başvuru Formu</h3>
-                            <p class="yatay-card-description">Başvuru formlarını indirip doldurabilirsiniz</p>
+                            <h3 class="yatay-card-title">{% trans "Yatay Geçiş Başvuru Formu" %}</h3>
+                            <p class="yatay-card-description">{% trans "Başvuru formlarını indirip doldurabilirsiniz" %}</p>
                             <div class="yatay-card-buttons">
                                 <a href="https://avrasya.edu.tr/wp-content/uploads/2021/01/Yatay-Gecis-Basvuru-Formu.pdf" class="yatay-card-button">
-                                    <span>PDF Formu</span>
+                                    <span>{% trans "PDF Formu" %}</span>
                                     <i class="fas fa-download"></i>
                                 </a>
                                 <a href="https://avrasya.edu.tr/wp-content/uploads/2023/01/Avrasya_Universitesi_yatay-gecis_basvuru_ve_kayit_dosyasi_kapak_formu-24.01.2023.docx" class="yatay-card-button">
-                                    <span>Kapak Formu</span>
+                                    <span>{% trans "Kapak Formu" %}</span>
                                     <i class="fas fa-file-word"></i>
                                 </a>
                             </div>
@@ -79,15 +80,15 @@
                     <!-- کارت 3: Başvuru Belgeleri -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay3.png' %}" alt="Başvuru Belgeleri">
+                            <img src="{% static 'core/img/yatay/yatay3.png' %}" alt="{% trans 'Başvuru Belgeleri' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Başvuru Belgeleri</h3>
-                            <p class="yatay-card-description">Gerekli belgelerin listesi ve açıklamaları</p>
+                            <h3 class="yatay-card-title">{% trans "Başvuru Belgeleri" %}</h3>
+                            <p class="yatay-card-description">{% trans "Gerekli belgelerin listesi ve açıklamaları" %}</p>
                             <a href="{% url 'yatay_gecis:yatay_geciste_istenilen_Bbelgeler' %}" class="yatay-card-button">
-                                <span>Belgeleri Gör</span>
+                                <span>{% trans "Belgeleri Gör" %}</span>
                                 <i class="fas fa-folder-open"></i>
                             </a>
                         </div>
@@ -96,15 +97,15 @@
                     <!-- کارت 4: Ortalamaya Göre Başvuru Koşulları -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay4.png' %}" alt="Ortalamaya Göre Başvuru Koşulları">
+                            <img src="{% static 'core/img/yatay/yatay4.png' %}" alt="{% trans 'Ortalamaya Göre Başvuru Koşulları' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Ortalamaya Göre Başvuru Koşulları</h3>
-                            <p class="yatay-card-description">Not ortalamanıza göre başvuru şartları</p>
+                            <h3 class="yatay-card-title">{% trans "Ortalamaya Göre Başvuru Koşulları" %}</h3>
+                            <p class="yatay-card-description">{% trans "Not ortalamanıza göre başvuru şartları" %}</p>
                             <a href="{% url 'yatay_gecis:ortalama' %}" class="yatay-card-button">
-                                <span>Koşulları Gör</span>
+                                <span>{% trans "Koşulları Gör" %}</span>
                                 <i class="fas fa-chart-line"></i>
                             </a>
                         </div>
@@ -113,15 +114,15 @@
                     <!-- کارت 5: YÖK Ek Madde 1'e Göre Başvuru Koşulları -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay5.png' %}" alt="YÖK Ek Madde 1">
+                            <img src="{% static 'core/img/yatay/yatay5.png' %}" alt="{% trans 'YÖK Ek Madde 1' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">YÖK Ek Madde 1'e Göre</h3>
-                            <p class="yatay-card-description">YÖK tarafından belirlenen ek madde şartları</p>
+                            <h3 class="yatay-card-title">{% trans "YÖK Ek Madde 1'e Göre" %}</h3>
+                            <p class="yatay-card-description">{% trans "YÖK tarafından belirlenen ek madde şartları" %}</p>
                             <a href="{% url 'yatay_gecis:ek_madde' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-book"></i>
                             </a>
                         </div>
@@ -130,15 +131,15 @@
                     <!-- کارت 6: Yurt Dışından Yurt İçine Yatay Geçişler -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay6.png' %}" alt="Yurt Dışından Yurt İçine Yatay Geçiş">
+                            <img src="{% static 'core/img/yatay/yatay6.png' %}" alt="{% trans 'Yurt Dışından Yurt İçine Yatay Geçiş' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Yurt Dışından Yatay Geçiş</h3>
-                            <p class="yatay-card-description">Yurtdışından yatay geçiş prosedürleri</p>
+                            <h3 class="yatay-card-title">{% trans "Yurt Dışından Yatay Geçiş" %}</h3>
+                            <p class="yatay-card-description">{% trans "Yurtdışından yatay geçiş prosedürleri" %}</p>
                             <a href="{% url 'yatay_gecis:yatay_gecis' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-globe-americas"></i>
                             </a>
                         </div>
@@ -147,15 +148,15 @@
                     <!-- کارت 7: Değerlendirme Biçimi -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay7.png' %}" alt="Değerlendirme Biçimi">
+                            <img src="{% static 'core/img/yatay/yatay7.png' %}" alt="{% trans 'Değerlendirme Biçimi' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Değerlendirme Biçimi</h3>
-                            <p class="yatay-card-description">Başvuruların nasıl değerlendirileceği</p>
+                            <h3 class="yatay-card-title">{% trans "Değerlendirme Biçimi" %}</h3>
+                            <p class="yatay-card-description">{% trans "Başvuruların nasıl değerlendirileceği" %}</p>
                             <a href="{% url 'yatay_gecis:degerlendirme_bicimi' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-clipboard-check"></i>
                             </a>
                         </div>
@@ -164,15 +165,15 @@
                     <!-- کارت 8: Yatay Geçiş Bursları ve Öğrenim Ücretleri -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay8.png' %}" alt="Yatay Geçiş Bursları">
+                            <img src="{% static 'core/img/yatay/yatay8.png' %}" alt="{% trans 'Yatay Geçiş Bursları' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Burslar ve Ücretler</h3>
-                            <p class="yatay-card-description">Yatay geçiş bursları ve öğrenim ücretleri</p>
+                            <h3 class="yatay-card-title">{% trans "Burslar ve Ücretler" %}</h3>
+                            <p class="yatay-card-description">{% trans "Yatay geçiş bursları ve öğrenim ücretleri" %}</p>
                             <a href="{% url 'yatay_gecis:burslar' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-graduation-cap"></i>
                             </a>
                         </div>
@@ -181,15 +182,15 @@
                     <!-- کارت 9: Kayıt Yeri ve Kayıt İşlemleri İçin Gerekli Belgeler -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay9.png' %}" alt="Kayıt İşlemleri">
+                            <img src="{% static 'core/img/yatay/yatay9.png' %}" alt="{% trans 'Kayıt İşlemleri' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                            
-                            <h3 class="yatay-card-title">Kayıt İşlemleri ve Belgeler</h3>
-                            <p class="yatay-card-description">Kayıt için gerekli belgeler ve işlemler</p>
+                            <h3 class="yatay-card-title">{% trans "Kayıt İşlemleri ve Belgeler" %}</h3>
+                            <p class="yatay-card-description">{% trans "Kayıt için gerekli belgeler ve işlemler" %}</p>
                             <a href="{% url 'yatay_gecis:kayıt_yeri' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-file-signature"></i>
                             </a>
                         </div>
@@ -198,15 +199,15 @@
                     <!-- کارت 10: Taban Puanlar -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay10.png' %}" alt="Taban Puanlar">
+                            <img src="{% static 'core/img/yatay/yatay10.png' %}" alt="{% trans 'Taban Puanlar' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Taban Puanlar</h3>
-                            <p class="yatay-card-description">Programların taban puanları ve kontenjanları</p>
+                            <h3 class="yatay-card-title">{% trans "Taban Puanlar" %}</h3>
+                            <p class="yatay-card-description">{% trans "Programların taban puanları ve kontenjanları" %}</p>
                             <a href="{% url 'yatay_gecis:yatay_taban' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-chart-bar"></i>
                             </a>
                         </div>
@@ -215,15 +216,15 @@
                     <!-- کارت 11: Öğrenci İşleri Daire Başkanlığı -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay11.png' %}" alt="Öğrenci İşleri">
+                            <img src="{% static 'core/img/yatay/yatay11.png' %}" alt="{% trans 'Öğrenci İşleri' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Öğrenci İşleri</h3>
-                            <p class="yatay-card-description">Öğrenci İşleri Daire Başkanlığı iletişim</p>
+                            <h3 class="yatay-card-title">{% trans "Öğrenci İşleri" %}</h3>
+                            <p class="yatay-card-description">{% trans "Öğrenci İşleri Daire Başkanlığı iletişim" %}</p>
                             <a href="{% url 'yatay_gecis:orenci_isleri_daire_baskanli' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-users"></i>
                             </a>
                         </div>
@@ -232,15 +233,15 @@
                     <!-- کارت 12: Başvuru Takvimi -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay12.png' %}" alt="Başvuru Takvimi">
+                            <img src="{% static 'core/img/yatay/yatay12.png' %}" alt="{% trans 'Başvuru Takvimi' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Başvuru Takvimi</h3>
-                            <p class="yatay-card-description">Yatay geçiş başvuru tarihleri ve süreçleri</p>
+                            <h3 class="yatay-card-title">{% trans "Başvuru Takvimi" %}</h3>
+                            <p class="yatay-card-description">{% trans "Yatay geçiş başvuru tarihleri ve süreçleri" %}</p>
                             <a href="{% url 'yatay_gecis:takvim' %}" class="yatay-card-button">
-                                <span>Detayları Gör</span>
+                                <span>{% trans "Detayları Gör" %}</span>
                                 <i class="fas fa-calendar-alt"></i>
                             </a>
                         </div>
@@ -249,15 +250,15 @@
                     <!-- کارت 13: Yatay Geçiş Sonuçları -->
                     <div class="yatay-card">
                         <div class="yatay-card-bg">
-                            <img src="{% static 'core/img/yatay/yatay13.png' %}" alt="Yatay Geçiş Sonuçları">
+                            <img src="{% static 'core/img/yatay/yatay13.png' %}" alt="{% trans 'Yatay Geçiş Sonuçları' %}">
                             <div class="yatay-card-gradient"></div>
                         </div>
                         <div class="yatay-card-content">
                             
-                            <h3 class="yatay-card-title">Yatay Geçiş Sonuçları</h3>
-                            <p class="yatay-card-description">2024-2025 Bahar Dönemi sonuçları</p>
+                            <h3 class="yatay-card-title">{% trans "Yatay Geçiş Sonuçları" %}</h3>
+                            <p class="yatay-card-description">{% trans "2024-2025 Bahar Dönemi sonuçları" %}</p>
                             <a href="{% url 'yatay_gecis:bahar' %}" class="yatay-card-button">
-                                <span>Sonuçları Gör</span>
+                                <span>{% trans "Sonuçları Gör" %}</span>
                                 <i class="fas fa-poll"></i>
                             </a>
                         </div>
@@ -270,8 +271,8 @@
                         <div class="contact-form-icon">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <h2 class="contact-form-title">Sizi Arayalım</h2>
-                        <p class="contact-form-subtitle">Formumuzu doldurmanızın ardından sizinle en kısa süre içerisinde iletişime geçeceğiz.</p>
+                        <h2 class="contact-form-title">{% trans "Sizi Arayalım" %}</h2>
+                        <p class="contact-form-subtitle">{% trans "Formumuzu doldurmanızın ardından sizinle en kısa süre içerisinde iletişime geçeceğiz." %}</p>
                     </div>
                     
                     <div class="contact-form-container">
@@ -280,45 +281,45 @@
                             <div class="form-group">
                                 <label for="fullName" class="form-label">
                                     <i class="fas fa-user"></i>
-                                    <span>Ad Soyad*</span>
+                                    <span>{% trans "Ad Soyad*" %}</span>
                                 </label>
                                 <input type="text" 
                                        id="fullName" 
                                        name="fullName" 
                                        class="form-control" 
-                                       placeholder="Lütfen adınızı ve soyadınızı giriniz" 
+                                       placeholder="{% trans 'Lütfen adınızı ve soyadınızı giriniz' %}" 
                                        required>
-                                <div class="form-error">Please fill out this field.</div>
+                                <div class="form-error">{% trans "Please fill out this field." %}</div>
                             </div>
                             
                             <!-- فیلد E-posta -->
                             <div class="form-group">
                                 <label for="email" class="form-label">
                                     <i class="fas fa-envelope"></i>
-                                    <span>E-posta*</span>
+                                    <span>{% trans "E-posta*" %}</span>
                                 </label>
                                 <input type="email" 
                                        id="email" 
                                        name="email" 
                                        class="form-control" 
-                                       placeholder="ornek@email.com" 
+                                       placeholder="{% trans 'ornek@email.com' %}" 
                                        required>
-                                <div class="form-error">Please fill out this field.</div>
+                                <div class="form-error">{% trans "Please fill out this field." %}</div>
                             </div>
                             
                             <!-- فیلد Telefon Numarası -->
                             <div class="form-group">
                                 <label for="phone" class="form-label">
                                     <i class="fas fa-phone"></i>
-                                    <span>Telefon Numarası*</span>
+                                    <span>{% trans "Telefon Numarası*" %}</span>
                                 </label>
                                 <input type="tel" 
                                        id="phone" 
                                        name="phone" 
                                        class="form-control" 
-                                       placeholder="(5XX) XXX XX XX" 
+                                       placeholder="{% trans '(5XX) XXX XX XX' %}" 
                                        required>
-                                <div class="form-error">Please fill out this field.</div>
+                                <div class="form-error">{% trans "Please fill out this field." %}</div>
                             </div>
                             
                             <!-- چک‌باکس‌ها -->
@@ -330,7 +331,7 @@
                                            class="form-check-input" 
                                            required>
                                     <label for="acceptCommunication" class="form-check-label">
-                                        Formu göndererek iletişim ile ilgili kanunlar hükmünce reklam ve iletişim bildirimleri almayı kabul ederim.
+                                        {% trans "Formu göndererek iletişim ile ilgili kanunlar hükmünce reklam ve iletişim bildirimleri almayı kabul ederim." %}
                                     </label>
                                 </div>
                                 
@@ -341,7 +342,7 @@
                                            class="form-check-input" 
                                            required>
                                     <label for="acceptKVKK" class="form-check-label">
-                                        <a href="#" class="kvkk-link">"Kişisel Verilerin Korunması Kanunu"</a> kapsamında Bilgilendirme ve Aydınlatma Metnini okudum. (*) Verileriniz paylaşılmayacaktır.
+                                        <a href="#" class="kvkk-link">{% trans "\"Kişisel Verilerin Korunması Kanunu\"" %}</a> {% trans "kapsamında Bilgilendirme ve Aydınlatma Metnini okudum. (*) Verileriniz paylaşılmayacaktır." %}
                                     </label>
                                 </div>
                             </div>
@@ -349,7 +350,7 @@
                             <!-- دکمه ارسال -->
                             <div class="form-submit">
                                 <button type="submit" class="submit-button">
-                                    <span class="submit-text">Formu Gönder</span>
+                                    <span class="submit-text">{% trans "Formu Gönder" %}</span>
                                     <i class="fas fa-paper-plane"></i>
                                 </button>
                             </div>
@@ -358,8 +359,8 @@
                             <div class="form-success-message" id="successMessage">
                                 <i class="fas fa-check-circle"></i>
                                 <div>
-                                    <h4>Formunuz Başarıyla Gönderildi!</h4>
-                                    <p>En kısa sürede sizinle iletişime geçeceğiz.</p>
+                                    <h4>{% trans "Formunuz Başarıyla Gönderildi!" %}</h4>
+                                    <p>{% trans "En kısa sürede sizinle iletişime geçeceğiz." %}</p>
                                 </div>
                             </div>
                         </form>

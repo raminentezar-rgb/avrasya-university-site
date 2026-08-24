@@ -1,4 +1,5 @@
 {% extends 'akademik/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Akademik{% endblock %}
 
@@ -8,7 +9,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>AVRASYA ÜNİVERSİTESİ_AKADEMİK</h1>
+            <h1>{% trans "AVRASYA ÜNİVERSİTESİ_AKADEMİK" %}</h1>
             <p></p>
         </div>
     </div>
@@ -29,23 +30,20 @@
                 <div class="hero-content">
                     <div class="row align-items-center">
                         <div class="col-md-8">
-                            <h1 class="hero-title">AVRASYA ÜNİVERSİTESİ</h1>
-                            <h3 class="hero-subtitle">AKADEMİK</h3>
+                            <h1 class="hero-title">{% trans "AVRASYA ÜNİVERSİTESİ" %}</h1>
+                            <h3 class="hero-subtitle">{% trans "AKADEMİK" %}</h3>
                             <p class="hero-description">
-                                Öğretim üyeleri, öğrencileri ve idari kadrosu ile akademik mükemmeliyet vizyonuna sahip olan 
-                                Avrasya Üniversitesi hem mühendislik/fen bilimleri, hem de beşeri/sosyal bilimlerinin 
-                                tümünde üstün nitelikli eğitim vererek, yıllardır Türkiye'nin en saygın eğitim kurumu kimliğini 
-                                korumayı başarmıştır.
+                                {% trans "Öğretim üyeleri, öğrencileri ve idari kadrosu ile akademik mükemmeliyet vizyonuna sahip olan Avrasya Üniversitesi hem mühendislik/fen bilimleri, hem de beşeri/sosyal bilimlerinin tümünde üstün nitelikli eğitim vererek, yıllardır Türkiye'nin en saygın eğitim kurumu kimliğini korumayı başarmıştır." %}
                             </p>
                             <div class="hero-badges">
                                 <span class="hero-badge">
-                                    <i class="fas fa-book me-2"></i>30+ Lisans Programı
+                                    <i class="fas fa-book me-2"></i>{% trans "30+ Lisans Programı" %}
                                 </span>
                                 <span class="hero-badge">
-                                    <i class="fas fa-graduation-cap me-2"></i>80+ Lisansüstü Program
+                                    <i class="fas fa-graduation-cap me-2"></i>{% trans "80+ Lisansüstü Program" %}
                                 </span>
                                 <span class="hero-badge">
-                                    <i class="fas fa-globe me-2"></i>400+ Değişim Anlaşması
+                                    <i class="fas fa-globe me-2"></i>{% trans "400+ Değişim Anlaşması" %}
                                 </span>
                             </div>
                         </div>
@@ -62,7 +60,7 @@
         <!-- Academic Highlights -->
         <section class="academic-highlights">
             {% comment %} <div class="section-header">
-                <h2 class="section-title">Akademik Birimlerimiz</h2>
+                <h2 class="section-title">{% trans "Akademik Birimlerimiz" %}</h2>
                 <div class="title-underline"></div>
             </div> {% endcomment %}
             
@@ -74,23 +72,22 @@
                             <i class="fas fa-university"></i>
                         </div>
                         <div class="unit-content">
-                            <h4 class="unit-title">Enstitüler</h4>
+                            <h4 class="unit-title">{% trans "Enstitüler" %}</h4>
                             <p class="unit-description">
-                                Lisansüstü eğitim ve araştırma faaliyetlerinin yürütüldüğü, 
-                                akademik derinlik ve uzmanlaşmanın merkezi olan enstitülerimiz.
+                                {% trans "Lisansüstü eğitim ve araştırma faaliyetlerinin yürütüldüğü, akademik derinlik ve uzmanlaşmanın merkezi olan enstitülerimiz." %}
                             </p>
                             <div class="unit-stats">
                                 <div class="stat-item">
                                     <strong>2-4</strong>
-                                    <span>Yıl</span>
+                                    <span>{% trans "Yıl" %}</span>
                                 </div>
                                 <div class="stat-item">
                                     <strong>120+</strong>
-                                    <span>AKTS</span>
+                                    <span>{% trans "AKTS" %}</span>
                                 </div>
                             </div>
                             <a href="{% url 'lee:lee' %}" class="unit-link">
-                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                                {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -103,23 +100,22 @@
                             <i class="fas fa-building"></i>
                         </div>
                         <div class="unit-content">
-                            <h4 class="unit-title">Fakülteler</h4>
+                            <h4 class="unit-title">{% trans "Fakülteler" %}</h4>
                             <p class="unit-description">
-                                6 farklı fakültemizde lisans düzeyinde kaliteli eğitim ve 
-                                multidisipliner araştırma olanakları sunuyoruz.
+                                {% trans "6 farklı fakültemizde lisans düzeyinde kaliteli eğitim ve multidisipliner araştırma olanakları sunuyoruz." %}
                             </p>
                             <div class="unit-stats">
                                 <div class="stat-item">
                                     <strong>4</strong>
-                                    <span>Yıl</span>
+                                    <span>{% trans "Yıl" %}</span>
                                 </div>
                                 <div class="stat-item">
                                     <strong>240</strong>
-                                    <span>AKTS</span>
+                                    <span>{% trans "AKTS" %}</span>
                                 </div>
                             </div>
                             <a href="{% url 'fakulteler:fakulteler' %}" class="unit-link">
-                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                                {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -132,23 +128,22 @@
                             <i class="fas fa-building"></i>
                         </div>
                         <div class="unit-content">
-                            <h4 class="unit-title">Yüksekokullar</h4>
+                            <h4 class="unit-title">{% trans "Yüksekokullar" %}</h4>
                             <p class="unit-description">
-                                Uygulamalı bilimler alanında nitelikli eğitim veren, 
-                                sektörle entegre çalışan yüksekokullarımız.
+                                {% trans "Uygulamalı bilimler alanında nitelikli eğitim veren, sektörle entegre çalışan yüksekokullarımız." %}
                             </p>
                             <div class="unit-stats">
                                 <div class="stat-item">
                                     <strong>4</strong>
-                                    <span>Yıl</span>
+                                    <span>{% trans "Yıl" %}</span>
                                 </div>
                                 <div class="stat-item">
                                     <strong>240</strong>
-                                    <span>AKTS</span>
+                                    <span>{% trans "AKTS" %}</span>
                                 </div>
                             </div>
                             <a href="{% url 'yuksekokullari:yuksekokullari' %}" class="unit-link">
-                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                                {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -161,23 +156,22 @@
                             <i class="fas fa-university"></i>
                         </div>
                         <div class="unit-content">
-                            <h4 class="unit-title">Meslek Yüksekokullar</h4>
+                            <h4 class="unit-title">{% trans "Meslek Yüksekokullar" %}</h4>
                             <p class="unit-description">
-                                Pratik becerilere odaklanan, sektörün ihtiyaçlarına yönelik 
-                                teknik elemanlar yetiştiren meslek yüksekokullarımız.
+                                {% trans "Pratik becerilere odaklanan, sektörün ihtiyaçlarına yönelik teknik elemanlar yetiştiren meslek yüksekokullarımız." %}
                             </p>
                             <div class="unit-stats">
                                 <div class="stat-item">
                                     <strong>2</strong>
-                                    <span>Yıl</span>
+                                    <span>{% trans "Yıl" %}</span>
                                 </div>
                                 <div class="stat-item">
                                     <strong>120</strong>
-                                    <span>AKTS</span>
+                                    <span>{% trans "AKTS" %}</span>
                                 </div>
                             </div>
                             <a href="{% url 'meslekyuksekokullari:meslekyuksekokullari' %}" class="unit-link">
-                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                                {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -190,23 +184,17 @@
             <div class="info-card">
                 <div class="info-header">
                     <h3 class="info-title">
-                        <i class="fas fa-info-circle me-2"></i>Akademik Hakkında
+                        <i class="fas fa-info-circle me-2"></i>{% trans "Akademik Hakkında" %}
                     </h3>
                 </div>
                 
                 <div class="info-content">
                     <p class="info-text">
-                        Eğitim dili İngilizce olan Avrasya Üniversitesi'nde 30'un üzerinde lisans programı vardır. 
-                        Avrasya Üniversitesi, lisans eğitiminde öğrencilerin bir yandan kendi bölümlerinde zengin 
-                        ve derinlikli bir eğitim alırken, diğer yandan farklı disiplinlerden seçebilecekleri derslerle 
-                        ilgi ve becerilerini keşfedip, geliştirme fırsatı bulmalarını sağlayan bir eğitim geleneğini 
-                        benimsemiştir. Avrasya Üniversitesi'nde bazıları disiplinlerarası olmak üzere 80'in üzerinde 
-                        lisansüstü programı bulunmaktadır.
+                        {% trans "Eğitim dili İngilizce olan Avrasya Üniversitesi'nde 30'un üzerinde lisans programı vardır. Avrasya Üniversitesi, lisans eğitiminde öğrencilerin bir yandan kendi bölümlerinde zengin ve derinlikli bir eğitim alırken, diğer yandan farklı disiplinlerden seçebilecekleri derslerle ilgi ve becerilerini keşfedip, geliştirme fırsatı bulmalarını sağlayan bir eğitim geleneğini benimsemiştir. Avrasya Üniversitesi'nde bazıları disiplinlerarası olmak üzere 80'in üzerinde lisansüstü programı bulunmaktadır." %}
                     </p>
 
                     <p class="info-text">
-                        Uluslararasılaşmayı önemseyen Avrasya Üniversitesi'nde, yurtdışındaki seçkin üniversiteler 
-                        ile olmak üzere 400'ün üzerinde öğrenci değişim anlaşması vardır.
+                        {% trans "Uluslararasılaşmayı önemseyen Avrasya Üniversitesi'nde, yurtdışındaki seçkin üniversiteler ile olmak üzere 400'ün üzerinde öğrenci değişim anlaşması vardır." %}
                     </p>
                 </div>
             </div>
@@ -219,25 +207,25 @@
                     <div class="col-md-3 col-6 mb-4">
                         <div class="stat-item">
                             <h3 class="stat-number">30+</h3>
-                            <p class="stat-label">Lisans Programı</p>
+                            <p class="stat-label">{% trans "Lisans Programı" %}</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="stat-item">
                             <h3 class="stat-number">80+</h3>
-                            <p class="stat-label">Lisansüstü Program</p>
+                            <p class="stat-label">{% trans "Lisansüstü Program" %}</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="stat-item">
                             <h3 class="stat-number">400+</h3>
-                            <p class="stat-label">Değişim Anlaşması</p>
+                            <p class="stat-label">{% trans "Değişim Anlaşması" %}</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="stat-item">
                             <h3 class="stat-number">6</h3>
-                            <p class="stat-label">Fakülte</p>
+                            <p class="stat-label">{% trans "Fakülte" %}</p>
                         </div>
                     </div>
                 </div>

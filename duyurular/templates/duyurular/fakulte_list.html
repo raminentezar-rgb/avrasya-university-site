@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}{{ fakulte_tam_adi }} Duyuruları - Avrasya Üniversitesi{% endblock %}
 
@@ -12,8 +13,8 @@
                     <!-- Breadcrumb -->
                     <nav aria-label="breadcrumb" class="mb-4">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
-                            <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">Duyurular</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">{% trans "Duyurular" %}</a></li>
                             <li class="breadcrumb-item active">{{ fakulte_tam_adi }}</li>
                         </ol>
                     </nav>
@@ -26,7 +27,7 @@
                     <!-- Info Alert -->
                     <div class="info-alert">
                         <i class="fas fa-info-circle"></i>
-                        {{ fakulte_tam_adi }}'na ait toplam <strong>{{ duyurular.count }}</strong> duyuru bulunmaktadır.
+                        {{ fakulte_tam_adi }}'na ait toplam <strong>{{ duyurular.count }}</strong> {% trans "duyuru bulunmaktadır." %}
                     </div>
                 </div>
             </div>
@@ -87,7 +88,7 @@
                             {% with dosyalar=duyuru.mevcut_dosyalar %}
                                 {% if dosyalar %}
                                 <div class="file-badges mt-3">
-                                    <h6 class="text-secondary mb-2">İlgili Dosyalar:</h6>
+                                    <h6 class="text-secondary mb-2">{% trans "İlgili Dosyalar:" %}</h6>
                                     {% for dosya in dosyalar %}
                                         <a href="{{ dosya.url }}" class="file-badge" download>
                                             <i class="fas fa-download"></i> {{ dosya.tur }}
@@ -99,7 +100,7 @@
 
                             <div class="announcement-card-footer">
                                 <a href="{{ duyuru.get_absolute_url }}" class="btn-primary">
-                                    Devamını Oku <i class="fas fa-arrow-right"></i>
+                                    {% trans "Devamını Oku" %} <i class="fas fa-arrow-right"></i>
                                 </a>
                                 <small class="text-muted">
                                     {{ duyuru.yayin_tarihi|timesince }} önce
@@ -112,7 +113,7 @@
                 <div class="col-12">
                     <div class="announcements-empty">
                         <i class="fas fa-bullhorn"></i>
-                        <h4>Duyuru Bulunamadı</h4>
+                        <h4>{% trans "Duyuru Bulunamadı" %}</h4>
                         <p>{{ fakulte_tam_adi }} için henüz duyuru bulunmamaktadır.</p>
                     </div>
                 </div>

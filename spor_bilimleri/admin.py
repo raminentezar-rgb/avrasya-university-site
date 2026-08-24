@@ -1,11 +1,12 @@
 # spor_bilimleri/admin.py
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     SporBilimleriDuyuru
 )
 
 @admin.register(SporBilimleriDuyuru)
-class SporBilimleriDuyuruAdmin(admin.ModelAdmin):
+class SporBilimleriDuyuruAdmin(TranslationAdmin):
     list_display = ['baslik', 'kategori', 'yayin_tarihi', 'yayinda', 'onemli', 'sira']
     list_filter = ['kategori', 'yayinda', 'onemli', 'yayin_tarihi']
     search_fields = ['baslik', 'icerik', 'ozet']

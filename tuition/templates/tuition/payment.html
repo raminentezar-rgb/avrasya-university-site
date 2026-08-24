@@ -1,4 +1,5 @@
 {% extends 'tuition/base_payment.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="row fade-in-up">
@@ -7,7 +8,7 @@
         <div class="glass-card h-100">
             <h4 class="fw-bold mb-4 border-bottom pb-3" style="border-color: var(--glass-border) !important;">
                 <i class="fa-solid fa-graduation-cap me-2 text-primary"></i>
-                Öğrenci Bilgileri
+                {% trans "Öğrenci Bilgileri" %}
             </h4>
             
             <div class="d-flex align-items-center mb-4">
@@ -21,23 +22,23 @@
             </div>
 
             <div class="mb-3">
-                <small class="text-muted d-block text-uppercase tracking-wider">Fakülte / Enstitü</small>
+                <small class="text-muted d-block text-uppercase tracking-wider">{% trans "Fakülte / Enstitü" %}</small>
                 <div class="fw-medium">{{ student.faculty }}</div>
             </div>
             
             <div class="mb-3">
-                <small class="text-muted d-block text-uppercase tracking-wider">Bölüm / Program</small>
+                <small class="text-muted d-block text-uppercase tracking-wider">{% trans "Bölüm / Program" %}</small>
                 <div class="fw-medium">{{ student.department }}</div>
             </div>
             
             <div class="mb-4">
-                <small class="text-muted d-block text-uppercase tracking-wider">Ödeme Dönemi</small>
+                <small class="text-muted d-block text-uppercase tracking-wider">{% trans "Ödeme Dönemi" %}</small>
                 <div class="fw-medium">{{ student.term }}</div>
             </div>
 
             <div class="p-3 rounded mt-4" style="background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);">
                 <div class="d-flex justify-content-between mb-2">
-                    <small class="text-muted">Eğitim Ücreti (Yıllık/Dönemlik)</small>
+                    <small class="text-muted">{% trans "Eğitim Ücreti (Yıllık/Dönemlik)" %}</small>
                     <small class="text-white">{{ student.base_fee }} {{ student.currency }}</small>
                 </div>
                 {% if student.scholarship_percentage > 0 %}
@@ -48,13 +49,13 @@
                 {% endif %}
                 {% if student.previous_debt > 0 %}
                 <div class="d-flex justify-content-between mb-2 text-warning">
-                    <small>Önceki Dönem Borcu</small>
+                    <small>{% trans "Önceki Dönem Borcu" %}</small>
                     <small>+{{ student.previous_debt }} {{ student.currency }}</small>
                 </div>
                 {% endif %}
                 <hr style="border-color: rgba(255,255,255,0.2);">
                 <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-primary text-uppercase fw-semibold mb-0">Ödenecek Tutar</small>
+                    <small class="text-primary text-uppercase fw-semibold mb-0">{% trans "Ödenecek Tutar" %}</small>
                     <h3 class="fw-bold mb-0 text-white">{{ student.total_payable }} <span class="fs-6">{{ student.currency }}</span></h3>
                 </div>
             </div>
@@ -66,19 +67,19 @@
         <div class="glass-card">
             <h4 class="fw-bold mb-4 border-bottom pb-3" style="border-color: var(--glass-border) !important;">
                 <i class="fa-regular fa-credit-card me-2 text-primary"></i>
-                Kart Bilgileri
+                {% trans "Kart Bilgileri" %}
             </h4>
 
             <form method="POST" action="{% url 'tuition:payment' student_id=student_id %}">
                 {% csrf_token %}
                 
                 <div class="mb-4">
-                    <label class="form-label text-muted small fw-semibold">Kart Üzerindeki İsim</label>
-                    <input type="text" class="form-control" name="card_name" placeholder="Ad Soyad" required>
+                    <label class="form-label text-muted small fw-semibold">{% trans "Kart Üzerindeki İsim" %}</label>
+                    <input type="text" class="form-control" name="card_name" placeholder="{% trans 'Ad Soyad' %}" required>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label text-muted small fw-semibold">Kart Numarası</label>
+                    <label class="form-label text-muted small fw-semibold">{% trans "Kart Numarası" %}</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-brands fa-cc-visa"></i></span>
                         <input type="text" class="form-control with-icon" name="card_number" placeholder="0000 0000 0000 0000" maxlength="19" required>
@@ -87,10 +88,10 @@
 
                 <div class="row mb-4">
                     <div class="col-6">
-                        <label class="form-label text-muted small fw-semibold">Son Kullanma Tarihi</label>
+                        <label class="form-label text-muted small fw-semibold">{% trans "Son Kullanma Tarihi" %}</label>
                         <div class="d-flex gap-2">
                             <select class="form-select" name="exp_month" required>
-                                <option value="" selected disabled>Ay</option>
+                                <option value="" selected disabled>{% trans "Ay" %}</option>
                                 <option value="01">01</option><option value="02">02</option>
                                 <option value="03">03</option><option value="04">04</option>
                                 <option value="05">05</option><option value="06">06</option>
@@ -99,7 +100,7 @@
                                 <option value="11">11</option><option value="12">12</option>
                             </select>
                             <select class="form-select" name="exp_year" required>
-                                <option value="" selected disabled>Yıl</option>
+                                <option value="" selected disabled>{% trans "Yıl" %}</option>
                                 <option value="26">26</option><option value="27">27</option>
                                 <option value="28">28</option><option value="29">29</option>
                                 <option value="30">30</option><option value="31">31</option>
@@ -107,7 +108,7 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <label class="form-label text-muted small fw-semibold">CVV</label>
+                        <label class="form-label text-muted small fw-semibold">{% trans "CVV" %}</label>
                         <input type="text" class="form-control" name="cvv" placeholder="123" maxlength="3" required>
                     </div>
                 </div>
@@ -115,7 +116,7 @@
                 <div class="form-check mb-4">
                     <input class="form-check-input" type="checkbox" value="" id="termCheck" required style="background-color: transparent; border-color: var(--glass-border);">
                     <label class="form-check-label text-muted small" for="termCheck">
-                        <a href="#" class="text-primary text-decoration-none">Mesafeli Satış Sözleşmesi</a>'ni okudum ve kabul ediyorum.
+                        <a href="#" class="text-primary text-decoration-none">{% trans "Mesafeli Satış Sözleşmesi" %}</a>{% trans "'ni okudum ve kabul ediyorum." %}
                     </label>
                 </div>
 
@@ -125,7 +126,7 @@
             </form>
             
             <div class="text-center mt-4">
-                <img src="https://www.paytr.com/img/general/PayTR-Odeme-Altyapisi.svg" alt="Güvenli Ödeme" style="height: 30px; opacity: 0.7; filter: grayscale(100%) brightness(200%);">
+                <img src="https://www.paytr.com/img/general/PayTR-Odeme-Altyapisi.svg" alt="{% trans 'Güvenli Ödeme' %}" style="height: 30px; opacity: 0.7; filter: grayscale(100%) brightness(200%);">
             </div>
         </div>
     </div>

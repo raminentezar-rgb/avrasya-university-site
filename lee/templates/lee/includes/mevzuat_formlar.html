@@ -1,4 +1,5 @@
 {% extends 'lee/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Lisansüstü Eğitim Enstitüsü_Mevzuat & Formlar{% endblock %}
 
@@ -10,9 +11,9 @@
     <div class="container">
         <div class="research-hero-content">
             <h1 style="margin-top: 120px; font-weight:800; font-family: 'Metropolis', sans-serif">
-                Lisansüstü Eğitim Enstitüsü_Mevzuat & Formlar
+                {% trans "Lisansüstü Eğitim Enstitüsü_Mevzuat & Formlar" %}
             </h1>
-            <p>Tüm yönetmelikler, formlar ve başvuru bilgileri</p>
+            <p>{% trans "Tüm yönetmelikler, formlar ve başvuru bilgileri" %}</p>
         </div>
     </div>
 </section>
@@ -35,25 +36,25 @@
                         <div class="tab-header">
                             <ul class="tab-menu">
                                 <li class="tab-menu-item active" data-tab="tab1">
-                                    <i class="fas fa-book"></i> Yönetmelik
+                                    <i class="fas fa-book"></i> {% trans "Yönetmelik" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab2">
-                                    <i class="fas fa-calendar-alt"></i> 2025/2026 Güz Dönemi Başvuruları
+                                    <i class="fas fa-calendar-alt"></i> {% trans "2025/2026 Güz Dönemi Başvuruları" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab3">
-                                    <i class="fas fa-globe"></i> Uluslararası Başvurular
+                                    <i class="fas fa-globe"></i> {% trans "Uluslararası Başvurular" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab4">
-                                    <i class="fas fa-project-diagram"></i> Süreç Akış Şemaları
+                                    <i class="fas fa-project-diagram"></i> {% trans "Süreç Akış Şemaları" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab5">
-                                    <i class="fas fa-file-alt"></i> Formlar
+                                    <i class="fas fa-file-alt"></i> {% trans "Formlar" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab6">
-                                    <i class="fas fa-money-bill-wave"></i> Ücretler
+                                    <i class="fas fa-money-bill-wave"></i> {% trans "Ücretler" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab7">
-                                    <i class="fas fa-file-pdf"></i> Tez ve Proje Yazım Kılavuzu
+                                    <i class="fas fa-file-pdf"></i> {% trans "Tez ve Proje Yazım Kılavuzu" %}
                                 </li>
                             </ul>
                         </div>
@@ -62,69 +63,69 @@
                             <!-- Sekme 1: Yönetmelik -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-book"></i> Yönetmelik</h3>
-                                    <p>Avrasya Üniversitesi Lisansüstü Eğitim-Öğretim ve Sınav Yönetmeliği</p>
+                                    <h3><i class="fas fa-book"></i> {% trans "Yönetmelik" %}</h3>
+                                    <p>{% trans "Avrasya Üniversitesi Lisansüstü Eğitim-Öğretim ve Sınav Yönetmeliği" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <h2>AVRASYA ÜNİVERSİTESİ LİSANSÜSTÜ EĞİTİM-ÖĞRETİM VE SINAV YÖNETMELİĞİ</h2>
-                                        <p><strong>Resmî Gazete Tarihi:</strong> 22 Ekim 2023 PAZAR</p>
-                                        <p><strong>Resmî Gazete Sayısı:</strong> 32347</p>
+                                        <h2>{% trans "AVRASYA ÜNİVERSİTESİ LİSANSÜSTÜ EĞİTİM-ÖĞRETİM VE SINAV YÖNETMELİĞİ" %}</h2>
+                                        <p><strong>{% trans "Resmî Gazete Tarihi:" %}</strong> {% trans "22 Ekim 2023 PAZAR" %}</p>
+                                        <p><strong>{% trans "Resmî Gazete Sayısı:" %}</strong> 32347</p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-info-circle"></i>
-                                            <h3>Yönetmelik Hakkında</h3>
+                                            <h3>{% trans "Yönetmelik Hakkında" %}</h3>
                                         </div>
-                                        <p>Bu yönetmelik, Avrasya Üniversitesi Lisansüstü Eğitim Enstitüsü'nde yürütülen lisansüstü eğitim-öğretim programlarına ilişkin usul ve esasları düzenlemektedir.</p>
+                                        <p>{% trans "Bu yönetmelik, Avrasya Üniversitesi Lisansüstü Eğitim Enstitüsü'nde yürütülen lisansüstü eğitim-öğretim programlarına ilişkin usul ve esasları düzenlemektedir." %}</p>
                                     </div>
                                     
-                                    <h3><i class="fas fa-file-pdf"></i> Yönetmelik Dosyası</h3>
-                                    <p>Tam yönetmelik metnini aşağıdaki bağlantıdan indirebilirsiniz:</p>
+                                    <h3><i class="fas fa-file-pdf"></i> {% trans "Yönetmelik Dosyası" %}</h3>
+                                    <p>{% trans "Tam yönetmelik metnini aşağıdaki bağlantıdan indirebilirsiniz:" %}</p>
                                     
                                     <div class="download-section">
                                         <a href="{% static 'pdf/TAB1.pdf' %}" class="btn-action" download>
-                                            <i class="fas fa-download"></i> Yönetmelik PDF'ini İndir
+                                            <i class="fas fa-download"></i> {% trans "Yönetmelik PDF'ini İndir" %}
                                         </a>
                                         <p class="file-info">
-                                            <small><i class="fas fa-file-pdf"></i> PDF Dosyası | 14 Sayfa | 2.4 MB</small>
+                                            <small><i class="fas fa-file-pdf"></i> {% trans "PDF Dosyası | 14 Sayfa | 2.4 MB" %}</small>
                                         </p>
                                     </div>
                                     
-                                    <h3>Önemli Bölümler</h3>
+                                    <h3>{% trans "Önemli Bölümler" %}</h3>
                                     <div class="contributions-grid">
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-graduation-cap"></i>
                                             </div>
-                                            <h4>Program Türleri</h4>
-                                            <p>Tezli yüksek lisans, tezsiz yüksek lisans ve doktora programları</p>
+                                            <h4>{% trans "Program Türleri" %}</h4>
+                                            <p>{% trans "Tezli yüksek lisans, tezsiz yüksek lisans ve doktora programları" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-calendar-check"></i>
                                             </div>
-                                            <h4>Süreler</h4>
-                                            <p>Program tamamlama süreleri ve uzatma koşulları</p>
+                                            <h4>{% trans "Süreler" %}</h4>
+                                            <p>{% trans "Program tamamlama süreleri ve uzatma koşulları" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-file-signature"></i>
                                             </div>
-                                            <h4>Başvuru Koşulları</h4>
-                                            <p>ALES, dil puanı ve diploma şartları</p>
+                                            <h4>{% trans "Başvuru Koşulları" %}</h4>
+                                            <p>{% trans "ALES, dil puanı ve diploma şartları" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-money-bill"></i>
                                             </div>
-                                            <h4>Ücretler</h4>
-                                            <p>Öğrenim ücretleri ve ödeme şekilleri</p>
+                                            <h4>{% trans "Ücretler" %}</h4>
+                                            <p>{% trans "Öğrenim ücretleri ve ödeme şekilleri" %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -133,77 +134,77 @@
                             <!-- Sekme 2: 2025/2026 Başvuruları -->
                             <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-calendar-alt"></i> 2025/2026 Güz Dönemi Yüksek Lisans ve Doktora Ek Yerleştirme Başvuruları</h3>
-                                    <p>Ek yerleştirme başvuru tarihleri ve kontenjan bilgileri</p>
+                                    <h3><i class="fas fa-calendar-alt"></i> {% trans "2025/2026 Güz Dönemi Yüksek Lisans ve Doktora Ek Yerleştirme Başvuruları" %}</h3>
+                                    <p>{% trans "Ek yerleştirme başvuru tarihleri ve kontenjan bilgileri" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <h2>2025/2026 EĞİTİM VE ÖĞRETİM DÖNEMİ GÜZ YARIYILI</h2>
-                                        <p><strong>LİSANSÜSTÜ PROGRAMLARA BAŞVURU KOŞULLARI VE ÖĞRENCİ KABUL İLANI (EK KONTENJAN)</strong></p>
+                                        <h2>{% trans "2025/2026 EĞİTİM VE ÖĞRETİM DÖNEMİ GÜZ YARIYILI" %}</h2>
+                                        <p><strong>{% trans "LİSANSÜSTÜ PROGRAMLARA BAŞVURU KOŞULLARI VE ÖĞRENCİ KABUL İLANI (EK KONTENJAN)" %}</strong></p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-exclamation-triangle"></i>
-                                            <h3>Önemli Not</h3>
+                                            <h3>{% trans "Önemli Not" %}</h3>
                                         </div>
-                                        <p>"Yükseköğretim Yürütme Kurulunun 23.07.2025 tarihli toplantısında; şehit eş ve çocukları, gazi eş ve çocukları ile gazi olan adayların başvurması durumunda her bir program için 1 (bir) kontenjan verilecektir."</p>
+                                        <p>{% trans "\"Yükseköğretim Yürütme Kurulunun 23.07.2025 tarihli toplantısında; şehit eş ve çocukları, gazi eş ve çocukları ile gazi olan adayların başvurması durumunda her bir program için 1 (bir) kontenjan verilecektir.\"" %}</p>
                                     </div>
                                     
-                                    <h3><i class="fas fa-download"></i> Başvuru İlanı Dosyası</h3>
-                                    <p>Tam başvuru ilanı ve kontenjan bilgilerini aşağıdaki bağlantıdan indirebilirsiniz:</p>
+                                    <h3><i class="fas fa-download"></i> {% trans "Başvuru İlanı Dosyası" %}</h3>
+                                    <p>{% trans "Tam başvuru ilanı ve kontenjan bilgilerini aşağıdaki bağlantıdan indirebilirsiniz:" %}</p>
                                     
                                     <div class="download-section">
                                         <a href="{% static 'pdf/TAB2.pdf' %}" class="btn-action" download>
-                                            <i class="fas fa-download"></i> Başvuru İlanı PDF'ini İndir
+                                            <i class="fas fa-download"></i> {% trans "Başvuru İlanı PDF'ini İndir" %}
                                         </a>
                                         <p class="file-info">
-                                            <small><i class="fas fa-file-pdf"></i> PDF Dosyası | 7 Sayfa | 1.8 MB</small>
+                                            <small><i class="fas fa-file-pdf"></i> {% trans "PDF Dosyası | 7 Sayfa | 1.8 MB" %}</small>
                                         </p>
                                     </div>
                                     
-                                    <h3>Önemli Tarihler</h3>
+                                    <h3>{% trans "Önemli Tarihler" %}</h3>
                                     <div class="key-features-grid">
                                         <div class="key-feature-card">
                                             <div class="feature-icon">
                                                 <i class="fas fa-calendar-day"></i>
                                             </div>
-                                            <h4>Başvuru Tarihleri</h4>
-                                            <p>5-19 Eylül 2025</p>
+                                            <h4>{% trans "Başvuru Tarihleri" %}</h4>
+                                            <p>{% trans "5-19 Eylül 2025" %}</p>
                                         </div>
                                         
                                         <div class="key-feature-card">
                                             <div class="feature-icon">
                                                 <i class="fas fa-search"></i>
                                             </div>
-                                            <h4>Değerlendirme</h4>
-                                            <p>22 Eylül 2025</p>
+                                            <h4>{% trans "Değerlendirme" %}</h4>
+                                            <p>{% trans "22 Eylül 2025" %}</p>
                                         </div>
                                         
                                         <div class="key-feature-card">
                                             <div class="feature-icon">
                                                 <i class="fas fa-list-ol"></i>
                                             </div>
-                                            <h4>Sonuç İlanı</h4>
-                                            <p>24 Eylül 2025</p>
+                                            <h4>{% trans "Sonuç İlanı" %}</h4>
+                                            <p>{% trans "24 Eylül 2025" %}</p>
                                         </div>
                                         
                                         <div class="key-feature-card">
                                             <div class="feature-icon">
                                                 <i class="fas fa-edit"></i>
                                             </div>
-                                            <h4>Kesin Kayıt</h4>
-                                            <p>25-26 Eylül 2025</p>
+                                            <h4>{% trans "Kesin Kayıt" %}</h4>
+                                            <p>{% trans "25-26 Eylül 2025" %}</p>
                                         </div>
                                     </div>
                                     
                                     <div class="cta-section">
-                                        <h3>Online Başvuru</h3>
-                                        <p>Başvurularınızı online olarak yapmak için aşağıdaki butona tıklayınız:</p>
+                                        <h3>{% trans "Online Başvuru" %}</h3>
+                                        <p>{% trans "Başvurularınızı online olarak yapmak için aşağıdaki butona tıklayınız:" %}</p>
                                         <div class="cta-buttons">
                                             <a href="https://lee.avrasya.edu.tr" class="btn-action" target="_blank">
-                                                <i class="fas fa-external-link-alt"></i> Online Başvuru Yap
+                                                <i class="fas fa-external-link-alt"></i> {% trans "Online Başvuru Yap" %}
                                             </a>
                                         </div>
                                     </div>
@@ -213,77 +214,77 @@
                             <!-- Sekme 3: Uluslararası Başvurular -->
                             <div class="tab-content" id="tab3">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-globe"></i> Uluslararası Başvurular</h3>
-                                    <p>Yabancı uyruklu öğrenciler için başvuru bilgileri ve gerekli belgeler</p>
+                                    <h3><i class="fas fa-globe"></i> {% trans "Uluslararası Başvurular" %}</h3>
+                                    <p>{% trans "Yabancı uyruklu öğrenciler için başvuru bilgileri ve gerekli belgeler" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <h2>YABANCI UYRUKLU ÖĞRENCİLERDEN İSTENEN BELGELER</h2>
+                                        <h2>{% trans "YABANCI UYRUKLU ÖĞRENCİLERDEN İSTENEN BELGELER" %}</h2>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-passport"></i>
-                                            <h3>Başvuru Belgeleri</h3>
+                                            <h3>{% trans "Başvuru Belgeleri" %}</h3>
                                         </div>
                                         <ol>
-                                            <li>Başvuru formu (Yüksek Lisans veya Doktora)</li>
-                                            <li>Lisans Diploması aslı ve fotokopisi</li>
-                                            <li>Not dökümünün onaylı örneği (Transkript)</li>
-                                            <li>ALES/GRE/GMAT Sınav Sonuç Belgesi</li>
-                                            <li>İkametgah tezkeresi</li>
-                                            <li>Türkçe dil belgesi (TÖMER veya eşdeğer)</li>
-                                            <li>4 adet fotoğraf</li>
-                                            <li>Pasaport aslı ve fotokopisi</li>
-                                            <li>Başvuru ücreti dekontu</li>
+                                            <li>{% trans "Başvuru formu (Yüksek Lisans veya Doktora)" %}</li>
+                                            <li>{% trans "Lisans Diploması aslı ve fotokopisi" %}</li>
+                                            <li>{% trans "Not dökümünün onaylı örneği (Transkript)" %}</li>
+                                            <li>{% trans "ALES/GRE/GMAT Sınav Sonuç Belgesi" %}</li>
+                                            <li>{% trans "İkametgah tezkeresi" %}</li>
+                                            <li>{% trans "Türkçe dil belgesi (TÖMER veya eşdeğer)" %}</li>
+                                            <li>{% trans "4 adet fotoğraf" %}</li>
+                                            <li>{% trans "Pasaport aslı ve fotokopisi" %}</li>
+                                            <li>{% trans "Başvuru ücreti dekontu" %}</li>
                                         </ol>
                                     </div>
                                     
-                                    <h3>Önemli Bilgiler</h3>
+                                    <h3>{% trans "Önemli Bilgiler" %}</h3>
                                     <div class="contributions-grid">
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-language"></i>
                                             </div>
-                                            <h4>Türkçe Dil Şartı</h4>
-                                            <p>Türkçe öğretim merkezlerinden en az Orta 2 seviyesinde Türkçe belgesi</p>
+                                            <h4>{% trans "Türkçe Dil Şartı" %}</h4>
+                                            <p>{% trans "Türkçe öğretim merkezlerinden en az Orta 2 seviyesinde Türkçe belgesi" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-university"></i>
                                             </div>
-                                            <h4>Denklik Belgesi</h4>
-                                            <p>YÖK'ten alınacak diploma denklik belgesi gereklidir</p>
+                                            <h4>{% trans "Denklik Belgesi" %}</h4>
+                                            <p>{% trans "YÖK'ten alınacak diploma denklik belgesi gereklidir" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-money-check"></i>
                                             </div>
-                                            <h4>Başvuru Ücreti</h4>
-                                            <p>1.000 TL başvuru ücreti ödenmesi gerekmektedir</p>
+                                            <h4>{% trans "Başvuru Ücreti" %}</h4>
+                                            <p>{% trans "1.000 TL başvuru ücreti ödenmesi gerekmektedir" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-clock"></i>
                                             </div>
-                                            <h4>Süreç</h4>
-                                            <p>Başvurular online olarak alınacak ve değerlendirilecektir</p>
+                                            <h4>{% trans "Süreç" %}</h4>
+                                            <p>{% trans "Başvurular online olarak alınacak ve değerlendirilecektir" %}</p>
                                         </div>
                                     </div>
                                     
                                     <div class="cta-section">
-                                        <h3>Formları İndir</h3>
-                                        <p>Başvuru formlarını aşağıdaki bağlantılardan indirebilirsiniz:</p>
+                                        <h3>{% trans "Formları İndir" %}</h3>
+                                        <p>{% trans "Başvuru formlarını aşağıdaki bağlantılardan indirebilirsiniz:" %}</p>
                                         <div class="cta-buttons">
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2021/08/Yuksek-Lisans-Basvuru-Formu.doc" class="btn-action" download>
-                                                <i class="fas fa-file-word"></i> Yüksek Lisans Başvuru Formu
+                                                <i class="fas fa-file-word"></i> {% trans "Yüksek Lisans Başvuru Formu" %}
                                             </a>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2021/08/Doktora-Basvuru-Formu-1.doc" class="btn-action" download>
-                                                <i class="fas fa-file-word"></i> Doktora Başvuru Formu
+                                                <i class="fas fa-file-word"></i> {% trans "Doktora Başvuru Formu" %}
                                             </a>
                                         </div>
                                     </div>
@@ -293,69 +294,69 @@
                             <!-- Sekme 4: Süreç Akış Şemaları -->
                             <div class="tab-content" id="tab4">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-project-diagram"></i> Süreç Akış Şemaları</h3>
-                                    <p>Tezli/tezsiz yüksek lisans ve doktora programları süreç akış şemaları</p>
+                                    <h3><i class="fas fa-project-diagram"></i> {% trans "Süreç Akış Şemaları" %}</h3>
+                                    <p>{% trans "Tezli/tezsiz yüksek lisans ve doktora programları süreç akış şemaları" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <h2>SÜREÇ AKIŞ ŞEMALARI</h2>
-                                        <p>Lisansüstü eğitim süreçlerinin görsel akış diyagramları</p>
+                                        <h2>{% trans "SÜREÇ AKIŞ ŞEMALARI" %}</h2>
+                                        <p>{% trans "Lisansüstü eğitim süreçlerinin görsel akış diyagramları" %}</p>
                                     </div>
                                     
-                                    <h3>Tezsiz Yüksek Lisans Programları</h3>
+                                    <h3>{% trans "Tezsiz Yüksek Lisans Programları" %}</h3>
                                     <ul>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-T-00-TEZSIZ-YUKSEK-LISANS-EGITIM-OGRETIM-SURECI-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA T-00 Eğitim-Öğretim Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA T-00 Eğitim-Öğretim Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                     </ul>
                                     
-                                    <h3>Tezli Yüksek Lisans Programları</h3>
+                                    <h3>{% trans "Tezli Yüksek Lisans Programları" %}</h3>
                                     <ul>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-Y-00-TEZLI-YUKSEK-LISANS-EGITIM-OGRETIM-SURECI-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA Y-00 Eğitim-Öğretim Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA Y-00 Eğitim-Öğretim Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-Y-01-SEMINER-SUNUMU-SURECI-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA Y-01 Seminer Sunum Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA Y-01 Seminer Sunum Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-Y-02-YUKSEK-LISANS-TEZI-SONUCLANMASI-SURECI-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA Y-02 Yüksek Lisans Tezi Sonuçlandırma Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA Y-02 Yüksek Lisans Tezi Sonuçlandırma Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                     </ul>
                                     
-                                    <h3>Doktora Programları</h3>
+                                    <h3>{% trans "Doktora Programları" %}</h3>
                                     <ul>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-D-00-DOKTORA-EGITIM-OGRETIM-SURECI-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA D-00 Eğitim-Öğretim Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA D-00 Eğitim-Öğretim Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-D-01-SEMINER-SUNUM-SURECI-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA D-01 Seminer Sunum Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA D-01 Seminer Sunum Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-D-02-DOKTORA-YETERLIK-SINAV-SUREC-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA D-02 Doktora Yeterlik Sınav Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA D-02 Doktora Yeterlik Sınav Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-D-03-DOKTORA-TEZ-ONERI-SURECI-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA D-03 Doktora Tez Öneri Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA D-03 Doktora Tez Öneri Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/SEMA-D-04-DOKTORA-TEZI-SONUCLANMASI-SURECI-AKIS-SEMASI.pdf" download>
-                                                <i class="fas fa-download"></i> ŞEMA D-04 Doktora Tezi Sonuçlandırma Süreç Akış Şeması
+                                                <i class="fas fa-download"></i> {% trans "ŞEMA D-04 Doktora Tezi Sonuçlandırma Süreç Akış Şeması" %}
                                             </a>
                                         </li>
                                     </ul>
@@ -363,9 +364,9 @@
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-lightbulb"></i>
-                                            <h3>Akış Şemalarının Kullanımı</h3>
+                                            <h3>{% trans "Akış Şemalarının Kullanımı" %}</h3>
                                         </div>
-                                        <p>Bu şemalar, lisansüstü eğitim sürecindeki tüm aşamaları görsel olarak takip etmenizi sağlar. Her adımda ne yapılması gerektiği ve süreçlerin nasıl ilerlediği açıkça gösterilmektedir.</p>
+                                        <p>{% trans "Bu şemalar, lisansüstü eğitim sürecindeki tüm aşamaları görsel olarak takip etmenizi sağlar. Her adımda ne yapılması gerektiği ve süreçlerin nasıl ilerlediği açıkça gösterilmektedir." %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -373,26 +374,26 @@
                             <!-- Sekme 5: Formlar -->
                             <div class="tab-content" id="tab5">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-file-alt"></i> Formlar</h3>
-                                    <p>Tüm başvuru, tez ve süreç formları</p>
+                                    <h3><i class="fas fa-file-alt"></i> {% trans "Formlar" %}</h3>
+                                    <p>{% trans "Tüm başvuru, tez ve süreç formları" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <h2>LİSANSÜSTÜ PROGRAM FORMLARI</h2>
-                                        <p>Tüm lisansüstü eğitim süreçleri için gerekli formlar</p>
+                                        <h2>{% trans "LİSANSÜSTÜ PROGRAM FORMLARI" %}</h2>
+                                        <p>{% trans "Tüm lisansüstü eğitim süreçleri için gerekli formlar" %}</p>
                                     </div>
                                     
-                                    <h3>Tezli Yüksek Lisans Programı Formları</h3>
+                                    <h3>{% trans "Tezli Yüksek Lisans Programı Formları" %}</h3>
                                     <div class="contributions-grid">
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-user-graduate"></i>
                                             </div>
-                                            <h4>FORM Y001</h4>
-                                            <p>Tezli Yüksek Lisans Tez Danışman Öneri Formu</p>
+                                            <h4>{% trans "FORM Y001" %}</h4>
+                                            <p>{% trans "Tezli Yüksek Lisans Tez Danışman Öneri Formu" %}</p>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/Y001-TEZLİ-YÜKSEK-LİSANS-TEZ-DANIŞMAN-ÖNERİ-FORMU.pdf" class="btn-action small" download>
-                                                <i class="fas fa-download"></i> İndir
+                                                <i class="fas fa-download"></i> {% trans "İndir" %}
                                             </a>
                                         </div>
                                         
@@ -400,10 +401,10 @@
                                             <div class="contribution-icon">
                                                 <i class="fas fa-file-contract"></i>
                                             </div>
-                                            <h4>FORM Y101</h4>
-                                            <p>Tez Konusu Belirleme Formu</p>
+                                            <h4>{% trans "FORM Y101" %}</h4>
+                                            <p>{% trans "Tez Konusu Belirleme Formu" %}</p>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/Y101-TEZ-KONUSU-BELİRLEME-FORMU.docx" class="btn-action small" download>
-                                                <i class="fas fa-download"></i> İndir
+                                                <i class="fas fa-download"></i> {% trans "İndir" %}
                                             </a>
                                         </div>
                                         
@@ -411,10 +412,10 @@
                                             <div class="contribution-icon">
                                                 <i class="fas fa-users"></i>
                                             </div>
-                                            <h4>FORM Y202</h4>
-                                            <p>Yüksek Lisans Tez Jürisi Belirleme Formu</p>
+                                            <h4>{% trans "FORM Y202" %}</h4>
+                                            <p>{% trans "Yüksek Lisans Tez Jürisi Belirleme Formu" %}</p>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/Y202-YÜKSEK-LİSANS-TEZ-JÜRİSİ-BELİRLEME-FORMU.pdf" class="btn-action small" download>
-                                                <i class="fas fa-download"></i> İndir
+                                                <i class="fas fa-download"></i> {% trans "İndir" %}
                                             </a>
                                         </div>
                                         
@@ -422,24 +423,24 @@
                                             <div class="contribution-icon">
                                                 <i class="fas fa-graduation-cap"></i>
                                             </div>
-                                            <h4>FORM Y301</h4>
-                                            <p>Yüksek Lisans Tez Teslim Formu</p>
+                                            <h4>{% trans "FORM Y301" %}</h4>
+                                            <p>{% trans "Yüksek Lisans Tez Teslim Formu" %}</p>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/01/Y301-YUKSEK-LISANS-TEZ-TESLIM-FORMU.pdf" class="btn-action small" download>
-                                                <i class="fas fa-download"></i> İndir
+                                                <i class="fas fa-download"></i> {% trans "İndir" %}
                                             </a>
                                         </div>
                                     </div>
                                     
-                                    <h3>Doktora Programı Formları</h3>
+                                    <h3>{% trans "Doktora Programı Formları" %}</h3>
                                     <div class="contributions-grid">
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-user-tie"></i>
                                             </div>
-                                            <h4>FORM D001</h4>
-                                            <p>Doktora Programı Tez Danışman Öneri Formu</p>
+                                            <h4>{% trans "FORM D001" %}</h4>
+                                            <p>{% trans "Doktora Programı Tez Danışman Öneri Formu" %}</p>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/D001-DOKTORA-PROGRAMI-TEZ-DANISMAN-ONERI-FORMU.pdf" class="btn-action small" download>
-                                                <i class="fas fa-download"></i> İndir
+                                                <i class="fas fa-download"></i> {% trans "İndir" %}
                                             </a>
                                         </div>
                                         
@@ -447,10 +448,10 @@
                                             <div class="contribution-icon">
                                                 <i class="fas fa-chalkboard-teacher"></i>
                                             </div>
-                                            <h4>FORM D101</h4>
-                                            <p>Doktora Yeterlik Başvuru ve Jüri Belirleme Formu</p>
+                                            <h4>{% trans "FORM D101" %}</h4>
+                                            <p>{% trans "Doktora Yeterlik Başvuru ve Jüri Belirleme Formu" %}</p>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2024/04/D101-DOKTORA-YETERLIK-BASVURU-VE-JURI-BELIRLEME.pdf" class="btn-action small" download>
-                                                <i class="fas fa-download"></i> İndir
+                                                <i class="fas fa-download"></i> {% trans "İndir" %}
                                             </a>
                                         </div>
                                         
@@ -458,10 +459,10 @@
                                             <div class="contribution-icon">
                                                 <i class="fas fa-clipboard-check"></i>
                                             </div>
-                                            <h4>FORM D302</h4>
-                                            <p>Doktora Tez İzleme Jüri Değerlendirme Raporu</p>
+                                            <h4>{% trans "FORM D302" %}</h4>
+                                            <p>{% trans "Doktora Tez İzleme Jüri Değerlendirme Raporu" %}</p>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/D302-TEZ-İZLEME-JÜRİ-ORTAK-DEĞERLENDİRME-RAPORU.pdf" class="btn-action small" download>
-                                                <i class="fas fa-download"></i> İndir
+                                                <i class="fas fa-download"></i> {% trans "İndir" %}
                                             </a>
                                         </div>
                                         
@@ -469,38 +470,38 @@
                                             <div class="contribution-icon">
                                                 <i class="fas fa-file-certificate"></i>
                                             </div>
-                                            <h4>FORM D501</h4>
-                                            <p>Doktora Tez Teslim Formu</p>
+                                            <h4>{% trans "FORM D501" %}</h4>
+                                            <p>{% trans "Doktora Tez Teslim Formu" %}</p>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/12/D501-DOKTORA-TEZ-TESLIM-FORMU.pdf" class="btn-action small" download>
-                                                <i class="fas fa-download"></i> İndir
+                                                <i class="fas fa-download"></i> {% trans "İndir" %}
                                             </a>
                                         </div>
                                     </div>
                                     
-                                    <h3>Tezsiz Yüksek Lisans Formları</h3>
+                                    <h3>{% trans "Tezsiz Yüksek Lisans Formları" %}</h3>
                                     <ul>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/01/T101-DÖNEM-PROJESİ-ORTAK-DEĞERLENDİRME-RAPORU.pdf" download>
-                                                <i class="fas fa-download"></i> FORM T-101 Dönem Projesi Jüri Ortak Değerlendirme Raporu
+                                                <i class="fas fa-download"></i> {% trans "FORM T-101 Dönem Projesi Jüri Ortak Değerlendirme Raporu" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/02/T201-DÖNEM-PROJESİ-TESLİM-FORMU.pdf" download>
-                                                <i class="fas fa-download"></i> FORM T-201 Dönem Projesi Teslim Formu
+                                                <i class="fas fa-download"></i> {% trans "FORM T-201 Dönem Projesi Teslim Formu" %}
                                             </a>
                                         </li>
                                     </ul>
                                     
-                                    <h3>Ortak Formlar</h3>
+                                    <h3>{% trans "Ortak Formlar" %}</h3>
                                     <ul>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/01/O101-TEZ-DANISMAN-ONERI-FORMU.pdf" download>
-                                                <i class="fas fa-download"></i> FORM O-101 Tez Danışman Öneri Formu
+                                                <i class="fas fa-download"></i> {% trans "FORM O-101 Tez Danışman Öneri Formu" %}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2023/01/O201-SEMİNER-SUNUMU-TALEP-FORMU.pdf" download>
-                                                <i class="fas fa-download"></i> FORM O-201 Seminer Çalışması Sunumu İçin Talep Formu
+                                                <i class="fas fa-download"></i> {% trans "FORM O-201 Seminer Çalışması Sunumu İçin Talep Formu" %}
                                             </a>
                                         </li>
                                     </ul>
@@ -510,97 +511,97 @@
                             <!-- Sekme 6: Ücretler -->
                             <div class="tab-content" id="tab6">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-money-bill-wave"></i> Ücretler</h3>
-                                    <p>Program ücretleri ve ödeme bilgileri</p>
+                                    <h3><i class="fas fa-money-bill-wave"></i> {% trans "Ücretler" %}</h3>
+                                    <p>{% trans "Program ücretleri ve ödeme bilgileri" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <h2>GENEL ÜCRET BİLGİSİ</h2>
-                                        <p>2025-2026 Eğitim-Öğretim Yılı Lisansüstü Program Ücretleri</p>
+                                        <h2>{% trans "GENEL ÜCRET BİLGİSİ" %}</h2>
+                                        <p>{% trans "2025-2026 Eğitim-Öğretim Yılı Lisansüstü Program Ücretleri" %}</p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-info-circle"></i>
-                                            <h3>Önemli Bilgiler</h3>
+                                            <h3>{% trans "Önemli Bilgiler" %}</h3>
                                         </div>
                                         <ul>
-                                            <li>Tezli Programlar en az 7 ders (toplam 21 kredi), seminer ve yüksek lisans tezinden oluşmaktadır</li>
-                                            <li>Tezsiz Programlar toplam 10 ders (30 kredi) ve dönem projesinden oluşmaktadır</li>
-                                            <li>Tezli Programların süresi 4 yarıyıl, Tezsiz programların süresi 3 yarıyıldır</li>
-                                            <li>Program ücreti tüm süreyi kapsar</li>
-                                            <li>Ödeme Şekli: Normal Kesin Kayıt yaptıran öğrenciler ödemelerini kredi kartına 6 eşit taksitle yaptırabilirler</li>
+                                            <li>{% trans "Tezli Programlar en az 7 ders (toplam 21 kredi), seminer ve yüksek lisans tezinden oluşmaktadır" %}</li>
+                                            <li>{% trans "Tezsiz Programlar toplam 10 ders (30 kredi) ve dönem projesinden oluşmaktadır" %}</li>
+                                            <li>{% trans "Tezli Programların süresi 4 yarıyıl, Tezsiz programların süresi 3 yarıyıldır" %}</li>
+                                            <li>{% trans "Program ücreti tüm süreyi kapsar" %}</li>
+                                            <li>{% trans "Ödeme Şekli: Normal Kesin Kayıt yaptıran öğrenciler ödemelerini kredi kartına 6 eşit taksitle yaptırabilirler" %}</li>
                                         </ul>
                                     </div>
                                     
-                                    <h3>Ödeme Bilgileri</h3>
+                                    <h3>{% trans "Ödeme Bilgileri" %}</h3>
                                     <div class="contributions-grid">
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-university"></i>
                                             </div>
-                                            <h4>Garanti Bankası</h4>
-                                            <p>TR82 0006 2000 1580 0006 2949 19</p>
+                                            <h4>{% trans "Garanti Bankası" %}</h4>
+                                            <p>{% trans "TR82 0006 2000 1580 0006 2949 19" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-university"></i>
                                             </div>
-                                            <h4>Albaraka Türk</h4>
-                                            <p>TR78 0020 3000 0210 7500 0000 01</p>
+                                            <h4>{% trans "Albaraka Türk" %}</h4>
+                                            <p>{% trans "TR78 0020 3000 0210 7500 0000 01" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-credit-card"></i>
                                             </div>
-                                            <h4>Ödeme Seçenekleri</h4>
-                                            <p>6 eşit taksit imkanı</p>
+                                            <h4>{% trans "Ödeme Seçenekleri" %}</h4>
+                                            <p>{% trans "6 eşit taksit imkanı" %}</p>
                                         </div>
                                         
                                         <div class="contribution-item">
                                             <div class="contribution-icon">
                                                 <i class="fas fa-percentage"></i>
                                             </div>
-                                            <h4>İndirimler</h4>
-                                            <p>Anlaşmalı kurumlar ve erken kayıt indirimleri</p>
+                                            <h4>{% trans "İndirimler" %}</h4>
+                                            <p>{% trans "Anlaşmalı kurumlar ve erken kayıt indirimleri" %}</p>
                                         </div>
                                     </div>
                                     
-                                    <h3>İletişim Bilgileri</h3>
+                                    <h3>{% trans "İletişim Bilgileri" %}</h3>
                                     <div class="contact-info-section">
                                         <div class="contact-card">
                                             <div class="contact-item">
                                                 <i class="fas fa-user-tie"></i>
                                                 <div>
-                                                    <h5>Enstitü Sekreteri</h5>
-                                                    <p><strong>Tel:</strong> 0462 334 05 50 - Dahili: 1156</p>
+                                                    <h5>{% trans "Enstitü Sekreteri" %}</h5>
+                                                    <p><strong>{% trans "Tel:" %}</strong> {% trans "0462 334 05 50 - Dahili: 1156" %}</p>
                                                 </div>
                                             </div>
                                             
                                             <div class="contact-item">
                                                 <i class="fas fa-calculator"></i>
                                                 <div>
-                                                    <h5>Muhasebe Sorumlusu</h5>
-                                                    <p><strong>Tel:</strong> 0462 334 05 50 - Dahili: 1167</p>
+                                                    <h5>{% trans "Muhasebe Sorumlusu" %}</h5>
+                                                    <p><strong>{% trans "Tel:" %}</strong> {% trans "0462 334 05 50 - Dahili: 1167" %}</p>
                                                 </div>
                                             </div>
                                             
                                             <div class="contact-item">
                                                 <i class="fas fa-user-tie"></i>
                                                 <div>
-                                                    <h5>Muhasebe Müdürü</h5>
-                                                    <p><strong>Tel:</strong> 0462 334 05 50 - Dahili: 1219</p>
+                                                    <h5>{% trans "Muhasebe Müdürü" %}</h5>
+                                                    <p><strong>{% trans "Tel:" %}</strong> {% trans "0462 334 05 50 - Dahili: 1219" %}</p>
                                                 </div>
                                             </div>
                                             
                                             <div class="contact-item">
                                                 <i class="fas fa-envelope"></i>
                                                 <div>
-                                                    <h5>E-posta</h5>
-                                                    <p><a href="mailto:lisansustusekreterligi@avrasya.edu.tr">lisansustusekreterligi@avrasya.edu.tr</a></p>
+                                                    <h5>{% trans "E-posta" %}</h5>
+                                                    <p><a href="mailto:lisansustusekreterligi@avrasya.edu.tr">{% trans "lisansustusekreterligi@avrasya.edu.tr" %}</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -611,81 +612,81 @@
                             <!-- Sekme 7: Tez ve Proje Yazım Kılavuzu -->
                             <div class="tab-content" id="tab7">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-file-pdf"></i> Tez ve Proje Yazım Kılavuzu</h3>
-                                    <p>Tez ve dönem projesi yazım kılavuzları</p>
+                                    <h3><i class="fas fa-file-pdf"></i> {% trans "Tez ve Proje Yazım Kılavuzu" %}</h3>
+                                    <p>{% trans "Tez ve dönem projesi yazım kılavuzları" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <h2>TEZ VE PROJE YAZIM KILAVUZLARI</h2>
-                                        <p>Lisansüstü çalışmalar için yazım standartları ve şablonlar</p>
+                                        <h2>{% trans "TEZ VE PROJE YAZIM KILAVUZLARI" %}</h2>
+                                        <p>{% trans "Lisansüstü çalışmalar için yazım standartları ve şablonlar" %}</p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-exclamation-circle"></i>
-                                            <h3>Önemli Not</h3>
+                                            <h3>{% trans "Önemli Not" %}</h3>
                                         </div>
-                                        <p><em><strong>2024-2025 eğitim öğretim yılından (23.09.2024 tarihinden) itibaren Tez yazımları için geçerlidir.</strong></em></p>
+                                        <p><em><strong>{% trans "2024-2025 eğitim öğretim yılından (23.09.2024 tarihinden) itibaren Tez yazımları için geçerlidir." %}</strong></em></p>
                                     </div>
                                     
-                                    <h3>Tez Yazım Kılavuzu</h3>
+                                    <h3>{% trans "Tez Yazım Kılavuzu" %}</h3>
                                     <div class="download-section">
                                         <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2024/11/AVU-LEE-Tez-Yazim-Kilavuzu.pdf" class="btn-action" download>
-                                            <i class="fas fa-download"></i> Tez Yazım Kılavuzunu İndir
+                                            <i class="fas fa-download"></i> {% trans "Tez Yazım Kılavuzunu İndir" %}
                                         </a>
                                         <p class="file-info">
-                                            <small><i class="fas fa-file-pdf"></i> PDF Dosyası | Güncel versiyon</small>
+                                            <small><i class="fas fa-file-pdf"></i> {% trans "PDF Dosyası | Güncel versiyon" %}</small>
                                         </p>
                                     </div>
                                     
-                                    <h3>Dönem Projesi Yazım Kılavuzu</h3>
+                                    <h3>{% trans "Dönem Projesi Yazım Kılavuzu" %}</h3>
                                     <div class="download-section">
                                         <a href="https://lee.avrasya.edu.tr/wp-content/uploads/2025/07/AVU-LEE-Donem-Projesi-Yazim-Kilavuzu.pdf" class="btn-action" download>
-                                            <i class="fas fa-download"></i> Dönem Projesi Yazım Kılavuzunu İndir
+                                            <i class="fas fa-download"></i> {% trans "Dönem Projesi Yazım Kılavuzunu İndir" %}
                                         </a>
                                         <p class="file-info">
-                                            <small><i class="fas fa-file-pdf"></i> PDF Dosyası | Güncel versiyon</small>
+                                            <small><i class="fas fa-file-pdf"></i> {% trans "PDF Dosyası | Güncel versiyon" %}</small>
                                         </p>
                                     </div>
                                     
-                                    <h3>Kılavuz İçeriği</h3>
+                                    <h3>{% trans "Kılavuz İçeriği" %}</h3>
                                     <div class="key-features-grid">
                                         <div class="key-feature-card">
                                             <div class="feature-icon">
                                                 <i class="fas fa-font"></i>
                                             </div>
-                                            <h4>Yazım Kuralları</h4>
-                                            <p>Yazı tipi, punto, satır aralığı ve sayfa düzeni</p>
+                                            <h4>{% trans "Yazım Kuralları" %}</h4>
+                                            <p>{% trans "Yazı tipi, punto, satır aralığı ve sayfa düzeni" %}</p>
                                         </div>
                                         
                                         <div class="key-feature-card">
                                             <div class="feature-icon">
                                                 <i class="fas fa-list-ol"></i>
                                             </div>
-                                            <h4>İçerik Yapısı</h4>
-                                            <p>Bölüm sıralaması ve içerik organizasyonu</p>
+                                            <h4>{% trans "İçerik Yapısı" %}</h4>
+                                            <p>{% trans "Bölüm sıralaması ve içerik organizasyonu" %}</p>
                                         </div>
                                         
                                         <div class="key-feature-card">
                                             <div class="feature-icon">
                                                 <i class="fas fa-quote-right"></i>
                                             </div>
-                                            <h4>Kaynak Gösterimi</h4>
-                                            <p>Atıf ve kaynakça yazım kuralları</p>
+                                            <h4>{% trans "Kaynak Gösterimi" %}</h4>
+                                            <p>{% trans "Atıf ve kaynakça yazım kuralları" %}</p>
                                         </div>
                                         
                                         <div class="key-feature-card">
                                             <div class="feature-icon">
                                                 <i class="fas fa-table"></i>
                                             </div>
-                                            <h4>Tablo ve Şekiller</h4>
-                                            <p>Grafik, tablo ve şekil formatları</p>
+                                            <h4>{% trans "Tablo ve Şekiller" %}</h4>
+                                            <p>{% trans "Grafik, tablo ve şekil formatları" %}</p>
                                         </div>
                                     </div>
                                     
                                     <div class="quote-box">
-                                        <p>Tez yazımında en önemli konulardan biri, üniversitenin belirlediği format ve kurallara tam uyum sağlamaktır. Bu kılavuzlar, tüm teknik detayları içermektedir.</p>
+                                        <p>{% trans "Tez yazımında en önemli konulardan biri, üniversitenin belirlediği format ve kurallara tam uyum sağlamaktır. Bu kılavuzlar, tüm teknik detayları içermektedir." %}</p>
                                     </div>
                                 </div>
                             </div>

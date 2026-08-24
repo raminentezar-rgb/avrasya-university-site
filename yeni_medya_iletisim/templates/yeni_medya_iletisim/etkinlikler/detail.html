@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% block title %}{{ etkinlik.baslik }} - Avrasya Üniversitesi{% endblock %}
 {% block content %}
 <div class="container mt-4">
@@ -16,7 +17,7 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <i class="bi bi-calendar-event text-primary me-2"></i>
                                     <div>
-                                        <strong>Başlangıç:</strong><br>
+                                        <strong>{% trans "Başlangıç:" %}</strong><br>
                                         {{ etkinlik.baslangic_tarihi|date:'d F Y H:i' }}
                                     </div>
                                 </div>
@@ -25,7 +26,7 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <i class="bi bi-geo-alt text-primary me-2"></i>
                                     <div>
-                                        <strong>Yer:</strong><br>
+                                        <strong>{% trans "Yer:" %}</strong><br>
                                         {{ etkinlik.yer }}
                                     </div>
                                 </div>
@@ -36,7 +37,7 @@
                         <div class="d-flex align-items-center mb-2">
                             <i class="bi bi-clock text-primary me-2"></i>
                             <div>
-                                <strong>Bitiş:</strong><br>
+                                <strong>{% trans "Bitiş:" %}</strong><br>
                                 {{ etkinlik.bitis_tarihi|date:'d F Y H:i' }}
                             </div>
                         </div>
@@ -46,7 +47,7 @@
                 
                 {% if etkinlik.kayit_gerekiyor %}
                 <span class="badge bg-warning text-dark">
-                    <i class="bi bi-person-check"></i> Kayıt Gerekli
+                    <i class="bi bi-person-check"></i> {% trans "Kayıt Gerekli" %}
                 </span>
                 {% endif %}
             </div>
@@ -62,7 +63,7 @@
         <!-- Kısa Açıklama -->
         {% if etkinlik.kisa_aciklama %}
         <div class="alert alert-info mb-4">
-            <h5 class="alert-heading">Özet</h5>
+            <h5 class="alert-heading">{% trans "Özet" %}</h5>
             <p class="mb-0">{{ etkinlik.kisa_aciklama }}</p>
         </div>
         {% endif %}
@@ -78,17 +79,17 @@
                 <div class="card border-0 bg-light">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <i class="bi bi-info-circle text-primary"></i> Etkinlik Bilgileri
+                            <i class="bi bi-info-circle text-primary"></i> {% trans "Etkinlik Bilgileri" %}
                         </h5>
                         <ul class="list-unstyled">
-                            <li><strong>Tür:</strong> {{ etkinlik.get_etkinlik_turu_display }}</li>
-                            <li><strong>Yer:</strong> {{ etkinlik.yer }}</li>
-                            <li><strong>Tarih:</strong> {{ etkinlik.baslangic_tarihi|date:'d F Y' }}</li>
-                            <li><strong>Saat:</strong> {{ etkinlik.baslangic_tarihi|date:'H:i' }}</li>
+                            <li><strong>{% trans "Tür:" %}</strong> {{ etkinlik.get_etkinlik_turu_display }}</li>
+                            <li><strong>{% trans "Yer:" %}</strong> {{ etkinlik.yer }}</li>
+                            <li><strong>{% trans "Tarih:" %}</strong> {{ etkinlik.baslangic_tarihi|date:'d F Y' }}</li>
+                            <li><strong>{% trans "Saat:" %}</strong> {{ etkinlik.baslangic_tarihi|date:'H:i' }}</li>
                             {% if etkinlik.ucretli %}
-                            <li><strong>Ücret:</strong> Ücretli</li>
+                            <li><strong>{% trans "Ücret:" %}</strong> {% trans "Ücretli" %}</li>
                             {% else %}
-                            <li><strong>Ücret:</strong> Ücretsiz</li>
+                            <li><strong>{% trans "Ücret:" %}</strong> {% trans "Ücretsiz" %}</li>
                             {% endif %}
                         </ul>
                     </div>
@@ -100,11 +101,11 @@
                 <div class="card border-0 bg-primary text-white">
                     <div class="card-body text-center">
                         <h5 class="card-title">
-                            <i class="bi bi-link-45deg"></i> Katılım Linki
+                            <i class="bi bi-link-45deg"></i> {% trans "Katılım Linki" %}
                         </h5>
-                        <p class="card-text">Etkinliğe katılmak için aşağıdaki butona tıklayın:</p>
+                        <p class="card-text">{% trans "Etkinliğe katılmak için aşağıdaki butona tıklayın:" %}</p>
                         <a href="{{ etkinlik.katilim_linki }}" target="_blank" class="btn btn-light btn-lg">
-                            <i class="bi bi-box-arrow-up-right"></i> Etkinliğe Katıl
+                            <i class="bi bi-box-arrow-up-right"></i> {% trans "Etkinliğe Katıl" %}
                         </a>
                     </div>
                 </div>
@@ -115,10 +116,10 @@
         <!-- Geri dönüş butonu -->
         <div class="mt-4 pt-3 border-top">
             <a href="{% url 'yeni_medya_iletisim:etkinlik_listesi' %}" class="btn btn-outline-primary">
-                <i class="bi bi-arrow-left"></i> Tüm Etkinliklere Dön
+                <i class="bi bi-arrow-left"></i> {% trans "Tüm Etkinliklere Dön" %}
             </a>
             <a href="{% url 'yeni_medya_iletisim:yaklasan_etkinlikler' %}" class="btn btn-outline-secondary ms-2">
-                <i class="bi bi-calendar-event"></i> Yaklaşan Etkinlikler
+                <i class="bi bi-calendar-event"></i> {% trans "Yaklaşan Etkinlikler" %}
             </a>
         </div>
     </article>

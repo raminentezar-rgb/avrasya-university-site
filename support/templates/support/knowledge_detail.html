@@ -1,4 +1,5 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block content %}
@@ -13,7 +14,7 @@
         <div class="container relative-z">
             <div class="breadcrumbs-premium">
                 <a href="{% url 'support:search' %}" class="crumb-link">
-                    <i class="fas fa-home"></i> Destek Merkezi
+                    <i class="fas fa-home"></i> {% trans "Destek Merkezi" %}
                 </a>
                 <!-- <span class="crumb-sep">/</span>
                 <span class="crumb-current">{{ item.get_content_type_display }}</span> -->
@@ -77,7 +78,7 @@
 
                     {% if item.tags.all %}
                     <div class="article-tags-section">
-                        <h4 class="tags-title"><i class="fas fa-tags"></i> Etiketler</h4>
+                        <h4 class="tags-title"><i class="fas fa-tags"></i> {% trans "Etiketler" %}</h4>
                         <div class="tags-list">
                             {% for tag in item.tags.all %}
                             <a href="{% url 'support:search' %}?q={{ tag.name }}" class="tag-pill">
@@ -92,15 +93,15 @@
                 <!-- Helpful / Contact Section -->
                 <div class="help-box animate-up delay-1">
                     <div class="help-content">
-                        <h3>Yardıma mı ihtiyacınız var?</h3>
-                        <!-- <p>Aradığınız cevabı bulamadınız mı? Destek ekibimiz size yardımcı olmaya hazır.</p> -->
+                        <h3>{% trans "Yardıma mı ihtiyacınız var?" %}</h3>
+                        <!-- <p>{% trans "Aradığınız cevabı bulamadınız mı? Destek ekibimiz size yardımcı olmaya hazır." %}</p> -->
                     </div>
                     <div class="help-actions">
                         <a href="{% url 'support:create_ticket' %}" class="btn-help btn-primary-help">
-                            <i class="fas fa-ticket-alt"></i> Talep Oluştur
+                            <i class="fas fa-ticket-alt"></i> {% trans "Talep Oluştur" %}
                         </a>
                         <a href="{% url 'contact:contact' %}" class="btn-help btn-outline-help">
-                            <i class="fas fa-envelope"></i> Bize Ulaşın
+                            <i class="fas fa-envelope"></i> {% trans "Bize Ulaşın" %}
                         </a>
                     </div>
                 </div>

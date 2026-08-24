@@ -1,5 +1,6 @@
 <!-- misyon_vizyon.html -->
 {% extends 'avrasya_universitesi_hakkinda/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Misyon ve Vizyon{% endblock %}
@@ -10,9 +11,9 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">Misyon ve Vizyon</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "Misyon ve Vizyon" %}</h1>
                 <p class="lead mb-0">
-                    Geleceği şekillendiren bir eğitim kurumu olma yolunda
+                    {% trans "Geleceği şekillendiren bir eğitim kurumu olma yolunda" %}
                 </p>
             </div>
             <div class="col-md-4 text-center">
@@ -30,16 +31,16 @@
                 <div class="card h-100 border-0 shadow-sm" style="border-left: 5px solid #fd7e14 !important;">
                     <div class="card-body">
                         <h3 class="text-primary mb-3">
-                            <i class="bi bi-compass me-2"></i>Misyonumuz
+                            <i class="bi bi-compass me-2"></i>{% trans "Misyonumuz" %}
                         </h3>
                         <p class="mb-3">
                             <ul>
-                                <li>Eğitimde; sürdürülebilir, kaliteli eğitim veren lider üniversitelerden biri olmak,</li>
-                                <li>Bilimsel üretim, uygulanabilir teknoloji ve yenilikçi çalışmalar yapmak,</li>
-                                <li>Topluma katkı yapmak,</li>
-                                <li>Kendi kendini denetleyen yenileyen geliştiren, sürdürülebilir bir üniversite idare sistemi kurmak,</li>
-                                <li>Kendi ekonomik kaynaklarını geliştiren ve çeşitlendiren bir üniversite olmak</li>
-                                <li>Uluslararası akredite programlara sahip olmak</li>
+                                <li>{% trans "Eğitimde; sürdürülebilir, kaliteli eğitim veren lider üniversitelerden biri olmak," %}</li>
+                                <li>{% trans "Bilimsel üretim, uygulanabilir teknoloji ve yenilikçi çalışmalar yapmak," %}</li>
+                                <li>{% trans "Topluma katkı yapmak," %}</li>
+                                <li>{% trans "Kendi kendini denetleyen yenileyen geliştiren, sürdürülebilir bir üniversite idare sistemi kurmak," %}</li>
+                                <li>{% trans "Kendi ekonomik kaynaklarını geliştiren ve çeşitlendiren bir üniversite olmak" %}</li>
+                                <li>{% trans "Uluslararası akredite programlara sahip olmak" %}</li>
                             </ul> 
                             
                         <p class="mb-0">
@@ -53,20 +54,20 @@
                 <div class="card h-100 border-0 shadow-sm" style="border-left: 5px solid #0dcaf0 !important;">
                     <div class="card-body">
                         <h3 class="text-primary mb-3">
-                            <i class="bi bi-eye me-2"></i>Vizyonumuz
+                            <i class="bi bi-eye me-2"></i>{% trans "Vizyonumuz" %}
                         </h3>
                         <p class="mb-3">
-                            Türkiye’de ve dünyada saygın üniversitelerden biri olmak.<br><br>
-                            <b>Temel Değerler</b>
+                            {% trans "Türkiye’de ve dünyada saygın üniversitelerden biri olmak." %}<br><br>
+                            <b>{% trans "Temel Değerler" %}</b>
                             <ul>
-                                <li>Bilimsel düşünceyi rehber edinmek,</li>
-                                <li>Adalet, hoşgörü ve İnsan onurunu üstün tutmak,</li>
-                                <li>Topluma ve çevreye karşı duyarlı ve sorumlu olmak,</li>
-                                <li>Yenilikçi ve girişimci olmak,</li>
-                                <li>Hayat boyu öğrenmek,</li>
-                                <li>Şeffaflık, hesap verebilirlik ilkelerine bağlı olmak,</li>
-                                <li>Evrensel değerlere bağlı olmak,</li>
-                                <li>Kalkınmaya dayalı bir dünya düzeninin kurulmasını hedeflemek.</li>
+                                <li>{% trans "Bilimsel düşünceyi rehber edinmek," %}</li>
+                                <li>{% trans "Adalet, hoşgörü ve İnsan onurunu üstün tutmak," %}</li>
+                                <li>{% trans "Topluma ve çevreye karşı duyarlı ve sorumlu olmak," %}</li>
+                                <li>{% trans "Yenilikçi ve girişimci olmak," %}</li>
+                                <li>{% trans "Hayat boyu öğrenmek," %}</li>
+                                <li>{% trans "Şeffaflık, hesap verebilirlik ilkelerine bağlı olmak," %}</li>
+                                <li>{% trans "Evrensel değerlere bağlı olmak," %}</li>
+                                <li>{% trans "Kalkınmaya dayalı bir dünya düzeninin kurulmasını hedeflemek." %}</li>
                             </ul> 
 
                                         
@@ -81,7 +82,7 @@
         </div>
         
         {% comment %} <h3 class="text-primary mb-4 border-bottom pb-2">
-            <i class="bi bi-heart me-2"></i>Temel Değerlerimiz
+            <i class="bi bi-heart me-2"></i>{% trans "Temel Değerlerimiz" %}
         </h3>
         
         <div class="row">
@@ -91,10 +92,9 @@
                         <div class="icon-wrapper bg-primary mb-3 mx-auto">
                             <i class="bi bi-shield-check text-white"></i>
                         </div>
-                        <h5 class="card-title">Kalite</h5>
+                        <h5 class="card-title">{% trans "Kalite" %}</h5>
                         <p class="card-text small">
-                            Eğitim-öğretim, araştırma ve toplum hizmetlerinde 
-                            sürekli kalite iyileştirmeyi hedefleriz.
+                            {% trans "Eğitim-öğretim, araştırma ve toplum hizmetlerinde sürekli kalite iyileştirmeyi hedefleriz." %}
                         </p>
                     </div>
                 </div>
@@ -106,10 +106,9 @@
                         <div class="icon-wrapper bg-success mb-3 mx-auto">
                             <i class="bi bi-lightbulb text-white"></i>
                         </div>
-                        <h5 class="card-title">Yenilikçilik</h5>
+                        <h5 class="card-title">{% trans "Yenilikçilik" %}</h5>
                         <p class="card-text small">
-                            Değişen dünyaya uyum sağlamak için sürekli yenilikçi 
-                            yaklaşımlar geliştiririz.
+                            {% trans "Değişen dünyaya uyum sağlamak için sürekli yenilikçi yaklaşımlar geliştiririz." %}
                         </p>
                     </div>
                 </div>
@@ -121,10 +120,9 @@
                         <div class="icon-wrapper bg-info mb-3 mx-auto">
                             <i class="bi bi-people text-white"></i>
                         </div>
-                        <h5 class="card-title">Katılımcılık</h5>
+                        <h5 class="card-title">{% trans "Katılımcılık" %}</h5>
                         <p class="card-text small">
-                            Karar alma süreçlerinde paydaşlarımızın katılımını 
-                            teşvik ederiz.
+                            {% trans "Karar alma süreçlerinde paydaşlarımızın katılımını teşvik ederiz." %}
                         </p>
                     </div>
                 </div>
@@ -136,10 +134,9 @@
                         <div class="icon-wrapper bg-warning mb-3 mx-auto">
                             <i class="bi bi-globe text-white"></i>
                         </div>
-                        <h5 class="card-title">Evrensellik</h5>
+                        <h5 class="card-title">{% trans "Evrensellik" %}</h5>
                         <p class="card-text small">
-                            Evrensel değerleri benimseyerek küresel bir perspektifle 
-                            eğitim veririz.
+                            {% trans "Evrensel değerleri benimseyerek küresel bir perspektifle eğitim veririz." %}
                         </p>
                     </div>
                 </div>
@@ -151,10 +148,9 @@
                         <div class="icon-wrapper bg-danger mb-3 mx-auto">
                             <i class="bi bi-gem text-white"></i>
                         </div>
-                        <h5 class="card-title">Şeffaflık</h5>
+                        <h5 class="card-title">{% trans "Şeffaflık" %}</h5>
                         <p class="card-text small">
-                            Tüm faaliyetlerimizde şeffaf ve hesap verebilir 
-                            bir yönetim anlayışını benimseriz.
+                            {% trans "Tüm faaliyetlerimizde şeffaf ve hesap verebilir bir yönetim anlayışını benimseriz." %}
                         </p>
                     </div>
                 </div>
@@ -166,10 +162,9 @@
                         <div class="icon-wrapper bg-secondary mb-3 mx-auto">
                             <i class="bi bi-hand-thumbs-up text-white"></i>
                         </div>
-                        <h5 class="card-title">Sosyal Sorumluluk</h5>
+                        <h5 class="card-title">{% trans "Sosyal Sorumluluk" %}</h5>
                         <p class="card-text small">
-                            Toplumsal sorunlara duyarlı, çözüm üreten ve 
-                            topluma hizmet eden bir kurum olmayı hedefleriz.
+                            {% trans "Toplumsal sorunlara duyarlı, çözüm üreten ve topluma hizmet eden bir kurum olmayı hedefleriz." %}
                         </p>
                     </div>
                 </div>

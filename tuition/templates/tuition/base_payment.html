@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -217,10 +218,10 @@
         <div class="container d-flex justify-content-between align-items-center">
             <a href="{% url 'core:home' %}" class="brand-logo">
                 <i class="fa-solid fa-building-columns text-primary"></i>
-                Avrasya Üniversitesi
+                {% trans "Avrasya Üniversitesi" %}
             </a>
             <div class="d-none d-md-block text-muted">
-                <i class="fa-solid fa-lock me-2"></i>Güvenli Ödeme Portalı
+                <i class="fa-solid fa-lock me-2"></i>{% trans "Güvenli Ödeme Portalı" %}
             </div>
         </div>
     </nav>
@@ -244,8 +245,8 @@
 
     <footer>
         <div class="container">
-            <p class="mb-0">&copy; 2026 Avrasya Üniversitesi. Tüm Hakları Saklıdır.</p>
-            <p class="mb-0 mt-1" style="font-size: 0.8rem;"><i class="fa-solid fa-shield-halved me-1"></i>256-bit SSL ile korunmaktadır.</p>
+            <p class="mb-0">{% trans "&copy; 2026 Avrasya Üniversitesi. Tüm Hakları Saklıdır." %}</p>
+            <p class="mb-0 mt-1" style="font-size: 0.8rem;"><i class="fa-solid fa-shield-halved me-1"></i>{% trans "256-bit SSL ile korunmaktadır." %}</p>
         </div>
     </footer>
 

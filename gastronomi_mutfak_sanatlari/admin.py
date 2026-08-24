@@ -1,12 +1,13 @@
 # app_name: gastronomi_mutfak_sanatlari/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     GastronomiDuyuru, GastronomiDersProgrami, GastronomiEtkinlik, GastronomiMutfakSanatlariFaaliyet, GastronomiMutfakSanatlariFaaliyetGrubu, GastronomiMutfakSanatlariFaaliyetGorseli
 )
 
 @admin.register(GastronomiEtkinlik)
-class GastronomiEtkinlikAdmin(admin.ModelAdmin):
+class GastronomiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class GastronomiDuyuruAdmin(admin.ModelAdmin):
         return GastronomiDuyuru.objects.all()
 
 @admin.register(GastronomiDersProgrami)
-class GastronomiDersProgramiAdmin(admin.ModelAdmin):
+class GastronomiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class GastronomiMutfakSanatlariFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(GastronomiMutfakSanatlariFaaliyetGrubu)
-class GastronomiMutfakSanatlariFaaliyetGrubuAdmin(admin.ModelAdmin):
+class GastronomiMutfakSanatlariFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(GastronomiMutfakSanatlariFaaliyet)
-class GastronomiMutfakSanatlariFaaliyetAdmin(admin.ModelAdmin):
+class GastronomiMutfakSanatlariFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

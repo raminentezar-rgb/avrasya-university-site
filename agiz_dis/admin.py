@@ -1,12 +1,13 @@
 # app_name: agiz_dis/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     AgizDisDuyuru, AgizDisFaaliyet, AgizDisFaaliyetGorseli, AgizDisDersProgrami, AgizDisFaaliyetGrubu, AgizDisEtkinlik
 )
 
 @admin.register(AgizDisEtkinlik)
-class AgizDisEtkinlikAdmin(admin.ModelAdmin):
+class AgizDisEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class AgizDisDuyuruAdmin(admin.ModelAdmin):
         return AgizDisDuyuru.objects.all()
 
 @admin.register(AgizDisDersProgrami)
-class AgizDisDersProgramiAdmin(admin.ModelAdmin):
+class AgizDisDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class AgizDisFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(AgizDisFaaliyetGrubu)
-class AgizDisFaaliyetGrubuAdmin(admin.ModelAdmin):
+class AgizDisFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(AgizDisFaaliyet)
-class AgizDisFaaliyetAdmin(admin.ModelAdmin):
+class AgizDisFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

@@ -1,4 +1,5 @@
 {% extends 'saglik_yonetimi/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Sağlık Yönetimi Duyuruları{% endblock %}
 
@@ -9,8 +10,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1> Sağlık Yönetimi Duyuruları</h1>
-            <p>Akademik Duyurular ve Haberler</p>
+            <h1> {% trans "Sağlık Yönetimi Duyuruları" %}</h1>
+            <p>{% trans "Akademik Duyurular ve Haberler" %}</p>
         </div>
     </div>
 </section>
@@ -32,16 +33,16 @@
               <ol class="breadcrumb">
                   <li class="breadcrumb-item">
                       <a href="{% url 'duyurular:liste' %}" class="text-decoration-none">
-                          <i class="bi bi-house-door me-1"></i>Tüm Duyurular
+                          <i class="bi bi-house-door me-1"></i>{% trans "Tüm Duyurular" %}
                       </a>
                   </li>
                   <li class="breadcrumb-item">
                       <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu='SBF' %}" class="text-decoration-none">
-                          <i class="bi bi-building me-1"></i>SBF
+                          <i class="bi bi-building me-1"></i>{% trans "SBF" %}
                       </a>
                   </li>
                   <li class="breadcrumb-item active text-primary fw-semibold" aria-current="page">
-                      <i class="bi bi-book me-1"></i> Sağlık Yönetimi
+                      <i class="bi bi-book me-1"></i> {% trans "Sağlık Yönetimi" %}
                   </li>
               </ol>
           </nav>
@@ -52,10 +53,10 @@
                   <div class="col-lg-8 mb-4 mb-lg-0">
                       <div class="header-gradient p-4 rounded-4">
                           <h1 class="section-title mb-2">
-                              <i class="bi bi-book me-2"></i> Sağlık Yönetimi Duyuruları
+                              <i class="bi bi-book me-2"></i> {% trans "Sağlık Yönetimi Duyuruları" %}
                           </h1>
                           <p class="section-subtitle mb-0">
-                              Sağlık Yönetimi bölümüne ait akademik duyurular, etkinlikler ve önemli haberler
+                              {% trans "Sağlık Yönetimi bölümüne ait akademik duyurular, etkinlikler ve önemli haberler" %}
                           </p>
                       </div>
                   </div>
@@ -66,8 +67,8 @@
                                   <i class="bi bi-megaphone text-primary"></i>
                               </div>
                               <h3 class="text-primary fw-bold mb-1">{{ toplam_duyuru }}</h3>
-                              <p class="text-muted mb-0">Toplam Duyuru</p>
-                              <small class="text-muted">Aktif ve geçmiş duyurular</small>
+                              <p class="text-muted mb-0">{% trans "Toplam Duyuru" %}</p>
+                              <small class="text-muted">{% trans "Aktif ve geçmiş duyurular" %}</small>
                           </div>
                       </div>
                   </div>
@@ -78,10 +79,10 @@
           <div class="duyuru-filter-section mb-5">
               <div class="section-header">
                   <h3 class="section-sub-title mb-3">
-                      <i class="bi bi-funnel me-2"></i>Duyuru Filtreleme
+                      <i class="bi bi-funnel me-2"></i>{% trans "Duyuru Filtreleme" %}
                   </h3>
                   <p class="section-sub-description mb-4">
-                      Sağlık Yönetimi duyurularında arama yapın veya tarihe göre filtreleyin
+                      {% trans "Sağlık Yönetimi duyurularında arama yapın veya tarihe göre filtreleyin" %}
                   </p>
               </div>
               
@@ -97,7 +98,7 @@
                               id="q" 
                               name="q" 
                               value="{{ search_query }}"
-                              placeholder="Sağlık Yönetimi duyurularında ara..."
+                              placeholder="{% trans 'Sağlık Yönetimi duyurularında ara...' %}"
                               style="height: 56px;"
                           >
                       </div>
@@ -128,7 +129,7 @@
               <div class="mt-4 p-3 bg-light rounded-3">
                   <div class="d-flex flex-wrap align-items-center justify-content-between">
                       <div>
-                          <span class="badge bg-primary me-2">Aktif Filtreler</span>
+                          <span class="badge bg-primary me-2">{% trans "Aktif Filtreler" %}</span>
                           {% if search_query %}
                           <span class="badge bg-secondary me-2">
                               <i class="bi bi-search me-1"></i>"{{ search_query }}"
@@ -141,7 +142,7 @@
                           {% endif %}
                       </div>
                       <a href="{% url 'saglik_yonetimi:liste' %}" class="btn btn-outline-danger btn-sm">
-                          <i class="bi bi-x-circle me-1"></i> Filtreleri Temizle
+                          <i class="bi bi-x-circle me-1"></i> {% trans "Filtreleri Temizle" %}
                       </a>
                   </div>
               </div>
@@ -152,11 +153,11 @@
           <div class="duyuru-list-section">
               <div class="section-header mb-4">
                   <h3 class="section-sub-title mb-3">
-                      <i class="bi bi-bell me-2"></i> Sağlık Yönetimi Duyuruları
+                      <i class="bi bi-bell me-2"></i> {% trans "Sağlık Yönetimi Duyuruları" %}
                   </h3>
                   {% if duyurular %}
                   <p class="section-sub-description mb-0">
-                      Toplam <span class="fw-bold text-primary">{{ duyurular|length }}</span> Sağlık Yönetimi duyurusu listeleniyor
+                      {% trans "Toplam" %} <span class="fw-bold text-primary">{{ duyurular|length }}</span> {% trans "Sağlık Yönetimi duyurusu listeleniyor" %}
                   </p>
                   {% endif %}
               </div>
@@ -173,7 +174,7 @@
                                           <i class="bi bi-building me-1"></i>{{ duyuru.get_fakulte_display }}
                                       </span>
                                       <span class="duyuru-category" style="background: linear-gradient(135deg, #8dd4e3 0%, #4a9db8 100%);">
-                                          <i class="bi bi-book me-1"></i> Sağlık Yönetimi
+                                          <i class="bi bi-book me-1"></i> {% trans "Sağlık Yönetimi" %}
                                       </span>
                                   </div>
                                   <div class="duyuru-date">
@@ -185,7 +186,7 @@
                               {% if duyuru.onemli %}
                               <div class="duyuru-priority">
                                   <span class="priority-dot"></span>
-                                  <span class="priority-text">Önemli Duyuru</span>
+                                  <span class="priority-text">{% trans "Önemli Duyuru" %}</span>
                               </div>
                               {% endif %}
                           </div>
@@ -210,7 +211,7 @@
                               <div class="mt-3">
                                   <div class="d-flex align-items-center mb-2">
                                       <i class="bi bi-paperclip me-2 text-primary"></i>
-                                      <small class="text-muted">Ekli Dosyalar:</small>
+                                      <small class="text-muted">{% trans "Ekli Dosyalar:" %}</small>
                                   </div>
                                   <div class="d-flex flex-wrap gap-2">
                                       {% for dosya in dosyalar %}
@@ -233,7 +234,7 @@
                           <div class="duyuru-card-footer">
                               <div class="d-flex justify-content-between align-items-center">
                                   <a href="{% url 'saglik_yonetimi:detay' duyuru.slug %}" class="duyuru-read-more">
-                                      Devamını Oku
+                                      {% trans "Devamını Oku" %}
                                       <i class="bi bi-arrow-right ms-2"></i>
                                   </a>
                                   
@@ -254,7 +255,7 @@
                   <div class="empty-state-icon">
                       <i class="bi bi-book"></i>
                   </div>
-                  <h4 class="mb-3">Sağlık Yönetimi Duyurusu Bulunamadı</h4>
+                  <h4 class="mb-3">{% trans "Sağlık Yönetimi Duyurusu Bulunamadı" %}</h4>
                   <p class="mb-4">
                       {% if search_query or tarih_query %}
                       Arama kriterlerinize uygun Sağlık Yönetimi duyurusu bulunamadı. Lütfen farklı anahtar kelimelerle tekrar deneyin.
@@ -264,10 +265,10 @@
                   </p>
                   <div class="duyuru-filter-buttons justify-content-center">
                       <a href="{% url 'saglik_yonetimi:liste' %}" class="filter-btn active">
-                          <i class="bi bi-arrow-clockwise me-2"></i>Tüm Duyuruları Göster
+                          <i class="bi bi-arrow-clockwise me-2"></i>{% trans "Tüm Duyuruları Göster" %}
                       </a>
                       <a href="{% url 'duyurular:liste' %}" class="filter-btn">
-                          <i class="bi bi-grid me-2"></i>Tüm Fakülte Duyuruları
+                          <i class="bi bi-grid me-2"></i>{% trans "Tüm Fakülte Duyuruları" %}
                       </a>
                   </div>
               </div>

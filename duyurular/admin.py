@@ -5,7 +5,7 @@ from .models import (
 
 from modeltranslation.admin import TranslationAdmin
 
-class BolumAdmin(admin.ModelAdmin):
+class BolumAdmin(TranslationAdmin):
     list_display = ['ad', 'kod', 'fakulte', 'aktif']
     list_filter = ['fakulte', 'aktif']
     search_fields = ['ad', 'kod']
@@ -19,7 +19,7 @@ class DuyuruDosyaInline(admin.TabularInline):
     verbose_name_plural = "Dosyalar"
 
 @admin.register(Duyuru)
-class DuyuruAdmin(admin.ModelAdmin):
+class DuyuruAdmin(TranslationAdmin):
     list_display = ['baslik', 'fakulte', 'get_bolumler', 'yayin_tarihi', 'yayinda', 'olusturulma_tarihi', 'dosya_sayisi']
     list_filter = ['fakulte', 'yayinda', 'yayin_tarihi', 'bolumler']
     search_fields = ['baslik', 'icerik']
@@ -50,7 +50,7 @@ class DuyuruAdmin(admin.ModelAdmin):
     dosya_sayisi.short_description = 'Dosya Sayısı'
 
 @admin.register(DuyuruDosya)
-class DuyuruDosyaAdmin(admin.ModelAdmin):
+class DuyuruDosyaAdmin(TranslationAdmin):
     list_display = ['dosya_adi', 'duyuru', 'fakulte', 'tur', 'olusturulma_tarihi']
     list_filter = ['tur', 'olusturulma_tarihi', 'duyuru__fakulte']
     search_fields = ['dosya_adi', 'duyuru__baslik']

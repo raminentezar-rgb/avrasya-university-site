@@ -1,12 +1,13 @@
 # app_name: web_tasarimi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     WebTasarimiFaaliyetGorseli, WebTasarimiEtkinlik, WebTasarimiDuyuru, WebTasarimiDersProgrami, WebTasarimiFaaliyet, WebTasarimiFaaliyetGrubu
 )
 
 @admin.register(WebTasarimiEtkinlik)
-class WebTasarimiEtkinlikAdmin(admin.ModelAdmin):
+class WebTasarimiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class WebTasarimiDuyuruAdmin(admin.ModelAdmin):
         return WebTasarimiDuyuru.objects.all()
 
 @admin.register(WebTasarimiDersProgrami)
-class WebTasarimiDersProgramiAdmin(admin.ModelAdmin):
+class WebTasarimiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class WebTasarimiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(WebTasarimiFaaliyetGrubu)
-class WebTasarimiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class WebTasarimiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(WebTasarimiFaaliyet)
-class WebTasarimiFaaliyetAdmin(admin.ModelAdmin):
+class WebTasarimiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

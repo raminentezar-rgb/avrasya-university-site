@@ -11,7 +11,7 @@
 <section class="research-hero" style="background: linear-gradient(135deg, #1d5da9 0%, #3a7bd5 100%);  ">
     <div class="container">
         <div class="research-hero-content text-center py-5">
-            <h1 class="text-white fw-bold mb-3" style="margin-top: -60px;"> Sosyal Güvenlik Ders Programı</h1>
+            <h1 class="text-white fw-bold mb-3" style="margin-top: -60px;"> {% trans "Sosyal Güvenlik Ders Programı" %}</h1>
             <p class="text-white-80 mb-0 fs-5" ></p>
         </div>
     </div>
@@ -37,8 +37,8 @@
                                 <i class="fas fa-info-circle fa-2x"></i>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h5 class="alert-heading mb-2">Önemli Bilgi!</h5>
-                                <p class="mb-0">Ders programları akademik yıllara ve sınıflara göre gruplandırılmıştır. Güncel programlar için sınıfınıza uygun dosyayı indirebilirsiniz.</p>
+                                <h5 class="alert-heading mb-2">{% trans "Önemli Bilgi!" %}</h5>
+                                <p class="mb-0">{% trans "Ders programları akademik yıllara ve sınıflara göre gruplandırılmıştır. Güncel programlar için sınıfınıza uygun dosyayı indirebilirsiniz." %}</p>
                             </div>
                         </div>
                     </div>
@@ -52,9 +52,9 @@
                                 <div class="info-icon">
                                     <i class="fas fa-file-pdf"></i>
                                 </div>
-                                <h5>Toplam Dosya</h5>
+                                <h5>{% trans "Toplam Dosya" %}</h5>
                                 <div class="info-number">{{ toplam_dosya }}</div>
-                                <p class="info-text">Aktif ders programı</p>
+                                <p class="info-text">{% trans "Aktif ders programı" %}</p>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -62,9 +62,9 @@
                                 <div class="info-icon">
                                     <i class="fas fa-graduation-cap"></i>
                                 </div>
-                                <h5>Sınıflar</h5>
+                                <h5>{% trans "Sınıflar" %}</h5>
                                 <div class="info-number">{{ gruplar|length }}</div>
-                                <p class="info-text">Farklı sınıf seviyesi</p>
+                                <p class="info-text">{% trans "Farklı sınıf seviyesi" %}</p>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -72,9 +72,9 @@
                                 <div class="info-icon">
                                     <i class="fas fa-calendar-check"></i>
                                 </div>
-                                <h5>Güncel</h5>
+                                <h5>{% trans "Güncel" %}</h5>
                                 <div class="info-number">2025</div>
-                                <p class="info-text">Güncel akademik yıl</p>
+                                <p class="info-text">{% trans "Güncel akademik yıl" %}</p>
                             </div>
                         </div>
                     </div>
@@ -141,10 +141,10 @@
                                     </div>
                                     <div class="course-card-footer">
                                         <a href="{{ dosya.dosya.url }}" class="btn btn-primary btn-download" download>
-                                            <i class="fas fa-download me-2"></i> İndir
+                                            <i class="fas fa-download me-2"></i> {% trans "İndir" %}
                                         </a>
                                         <a href="{{ dosya.dosya.url }}" class="btn btn-outline-primary btn-preview" target="_blank">
-                                            <i class="fas fa-eye me-2"></i> Görüntüle
+                                            <i class="fas fa-eye me-2"></i> {% trans "Görüntüle" %}
                                         </a>
                                     </div>
                                 </div>
@@ -158,11 +158,11 @@
                 <div class="text-center py-5">
                     <div class="empty-state">
                         <i class="fas fa-folder-open fa-4x text-muted mb-4"></i>
-                        <h3 class="text-muted mb-3">Henüz Ders Programı Yüklenmemiş</h3>
-                        <p class="text-muted mb-4">Bu bölüm için henüz ders programı yüklenmemiştir.</p>
+                        <h3 class="text-muted mb-3">{% trans "Henüz Ders Programı Yüklenmemiş" %}</h3>
+                        <p class="text-muted mb-4">{% trans "Bu bölüm için henüz ders programı yüklenmemiştir." %}</p>
                         <div class="alert alert-warning d-inline-block">
                             <i class="fas fa-clock me-2"></i>
-                            Yakında güncellenecektir.
+                            {% trans "Yakında güncellenecektir." %}
                         </div>
                     </div>
                 </div>
@@ -171,15 +171,15 @@
                 <!-- نکات مهم -->
                 <div class="important-notes mt-5">
                     <div class="notes-header">
-                        <h4><i class="fas fa-exclamation-circle me-2"></i> Önemli Notlar</h4>
+                        <h4><i class="fas fa-exclamation-circle me-2"></i> {% trans "Önemli Notlar" %}</h4>
                     </div>
                     <div class="notes-content">
                         <ul>
-                            <li>Ders programları PDF, Word ve Excel formatlarında sunulmaktadır.</li>
-                            <li>Her sınıf için ayrı programlar bulunmaktadır.</li>
-                            <li>Programları görüntülemek için "Görüntüle" butonuna, indirmek için "İndir" butonuna tıklayınız.</li>
-                            <li>Programlarda değişiklik olması durumunda en güncel versiyon yayınlanacaktır.</li>
-                            <li>Ders programlarıyla ilgili sorularınız için bölüm sekreterliği ile iletişime geçebilirsiniz.</li>
+                            <li>{% trans "Ders programları PDF, Word ve Excel formatlarında sunulmaktadır." %}</li>
+                            <li>{% trans "Her sınıf için ayrı programlar bulunmaktadır." %}</li>
+                            <li>{% trans "Programları görüntülemek için \"Görüntüle\" butonuna, indirmek için \"İndir\" butonuna tıklayınız." %}</li>
+                            <li>{% trans "Programlarda değişiklik olması durumunda en güncel versiyon yayınlanacaktır." %}</li>
+                            <li>{% trans "Ders programlarıyla ilgili sorularınız için bölüm sekreterliği ile iletişime geçebilirsiniz." %}</li>
                         </ul>
                     </div>
                 </div>
@@ -188,19 +188,19 @@
                 <div class="contact-info mt-5">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body text-center">
-                            <h5 class="card-title mb-3"><i class="fas fa-question-circle me-2"></i> Yardıma mı ihtiyacınız var?</h5>
-                            <p class="card-text mb-4">Ders programlarıyla ilgili sorularınız için aşağıdaki iletişim bilgilerini kullanabilirsiniz.</p>
+                            <h5 class="card-title mb-3"><i class="fas fa-question-circle me-2"></i> {% trans "Yardıma mı ihtiyacınız var?" %}</h5>
+                            <p class="card-text mb-4">{% trans "Ders programlarıyla ilgili sorularınız için aşağıdaki iletişim bilgilerini kullanabilirsiniz." %}</p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-item mb-3">
                                         <i class="fas fa-envelope me-2 text-primary"></i>
-                                        <span>ingilizedebiyati@avrasya.edu.tr</span>
+                                        <span>{% trans "ingilizedebiyati@avrasya.edu.tr" %}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="contact-item mb-3">
                                         <i class="fas fa-phone me-2 text-primary"></i>
-                                        <span>0 (462) 444 0 XXXX</span>
+                                        <span>{% trans "0 (462) 444 0 XXXX" %}</span>
                                     </div>
                                 </div>
                             </div>

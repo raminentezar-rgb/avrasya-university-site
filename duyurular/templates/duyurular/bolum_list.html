@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}{{ bolum.ad }} Duyuruları - Avrasya Üniversitesi{% endblock %}
 
@@ -14,8 +15,8 @@
                         <div class="breadcrumb-container">
                             <nav aria-label="breadcrumb" style="margin-top: 200px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
-                                    <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">Duyurular</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">{% trans "Duyurular" %}</a></li>
                                     <li class="breadcrumb-item"><a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=bolum.fakulte %}">{{ fakulte_adi }}</a></li>
                                     <li class="breadcrumb-item active">{{ bolum.ad }}</li>
                                 </ol>
@@ -30,7 +31,7 @@
                             <div class="header-stats">
                                 <div class="stat-item">
                                     <span class="stat-number">{{ duyurular|length }}</span>
-                                    <span class="stat-label">Toplam Duyuru</span>
+                                    <span class="stat-label">{% trans "Toplam Duyuru" %}</span>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +96,7 @@
 
                             <div class="card-footer">
                                 <a href="{{ duyuru.get_absolute_url }}" class="read-more-btn">
-                                    Devamını Oku
+                                    {% trans "Devamını Oku" %}
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
                                 <div class="time-ago">
@@ -109,8 +110,8 @@
                         <div class="empty-icon">
                             <i class="fas fa-bullhorn"></i>
                         </div>
-                        <h3>Duyuru Bulunamadı</h3>
-                        <p>Bu bölüm için henüz duyuru bulunmamaktadır.</p>
+                        <h3>{% trans "Duyuru Bulunamadı" %}</h3>
+                        <p>{% trans "Bu bölüm için henüz duyuru bulunmamaktadır." %}</p>
                     </div>
                     {% endif %}
                 </div>
@@ -122,24 +123,24 @@
                         <div class="sidebar-widget">
                             <h4 class="widget-title">
                                 <i class="fas fa-info-circle"></i>
-                                Bölüm Bilgileri
+                                {% trans "Bölüm Bilgileri" %}
                             </h4>
                             <div class="info-list">
                                 <div class="info-item">
-                                    <span class="info-label">Bölüm Adı:</span>
+                                    <span class="info-label">{% trans "Bölüm Adı:" %}</span>
                                     <span class="info-value">{{ bolum.ad }}</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Fakülte:</span>
+                                    <span class="info-label">{% trans "Fakülte:" %}</span>
                                     <span class="info-value">{{ fakulte_adi }}</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Toplam Duyuru:</span>
+                                    <span class="info-label">{% trans "Toplam Duyuru:" %}</span>
                                     <span class="info-value">{{ duyurular|length }}</span>
                                 </div>
                                 {% if bolum.aciklama %}
                                 <div class="info-item">
-                                    <span class="info-label">Açıklama:</span>
+                                    <span class="info-label">{% trans "Açıklama:" %}</span>
                                     <span class="info-value">{{ bolum.aciklama }}</span>
                                 </div>
                                 {% endif %}
@@ -150,12 +151,12 @@
                         <div class="sidebar-widget">
                             <h4 class="widget-title">
                                 <i class="fas fa-compass"></i>
-                                Navigasyon
+                                {% trans "Navigasyon" %}
                             </h4>
                             <div class="navigation-links">
                                 <a href="{% url 'duyurular:liste' %}" class="nav-link" style="background: rgba(9, 36, 66, 0.9); color: white;">
                                     <i class="fas fa-arrow-left"></i>
-                                    Tüm Duyurulara Dön
+                                    {% trans "Tüm Duyurulara Dön" %}
                                 </a>
                                 <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=bolum.fakulte %}" class="nav-link" style="background: rgba(9, 36, 66, 0.9); color: white;">
                                     <i class="fas fa-filter"></i>
@@ -168,16 +169,16 @@
                         <div class="sidebar-widget">
                             <h4 class="widget-title">
                                 <i class="fas fa-bolt"></i>
-                                Hızlı İşlemler
+                                {% trans "Hızlı İşlemler" %}
                             </h4>
                             <div class="navigation-links">
                                 <a href="{% url 'duyurular:liste' %}?bolum={{ bolum.kod }}" class="nav-link" style="background: rgba(9, 36, 66, 0.9); color: white;">
                                     <i class="fas fa-search"></i>
-                                    Bu Bölümde Ara
+                                    {% trans "Bu Bölümde Ara" %}
                                 </a>
                                 <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=bolum.fakulte %}" class="nav-link" style="background: rgba(9, 36, 66, 0.9); color: white;">
                                     <i class="fas fa-building"></i>
-                                    Fakülte Duyuruları
+                                    {% trans "Fakülte Duyuruları" %}
                                 </a>
                             </div>
                         </div>

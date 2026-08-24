@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geri Arama Talebiniz Alındı</title>
+    <title>{% trans "Geri Arama Talebiniz Alındı" %}</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -60,41 +61,40 @@
 </head>
 <body>
     <div class="header">
-        <h1>📞 Geri Arama Talebiniz Alındı</h1>
+        <h1>{% trans "📞 Geri Arama Talebiniz Alındı" %}</h1>
         <p>Sayın {{ callback.full_name }}, talebiniz tarafımıza ulaşmıştır</p>
     </div>
     
     <div class="content">
-        <p>Merhaba <strong>{{ callback.full_name }}</strong>,</p>
+        <p>{% trans "Merhaba" %} <strong>{{ callback.full_name }}</strong>,</p>
         
-        <p>Avrasya Üniversitesi'ne gösterdiğiniz ilgi için teşekkür ederiz. 
-        Geri arama talebiniz başarıyla kaydedilmiştir.</p>
+        <p>{% trans "Avrasya Üniversitesi'ne gösterdiğiniz ilgi için teşekkür ederiz. Geri arama talebiniz başarıyla kaydedilmiştir." %}</p>
         
         <div class="info-box">
-            <h3 style="color: #1d61a9; margin-top: 0;">Talep Bilgileriniz</h3>
-            <p><strong>Ad Soyad:</strong> {{ callback.full_name }}</p>
-            <p><strong>E-posta:</strong> {{ callback.email }}</p>
-            <p><strong>Telefon:</strong> {{ callback.phone }}</p>
-            <p><strong>Talep Tarihi:</strong> {{ callback.created_at|date:"d F Y H:i" }}</p>
+            <h3 style="color: #1d61a9; margin-top: 0;">{% trans "Talep Bilgileriniz" %}</h3>
+            <p><strong>{% trans "Ad Soyad:" %}</strong> {{ callback.full_name }}</p>
+            <p><strong>{% trans "E-posta:" %}</strong> {{ callback.email }}</p>
+            <p><strong>{% trans "Telefon:" %}</strong> {{ callback.phone }}</p>
+            <p><strong>{% trans "Talep Tarihi:" %}</strong> {{ callback.created_at|date:"d F Y H:i" }}</p>
         </div>
         
-        <p>En kısa sürede <strong>{{ callback.phone }}</strong> numaralı telefondan sizinle iletişime geçeceğiz.</p>
+        <p>{% trans "En kısa sürede" %} <strong>{{ callback.phone }}</strong> {% trans "numaralı telefondan sizinle iletişime geçeceğiz." %}</p>
         
-        <p>Eğer acil bir durum varsa veya sorularınız olursa, bizimle aşağıdaki iletişim kanallarından ulaşabilirsiniz:</p>
+        <p>{% trans "Eğer acil bir durum varsa veya sorularınız olursa, bizimle aşağıdaki iletişim kanallarından ulaşabilirsiniz:" %}</p>
         
         <div class="contact-info">
-            <p><strong>📞 Telefon:</strong> <a href="tel:+904621234567">+90 (462) 123 45 67</a></p>
-            <p><strong>✉️ E-posta:</strong> <a href="mailto:info@avrasya.edu.tr">info@avrasya.edu.tr</a></p>
-            <p><strong>🌐 Web:</strong> <a href="{{ site_url }}">{{ site_url }}</a></p>
+            <p><strong>{% trans "📞 Telefon:" %}</strong> <a href="tel:+904621234567">+90 (462) 123 45 67</a></p>
+            <p><strong>{% trans "✉️ E-posta:" %}</strong> <a href="mailto:info@avrasya.edu.tr">{% trans "info@avrasya.edu.tr" %}</a></p>
+            <p><strong>{% trans "🌐 Web:" %}</strong> <a href="{{ site_url }}">{{ site_url }}</a></p>
         </div>
         
-        <p style="margin-top: 30px;">Saygılarımızla,<br>
-        <strong>Avrasya Üniversitesi<br>
-        Öğrenci İşleri Daire Başkanlığı</strong></p>
+        <p style="margin-top: 30px;">{% trans "Saygılarımızla," %}<br>
+        <strong>{% trans "Avrasya Üniversitesi" %}<br>
+        {% trans "Öğrenci İşleri Daire Başkanlığı" %}</strong></p>
     </div>
     
     <div class="footer">
-        <p>Bu e-posta size Avrasya Üniversitesi tarafından gönderilmiştir.</p>
+        <p>{% trans "Bu e-posta size Avrasya Üniversitesi tarafından gönderilmiştir." %}</p>
         <p>&copy; {% now "Y" %} Avrasya Üniversitesi - Tüm hakları saklıdır.</p>
     </div>
 </body>

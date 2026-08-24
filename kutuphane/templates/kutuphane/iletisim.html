@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - İletişim{% endblock %}
 
@@ -17,9 +18,9 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">İletişim</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "İletişim" %}</h1>
                         <p class="lead mb-4">
-                            Avrasya Üniversitesi'nin tüm yerleşkeleri ve iletişim bilgileri
+                            {% trans "Avrasya Üniversitesi'nin tüm yerleşkeleri ve iletişim bilgileri" %}
                         </p>
                     </div>
                     <div class="col-md-4 text-center">
@@ -31,7 +32,7 @@
 
         <!-- Campus Cards Section -->
         <div class="container mb-5">
-            <h2 class="university-title">AVRASYA ÜNİVERSİTESİ</h2>
+            <h2 class="university-title">{% trans "AVRASYA ÜNİVERSİTESİ" %}</h2>
             
             <div class="row">
                 <!-- Peliti Yerleşkesi -->
@@ -40,25 +41,25 @@
                         <div class="campus-card">
                             <div class="campus-card-front">
                                 <div class="campus-image-container">
-                                    <img src="{% static 'img/peelitli.png' %}" alt="Pelitli Yerleşkesi" class="campus-image">
+                                    <img src="{% static 'img/peelitli.png' %}" alt="{% trans 'Pelitli Yerleşkesi' %}" class="campus-image">
                                     <div class="image-overlay"></div>
                                 </div>
-                                <h3 class="campus-name">PELİTLİ</h3>
-                                <p class="campus-location">Ortahisar / TR4820N</p>
-                                <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                                <h3 class="campus-name">{% trans "PELİTLİ" %}</h3>
+                                <p class="campus-location">{% trans "Ortahisar / TR4820N" %}</p>
+                                <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                             </div>
                             <div class="campus-card-back">
-                                <h3 class="back-campus-name">PELİTLİ YERLEŞKESİ</h3>
+                                <h3 class="back-campus-name">{% trans "PELİTLİ YERLEŞKESİ" %}</h3>
                                 <div class="contact-info">
                                     <div class="contact-item">
                                         <div class="contact-icon">
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="contact-text">
-                                            Arrasyon Üniversitesi<br>
-                                            Restolveğin Peliti Mühelfesi<br>
-                                            Otirmiyeti: Birhem, No:26/A<br>
-                                            Ortarlıson/TR4820N
+                                            {% trans "Arrasyon Üniversitesi" %}<br>
+                                            {% trans "Restolveğin Peliti Mühelfesi" %}<br>
+                                            {% trans "Otirmiyeti: Birhem, No:26/A" %}<br>
+                                            {% trans "Ortarlıson/TR4820N" %}
                                         </div>
                                     </div>
                                     <div class="contact-item">
@@ -71,7 +72,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                                <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                             </div>
                         </div>
                     </div>
@@ -83,24 +84,24 @@
                         <div class="campus-card">
                             <div class="campus-card-front">
                                 <div class="campus-image-container">
-                                    <img src="{% static 'img/yalincak.jpg' %}" alt="Yalıncak Yerleşkesi" class="campus-image">
+                                    <img src="{% static 'img/yalincak.jpg' %}" alt="{% trans 'Yalıncak Yerleşkesi' %}" class="campus-image">
                                     <div class="image-overlay"></div>
                                 </div>
-                                <h3 class="campus-name">YALINCAK</h3>
-                                <p class="campus-location">Ortahisar / Trabzon</p>
-                                <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                                <h3 class="campus-name">{% trans "YALINCAK" %}</h3>
+                                <p class="campus-location">{% trans "Ortahisar / Trabzon" %}</p>
+                                <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                             </div>
                             <div class="campus-card-back">
-                                <h3 class="back-campus-name">YALINCAK YERLEŞKESİ</h3>
+                                <h3 class="back-campus-name">{% trans "YALINCAK YERLEŞKESİ" %}</h3>
                                 <div class="contact-info">
                                     <div class="contact-item">
                                         <div class="contact-icon">
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="contact-text">
-                                            Yalıncak Mahallesi<br>
-                                            Bize Cad. No: 126/1<br>
-                                            Ortahtar / Trabzon
+                                            {% trans "Yalıncak Mahallesi" %}<br>
+                                            {% trans "Bize Cad. No: 126/1" %}<br>
+                                            {% trans "Ortahtar / Trabzon" %}
                                         </div>
                                     </div>
                                     <div class="contact-item">
@@ -113,7 +114,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                                <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                             </div>
                         </div>
                     </div>
@@ -125,23 +126,23 @@
                         <div class="campus-card">
                             <div class="campus-card-front">
                                 <div class="campus-image-container">
-                                    <img src="{% static 'img/kasustu-scaled.jpg' %}" alt="Kaşüstü Yerleşkesi" class="campus-image">
+                                    <img src="{% static 'img/kasustu-scaled.jpg' %}" alt="{% trans 'Kaşüstü Yerleşkesi' %}" class="campus-image">
                                     <div class="image-overlay"></div>
                                 </div>
-                                <h3 class="campus-name">KAŞÜSTÜ</h3>
-                                <p class="campus-location">Yomra / Trabzon</p>
-                                <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                                <h3 class="campus-name">{% trans "KAŞÜSTÜ" %}</h3>
+                                <p class="campus-location">{% trans "Yomra / Trabzon" %}</p>
+                                <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                             </div>
                             <div class="campus-card-back">
-                                <h3 class="back-campus-name">KAŞÜSTÜ YERLEŞKESİ</h3>
+                                <h3 class="back-campus-name">{% trans "KAŞÜSTÜ YERLEŞKESİ" %}</h3>
                                 <div class="contact-info">
                                     <div class="contact-item">
                                         <div class="contact-icon">
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="contact-text">
-                                            Koşüstü, Limramet Road<br>
-                                            02180 Yormu/Trabzon
+                                            {% trans "Koşüstü, Limramet Road" %}<br>
+                                            {% trans "02180 Yormu/Trabzon" %}
                                         </div>
                                     </div>
                                     <div class="contact-item">
@@ -154,7 +155,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                                <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                             </div>
                         </div>
                     </div>
@@ -166,24 +167,24 @@
                         <div class="campus-card">
                             <div class="campus-card-front">
                                 <div class="campus-image-container">
-                                    <img src="{% static 'img/yomra2.png' %}" alt="Yomra Yerleşkesi" class="campus-image">
+                                    <img src="{% static 'img/yomra2.png' %}" alt="{% trans 'Yomra Yerleşkesi' %}" class="campus-image">
                                     <div class="image-overlay"></div>
                                 </div>
-                                <h3 class="campus-name">YOMRA</h3>
-                                <p class="campus-location">Yomra / Trabzon</p>
-                                <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                                <h3 class="campus-name">{% trans "YOMRA" %}</h3>
+                                <p class="campus-location">{% trans "Yomra / Trabzon" %}</p>
+                                <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                             </div>
                             <div class="campus-card-back">
-                                <h3 class="back-campus-name">YOMRA YERLEŞKESİ</h3>
+                                <h3 class="back-campus-name">{% trans "YOMRA YERLEŞKESİ" %}</h3>
                                 <div class="contact-info">
                                     <div class="contact-item">
                                         <div class="contact-icon">
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="contact-text">
-                                            Sencok, Nüzümet Cd.<br>
-                                            BİZGÖ<br>
-                                            Yomro/Tirabzon
+                                            {% trans "Sencok, Nüzümet Cd." %}<br>
+                                            {% trans "BİZGÖ" %}<br>
+                                            {% trans "Yomro/Tirabzon" %}
                                         </div>
                                     </div>
                                     <div class="contact-item">
@@ -196,7 +197,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                                <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                             </div>
                         </div>
                     </div>

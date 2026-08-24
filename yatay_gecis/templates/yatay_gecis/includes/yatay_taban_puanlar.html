@@ -1,4 +1,5 @@
 {% extends 'yatay_gecis/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Taban Puanlar
 {% endblock %}
@@ -9,8 +10,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Taban Puanlar</h1>
-            <p>2018-2024 Yılları Arası Taban Puanları ve Başarı Sıralamaları</p>
+            <h1>{% trans "Taban Puanlar" %}</h1>
+            <p>{% trans "2018-2024 Yılları Arası Taban Puanları ve Başarı Sıralamaları" %}</p>
         </div>
     </div>
 </section>
@@ -34,8 +35,8 @@
                             <div class="info-card" style="background: var(--neutral-cream); border-left: 4px solid var(--secondary-medium-blue);">
                                 <i class="fas fa-info-circle" style="color: var(--secondary-medium-blue);"></i>
                                 <div>
-                                    <h6 style="color: var(--primary-dark-blue); margin-bottom: 5px;">Güncel 2024 YKS Verileri</h6>
-                                    <p style="color: var(--text-light); margin: 0; font-size: 0.9rem;">Tüm programların 2024 YKS taban puanları</p>
+                                    <h6 style="color: var(--primary-dark-blue); margin-bottom: 5px;">{% trans "Güncel 2024 YKS Verileri" %}</h6>
+                                    <p style="color: var(--text-light); margin: 0; font-size: 0.9rem;">{% trans "Tüm programların 2024 YKS taban puanları" %}</p>
                                 </div>
                             </div>
                         </div>
@@ -43,8 +44,8 @@
                             <div class="info-card" style="background: rgba(141, 212, 227, 0.1); border-left: 4px solid var(--accent-light-blue);">
                                 <i class="fas fa-chart-line" style="color: var(--accent-light-blue);"></i>
                                 <div>
-                                    <h6 style="color: var(--primary-dark-blue); margin-bottom: 5px;">7 Yıllık Veri</h6>
-                                    <p style="color: var(--text-light); margin: 0; font-size: 0.9rem;">2018-2024 arası karşılaştırma</p>
+                                    <h6 style="color: var(--primary-dark-blue); margin-bottom: 5px;">{% trans "7 Yıllık Veri" %}</h6>
+                                    <p style="color: var(--text-light); margin: 0; font-size: 0.9rem;">{% trans "2018-2024 arası karşılaştırma" %}</p>
                                 </div>
                             </div>
                         </div>
@@ -59,19 +60,19 @@
                                 <span class="input-group-text" style="background: var(--primary-dark-blue); color: white; border-color: var(--primary-dark-blue);">
                                     <i class="fas fa-search"></i>
                                 </span>
-                                <input type="text" class="form-control" id="searchInput" placeholder="Bölüm veya fakülte ara...">
+                                <input type="text" class="form-control" id="searchInput" placeholder="{% trans 'Bölüm veya fakülte ara...' %}">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" id="facultyFilter">
-                                <option value="">Tüm Fakülteler</option>
-                                <option value="Mühendislik ve Mimarlık Fakültesi">Mühendislik ve Mimarlık</option>
-                                <option value="Sağlık Bilimleri Fakültesi">Sağlık Bilimleri</option>
-                                <option value="Fen Edebiyat Fakültesi">Fen Edebiyat</option>
-                                <option value="İktisadi ve İdari Bilimler Fakültesi">İktisadi ve İdari Bilimler</option>
-                                <option value="Uygulamalı Bilimler Yüksekokulu">Uygulamalı Bilimler</option>
-                                <option value="Sağlık Hizmetleri Meslek Yüksekokulu">Sağlık Hizmetleri MYO</option>
-                                <option value="Meslek Yüksekokulu">Meslek Yüksekokulu</option>
+                                <option value="">{% trans "Tüm Fakülteler" %}</option>
+                                <option value="Mühendislik ve Mimarlık Fakültesi">{% trans "Mühendislik ve Mimarlık" %}</option>
+                                <option value="Sağlık Bilimleri Fakültesi">{% trans "Sağlık Bilimleri" %}</option>
+                                <option value="Fen Edebiyat Fakültesi">{% trans "Fen Edebiyat" %}</option>
+                                <option value="İktisadi ve İdari Bilimler Fakültesi">{% trans "İktisadi ve İdari Bilimler" %}</option>
+                                <option value="Uygulamalı Bilimler Yüksekokulu">{% trans "Uygulamalı Bilimler" %}</option>
+                                <option value="Sağlık Hizmetleri Meslek Yüksekokulu">{% trans "Sağlık Hizmetleri MYO" %}</option>
+                                <option value="Meslek Yüksekokulu">{% trans "Meslek Yüksekokulu" %}</option>
                             </select>
                         </div>
                     </div>
@@ -82,12 +83,12 @@
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="show2024" checked>
                                     <label class="form-check-label" for="show2024" style="color: var(--text-dark);">
-                                        2024 YKS Göster
+                                        {% trans "2024 YKS Göster" %}
                                     </label>
                                 </div>
                                 <div>
                                     <button class="btn btn-sm" style="background: var(--neutral-cream); color: var(--text-dark); border: 1px solid var(--accent-light-blue);" id="resetFilters">
-                                        <i class="fas fa-redo"></i> Sıfırla
+                                        <i class="fas fa-redo"></i> {% trans "Sıfırla" %}
                                     </button>
                                 </div>
                             </div>
@@ -97,9 +98,9 @@
 
                 <!-- اطلاعات نتیجه -->
                 <div class="result-info mb-3" style="padding: 10px 15px; background: rgba(141, 212, 227, 0.05); border-radius: 8px; border: 1px solid rgba(141, 212, 227, 0.2);">
-                    <span style="color: var(--text-dark);"><strong id="resultCount">0</strong> bölüm listeleniyor</span>
+                    <span style="color: var(--text-dark);"><strong id="resultCount">0</strong> {% trans "bölüm listeleniyor" %}</span>
                     <span class="ms-3" style="color: var(--text-light); font-size: 0.9rem;">
-                        <i class="fas fa-filter"></i> Filtreleme aktif
+                        <i class="fas fa-filter"></i> {% trans "Filtreleme aktif" %}
                     </span>
                 </div> {% endcomment %}
 
@@ -108,13 +109,13 @@
                     <table class="table table-hover" id="scoresTable">
                         <thead style="background: var(--primary-dark-blue); color: white;">
                             <tr>
-                                <th style="width: 30%;">Fakülte / Bölüm</th>
-                                <th style="width: 10%;">Puan Türü</th>
+                                <th style="width: 30%;">{% trans "Fakülte / Bölüm" %}</th>
+                                <th style="width: 10%;">{% trans "Puan Türü" %}</th>
                                 <th style="width: 12%; text-align: center;">2024</th>
                                 <th style="width: 12%; text-align: center;">2023</th>
                                 <th style="width: 12%; text-align: center;">2022</th>
                                 <th style="width: 12%; text-align: center;">2021</th>
-                                <th style="width: 12%; text-align: center;">Değişim</th>
+                                <th style="width: 12%; text-align: center;">{% trans "Değişim" %}</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody">
@@ -126,23 +127,23 @@
                 <!-- پیام خالی -->
                 <div id="noResults" class="text-center py-5 d-none">
                     <i class="fas fa-search fa-3x mb-3" style="color: var(--text-light); opacity: 0.5;"></i>
-                    <h5 style="color: var(--text-dark);">Sonuç bulunamadı</h5>
-                    <p style="color: var(--text-light);">Arama kriterlerinize uygun bölüm bulunamadı.</p>
+                    <h5 style="color: var(--text-dark);">{% trans "Sonuç bulunamadı" %}</h5>
+                    <p style="color: var(--text-light);">{% trans "Arama kriterlerinize uygun bölüm bulunamadı." %}</p>
                 </div>
 
                 <!-- دانلود ساده -->
                 <div class="simple-download mt-4">
                     <div class="d-flex align-items-center p-3" style="background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue)); border-radius: 10px;">
                         <div class="flex-grow-1">
-                            <h6 class="mb-1" style="color: white;">Tam Taban Puan Listesi</h6>
-                            <p class="mb-0" style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">PDF formatında indirin</p>
+                            <h6 class="mb-1" style="color: white;">{% trans "Tam Taban Puan Listesi" %}</h6>
+                            <p class="mb-0" style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">{% trans "PDF formatında indirin" %}</p>
                         </div>
                         <div>
                             <a href="{% static 'documents/taban-puan-cizelgesi-30.06.2025-1-2.pdf' %}" 
                                class="btn btn-sm" 
                                style="background: white; color: var(--primary-dark-blue); border: none;"
                                download>
-                                <i class="fas fa-download me-1"></i> İndir
+                                <i class="fas fa-download me-1"></i> {% trans "İndir" %}
                             </a>
                         </div>
                     </div>

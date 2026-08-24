@@ -1,12 +1,13 @@
 # app_name: odyometri/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     OdyometriEtkinlik, OdyometriFaaliyet, OdyometriFaaliyetGrubu, OdyometriFaaliyetGorseli, OdyometriDuyuru, OdyometriDersProgrami
 )
 
 @admin.register(OdyometriEtkinlik)
-class OdyometriEtkinlikAdmin(admin.ModelAdmin):
+class OdyometriEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class OdyometriDuyuruAdmin(admin.ModelAdmin):
         return OdyometriDuyuru.objects.all()
 
 @admin.register(OdyometriDersProgrami)
-class OdyometriDersProgramiAdmin(admin.ModelAdmin):
+class OdyometriDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class OdyometriFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(OdyometriFaaliyetGrubu)
-class OdyometriFaaliyetGrubuAdmin(admin.ModelAdmin):
+class OdyometriFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(OdyometriFaaliyet)
-class OdyometriFaaliyetAdmin(admin.ModelAdmin):
+class OdyometriFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

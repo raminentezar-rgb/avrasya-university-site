@@ -1,12 +1,13 @@
 # app_name: elektronorofizyoloji/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     ElektronorofizyolojiEtkinlik, ElektronorofizyolojiFaaliyetGorseli, ElektronorofizyolojiDersProgrami, ElektronorofizyolojiDuyuru, ElektronorofizyolojiFaaliyetGrubu, ElektronorofizyolojiFaaliyet
 )
 
 @admin.register(ElektronorofizyolojiEtkinlik)
-class ElektronorofizyolojiEtkinlikAdmin(admin.ModelAdmin):
+class ElektronorofizyolojiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class ElektronorofizyolojiDuyuruAdmin(admin.ModelAdmin):
         return ElektronorofizyolojiDuyuru.objects.all()
 
 @admin.register(ElektronorofizyolojiDersProgrami)
-class ElektronorofizyolojiDersProgramiAdmin(admin.ModelAdmin):
+class ElektronorofizyolojiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class ElektronorofizyolojiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(ElektronorofizyolojiFaaliyetGrubu)
-class ElektronorofizyolojiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class ElektronorofizyolojiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(ElektronorofizyolojiFaaliyet)
-class ElektronorofizyolojiFaaliyetAdmin(admin.ModelAdmin):
+class ElektronorofizyolojiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

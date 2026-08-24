@@ -1,5 +1,6 @@
 <!-- rektor_yardimcilari.html -->
 {% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Rektör Yardımcıları{% endblock %}
@@ -10,10 +11,9 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">REKTÖR YARDIMCILARI</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "REKTÖR YARDIMCILARI" %}</h1>
                 <p class="lead mb-4">
-                    Üniversitemizin akademik ve idari süreçlerinde 
-                    Rektör'e destek olan deneyimli akademisyenler
+                    {% trans "Üniversitemizin akademik ve idari süreçlerinde Rektör'e destek olan deneyimli akademisyenler" %}
                 </p>
             </div>
             <div class="col-md-4 text-center">
@@ -33,12 +33,12 @@
                     <div class="card-header-rektor bg-primary text-white py-4">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h2 class="mb-1">Prof. Dr. Yavuz ÖZORAN</h2>
-                                <p class="mb-0 opacity-75">Rektör Yardımcısı</p>
+                                <h2 class="mb-1">{% trans "Prof. Dr. Yavuz ÖZORAN" %}</h2>
+                                <p class="mb-0 opacity-75">{% trans "Rektör Yardımcısı" %}</p>
                             </div>
                             <div class="col-md-4 text-md-end">
                                 <a href="mailto:yavuz.ozoran@avrasya.edu.tr" class="btn btn-light btn-sm">
-                                    <i class="bi bi-envelope me-2"></i>E-posta Gönder
+                                    <i class="bi bi-envelope me-2"></i>{% trans "E-posta Gönder" %}
                                 </a>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                 <div class="p-4 text-center">
                                     <div class="rector-photo-wrapper mb-3">
                                         <img src="{% static 'avrasya_universitesi_yonetim/images/a10.jpg' %}" 
-                                             alt="Prof. Dr. Yavuz ÖZORAN" 
+                                             alt="{% trans 'Prof. Dr. Yavuz ÖZORAN' %}" 
                                              class="rector-photo img-fluid">
                                         <div class="photo-overlay"></div>
                                     </div>
@@ -58,7 +58,7 @@
                                         <p class="mb-2">
                                             <i class="bi bi-envelope-fill text-primary me-2"></i>
                                             <a href="mailto:yavuz.ozoran@avrasya.edu.tr" class="text-decoration-none">
-                                                yavuz.ozoran@avrasya.edu.tr
+                                                {% trans "yavuz.ozoran@avrasya.edu.tr" %}
                                             </a>
                                         </p>
                                     </div>
@@ -70,7 +70,7 @@
                                 <div class="p-4">
                                     <h4 class="section-title mb-4">
                                         <i class="bi bi-diagram-3 me-2 text-primary"></i>
-                                        Görev Dağılımı
+                                        {% trans "Görev Dağılımı" %}
                                     </h4>
                                     
                                     <div class="row">
@@ -80,16 +80,16 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-building me-2"></i>
-                                                        Akademik Birimler
+                                                        {% trans "Akademik Birimler" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul class="responsibility-list">
-                                                        <li>Sağlık Bilimleri Fakültesi</li>
-                                                        <li>Uygulamalı Bilimler Yüksekokulu</li>
-                                                        <li>Lisansüstü Eğitim Enstitüsü</li>
-                                                        <li>Sağlık Hizmetleri Meslek Yüksekokulu</li>
-                                                        <li>Yabancı Diller Yüksekokulu</li>
+                                                        <li>{% trans "Sağlık Bilimleri Fakültesi" %}</li>
+                                                        <li>{% trans "Uygulamalı Bilimler Yüksekokulu" %}</li>
+                                                        <li>{% trans "Lisansüstü Eğitim Enstitüsü" %}</li>
+                                                        <li>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</li>
+                                                        <li>{% trans "Yabancı Diller Yüksekokulu" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -101,17 +101,17 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-search me-2"></i>
-                                                        Araştırma Merkezleri
+                                                        {% trans "Araştırma Merkezleri" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul class="responsibility-list">
-                                                        <li>Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi</li>
-                                                        <li>Uzaktan Eğitim Uygulama ve Araştırma Merkezi</li>
-                                                        <li>Kariyer Geliştirme Uygulama ve Araştırma Merkezi</li>
-                                                        <li>Gıda Eğitim Uygulama ve Araştırma Merkezi</li>
-                                                        <li>Sürekli Eğitim Merkezi</li>
-                                                        <li>Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi</li>
+                                                        <li>{% trans "Bağımlılıkla Mücadele Uygulama ve Araştırma Merkezi" %}</li>
+                                                        <li>{% trans "Uzaktan Eğitim Uygulama ve Araştırma Merkezi" %}</li>
+                                                        <li>{% trans "Kariyer Geliştirme Uygulama ve Araştırma Merkezi" %}</li>
+                                                        <li>{% trans "Gıda Eğitim Uygulama ve Araştırma Merkezi" %}</li>
+                                                        <li>{% trans "Sürekli Eğitim Merkezi" %}</li>
+                                                        <li>{% trans "Teknoloji Transfer Ofisi Uygulama ve Araştırma Merkezi" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -125,13 +125,13 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-gear me-2"></i>
-                                                        Koordinatörlük
+                                                        {% trans "Koordinatörlük" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul class="responsibility-list">
-                                                        <li>Kalite ve Akreditasyon Koordinatörlüğü</li>
-                                                        <li>Dış İlişkiler Koordinatörlüğü (Erasmus-Farabi-Mevlana)</li>
+                                                        <li>{% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}</li>
+                                                        <li>{% trans "Dış İlişkiler Koordinatörlüğü (Erasmus-Farabi-Mevlana)" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -143,14 +143,14 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-people me-2"></i>
-                                                        Komisyonlar
+                                                        {% trans "Komisyonlar" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul class="responsibility-list">
-                                                        <li>Etik Kurul Komisyonu</li>
-                                                        <li>Bologna Eşgüdüm Komisyonu</li>
-                                                        <li>Eğitim, Ölçme ve Değerlendirme Komisyonu</li>
+                                                        <li>{% trans "Etik Kurul Komisyonu" %}</li>
+                                                        <li>{% trans "Bologna Eşgüdüm Komisyonu" %}</li>
+                                                        <li>{% trans "Eğitim, Ölçme ve Değerlendirme Komisyonu" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -164,11 +164,11 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-clipboard-check me-2"></i>
-                                                        Diğer Sorumluluklar
+                                                        {% trans "Diğer Sorumluluklar" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <p class="mb-0">Merkezi Sınav Hizmetleri Birimi</p>
+                                                    <p class="mb-0">{% trans "Merkezi Sınav Hizmetleri Birimi" %}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,12 +188,12 @@
                     <div class="card-header-rektor bg-success text-white py-4">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h2 class="mb-1">Prof. Dr. Celalettin KARALİ</h2>
-                                <p class="mb-0 opacity-75">Rektör Yardımcısı</p>
+                                <h2 class="mb-1">{% trans "Prof. Dr. Celalettin KARALİ" %}</h2>
+                                <p class="mb-0 opacity-75">{% trans "Rektör Yardımcısı" %}</p>
                             </div>
                             <div class="col-md-4 text-md-end">
                                 <a href="mailto:celalettin.karali@avrasya.edu.tr" class="btn btn-light btn-sm">
-                                    <i class="bi bi-envelope me-2"></i>E-posta Gönder
+                                    <i class="bi bi-envelope me-2"></i>{% trans "E-posta Gönder" %}
                                 </a>
                             </div>
                         </div>
@@ -205,7 +205,7 @@
                                 <div class="p-4 text-center">
                                     <div class="rector-photo-wrapper mb-3">
                                         <img src="{% static 'avrasya_universitesi_yonetim/images/celalettin-karali.jpeg' %}" 
-                                             alt="Prof. Dr. Celalettin KARALİ" 
+                                             alt="{% trans 'Prof. Dr. Celalettin KARALİ' %}" 
                                              class="rector-photo img-fluid">
                                         <div class="photo-overlay"></div>
                                     </div>
@@ -213,7 +213,7 @@
                                         <p class="mb-2">
                                             <i class="bi bi-envelope-fill text-success me-2"></i>
                                             <a href="mailto:celalettin.karali@avrasya.edu.tr" class="text-decoration-none">
-                                                celalettin.karali@avrasya.edu.tr
+                                                {% trans "celalettin.karali@avrasya.edu.tr" %}
                                             </a>
                                         </p>
                                     </div>
@@ -225,7 +225,7 @@
                                 <div class="p-4">
                                     <h4 class="section-title mb-4">
                                         <i class="bi bi-diagram-3 me-2 text-success"></i>
-                                        Görev Dağılımı
+                                        {% trans "Görev Dağılımı" %}
                                     </h4>
                                     
                                     <div class="row">
@@ -235,17 +235,17 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-building me-2"></i>
-                                                        Akademik Birimler
+                                                        {% trans "Akademik Birimler" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul class="responsibility-list">
-                                                        <li>Fen-Edebiyat Fakültesi</li>
-                                                        <li>Mühendislik Mimarlık Fakültesi</li>
-                                                        <li>İktisadi ve İdari Bilimler Fakültesi</li>
-                                                        <li>Spor Bilimleri Fakültesi</li>
-                                                        <li>Meslek Yüksekokulu</li>
-                                                        <li>İletişim Fakültesi</li>
+                                                        <li>{% trans "Fen-Edebiyat Fakültesi" %}</li>
+                                                        <li>{% trans "Mühendislik Mimarlık Fakültesi" %}</li>
+                                                        <li>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</li>
+                                                        <li>{% trans "Spor Bilimleri Fakültesi" %}</li>
+                                                        <li>{% trans "Meslek Yüksekokulu" %}</li>
+                                                        <li>{% trans "İletişim Fakültesi" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -257,16 +257,16 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-search me-2"></i>
-                                                        Araştırma Merkezleri
+                                                        {% trans "Araştırma Merkezleri" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul class="responsibility-list">
-                                                        <li>Kadın Çalışmaları Uygulama ve Araştırma Merkezi</li>
-                                                        <li>Girişimcilik ve Yenilikçilik Uygulama ve Araştırma Merkezi</li>
-                                                        <li>Göç Çalışmaları Uygulama ve Araştırma Merkezi</li>
-                                                        <li>Türkçe Öğretimi Uygulama ve Araştırma Merkezi</li>
-                                                        <li>Ulaştırma Uygulama ve Araştırma Merkezi</li>
+                                                        <li>{% trans "Kadın Çalışmaları Uygulama ve Araştırma Merkezi" %}</li>
+                                                        <li>{% trans "Girişimcilik ve Yenilikçilik Uygulama ve Araştırma Merkezi" %}</li>
+                                                        <li>{% trans "Göç Çalışmaları Uygulama ve Araştırma Merkezi" %}</li>
+                                                        <li>{% trans "Türkçe Öğretimi Uygulama ve Araştırma Merkezi" %}</li>
+                                                        <li>{% trans "Ulaştırma Uygulama ve Araştırma Merkezi" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -280,13 +280,13 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-gear me-2"></i>
-                                                        Koordinatörlük
+                                                        {% trans "Koordinatörlük" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul class="responsibility-list">
-                                                        <li>Dijital Dönüşüm Ofisi Koordinatörlüğü</li>
-                                                        <li>Bilimsel Araştırma Projeleri (BAP) Koordinatörlüğü</li>
+                                                        <li>{% trans "Dijital Dönüşüm Ofisi Koordinatörlüğü" %}</li>
+                                                        <li>{% trans "Bilimsel Araştırma Projeleri (BAP) Koordinatörlüğü" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -298,14 +298,14 @@
                                                 <div class="card-header-responsibility">
                                                     <h5 class="mb-0">
                                                         <i class="bi bi-people me-2"></i>
-                                                        Komisyonlar
+                                                        {% trans "Komisyonlar" %}
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul class="responsibility-list">
-                                                        <li>Mevzuat Komisyonu</li>
-                                                        <li>Muafiyet ve İntibak Komisyonu</li>
-                                                        <li>Yabancı Uyruklu Öğretim Elemanı İnceleme ve Değerlendirme Komisyonu</li>
+                                                        <li>{% trans "Mevzuat Komisyonu" %}</li>
+                                                        <li>{% trans "Muafiyet ve İntibak Komisyonu" %}</li>
+                                                        <li>{% trans "Yabancı Uyruklu Öğretim Elemanı İnceleme ve Değerlendirme Komisyonu" %}</li>
                                                     </ul>
                                                 </div>
                                             </div>

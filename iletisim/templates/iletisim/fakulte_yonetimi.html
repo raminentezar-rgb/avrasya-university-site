@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - İletişim Fakültesi Yönetim{% endblock %}
 
@@ -17,19 +18,19 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">İletişim Fakülte Yönetimi</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "İletişim Fakülte Yönetimi" %}</h1>
                         {% comment %} <p class="lead mb-4">
-                            İktisad ve İdari Fakültesi'nin deneyimli ve dinamik yönetim kadrosu ile tanışın.
+                            {% trans "İktisad ve İdari Fakültesi'nin deneyimli ve dinamik yönetim kadrosu ile tanışın." %}
                         </p>
                         <div class="d-flex gap-3">
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-person-gear me-1"></i>Uzman Yönetim
+                                <i class="bi bi-person-gear me-1"></i>{% trans "Uzman Yönetim" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-diagram-3 me-1"></i>Organizasyon
+                                <i class="bi bi-diagram-3 me-1"></i>{% trans "Organizasyon" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-graph-up me-1"></i>Stratejik Planlama
+                                <i class="bi bi-graph-up me-1"></i>{% trans "Stratejik Planlama" %}
                             </span>
                         </div> {% endcomment %}
                     </div>
@@ -43,25 +44,25 @@
         <!-- Dekan Section -->
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-primary text-white py-3">
-                <h4 class="mb-0"><i class="bi bi-person-fill-gear me-2"></i>Dekanlık</h4>
+                <h4 class="mb-0"><i class="bi bi-person-fill-gear me-2"></i>{% trans "Dekanlık" %}</h4>
             </div>
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-4 text-center mb-4 mb-md-0">
                         <div class="management-profile-img mx-auto">
-                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="Prof. Dr. Örnek DEKAN" class="management-photo">
+                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="{% trans 'Prof. Dr. Örnek DEKAN' %}" class="management-photo">
                         </div>
                     </div>
                     <div class="col-md-8">
                         <h3 class="text-primary mb-2"></h3>
-                        <p class="text-muted mb-3">İktisadi ve İdari Fakültesi Dekanı</p>
+                        <p class="text-muted mb-3">{% trans "İktisadi ve İdari Fakültesi Dekanı" %}</p>
                         
                         <div class="contact-info mb-4">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center mb-2">
                                         <i class="bi bi-envelope text-primary me-2"></i>
-                                        <a href="mailto:dekan@avrasya.edu.tr" class="text-decoration-none">umit.uzman@avrasya.edu.trr</a>
+                                        <a href="mailto:dekan@avrasya.edu.tr" class="text-decoration-none">{% trans "umit.uzman@avrasya.edu.trr" %}</a>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
                                         <i class="bi bi-telephone text-primary me-2"></i>
@@ -71,7 +72,7 @@
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center mb-2">
                                         <i class="bi bi-geo-alt text-primary me-2"></i>
-                                        <span>Dekanlık Ofisi, A Blok Kat: 3</span>
+                                        <span>{% trans "Dekanlık Ofisi, A Blok Kat: 3" %}</span>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <i class="bi bi-clock text-primary me-2"></i>
@@ -82,12 +83,9 @@
                         </div>
 
                         <div class="dekan-message">
-                            <h6 class="text-primary mb-2">Dekan Mesajı</h6>
+                            <h6 class="text-primary mb-2">{% trans "Dekan Mesajı" %}</h6>
                             <p class="text-muted">
-                                "İktisad ve İdari olarak, bilim ve sanatı buluşturan, evrensel değerleri 
-                                benimseyen, araştırmacı ve yaratıcı bireyler yetiştirmeyi hedefliyoruz. 
-                                Fakültemiz, alanında uzman akademik kadrosu ve modern alt yapısı ile 
-                                öğrencilerimize en iyi eğitim ortamını sunmaktadır."
+                                {% trans "\"İktisad ve İdari olarak, bilim ve sanatı buluşturan, evrensel değerleri benimseyen, araştırmacı ve yaratıcı bireyler yetiştirmeyi hedefliyoruz. Fakültemiz, alanında uzman akademik kadrosu ve modern alt yapısı ile öğrencilerimize en iyi eğitim ortamını sunmaktadır.\"" %}
                             </p>
                         </div>
                     </div>
@@ -100,19 +98,19 @@
             <div class="col-md-6 mb-4">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-success text-white py-3">
-                        <h5 class="mb-0"><i class="bi bi-person-fill me-2"></i>Dekan Yardımcısı</h5>
+                        <h5 class="mb-0"><i class="bi bi-person-fill me-2"></i>{% trans "Dekan Yardımcısı" %}</h5>
                     </div>
                     <div class="card-body text-center">
                         <div class="management-profile-img-sm mx-auto mb-3">
-                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR" class="management-photo">
+                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="{% trans 'Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR' %}" class="management-photo">
                         </div>
                         <h5 class="text-success mb-1"></h5>
-                        <p class="text-muted mb-3">Dekan Yardımcısı</p>
+                        <p class="text-muted mb-3">{% trans "Dekan Yardımcısı" %}</p>
                         
                         <div class="contact-info-sm">
                             <div class="d-flex align-items-center justify-content-center mb-2">
                                 <i class="bi bi-envelope text-success me-2"></i>
-                                <a href="mailto:dekan.yardimcisi1@avrasya.edu.tr" class="text-decoration-none">emrah.yildirimcakar@avrasya.edu.tr</a>
+                                <a href="mailto:dekan.yardimcisi1@avrasya.edu.tr" class="text-decoration-none">{% trans "emrah.yildirimcakar@avrasya.edu.tr" %}</a>
                             </div>
                             <div class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-telephone text-success me-2"></i>
@@ -121,11 +119,11 @@
                         </div>
 
                         <div class="responsibilities mt-3">
-                            <h6 class="text-success mb-2">Sorumluluk Alanları</h6>
+                            <h6 class="text-success mb-2">{% trans "Sorumluluk Alanları" %}</h6>
                             <ul class="list-unstyled text-muted small">
-                                <li><i class="bi bi-check-circle text-success me-1"></i> Eğitim-Öğretim İşleri</li>
-                                <li><i class="bi bi-check-circle text-success me-1"></i> Öğrenci İşleri</li>
-                                <li><i class="bi bi-check-circle text-success me-1"></i> Kalite Güvence</li>
+                                <li><i class="bi bi-check-circle text-success me-1"></i> {% trans "Eğitim-Öğretim İşleri" %}</li>
+                                <li><i class="bi bi-check-circle text-success me-1"></i> {% trans "Öğrenci İşleri" %}</li>
+                                <li><i class="bi bi-check-circle text-success me-1"></i> {% trans "Kalite Güvence" %}</li>
                             </ul>
                         </div>
                     </div>
@@ -135,21 +133,21 @@
             <div class="col-md-6 mb-4">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-info text-white py-3">
-                        <h5 class="mb-0"><i class="bi bi-person-fill me-2"></i>Dekan Yardımcısı</h5>
+                        <h5 class="mb-0"><i class="bi bi-person-fill me-2"></i>{% trans "Dekan Yardımcısı" %}</h5>
                     </div>
                     <div class="card-body text-center">
                         <div class="management-profile-img-sm mx-auto mb-3">
-                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Erdoğan ALTUNDEKAN YRD." class="management-photo">
+                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="{% trans 'Dr. Öğr. Üyesi Erdoğan ALTUNDEKAN YRD.' %}" class="management-photo">
 
                         </div>
                         <h5 class="text-info mb-1"></h5>
 
-                        <p class="text-muted mb-3">Dekan Yardımcısı</p>
+                        <p class="text-muted mb-3">{% trans "Dekan Yardımcısı" %}</p>
                         
                         <div class="contact-info-sm">
                             <div class="d-flex align-items-center justify-content-center mb-2">
                                 <i class="bi bi-envelope text-info me-2"></i>
-                                <a href="mailto:dekan.yardimcisi2@avrasya.edu.tr" class="text-decoration-none">erdogan.altun@avrasya.edu.tr</a>
+                                <a href="mailto:dekan.yardimcisi2@avrasya.edu.tr" class="text-decoration-none">{% trans "erdogan.altun@avrasya.edu.tr" %}</a>
                             </div>
                             <div class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-telephone text-info me-2"></i>
@@ -158,11 +156,11 @@
                         </div>
 
                         <div class="responsibilities mt-3">
-                            <h6 class="text-info mb-2">Sorumluluk Alanları</h6>
+                            <h6 class="text-info mb-2">{% trans "Sorumluluk Alanları" %}</h6>
                             <ul class="list-unstyled text-muted small">
-                                <li><i class="bi bi-check-circle text-info me-1"></i> Araştırma-Proje İşleri</li>
-                                <li><i class="bi bi-check-circle text-info me-1"></i> Sosyal Etkinlikler</li>
-                                <li><i class="bi bi-check-circle text-info me-1"></i> Uluslararası İlişkiler</li>
+                                <li><i class="bi bi-check-circle text-info me-1"></i> {% trans "Araştırma-Proje İşleri" %}</li>
+                                <li><i class="bi bi-check-circle text-info me-1"></i> {% trans "Sosyal Etkinlikler" %}</li>
+                                <li><i class="bi bi-check-circle text-info me-1"></i> {% trans "Uluslararası İlişkiler" %}</li>
                             </ul>
                         </div>
                     </div>
@@ -173,7 +171,7 @@
         {% comment %} <!-- Fakülte Kurulu Section -->
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-warning text-white py-3">
-                <h4 class="mb-0"><i class="bi bi-people-fill me-2"></i>Fakülte Kurulu</h4>
+                <h4 class="mb-0"><i class="bi bi-people-fill me-2"></i>{% trans "Fakülte Kurulu" %}</h4>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -181,13 +179,13 @@
                         <div class="d-flex align-items-center p-3 bg-light rounded">
                             <div class="flex-shrink-0">
                                 <div class="faculty-council-img">
-                                    <img src="{% static 'fen_edebiyat/images/akademik-kadro/Sermin-Onder.jpg' %}" alt="Prof. Dr. Şermin ÖNDER" class="council-photo">
+                                    <img src="{% static 'fen_edebiyat/images/akademik-kadro/Sermin-Onder.jpg' %}" alt="{% trans 'Prof. Dr. Şermin ÖNDER' %}" class="council-photo">
                                 </div>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-1">Prof. Dr. Şermin ÖNDER</h6>
-                                <p class="text-muted small mb-1">Psikoloji Bölümü</p>
-                                <span class="badge bg-warning">Kurul Üyesi</span>
+                                <h6 class="mb-1">{% trans "Prof. Dr. Şermin ÖNDER" %}</h6>
+                                <p class="text-muted small mb-1">{% trans "Psikoloji Bölümü" %}</p>
+                                <span class="badge bg-warning">{% trans "Kurul Üyesi" %}</span>
                             </div>
                         </div>
                     </div>
@@ -196,13 +194,13 @@
                         <div class="d-flex align-items-center p-3 bg-light rounded">
                             <div class="flex-shrink-0">
                                 <div class="faculty-council-img">
-                                    <img src="{% static 'fen_edebiyat/images/akademik-kadro/deniz-ugur.jpg' %}" alt="Dr. Öğr. Üyesi Deniz UĞUR" class="council-photo">
+                                    <img src="{% static 'fen_edebiyat/images/akademik-kadro/deniz-ugur.jpg' %}" alt="{% trans 'Dr. Öğr. Üyesi Deniz UĞUR' %}" class="council-photo">
                                 </div>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-1">Dr. Öğr. Üyesi Deniz UĞUR</h6>
-                                <p class="text-muted small mb-1">Moleküler Biyoloji ve Genetik</p>
-                                <span class="badge bg-warning">Kurul Üyesi</span>
+                                <h6 class="mb-1">{% trans "Dr. Öğr. Üyesi Deniz UĞUR" %}</h6>
+                                <p class="text-muted small mb-1">{% trans "Moleküler Biyoloji ve Genetik" %}</p>
+                                <span class="badge bg-warning">{% trans "Kurul Üyesi" %}</span>
                             </div>
                         </div>
                     </div>
@@ -211,13 +209,13 @@
                         <div class="d-flex align-items-center p-3 bg-light rounded">
                             <div class="flex-shrink-0">
                                 <div class="faculty-council-img">
-                                    <img src="{% static 'fen_edebiyat/images/akademik-kadro/abdullah-hoca.jpg' %}" alt="Dr. Öğr. Üyesi Abdullah ÇELİK" class="council-photo">
+                                    <img src="{% static 'fen_edebiyat/images/akademik-kadro/abdullah-hoca.jpg' %}" alt="{% trans 'Dr. Öğr. Üyesi Abdullah ÇELİK' %}" class="council-photo">
                                 </div>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-1">Dr. Öğr. Üyesi Abdullah ÇELİK</h6>
-                                <p class="text-muted small mb-1">Türk Dili ve Edebiyatı</p>
-                                <span class="badge bg-warning">Kurul Üyesi</span>
+                                <h6 class="mb-1">{% trans "Dr. Öğr. Üyesi Abdullah ÇELİK" %}</h6>
+                                <p class="text-muted small mb-1">{% trans "Türk Dili ve Edebiyatı" %}</p>
+                                <span class="badge bg-warning">{% trans "Kurul Üyesi" %}</span>
                             </div>
                         </div>
                     </div>
@@ -226,13 +224,13 @@
                         <div class="d-flex align-items-center p-3 bg-light rounded">
                             <div class="flex-shrink-0">
                                 <div class="faculty-council-img">
-                                    <img src="{% static 'fen_edebiyat/images/akademik-kadro/SHIRIN-SADAGHIAN.jpeg' %}" alt="Dr. Öğr. Üyesi Shırın SADAGHIAN" class="council-photo">
+                                    <img src="{% static 'fen_edebiyat/images/akademik-kadro/SHIRIN-SADAGHIAN.jpeg' %}" alt="{% trans 'Dr. Öğr. Üyesi Shırın SADAGHIAN' %}" class="council-photo">
                                 </div>
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-1">Dr. Öğr. Üyesi Shırın SADAGHIAN</h6>
-                                <p class="text-muted small mb-1">İngiliz Dili ve Edebiyatı</p>
-                                <span class="badge bg-warning">Kurul Üyesi</span>
+                                <h6 class="mb-1">{% trans "Dr. Öğr. Üyesi Shırın SADAGHIAN" %}</h6>
+                                <p class="text-muted small mb-1">{% trans "İngiliz Dili ve Edebiyatı" %}</p>
+                                <span class="badge bg-warning">{% trans "Kurul Üyesi" %}</span>
                             </div>
                         </div>
                     </div>
@@ -243,21 +241,21 @@
         <!-- İdari Personel Section -->
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-secondary text-white py-3">
-                <h4 class="mb-0"><i class="bi bi-person-lines-fill me-2"></i>İdari Personel</h4>
+                <h4 class="mb-0"><i class="bi bi-person-lines-fill me-2"></i>{% trans "İdari Personel" %}</h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <div class="text-center">
                             <div class="admin-staff-img mx-auto mb-3">
-                                <img src="{% static 'fen_edebiyat/images/yonetim/idari-personel-1.jpg' %}" alt="Fakülte Sekreteri" class="staff-photo">
+                                <img src="{% static 'fen_edebiyat/images/yonetim/idari-personel-1.jpg' %}" alt="{% trans 'Fakülte Sekreteri' %}" class="staff-photo">
                             </div>
-                            <h6 class="mb-1">Ayşe DEMİR</h6>
-                            <p class="text-muted small mb-2">Fakülte Sekreteri</p>
+                            <h6 class="mb-1">{% trans "Ayşe DEMİR" %}</h6>
+                            <p class="text-muted small mb-2">{% trans "Fakülte Sekreteri" %}</p>
                             <div class="contact-info-sm">
                                 <div class="d-flex align-items-center justify-content-center mb-1">
                                     <i class="bi bi-envelope text-secondary me-1"></i>
-                                    <small><a href="mailto:ayse.demir@avrasya.edu.tr" class="text-decoration-none">ayse.demir@avrasya.edu.tr</a></small>
+                                    <small><a href="mailto:ayse.demir@avrasya.edu.tr" class="text-decoration-none">{% trans "ayse.demir@avrasya.edu.tr" %}</a></small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <i class="bi bi-telephone text-secondary me-1"></i>
@@ -270,14 +268,14 @@
                     <div class="col-md-4 mb-4">
                         <div class="text-center">
                             <div class="admin-staff-img mx-auto mb-3">
-                                <img src="{% static 'fen_edebiyat/images/yonetim/idari-personel-2.jpg' %}" alt="Öğrenci İşleri Sorumlusu" class="staff-photo">
+                                <img src="{% static 'fen_edebiyat/images/yonetim/idari-personel-2.jpg' %}" alt="{% trans 'Öğrenci İşleri Sorumlusu' %}" class="staff-photo">
                             </div>
-                            <h6 class="mb-1">Mehmet YILMAZ</h6>
-                            <p class="text-muted small mb-2">Öğrenci İşleri Sorumlusu</p>
+                            <h6 class="mb-1">{% trans "Mehmet YILMAZ" %}</h6>
+                            <p class="text-muted small mb-2">{% trans "Öğrenci İşleri Sorumlusu" %}</p>
                             <div class="contact-info-sm">
                                 <div class="d-flex align-items-center justify-content-center mb-1">
                                     <i class="bi bi-envelope text-secondary me-1"></i>
-                                    <small><a href="mailto:mehmet.yilmaz@avrasya.edu.tr" class="text-decoration-none">mehmet.yilmaz@avrasya.edu.tr</a></small>
+                                    <small><a href="mailto:mehmet.yilmaz@avrasya.edu.tr" class="text-decoration-none">{% trans "mehmet.yilmaz@avrasya.edu.tr" %}</a></small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <i class="bi bi-telephone text-secondary me-1"></i>
@@ -290,14 +288,14 @@
                     <div class="col-md-4 mb-4">
                         <div class="text-center">
                             <div class="admin-staff-img mx-auto mb-3">
-                                <img src="{% static 'fen_edebiyat/images/yonetim/idari-personel-3.jpg' %}" alt="Evrak ve Arşiv Sorumlusu" class="staff-photo">
+                                <img src="{% static 'fen_edebiyat/images/yonetim/idari-personel-3.jpg' %}" alt="{% trans 'Evrak ve Arşiv Sorumlusu' %}" class="staff-photo">
                             </div>
-                            <h6 class="mb-1">Zeynep KAYA</h6>
-                            <p class="text-muted small mb-2">Evrak ve Arşiv Sorumlusu</p>
+                            <h6 class="mb-1">{% trans "Zeynep KAYA" %}</h6>
+                            <p class="text-muted small mb-2">{% trans "Evrak ve Arşiv Sorumlusu" %}</p>
                             <div class="contact-info-sm">
                                 <div class="d-flex align-items-center justify-content-center mb-1">
                                     <i class="bi bi-envelope text-secondary me-1"></i>
-                                    <small><a href="mailto:zeynep.kaya@avrasya.edu.tr" class="text-decoration-none">zeynep.kaya@avrasya.edu.tr</a></small>
+                                    <small><a href="mailto:zeynep.kaya@avrasya.edu.tr" class="text-decoration-none">{% trans "zeynep.kaya@avrasya.edu.tr" %}</a></small>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <i class="bi bi-telephone text-secondary me-1"></i>

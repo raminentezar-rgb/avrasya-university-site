@@ -1,12 +1,13 @@
 # app_name: egzersiz/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     EgzersizFaaliyetGorseli, EgzersizFaaliyetGrubu, EgzersizDersProgrami, EgzersizFaaliyet, EgzersizDuyuru, EgzersizEtkinlik
 )
 
 @admin.register(EgzersizEtkinlik)
-class EgzersizEtkinlikAdmin(admin.ModelAdmin):
+class EgzersizEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class EgzersizDuyuruAdmin(admin.ModelAdmin):
         return EgzersizDuyuru.objects.all()
 
 @admin.register(EgzersizDersProgrami)
-class EgzersizDersProgramiAdmin(admin.ModelAdmin):
+class EgzersizDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class EgzersizFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(EgzersizFaaliyetGrubu)
-class EgzersizFaaliyetGrubuAdmin(admin.ModelAdmin):
+class EgzersizFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(EgzersizFaaliyet)
-class EgzersizFaaliyetAdmin(admin.ModelAdmin):
+class EgzersizFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

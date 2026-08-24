@@ -1,12 +1,13 @@
 # app_name: fizyoterapi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     FizyoterapiDuyuru, FizyoterapiFaaliyetGorseli, FizyoterapiEtkinlik, FizyoterapiFaaliyet, FizyoterapiFaaliyetGrubu, FizyoterapiDersProgrami
 )
 
 @admin.register(FizyoterapiEtkinlik)
-class FizyoterapiEtkinlikAdmin(admin.ModelAdmin):
+class FizyoterapiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class FizyoterapiDuyuruAdmin(admin.ModelAdmin):
         return FizyoterapiDuyuru.objects.all()
 
 @admin.register(FizyoterapiDersProgrami)
-class FizyoterapiDersProgramiAdmin(admin.ModelAdmin):
+class FizyoterapiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class FizyoterapiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(FizyoterapiFaaliyetGrubu)
-class FizyoterapiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class FizyoterapiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(FizyoterapiFaaliyet)
-class FizyoterapiFaaliyetAdmin(admin.ModelAdmin):
+class FizyoterapiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

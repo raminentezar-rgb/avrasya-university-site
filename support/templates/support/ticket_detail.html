@@ -1,12 +1,12 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block content %}
 <div class="page-header" style="margin-top: -100px; position: relative;">
     <div class="page-header-content">
-        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">Destek
-            Talebi Ayrıntıları</h1>
-        <p>Destek talebinizin durumunu takip edin</p>
+        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Destek Talebi Ayrıntıları" %}</h1>
+        <p>{% trans "Destek talebinizin durumunu takip edin" %}</p>
     </div>
 
     <!-- قسمت احراز هویت در گوشه بالا راست -->
@@ -22,15 +22,15 @@
             <!-- دکمه داشبورد -->
             {% if user.profile.role == 'student' %}
             <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-tachometer-alt"></i> Taleplerim
+                <i class="fas fa-tachometer-alt"></i> {% trans "Taleplerim" %}
             </a>
             {% elif user.profile.role == 'staff' %}
             <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
+                <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
             </a>
             {% else %}
             <a href="/" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
+                <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
             </a>
             {% endif %}
 
@@ -38,7 +38,7 @@
             <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-outline-light btn-sm">
-                    <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                    <i class="fas fa-sign-out-alt"></i> {% trans "Çıkış Yap" %}
                 </button>
             </form>
         </div>
@@ -46,11 +46,11 @@
         <!-- اگر کاربر لاگین نکرده باشد -->
         <div class="guest-buttons" style="display: flex; gap: 10px;">
             <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                <i class="fas fa-sign-in-alt"></i> {% trans "Giriş Yap" %}
             </a>
             <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm"
                 style="background-color: white; color: var(--primary-dark-blue);">
-                <i class="fas fa-user-plus"></i> Kayıt Ol
+                <i class="fas fa-user-plus"></i> {% trans "Kayıt Ol" %}
             </a>
         </div>
         {% endif %}
@@ -59,11 +59,11 @@
 
 <div class="support-container">
     <div class="breadcrumb">
-        <a href="/" class="breadcrumb-item">Home</a>
+        <a href="/" class="breadcrumb-item">{% trans "Home" %}</a>
         <span class="breadcrumb-divider">/</span>
-        <a href="{% url 'support:search' %}" class="breadcrumb-item">Support</a>
+        <a href="{% url 'support:search' %}" class="breadcrumb-item">{% trans "Support" %}</a>
         <span class="breadcrumb-divider">/</span>
-        <a href="{% url 'support:my_tickets' %}" class="breadcrumb-item">My Tickets</a>
+        <a href="{% url 'support:my_tickets' %}" class="breadcrumb-item">{% trans "My Tickets" %}</a>
         <span class="breadcrumb-divider">/</span>
         <span class="breadcrumb-item active">Talep #{{ ticket.id|stringformat:"04d" }}</span>
     </div>
@@ -73,7 +73,7 @@
         <div class="col-4">
             <div class="card" style="position: sticky; top: 2rem;">
                 <div class="card-header">
-                    <h2 class="card-title">Talep Bilgileri</h2>
+                    <h2 class="card-title">{% trans "Talep Bilgileri" %}</h2>
                     <span class="status-badge status-{{ ticket.status }}">
                         {{ ticket.get_status_display }}
                     </span>
@@ -83,7 +83,7 @@
                     <div style="margin-bottom: 1.5rem;">
                         <h3
                             style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
-                            Talep ID
+                            {% trans "Talep ID" %}
                         </h3>
                         <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-blue);">
                             #{{ ticket.id|stringformat:"04d" }}
@@ -93,7 +93,7 @@
                     <div style="margin-bottom: 1.5rem;">
                         <h3
                             style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
-                            Department
+                            {% trans "Department" %}
                         </h3>
                         <div style="font-weight: 600; color: var(--text-dark);">
                             <i class="fas fa-building"></i> {{ ticket.department.name }}
@@ -103,7 +103,7 @@
                     <div style="margin-bottom: 1.5rem;">
                         <h3
                             style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
-                            Oluşturuldu
+                            {% trans "Oluşturuldu" %}
                         </h3>
                         <div style="color: var(--text-dark);">
                             <i class="fas fa-calendar"></i> {{ ticket.created_at|date:"d.m.Y" }}
@@ -115,7 +115,7 @@
                     <div style="margin-bottom: 1.5rem;">
                         <h3
                             style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
-                            Son Güncellenme
+                            {% trans "Son Güncellenme" %}
                         </h3>
                         <div style="color: var(--text-dark);">
                             <i class="fas fa-clock"></i> {{ ticket.updated_at|date:"d.m.Y H:i" }}
@@ -125,11 +125,11 @@
                     <div>
                         <h3
                             style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
-                            Öncelik
+                            {% trans "Öncelik" %}
                         </h3>
                         <div
                             style="display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; background: rgba(243, 156, 18, 0.1); color: #f39c12; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
-                            <i class="fas fa-flag"></i> Medium
+                            <i class="fas fa-flag"></i> {% trans "Medium" %}
                         </div>
                     </div>
                 </div>
@@ -138,18 +138,18 @@
             <!-- دکمه‌های اقدام -->
             <div class="card" style="margin-top: 1rem;">
                 <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.1rem;">
-                    <i class="fas fa-cog"></i> Eylemler
+                    <i class="fas fa-cog"></i> {% trans "Eylemler" %}
                 </h3>
                 <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                     <a href="{% url 'support:my_tickets' %}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Taleplere Geri Dön
+                        <i class="fas fa-arrow-left"></i> {% trans "Taleplere Geri Dön" %}
                     </a>
                     <a href="{% url 'support:create_ticket' %}" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Yeni Talep Oluştur
+                        <i class="fas fa-plus"></i> {% trans "Yeni Talep Oluştur" %}
                     </a>
                     {% if ticket.status != 'closed' %}
                     <button class="btn btn-danger">
-                        <i class="fas fa-times-circle"></i> Talebi Kapat
+                        <i class="fas fa-times-circle"></i> {% trans "Talebi Kapat" %}
                     </button>
                     {% endif %}
                 </div>
@@ -177,7 +177,7 @@
                         </div>
                         <div>
                             <h3 style="color: var(--primary-blue); margin: 0; font-size: 1.1rem;">
-                                Sorunuz
+                                {% trans "Sorunuz" %}
                             </h3>
                             <small style="color: var(--text-light);">
                                 {{ ticket.user.username }} • {{ ticket.created_at|date:"d.m.Y H:i" }}
@@ -205,7 +205,7 @@
                         </div>
                         <div>
                             <h3 style="color: #27ae60; margin: 0; font-size: 1.1rem;">
-                                Department Cevap
+                                {% trans "Department Cevap" %}
                             </h3>
                             <small style="color: var(--text-light);">
                                 {{ reply.staff.get_full_name|default:reply.staff.username }}
@@ -230,10 +230,10 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <h3 style="color: var(--primary-blue); margin-bottom: 0.5rem;">
-                        Talep İncelemede
+                        {% trans "Talep İncelemede" %}
                     </h3>
                     <p style="color: var(--text-medium); max-width: 500px; margin: 0 auto;">
-                        Talebiniz <strong>{{ ticket.department.name }}</strong> tarafından inceleniyor.
+                        {% trans "Talebiniz" %} <strong>{{ ticket.department.name }}</strong> {% trans "tarafından inceleniyor." %}
                     </p>
                 </div>
                 {% endif %}
@@ -243,7 +243,7 @@
                 {% if ticket.history.exists %}
                 <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(141, 212, 227, 0.2);">
                     <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.1rem;">
-                        <i class="fas fa-history"></i> Talep Geçmişi
+                        <i class="fas fa-history"></i> {% trans "Talep Geçmişi" %}
                     </h3>
 
                     <div style="position: relative; padding-left: 2rem;">

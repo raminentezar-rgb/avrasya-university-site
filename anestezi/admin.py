@@ -1,12 +1,13 @@
 # app_name: anestezi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     AnesteziEtkinlik, AnesteziDersProgrami, AnesteziFaaliyetGorseli, AnesteziFaaliyetGrubu, AnesteziFaaliyet, AnesteziDuyuru
 )
 
 @admin.register(AnesteziEtkinlik)
-class AnesteziEtkinlikAdmin(admin.ModelAdmin):
+class AnesteziEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class AnesteziDuyuruAdmin(admin.ModelAdmin):
         return AnesteziDuyuru.objects.all()
 
 @admin.register(AnesteziDersProgrami)
-class AnesteziDersProgramiAdmin(admin.ModelAdmin):
+class AnesteziDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class AnesteziFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(AnesteziFaaliyetGrubu)
-class AnesteziFaaliyetGrubuAdmin(admin.ModelAdmin):
+class AnesteziFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(AnesteziFaaliyet)
-class AnesteziFaaliyetAdmin(admin.ModelAdmin):
+class AnesteziFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

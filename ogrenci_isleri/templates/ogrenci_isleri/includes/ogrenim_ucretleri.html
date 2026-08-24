@@ -1,4 +1,5 @@
 {% extends 'ogrenci_isleri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - 2025 YKS Eğitim Ücretleri{% endblock %}
 
@@ -8,7 +9,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>2025-2026 EĞİTİM-ÖĞRETİM YILI YENİ KAYIT EĞİTİM ÜCRETLERİ</h1>
+            <h1>{% trans "2025-2026 EĞİTİM-ÖĞRETİM YILI YENİ KAYIT EĞİTİM ÜCRETLERİ" %}</h1>
             <p></p>
         </div>
     </div>
@@ -33,8 +34,8 @@
                             <i class="fas fa-graduation-cap"></i>
                         </div>
                         <div class="info-card-content">
-                            <h4>Toplam Program</h4>
-                            <p id="totalProgramsCount">48 Program</p>
+                            <h4>{% trans "Toplam Program" %}</h4>
+                            <p id="totalProgramsCount">{% trans "48 Program" %}</p>
                         </div>
                     </div>
                     <div class="info-card">
@@ -42,8 +43,8 @@
                             <i class="fas fa-percent"></i>
                         </div>
                         <div class="info-card-content">
-                            <h4>Tercih İndirimi</h4>
-                            <p>%10 İlk 3 Tercih</p>
+                            <h4>{% trans "Tercih İndirimi" %}</h4>
+                            <p>{% trans "%10 İlk 3 Tercih" %}</p>
                         </div>
                     </div>
                     <div class="info-card">
@@ -51,8 +52,8 @@
                             <i class="fas fa-credit-card"></i>
                         </div>
                         <div class="info-card-content">
-                            <h4>Taksit Seçeneği</h4>
-                            <p>9 Taksit İmkanı</p>
+                            <h4>{% trans "Taksit Seçeneği" %}</h4>
+                            <p>{% trans "9 Taksit İmkanı" %}</p>
                         </div>
                     </div>
                     <div class="info-card">
@@ -60,8 +61,8 @@
                             <i class="fas fa-university"></i>
                         </div>
                         <div class="info-card-content">
-                            <h4>Ödeme Bankaları</h4>
-                            <p>2 Farklı Banka</p>
+                            <h4>{% trans "Ödeme Bankaları" %}</h4>
+                            <p>{% trans "2 Farklı Banka" %}</p>
                         </div>
                     </div>
                 </div>
@@ -70,13 +71,13 @@
                 <div class="tuition-tabs">
                     <div class="tab-buttons">
                         <button class="tab-button active" data-tab="tuition-table">
-                            <i class="fas fa-table"></i> Eğitim Ücretleri Tablosu
+                            <i class="fas fa-table"></i> {% trans "Eğitim Ücretleri Tablosu" %}
                         </button>
                         <button class="tab-button" data-tab="payment-info">
-                            <i class="fas fa-money-bill-wave"></i> Ödeme Koşulları
+                            <i class="fas fa-money-bill-wave"></i> {% trans "Ödeme Koşulları" %}
                         </button>
                         <button class="tab-button" data-tab="bank-info">
-                            <i class="fas fa-university"></i> Banka Bilgileri
+                            <i class="fas fa-university"></i> {% trans "Banka Bilgileri" %}
                         </button>
                     </div>
 
@@ -84,34 +85,34 @@
                         <!-- تب جدول آموزش‌ها -->
                         <div class="tab-content active" id="tuition-table">
                             <div class="tab-header">
-                                <h3><i class="fas fa-table"></i> 2025 YKS Eğitim Ücretleri</h3>
-                                <p>Tüm bölüm ve programların güncel eğitim ücretleri</p>
+                                <h3><i class="fas fa-table"></i> {% trans "2025 YKS Eğitim Ücretleri" %}</h3>
+                                <p>{% trans "Tüm bölüm ve programların güncel eğitim ücretleri" %}</p>
                             </div>
 
                             <div class="table-controls">
                                 <div class="search-container">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" id="programSearch" placeholder="Program adı veya fakülte ara...">
+                                    <input type="text" id="programSearch" placeholder="{% trans 'Program adı veya fakülte ara...' %}">
                                     <div class="search-info">
-                                        <span id="searchResults">48</span> program bulundu
+                                        <span id="searchResults">48</span> {% trans "program bulundu" %}
                                     </div>
                                 </div>
                                 <div class="filter-options">
                                     <select id="facultyFilter">
-                                        <option value="">Tüm Fakülteler</option>
-                                        <option value="Fen Edebiyat Fakültesi">Fen Edebiyat Fakültesi</option>
-                                        <option value="İktisadi ve İdari Bilimler Fakültesi">İktisadi ve İdari Bilimler Fakültesi</option>
-                                        <option value="İletişim Fakültesi">İletişim Fakültesi</option>
-                                        <option value="Mühendislik ve Mimarlık Fakültesi">Mühendislik ve Mimarlık Fakültesi</option>
-                                        <option value="Meslek Yüksekokulu">Meslek Yüksekokulu</option>
-                                        <option value="Sağlık Bilimleri Fakültesi">Sağlık Bilimleri Fakültesi</option>
-                                        <option value="Sağlık Hizmetleri Meslek Yüksekokulu">Sağlık Hizmetleri Meslek Yüksekokulu</option>
-                                        <option value="Spor Bilimleri Fakültesi">Spor Bilimleri Fakültesi</option>
-                                        <option value="Uygulamalı Bilimler Yüksekokulu">Uygulamalı Bilimler Yüksekokulu</option>
+                                        <option value="">{% trans "Tüm Fakülteler" %}</option>
+                                        <option value="Fen Edebiyat Fakültesi">{% trans "Fen Edebiyat Fakültesi" %}</option>
+                                        <option value="İktisadi ve İdari Bilimler Fakültesi">{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</option>
+                                        <option value="İletişim Fakültesi">{% trans "İletişim Fakültesi" %}</option>
+                                        <option value="Mühendislik ve Mimarlık Fakültesi">{% trans "Mühendislik ve Mimarlık Fakültesi" %}</option>
+                                        <option value="Meslek Yüksekokulu">{% trans "Meslek Yüksekokulu" %}</option>
+                                        <option value="Sağlık Bilimleri Fakültesi">{% trans "Sağlık Bilimleri Fakültesi" %}</option>
+                                        <option value="Sağlık Hizmetleri Meslek Yüksekokulu">{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</option>
+                                        <option value="Spor Bilimleri Fakültesi">{% trans "Spor Bilimleri Fakültesi" %}</option>
+                                        <option value="Uygulamalı Bilimler Yüksekokulu">{% trans "Uygulamalı Bilimler Yüksekokulu" %}</option>
                                     </select>
-                                    <button class="filter-btn active" data-filter="all">Tümü</button>
-                                    <button class="filter-btn" data-filter="discount">İndirimli</button>
-                                    <button class="filter-btn" data-filter="starred">Tercih İndirimli</button>
+                                    <button class="filter-btn active" data-filter="all">{% trans "Tümü" %}</button>
+                                    <button class="filter-btn" data-filter="discount">{% trans "İndirimli" %}</button>
+                                    <button class="filter-btn" data-filter="starred">{% trans "Tercih İndirimli" %}</button>
                                 </div>
                             </div>
 
@@ -119,46 +120,46 @@
                                 <table class="modern-table">
                                     <thead>
                                         <tr>
-                                            <th width="25%">Fakülte / Yüksekokul</th>
-                                            <th width="25%">Bölüm / Program</th>
-                                            <th width="16%">Tam Ücret</th>
-                                            <th width="17%">%50 İndirimli</th>
-                                            <th width="17%">%10 Tercih İndirimli</th>
+                                            <th width="25%">{% trans "Fakülte / Yüksekokul" %}</th>
+                                            <th width="25%">{% trans "Bölüm / Program" %}</th>
+                                            <th width="16%">{% trans "Tam Ücret" %}</th>
+                                            <th width="17%">{% trans "%50 İndirimli" %}</th>
+                                            <th width="17%">{% trans "%10 Tercih İndirimli" %}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tuitionTableBody">
                                         <!-- ========== FEN EDEBİYAT FAKÜLTESİ ========== -->
                                         <tr>
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td><span class="program-name">İngiliz Dili ve Edebiyatı</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "İngiliz Dili ve Edebiyatı" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td><span class="program-name">İngilizce Mütercim ve Tercümanlık (İngilizce)</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "İngilizce Mütercim ve Tercümanlık (İngilizce)" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td><span class="program-name">Moleküler Biyoloji ve Genetik (İngilizce)</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Moleküler Biyoloji ve Genetik (İngilizce)" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">308,000.00 ₺</td>
                                             <td class="price discount">154,000.00 ₺</td>
                                             <td class="price special">277,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td><span class="program-name">Psikoloji</span></td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Psikoloji" %}</span></td>
                                             <td class="price">308,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td><span class="program-name">Trak Dili ve Edebiyatı</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Trak Dili ve Edebiyatı" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
@@ -166,15 +167,15 @@
 
                                         <!-- ========== İKTİSADİ VE İDARİ BİLİMLER FAKÜLTESİ ========== -->
                                         <tr>
-                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
-                                            <td><span class="program-name">İşletme (İngilizce)</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "İşletme (İngilizce)" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price special">198,000.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
-                                            <td><span class="program-name">Siyaset Bilimi ve Kamu Yönetimi</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Siyaset Bilimi ve Kamu Yönetimi" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
@@ -182,15 +183,15 @@
 
                                         <!-- ========== İLETİŞİM FAKÜLTESİ ========== -->
                                         <tr>
-                                            <td>İletişim Fakültesi</td>
-                                            <td><span class="program-name">Görsel İletişim Tasarımı</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "İletişim Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Görsel İletişim Tasarımı" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>İletişim Fakültesi</td>
-                                            <td><span class="program-name">Yeni Medya ve İletişim</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "İletişim Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Yeni Medya ve İletişim" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
@@ -198,29 +199,29 @@
 
                                         <!-- ========== MÜHENDİSLİK VE MİMARLIK FAKÜLTESİ ========== -->
                                         <tr>
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td><span class="program-name">Bilgisayar Mühendisliği</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Bilgisayar Mühendisliği" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td><span class="program-name">İç Mimarlık ve Çevre Tasarımı</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "İç Mimarlık ve Çevre Tasarımı" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">308,000.00 ₺</td>
                                             <td class="price discount">154,000.00 ₺</td>
                                             <td class="price special">277,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td><span class="program-name">İnşaat Mühendisliği</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "İnşaat Mühendisliği" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price discount">110,000.00 ₺</td>
                                             <td class="price special">198,000.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td><span class="program-name">Mimarlık</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Mimarlık" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price discount">110,000.00 ₺</td>
                                             <td class="price special">198,000.00 ₺</td>
@@ -228,120 +229,120 @@
 
                                         <!-- ========== MESLEK YÜKSEKOKULU ========== -->
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Aşçılık</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Aşçılık" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Bilgisayar Programcılığı</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Bilgisayar Programcılığı" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Bilişim Güvenliği Teknolojisi</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Bilişim Güvenliği Teknolojisi" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Dış Ticaret</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Dış Ticaret" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">E-Ticaret ve Pazarlama</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "E-Ticaret ve Pazarlama" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Halkla İlişkiler ve Tanıtım</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Halkla İlişkiler ve Tanıtım" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Harita ve Kadastro</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Harita ve Kadastro" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">İç Mekan Tasarımı</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "İç Mekan Tasarımı" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">İnşaat Teknolojisi</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "İnşaat Teknolojisi" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Lojistik</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Lojistik" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Makkeme Büro Hizmetleri</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Makkeme Büro Hizmetleri" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Minari Restorasyon</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Minari Restorasyon" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Moda Tasarımı</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Moda Tasarımı" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Otomotiv Teknolojisi</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Otomotiv Teknolojisi" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">110,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price special">99,000.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Sivil Havacılık Kabin Hizmetleri</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Sivil Havacılık Kabin Hizmetleri" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Sosyal Hizmetler</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Sosyal Hizmetler" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">154,000.00 ₺</td>
                                             <td class="price discount">77,000.00 ₺</td>
                                             <td class="price special">138,600.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Web Tasarımı ve Kodlama</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Web Tasarımı ve Kodlama" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price special">178,200.00 ₺</td>
@@ -349,50 +350,50 @@
 
                                         <!-- ========== SAĞLIK BİLİMLERİ FAKÜLTESİ ========== -->
                                         <tr>
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Beslenme ve Diyetetik</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Beslenme ve Diyetetik" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Çocuk Gelişimi</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Çocuk Gelişimi" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Ebelik</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Ebelik" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">308,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price special">277,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Ergoterapi</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Ergoterapi" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Fizyoterapi ve Rehabilitasyon</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Fizyoterapi ve Rehabilitasyon" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Hemşirelik</span></td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Hemşirelik" %}</span></td>
                                             <td class="price">308,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Odyoloji</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Odyoloji" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
@@ -400,134 +401,134 @@
 
                                         <!-- ========== SAĞLIK HİZMETLERİ MESLEK YÜKSEKOKULU ========== -->
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Ağız ve Diş Sağlığı</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Ağız ve Diş Sağlığı" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Ameliyathane Hizmetleri</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Ameliyathane Hizmetleri" %}</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Anestezi</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Anestezi" %}</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Çocuk Gelişimi</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Çocuk Gelişimi" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Diş Protez Teknolojisi</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Diş Protez Teknolojisi" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Diyaliz</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Diyaliz" %}</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Eczane Hizmetleri</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Eczane Hizmetleri" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Elektronörofizyoloji</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Elektronörofizyoloji" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Fizyoterapi</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Fizyoterapi" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">İlk ve Acil Yardım</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "İlk ve Acil Yardım" %}</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">İş Sağlığı ve Güvenliği</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "İş Sağlığı ve Güvenliği" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">İş ve Uğraşı Terapisi</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "İş ve Uğraşı Terapisi" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Odyometri</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Odyometri" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Optisyenlik</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Optisyenlik" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Ortopedik Protez ve Ortez</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Ortopedik Protez ve Ortez" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Patoloji Laboratuvar Teknikleri</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Patoloji Laboratuvar Teknikleri" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Radyoterapi</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Radyoterapi" %}</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Tıbbi Görüntüleme Teknikleri</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Tıbbi Görüntüleme Teknikleri" %}</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Sağlık Hizmetleri Meslek Yüksekokulu</td>
-                                            <td><span class="program-name">Tıbbi Laboratuvar Teknikleri</span></td>
+                                            <td>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Tıbbi Laboratuvar Teknikleri" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price empty">-</td>
@@ -535,29 +536,29 @@
 
                                         <!-- ========== SPOR BİLİMLERİ FAKÜLTESİ ========== -->
                                         <tr>
-                                            <td>Spor Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Antrenörlük Eğitimi</span></td>
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Antrenörlük Eğitimi" %}</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price empty">-</td>
                                         </tr>
                                         <tr>
-                                            <td>Spor Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Egzersiz ve Spor Bilimleri</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Egzersiz ve Spor Bilimleri" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Spor Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Rekreasyon</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Rekreasyon" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Spor Bilimleri Fakültesi</td>
-                                            <td><span class="program-name">Spor Yöneticiliği</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td><span class="program-name">{% trans "Spor Yöneticiliği" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">198,000.00 ₺</td>
                                             <td class="price discount">99,000.00 ₺</td>
                                             <td class="price special">178,200.00 ₺</td>
@@ -565,15 +566,15 @@
 
                                         <!-- ========== UYGULAMALI BİLİMLER YÜKSEKOKULU ========== -->
                                         <tr>
-                                            <td>Uygulamalı Bilimler Yüksekokulu</td>
-                                            <td><span class="program-name">Gastronomi ve Mutfak Sanatları</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Uygulamalı Bilimler Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Gastronomi ve Mutfak Sanatları" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">275,000.00 ₺</td>
                                             <td class="price discount">137,500.00 ₺</td>
                                             <td class="price special">247,500.00 ₺</td>
                                         </tr>
                                         <tr>
-                                            <td>Uygulamalı Bilimler Yüksekokulu</td>
-                                            <td><span class="program-name">Yönetim Bilişim Sistemleri</span><span class="star-icon">*</span></td>
+                                            <td>{% trans "Uygulamalı Bilimler Yüksekokulu" %}</td>
+                                            <td><span class="program-name">{% trans "Yönetim Bilişim Sistemleri" %}</span><span class="star-icon">*</span></td>
                                             <td class="price">220,000.00 ₺</td>
                                             <td class="price empty">-</td>
                                             <td class="price special">198,000.00 ₺</td>
@@ -586,19 +587,19 @@
                                 <div class="legend">
                                     <div class="legend-item">
                                         <span class="legend-color discount-color"></span>
-                                        <span>%50 İndirimli</span>
+                                        <span>{% trans "%50 İndirimli" %}</span>
                                     </div>
                                     <div class="legend-item">
                                         <span class="legend-color special-color"></span>
-                                        <span>%10 Tercih İndirimli</span>
+                                        <span>{% trans "%10 Tercih İndirimli" %}</span>
                                     </div>
                                     <div class="legend-item">
                                         <span class="star-icon">*</span>
-                                        <span>İlk 3 tercihe özel indirim</span>
+                                        <span>{% trans "İlk 3 tercihe özel indirim" %}</span>
                                     </div>
                                 </div>
                                 <div class="table-summary">
-                                    <p><i class="fas fa-info-circle"></i> Toplam <strong>48 program</strong> listelenmiştir. <span class="starred-count">(35 program tercih indirimine uygundur)</span></p>
+                                    <p><i class="fas fa-info-circle"></i> {% trans "Toplam" %} <strong>{% trans "48 program" %}</strong> {% trans "listelenmiştir." %} <span class="starred-count">{% trans "(35 program tercih indirimine uygundur)" %}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -606,8 +607,8 @@
                         <!-- تب اطلاعات پرداخت -->
                         <div class="tab-content" id="payment-info">
                             <div class="tab-header">
-                                <h3><i class="fas fa-money-bill-wave"></i> Ödeme Koşulları ve Seçenekleri</h3>
-                                <p>2025-2026 eğitim-öğretim yılı ödeme bilgileri</p>
+                                <h3><i class="fas fa-money-bill-wave"></i> {% trans "Ödeme Koşulları ve Seçenekleri" %}</h3>
+                                <p>{% trans "2025-2026 eğitim-öğretim yılı ödeme bilgileri" %}</p>
                             </div>
 
                             <div class="payment-options">
@@ -616,12 +617,12 @@
                                         <i class="fas fa-money-bill-alt"></i>
                                     </div>
                                     <div class="payment-content">
-                                        <h4>1. Tam Nakit Ödeme</h4>
-                                        <p>Bölüm ücretinin tamamı nakit olarak Üniversitenin belirtilen IBAN numaralarına dekontun açıklama kısmına <strong>öğrencinin Adı Soyadı ve T.C. Kimlik numarası</strong> yazılarak yapılmalıdır.</p>
+                                        <h4>{% trans "1. Tam Nakit Ödeme" %}</h4>
+                                        <p>{% trans "Bölüm ücretinin tamamı nakit olarak Üniversitenin belirtilen IBAN numaralarına dekontun açıklama kısmına" %} <strong>{% trans "öğrencinin Adı Soyadı ve T.C. Kimlik numarası" %}</strong> {% trans "yazılarak yapılmalıdır." %}</p>
                                         <ul>
-                                            <li>Nakit ödemeler gişelerden yapılabilir</li>
-                                            <li>İnternet bankacılığı ile ödeme yapılabilir</li>
-                                            <li>Dekontun açıklama kısmına öğrenci bilgileri yazılmalıdır</li>
+                                            <li>{% trans "Nakit ödemeler gişelerden yapılabilir" %}</li>
+                                            <li>{% trans "İnternet bankacılığı ile ödeme yapılabilir" %}</li>
+                                            <li>{% trans "Dekontun açıklama kısmına öğrenci bilgileri yazılmalıdır" %}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -631,16 +632,16 @@
                                         <i class="fas fa-credit-card"></i>
                                     </div>
                                     <div class="payment-content">
-                                        <h4>2. Taksitli Ödeme</h4>
-                                        <p>Bölüm ücretinin tamamını nakit ödeyemeyenler için esnek taksit seçenekleri:</p>
+                                        <h4>{% trans "2. Taksitli Ödeme" %}</h4>
+                                        <p>{% trans "Bölüm ücretinin tamamını nakit ödeyemeyenler için esnek taksit seçenekleri:" %}</p>
                                         <ul>
-                                            <li>En az 1/3 (üçte biri) nakit veya tek çekim</li>
-                                            <li>Kalan 2/3 (üçte ikisi) 9 eşit taksitle</li>
-                                            <li>Sadece anlaşmalı kredi kartlarına taksit imkanı</li>
+                                            <li>{% trans "En az 1/3 (üçte biri) nakit veya tek çekim" %}</li>
+                                            <li>{% trans "Kalan 2/3 (üçte ikisi) 9 eşit taksitle" %}</li>
+                                            <li>{% trans "Sadece anlaşmalı kredi kartlarına taksit imkanı" %}</li>
                                         </ul>
                                         <div class="highlight-info">
                                             <i class="fas fa-info-circle"></i>
-                                            <strong>Taksit Yapılabilen Kartlar:</strong> Akbank Axess, Halkbank Paraf, İş Bankası Maximum, Vakıfbank World, Yapı Kredi World, Albaraka Türk World, Garanti Bankası Bonus
+                                            <strong>{% trans "Taksit Yapılabilen Kartlar:" %}</strong> {% trans "Akbank Axess, Halkbank Paraf, İş Bankası Maximum, Vakıfbank World, Yapı Kredi World, Albaraka Türk World, Garanti Bankası Bonus" %}
                                         </div>
                                     </div>
                                 </div>
@@ -650,17 +651,17 @@
                                         <i class="fas fa-handshake"></i>
                                     </div>
                                     <div class="payment-content">
-                                        <h4>3. Faizsiz Kredi Seçeneği</h4>
-                                        <p>Albaraka Türk Katılım Bankası ile otomatik katılım sistemi (OTS) anlaşması:</p>
+                                        <h4>{% trans "3. Faizsiz Kredi Seçeneği" %}</h4>
+                                        <p>{% trans "Albaraka Türk Katılım Bankası ile otomatik katılım sistemi (OTS) anlaşması:" %}</p>
                                         <ul>
-                                            <li>Faizsiz kredi imkanı</li>
-                                            <li>9 eşit taksit</li>
-                                            <li>Çalışan öğrenci, veli veya emekli veliler için</li>
-                                            <li>Gelir belgesi beyanı gereklidir</li>
+                                            <li>{% trans "Faizsiz kredi imkanı" %}</li>
+                                            <li>{% trans "9 eşit taksit" %}</li>
+                                            <li>{% trans "Çalışan öğrenci, veli veya emekli veliler için" %}</li>
+                                            <li>{% trans "Gelir belgesi beyanı gereklidir" %}</li>
                                         </ul>
                                         <div class="warning-box">
                                             <i class="fas fa-exclamation-triangle"></i>
-                                            <p>Belirtilen kredi kartları dışındaki tüm kartlara tek çekim yapılmaktadır.</p>
+                                            <p>{% trans "Belirtilen kredi kartları dışındaki tüm kartlara tek çekim yapılmaktadır." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -670,8 +671,8 @@
                         <!-- تب اطلاعات بانکی -->
                         <div class="tab-content" id="bank-info">
                             <div class="tab-header">
-                                <h3><i class="fas fa-university"></i> Banka Bilgileri ve İletişim</h3>
-                                <p>Ödeme yapılacak banka hesapları ve iletişim bilgileri</p>
+                                <h3><i class="fas fa-university"></i> {% trans "Banka Bilgileri ve İletişim" %}</h3>
+                                <p>{% trans "Ödeme yapılacak banka hesapları ve iletişim bilgileri" %}</p>
                             </div>
 
                             <div class="bank-cards-container">
@@ -681,18 +682,18 @@
                                             <i class="fas fa-university"></i>
                                         </div>
                                         <div class="bank-title">
-                                            <h4>Albaraka Türk Katılım Bankası</h4>
-                                            <p class="bank-subtitle">Değirmendere Şubesi</p>
+                                            <h4>{% trans "Albaraka Türk Katılım Bankası" %}</h4>
+                                            <p class="bank-subtitle">{% trans "Değirmendere Şubesi" %}</p>
                                         </div>
                                     </div>
                                     <div class="bank-details">
                                         <div class="detail-item">
-                                            <span class="detail-label">Alıcı Adı:</span>
-                                            <span class="detail-value">T.C. Avrasya Üniversitesi</span>
+                                            <span class="detail-label">{% trans "Alıcı Adı:" %}</span>
+                                            <span class="detail-value">{% trans "T.C. Avrasya Üniversitesi" %}</span>
                                         </div>
                                         <div class="detail-item">
-                                            <span class="detail-label">IBAN No:</span>
-                                            <span class="detail-value iban">TR78 0020 3000 0210 7500 0000 01</span>
+                                            <span class="detail-label">{% trans "IBAN No:" %}</span>
+                                            <span class="detail-value iban">{% trans "TR78 0020 3000 0210 7500 0000 01" %}</span>
                                             <button class="copy-btn" data-text="TR78 0020 3000 0210 7500 0000 01">
                                                 <i class="fas fa-copy"></i>
                                             </button>
@@ -706,18 +707,18 @@
                                             <i class="fas fa-university"></i>
                                         </div>
                                         <div class="bank-title">
-                                            <h4>Garanti Bankası</h4>
-                                            <p class="bank-subtitle">Trabzon Merkez Şubesi</p>
+                                            <h4>{% trans "Garanti Bankası" %}</h4>
+                                            <p class="bank-subtitle">{% trans "Trabzon Merkez Şubesi" %}</p>
                                         </div>
                                     </div>
                                     <div class="bank-details">
                                         <div class="detail-item">
-                                            <span class="detail-label">Alıcı Adı:</span>
-                                            <span class="detail-value">T.C. Avrasya Üniversitesi</span>
+                                            <span class="detail-label">{% trans "Alıcı Adı:" %}</span>
+                                            <span class="detail-value">{% trans "T.C. Avrasya Üniversitesi" %}</span>
                                         </div>
                                         <div class="detail-item">
-                                            <span class="detail-label">IBAN No:</span>
-                                            <span class="detail-value iban">TR82 0006 2000 1580 0006 2949 19</span>
+                                            <span class="detail-label">{% trans "IBAN No:" %}</span>
+                                            <span class="detail-value iban">{% trans "TR82 0006 2000 1580 0006 2949 19" %}</span>
                                             <button class="copy-btn" data-text="TR82 0006 2000 1580 0006 2949 19">
                                                 <i class="fas fa-copy"></i>
                                             </button>
@@ -731,33 +732,33 @@
                                     <i class="fas fa-exclamation-circle"></i>
                                 </div>
                                 <div class="note-content">
-                                    <h5>Önemli Uyarı</h5>
-                                    <p>Dekontun açıklama kısmına mutlaka <strong>Öğrencinin Adı Soyadı ve T.C. Kimlik numarası</strong> yazılmalıdır. Aksi takdirde ödemeniz tanımlanamayabilir.</p>
+                                    <h5>{% trans "Önemli Uyarı" %}</h5>
+                                    <p>{% trans "Dekontun açıklama kısmına mutlaka" %} <strong>{% trans "Öğrencinin Adı Soyadı ve T.C. Kimlik numarası" %}</strong> {% trans "yazılmalıdır. Aksi takdirde ödemeniz tanımlanamayabilir." %}</p>
                                 </div>
                             </div>
 
                             <div class="contact-section">
-                                <h4><i class="fas fa-phone-alt"></i> Bilgi ve İletişim</h4>
+                                <h4><i class="fas fa-phone-alt"></i> {% trans "Bilgi ve İletişim" %}</h4>
                                 <div class="contact-info">
                                     <div class="contact-item">
                                         <i class="fas fa-phone"></i>
                                         <div>
-                                            <strong>Telefon:</strong>
+                                            <strong>{% trans "Telefon:" %}</strong>
                                             <a href="tel:04623340550">0462 334 05 50</a>
                                         </div>
                                     </div>
                                     <div class="contact-item">
                                         <i class="fas fa-envelope"></i>
                                         <div>
-                                            <strong>E-posta:</strong>
-                                            <a href="mailto:muhasebe@avrasya.edu.tr">muhasebe@avrasya.edu.tr</a>
+                                            <strong>{% trans "E-posta:" %}</strong>
+                                            <a href="mailto:muhasebe@avrasya.edu.tr">{% trans "muhasebe@avrasya.edu.tr" %}</a>
                                         </div>
                                     </div>
                                     <div class="contact-item">
                                         <i class="fas fa-clock"></i>
                                         <div>
-                                            <strong>Çalışma Saatleri:</strong>
-                                            <span>09:00 - 17:00 (Hafta içi)</span>
+                                            <strong>{% trans "Çalışma Saatleri:" %}</strong>
+                                            <span>{% trans "09:00 - 17:00 (Hafta içi)" %}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -770,16 +771,16 @@
                 <div class="main-download-section">
                     <div class="download-wrapper">
                         <div class="download-content">
-                            <h3><i class="fas fa-file-pdf"></i> Tam Eğitim Ücretleri Tablosu</h3>
+                            <h3><i class="fas fa-file-pdf"></i> {% trans "Tam Eğitim Ücretleri Tablosu" %}</h3>
                             <p></p>
                             {% comment %} <div class="download-stats">
                                 <div class="stat">
                                     <i class="fas fa-file-alt"></i>
-                                    <span>3 Sayfa</span>
+                                    <span>{% trans "3 Sayfa" %}</span>
                                 </div>
                                 <div class="stat">
                                     <i class="fas fa-list-ol"></i>
-                                    <span>48 Program</span>
+                                    <span>{% trans "48 Program" %}</span>
                                 </div>
                                 <div class="stat">
                                     <i class="fas fa-calendar-alt"></i>
@@ -787,12 +788,12 @@
                                 </div>
                                 <div class="stat">
                                     <i class="fas fa-percentage"></i>
-                                    <span>35 İndirimli</span>
+                                    <span>{% trans "35 İndirimli" %}</span>
                                 </div>
                             </div> {% endcomment %}
                             <a href="{% static "files/2025-YKS-egitim-ucretleri-01.08.2025.pdf" %}" class="main-download-btn" download>
                                 <i class="fas fa-download"></i>
-                                <span>PDF Dosyasını İndir</span>
+                                <span>{% trans "PDF Dosyasını İndir" %}</span>
                                 <small></small>
                             </a>
                         </div>

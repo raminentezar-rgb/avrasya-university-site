@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Etkinlikler - Avrasya Üniversitesi{% endblock %}
 {% block content %}
@@ -7,12 +8,12 @@
         <!-- Header Section -->
         <div class="row align-items-center mb-5">
             <div class="col-md-8">
-                <h1 class="fw-bold text-dark-blue mb-2">ETKİNLİKLER</h1>
-                <p class="text-muted fs-5">Üniversitemizde düzenlenen etkinlikler ve organizasyonlar</p>
+                <h1 class="fw-bold text-dark-blue mb-2">{% trans "ETKİNLİKLER" %}</h1>
+                <p class="text-muted fs-5">{% trans "Üniversitemizde düzenlenen etkinlikler ve organizasyonlar" %}</p>
             </div>
             <div class="col-md-4 text-end">
                 <a href="{% url 'etkinlikler:yaklasan' %}" class="btn btn-outline-primary btn-lg">
-                    Yaklaşan Etkinlikler <i class="fas fa-arrow-right ms-2"></i>
+                    {% trans "Yaklaşan Etkinlikler" %} <i class="fas fa-arrow-right ms-2"></i>
                 </a>
             </div>
         </div>
@@ -29,7 +30,7 @@
                             <input type="text" 
                                    name="q" 
                                    class="form-control search-input" 
-                                   placeholder="Etkinlik başlığı, özet veya içerikte ara..."
+                                   placeholder="{% trans 'Etkinlik başlığı, özet veya içerikte ara...' %}"
                                    value="{{ search_query }}">
                             {% if search_query %}
                             <button type="button" class="btn btn-clear" onclick="clearSearch()">
@@ -37,7 +38,7 @@
                             </button>
                             {% endif %}
                             <button type="submit" class="btn btn-search">
-                                Ara
+                                {% trans "Ara" %}
                             </button>
                         </div>
                     </div>
@@ -49,12 +50,12 @@
                         <button class="btn btn-filter dropdown-toggle" type="button" id="sortDropdown" 
                                 data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                             <i class="fas fa-sort me-2"></i>
-                            Tarihe Göre Sırala
+                            {% trans "Tarihe Göre Sırala" %}
                         </button>
                         <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="sortDropdown">
-                            <li><a class="dropdown-item" href="?sort=newest{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">En Yeni</a></li>
-                            <li><a class="dropdown-item" href="?sort=oldest{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">En Eski</a></li>
-                            <li><a class="dropdown-item" href="?sort=upcoming{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">Yaklaşanlar</a></li>
+                            <li><a class="dropdown-item" href="?sort=newest{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">{% trans "En Yeni" %}</a></li>
+                            <li><a class="dropdown-item" href="?sort=oldest{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">{% trans "En Eski" %}</a></li>
+                            <li><a class="dropdown-item" href="?sort=upcoming{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">{% trans "Yaklaşanlar" %}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -68,11 +69,11 @@
             <div class="col-12">
                 <div class="search-results-info">
                     <p class="mb-0">
-                        <strong>"{{ search_query }}"</strong> için 
+                        <strong>"{{ search_query }}"</strong> {% trans "için" %} 
                         <span class="text-primary">{{ gelecek_etkinlikler|length|add:gecmis_etkinlikler|length }}</span> 
-                        sonuç bulundu
+                        {% trans "sonuç bulundu" %}
                         <a href="{% url 'etkinlikler:liste' %}" class="btn-clear-search ms-3">
-                            <i class="fas fa-times me-1"></i> Filtreyi Temizle
+                            <i class="fas fa-times me-1"></i> {% trans "Filtreyi Temizle" %}
                         </a>
                     </p>
                 </div>
@@ -83,7 +84,7 @@
         <!-- Yaklaşan Etkinlikler -->
         <div class="mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-dark-blue mb-0">Yaklaşan Etkinlikler</h3>
+                <h3 class="text-dark-blue mb-0">{% trans "Yaklaşan Etkinlikler" %}</h3>
                 <span class="badge bg-medium-blue fs-6">{{ gelecek_etkinlikler|length }} etkinlik</span>
             </div>
             
@@ -100,7 +101,7 @@
                                 </div>
                                 {% if etkinlik.yaklasan_etkinlik %}
                                 <span class="badge bg-warning text-dark ms-2">
-                                    <i class="fas fa-clock me-1"></i> YAKINDA!
+                                    <i class="fas fa-clock me-1"></i> {% trans "YAKINDA!" %}
                                 </span>
                                 {% endif %}
                             </div>
@@ -129,11 +130,11 @@
                             
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="{{ etkinlik.get_absolute_url }}" class="btn btn-primary btn-sm px-4">
-                                    Detaylı Bilgi <i class="fas fa-arrow-right ms-2"></i>
+                                    {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right ms-2"></i>
                                 </a>
                                 {% if etkinlik.kayit_gerekiyor %}
                                 <span class="badge bg-info text-dark">
-                                    <i class="fas fa-user-check me-1"></i> Kayıt Gerekli
+                                    <i class="fas fa-user-check me-1"></i> {% trans "Kayıt Gerekli" %}
                                 </span>
                                 {% endif %}
                             </div>
@@ -161,7 +162,7 @@
                 </p>
                 {% if search_query %}
                 <a href="{% url 'etkinlikler:liste' %}" class="btn btn-primary">
-                    Tüm Etkinlikleri Görüntüle
+                    {% trans "Tüm Etkinlikleri Görüntüle" %}
                 </a>
                 {% endif %}
             </div>
@@ -172,7 +173,7 @@
         {% if gecmis_etkinlikler %}
         <div class="mt-5 pt-5 border-top">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-dark-blue mb-0">Geçmiş Etkinlikler</h3>
+                <h3 class="text-dark-blue mb-0">{% trans "Geçmiş Etkinlikler" %}</h3>
                 <span class="badge bg-secondary fs-6">{{ gecmis_etkinlikler|length }} etkinlik</span>
             </div>
             
@@ -190,7 +191,7 @@
                                 </div>
                             </div>
                             <a href="{{ etkinlik.get_absolute_url }}" class="btn btn-outline-secondary btn-sm w-100">
-                                <i class="fas fa-eye me-2"></i> Detayları Görüntüle
+                                <i class="fas fa-eye me-2"></i> {% trans "Detayları Görüntüle" %}
                             </a>
                         </div>
                     </div>

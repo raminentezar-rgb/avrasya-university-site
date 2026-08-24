@@ -1,12 +1,13 @@
 # app_name: molekuler_biyoloji_genetik/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     MolekulerBiyolojiGenetikEtkinlik, MolekulerBiyolojiGenetikFaaliyetGorseli, MolekulerBiyolojiGenetikDuyuru, MolekulerBiyolojiGenetikFaaliyetGrubu, MolekulerBiyolojiGenetikFaaliyet, MolekulerBiyolojiGenetikDersProgrami
 )
 
 @admin.register(MolekulerBiyolojiGenetikEtkinlik)
-class MolekulerBiyolojiGenetikEtkinlikAdmin(admin.ModelAdmin):
+class MolekulerBiyolojiGenetikEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class MolekulerBiyolojiGenetikDuyuruAdmin(admin.ModelAdmin):
         return MolekulerBiyolojiGenetikDuyuru.objects.all()
 
 @admin.register(MolekulerBiyolojiGenetikDersProgrami)
-class MolekulerBiyolojiGenetikDersProgramiAdmin(admin.ModelAdmin):
+class MolekulerBiyolojiGenetikDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class MolekulerBiyolojiGenetikFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(MolekulerBiyolojiGenetikFaaliyetGrubu)
-class MolekulerBiyolojiGenetikFaaliyetGrubuAdmin(admin.ModelAdmin):
+class MolekulerBiyolojiGenetikFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(MolekulerBiyolojiGenetikFaaliyet)
-class MolekulerBiyolojiGenetikFaaliyetAdmin(admin.ModelAdmin):
+class MolekulerBiyolojiGenetikFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

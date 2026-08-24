@@ -1,4 +1,5 @@
 {% extends 'yatay_gecis/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - 2024-2025 Eğitim ve Öğretim Yılı Bahar Dönemi Yatay Geçiş Sonuçları{% endblock %}
 
@@ -8,8 +9,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>2024-2025 Eğitim ve Öğretim Yılı Bahar Dönemi Yatay Geçiş Sonuçları</h1>
-            <p>Bahar dönemi için yapılan yatay geçiş başvurularının değerlendirme sonuçları</p>
+            <h1>{% trans "2024-2025 Eğitim ve Öğretim Yılı Bahar Dönemi Yatay Geçiş Sonuçları" %}</h1>
+            <p>{% trans "Bahar dönemi için yapılan yatay geçiş başvurularının değerlendirme sonuçları" %}</p>
         </div>
     </div>
 </section>
@@ -27,8 +28,8 @@
         <div class="col-lg-9 col-xxl-10">
             <div class="content-wrapper">
                 <div class="page-intro">
-                    <h2 class="section-title">2024-2025 Bahar Dönemi Sonuçları</h2>
-                    <p class="section-subtitle">Aşağıda 2024-2025 eğitim ve öğretim yılı bahar dönemi için yapılan yatay geçiş başvurularının değerlendirme sonuçlarını bulabilirsiniz. Her başvuru türü için ayrı sonuç listeleri hazırlanmıştır.</p>
+                    <h2 class="section-title">{% trans "2024-2025 Bahar Dönemi Sonuçları" %}</h2>
+                    <p class="section-subtitle">{% trans "Aşağıda 2024-2025 eğitim ve öğretim yılı bahar dönemi için yapılan yatay geçiş başvurularının değerlendirme sonuçlarını bulabilirsiniz. Her başvuru türü için ayrı sonuç listeleri hazırlanmıştır." %}</p>
                 </div>
                 
                 <!-- Tab Container -->
@@ -36,9 +37,9 @@
                     <div class="tab-container">
                         <div class="tab-header">
                             <ul class="tab-menu">
-                                <li class="tab-menu-item active" data-tab="tab1">Ek Madde-1 Sonuçları</li>
-                                <li class="tab-menu-item" data-tab="tab2">Kurumlararası Not Ortalaması</li>
-                                <li class="tab-menu-item" data-tab="tab3">Kurumiçi Not Ortalaması</li>
+                                <li class="tab-menu-item active" data-tab="tab1">{% trans "Ek Madde-1 Sonuçları" %}</li>
+                                <li class="tab-menu-item" data-tab="tab2">{% trans "Kurumlararası Not Ortalaması" %}</li>
+                                <li class="tab-menu-item" data-tab="tab3">{% trans "Kurumiçi Not Ortalaması" %}</li>
                             </ul>
                         </div>
                         
@@ -46,26 +47,26 @@
                             <!-- Tab 1: Ek Madde-1 Sonuçları -->
                             <div id="tab1" class="tab-content active">
                                 <div class="tab-content-header">
-                                    <h3>Ek Madde-1 ile Yapılan Yatay Geçiş Sonuçları</h3>
+                                    <h3>{% trans "Ek Madde-1 ile Yapılan Yatay Geçiş Sonuçları" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="results-container">
                                         <div class="results-summary">
                                             <div class="summary-card">
                                                 <div class="summary-value">43</div>
-                                                <div class="summary-label">Toplam Başvuru</div>
+                                                <div class="summary-label">{% trans "Toplam Başvuru" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">43</div>
-                                                <div class="summary-label">Kabul Edilen</div>
+                                                <div class="summary-label">{% trans "Kabul Edilen" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">0</div>
-                                                <div class="summary-label">Reddedilen</div>
+                                                <div class="summary-label">{% trans "Reddedilen" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">43</div>
-                                                <div class="summary-label">Asil</div>
+                                                <div class="summary-label">{% trans "Asil" %}</div>
                                             </div>
                                         </div>
                                         
@@ -73,64 +74,64 @@
                                             <table class="timetable-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Sıra No</th>
-                                                        <th>Ad Soyadı</th>
-                                                        <th>Eski Üniversite</th>
-                                                        <th>Eski Bölüm</th>
-                                                        <th>Yeni Bölüm</th>
-                                                        <th>Durum</th>
-                                                        <th>Asil/Yedek</th>
+                                                        <th>{% trans "Sıra No" %}</th>
+                                                        <th>{% trans "Ad Soyadı" %}</th>
+                                                        <th>{% trans "Eski Üniversite" %}</th>
+                                                        <th>{% trans "Eski Bölüm" %}</th>
+                                                        <th>{% trans "Yeni Bölüm" %}</th>
+                                                        <th>{% trans "Durum" %}</th>
+                                                        <th>{% trans "Asil/Yedek" %}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>Birle Nys AK™V</td>
-                                                        <td>Zagalışık Nikolai Kemli Güvenilmiştir</td>
-                                                        <td>Fazeme Hizmetleri</td>
-                                                        <td>Çevrek Gelişimi</td>
-                                                        <td><span class="status-badge accepted">KABUL</span></td>
-                                                        <td><span class="status-badge asil">ASİL</span></td>
+                                                        <td>{% trans "Birle Nys AK™V" %}</td>
+                                                        <td>{% trans "Zagalışık Nikolai Kemli Güvenilmiştir" %}</td>
+                                                        <td>{% trans "Fazeme Hizmetleri" %}</td>
+                                                        <td>{% trans "Çevrek Gelişimi" %}</td>
+                                                        <td><span class="status-badge accepted">{% trans "KABUL" %}</span></td>
+                                                        <td><span class="status-badge asil">{% trans "ASİL" %}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>2</td>
-                                                        <td>Birle Nys AK™R</td>
-                                                        <td>Birle Abrat İzcat Bayat Üniversitesi</td>
-                                                        <td>Çevrek Gelişimi</td>
-                                                        <td>Çevrek Gelişimi</td>
-                                                        <td><span class="status-badge accepted">KABUL</span></td>
-                                                        <td><span class="status-badge asil">ASİL</span></td>
+                                                        <td>{% trans "Birle Nys AK™R" %}</td>
+                                                        <td>{% trans "Birle Abrat İzcat Bayat Üniversitesi" %}</td>
+                                                        <td>{% trans "Çevrek Gelişimi" %}</td>
+                                                        <td>{% trans "Çevrek Gelişimi" %}</td>
+                                                        <td><span class="status-badge accepted">{% trans "KABUL" %}</span></td>
+                                                        <td><span class="status-badge asil">{% trans "ASİL" %}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>3</td>
-                                                        <td>MeFus ÇETİPÇETİP™R</td>
-                                                        <td>Avrupa Üniversitesi</td>
-                                                        <td>Çevrek Gelişimi</td>
-                                                        <td>Çevrek Gelişimi</td>
-                                                        <td><span class="status-badge accepted">KABUL</span></td>
-                                                        <td><span class="status-badge asil">ASİL</span></td>
+                                                        <td>{% trans "MeFus ÇETİPÇETİP™R" %}</td>
+                                                        <td>{% trans "Avrupa Üniversitesi" %}</td>
+                                                        <td>{% trans "Çevrek Gelişimi" %}</td>
+                                                        <td>{% trans "Çevrek Gelişimi" %}</td>
+                                                        <td><span class="status-badge accepted">{% trans "KABUL" %}</span></td>
+                                                        <td><span class="status-badge asil">{% trans "ASİL" %}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>4</td>
-                                                        <td>Birle Nys, T'in-YILA™</td>
-                                                        <td>Sinne Cumhuriyi Üniversitesi</td>
-                                                        <td>Fizyoterapi ve Rehabilitasyon</td>
-                                                        <td>Fizyoterapi ve Rehabilitasyon</td>
-                                                        <td><span class="status-badge accepted">KABUL</span></td>
-                                                        <td><span class="status-badge asil">ASİL</span></td>
+                                                        <td>{% trans "Birle Nys, T'in-YILA™" %}</td>
+                                                        <td>{% trans "Sinne Cumhuriyi Üniversitesi" %}</td>
+                                                        <td>{% trans "Fizyoterapi ve Rehabilitasyon" %}</td>
+                                                        <td>{% trans "Fizyoterapi ve Rehabilitasyon" %}</td>
+                                                        <td><span class="status-badge accepted">{% trans "KABUL" %}</span></td>
+                                                        <td><span class="status-badge asil">{% trans "ASİL" %}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>5</td>
-                                                        <td>MeFuzur CAN™</td>
-                                                        <td>İstanbul Gelişim Üniversitesi</td>
-                                                        <td>Hemşirelik</td>
-                                                        <td>Hemşirelik</td>
-                                                        <td><span class="status-badge accepted">KABUL</span></td>
-                                                        <td><span class="status-badge asil">ASİL</span></td>
+                                                        <td>{% trans "MeFuzur CAN™" %}</td>
+                                                        <td>{% trans "İstanbul Gelişim Üniversitesi" %}</td>
+                                                        <td>{% trans "Hemşirelik" %}</td>
+                                                        <td>{% trans "Hemşirelik" %}</td>
+                                                        <td><span class="status-badge accepted">{% trans "KABUL" %}</span></td>
+                                                        <td><span class="status-badge asil">{% trans "ASİL" %}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="show-more" colspan="7">
-                                                            <button class="show-more-btn" data-target="ek-madde-full">Tüm Sonuçları Göster (43 kayıt)</button>
+                                                            <button class="show-more-btn" data-target="ek-madde-full">{% trans "Tüm Sonuçları Göster (43 kayıt)" %}</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -138,11 +139,11 @@
                                         </div>
                                         
                                         <div class="timetable-notes">
-                                            <h4>Değerlendirme Kriterleri:</h4>
+                                            <h4>{% trans "Değerlendirme Kriterleri:" %}</h4>
                                             <ul>
-                                                <li>Ek Madde-1 ile yatay geçiş kontenjanları, programların taban puanları dikkate alınarak belirlenmiştir.</li>
-                                                <li>Başvurular, öğrencilerin merkezi yerleştirme puanlarına göre değerlendirilmiştir.</li>
-                                                <li>Tüm başvurular kontenjanlar dahilinde değerlendirilmiştir.</li>
+                                                <li>{% trans "Ek Madde-1 ile yatay geçiş kontenjanları, programların taban puanları dikkate alınarak belirlenmiştir." %}</li>
+                                                <li>{% trans "Başvurular, öğrencilerin merkezi yerleştirme puanlarına göre değerlendirilmiştir." %}</li>
+                                                <li>{% trans "Tüm başvurular kontenjanlar dahilinde değerlendirilmiştir." %}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -152,26 +153,26 @@
                             <!-- Tab 2: Kurumlararası Not Ortalaması -->
                             <div id="tab2" class="tab-content">
                                 <div class="tab-content-header">
-                                    <h3>Kurumlararası Not Ortalaması ile Yapılan Yatay Geçiş Sonuçları</h3>
+                                    <h3>{% trans "Kurumlararası Not Ortalaması ile Yapılan Yatay Geçiş Sonuçları" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="results-container">
                                         <div class="results-summary">
                                             <div class="summary-card">
                                                 <div class="summary-value">2</div>
-                                                <div class="summary-label">Toplam Başvuru</div>
+                                                <div class="summary-label">{% trans "Toplam Başvuru" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">1</div>
-                                                <div class="summary-label">Kabul Edilen</div>
+                                                <div class="summary-label">{% trans "Kabul Edilen" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">1</div>
-                                                <div class="summary-label">Reddedilen</div>
+                                                <div class="summary-label">{% trans "Reddedilen" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">1</div>
-                                                <div class="summary-label">Asil</div>
+                                                <div class="summary-label">{% trans "Asil" %}</div>
                                             </div>
                                         </div>
                                         
@@ -179,32 +180,32 @@
                                             <table class="timetable-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Sıra No</th>
-                                                        <th>Ad Soyadı</th>
-                                                        <th>Eski Üniversite</th>
-                                                        <th>Eski Bölüm</th>
-                                                        <th>Yeni Bölüm</th>
-                                                        <th>Durum</th>
-                                                        <th>Asil/Yedek</th>
+                                                        <th>{% trans "Sıra No" %}</th>
+                                                        <th>{% trans "Ad Soyadı" %}</th>
+                                                        <th>{% trans "Eski Üniversite" %}</th>
+                                                        <th>{% trans "Eski Bölüm" %}</th>
+                                                        <th>{% trans "Yeni Bölüm" %}</th>
+                                                        <th>{% trans "Durum" %}</th>
+                                                        <th>{% trans "Asil/Yedek" %}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>Av'eşel AVDW</td>
-                                                        <td>Erziman Birali Yıldırım Üniversitesi</td>
-                                                        <td>Tahsi Laboratuvar Teknikleri</td>
-                                                        <td>Tahsi Laboratuvar Teknikleri</td>
-                                                        <td><span class="status-badge accepted">KABUL</span></td>
-                                                        <td><span class="status-badge asil">ASİL</span></td>
+                                                        <td>{% trans "Av'eşel AVDW" %}</td>
+                                                        <td>{% trans "Erziman Birali Yıldırım Üniversitesi" %}</td>
+                                                        <td>{% trans "Tahsi Laboratuvar Teknikleri" %}</td>
+                                                        <td>{% trans "Tahsi Laboratuvar Teknikleri" %}</td>
+                                                        <td><span class="status-badge accepted">{% trans "KABUL" %}</span></td>
+                                                        <td><span class="status-badge asil">{% trans "ASİL" %}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>2</td>
-                                                        <td>GPlan YILTRAM</td>
-                                                        <td>Jeh Üniversitesi</td>
-                                                        <td>İlk ve Asil Yından</td>
-                                                        <td>İlk ve Asil Yından</td>
-                                                        <td><span class="status-badge rejected">RED</span></td>
+                                                        <td>{% trans "GPlan YILTRAM" %}</td>
+                                                        <td>{% trans "Jeh Üniversitesi" %}</td>
+                                                        <td>{% trans "İlk ve Asil Yından" %}</td>
+                                                        <td>{% trans "İlk ve Asil Yından" %}</td>
+                                                        <td><span class="status-badge rejected">{% trans "RED" %}</span></td>
                                                         <td>-</td>
                                                     </tr>
                                                 </tbody>
@@ -212,11 +213,11 @@
                                         </div>
                                         
                                         <div class="timetable-notes">
-                                            <h4>Değerlendirme Kriterleri:</h4>
+                                            <h4>{% trans "Değerlendirme Kriterleri:" %}</h4>
                                             <ul>
-                                                <li>Kurumlararası yatay geçiş için öğrencinin genel not ortalamasının 100 üzerinden en az 60 olması gerekmektedir.</li>
-                                                <li>4'lük sistemde bu not 2.25 olarak kabul edilmektedir.</li>
-                                                <li>Kontenjanlar ve diğer şartlar ilgili yönetmelik hükümlerine göre belirlenmiştir.</li>
+                                                <li>{% trans "Kurumlararası yatay geçiş için öğrencinin genel not ortalamasının 100 üzerinden en az 60 olması gerekmektedir." %}</li>
+                                                <li>{% trans "4'lük sistemde bu not 2.25 olarak kabul edilmektedir." %}</li>
+                                                <li>{% trans "Kontenjanlar ve diğer şartlar ilgili yönetmelik hükümlerine göre belirlenmiştir." %}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -226,26 +227,26 @@
                             <!-- Tab 3: Kurumiçi Not Ortalaması -->
                             <div id="tab3" class="tab-content">
                                 <div class="tab-content-header">
-                                    <h3>Kurumiçi Not Ortalaması ile Yapılan Yatay Geçiş Sonuçları</h3>
+                                    <h3>{% trans "Kurumiçi Not Ortalaması ile Yapılan Yatay Geçiş Sonuçları" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="results-container">
                                         <div class="results-summary">
                                             <div class="summary-card">
                                                 <div class="summary-value">2</div>
-                                                <div class="summary-label">Toplam Başvuru</div>
+                                                <div class="summary-label">{% trans "Toplam Başvuru" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">1</div>
-                                                <div class="summary-label">Kabul Edilen</div>
+                                                <div class="summary-label">{% trans "Kabul Edilen" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">1</div>
-                                                <div class="summary-label">Reddedilen</div>
+                                                <div class="summary-label">{% trans "Reddedilen" %}</div>
                                             </div>
                                             <div class="summary-card">
                                                 <div class="summary-value">1</div>
-                                                <div class="summary-label">Asil</div>
+                                                <div class="summary-label">{% trans "Asil" %}</div>
                                             </div>
                                         </div>
                                         
@@ -253,29 +254,29 @@
                                             <table class="timetable-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Sıra No</th>
-                                                        <th>Ad Soyadı</th>
-                                                        <th>Eski Bölüm</th>
-                                                        <th>Yeni Bölüm</th>
-                                                        <th>Durum</th>
-                                                        <th>Asil/Yedek</th>
+                                                        <th>{% trans "Sıra No" %}</th>
+                                                        <th>{% trans "Ad Soyadı" %}</th>
+                                                        <th>{% trans "Eski Bölüm" %}</th>
+                                                        <th>{% trans "Yeni Bölüm" %}</th>
+                                                        <th>{% trans "Durum" %}</th>
+                                                        <th>{% trans "Asil/Yedek" %}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>Elave YAVIR</td>
-                                                        <td>Beslenme ve Diyometik</td>
-                                                        <td>Hemajistik</td>
-                                                        <td><span class="status-badge accepted">KABUL</span></td>
-                                                        <td><span class="status-badge asil">ASİL</span></td>
+                                                        <td>{% trans "Elave YAVIR" %}</td>
+                                                        <td>{% trans "Beslenme ve Diyometik" %}</td>
+                                                        <td>{% trans "Hemajistik" %}</td>
+                                                        <td><span class="status-badge accepted">{% trans "KABUL" %}</span></td>
+                                                        <td><span class="status-badge asil">{% trans "ASİL" %}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>2</td>
-                                                        <td>Sayfas Beyin TFT</td>
-                                                        <td>Produjik Laboratuvar Teknikleri</td>
-                                                        <td>Diş Poster Teknolojisi</td>
-                                                        <td><span class="status-badge rejected">RED</span></td>
+                                                        <td>{% trans "Sayfas Beyin TFT" %}</td>
+                                                        <td>{% trans "Produjik Laboratuvar Teknikleri" %}</td>
+                                                        <td>{% trans "Diş Poster Teknolojisi" %}</td>
+                                                        <td><span class="status-badge rejected">{% trans "RED" %}</span></td>
                                                         <td>-</td>
                                                     </tr>
                                                 </tbody>
@@ -283,11 +284,11 @@
                                         </div>
                                         
                                         <div class="timetable-notes">
-                                            <h4>Değerlendirme Kriterleri:</h4>
+                                            <h4>{% trans "Değerlendirme Kriterleri:" %}</h4>
                                             <ul>
-                                                <li>Kurumiçi yatay geçiş kontenjanları ilgili yönetim kurulu tarafından belirlenmektedir.</li>
-                                                <li>Başvurular, programların kontenjanları ve öğrenci not ortalamaları dikkate alınarak değerlendirilmiştir.</li>
-                                                <li>Kurumiçi geçişlerde aynı fakülte içindeki ve farklı fakülteler arasındaki kontenjanlar ayrı ayrı belirlenmektedir.</li>
+                                                <li>{% trans "Kurumiçi yatay geçiş kontenjanları ilgili yönetim kurulu tarafından belirlenmektedir." %}</li>
+                                                <li>{% trans "Başvurular, programların kontenjanları ve öğrenci not ortalamaları dikkate alınarak değerlendirilmiştir." %}</li>
+                                                <li>{% trans "Kurumiçi geçişlerde aynı fakülte içindeki ve farklı fakülteler arasındaki kontenjanlar ayrı ayrı belirlenmektedir." %}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -299,13 +300,13 @@
                 
                 <!-- Genel Bilgilendirme -->
                 <div class="highlight-box">
-                    <h4>Sonuçlar Hakkında Genel Bilgilendirme</h4>
+                    <h4>{% trans "Sonuçlar Hakkında Genel Bilgilendirme" %}</h4>
                     <ul class="responsibilities-list">
-                        <li>Tüm sonuçlar resmi olarak ilan edilmiştir ve kesinleşmiştir.</li>
-                        <li>Kabul edilen öğrenciler, kayıt için gerekli belgeleri belirtilen tarihlerde tamamlamalıdır.</li>
-                        <li>Reddedilen başvurular için itiraz süreci bulunmamaktadır.</li>
-                        <li>Asil listesinde yer alan öğrenciler, yedek listeye geçiş yapmazlar.</li>
-                        <li>Tüm başvurular ilgili yönetmelik hükümlerine göre değerlendirilmiştir.</li>
+                        <li>{% trans "Tüm sonuçlar resmi olarak ilan edilmiştir ve kesinleşmiştir." %}</li>
+                        <li>{% trans "Kabul edilen öğrenciler, kayıt için gerekli belgeleri belirtilen tarihlerde tamamlamalıdır." %}</li>
+                        <li>{% trans "Reddedilen başvurular için itiraz süreci bulunmamaktadır." %}</li>
+                        <li>{% trans "Asil listesinde yer alan öğrenciler, yedek listeye geçiş yapmazlar." %}</li>
+                        <li>{% trans "Tüm başvurular ilgili yönetmelik hükümlerine göre değerlendirilmiştir." %}</li>
                     </ul>
                 </div>
                 
@@ -313,26 +314,26 @@
                 <div class="download-section">
                     <div class="download-container">
                         <div class="download-info">
-                            <h4>Sonuçları PDF Olarak İndir</h4>
-                            <p>2024-2025 Bahar Dönemi yatay geçiş sonuçlarını PDF formatında indirerek arşivleyebilir ve yazdırabilirsiniz.</p>
+                            <h4>{% trans "Sonuçları PDF Olarak İndir" %}</h4>
+                            <p>{% trans "2024-2025 Bahar Dönemi yatay geçiş sonuçlarını PDF formatında indirerek arşivleyebilir ve yazdırabilirsiniz." %}</p>
                         </div>
                         <div class="download-buttons">
                             <a href="/path/to/Ek-Madde-1.pdf" class="download-btn" download>
-                                <span>Ek Madde-1 Sonuçları</span>
-                                <span class="file-size">(PDF, 156 KB)</span>
+                                <span>{% trans "Ek Madde-1 Sonuçları" %}</span>
+                                <span class="file-size">{% trans "(PDF, 156 KB)" %}</span>
                             </a>
                             <a href="/path/to/Kurumlararasi-Not-Ortalamasi.pdf" class="download-btn" download>
-                                <span>Kurumlararası Not Ort.</span>
-                                <span class="file-size">(PDF, 89 KB)</span>
+                                <span>{% trans "Kurumlararası Not Ort." %}</span>
+                                <span class="file-size">{% trans "(PDF, 89 KB)" %}</span>
                             </a>
                             <a href="/path/to/Kurumici-Not-Ortalamasi.pdf" class="download-btn" download>
-                                <span>Kurumiçi Not Ort.</span>
-                                <span class="file-size">(PDF, 112 KB)</span>
+                                <span>{% trans "Kurumiçi Not Ort." %}</span>
+                                <span class="file-size">{% trans "(PDF, 112 KB)" %}</span>
                             </a>
                         </div>
                     </div>
                     <div class="download-notice">
-                        <p><strong>Not:</strong> PDF dosyaları resmi sonuç belgelerinin dijital kopyalarıdır. Yazdırılmaya uygun formatta hazırlanmıştır. Belgelerde herhangi bir hata veya eksiklik tespit edilmesi durumunda lütfen Öğrenci İşleri Birimi ile iletişime geçiniz.</p>
+                        <p><strong>{% trans "Not:" %}</strong> {% trans "PDF dosyaları resmi sonuç belgelerinin dijital kopyalarıdır. Yazdırılmaya uygun formatta hazırlanmıştır. Belgelerde herhangi bir hata veya eksiklik tespit edilmesi durumunda lütfen Öğrenci İşleri Birimi ile iletişime geçiniz." %}</p>
                     </div>
                 </div>
             </div>

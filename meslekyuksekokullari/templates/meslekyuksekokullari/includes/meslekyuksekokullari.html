@@ -1,4 +1,5 @@
 {% extends 'meslekyuksekokullari/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Meslek Yüksekokulari{% endblock %}
 
@@ -8,7 +9,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Avrasya Üniversitesi - Meslek Yüksekokulari</h1>
+            <h1>{% trans "Avrasya Üniversitesi - Meslek Yüksekokulari" %}</h1>
             <p></p>
         </div>
     </div>
@@ -27,7 +28,7 @@
         <!-- Academic Highlights -->
         <section class="academic-highlights">
             {% comment %} <div class="section-header">
-                <h2 class="section-title">Fakültelerimiz</h2>
+                <h2 class="section-title">{% trans "Fakültelerimiz" %}</h2>
                 <div class="title-underline"></div>
             </div> {% endcomment %}
             
@@ -39,23 +40,22 @@
                             <i class="fas fa-flask"></i>
                         </div>
                         <div class="unit-content">
-                            <h4 class="unit-title">Meslek Yüksekokulu</h4>
+                            <h4 class="unit-title">{% trans "Meslek Yüksekokulu" %}</h4>
                             <p class="unit-description">
-                                Temel bilimler ve sosyal bilimler alanında nitelikli eğitim veren, 
-                                bilimsel araştırmalarla topluma katkı sağlayan bir fakülte.
+                                {% trans "Temel bilimler ve sosyal bilimler alanında nitelikli eğitim veren, bilimsel araştırmalarla topluma katkı sağlayan bir fakülte." %}
                             </p>
                             <div class="unit-stats">
                                 <div class="stat-item">
                                     <strong>8</strong>
-                                    <span>Bölüm</span>
+                                    <span>{% trans "Bölüm" %}</span>
                                 </div>
                                 <div class="stat-item">
                                     <strong>120+</strong>
-                                    <span>AKTS</span>
+                                    <span>{% trans "AKTS" %}</span>
                                 </div>
                             </div>
                             <a href="{% url 'meslek_yuksekokulu:meslek_yuksekokulu' %}" class="unit-link">
-                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                                {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -68,23 +68,22 @@
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="unit-content">
-                            <h4 class="unit-title">Sağlık Hizmetleri Meslek Yüksekokulu</h4>
+                            <h4 class="unit-title">{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</h4>
                             <p class="unit-description">
-                                İş dünyasının ihtiyaçlarına yönelik uzmanlar yetiştiren, 
-                                modern ekonominin gereksinimlerine uygun eğitim veren fakülte.
+                                {% trans "İş dünyasının ihtiyaçlarına yönelik uzmanlar yetiştiren, modern ekonominin gereksinimlerine uygun eğitim veren fakülte." %}
                             </p>
                             <div class="unit-stats">
                                 <div class="stat-item">
                                     <strong>6</strong>
-                                    <span>Bölüm</span>
+                                    <span>{% trans "Bölüm" %}</span>
                                 </div>
                                 <div class="stat-item">
                                     <strong>240</strong>
-                                    <span>AKTS</span>
+                                    <span>{% trans "AKTS" %}</span>
                                 </div>
                             </div>
                             <a href="{% url 'saglik_hizmetleri_myo:saglik_hizmetleri_myo' %}" class="unit-link">
-                                Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                                {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -99,22 +98,17 @@
             <div class="info-card">
                 <div class="info-header">
                     <h3 class="info-title">
-                        <i class="fas fa-info-circle me-2"></i>Fakülteler Hakkında
+                        <i class="fas fa-info-circle me-2"></i>{% trans "Fakülteler Hakkında" %}
                     </h3>
                 </div>
                 
                 <div class="info-content">
                     <p class="info-text">
-                        Avrasya Üniversitesi, 6 farklı fakültesiyle lisans düzeyinde kaliteli eğitim 
-                        ve multidisipliner araştırma olanakları sunmaktadır. Her fakülte, kendi alanında 
-                        uzman akademik kadrosu ve modern altyapısıyla öğrencilerine en iyi eğitim 
-                        deneyimini sağlamaktadır.
+                        {% trans "Avrasya Üniversitesi, 6 farklı fakültesiyle lisans düzeyinde kaliteli eğitim ve multidisipliner araştırma olanakları sunmaktadır. Her fakülte, kendi alanında uzman akademik kadrosu ve modern altyapısıyla öğrencilerine en iyi eğitim deneyimini sağlamaktadır." %}
                     </p>
 
                     <p class="info-text">
-                        Fakültelerimiz, öğrencilerine sadece teorik bilgi değil aynı zamanda 
-                        pratik beceriler de kazandırarak, mezun olduklarında iş dünyasının 
-                        aradığı nitelikli profesyoneller olmalarını hedeflemektedir.
+                        {% trans "Fakültelerimiz, öğrencilerine sadece teorik bilgi değil aynı zamanda pratik beceriler de kazandırarak, mezun olduklarında iş dünyasının aradığı nitelikli profesyoneller olmalarını hedeflemektedir." %}
                     </p>
                 </div>
             </div>
@@ -127,25 +121,25 @@
                     <div class="col-md-3 col-6 mb-4">
                         <div class="stat-item">
                             <h3 class="stat-number">6</h3>
-                            <p class="stat-label">Fakülte</p>
+                            <p class="stat-label">{% trans "Fakülte" %}</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="stat-item">
                             <h3 class="stat-number">36+</h3>
-                            <p class="stat-label">Bölüm</p>
+                            <p class="stat-label">{% trans "Bölüm" %}</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="stat-item">
                             <h3 class="stat-number">540+</h3>
-                            <p class="stat-label">Akademisyen</p>
+                            <p class="stat-label">{% trans "Akademisyen" %}</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="stat-item">
                             <h3 class="stat-number">8000+</h3>
-                            <p class="stat-label">Öğrenci</p>
+                            <p class="stat-label">{% trans "Öğrenci" %}</p>
                         </div>
                     </div>
                 </div>

@@ -1,11 +1,12 @@
 # iktisadi_idari/admin.py
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     IktisadiIdariDuyuru
 )
 
 @admin.register(IktisadiIdariDuyuru)
-class IktisadiIdariDuyuruAdmin(admin.ModelAdmin):
+class IktisadiIdariDuyuruAdmin(TranslationAdmin):
     list_display = ['baslik', 'kategori', 'yayin_tarihi', 'yayinda', 'onemli', 'sira']
     list_filter = ['kategori', 'yayinda', 'onemli', 'yayin_tarihi']
     search_fields = ['baslik', 'icerik', 'ozet']

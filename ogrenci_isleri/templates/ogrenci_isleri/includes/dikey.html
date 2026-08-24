@@ -1,4 +1,5 @@
 {% extends 'ogrenci_isleri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - DİKEY GEÇİŞ (DGS){% endblock %}
 
@@ -8,8 +9,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>DİKEY GEÇİŞ (DGS)</h1>
-            <p>2025 Dikey Geçiş Sınavı (DGS) Kontenjanları ve Başvuru Bilgileri</p>
+            <h1>{% trans "DİKEY GEÇİŞ (DGS)" %}</h1>
+            <p>{% trans "2025 Dikey Geçiş Sınavı (DGS) Kontenjanları ve Başvuru Bilgileri" %}</p>
         </div>
     </div>
 </section>
@@ -34,11 +35,9 @@
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
                             <div class="notice-content">
-                                <h3 class="notice-title">2025-DGS Tercih Tarihleri</h3>
+                                <h3 class="notice-title">{% trans "2025-DGS Tercih Tarihleri" %}</h3>
                                 <p class="notice-text mb-0">
-                                    <strong>28 Ağustos - 04 Eylül 2025</strong> tarihleri arasında yapılacaktır. 
-                                    Tercihler 28 Ağustos 2025 saat <strong>10:15</strong>'ten itibaren başlayacak, 
-                                    04 Eylül 2025 saat <strong>23:59</strong>'da sona erecektir.
+                                    <strong>{% trans "28 Ağustos - 04 Eylül 2025" %}</strong> {% trans "tarihleri arasında yapılacaktır. Tercihler 28 Ağustos 2025 saat" %} <strong>10:15</strong>{% trans "'ten itibaren başlayacak, 04 Eylül 2025 saat" %} <strong>23:59</strong>{% trans "'da sona erecektir." %}
                                 </p>
                             </div>
                         </div>
@@ -54,10 +53,10 @@
                                     <i class="fas fa-external-link-alt"></i>
                                 </div>
                                 <div class="link-text">
-                                    <h3>ÖSYM Tercih Sayfası</h3>
-                                    <p>Tercihlerinizi yapmak için ÖSYM Aday İşlemleri Sistemini kullanınız:</p>
+                                    <h3>{% trans "ÖSYM Tercih Sayfası" %}</h3>
+                                    <p>{% trans "Tercihlerinizi yapmak için ÖSYM Aday İşlemleri Sistemini kullanınız:" %}</p>
                                     <a href="https://ais.osym.gov.tr" target="_blank" class="link-button">
-                                        <i class="fas fa-link"></i> https://ais.osym.gov.tr
+                                        <i class="fas fa-link"></i> {% trans "https://ais.osym.gov.tr" %}
                                     </a>
                                 </div>
                             </div>
@@ -69,33 +68,33 @@
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="filter-section">
-                            <h3 class="filter-title mb-3">DGS Programlarını Filtrele</h3>
+                            <h3 class="filter-title mb-3">{% trans "DGS Programlarını Filtrele" %}</h3>
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <select class="form-select filter-select" id="facultyFilter">
-                                        <option value="all">Fakülte/Yüksekokul (Tümü)</option>
-                                        <option value="Fen Edebiyat Fakültesi">Fen Edebiyat Fakültesi</option>
-                                        <option value="İktisadi ve İdari Bilimler Fakültesi">İktisadi ve İdari Bilimler Fakültesi</option>
-                                        <option value="İletişim Fakültesi">İletişim Fakültesi</option>
-                                        <option value="Mühendislik ve Mimarlık Fakültesi">Mühendislik ve Mimarlık Fakültesi</option>
-                                        <option value="Sağlık Bilimleri Fakültesi">Sağlık Bilimleri Fakültesi</option>
-                                        <option value="Spor Bilimleri Fakültesi">Spor Bilimleri Fakültesi</option>
-                                        <option value="Uygulamalı Bilimler Yüksekokulu">Uygulamalı Bilimler Yüksekokulu</option>
+                                        <option value="all">{% trans "Fakülte/Yüksekokul (Tümü)" %}</option>
+                                        <option value="Fen Edebiyat Fakültesi">{% trans "Fen Edebiyat Fakültesi" %}</option>
+                                        <option value="İktisadi ve İdari Bilimler Fakültesi">{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</option>
+                                        <option value="İletişim Fakültesi">{% trans "İletişim Fakültesi" %}</option>
+                                        <option value="Mühendislik ve Mimarlık Fakültesi">{% trans "Mühendislik ve Mimarlık Fakültesi" %}</option>
+                                        <option value="Sağlık Bilimleri Fakültesi">{% trans "Sağlık Bilimleri Fakültesi" %}</option>
+                                        <option value="Spor Bilimleri Fakültesi">{% trans "Spor Bilimleri Fakültesi" %}</option>
+                                        <option value="Uygulamalı Bilimler Yüksekokulu">{% trans "Uygulamalı Bilimler Yüksekokulu" %}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
                                     <select class="form-select filter-select" id="programTypeFilter">
-                                        <option value="all">Program Türü (Tümü)</option>
-                                        <option value="Ücretli">Ücretli</option>
-                                        <option value="Burslu">Burslu</option>
+                                        <option value="all">{% trans "Program Türü (Tümü)" %}</option>
+                                        <option value="Ücretli">{% trans "Ücretli" %}</option>
+                                        <option value="Burslu">{% trans "Burslu" %}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
                                     <select class="form-select filter-select" id="scoreTypeFilter">
-                                        <option value="all">Puan Türü (Tümü)</option>
-                                        <option value="SAY">SAY</option>
-                                        <option value="EA">EA</option>
-                                        <option value="SÖZ">SÖZ</option>
+                                        <option value="all">{% trans "Puan Türü (Tümü)" %}</option>
+                                        <option value="SAY">{% trans "SAY" %}</option>
+                                        <option value="EA">{% trans "EA" %}</option>
+                                        <option value="SÖZ">{% trans "SÖZ" %}</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,381 +107,381 @@
                     <div class="col-12">
                         <div class="table-card">
                             <div class="table-header">
-                                <h4 class="table-title"> 2025-DGS Kontenjanlar ve Eğitim Ücretleri</h4>
-                                <p class="table-subtitle">Avrasya Üniversitesi Dikey Geçiş Programları</p>
+                                <h4 class="table-title"> {% trans "2025-DGS Kontenjanlar ve Eğitim Ücretleri" %}</h4>
+                                <p class="table-subtitle">{% trans "Avrasya Üniversitesi Dikey Geçiş Programları" %}</p>
                             </div>
                             <div class="table-announcement">
                                 <i class="fas fa-info-circle"></i>
-                                <span><strong>Not:</strong> DGS programlarında tercih indirimi bulunmamaktadır.</span>
+                                <span><strong>{% trans "Not:" %}</strong> {% trans "DGS programlarında tercih indirimi bulunmamaktadır." %}</span>
                             </div>
                             <div class="table-responsive">
                                 <table class="table dgs-table" id="dgsTable">
                                     <thead>
                                         <tr>
-                                            <th width="20%">Fakülte/Yüksekokul</th>
-                                            <th width="25%">Program Adı</th>
-                                            <th width="8%">Öğr. Süre</th>
-                                            <th width="8%">Puan Türü</th>
-                                            <th width="8%">Kont.</th>
-                                            <th width="12%">Lisans Alan Kodu</th>
-                                            <th width="19%">2025 Eğitim Ücreti (KDV Dahil)</th>
+                                            <th width="20%">{% trans "Fakülte/Yüksekokul" %}</th>
+                                            <th width="25%">{% trans "Program Adı" %}</th>
+                                            <th width="8%">{% trans "Öğr. Süre" %}</th>
+                                            <th width="8%">{% trans "Puan Türü" %}</th>
+                                            <th width="8%">{% trans "Kont." %}</th>
+                                            <th width="12%">{% trans "Lisans Alan Kodu" %}</th>
+                                            <th width="19%">{% trans "2025 Eğitim Ücreti (KDV Dahil)" %}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- Fen Edebiyat Fakültesi -->
                                         <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
-                                            <td><strong>Fen Edebiyat Fakültesi</strong></td>
-                                            <td>İngiliz Dili ve Edebiyatı (Ücretli)</td>
+                                            <td><strong>{% trans "Fen Edebiyat Fakültesi" %}</strong></td>
+                                            <td>{% trans "İngiliz Dili ve Edebiyatı (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>4</td>
                                             <td><span class="field-code">3219</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td>İngiliz Dili ve Edebiyatı (Burslu)</td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "İngiliz Dili ve Edebiyatı (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3219</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td>İngilizce Mütercim ve Tercümanlık (Ücretli)</td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "İngilizce Mütercim ve Tercümanlık (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>4</td>
                                             <td><span class="field-code">1400</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td>İngilizce Mütercim ve Tercümanlık (Burslu)</td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "İngilizce Mütercim ve Tercümanlık (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">1400</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td>Moleküler Biyoloji ve Genetik (İngilizce) (Ücretli)</td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "Moleküler Biyoloji ve Genetik (İngilizce) (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>2</td>
                                             <td><span class="field-code">3267</span></td>
                                             <td><span class="price-dgs">308.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Fen Edebiyat Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Fen Edebiyat Fakültesi</td>
-                                            <td>Moleküler Biyoloji ve Genetik (İngilizce) (Burslu)</td>
+                                            <td>{% trans "Fen Edebiyat Fakültesi" %}</td>
+                                            <td>{% trans "Moleküler Biyoloji ve Genetik (İngilizce) (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3267</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         
                                         <!-- İktisadi ve İdari Bilimler Fakültesi -->
                                         <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
-                                            <td><strong>İktisadi ve İdari Bilimler Fakültesi</strong></td>
-                                            <td>Siyaset Bilimi ve Kamu Yönetimi (Ücretli)</td>
+                                            <td><strong>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</strong></td>
+                                            <td>{% trans "Siyaset Bilimi ve Kamu Yönetimi (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>3</td>
                                             <td><span class="field-code">3314</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="İktisadi ve İdari Bilimler Fakültesi" data-programtype="Burslu" data-scoretype="EA">
-                                            <td>İktisadi ve İdari Bilimler Fakültesi</td>
-                                            <td>Siyaset Bilimi ve Kamu Yönetimi (Burslu)</td>
+                                            <td>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</td>
+                                            <td>{% trans "Siyaset Bilimi ve Kamu Yönetimi (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3314</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         
                                         <!-- İletişim Fakültesi -->
                                         <tr data-faculty="İletişim Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
-                                            <td><strong>İletişim Fakültesi</strong></td>
-                                            <td>Görsel İletişim Tasarımı (Ücretli)</td>
+                                            <td><strong>{% trans "İletişim Fakültesi" %}</strong></td>
+                                            <td>{% trans "Görsel İletişim Tasarımı (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>3</td>
                                             <td><span class="field-code">5109</span></td>
                                             <td><span class="price-dgs">198.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="İletişim Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
-                                            <td>İletişim Fakültesi</td>
-                                            <td>Görsel İletişim Tasarımı (Burslu)</td>
+                                            <td>{% trans "İletişim Fakültesi" %}</td>
+                                            <td>{% trans "Görsel İletişim Tasarımı (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">5109</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="İletişim Fakültesi" data-programtype="Ücretli" data-scoretype="SÖZ">
-                                            <td>İletişim Fakültesi</td>
-                                            <td>Yeni Medya ve İletişim (Ücretli)</td>
+                                            <td>{% trans "İletişim Fakültesi" %}</td>
+                                            <td>{% trans "Yeni Medya ve İletişim (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>3</td>
                                             <td><span class="field-code">9471</span></td>
                                             <td><span class="price-dgs">198.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="İletişim Fakültesi" data-programtype="Burslu" data-scoretype="SÖZ">
-                                            <td>İletişim Fakültesi</td>
-                                            <td>Yeni Medya ve İletişim (Burslu)</td>
+                                            <td>{% trans "İletişim Fakültesi" %}</td>
+                                            <td>{% trans "Yeni Medya ve İletişim (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">9471</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         
                                         <!-- Mühendislik ve Mimarlık Fakültesi -->
                                         <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td><strong>Mühendislik ve Mimarlık Fakültesi</strong></td>
-                                            <td>Bilgisayar Mühendisliği (Ücretli)</td>
+                                            <td><strong>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</strong></td>
+                                            <td>{% trans "Bilgisayar Mühendisliği (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3124</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td>Bilgisayar Mühendisliği (Burslu)</td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "Bilgisayar Mühendisliği (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3124</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td>İç Mimarlık ve Çevre Tasarımı (Ücretli)</td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "İç Mimarlık ve Çevre Tasarımı (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>2</td>
                                             <td><span class="field-code">3212</span></td>
                                             <td><span class="price-dgs">308.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="EA">
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td>İç Mimarlık ve Çevre Tasarımı (Burslu)</td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "İç Mimarlık ve Çevre Tasarımı (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3212</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td>İnşaat Mühendisliği (Ücretli)</td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "İnşaat Mühendisliği (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3221</span></td>
                                             <td><span class="price-dgs">220.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td>İnşaat Mühendisliği (Burslu)</td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "İnşaat Mühendisliği (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3221</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td>Mimarlık (Ücretli)</td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "Mimarlık (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3263</span></td>
                                             <td><span class="price-dgs">220.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Mühendislik ve Mimarlık Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Mühendislik ve Mimarlık Fakültesi</td>
-                                            <td>Mimarlık (Burslu)</td>
+                                            <td>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</td>
+                                            <td>{% trans "Mimarlık (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3263</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         
                                         <!-- Sağlık Bilimleri Fakültesi -->
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td><strong>Sağlık Bilimleri Fakültesi</strong></td>
-                                            <td>Beslenme ve Diyetetik (Ücretli)</td>
+                                            <td><strong>{% trans "Sağlık Bilimleri Fakültesi" %}</strong></td>
+                                            <td>{% trans "Beslenme ve Diyetetik (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3122</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Beslenme ve Diyetetik (Burslu)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Beslenme ve Diyetetik (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3122</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Çocuk Gelişimi (Ücretli)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Çocuk Gelişimi (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">4235</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="EA">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Çocuk Gelişimi (Burslu)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Çocuk Gelişimi (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">4235</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Ebelik (Ücretli)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Ebelik (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3155</span></td>
                                             <td><span class="price-dgs">308.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Ebelik (Burslu)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Ebelik (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3155</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Fizyoterapi ve Rehabilitasyon (Ücretli)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Fizyoterapi ve Rehabilitasyon (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">8344</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Fizyoterapi ve Rehabilitasyon (Burslu)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Fizyoterapi ve Rehabilitasyon (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">8344</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Hemşirelik (Ücretli)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Hemşirelik (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>4</td>
                                             <td><span class="field-code">3204</span></td>
                                             <td><span class="price-dgs">308.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Hemşirelik (Burslu)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Hemşirelik (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">3204</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Odyoloji (Ücretli)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Odyoloji (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">9267</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Sağlık Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="SAY">
-                                            <td>Sağlık Bilimleri Fakültesi</td>
-                                            <td>Odyoloji (Burslu)</td>
+                                            <td>{% trans "Sağlık Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Odyoloji (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SAY</td>
+                                            <td>{% trans "SAY" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">9267</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         
                                         <!-- Spor Bilimleri Fakültesi -->
                                         <tr data-faculty="Spor Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
-                                            <td><strong>Spor Bilimleri Fakültesi</strong></td>
-                                            <td>Spor Yöneticiliği (Ücretli)</td>
+                                            <td><strong>{% trans "Spor Bilimleri Fakültesi" %}</strong></td>
+                                            <td>{% trans "Spor Yöneticiliği (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>4</td>
                                             <td><span class="field-code">7104</span></td>
                                             <td><span class="price-dgs">198.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Spor Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="EA">
-                                            <td>Spor Bilimleri Fakültesi</td>
-                                            <td>Spor Yöneticiliği (Burslu)</td>
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Spor Yöneticiliği (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">7104</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         <tr data-faculty="Spor Bilimleri Fakültesi" data-programtype="Ücretli" data-scoretype="EA">
-                                            <td>Spor Bilimleri Fakültesi</td>
-                                            <td>Rekreasyon (Ücretli)</td>
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Rekreasyon (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>4</td>
                                             <td><span class="field-code">7103</span></td>
                                             <td><span class="price-dgs">198.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Spor Bilimleri Fakültesi" data-programtype="Burslu" data-scoretype="EA">
-                                            <td>Spor Bilimleri Fakültesi</td>
-                                            <td>Rekreasyon (Burslu)</td>
+                                            <td>{% trans "Spor Bilimleri Fakültesi" %}</td>
+                                            <td>{% trans "Rekreasyon (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>EA</td>
+                                            <td>{% trans "EA" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">7103</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                         
                                         <!-- Uygulamalı Bilimler Yüksekokulu -->
                                         <tr data-faculty="Uygulamalı Bilimler Yüksekokulu" data-programtype="Ücretli" data-scoretype="SÖZ">
-                                            <td><strong>Uygulamalı Bilimler Yüksekokulu</strong></td>
-                                            <td>Gastronomi ve Mutfak Sanatları (Ücretli)</td>
+                                            <td><strong>{% trans "Uygulamalı Bilimler Yüksekokulu" %}</strong></td>
+                                            <td>{% trans "Gastronomi ve Mutfak Sanatları (Ücretli)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>3</td>
                                             <td><span class="field-code">5108</span></td>
                                             <td><span class="price-dgs">275.000,00 ₺</span></td>
                                         </tr>
                                         <tr data-faculty="Uygulamalı Bilimler Yüksekokulu" data-programtype="Burslu" data-scoretype="SÖZ">
-                                            <td>Uygulamalı Bilimler Yüksekokulu</td>
-                                            <td>Gastronomi ve Mutfak Sanatları (Burslu)</td>
+                                            <td>{% trans "Uygulamalı Bilimler Yüksekokulu" %}</td>
+                                            <td>{% trans "Gastronomi ve Mutfak Sanatları (Burslu)" %}</td>
                                             <td>4</td>
-                                            <td>SÖZ</td>
+                                            <td>{% trans "SÖZ" %}</td>
                                             <td>1</td>
                                             <td><span class="field-code">5108</span></td>
-                                            <td><span class="price-free">Burslu</span></td>
+                                            <td><span class="price-free">{% trans "Burslu" %}</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -490,15 +489,15 @@
                             
                             <div class="table-footer">
                                 <div class="legend">
-                                    <h6>Renk Açıklamaları:</h6>
+                                    <h6>{% trans "Renk Açıklamaları:" %}</h6>
                                     <div class="legend-items">
                                         <div class="legend-item">
                                             <span class="legend-color" style="background-color: #dc3545;"></span>
-                                            <span class="legend-text">Ücretli Program</span>
+                                            <span class="legend-text">{% trans "Ücretli Program" %}</span>
                                         </div>
                                         <div class="legend-item">
                                             <span class="legend-color" style="background-color: #198754;"></span>
-                                            <span class="legend-text">Burslu Program</span>
+                                            <span class="legend-text">{% trans "Burslu Program" %}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -512,14 +511,14 @@
                     <div class="col-lg-6">
                         <div class="info-box">
                             <div class="info-box-header">
-                                <h5><i class="fas fa-info-circle me-2"></i> Önemli Bilgiler</h5>
+                                <h5><i class="fas fa-info-circle me-2"></i> {% trans "Önemli Bilgiler" %}</h5>
                             </div>
                             <div class="info-box-body">
-                                <p>Yerleştirme işleminde, <strong>2025-DGS Başvuru Kılavuzu'nda</strong> yer alan ilke ve kurallar uygulanacaktır.</p>
-                                <p>2025-DGS yerleştirme ile ilgili genel bilgiler ve tablolar <a href="https://www.osym.gov.tr/TR,33452/2025-dgs-tercih-bilgileri-ve-tablolar.html" target="_blank">ÖSYM web sitesinde</a> sunulmuştur.</p>
+                                <p>{% trans "Yerleştirme işleminde," %} <strong>{% trans "2025-DGS Başvuru Kılavuzu'nda" %}</strong> {% trans "yer alan ilke ve kurallar uygulanacaktır." %}</p>
+                                <p>{% trans "2025-DGS yerleştirme ile ilgili genel bilgiler ve tablolar" %} <a href="https://www.osym.gov.tr/TR,33452/2025-dgs-tercih-bilgileri-ve-tablolar.html" target="_blank">{% trans "ÖSYM web sitesinde" %}</a> {% trans "sunulmuştur." %}</p>
                                 <div class="alert alert-warning mt-3">
                                     <i class="fas fa-exclamation-triangle me-2"></i>
-                                    <strong>Gastronomi ve Mutfak Sanatları</strong> programına başvuran adaylar için sağlık raporu gerekmektedir.
+                                    <strong>{% trans "Gastronomi ve Mutfak Sanatları" %}</strong> {% trans "programına başvuran adaylar için sağlık raporu gerekmektedir." %}
                                 </div>
                             </div>
                         </div>
@@ -527,14 +526,14 @@
                     <div class="col-lg-6">
                         <div class="info-box">
                             <div class="info-box-header">
-                                <h5><i class="fas fa-map-marker-alt me-2"></i> Kayıt Bilgileri</h5>
+                                <h5><i class="fas fa-map-marker-alt me-2"></i> {% trans "Kayıt Bilgileri" %}</h5>
                             </div>
                             <div class="info-box-body">
-                                <p><strong>Kayıt Yeri:</strong> Avrasya Üniversitesi Öğrenci İşleri Daire Başkanlığı</p>
-                                <p><strong>Adres:</strong> Yomra, Trabzon</p>
+                                <p><strong>{% trans "Kayıt Yeri:" %}</strong> {% trans "Avrasya Üniversitesi Öğrenci İşleri Daire Başkanlığı" %}</p>
+                                <p><strong>{% trans "Adres:" %}</strong> {% trans "Yomra, Trabzon" %}</p>
                                 <div class="alert alert-info mt-3">
                                     <i class="fas fa-clock me-2"></i>
-                                    <strong>Çalışma Saatleri:</strong> 09:00 - 17:00 (Hafta içi)
+                                    <strong>{% trans "Çalışma Saatleri:" %}</strong> {% trans "09:00 - 17:00 (Hafta içi)" %}
                                 </div>
                             </div>
                         </div>
@@ -546,7 +545,7 @@
                     <div class="col-12">
                         <div class="documents-card">
                             <div class="documents-header">
-                                <h4 class="documents-title">📋 Dikey Geçiş Başvurusunda Gerekli Evraklar</h4>
+                                <h4 class="documents-title">{% trans "📋 Dikey Geçiş Başvurusunda Gerekli Evraklar" %}</h4>
                             </div>
                             <div class="documents-body">
                                 <div class="documents-list">
@@ -554,88 +553,88 @@
                                         <i class="fas fa-file-pdf document-icon"></i>
                                         <div class="document-content">
                                             <a href="https://avrasya.edu.tr/wp-content/uploads/2022/09/Avrasya_Universitesi_basvuru_ve_kayit_dosyasi_kapak_formu_dgs-08.09.2022.pdf" target="_blank" class="document-link">
-                                                Avrasya Üniversitesi Kayıt Dosyası Kapak Formu
+                                                {% trans "Avrasya Üniversitesi Kayıt Dosyası Kapak Formu" %}
                                             </a>
-                                            <span class="document-size">(PDF - 250KB)</span>
+                                            <span class="document-size">{% trans "(PDF - 250KB)" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-alt document-icon"></i>
                                         <div class="document-content">
-                                            <span class="document-text">DGS Yerleştirme belgesinin internet çıktısı</span>
+                                            <span class="document-text">{% trans "DGS Yerleştirme belgesinin internet çıktısı" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-alt document-icon"></i>
                                         <div class="document-content">
-                                            <span class="document-text">Lise Diploması aslı (Üniversite ya da noter tarafından Aslı onaylı belgesi kabul edilir.)</span>
+                                            <span class="document-text">{% trans "Lise Diploması aslı (Üniversite ya da noter tarafından Aslı onaylı belgesi kabul edilir.)" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-alt document-icon"></i>
                                         <div class="document-content">
-                                            <span class="document-text">Önlisans Diploması veya diploma hazırlanmamış ise yeni tarihli mezuniyet belgesi</span>
+                                            <span class="document-text">{% trans "Önlisans Diploması veya diploma hazırlanmamış ise yeni tarihli mezuniyet belgesi" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-alt document-icon"></i>
                                         <div class="document-content">
-                                            <span class="document-text">2 adet fotoğraf (4,5×6 ebadında, son 6 ay içerisinde çekilmiş)</span>
+                                            <span class="document-text">{% trans "2 adet fotoğraf (4,5×6 ebadında, son 6 ay içerisinde çekilmiş)" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-alt document-icon"></i>
                                         <div class="document-content">
-                                            <span class="document-text">Nüfus Cüzdanı Fotokopisi</span>
+                                            <span class="document-text">{% trans "Nüfus Cüzdanı Fotokopisi" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-alt document-icon"></i>
                                         <div class="document-content">
-                                            <span class="document-text">Eğitim Ücretinin ödendiğine dair dekont (Bir yıllık)</span>
+                                            <span class="document-text">{% trans "Eğitim Ücretinin ödendiğine dair dekont (Bir yıllık)" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-pdf document-icon"></i>
                                         <div class="document-content">
                                             <a href="https://avrasya.edu.tr/wp-content/uploads/2021/08/BEYANNAME_16.08.2019-1.pdf" target="_blank" class="document-link">
-                                                Beyanname
+                                                {% trans "Beyanname" %}
                                             </a>
-                                            <span class="document-size">(PDF - 150KB)</span>
+                                            <span class="document-size">{% trans "(PDF - 150KB)" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-pdf document-icon"></i>
                                         <div class="document-content">
                                             <a href="https://avrasya.edu.tr/wp-content/uploads/2025/08/ogrenci-sozlesmesi-27.08.2025.pdf" target="_blank" class="document-link">
-                                                Eğitim Sözleşmesi
+                                                {% trans "Eğitim Sözleşmesi" %}
                                             </a>
-                                            <span class="document-size">(PDF - 300KB)</span>
+                                            <span class="document-size">{% trans "(PDF - 300KB)" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-pdf document-icon"></i>
                                         <div class="document-content">
                                             <a href="https://avrasya.edu.tr/wp-content/uploads/2021/08/engelli_og_tespit_formu.pdf" target="_blank" class="document-link">
-                                                Engelli Öğrenci Tespit Formu
+                                                {% trans "Engelli Öğrenci Tespit Formu" %}
                                             </a>
-                                            <span class="document-size">(PDF - 180KB)</span>
-                                            <small class="text-muted d-block">(Engel durumu olan aday doldurması gerekir.)</small>
+                                            <span class="document-size">{% trans "(PDF - 180KB)" %}</span>
+                                            <small class="text-muted d-block">{% trans "(Engel durumu olan aday doldurması gerekir.)" %}</small>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-pdf document-icon"></i>
                                         <div class="document-content">
                                             <a href="https://avrasya.edu.tr/wp-content/uploads/2023/09/AVU-Muafiyet-Formu.pdf" target="_blank" class="document-link">
-                                                AVU Muafiyet Başvuru Formu
+                                                {% trans "AVU Muafiyet Başvuru Formu" %}
                                             </a>
-                                            <span class="document-size">(PDF - 200KB)</span>
+                                            <span class="document-size">{% trans "(PDF - 200KB)" %}</span>
                                         </div>
                                     </div>
                                     <div class="document-item">
                                         <i class="fas fa-file-alt document-icon"></i>
                                         <div class="document-content">
-                                            <span class="document-text">Muafiyet başvurusu yapılacak ise önceki üniversitenin Transkript ve Ders İçerikleri Belgelerinin Asılları</span>
+                                            <span class="document-text">{% trans "Muafiyet başvurusu yapılacak ise önceki üniversitenin Transkript ve Ders İçerikleri Belgelerinin Asılları" %}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -653,27 +652,27 @@
                                     <i class="fas fa-headset"></i>
                                 </div>
                                 <div class="contact-text">
-                                    <h5>DGS ve Kayıt Danışmanlığı</h5>
+                                    <h5>{% trans "DGS ve Kayıt Danışmanlığı" %}</h5>
                                     <div class="contact-details">
                                         <div class="contact-item">
                                             <i class="fas fa-phone"></i>
                                             <div>
-                                                <strong>Telefon:</strong>
+                                                <strong>{% trans "Telefon:" %}</strong>
                                                 <a href="tel:+904623340550">0462 334 05 50</a>
                                             </div>
                                         </div>
                                         <div class="contact-item">
                                             <i class="fas fa-envelope"></i>
                                             <div>
-                                                <strong>E-posta:</strong>
-                                                <a href="mailto:ogrenciisleri@avrasya.edu.tr">ogrenciisleri@avrasya.edu.tr</a>
+                                                <strong>{% trans "E-posta:" %}</strong>
+                                                <a href="mailto:ogrenciisleri@avrasya.edu.tr">{% trans "ogrenciisleri@avrasya.edu.tr" %}</a>
                                             </div>
                                         </div>
                                         <div class="contact-item">
                                             <i class="fas fa-clock"></i>
                                             <div>
-                                                <strong>Çalışma Saatleri:</strong>
-                                                <span>09:00 - 17:00 (Hafta içi)</span>
+                                                <strong>{% trans "Çalışma Saatleri:" %}</strong>
+                                                <span>{% trans "09:00 - 17:00 (Hafta içi)" %}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -692,17 +691,17 @@
                                     <i class="fas fa-file-pdf"></i>
                                 </div>
                                 <div class="download-text">
-                                    <h4>Resmi DGS Kontenjan ve Ücretler Belgesini İndir</h4>
-                                    <p>Tüm DGS programlarının kontenjanları ve eğitim ücretlerini içeren resmi PDF belgesini indirebilirsiniz.</p>
+                                    <h4>{% trans "Resmi DGS Kontenjan ve Ücretler Belgesini İndir" %}</h4>
+                                    <p>{% trans "Tüm DGS programlarının kontenjanları ve eğitim ücretlerini içeren resmi PDF belgesini indirebilirsiniz." %}</p>
                                     <div class="download-info">
-                                        <span><i class="fas fa-file-alt"></i> 2025-DGS-kontenjan-ve-egitim-ucreti-28.08.2025.pdf</span>
-                                        <span><i class="fas fa-hdd"></i> 520KB</span>
+                                        <span><i class="fas fa-file-alt"></i> {% trans "2025-DGS-kontenjan-ve-egitim-ucreti-28.08.2025.pdf" %}</span>
+                                        <span><i class="fas fa-hdd"></i> {% trans "520KB" %}</span>
                                         <span><i class="fas fa-calendar-alt"></i> 28.08.2025</span>
                                     </div>
                                 </div>
                                 <div class="download-btn-wrapper">
                                     <a href="{% static 'docs/2025-DGS-kontenjan-ve-egitim-ucreti-28.08.2025.pdf' %}" class="btn btn-download" download>
-                                        <i class="fas fa-download"></i> PDF'yi İndir
+                                        <i class="fas fa-download"></i> {% trans "PDF'yi İndir" %}
                                     </a>
                                 </div>
                             </div>

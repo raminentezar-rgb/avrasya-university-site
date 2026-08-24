@@ -1,12 +1,13 @@
 # file name: dis_protezi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     DisProteziFaaliyetGorseli, DisProteziFaaliyet, DisProteziDersProgrami, DisProteziFaaliyetGrubu, DisProteziDuyuru, DisProteziEtkinlik
 )
 
 @admin.register(DisProteziEtkinlik)
-class DisProteziEtkinlikAdmin(admin.ModelAdmin):
+class DisProteziEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class DisProteziDuyuruAdmin(admin.ModelAdmin):
         return DisProteziDuyuru.objects.all()
 
 @admin.register(DisProteziDersProgrami)
-class DisProteziDersProgramiAdmin(admin.ModelAdmin):
+class DisProteziDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class DisProteziFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(DisProteziFaaliyetGrubu)
-class DisProteziFaaliyetGrubuAdmin(admin.ModelAdmin):
+class DisProteziFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(DisProteziFaaliyet)
-class DisProteziFaaliyetAdmin(admin.ModelAdmin):
+class DisProteziFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

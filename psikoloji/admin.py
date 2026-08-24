@@ -1,12 +1,13 @@
 # app_name: psikoloji/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     PsikolojiDuyuru, PsikolojiEtkinlik, PsikolojiFaaliyet, PsikolojiDersProgrami, PsikolojiFaaliyetGorseli, PsikolojiFaaliyetGrubu
 )
 
 @admin.register(PsikolojiEtkinlik)
-class PsikolojiEtkinlikAdmin(admin.ModelAdmin):
+class PsikolojiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class PsikolojiDuyuruAdmin(admin.ModelAdmin):
         return PsikolojiDuyuru.objects.all()
 
 @admin.register(PsikolojiDersProgrami)
-class PsikolojiDersProgramiAdmin(admin.ModelAdmin):
+class PsikolojiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class PsikolojiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(PsikolojiFaaliyetGrubu)
-class PsikolojiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class PsikolojiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(PsikolojiFaaliyet)
-class PsikolojiFaaliyetAdmin(admin.ModelAdmin):
+class PsikolojiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

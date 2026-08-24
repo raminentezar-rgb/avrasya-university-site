@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yeni Geri Arama Talebi</title>
+    <title>{% trans "Yeni Geri Arama Talebi" %}</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -71,60 +72,60 @@
 </head>
 <body>
     <div class="header">
-        <h1>📞 Yeni Geri Arama Talebi</h1>
-        <p>Bir öğrenci adayı sizinle iletişime geçmek istiyor</p>
+        <h1>{% trans "📞 Yeni Geri Arama Talebi" %}</h1>
+        <p>{% trans "Bir öğrenci adayı sizinle iletişime geçmek istiyor" %}</p>
     </div>
     
     <div class="content">
         <div class="info-box">
-            <h2 style="color: #1d61a9; margin-top: 0;">Talep Detayları</h2>
+            <h2 style="color: #1d61a9; margin-top: 0;">{% trans "Talep Detayları" %}</h2>
             
             <div class="info-item">
-                <span class="info-label">Ad Soyad:</span>
+                <span class="info-label">{% trans "Ad Soyad:" %}</span>
                 <span class="info-value">{{ callback.full_name }}</span>
             </div>
             
             <div class="info-item">
-                <span class="info-label">E-posta:</span>
+                <span class="info-label">{% trans "E-posta:" %}</span>
                 <span class="info-value">
                     <a href="mailto:{{ callback.email }}">{{ callback.email }}</a>
                 </span>
             </div>
             
             <div class="info-item">
-                <span class="info-label">Telefon:</span>
+                <span class="info-label">{% trans "Telefon:" %}</span>
                 <span class="info-value">
                     <a href="tel:{{ callback.phone }}">{{ callback.phone }}</a>
                 </span>
             </div>
             
             <div class="info-item">
-                <span class="info-label">Tarih:</span>
+                <span class="info-label">{% trans "Tarih:" %}</span>
                 <span class="info-value">{{ callback.created_at|date:"d F Y H:i" }}</span>
             </div>
             
             <div class="info-item">
-                <span class="info-label">IP Adresi:</span>
+                <span class="info-label">{% trans "IP Adresi:" %}</span>
                 <span class="info-value">{{ callback.ip_address|default:"Bilinmiyor" }}</span>
             </div>
         </div>
         
         <div style="text-align: center;">
             <a href="{{ site_url }}/admin/yatay_gecis/callbackrequest/{{ callback.id }}/change/" class="button">
-                Talebi Yönetim Panelinde Görüntüle
+                {% trans "Talebi Yönetim Panelinde Görüntüle" %}
             </a>
         </div>
         
         <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-radius: 8px;">
             <p style="margin: 0; color: #856404;">
-                <strong>⚠️ Not:</strong> Bu talep {{ callback.created_at|timespan }} önce oluşturuldu. 
+                <strong>{% trans "⚠️ Not:" %}</strong> Bu talep {{ callback.created_at|timespan }} önce oluşturuldu. 
                 En kısa sürede öğrenci adayıyla iletişime geçilmesi önerilir.
             </p>
         </div>
     </div>
     
     <div class="footer">
-        <p>Bu e-posta otomatik olarak gönderilmiştir. Lütfen yanıtlamayınız.</p>
+        <p>{% trans "Bu e-posta otomatik olarak gönderilmiştir. Lütfen yanıtlamayınız." %}</p>
         <p>&copy; {% now "Y" %} Avrasya Üniversitesi - Tüm hakları saklıdır.</p>
     </div>
 </body>

@@ -1,4 +1,5 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block content %}
@@ -12,15 +13,14 @@
         <div class="hero-glow-1"></div>
         <div class="hero-glow-2"></div>
         <div class="container relative-z text-center">
-            <h1 class="hero-title animate-down">Nasıl yardımcı olabiliriz?</h1>
-            <p class="hero-subtitle animate-down delay-1">Sıkça sorulan sorulara hızlıca ulaşın veya aradığınızı anında
-                bulun.</p>
+            <h1 class="hero-title animate-down">{% trans "Nasıl yardımcı olabiliriz?" %}</h1>
+            <p class="hero-subtitle animate-down delay-1">{% trans "Sıkça sorulan sorulara hızlıca ulaşın veya aradığınızı anında bulun." %}</p>
 
             <!-- Modern Search Box -->
             <div class="hero-search-container animate-up delay-2">
                 <i class="fas fa-search search-icon-hero"></i>
                 <input type="text" id="faqSearchInput" class="hero-search-input"
-                    placeholder="Bir soru arayın... (Örn: Burs, Kayıt, Transkript)">
+                    placeholder="{% trans 'Bir soru arayın... (Örn: Burs, Kayıt, Transkript)' %}">
             </div>
         </div>
     </div>
@@ -29,17 +29,17 @@
 
         <!-- Filter Bar -->
         <div class="filter-bar animate-up delay-3">
-            <button class="filter-btn active" data-filter="all">Tümü</button>
-            <button class="filter-btn" data-filter="akademik">Akademik</button>
-            <button class="filter-btn" data-filter="teknik">Teknik</button>
-            <button class="filter-btn" data-filter="mali">Mali İşler</button>
-            <button class="filter-btn" data-filter="ogrenci">Öğrenci İşleri</button>
+            <button class="filter-btn active" data-filter="all">{% trans "Tümü" %}</button>
+            <button class="filter-btn" data-filter="akademik">{% trans "Akademik" %}</button>
+            <button class="filter-btn" data-filter="teknik">{% trans "Teknik" %}</button>
+            <button class="filter-btn" data-filter="mali">{% trans "Mali İşler" %}</button>
+            <button class="filter-btn" data-filter="ogrenci">{% trans "Öğrenci İşleri" %}</button>
         </div>
 
         <!-- Popular Topics Grid -->
         <div class="row mb-5 animate-up delay-4">
             <div class="col-12 mb-4">
-                <h3 class="section-heading"><i class="fas fa-fire text-warning"></i> Popüler Konular</h3>
+                <h3 class="section-heading"><i class="fas fa-fire text-warning"></i> {% trans "Popüler Konular" %}</h3>
             </div>
 
             <div class="col-md-4 mb-4">
@@ -48,8 +48,8 @@
                         <i class="fas fa-user-graduate text-blue"></i>
                     </div>
                     <div class="topic-info">
-                        <h5>Kayıt İşlemleri</h5>
-                        <p>Ders kaydı ve yenileme</p>
+                        <h5>{% trans "Kayıt İşlemleri" %}</h5>
+                        <p>{% trans "Ders kaydı ve yenileme" %}</p>
                     </div>
                     <i class="fas fa-arrow-right topic-arrow"></i>
                 </div>
@@ -61,8 +61,8 @@
                         <i class="fas fa-money-bill-wave text-green"></i>
                     </div>
                     <div class="topic-info">
-                        <h5>Burs & Ücretler</h5>
-                        <p>Ödeme planları ve burslar</p>
+                        <h5>{% trans "Burs & Ücretler" %}</h5>
+                        <p>{% trans "Ödeme planları ve burslar" %}</p>
                     </div>
                     <i class="fas fa-arrow-right topic-arrow"></i>
                 </div>
@@ -74,8 +74,8 @@
                         <i class="fas fa-pen-alt text-purple"></i>
                     </div>
                     <div class="topic-info">
-                        <h5>Sınavlar</h5>
-                        <p>Takvim ve sonuçlar</p>
+                        <h5>{% trans "Sınavlar" %}</h5>
+                        <p>{% trans "Takvim ve sonuçlar" %}</p>
                     </div>
                     <i class="fas fa-arrow-right topic-arrow"></i>
                 </div>
@@ -85,7 +85,7 @@
         <!-- FAQ List -->
         <div class="faq-list-section animate-up delay-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="section-heading">Tüm Sorular</h3>
+                <h3 class="section-heading">{% trans "Tüm Sorular" %}</h3>
                 <span class="badge-count">{{ faqs|length }} Soru</span>
             </div>
 
@@ -106,7 +106,7 @@
                                     <i class="fas fa-tag"></i> {{ faq.category.name|default:"Genel" }}
                                 </div>
                                 <button class="btn-useful" onclick="markUseful(this, {{ faq.id }})">
-                                    <i class="far fa-thumbs-up"></i> Yararlı
+                                    <i class="far fa-thumbs-up"></i> {% trans "Yararlı" %}
                                 </button>
                             </div>
                         </div>
@@ -116,8 +116,8 @@
                 {% else %}
                 <div class="empty-state text-center py-5">
                     <div class="empty-icon-large mb-3"><i class="fas fa-search"></i></div>
-                    <h3>Sonuç Bulunamadı</h3>
-                    <p class="text-muted">Aramanızla eşleşen bir soru bulunamadı.</p>
+                    <h3>{% trans "Sonuç Bulunamadı" %}</h3>
+                    <p class="text-muted">{% trans "Aramanızla eşleşen bir soru bulunamadı." %}</p>
                 </div>
                 {% endif %}
             </div>
@@ -125,23 +125,23 @@
             <!-- Client-side No Results Message (Hidden by default) -->
             <div id="js-no-results" class="empty-state text-center py-5" style="display: none;">
                 <div class="empty-icon-large mb-3"><i class="fas fa-search"></i></div>
-                <h3>Eşleşen sonuç bulunamadı</h3>
-                <p class="text-muted">Lütfen farklı anahtar kelimeler deneyin.</p>
+                <h3>{% trans "Eşleşen sonuç bulunamadı" %}</h3>
+                <p class="text-muted">{% trans "Lütfen farklı anahtar kelimeler deneyin." %}</p>
             </div>
         </div>
 
         <!-- Contact CTA -->
         <div class="contact-cta animate-up delay-6">
             <div class="cta-content">
-                <h2>Cevabınızı bulamadınız mı?</h2>
-                <p>Destek ekibimiz size yardımcı olmak için burada.</p>
+                <h2>{% trans "Cevabınızı bulamadınız mı?" %}</h2>
+                <p>{% trans "Destek ekibimiz size yardımcı olmak için burada." %}</p>
             </div>
             <div class="cta-buttons">
                 <a href="{% url 'support:create_ticket' %}" class="btn-cta primary">
-                    <i class="fas fa-paper-plane"></i> Talep Oluştur
+                    <i class="fas fa-paper-plane"></i> {% trans "Talep Oluştur" %}
                 </a>
                 <a href="{% url 'contact:contact' %}" class="btn-cta outline">
-                    <i class="fas fa-comment-alt"></i> İletişime Geç
+                    <i class="fas fa-comment-alt"></i> {% trans "İletişime Geç" %}
                 </a>
             </div>
         </div>

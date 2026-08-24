@@ -1,12 +1,13 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% block content %}
 
 
 
 <div class="page-header" style="margin-top: 20px; position: relative; ">
     <div class="page-header-content">
-        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-chart-line"></i> Bölüm Destek Paneli</h1>
-        <p>Bölümünüzdeki tüm destek taleplerini yönetin ve takip edin</p>
+        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-chart-line"></i> {% trans "Bölüm Destek Paneli" %}</h1>
+        <p>{% trans "Bölümünüzdeki tüm destek taleplerini yönetin ve takip edin" %}</p>
     </div>
     
     <!-- قسمت احراز هویت در گوشه بالا راست -->
@@ -21,15 +22,15 @@
                 <!-- دکمه داشبورد -->
                 {% if user.profile.role == 'student' %}
                     <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> Taleplerim
+                        <i class="fas fa-tachometer-alt"></i> {% trans "Taleplerim" %}
                     </a>
                 {% elif user.profile.role == 'staff' %}
                     <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
                     </a>
                 {% else %}
                     <a href="/" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
                     </a>
                 {% endif %}
                 
@@ -37,7 +38,7 @@
                 <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                        <i class="fas fa-sign-out-alt"></i> {% trans "Çıkış Yap" %}
                     </button>
                 </form>
             </div>
@@ -45,10 +46,10 @@
             <!-- اگر کاربر لاگین نکرده باشد -->
             <div class="guest-buttons" style="display: flex; gap: 10px;">
                 <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
-                    <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                    <i class="fas fa-sign-in-alt"></i> {% trans "Giriş Yap" %}
                 </a>
                 <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm" style="background-color: white; color: var(--primary-dark-blue);">
-                    <i class="fas fa-user-plus"></i> Kayıt Ol
+                    <i class="fas fa-user-plus"></i> {% trans "Kayıt Ol" %}
                 </a>
             </div>
         {% endif %}
@@ -65,7 +66,7 @@
                 </div>
                 <div class="stat-content">
                     <h3>{{ total_tickets|default:"0" }}</h3>
-                    <p>Toplam Talep</p>
+                    <p>{% trans "Toplam Talep" %}</p>
                 </div>
             </div>
         </div>
@@ -76,7 +77,7 @@
                 </div>
                 <div class="stat-content">
                     <h3>{{ pending_tickets|default:"0" }}</h3>
-                    <p>Bekleyen Talep</p>
+                    <p>{% trans "Bekleyen Talep" %}</p>
                 </div>
             </div>
         </div>
@@ -87,7 +88,7 @@
                 </div>
                 <div class="stat-content">
                     <h3>{{ resolved_tickets|default:"0" }}</h3>
-                    <p>Çözülen Talep</p>
+                    <p>{% trans "Çözülen Talep" %}</p>
                 </div>
             </div>
         </div>
@@ -98,7 +99,7 @@
                 </div>
                 <div class="stat-content">
                     <h3>{{ in_progress_tickets|default:"0" }}</h3>
-                    <p>Devam Eden Talep</p>
+                    <p>{% trans "Devam Eden Talep" %}</p>
                 </div>
             </div>
         </div>
@@ -107,34 +108,34 @@
     <!-- Filtreleme -->
     <div class="filter-card mb-4">
         <div class="filter-header">
-            <h4><i class="fas fa-filter"></i> Talepleri Filtrele</h4>
+            <h4><i class="fas fa-filter"></i> {% trans "Talepleri Filtrele" %}</h4>
         </div>
         <div class="filter-body">
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label class="form-label">Duruma Göre</label>
+                    <label class="form-label">{% trans "Duruma Göre" %}</label>
                     <select class="form-control" id="status-filter">
-                        <option value="all">Tüm Durumlar</option>
-                        <option value="open">Açık</option>
-                        <option value="pending">Beklemede</option>
-                        <option value="in_progress">Devam Ediyor</option>
-                        <option value="resolved">Çözüldü</option>
-                        <option value="closed">Kapandı</option>
+                        <option value="all">{% trans "Tüm Durumlar" %}</option>
+                        <option value="open">{% trans "Açık" %}</option>
+                        <option value="pending">{% trans "Beklemede" %}</option>
+                        <option value="in_progress">{% trans "Devam Ediyor" %}</option>
+                        <option value="resolved">{% trans "Çözüldü" %}</option>
+                        <option value="closed">{% trans "Kapandı" %}</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label class="form-label">Tarihe Göre</label>
+                    <label class="form-label">{% trans "Tarihe Göre" %}</label>
                     <select class="form-control" id="date-filter">
-                        <option value="all">Tüm Zamanlar</option>
-                        <option value="today">Bugün</option>
-                        <option value="week">Bu Hafta</option>
-                        <option value="month">Bu Ay</option>
+                        <option value="all">{% trans "Tüm Zamanlar" %}</option>
+                        <option value="today">{% trans "Bugün" %}</option>
+                        <option value="week">{% trans "Bu Hafta" %}</option>
+                        <option value="month">{% trans "Bu Ay" %}</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label class="form-label">Arama</label>
+                    <label class="form-label">{% trans "Arama" %}</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Talep veya öğrenci ara...">
+                        <input type="text" class="form-control" placeholder="{% trans 'Talep veya öğrenci ara...' %}">
                         <div class="input-group-append">
                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
@@ -148,7 +149,7 @@
     <div class="dashboard-card">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
-                <h2 class="mb-0"><i class="fas fa-list"></i> Tüm Talepler</h2>
+                <h2 class="mb-0"><i class="fas fa-list"></i> {% trans "Tüm Talepler" %}</h2>
                 <span class="badge badge-primary">{{ tickets|length }} Talep</span>
             </div>
         </div>
@@ -158,13 +159,13 @@
             <table class="dashboard-table">
                 <thead>
                     <tr>
-                        <th>Talep No</th>
-                        <th>Konu</th>
-                        <th>Öğrenci</th>
-                        <th>Durum</th>
-                        <th>Öncelik</th>
-                        <th>Tarih</th>
-                        <th>İşlem</th>
+                        <th>{% trans "Talep No" %}</th>
+                        <th>{% trans "Konu" %}</th>
+                        <th>{% trans "Öğrenci" %}</th>
+                        <th>{% trans "Durum" %}</th>
+                        <th>{% trans "Öncelik" %}</th>
+                        <th>{% trans "Tarih" %}</th>
+                        <th>{% trans "İşlem" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -212,13 +213,13 @@
                         </td>
                         <td>
                             <div class="action-buttons">
-                                <a href="{% url 'support:reply_ticket' ticket.id %}" class="btn-action btn-reply" title="Yanıtla">
+                                <a href="{% url 'support:reply_ticket' ticket.id %}" class="btn-action btn-reply" title="{% trans 'Yanıtla' %}">
                                     <i class="fas fa-reply"></i>
                                 </a>
-                                <a href="#" class="btn-action btn-view" title="Detayları Gör">
+                                <a href="#" class="btn-action btn-view" title="{% trans 'Detayları Gör' %}">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="#" class="btn-action btn-edit" title="Durumu Güncelle">
+                                <a href="#" class="btn-action btn-edit" title="{% trans 'Durumu Güncelle' %}">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </div>
@@ -265,10 +266,10 @@
             <div class="empty-icon">
                 <i class="fas fa-inbox"></i>
             </div>
-            <h3>Henüz Talep Yok</h3>
-            <p class="text-muted">Bölümünüze atanmış destek talebi bulunmuyor.</p>
+            <h3>{% trans "Henüz Talep Yok" %}</h3>
+            <p class="text-muted">{% trans "Bölümünüze atanmış destek talebi bulunmuyor." %}</p>
             <a href="#" class="btn btn-primary mt-3">
-                <i class="fas fa-sync-alt"></i> Yenile
+                <i class="fas fa-sync-alt"></i> {% trans "Yenile" %}
             </a>
         </div>
         {% endif %}

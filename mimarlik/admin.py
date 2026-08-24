@@ -1,12 +1,13 @@
 # app_name: mimarlik/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     MimarlikFaaliyet, MimarlikFaaliyetGrubu, MimarlikFaaliyetGorseli, MimarlikEtkinlik, MimarlikDersProgrami, MimarlikDuyuru
 )
 
 @admin.register(MimarlikEtkinlik)
-class MimarlikEtkinlikAdmin(admin.ModelAdmin):
+class MimarlikEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class MimarlikDuyuruAdmin(admin.ModelAdmin):
         return MimarlikDuyuru.objects.all()
 
 @admin.register(MimarlikDersProgrami)
-class MimarlikDersProgramiAdmin(admin.ModelAdmin):
+class MimarlikDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class MimarlikFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(MimarlikFaaliyetGrubu)
-class MimarlikFaaliyetGrubuAdmin(admin.ModelAdmin):
+class MimarlikFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(MimarlikFaaliyet)
-class MimarlikFaaliyetAdmin(admin.ModelAdmin):
+class MimarlikFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

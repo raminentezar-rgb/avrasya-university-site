@@ -1,12 +1,13 @@
 # app_name: uluslararasi_iliskiler/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     UluslararasiIliskilerDersProgrami, UluslararasiIliskilerFaaliyet, UluslararasiIliskilerFaaliyetGrubu, UluslararasiIliskilerDuyuru, UluslararasiIliskilerFaaliyetGorseli, UluslararasiIliskilerEtkinlik
 )
 
 @admin.register(UluslararasiIliskilerEtkinlik)
-class UluslararasiIliskilerEtkinlikAdmin(admin.ModelAdmin):
+class UluslararasiIliskilerEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class UluslararasiIliskilerDuyuruAdmin(admin.ModelAdmin):
         return UluslararasiIliskilerDuyuru.objects.all()
 
 @admin.register(UluslararasiIliskilerDersProgrami)
-class UluslararasiIliskilerDersProgramiAdmin(admin.ModelAdmin):
+class UluslararasiIliskilerDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class UluslararasiIliskilerFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(UluslararasiIliskilerFaaliyetGrubu)
-class UluslararasiIliskilerFaaliyetGrubuAdmin(admin.ModelAdmin):
+class UluslararasiIliskilerFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(UluslararasiIliskilerFaaliyet)
-class UluslararasiIliskilerFaaliyetAdmin(admin.ModelAdmin):
+class UluslararasiIliskilerFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

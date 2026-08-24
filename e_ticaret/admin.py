@@ -1,12 +1,13 @@
 # app_name: e_ticaret/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     ETicaretDersProgrami, ETicaretFaaliyetGorseli, ETicaretFaaliyet, ETicaretFaaliyetGrubu, ETicaretDuyuru, ETicaretEtkinlik
 )
 
 @admin.register(ETicaretEtkinlik)
-class ETicaretEtkinlikAdmin(admin.ModelAdmin):
+class ETicaretEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class ETicaretDuyuruAdmin(admin.ModelAdmin):
         return ETicaretDuyuru.objects.all()
 
 @admin.register(ETicaretDersProgrami)
-class ETicaretDersProgramiAdmin(admin.ModelAdmin):
+class ETicaretDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class ETicaretFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(ETicaretFaaliyetGrubu)
-class ETicaretFaaliyetGrubuAdmin(admin.ModelAdmin):
+class ETicaretFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(ETicaretFaaliyet)
-class ETicaretFaaliyetAdmin(admin.ModelAdmin):
+class ETicaretFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

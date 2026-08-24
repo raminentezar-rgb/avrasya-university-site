@@ -1,4 +1,5 @@
 {% extends 'ogrenci_isleri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Burslar ve İndirimler{% endblock %}
 
@@ -9,7 +10,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Burslar ve İndirimler</h1>
+            <h1>{% trans "Burslar ve İndirimler" %}</h1>
 
             <p></p>
         </div>
@@ -33,9 +34,9 @@
                 <div class="section-title mb-5 pb-3 border-bottom border-1" style="border-color: rgba(9, 36, 66, 0.1) !important;">
                     <h2 class="fw-bold mb-3 d-flex align-items-center" style="color: var(--primary-dark-blue);">
                         <i class="fas fa-graduation-cap me-3" style="color: var(--secondary-medium-blue); font-size: 2.2rem;"></i>
-                        Burs ve İndirim Olanakları
+                        {% trans "Burs ve İndirim Olanakları" %}
                     </h2>
-                    <p class="fs-5 text-muted mb-0" style="line-height: 1.6;">Avrasya Üniversitesi’nde sağlanan resmi burslar ve eğitim ücreti muafiyetlerine ait bilgiler aşağıda yer almaktadır.</p>
+                    <p class="fs-5 text-muted mb-0" style="line-height: 1.6;">{% trans "Avrasya Üniversitesi’nde sağlanan resmi burslar ve eğitim ücreti muafiyetlerine ait bilgiler aşağıda yer almaktadır." %}</p>
                 </div>
 
                 <!-- ÖSYM Bursları Kartı -->
@@ -47,13 +48,13 @@
                             <i class="fas fa-award"></i>
                         </div>
                         <div>
-                            <span class="badge bg-primary-dark-subtle text-primary-dark mb-2 px-3 py-2 rounded-pill fw-semibold" style="font-size: 0.9rem;">Tam Burs / %50 İndirim</span>
-                            <h3 class="fw-bold mb-0" style="color: var(--primary-dark-blue);">ÖSYM Bursları</h3>
+                            <span class="badge bg-primary-dark-subtle text-primary-dark mb-2 px-3 py-2 rounded-pill fw-semibold" style="font-size: 0.9rem;">{% trans "Tam Burs / %50 İndirim" %}</span>
+                            <h3 class="fw-bold mb-0" style="color: var(--primary-dark-blue);">{% trans "ÖSYM Bursları" %}</h3>
                         </div>
                     </div>
                     
                     <p class="fs-5 mb-5 position-relative z-index-1" style="color: var(--text-dark); line-height: 1.7;">
-                        ÖSYM YKS Kılavuzunda Üniversitemizin %100 Burslu ve %50 İndirimli kontenjanlarına yerleştirilen öğrencilere sağlanan <strong>karşılıksız</strong> eğitim burslarıdır.
+                        {% trans "ÖSYM YKS Kılavuzunda Üniversitemizin %100 Burslu ve %50 İndirimli kontenjanlarına yerleştirilen öğrencilere sağlanan" %} <strong>{% trans "karşılıksız" %}</strong> {% trans "eğitim burslarıdır." %}
                     </p>
                     
                     <div class="row g-4 position-relative z-index-1">
@@ -64,9 +65,9 @@
                                     <div class="feature-icon me-4">
                                         <i class="fas fa-wallet"></i>
                                     </div>
-                                    <h5 class="fw-bold mb-0" style="color: var(--primary-dark-blue);">Kapsam</h5>
+                                    <h5 class="fw-bold mb-0" style="color: var(--primary-dark-blue);">{% trans "Kapsam" %}</h5>
                                 </div>
-                                <p class="mb-0 text-muted">Sadece <strong>öğrenim ücretini</strong> kapsar; barınma, beslenme ve ulaşım gibi kişisel giderleri kapsamaz.</p>
+                                <p class="mb-0 text-muted">{% trans "Sadece" %} <strong>{% trans "öğrenim ücretini" %}</strong> {% trans "kapsar; barınma, beslenme ve ulaşım gibi kişisel giderleri kapsamaz." %}</p>
                             </div>
                         </div>
                         
@@ -77,9 +78,9 @@
                                     <div class="feature-icon me-4">
                                         <i class="fas fa-shield-alt"></i>
                                     </div>
-                                    <h5 class="fw-bold mb-0" style="color: var(--secondary-medium-blue);">Eğitim Güvencesi</h5>
+                                    <h5 class="fw-bold mb-0" style="color: var(--secondary-medium-blue);">{% trans "Eğitim Güvencesi" %}</h5>
                                 </div>
-                                <p class="mb-0 text-muted">ÖSYM bursları, normal öğrenim süresi boyunca (Ön lisans: 2 yıl, Lisans: 4 yıl, Hazırlık: ek 1 yıl) akademik başarı durumu <strong>ne olursa olsun kesintiye uğramaz</strong>.</p>
+                                <p class="mb-0 text-muted">{% trans "ÖSYM bursları, normal öğrenim süresi boyunca (Ön lisans: 2 yıl, Lisans: 4 yıl, Hazırlık: ek 1 yıl) akademik başarı durumu" %} <strong>{% trans "ne olursa olsun kesintiye uğramaz" %}</strong>.</p>
                             </div>
                         </div>
                         
@@ -90,9 +91,9 @@
                                     <div class="feature-icon me-4">
                                         <i class="fas fa-user-shield"></i>
                                     </div>
-                                    <h5 class="fw-bold mb-0" style="color: #6c757d;">Disiplin Durumu</h5>
+                                    <h5 class="fw-bold mb-0" style="color: #6c757d;">{% trans "Disiplin Durumu" %}</h5>
                                 </div>
-                                <p class="mb-0 text-muted">Ağır disiplin suçu işlenmesi halleri dışında burs hakkı <strong>normal öğrenim süresince korunur</strong>.</p>
+                                <p class="mb-0 text-muted">{% trans "Ağır disiplin suçu işlenmesi halleri dışında burs hakkı" %} <strong>{% trans "normal öğrenim süresince korunur" %}</strong>.</p>
                             </div>
                         </div>
                     </div>

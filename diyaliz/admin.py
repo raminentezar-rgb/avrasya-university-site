@@ -1,12 +1,13 @@
 # app_name: diyaliz/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     DiyalizFaaliyet, DiyalizDuyuru, DiyalizFaaliyetGorseli, DiyalizEtkinlik, DiyalizFaaliyetGrubu, DiyalizDersProgrami
 )
 
 @admin.register(DiyalizEtkinlik)
-class DiyalizEtkinlikAdmin(admin.ModelAdmin):
+class DiyalizEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class DiyalizDuyuruAdmin(admin.ModelAdmin):
         return DiyalizDuyuru.objects.all()
 
 @admin.register(DiyalizDersProgrami)
-class DiyalizDersProgramiAdmin(admin.ModelAdmin):
+class DiyalizDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class DiyalizFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(DiyalizFaaliyetGrubu)
-class DiyalizFaaliyetGrubuAdmin(admin.ModelAdmin):
+class DiyalizFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(DiyalizFaaliyet)
-class DiyalizFaaliyetAdmin(admin.ModelAdmin):
+class DiyalizFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

@@ -1,12 +1,13 @@
 # app_name: bilgisayar_muhendisligi/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     BilgisayarMuhendisligiFaaliyet, BilgisayarMuhendisligiFaaliyetGorseli, BilgisayarMuhendisligiDuyuru, BilgisayarMuhendisligiDersProgrami, BilgisayarMuhendisligiFaaliyetGrubu, BilgisayarMuhendisligiEtkinlik
 )
 
 @admin.register(BilgisayarMuhendisligiEtkinlik)
-class BilgisayarMuhendisligiEtkinlikAdmin(admin.ModelAdmin):
+class BilgisayarMuhendisligiEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class BilgisayarMuhendisligiDuyuruAdmin(admin.ModelAdmin):
         return BilgisayarMuhendisligiDuyuru.objects.all()
 
 @admin.register(BilgisayarMuhendisligiDersProgrami)
-class BilgisayarMuhendisligiDersProgramiAdmin(admin.ModelAdmin):
+class BilgisayarMuhendisligiDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class BilgisayarMuhendisligiFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(BilgisayarMuhendisligiFaaliyetGrubu)
-class BilgisayarMuhendisligiFaaliyetGrubuAdmin(admin.ModelAdmin):
+class BilgisayarMuhendisligiFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(BilgisayarMuhendisligiFaaliyet)
-class BilgisayarMuhendisligiFaaliyetAdmin(admin.ModelAdmin):
+class BilgisayarMuhendisligiFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

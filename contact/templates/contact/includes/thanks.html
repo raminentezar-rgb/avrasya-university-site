@@ -1,9 +1,10 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% block title %}Teşekkürler{% endblock %}
 {% block content %}
 <div class="container py-5 text-center">
-    <h2 class="text-success">Mesajınız başarıyla gönderildi!</h2>
+    <h2 class="text-success">{% trans "Mesajınız başarıyla gönderildi!" %}</h2>
     <p>Teşekkür ederiz, {{ name }}. En kısa sürede sizinle iletişime geçeceğiz.</p>
-    <a href="/" class="btn btn-outline-primary mt-3">Anasayfa</a>
+    <a href="/" class="btn btn-outline-primary mt-3">{% trans "Anasayfa" %}</a>
 </div>
 {% endblock %}

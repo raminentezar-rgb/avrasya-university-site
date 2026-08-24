@@ -1,11 +1,12 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% block content %}
 
 <div class="support-hero">
     <div class="container">
         <div class="hero-content">
-            <h1><i class="fas fa-reply"></i> Talep Yanıtla</h1>
-            <p>Öğrencilere net ve yardımcı yanıtlar vererek yardımcı olun</p>
+            <h1><i class="fas fa-reply"></i> {% trans "Talep Yanıtla" %}</h1>
+            <p>{% trans "Öğrencilere net ve yardımcı yanıtlar vererek yardımcı olun" %}</p>
         </div>
     </div>
 </div>
@@ -16,7 +17,7 @@
             <!-- Talep Özeti -->
             <div class="ticket-summary-card mb-4">
                 <div class="summary-header">
-                    <h2><i class="fas fa-ticket-alt"></i> Talep Özeti</h2>
+                    <h2><i class="fas fa-ticket-alt"></i> {% trans "Talep Özeti" %}</h2>
                     <div class="ticket-meta">
                         <span class="badge badge-primary">#{{ ticket.id|stringformat:"04d" }}</span>
                         <span class="status-badge status-{{ ticket.status }}">
@@ -33,7 +34,7 @@
                                     <i class="fas fa-user-graduate"></i>
                                 </div>
                                 <div class="info-content">
-                                    <label>Öğrenci</label>
+                                    <label>{% trans "Öğrenci" %}</label>
                                     <h4>{{ ticket.user.get_full_name|default:ticket.user.username }}</h4>
                                     <small>{{ ticket.user.email }}</small>
                                 </div>
@@ -46,7 +47,7 @@
                                     <i class="fas fa-building"></i>
                                 </div>
                                 <div class="info-content">
-                                    <label>Bölüm</label>
+                                    <label>{% trans "Bölüm" %}</label>
                                     <h4>{{ ticket.department.name }}</h4>
                                     <small>{{ ticket.category.name|default:"Kategori belirtilmemiş" }}</small>
                                 </div>
@@ -61,7 +62,7 @@
                                     <i class="fas fa-flag"></i>
                                 </div>
                                 <div class="info-content">
-                                    <label>Öncelik</label>
+                                    <label>{% trans "Öncelik" %}</label>
                                     <span class="priority-badge priority-{{ ticket.priority }}">
                                         {{ ticket.get_priority_display }}
                                     </span>
@@ -75,7 +76,7 @@
                                     <i class="fas fa-calendar-alt"></i>
                                 </div>
                                 <div class="info-content">
-                                    <label>Oluşturulma Tarihi</label>
+                                    <label>{% trans "Oluşturulma Tarihi" %}</label>
                                     <h4>{{ ticket.created_at|date:"d.m.Y" }}</h4>
                                     <small>{{ ticket.created_at|date:"H:i" }}</small>
                                 </div>
@@ -110,8 +111,8 @@
             <!-- Yanıt Formu -->
             <div class="response-card">
                 <div class="response-header">
-                    <h2><i class="fas fa-edit"></i> Yanıt Gönder</h2>
-                    <p>Yanıtınız öğrenciye e-posta olarak gönderilecektir</p>
+                    <h2><i class="fas fa-edit"></i> {% trans "Yanıt Gönder" %}</h2>
+                    <p>{% trans "Yanıtınız öğrenciye e-posta olarak gönderilecektir" %}</p>
                 </div>
                 
                 <form method="post" class="response-form">
@@ -119,26 +120,26 @@
                     
                     <!-- Cevap Şablonları -->
                     <div class="template-section mb-4">
-                        <h6><i class="fas fa-magic"></i> Hızlı Yanıt Şablonları</h6>
+                        <h6><i class="fas fa-magic"></i> {% trans "Hızlı Yanıt Şablonları" %}</h6>
                         <div class="template-buttons">
                             <button type="button" class="btn-template" data-template="onay">
-                                <i class="fas fa-check"></i> Onaylandı
+                                <i class="fas fa-check"></i> {% trans "Onaylandı" %}
                             </button>
                             <button type="button" class="btn-template" data-template="bilgi">
-                                <i class="fas fa-info-circle"></i> Bilgi İstendi
+                                <i class="fas fa-info-circle"></i> {% trans "Bilgi İstendi" %}
                             </button>
                             <button type="button" class="btn-template" data-template="cozuldu">
-                                <i class="fas fa-check-double"></i> Çözüldü
+                                <i class="fas fa-check-double"></i> {% trans "Çözüldü" %}
                             </button>
                             <button type="button" class="btn-template" data-template="teknik">
-                                <i class="fas fa-tools"></i> Teknik Destek
+                                <i class="fas fa-tools"></i> {% trans "Teknik Destek" %}
                             </button>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label class="form-label">
-                            <i class="fas fa-comment-dots"></i> Yanıtınız *
+                            <i class="fas fa-comment-dots"></i> {% trans "Yanıtınız *" %}
                         </label>
                         <div class="editor-container">
                             <div class="editor-toolbar">
@@ -150,25 +151,25 @@
                             </div>
                             <textarea name="response" id="response" rows="10" 
                                       class="form-control editor-textarea"
-                                      placeholder="Detaylı yanıtınızı buraya yazın... Öğrenciye net ve anlaşılır bilgiler verin."
+                                      placeholder="{% trans 'Detaylı yanıtınızı buraya yazın... Öğrenciye net ve anlaşılır bilgiler verin.' %}"
                                       required></textarea>
                         </div>
                         <div class="editor-stats">
-                            <span id="char-count">0</span> karakter
+                            <span id="char-count">0</span> {% trans "karakter" %}
                         </div>
                     </div>
 
                     <!-- Ek Dosya -->
                     <div class="form-group">
                         <label class="form-label">
-                            <i class="fas fa-paperclip"></i> Dosya Ekle (İsteğe Bağlı)
+                            <i class="fas fa-paperclip"></i> {% trans "Dosya Ekle (İsteğe Bağlı)" %}
                         </label>
                         <div class="file-upload-area">
                             <input type="file" id="file-upload" class="file-input" multiple>
                             <label for="file-upload" class="file-upload-label">
                                 <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Dosyaları buraya sürükleyin veya tıklayın</span>
-                                <small>PDF, DOC, JPG, PNG (Max 10MB)</small>
+                                <span>{% trans "Dosyaları buraya sürükleyin veya tıklayın" %}</span>
+                                <small>{% trans "PDF, DOC, JPG, PNG (Max 10MB)" %}</small>
                             </label>
                             <div class="file-preview" id="file-preview"></div>
                         </div>
@@ -176,34 +177,34 @@
 
                     <!-- Durum Güncelleme -->
                     <div class="status-section">
-                        <h6><i class="fas fa-sync-alt"></i> Talep Durumunu Güncelle</h6>
+                        <h6><i class="fas fa-sync-alt"></i> {% trans "Talep Durumunu Güncelle" %}</h6>
                         <div class="status-options">
                             <div class="status-option" data-value="pending">
                                 <div class="status-indicator pending"></div>
                                 <div class="status-content">
-                                    <h6>Beklemede</h6>
-                                    <p>İnceleme sürecinde</p>
+                                    <h6>{% trans "Beklemede" %}</h6>
+                                    <p>{% trans "İnceleme sürecinde" %}</p>
                                 </div>
                             </div>
                             <div class="status-option" data-value="in_progress">
                                 <div class="status-indicator in_progress"></div>
                                 <div class="status-content">
-                                    <h6>Devam Ediyor</h6>
-                                    <p>Çözüm için çalışılıyor</p>
+                                    <h6>{% trans "Devam Ediyor" %}</h6>
+                                    <p>{% trans "Çözüm için çalışılıyor" %}</p>
                                 </div>
                             </div>
                             <div class="status-option" data-value="resolved">
                                 <div class="status-indicator resolved"></div>
                                 <div class="status-content">
-                                    <h6>Çözüldü</h6>
-                                    <p>Sorun çözüldü</p>
+                                    <h6>{% trans "Çözüldü" %}</h6>
+                                    <p>{% trans "Sorun çözüldü" %}</p>
                                 </div>
                             </div>
                             <div class="status-option" data-value="closed">
                                 <div class="status-indicator closed"></div>
                                 <div class="status-content">
-                                    <h6>Kapandı</h6>
-                                    <p>Talep kapatıldı</p>
+                                    <h6>{% trans "Kapandı" %}</h6>
+                                    <p>{% trans "Talep kapatıldı" %}</p>
                                 </div>
                             </div>
                         </div>
@@ -215,15 +216,15 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <a href="{% url 'support:department_dashboard' %}" 
                                class="btn btn-outline-primary">
-                                <i class="fas fa-arrow-left"></i> Panoya Dön
+                                <i class="fas fa-arrow-left"></i> {% trans "Panoya Dön" %}
                             </a>
                             
                             <div class="action-buttons">
                                 <button type="button" class="btn btn-outline-secondary" id="save-draft">
-                                    <i class="fas fa-save"></i> Taslak Kaydet
+                                    <i class="fas fa-save"></i> {% trans "Taslak Kaydet" %}
                                 </button>
                                 <button type="submit" class="btn btn-primary btn-submit">
-                                    <i class="fas fa-paper-plane"></i> Yanıtı Gönder
+                                    <i class="fas fa-paper-plane"></i> {% trans "Yanıtı Gönder" %}
                                     <i class="fas fa-spinner fa-spin loading-icon"></i>
                                 </button>
                             </div>

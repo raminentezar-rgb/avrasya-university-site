@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}{{ duyuru.baslik }} - Avrasya Üniversitesi{% endblock %}
 
@@ -12,8 +13,8 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
-                            <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">Duyurular</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">{% trans "Duyurular" %}</a></li>
                             <li class="breadcrumb-item active" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 {{ duyuru.baslik }}
                             </li>
@@ -74,7 +75,7 @@
                             <section class="attachments-section">
                                 <h3 class="section-title">
                                     <i class="fas fa-download"></i>
-                                    İndirilebilir Dosyalar
+                                    {% trans "İndirilebilir Dosyalar" %}
                                 </h3>
                                 <div class="attachments-grid">
                                     {% for dosya in dosyalar %}
@@ -91,7 +92,7 @@
                                         </div>
                                         <a href="{{ dosya.url }}" class="download-btn" download>
                                             <i class="fas fa-download"></i>
-                                            İndir
+                                            {% trans "İndir" %}
                                         </a>
                                     </div>
                                     {% endfor %}
@@ -105,7 +106,7 @@
                         <section class="related-section">
                             <h3 class="section-title">
                                 <i class="fas fa-link"></i>
-                                İlgili Duyurular
+                                {% trans "İlgili Duyurular" %}
                             </h3>
                             <div class="related-grid">
                                 {% for ilgili in ilgili_duyurular %}
@@ -119,7 +120,7 @@
                                         {{ ilgili.yayin_tarihi|date:'d M Y' }}
                                     </div>
                                     <a href="{{ ilgili.get_absolute_url }}" class="related-link">
-                                        Detaylı Görüntüle
+                                        {% trans "Detaylı Görüntüle" %}
                                         <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </article>
@@ -137,12 +138,12 @@
                         <div class="sidebar-widget">
                             <h4 class="widget-title">
                                 <i class="fas fa-compass"></i>
-                                Navigasyon
+                                {% trans "Navigasyon" %}
                             </h4>
                             <div class="navigation-links">
                                 <a href="{% url 'duyurular:liste' %}" class="nav-link1">
                                     <i class="fas fa-arrow-left"></i>
-                                    Tüm Duyurulara Dön
+                                    {% trans "Tüm Duyurulara Dön" %}
                                 </a>
                                 <a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=duyuru.fakulte %}" class="nav-link1">
                                     <i class="fas fa-filter"></i>
@@ -163,20 +164,20 @@
                         <div class="sidebar-widget">
                             <h4 class="widget-title">
                                 <i class="fas fa-info-circle"></i>
-                                Duyuru Bilgileri
+                                {% trans "Duyuru Bilgileri" %}
                             </h4>
                             <div class="info-list">
                                 <div class="info-item">
-                                    <span class="info-label">Yayın Tarihi:</span>
+                                    <span class="info-label">{% trans "Yayın Tarihi:" %}</span>
                                     <span class="info-value">{{ duyuru.yayin_tarihi|date:'d.m.Y' }}</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Fakülte:</span>
+                                    <span class="info-label">{% trans "Fakülte:" %}</span>
                                     <span class="info-value">{{ duyuru.get_fakulte_display }}</span>
                                 </div>
                                 {% if duyuru.bolumler.exists %}
                                 <div class="info-item">
-                                    <span class="info-label">Bölümler:</span>
+                                    <span class="info-label">{% trans "Bölümler:" %}</span>
                                     <span class="info-value">
                                         {% for bolum in duyuru.bolumler.all %}
                                             {{ bolum.ad }}{% if not forloop.last %}, {% endif %}
@@ -187,7 +188,7 @@
                                 {% with dosyalar=duyuru.mevcut_dosyalar %}
                                 {% if dosyalar %}
                                 <div class="info-item">
-                                    <span class="info-label">Ek Dosya:</span>
+                                    <span class="info-label">{% trans "Ek Dosya:" %}</span>
                                     <span class="info-value">{{ dosyalar|length }} adet</span>
                                 </div>
                                 {% endif %}
@@ -199,7 +200,7 @@
                         <div class="sidebar-widget">
                             <h4 class="widget-title">
                                 <i class="fas fa-share-alt"></i>
-                                Paylaş
+                                {% trans "Paylaş" %}
                             </h4>
                             <div class="share-buttons">
                                 <button class="share-btn whatsapp" onclick="shareOnWhatsapp()">

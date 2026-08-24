@@ -190,7 +190,7 @@
             {% for num in page_obj.paginator.page_range %}
                 {% if page_obj.number == num %}
                 <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                {% elif num > {% trans "page_obj.number|add:'-3' and num" %} < page_obj.number|add:'3' %}
                 <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.news_type %}&news_type={{ request.GET.news_type }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">{{ num }}</a></li>
                 {% endif %}
             {% endfor %}

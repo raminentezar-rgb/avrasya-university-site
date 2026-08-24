@@ -1,5 +1,6 @@
 <!-- rektor.html -->
 {% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Rektör{% endblock %}
@@ -10,10 +11,9 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">REKTÖR</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "REKTÖR" %}</h1>
                 <p class="lead mb-4">
-                    Üniversitemizin akademik, idari ve bilimsel çalışmalarından sorumlu 
-                    Rektörümüzün mesajı ve biyografisi.
+                    {% trans "Üniversitemizin akademik, idari ve bilimsel çalışmalarından sorumlu Rektörümüzün mesajı ve biyografisi." %}
                 </p>
             </div>
             <div class="col-md-4 text-center">
@@ -30,43 +30,37 @@
             <div class="col-md-4 text-center">
                 <div class="position-relative">
                     <img src="{% static 'avrasya_universitesi_yonetim/images/mahirkadakal.png' %}" 
-                         alt="Rektör Prof. Dr. Mahir KADAKAL" 
+                         alt="{% trans 'Rektör Prof. Dr. Mahir KADAKAL' %}" 
                          class="img-fluid rounded shadow-lg" 
                          style="max-height: 400px; object-fit: cover;">
                     <div class="position-absolute top-0 start-0 m-3">
                         <span class="badge bg-danger fs-6 p-2">
-                            <i class="bi bi-award-fill me-1"></i>Rektör
+                            <i class="bi bi-award-fill me-1"></i>{% trans "Rektör" %}
                         </span>
                     </div>
                 </div>
-                <h4 class="mt-4 mb-1 text-primary fw-bold">Prof. Dr. Mahir KADAKAL</h4>
-                <p class="text-muted fs-5">Rektör</p>
+                <h4 class="mt-4 mb-1 text-primary fw-bold">{% trans "Prof. Dr. Mahir KADAKAL" %}</h4>
+                <p class="text-muted fs-5">{% trans "Rektör" %}</p>
             </div>
             <div class="col-md-8">
-                <h3 class="text-primary mb-4 border-bottom pb-2">Rektör'ün Mesajı</h3>
+                <h3 class="text-primary mb-4 border-bottom pb-2">{% trans "Rektör'ün Mesajı" %}</h3>
                 <div class="message-content">
                     <p class="mb-4 fs-6">
-                        <strong>Sevgili Gençler,</strong>
+                        <strong>{% trans "Sevgili Gençler," %}</strong>
                     </p>
                     <p class="mb-4">
-                        2010 yılında kurulan ve <em>"Kıtaların Buluşma Noktasında Eğitime Açılan Kapınız"</em> sloganı ile  
-                        2011-2012 Eğitim ve Öğretim yılında ilk öğrencileri ile buluşan Avrasya Üniversitesi;  
-                        Trabzon'da beş farklı kampüste eğitim ve öğrenim faaliyetlerine devam etmektedir.
+                        {% trans "2010 yılında kurulan ve" %} <em>{% trans "\"Kıtaların Buluşma Noktasında Eğitime Açılan Kapınız\"" %}</em> {% trans "sloganı ile 2011-2012 Eğitim ve Öğretim yılında ilk öğrencileri ile buluşan Avrasya Üniversitesi; Trabzon'da beş farklı kampüste eğitim ve öğrenim faaliyetlerine devam etmektedir." %}
                     </p>
                     <p class="mb-4">
-                        Üniversitemiz, modern kampüsleri, teknolojik donanımlarıyla oluşturulan altyapısı, 
-                        araştırma ve proje olanakları, ulusal ve uluslararası güncel gelişmelere uygun eğitim modeli 
-                        ve ulusal ve uluslararası düzeyde tanınan nitelikli akademisyenleri ile bilim ve teknolojinin buluşma noktasıdır.
+                        {% trans "Üniversitemiz, modern kampüsleri, teknolojik donanımlarıyla oluşturulan altyapısı, araştırma ve proje olanakları, ulusal ve uluslararası güncel gelişmelere uygun eğitim modeli ve ulusal ve uluslararası düzeyde tanınan nitelikli akademisyenleri ile bilim ve teknolojinin buluşma noktasıdır." %}
                     </p>
                     <p class="mb-4">
-                        Üniversitemiz; 36 ön lisans, 26 lisans ve 18 yüksek lisans düzeyinde yürütülen, 
-                        uzaktan-örgün eğitim ve sertifika programları, 21 farklı ülkeden uluslararası öğrencisi 
-                        ve 12000'den fazla mezun öğrencisi ile büyümeye devam etmektedir.
+                        {% trans "Üniversitemiz; 36 ön lisans, 26 lisans ve 18 yüksek lisans düzeyinde yürütülen, uzaktan-örgün eğitim ve sertifika programları, 21 farklı ülkeden uluslararası öğrencisi ve 12000'den fazla mezun öğrencisi ile büyümeye devam etmektedir." %}
                     </p>
                     <p class="mb-0 fst-italic text-primary">
-                        Saygı ve Sevgilerimle<br>
-                        <strong>Prof. Dr. Mahir KADAKAL</strong><br>
-                        Avrasya Üniversitesi Rektörü
+                        {% trans "Saygı ve Sevgilerimle" %}<br>
+                        <strong>{% trans "Prof. Dr. Mahir KADAKAL" %}</strong><br>
+                        {% trans "Avrasya Üniversitesi Rektörü" %}
                     </p>
                 </div>
             </div>
@@ -78,43 +72,43 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body">
         <h3 class="text-primary mb-4 border-bottom pb-2">
-            <i class="bi bi-person-vcard me-2"></i>Rektör Prof. Dr. Mahir KADAKAL'ın Özgeçmişi
+            <i class="bi bi-person-vcard me-2"></i>{% trans "Rektör Prof. Dr. Mahir KADAKAL'ın Özgeçmişi" %}
         </h3>
         
         <div class="row">
             <div class="col-md-8">
                 <!-- Personal Info -->
                 <div class="mb-4">
-                    <h5 class="text-primary mb-3">Kişisel Bilgiler</h5>
+                    <h5 class="text-primary mb-3">{% trans "Kişisel Bilgiler" %}</h5>
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="mb-2"><strong>Doğum Tarihi:</strong> 28.04.1971</p>
-                            <p class="mb-2"><strong>Doğum Yeri:</strong> Gümüşhane</p>
+                            <p class="mb-2"><strong>{% trans "Doğum Tarihi:" %}</strong> 28.04.1971</p>
+                            <p class="mb-2"><strong>{% trans "Doğum Yeri:" %}</strong> {% trans "Gümüşhane" %}</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="mb-2"><strong>Medeni Durum:</strong> Evli</p>
-                            <p class="mb-2"><strong>Çocuklar:</strong> Oğuzhan Emre, Gülsüm Rengin</p>
+                            <p class="mb-2"><strong>{% trans "Medeni Durum:" %}</strong> {% trans "Evli" %}</p>
+                            <p class="mb-2"><strong>{% trans "Çocuklar:" %}</strong> {% trans "Oğuzhan Emre, Gülsüm Rengin" %}</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Education -->
                 <div class="mb-4">
-                    <h5 class="text-primary mb-3">Eğitim</h5>
+                    <h5 class="text-primary mb-3">{% trans "Eğitim" %}</h5>
                     <div class="timeline">
                         <div class="timeline-item">
-                            <h6 class="text-primary">Lisans</h6>
-                            <p class="mb-1">Ondokuz Mayıs Üniversitesi Eğitim Fakültesi Matematik Anabilim Dalı</p>
+                            <h6 class="text-primary">{% trans "Lisans" %}</h6>
+                            <p class="mb-1">{% trans "Ondokuz Mayıs Üniversitesi Eğitim Fakültesi Matematik Anabilim Dalı" %}</p>
                             <small class="text-muted">1989 - 1993</small>
                         </div>
                         <div class="timeline-item">
-                            <h6 class="text-primary">Yüksek Lisans</h6>
-                            <p class="mb-1">OMÜ Fen Bilimleri Enstitüsü</p>
+                            <h6 class="text-primary">{% trans "Yüksek Lisans" %}</h6>
+                            <p class="mb-1">{% trans "OMÜ Fen Bilimleri Enstitüsü" %}</p>
                             <small class="text-muted">1993 - 1996</small>
                         </div>
                         <div class="timeline-item">
-                            <h6 class="text-primary">Doktora</h6>
-                            <p class="mb-1">OMÜ Fen Bilimleri Enstitüsü</p>
+                            <h6 class="text-primary">{% trans "Doktora" %}</h6>
+                            <p class="mb-1">{% trans "OMÜ Fen Bilimleri Enstitüsü" %}</p>
                             <small class="text-muted">1996 - 2000</small>
                         </div>
                     </div>
@@ -122,25 +116,25 @@
 
                 <!-- Academic Career -->
                 <div class="mb-4">
-                    <h5 class="text-primary mb-3">Akademik Kariyer</h5>
+                    <h5 class="text-primary mb-3">{% trans "Akademik Kariyer" %}</h5>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="list-unstyled">
                                 <li class="mb-2 d-flex align-items-start">
                                     <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
-                                    <span>Araştırma Görevlisi - OMÜ (1994)</span>
+                                    <span>{% trans "Araştırma Görevlisi - OMÜ (1994)" %}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-start">
                                     <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
-                                    <span>Yardımcı Doçent - OMÜ (2000)</span>
+                                    <span>{% trans "Yardımcı Doçent - OMÜ (2000)" %}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-start">
                                     <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
-                                    <span>Doçent (2006)</span>
+                                    <span>{% trans "Doçent (2006)" %}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-start">
                                     <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
-                                    <span>Profesör (2011)</span>
+                                    <span>{% trans "Profesör (2011)" %}</span>
                                 </li>
                             </ul>
                         </div>
@@ -148,15 +142,15 @@
                             <ul class="list-unstyled">
                                 <li class="mb-2 d-flex align-items-start">
                                     <i class="bi bi-journal-text text-info me-2 mt-1"></i>
-                                    <span>2 Kitap Yazarı</span>
+                                    <span>{% trans "2 Kitap Yazarı" %}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-start">
                                     <i class="bi bi-file-text text-info me-2 mt-1"></i>
-                                    <span>Çok Sayıda Makale</span>
+                                    <span>{% trans "Çok Sayıda Makale" %}</span>
                                 </li>
                                 <li class="mb-2 d-flex align-items-start">
                                     <i class="bi bi-mic text-info me-2 mt-1"></i>
-                                    <span>Konferans ve Sempozyumlar</span>
+                                    <span>{% trans "Konferans ve Sempozyumlar" %}</span>
                                 </li>
                             </ul>
                         </div>
@@ -168,31 +162,31 @@
                 <!-- Administrative Experience -->
                 <div class="card bg-light border-0 h-100">
                     <div class="card-body">
-                        <h5 class="text-primary mb-3">Yöneticilik Deneyimleri</h5>
+                        <h5 class="text-primary mb-3">{% trans "Yöneticilik Deneyimleri" %}</h5>
                         <div class="admin-timeline">
                             <div class="admin-item mb-3">
-                                <h6 class="text-primary mb-1">Avrasya Üniversitesi</h6>
-                                <p class="mb-1 small">Rektör</p>
-                                <small class="text-muted">2024 - Devam</small>
+                                <h6 class="text-primary mb-1">{% trans "Avrasya Üniversitesi" %}</h6>
+                                <p class="mb-1 small">{% trans "Rektör" %}</p>
+                                <small class="text-muted">{% trans "2024 - Devam" %}</small>
                             </div>
                             <div class="admin-item mb-3">
-                                <h6 class="text-primary mb-1">Bayburt Üniversitesi</h6>
-                                <p class="mb-1 small">Rektör Yardımcısı</p>
+                                <h6 class="text-primary mb-1">{% trans "Bayburt Üniversitesi" %}</h6>
+                                <p class="mb-1 small">{% trans "Rektör Yardımcısı" %}</p>
                                 <small class="text-muted">2022 - 2024</small>
                             </div>
                             <div class="admin-item mb-3">
-                                <h6 class="text-primary mb-1">Giresun Üniversitesi</h6>
-                                <p class="mb-1 small">Rektör Yardımcısı</p>
+                                <h6 class="text-primary mb-1">{% trans "Giresun Üniversitesi" %}</h6>
+                                <p class="mb-1 small">{% trans "Rektör Yardımcısı" %}</p>
                                 <small class="text-muted">2012 - 2015</small>
                             </div>
                             <div class="admin-item mb-3">
-                                <h6 class="text-primary mb-1">Giresun Üniversitesi</h6>
-                                <p class="mb-1 small">Eğitim Fakültesi Dekanı</p>
+                                <h6 class="text-primary mb-1">{% trans "Giresun Üniversitesi" %}</h6>
+                                <p class="mb-1 small">{% trans "Eğitim Fakültesi Dekanı" %}</p>
                                 <small class="text-muted">2015</small>
                             </div>
                             <div class="admin-item">
-                                <h6 class="text-primary mb-1">Ahi Evran Üniversitesi</h6>
-                                <p class="mb-1 small">Fakülte Dekanı</p>
+                                <h6 class="text-primary mb-1">{% trans "Ahi Evran Üniversitesi" %}</h6>
+                                <p class="mb-1 small">{% trans "Fakülte Dekanı" %}</p>
                                 <small class="text-muted">2012</small>
                             </div>
                         </div>
@@ -204,15 +198,15 @@
         <!-- Publications -->
         <div class="row mt-4">
             <div class="col-12">
-                <h5 class="text-primary mb-3">Yayınlar ve Eserler</h5>
+                <h5 class="text-primary mb-3">{% trans "Yayınlar ve Eserler" %}</h5>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card border-0 bg-light">
                             <div class="card-body">
-                                <h6 class="text-primary">Kitaplar</h6>
+                                <h6 class="text-primary">{% trans "Kitaplar" %}</h6>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-1">• "Genel Matematik-I"</li>
-                                    <li class="mb-0">• "Genel Matematik-I Problem Çözümleri"</li>
+                                    <li class="mb-1">{% trans "• \"Genel Matematik-I\"" %}</li>
+                                    <li class="mb-0">{% trans "• \"Genel Matematik-I Problem Çözümleri\"" %}</li>
                                 </ul>
                             </div>
                         </div>
@@ -220,10 +214,10 @@
                     <div class="col-md-6">
                         <div class="card border-0 bg-light">
                             <div class="card-body">
-                                <h6 class="text-primary">Akademik Çalışmalar</h6>
+                                <h6 class="text-primary">{% trans "Akademik Çalışmalar" %}</h6>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-1">• Yurt içi ve yurt dışı dergilerde makaleler</li>
-                                    <li class="mb-0">• Uluslararası ve ulusal konferans bildirileri</li>
+                                    <li class="mb-1">{% trans "• Yurt içi ve yurt dışı dergilerde makaleler" %}</li>
+                                    <li class="mb-0">{% trans "• Uluslararası ve ulusal konferans bildirileri" %}</li>
                                 </ul>
                             </div>
                         </div>

@@ -1,6 +1,11 @@
-from modeltranslation.translator import register, TranslationOptions
-from .models import News
+from modeltranslation.translator import TranslationOptions, register
+from .models import News, NewsAttachment
 
 @register(News)
 class NewsTranslationOptions(TranslationOptions):
-    fields = ('title', 'summary', 'content') # فیلدهایی که باید ترجمه شوند
+    fields = ('title', 'content')
+
+@register(NewsAttachment)
+class NewsAttachmentTranslationOptions(TranslationOptions):
+    fields = ('title',)
+

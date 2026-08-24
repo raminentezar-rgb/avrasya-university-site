@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Galeri - {{ category.name }} | Avrasya Üniversitesi{% endblock %}
@@ -11,8 +12,8 @@
             <div class="col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'gallery:main' %}">Galeri</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'gallery:main' %}">{% trans "Galeri" %}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
                     </ol>
                 </nav>
@@ -50,11 +51,11 @@
             </div>
             <div class="gallery-sort">
                 <select class="form-select" id="sortSelect">
-                    <option value="order">Varsayılan Sıralama</option>
-                    <option value="-upload_date">En Yeni</option>
-                    <option value="upload_date">En Eski</option>
-                    <option value="title">A'dan Z'ye</option>
-                    <option value="-title">Z'den A'ya</option>
+                    <option value="order">{% trans "Varsayılan Sıralama" %}</option>
+                    <option value="-upload_date">{% trans "En Yeni" %}</option>
+                    <option value="upload_date">{% trans "En Eski" %}</option>
+                    <option value="title">{% trans "A'dan Z'ye" %}</option>
+                    <option value="-title">{% trans "Z'den A'ya" %}</option>
                 </select>
             </div>
         </div>
@@ -68,7 +69,7 @@
                             <img src="{{ image.image.url }}" alt="{{ image.title }}" loading="lazy">
                             <div class="image-hover">
                                 <i class="fas fa-expand-alt"></i>
-                                <span>Görüntüle</span>
+                                <span>{% trans "Görüntüle" %}</span>
                             </div>
                         </div>
                         <div class="gallery-content">
@@ -85,10 +86,10 @@
             <div class="col-12">
                 <div class="empty-gallery">
                     <i class="fas fa-images"></i>
-                    <h4>Bu kategoride henüz fotoğraf bulunmuyor</h4>
-                    <p>Fotoğraflar yakında eklenecektir.</p>
+                    <h4>{% trans "Bu kategoride henüz fotoğraf bulunmuyor" %}</h4>
+                    <p>{% trans "Fotoğraflar yakında eklenecektir." %}</p>
                     <a href="{% url 'gallery:main' %}" class="btn btn-primary">
-                        <i class="fas fa-arrow-left"></i> Galeriye Dön
+                        <i class="fas fa-arrow-left"></i> {% trans "Galeriye Dön" %}
                     </a>
                 </div>
             </div>
@@ -131,8 +132,8 @@
 <section class="other-categories">
     <div class="container">
         <div class="section-title">
-            <h2>Diğer Kategoriler</h2>
-            <p class="section-subtitle">Keşfetmek için diğer galerilerimizi ziyaret edin</p>
+            <h2>{% trans "Diğer Kategoriler" %}</h2>
+            <p class="section-subtitle">{% trans "Keşfetmek için diğer galerilerimizi ziyaret edin" %}</p>
         </div>
 
         {% if categories %}
@@ -162,8 +163,8 @@
         {% else %}
         <div class="empty-state">
             <i class="fas fa-folder-open"></i>
-            <h4>Henüz başka kategori bulunmuyor</h4>
-            <p>Diğer kategoriler yakında eklenecektir.</p>
+            <h4>{% trans "Henüz başka kategori bulunmuyor" %}</h4>
+            <p>{% trans "Diğer kategoriler yakında eklenecektir." %}</p>
         </div>
         {% endif %}
     </div>

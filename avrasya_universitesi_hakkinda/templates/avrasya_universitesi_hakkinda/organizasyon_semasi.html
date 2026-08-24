@@ -1,5 +1,6 @@
 <!-- organizasyon_semasi.html -->
 {% extends 'avrasya_universitesi_hakkinda/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Organizasyon Şeması{% endblock %}
@@ -10,9 +11,9 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">Organizasyon Şeması</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "Organizasyon Şeması" %}</h1>
                 <p class="lead mb-0">
-                    Üniversitemizin yönetim yapısı ve organizasyonel hiyerarşisi
+                    {% trans "Üniversitemizin yönetim yapısı ve organizasyonel hiyerarşisi" %}
                 </p>
             </div>
             <div class="col-md-4 text-center">
@@ -27,7 +28,7 @@
     <div class="card-body p-3">
         <div class="organization-image-container">
             <img src="{% static 'avrasya_universitesi_hakkinda/images/organizasyonsemasi.jpg' %}" 
-                 alt="Avrasya Üniversitesi Organizasyon Şeması" 
+                 alt="{% trans 'Avrasya Üniversitesi Organizasyon Şeması' %}" 
                  class="organization-full-image">
             <div class="image-badge">
                 <i class="bi bi-diagram-3"></i>
@@ -42,17 +43,17 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <h4 class="text-primary mb-2">
-                    <i class="bi bi-download me-2"></i>Organizasyon Şemasını İndir
+                    <i class="bi bi-download me-2"></i>{% trans "Organizasyon Şemasını İndir" %}
                 </h4>
                 <p class="text-muted mb-0">
-                    Yüksek çözünürlüklü organizasyon şemasını bilgisayarınıza indirmek için aşağıdaki butonu kullanabilirsiniz.
+                    {% trans "Yüksek çözünürlüklü organizasyon şemasını bilgisayarınıza indirmek için aşağıdaki butonu kullanabilirsiniz." %}
                 </p>
             </div>
             <div class="col-md-4 text-end">
                 <a href="{% static 'avrasya_universitesi_hakkinda/images/organizasyonsemasi.jpg' %}" 
                    download="Avrasya_Universitesi_Organizasyon_Semasi.jpg"
                    class="btn btn-primary btn-lg">
-                    <i class="bi bi-download me-2"></i>Şemayı İndir
+                    <i class="bi bi-download me-2"></i>{% trans "Şemayı İndir" %}
                 </a>
             </div>
         </div>
@@ -63,86 +64,86 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body p-4">
         <h3 class="text-primary mb-4 border-bottom pb-2">
-            <i class="bi bi-info-circle me-2"></i>Organizasyon Yapısı Hakkında
+            <i class="bi bi-info-circle me-2"></i>{% trans "Organizasyon Yapısı Hakkında" %}
         </h3>
         
         <div class="row">
             <div class="col-md-6">
                 <h5 class="text-primary mb-3">
-                    <i class="bi bi-building me-2"></i>Akademik Birimler
+                    <i class="bi bi-building me-2"></i>{% trans "Akademik Birimler" %}
                 </h5>
                 <ul class="list-unstyled">
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Mühendislik Fakültesi
+                        {% trans "Mühendislik Fakültesi" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Tıp Fakültesi
+                        {% trans "Tıp Fakültesi" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Fen-Edebiyat Fakültesi
+                        {% trans "Fen-Edebiyat Fakültesi" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        İktisadi ve İdari Bilimler Fakültesi
+                        {% trans "İktisadi ve İdari Bilimler Fakültesi" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Sağlık Bilimleri Fakültesi
+                        {% trans "Sağlık Bilimleri Fakültesi" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        İletişim Fakültesi
+                        {% trans "İletişim Fakültesi" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Spor Bilimleri Fakültesi
+                        {% trans "Spor Bilimleri Fakültesi" %}
                     </li>
                     <li class="mb-0">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Diş Hekimliği Fakültesi
+                        {% trans "Diş Hekimliği Fakültesi" %}
                     </li>
                 </ul>
             </div>
             
             <div class="col-md-6">
                 <h5 class="text-primary mb-3">
-                    <i class="bi bi-gear me-2"></i>İdari Birimler
+                    <i class="bi bi-gear me-2"></i>{% trans "İdari Birimler" %}
                 </h5>
                 <ul class="list-unstyled">
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Öğrenci İşleri Daire Başkanlığı
+                        {% trans "Öğrenci İşleri Daire Başkanlığı" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Personel Daire Başkanlığı
+                        {% trans "Personel Daire Başkanlığı" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Mali İşler Daire Başkanlığı
+                        {% trans "Mali İşler Daire Başkanlığı" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Yapı İşleri Daire Başkanlığı
+                        {% trans "Yapı İşleri Daire Başkanlığı" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Sağlık Kültür Spor Daire Başkanlığı
+                        {% trans "Sağlık Kültür Spor Daire Başkanlığı" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Kütüphane ve Dokümantasyon Daire Başkanlığı
+                        {% trans "Kütüphane ve Dokümantasyon Daire Başkanlığı" %}
                     </li>
                     <li class="mb-2">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Bilgi İşlem Daire Başkanlığı
+                        {% trans "Bilgi İşlem Daire Başkanlığı" %}
                     </li>
                     <li class="mb-0">
                         <i class="bi bi-arrow-right text-primary me-2"></i>
-                        Strateji Geliştirme Daire Başkanlığı
+                        {% trans "Strateji Geliştirme Daire Başkanlığı" %}
                     </li>
                 </ul>
             </div>
@@ -150,11 +151,10 @@
         
         <div class="mt-4 p-3 bg-light rounded">
             <h6 class="text-primary mb-2">
-                <i class="bi bi-lightbulb me-2"></i>Not:
+                <i class="bi bi-lightbulb me-2"></i>{% trans "Not:" %}
             </h6>
             <p class="mb-0 text-muted small">
-                Organizasyon şeması üniversitemizin güncel yönetim yapısını göstermektedir. 
-                Detaylı bilgi için ilgili birimlerle iletişime geçebilirsiniz.
+                {% trans "Organizasyon şeması üniversitemizin güncel yönetim yapısını göstermektedir. Detaylı bilgi için ilgili birimlerle iletişime geçebilirsiniz." %}
             </p>
         </div>
     </div>

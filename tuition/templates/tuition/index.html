@@ -1,4 +1,5 @@
 {% extends 'tuition/base_payment.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="row justify-content-center align-items-center" style="min-height: 60vh;">
@@ -10,21 +11,21 @@
                 </div>
             </div>
             
-            <h2 class="fw-bold mb-2">Öğrenci Sorgulama</h2>
-            <p class="text-muted mb-4">Harç veya eğitim ücreti ödemesi yapmak için T.C. Kimlik veya Pasaport numaranızı giriniz.</p>
+            <h2 class="fw-bold mb-2">{% trans "Öğrenci Sorgulama" %}</h2>
+            <p class="text-muted mb-4">{% trans "Harç veya eğitim ücreti ödemesi yapmak için T.C. Kimlik veya Pasaport numaranızı giriniz." %}</p>
 
             <form method="POST" action="{% url 'tuition:index' %}">
                 {% csrf_token %}
                 <div class="mb-4 text-start">
-                    <label for="student_id" class="form-label text-muted small fw-semibold text-uppercase tracking-wider">T.C. Kimlik / Pasaport No</label>
+                    <label for="student_id" class="form-label text-muted small fw-semibold text-uppercase tracking-wider">{% trans "T.C. Kimlik / Pasaport No" %}</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
-                        <input type="text" class="form-control with-icon" id="student_id" name="student_id" placeholder="Kimlik numaranızı giriniz" required autocomplete="off">
+                        <input type="text" class="form-control with-icon" id="student_id" name="student_id" placeholder="{% trans 'Kimlik numaranızı giriniz' %}" required autocomplete="off">
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-glow w-100 d-flex justify-content-center align-items-center gap-2">
-                    Sorgula
+                    {% trans "Sorgula" %}
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
@@ -32,7 +33,7 @@
             <div class="mt-4 pt-3 border-top" style="border-color: var(--glass-border) !important;">
                 <p class="small text-muted mb-0">
                     <i class="fa-solid fa-circle-info me-1"></i>
-                    Bilgileriniz doğrudan OBS (Öğrenci Bilgi Sistemi) üzerinden anlık olarak çekilmektedir.
+                    {% trans "Bilgileriniz doğrudan OBS (Öğrenci Bilgi Sistemi) üzerinden anlık olarak çekilmektedir." %}
                 </p>
             </div>
         </div>

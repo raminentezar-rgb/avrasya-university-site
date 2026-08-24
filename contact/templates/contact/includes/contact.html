@@ -1,4 +1,5 @@
 {% extends 'contact/base.html' %}
+{% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -230,10 +231,8 @@
     <div class="container">
         <h1
             style="font-family: 'Metropolis', sans-serif; font-weight: 800; font-size: 3.5rem; margin-bottom: 15px; color:#f8f9fa">
-            İletişim</h1>
-        <p class="lead" style="opacity: 0.9; font-weight: 300; color:#f8f9fa">Sorularınız ve önerileriniz için bizimle
-            iletişime
-            geçin.</p>
+            {% trans "İletişim" %}</h1>
+        <p class="lead" style="opacity: 0.9; font-weight: 300; color:#f8f9fa">{% trans "Sorularınız ve önerileriniz için bizimle iletişime geçin." %}</p>
     </div>
 </div>
 
@@ -243,8 +242,8 @@
             <!-- Left Side: Form -->
             <div class="col-lg-7">
                 <div class="form-section">
-                    <span class="section-label">Bize Yazın</span>
-                    <h2 class="section-heading">Mesaj Gönderin</h2>
+                    <span class="section-label">{% trans "Bize Yazın" %}</span>
+                    <h2 class="section-heading">{% trans "Mesaj Gönderin" %}</h2>
 
                     <form method="post" novalidate>
                         {% csrf_token %}
@@ -264,7 +263,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-contact-submit">
-                            <i class="fas fa-paper-plane mr-2"></i> Mesajı Gönder
+                            <i class="fas fa-paper-plane mr-2"></i> {% trans "Mesajı Gönder" %}
                         </button>
                     </form>
                 </div>
@@ -276,10 +275,9 @@
                     <div class="circle-decoration circle-1"></div>
                     <div class="circle-decoration circle-2"></div>
 
-                    <h3 class="info-heading">İletişim Bilgileri</h3>
+                    <h3 class="info-heading">{% trans "İletişim Bilgileri" %}</h3>
                     <p style="color: rgba(255,255,255,0.7); margin-bottom: 40px; position: relative; z-index: 2;">
-                        Aşağıdaki iletişim kanallarından bize doğrudan ulaşabilir veya kampüsümüzü ziyaret
-                        edebilirsiniz.
+                        {% trans "Aşağıdaki iletişim kanallarından bize doğrudan ulaşabilir veya kampüsümüzü ziyaret edebilirsiniz." %}
                     </p>
 
                     <div class="contact-item">
@@ -287,8 +285,8 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="contact-text">
-                            <h5>Adres</h5>
-                            <p>Pelitli, Rize Cd. No:224<br>61080 Ortahisar/Trabzon, Türkiye</p>
+                            <h5>{% trans "Adres" %}</h5>
+                            <p>{% trans "Pelitli, Rize Cd. No:224" %}<br>{% trans "61080 Ortahisar/Trabzon, Türkiye" %}</p>
                         </div>
                     </div>
 
@@ -297,7 +295,7 @@
                             <i class="fas fa-phone-alt"></i>
                         </div>
                         <div class="contact-text">
-                            <h5>Telefon</h5>
+                            <h5>{% trans "Telefon" %}</h5>
                             <p><a href="tel:+904623340550">+90 462 334 04 44</a></p>
                             <p><a href="tel:+904623340550">+90 462 334 05 50</a></p>
                         </div>
@@ -308,9 +306,9 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-text">
-                            <h5>E-posta</h5>
-                            <p><a href="mailto:info@avrasya.edu.tr">info@avrasya.edu.tr</a></p>
-                            <p><a href="mailto:iletisim@avrasya.edu.tr">iletisim@avrasya.edu.tr</a></p>
+                            <h5>{% trans "E-posta" %}</h5>
+                            <p><a href="mailto:info@avrasya.edu.tr">{% trans "info@avrasya.edu.tr" %}</a></p>
+                            <p><a href="mailto:iletisim@avrasya.edu.tr">{% trans "iletisim@avrasya.edu.tr" %}</a></p>
 
 
                         </div>

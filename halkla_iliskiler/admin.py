@@ -1,12 +1,13 @@
 # app_name: halkla_iliskiler/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     HalklaIliskilerFaaliyet, HalklaIliskilerDersProgrami, HalklaIliskilerFaaliyetGrubu, HalklaIliskilerFaaliyetGorseli, HalklaIliskilerDuyuru, HalklaIliskilerEtkinlik
 )
 
 @admin.register(HalklaIliskilerEtkinlik)
-class HalklaIliskilerEtkinlikAdmin(admin.ModelAdmin):
+class HalklaIliskilerEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class HalklaIliskilerDuyuruAdmin(admin.ModelAdmin):
         return HalklaIliskilerDuyuru.objects.all()
 
 @admin.register(HalklaIliskilerDersProgrami)
-class HalklaIliskilerDersProgramiAdmin(admin.ModelAdmin):
+class HalklaIliskilerDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class HalklaIliskilerFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(HalklaIliskilerFaaliyetGrubu)
-class HalklaIliskilerFaaliyetGrubuAdmin(admin.ModelAdmin):
+class HalklaIliskilerFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(HalklaIliskilerFaaliyet)
-class HalklaIliskilerFaaliyetAdmin(admin.ModelAdmin):
+class HalklaIliskilerFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

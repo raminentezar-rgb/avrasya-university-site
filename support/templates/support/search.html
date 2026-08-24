@@ -1,4 +1,5 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block content %}
@@ -23,10 +24,10 @@
                 <div class="pill-actions">
 
                     {% if user.profile.role == 'student' %}
-                    <a href="{% url 'support:my_tickets' %}" class="pill-link" title="Taleplerim"><i
+                    <a href="{% url 'support:my_tickets' %}" class="pill-link" title="{% trans 'Taleplerim' %}"><i
                             class="fas fa-ticket-alt"></i></a>
                     {% elif user.profile.role == 'staff' %}
-                    <a href="{% url 'support:department_dashboard' %}" class="pill-link" title="Dashboard"><i
+                    <a href="{% url 'support:department_dashboard' %}" class="pill-link" title="{% trans 'Dashboard' %}"><i
                             class="fas fa-tachometer-alt"></i></a>
                     {% endif %}
                     <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">
@@ -37,15 +38,15 @@
             </div>
             {% else %}
             <div class="guest-pill shadow-lg">
-                <a href="{% url 'accounts:login' %}" class="pill-btn primary">Giriş Yap</a>
-                <a href="{% url 'accounts:signup' %}" class="pill-btn secondary">Kayıt Ol</a>
+                <a href="{% url 'accounts:login' %}" class="pill-btn primary">{% trans "Giriş Yap" %}</a>
+                <a href="{% url 'accounts:signup' %}" class="pill-btn secondary">{% trans "Kayıt Ol" %}</a>
             </div>
             {% endif %}
         </div>
 
         <div class="hero-text-content text-center animate-slide-up">
-            <h1 class="main-title" style="color:#f8fafc">Destek Merkezi</h1>
-            <p class="main-subtitle">Sizin için buradayız. Üniversite hayatınızla ilgili her konuda hızlıca çözüm bulun.
+            <h1 class="main-title" style="color:#f8fafc">{% trans "Destek Merkezi" %}</h1>
+            <p class="main-subtitle">{% trans "Sizin için buradayız. Üniversite hayatınızla ilgili her konuda hızlıca çözüm bulun." %}
             </p>
             <p style="margin-bottom: 250px;"></p>
         </div>
@@ -61,9 +62,9 @@
                 <div class="premium-search-input">
                     <i class="fas fa-search search-icon-left"></i>
                     <input type="text" id="live-search-input" name="q" value="{{ query }}"
-                        placeholder="Kayıt, harç, yurt, sınavlar gibi konularda arama yapın..." autocomplete="off">
+                        placeholder="{% trans 'Kayıt, harç, yurt, sınavlar gibi konularda arama yapın...' %}" autocomplete="off">
                     <button type="submit" class="search-submit-btn">
-                        <span>Ara</span>
+                        <span>{% trans "Ara" %}</span>
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -73,7 +74,7 @@
                     <div id="live-results-list"></div>
                     <div id="live-results-footer" class="text-center p-3 border-t">
                         <a href="#" id="view-all-results" class="view-all-link">
-                            Tüm sonuçları gör <i class="fas fa-chevron-right ms-1"></i>
+                            {% trans "Tüm sonuçları gör" %} <i class="fas fa-chevron-right ms-1"></i>
                         </a>
                     </div>
                 </div>
@@ -82,9 +83,9 @@
     </div>
     <!-- Quick Access Chips -->
     <div class="quick-access-chips mt-4 animate-fade-in" style="margin-bottom: 33px;">
-        <a href="{% url 'support:create_ticket' %}" class="chip-item"><i class="fas fa-plus"></i> Yeni Talep</a>
-        <a href="{% url 'support:faq_list' %}" class="chip-item"><i class="fas fa-question-circle"></i> SSS</a>
-        <a href="{% url 'support:my_tickets' %}" class="chip-item"><i class="fas fa-history"></i> Taleplerim</a>
+        <a href="{% url 'support:create_ticket' %}" class="chip-item"><i class="fas fa-plus"></i> {% trans "Yeni Talep" %}</a>
+        <a href="{% url 'support:faq_list' %}" class="chip-item"><i class="fas fa-question-circle"></i> {% trans "SSS" %}</a>
+        <a href="{% url 'support:my_tickets' %}" class="chip-item"><i class="fas fa-history"></i> {% trans "Taleplerim" %}</a>
     </div>
 </div>
 
@@ -99,9 +100,9 @@
                 <p>{{ total_results }} eşleşme bulundu</p>
             </div>
             <div class="filter-group-premium">
-                <button class="filter-btn active" data-filter="all">Tümü</button>
-                <button class="filter-btn" data-filter="faq">SSS</button>
-                <button class="filter-btn" data-filter="guide">Rehber</button>
+                <button class="filter-btn active" data-filter="all">{% trans "Tümü" %}</button>
+                <button class="filter-btn" data-filter="faq">{% trans "SSS" %}</button>
+                <button class="filter-btn" data-filter="guide">{% trans "Rehber" %}</button>
             </div>
         </div>
 
@@ -127,7 +128,7 @@
                     <h3 class="card-title"><a href="{{ item.url }}">{{ item.title }}</a></h3>
                     <p class="card-excerpt">{{ item.content|striptags|truncatechars:180 }}</p>
                     <div class="card-footer-area">
-                        <a href="{{ item.url }}" class="learn-more-btn">Devamını Oku <i
+                        <a href="{{ item.url }}" class="learn-more-btn">{% trans "Devamını Oku" %} <i
                                 class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -156,20 +157,20 @@
             <div class="empty-icon-wrapper shadow-lg">
                 <i class="fas fa-search-minus"></i>
             </div>
-            <h3>Aradığınızı bulamadık</h3>
-            <p>Farklı bir terim deneyebilir veya uzman ekibimizden doğrudan yardım isteyebilirsiniz.</p>
+            <h3>{% trans "Aradığınızı bulamadık" %}</h3>
+            <p>{% trans "Farklı bir terim deneyebilir veya uzman ekibimizden doğrudan yardım isteyebilirsiniz." %}</p>
             <div class="empty-actions mt-4">
                 <a href="{% url 'support:create_ticket' %}" class="btn-primary-premium">
-                    <i class="fas fa-paper-plane me-2"></i> Destek Talebi Oluştur
+                    <i class="fas fa-paper-plane me-2"></i> {% trans "Destek Talebi Oluştur" %}
                 </a>
             </div>
             <div class="suggested-tags mt-5">
-                <span>Popüler aramalar:</span>
+                <span>{% trans "Popüler aramalar:" %}</span>
                 <div class="tag-cloud">
-                    <a href="?q=kayıt">Kayıt</a>
-                    <a href="?q=harç">Harç</a>
-                    <a href="?q=yurt">Konaklama</a>
-                    <a href="?q=burs">Burs</a>
+                    <a href="?q=kayıt">{% trans "Kayıt" %}</a>
+                    <a href="?q=harç">{% trans "Harç" %}</a>
+                    <a href="?q=yurt">{% trans "Konaklama" %}</a>
+                    <a href="?q=burs">{% trans "Burs" %}</a>
                 </div>
             </div>
         </div>
@@ -178,7 +179,7 @@
     {% else %}
     <!-- Landing View -->
      <div class="landing-layout">
-        <h2 class="section-title-premium text-center mb-5">Popüler Konular</h2>
+        <h2 class="section-title-premium text-center mb-5">{% trans "Popüler Konular" %}</h2>
         <div class="popular-topics-grid animate-slide-up">
             {% for topic in popular_topics %}
             <a href="?q={{ topic.name }}" class="topic-box-premium">
@@ -196,21 +197,21 @@
         <div class="feature-cards-grid mt-5 pt-5 animate-slide-up">
             <div class="feature-card-premium">
                 <div class="f-icon"><i class="fas fa-graduation-cap"></i></div>
-                <h3>Akademik Takvim</h3>
-                <p>Dönem başlangıçları, vize ve final tarihlerini takip edin.</p>
-                <a href="?q=takvim" class="f-link">İncele</a>
+                <h3>{% trans "Akademik Takvim" %}</h3>
+                <p>{% trans "Dönem başlangıçları, vize ve final tarihlerini takip edin." %}</p>
+                <a href="?q=takvim" class="f-link">{% trans "İncele" %}</a>
             </div>
             <div class="feature-card-premium">
                 <div class="f-icon"><i class="fas fa-university"></i></div>
-                <h3>Kampüs Yaşamı</h3>
-                <p>Sosyal tesisler, kütüphane ve yemekhane saatleri.</p>
-                <a href="?q=kampüs" class="f-link">İncele</a>
+                <h3>{% trans "Kampüs Yaşamı" %}</h3>
+                <p>{% trans "Sosyal tesisler, kütüphane ve yemekhane saatleri." %}</p>
+                <a href="?q=kampüs" class="f-link">{% trans "İncele" %}</a>
             </div>
             <div class="feature-card-premium">
                 <div class="f-icon"><i class="fas fa-wallet"></i></div>
-                <h3>Finansal Bilgiler</h3>
-                <p>Ödeme yöntemleri, burs ve harç detayları.</p>
-                <a href="?q=ücret" class="f-link">İncele</a>
+                <h3>{% trans "Finansal Bilgiler" %}</h3>
+                <p>{% trans "Ödeme yöntemleri, burs ve harç detayları." %}</p>
+                <a href="?q=ücret" class="f-link">{% trans "İncele" %}</a>
             </div>
         </div>
     </div> 
@@ -223,19 +224,19 @@
             <div class="wa-left">
                 <div class="wa-avatar-group">
                     <div class="wa-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-                            alt="Support"></div>
+                            alt="{% trans 'Support' %}"></div>
                     <div class="wa-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka"
-                            alt="Support"></div>
+                            alt="{% trans 'Support' %}"></div>
                     <div class="wa-badge"><i class="fab fa-whatsapp"></i></div>
                 </div>
                 <div class="wa-text-info">
-                    <h4>WhatsApp Canlı Destek</h4>
-                    <p>Sorularınızı anında yanıtlamak için ekiplerimiz hazır.</p>
+                    <h4>{% trans "WhatsApp Canlı Destek" %}</h4>
+                    <p>{% trans "Sorularınızı anında yanıtlamak için ekiplerimiz hazır." %}</p>
                 </div>
             </div>
             <div class="wa-right">
                 <a href="https://wa.me/905353334555" target="_blank" class="wa-action-btn">
-                    <span>Hemen Bağlan</span>
+                    <span>{% trans "Hemen Bağlan" %}</span>
                     <i class="fas fa-external-link-alt"></i>
                 </a>
             </div>

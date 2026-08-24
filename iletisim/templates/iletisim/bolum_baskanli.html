@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - İletişim Fakültesi Bölüm Başkanları{% endblock %}
 
@@ -18,19 +19,19 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">Bölüm Başkanları</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "Bölüm Başkanları" %}</h1>
                         <p class="lead mb-4">
                             
                         </p>
                         {% comment %} <div class="d-flex gap-3">
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-book me-1"></i>5 Bölüm
+                                <i class="bi bi-book me-1"></i>{% trans "5 Bölüm" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-mortarboard me-1"></i>Uzman Liderlik
+                                <i class="bi bi-mortarboard me-1"></i>{% trans "Uzman Liderlik" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-award me-1"></i>Akademik Mükemmeliyet
+                                <i class="bi bi-award me-1"></i>{% trans "Akademik Mükemmeliyet" %}
                             </span>
                         </div> {% endcomment %}
                     </div>
@@ -50,17 +51,17 @@
                             <span class="input-group-text bg-primary text-white">
                                 <i class="bi bi-search"></i>
                             </span>
-                            <input type="text" id="searchInput" class="form-control" placeholder="Bölüm başkanı ara...">
+                            <input type="text" id="searchInput" class="form-control" placeholder="{% trans 'Bölüm başkanı ara...' %}">
                         </div>
                     </div>
                     {% comment %} <div class="col-md-6">
                         <select id="departmentFilter" class="form-select">
-                            <option value="">Tüm Bölümler</option>
-                            <option value="ingiliz-dili">İngiliz Dili ve Edebiyatı</option>
-                            <option value="psikoloji">Psikoloji</option>
-                            <option value="turk-dili">Türk Dili ve Edebiyatı</option>
-                            <option value="molekuler-biyoloji">Moleküler Biyoloji ve Genetik</option>
-                            <option value="mtercim-tercumanlik">Mütercim Tercümanlık</option>
+                            <option value="">{% trans "Tüm Bölümler" %}</option>
+                            <option value="ingiliz-dili">{% trans "İngiliz Dili ve Edebiyatı" %}</option>
+                            <option value="psikoloji">{% trans "Psikoloji" %}</option>
+                            <option value="turk-dili">{% trans "Türk Dili ve Edebiyatı" %}</option>
+                            <option value="molekuler-biyoloji">{% trans "Moleküler Biyoloji ve Genetik" %}</option>
+                            <option value="mtercim-tercumanlik">{% trans "Mütercim Tercümanlık" %}</option>
                         </select>
                     </div> {% endcomment %}
                 </div>
@@ -75,7 +76,7 @@
                     <div class="card-header bg-info text-white text-center py-4 position-relative">
                         <div class="department-badge"> </div>
                         <div class="profile-img mx-auto mb-3">
-                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Erdoğan ALTUN" class="profile-photo">
+                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="{% trans 'Dr. Öğr. Üyesi Erdoğan ALTUN' %}" class="profile-photo">
                         </div>
                         <h5 class="card-title mb-1"></h5>
                         <p class="card-subtitle small opacity-75"></p>
@@ -92,11 +93,11 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-geo-alt text-info me-2"></i>
-                                <span>B Blok, Kat: 2, Oda: 205</span>
+                                <span>{% trans "B Blok, Kat: 2, Oda: 205" %}</span>
                             </div>
                         </div>
                         <div class="academic-interests">
-                            <h6 class="text-info mb-2">Akademik İlgi Alanları</h6>
+                            <h6 class="text-info mb-2">{% trans "Akademik İlgi Alanları" %}</h6>
                             <div class="d-flex flex-wrap gap-1">
                                 <span class="badge bg-light text-dark"></span>
                                 <span class="badge bg-light text-dark"></span>
@@ -104,7 +105,7 @@
                             </div>
                         </div>
                         <div class="department-info mt-3">
-                            <h6 class="text-info mb-2">Bölüm Hakkında</h6>
+                            <h6 class="text-info mb-2">{% trans "Bölüm Hakkında" %}</h6>
                             <p class="text-muted small mb-0">
                                 
                             </p>
@@ -114,12 +115,12 @@
                         <div class="row g-2">
                             <div class="col-6">
                                 <a href="" class="btn btn-outline-info btn-sm w-100">
-                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                    <i class="bi bi-person-vcard me-1"></i> {% trans "Özgeçmiş" %}
                                 </a>
                             </div>
                             <div class="col-6">
                                 <a href="#" class="btn btn-info btn-sm w-100">
-                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                    <i class="bi bi-info-circle me-1"></i> {% trans "Bölüm" %}
                                 </a>
                             </div>
                         </div>
@@ -133,7 +134,7 @@
                     <div class="card-header bg-success text-white text-center py-4 position-relative">
                         <div class="department-badge"></div>
                         <div class="profile-img mx-auto mb-3">
-                            <img src="" alt="Dr. Öğr. Üyesi Oğuz Bilge GÜNGÖRDÜ" class="profile-photo">
+                            <img src="" alt="{% trans 'Dr. Öğr. Üyesi Oğuz Bilge GÜNGÖRDÜ' %}" class="profile-photo">
                         </div>
                         <h5 class="card-title mb-1"></h5>
                         <p class="card-subtitle small opacity-75"></p>
@@ -150,11 +151,11 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-geo-alt text-success me-2"></i>
-                                <span>C Blok, Kat: 1, Oda: 112</span>
+                                <span>{% trans "C Blok, Kat: 1, Oda: 112" %}</span>
                             </div>
                         </div>
                         <div class="academic-interests">
-                            <h6 class="text-success mb-2">Akademik İlgi Alanları</h6>
+                            <h6 class="text-success mb-2">{% trans "Akademik İlgi Alanları" %}</h6>
                             <div class="d-flex flex-wrap gap-1">
                                 <span class="badge bg-light text-dark"></span>
                                 <span class="badge bg-light text-dark"></span>
@@ -162,7 +163,7 @@
                             </div>
                         </div>
                         <div class="department-info mt-3">
-                            <h6 class="text-success mb-2">Bölüm Hakkında</h6>
+                            <h6 class="text-success mb-2">{% trans "Bölüm Hakkında" %}</h6>
                             <p class="text-muted small mb-0">
                                
                             </p>
@@ -172,12 +173,12 @@
                         <div class="row g-2">
                             <div class="col-6">
                                 <a href="" class="btn btn-outline-success btn-sm w-100">
-                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                    <i class="bi bi-person-vcard me-1"></i> {% trans "Özgeçmiş" %}
                                 </a>
                             </div>
                             <div class="col-6">
                                 <a href="#" class="btn btn-success btn-sm w-100">
-                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                    <i class="bi bi-info-circle me-1"></i> {% trans "Bölüm" %}
                                 </a>
                             </div>
                         </div>
@@ -191,7 +192,7 @@
                     <div class="card-header bg-warning text-white text-center py-4 position-relative">
                         <div class="department-badge"></div>
                         <div class="profile-img mx-auto mb-3">
-                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi İsmail Hakkı KOFOĞLU" class="profile-photo">
+                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="{% trans 'Dr. Öğr. Üyesi İsmail Hakkı KOFOĞLU' %}" class="profile-photo">
                         </div>
                         <h5 class="card-title mb-1"></h5>
                         <p class="card-subtitle small opacity-75"> </p>
@@ -208,11 +209,11 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-geo-alt text-warning me-2"></i>
-                                <span>D Blok, Kat: 3, Oda: 305</span>
+                                <span>{% trans "D Blok, Kat: 3, Oda: 305" %}</span>
                             </div>
                         </div>
                         <div class="academic-interests">
-                            <h6 class="text-warning mb-2">Akademik İlgi Alanları</h6>
+                            <h6 class="text-warning mb-2">{% trans "Akademik İlgi Alanları" %}</h6>
                             <div class="d-flex flex-wrap gap-1">
                                 <span class="badge bg-light text-dark"></span>
                                 <span class="badge bg-light text-dark"></span>
@@ -220,7 +221,7 @@
                             </div>
                         </div>
                         <div class="department-info mt-3">
-                            <h6 class="text-warning mb-2">Bölüm Hakkında</h6>
+                            <h6 class="text-warning mb-2">{% trans "Bölüm Hakkında" %}</h6>
                             <p class="text-muted small mb-0">
                                 
                             </p>
@@ -230,12 +231,12 @@
                         <div class="row g-2">
                             <div class="col-6">
                                 <a href="https://acikerisim.avrasya.edu.tr/arastirmaci/65c938c6570b7&dil=0" class="btn btn-outline-warning btn-sm w-100">
-                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                    <i class="bi bi-person-vcard me-1"></i> {% trans "Özgeçmiş" %}
                                 </a>
                             </div>
                             <div class="col-6">
                                 <a href="#" class="btn btn-warning btn-sm w-100">
-                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                    <i class="bi bi-info-circle me-1"></i> {% trans "Bölüm" %}
                                 </a>
                             </div>
                         </div>
@@ -247,18 +248,18 @@
             <div class="col-md-6 col-lg-4 mb-4" data-department="molekuler-biyoloji">
                 <div class="card border-0 shadow-sm h-100 department-chair-card">
                     <div class="card-header bg-danger text-white text-center py-4 position-relative">
-                        <div class="department-badge">İşletme Bölüm Başkanı</div>
+                        <div class="department-badge">{% trans "İşletme Bölüm Başkanı" %}</div>
                         <div class="profile-img mx-auto mb-3">
-                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Gizel Busem SAYIL" class="profile-photo">
+                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="{% trans 'Dr. Öğr. Üyesi Gizel Busem SAYIL' %}" class="profile-photo">
                         </div>
-                        <h5 class="card-title mb-1">Dr. Öğr. Üyesi Gizel Busem SAYIL</h5>
-                        <p class="card-subtitle small opacity-75">İşletme Bölüm Başkanı</p>
+                        <h5 class="card-title mb-1">{% trans "Dr. Öğr. Üyesi Gizel Busem SAYIL" %}</h5>
+                        <p class="card-subtitle small opacity-75">{% trans "İşletme Bölüm Başkanı" %}</p>
                     </div>
                     <div class="card-body">
                         <div class="contact-info mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <i class="bi bi-envelope text-danger me-2"></i>
-                                <a href="mailto:deniz.ugur@avrasya.edu.tr" class="text-decoration-none">gizelbusem.sayil@avrasya.edu.tr</a>
+                                <a href="mailto:deniz.ugur@avrasya.edu.tr" class="text-decoration-none">{% trans "gizelbusem.sayil@avrasya.edu.tr" %}</a>
                             </div>
                             <div class="d-flex align-items-center mb-2">
                                 <i class="bi bi-telephone text-danger me-2"></i>
@@ -266,11 +267,11 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-geo-alt text-danger me-2"></i>
-                                <span>Laboratuvar Binası, Kat: 2, Oda: 208</span>
+                                <span>{% trans "Laboratuvar Binası, Kat: 2, Oda: 208" %}</span>
                             </div>
                         </div>
                         <div class="academic-interests">
-                            <h6 class="text-danger mb-2">Akademik İlgi Alanları</h6>
+                            <h6 class="text-danger mb-2">{% trans "Akademik İlgi Alanları" %}</h6>
                             <div class="d-flex flex-wrap gap-1">
                                 <span class="badge bg-light text-dark"></span>
                                 <span class="badge bg-light text-dark"></span>
@@ -278,7 +279,7 @@
                             </div>
                         </div>
                         <div class="department-info mt-3">
-                            <h6 class="text-danger mb-2">Bölüm Hakkında</h6>
+                            <h6 class="text-danger mb-2">{% trans "Bölüm Hakkında" %}</h6>
                             <p class="text-muted small mb-0">
                                
                             </p>
@@ -288,12 +289,12 @@
                         <div class="row g-2">
                             <div class="col-6">
                                 <a href="" class="btn btn-outline-danger btn-sm w-100">
-                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                    <i class="bi bi-person-vcard me-1"></i> {% trans "Özgeçmiş" %}
                                 </a>
                             </div>
                             <div class="col-6">
                                 <a href="#" class="btn btn-danger btn-sm w-100">
-                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                    <i class="bi bi-info-circle me-1"></i> {% trans "Bölüm" %}
                                 </a>
                             </div>
                         </div>
@@ -305,20 +306,20 @@
             <div class="col-md-6 col-lg-4 mb-4" data-department="mtercim-tercumanlik">
                 <div class="card border-0 shadow-sm h-100 department-chair-card">
                     <div class="card-header bg-primary text-white text-center py-4 position-relative">
-                        <div class="department-badge">Uluslararası İlişkiler Bölüm</div>
+                        <div class="department-badge">{% trans "Uluslararası İlişkiler Bölüm" %}</div>
                         <div class="profile-img mx-auto mb-3">
-                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR" class="profile-photo">
+                            <img src="{% static 'iletisim/images/akademik-kadro/bos-a.jpg' %}" alt="{% trans 'Dr. Öğr. Üyesi Emrah YILDIRIMÇAKAR' %}" class="profile-photo">
 
                         </div>
                         <h5 class="card-title mb-1"></h5>
 
-                        <p class="card-subtitle small opacity-75">Uluslararası İlişkiler Bölüm Başkanı</p>
+                        <p class="card-subtitle small opacity-75">{% trans "Uluslararası İlişkiler Bölüm Başkanı" %}</p>
                     </div>
                     <div class="card-body">
                         <div class="contact-info mb-3">
                             <div class="d-flex align-items-center mb-2">
                                 <i class="bi bi-envelope text-primary me-2"></i>
-                                <a href="mailto:sara.solmaz@avrasya.edu.tr" class="text-decoration-none">emrah.yildirimcakar@avrasya.edu.tr</a>
+                                <a href="mailto:sara.solmaz@avrasya.edu.tr" class="text-decoration-none">{% trans "emrah.yildirimcakar@avrasya.edu.tr" %}</a>
                             </div>
                             <div class="d-flex align-items-center mb-2">
                                 <i class="bi bi-telephone text-primary me-2"></i>
@@ -326,11 +327,11 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-geo-alt text-primary me-2"></i>
-                                <span>E Blok, Kat: 1, Oda: 115</span>
+                                <span>{% trans "E Blok, Kat: 1, Oda: 115" %}</span>
                             </div>
                         </div>
                         <div class="academic-interests">
-                            <h6 class="text-primary mb-2">Akademik İlgi Alanları</h6>
+                            <h6 class="text-primary mb-2">{% trans "Akademik İlgi Alanları" %}</h6>
                             <div class="d-flex flex-wrap gap-1">
                                 <span class="badge bg-light text-dark"></span>
                                 <span class="badge bg-light text-dark"></span>
@@ -338,7 +339,7 @@
                             </div>
                         </div>
                         <div class="department-info mt-3">
-                            <h6 class="text-primary mb-2">Bölüm Hakkında</h6>
+                            <h6 class="text-primary mb-2">{% trans "Bölüm Hakkında" %}</h6>
                             <p class="text-muted small mb-0">
                                 
                             </p>
@@ -348,12 +349,12 @@
                         <div class="row g-2">
                             <div class="col-6">
                                 <a href="" class="btn btn-outline-primary btn-sm w-100">
-                                    <i class="bi bi-person-vcard me-1"></i> Özgeçmiş
+                                    <i class="bi bi-person-vcard me-1"></i> {% trans "Özgeçmiş" %}
                                 </a>
                             </div>
                             <div class="col-6">
                                 <a href="#" class="btn btn-primary btn-sm w-100">
-                                    <i class="bi bi-info-circle me-1"></i> Bölüm
+                                    <i class="bi bi-info-circle me-1"></i> {% trans "Bölüm" %}
                                 </a>
                             </div>
                         </div>
@@ -366,50 +367,50 @@
         <div id="noResults" class="card border-0 shadow-sm text-center py-5 d-none">
             <div class="card-body">
                 <i class="bi bi-search display-1 text-muted mb-3"></i>
-                <h4 class="text-muted">Sonuç Bulunamadı</h4>
-                <p class="text-muted">Arama kriterlerinize uygun bölüm başkanı bulunamadı.</p>
+                <h4 class="text-muted">{% trans "Sonuç Bulunamadı" %}</h4>
+                <p class="text-muted">{% trans "Arama kriterlerinize uygun bölüm başkanı bulunamadı." %}</p>
             </div>
         </div>
 
         <!-- Department Statistics -->
         <div class="card border-0 shadow-sm mt-4">
             <div class="card-body">
-                <h4 class="text-primary mb-4"><i class="bi bi-graph-up me-2"></i>Bölümlerimiz Hakkında</h4>
+                <h4 class="text-primary mb-4"><i class="bi bi-graph-up me-2"></i>{% trans "Bölümlerimiz Hakkında" %}</h4>
                 <div class="row text-center">
                     <div class="col-md-2 col-6 mb-3">
                         <div class="stat-item">
                             <div class="stat-number text-primary">5</div>
-                            <div class="stat-label">Bölüm</div>
+                            <div class="stat-label">{% trans "Bölüm" %}</div>
                         </div>
                     </div>
                     <div class="col-md-2 col-6 mb-3">
                         <div class="stat-item">
                             <div class="stat-number text-success">50+</div>
-                            <div class="stat-label">Akademisyen</div>
+                            <div class="stat-label">{% trans "Akademisyen" %}</div>
                         </div>
                     </div>
                     <div class="col-md-2 col-6 mb-3">
                         <div class="stat-item">
                             <div class="stat-number text-warning">1000+</div>
-                            <div class="stat-label">Öğrenci</div>
+                            <div class="stat-label">{% trans "Öğrenci" %}</div>
                         </div>
                     </div>
                     <div class="col-md-2 col-6 mb-3">
                         <div class="stat-item">
                             <div class="stat-number text-info">15+</div>
-                            <div class="stat-label">Laboratuvar</div>
+                            <div class="stat-label">{% trans "Laboratuvar" %}</div>
                         </div>
                     </div>
                     <div class="col-md-2 col-6 mb-3">
                         <div class="stat-item">
                             <div class="stat-number text-danger">10+</div>
-                            <div class="stat-label">Araştırma Projesi</div>
+                            <div class="stat-label">{% trans "Araştırma Projesi" %}</div>
                         </div>
                     </div>
                     <div class="col-md-2 col-6 mb-3">
                         <div class="stat-item">
                             <div class="stat-number text-primary">20+</div>
-                            <div class="stat-label">Uluslararası İşbirliği</div>
+                            <div class="stat-label">{% trans "Uluslararası İşbirliği" %}</div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 <!-- meslekyuksekokullari/templates/meslekyuksekokullari/meslekyuksekokullari.html -->
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Meslek Yüksekokulları{% endblock %}
 
@@ -10,7 +11,7 @@
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-primary text-white">
                 <a href="{% url 'akademik:akademik' %}" class="text-white text-decoration-none">
-                    <h5 class="mb-0"><i class="bi bi-journals me-2"></i>AKADEMİK</h5>
+                    <h5 class="mb-0"><i class="bi bi-journals me-2"></i>{% trans "AKADEMİK" %}</h5>
                 </a>
             </div>
             <div class="card-body p-0">
@@ -19,13 +20,13 @@
                     <div class="list-group-item border-0 p-0">
                         <a href="{% url 'enstituler:enstituler' %}"><button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
                                 data-bs-toggle="collapse" data-bs-target="#enstitulerCollapse">
-                            <span><i class="bi bi-building me-2"></i>Enstitüler</span>
+                            <span><i class="bi bi-building me-2"></i>{% trans "Enstitüler" %}</span>
                             <i class="bi bi-chevron-down"></i>
                         </button></a>
                         <div class="collapse" id="enstitulerCollapse">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-mortarboard me-2"></i>Lisansüstü Eğitim Enstitüsü
+                                    <i class="bi bi-mortarboard me-2"></i>{% trans "Lisansüstü Eğitim Enstitüsü" %}
                                 </a>
                             </div>
                         </div>
@@ -35,28 +36,28 @@
                     <div class="list-group-item border-0 p-0">
                         <a href="{% url 'fakulteler:fakulteler' %}"><button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
                                 data-bs-toggle="collapse" data-bs-target="#enstitulerCollapse">
-                            <span><i class="bi bi-building me-2"></i>Fakülteler</span>
+                            <span><i class="bi bi-building me-2"></i>{% trans "Fakülteler" %}</span>
                             <i class="bi bi-chevron-down"></i>
                         </button></a>
                         <div class="collapse" id="fakultelerCollapse">
                             <div class="list-group list-group-flush">
                                 <a href="{% url 'aday_ogrenci:kontenjanlar' %}" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-gear me-2"></i>Mühendislik Fakültesi
+                                    <i class="bi bi-gear me-2"></i>{% trans "Mühendislik Fakültesi" %}
                                 </a>
                                 <a href="#" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-book me-2"></i>Fen-Edebiyat Fakültesi
+                                    <i class="bi bi-book me-2"></i>{% trans "Fen-Edebiyat Fakültesi" %}
                                 </a>
                                 <a href="#" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-graph-up me-2"></i>İktisadi ve İdari Bilimler Fakültesi
+                                    <i class="bi bi-graph-up me-2"></i>{% trans "İktisadi ve İdari Bilimler Fakültesi" %}
                                 </a>
                                 <a href="#" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-heart-pulse me-2"></i>Sağlık Bilimleri Fakültesi
+                                    <i class="bi bi-heart-pulse me-2"></i>{% trans "Sağlık Bilimleri Fakültesi" %}
                                 </a>
                                 <a href="#" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-person-running me-2"></i>Spor Bilimleri Fakültesi
+                                    <i class="bi bi-person-running me-2"></i>{% trans "Spor Bilimleri Fakültesi" %}
                                 </a>
                                 <a href="#" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-megaphone me-2"></i>İletişim Fakültesi
+                                    <i class="bi bi-megaphone me-2"></i>{% trans "İletişim Fakültesi" %}
                                 </a>
                             </div>
                         </div>
@@ -66,13 +67,13 @@
                     <div class="list-group-item border-0 p-0">
                         <a href="{% url 'yuksekokullari:yuksekokullari' %}"><button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
                                 data-bs-toggle="collapse" data-bs-target="#enstitulerCollapse">
-                            <span><i class="bi bi-building me-2"></i>Yüksekokullar</span>
+                            <span><i class="bi bi-building me-2"></i>{% trans "Yüksekokullar" %}</span>
                             <i class="bi bi-chevron-down"></i>
                         </button></a>
                         <div class="collapse" id="yuksekokullarCollapse">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-laptop me-2"></i>Uygulamalı Bilimler Yüksekokulu
+                                    <i class="bi bi-laptop me-2"></i>{% trans "Uygulamalı Bilimler Yüksekokulu" %}
                                 </a>
                             </div>
                         </div>
@@ -82,16 +83,16 @@
                     <div class="list-group-item border-0 p-0">
                         <a href="{% url 'meslekyuksekokullari:meslekyuksekokullari' %}"><button class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center collapsed" 
                                 data-bs-toggle="collapse" data-bs-target="#enstitulerCollapse">
-                            <span><i class="bi bi-building me-2"></i>Meslek Yüksekokullar</span>
+                            <span><i class="bi bi-building me-2"></i>{% trans "Meslek Yüksekokullar" %}</span>
                             <i class="bi bi-chevron-down"></i>
                         </button></a>
                         <div class="collapse show" id="meslekYuksekokullarCollapse">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action border-0 small active">
-                                    <i class="bi bi-tools me-2"></i>Meslek Yüksekokulu
+                                    <i class="bi bi-tools me-2"></i>{% trans "Meslek Yüksekokulu" %}
                                 </a>
                                 <a href="#" class="list-group-item list-group-item-action border-0 small">
-                                    <i class="bi bi-heart-pulse me-2"></i>Sağlık Hizmetleri Meslek Yüksekokulu
+                                    <i class="bi bi-heart-pulse me-2"></i>{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}
                                 </a>
                             </div>
                         </div>
@@ -99,57 +100,57 @@
 
                     <!-- Other Menu Items with Icons -->
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-journal-text me-2"></i>Lisans Programları</span>
+                        <span><i class="bi bi-journal-text me-2"></i>{% trans "Lisans Programları" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-mortarboard me-2"></i>Lisansüstü Programları</span>
+                        <span><i class="bi bi-mortarboard me-2"></i>{% trans "Lisansüstü Programları" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-journals me-2"></i>Çift Ana Dal Programları</span>
+                        <span><i class="bi bi-journals me-2"></i>{% trans "Çift Ana Dal Programları" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-file-text me-2"></i>Öğrenci Yönetmelik ve Yönergeler</span>
+                        <span><i class="bi bi-file-text me-2"></i>{% trans "Öğrenci Yönetmelik ve Yönergeler" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-translate me-2"></i>İngilizce Hazırlık Okulu</span>
+                        <span><i class="bi bi-translate me-2"></i>{% trans "İngilizce Hazırlık Okulu" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-award me-2"></i>Sertifika Programları</span>
+                        <span><i class="bi bi-award me-2"></i>{% trans "Sertifika Programları" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-sun me-2"></i>Yaz Okulu</span>
+                        <span><i class="bi bi-sun me-2"></i>{% trans "Yaz Okulu" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-globe me-2"></i>Uluslararası İlişkiler</span>
+                        <span><i class="bi bi-globe me-2"></i>{% trans "Uluslararası İlişkiler" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-arrow-repeat me-2"></i>Sürekli Eğitim</span>
+                        <span><i class="bi bi-arrow-repeat me-2"></i>{% trans "Sürekli Eğitim" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-clipboard-data me-2"></i>Öğretim Programı</span>
+                        <span><i class="bi bi-clipboard-data me-2"></i>{% trans "Öğretim Programı" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
 
                     <a href="#" class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-calendar-event me-2"></i>Akademik Takvim</span>
+                        <span><i class="bi bi-calendar-event me-2"></i>{% trans "Akademik Takvim" %}</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
@@ -164,20 +165,19 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">MESLEK YÜKSEKOKULLARI</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "MESLEK YÜKSEKOKULLARI" %}</h1>
                         <p class="lead mb-4">
-                            Meslek Yüksekokullarımız, sektör ihtiyaçlarına yönelik pratik ve teorik 
-                            eğitimi birleştiren ön lisans programları sunarak nitelikli teknik elemanlar yetiştirmektedir.
+                            {% trans "Meslek Yüksekokullarımız, sektör ihtiyaçlarına yönelik pratik ve teorik eğitimi birleştiren ön lisans programları sunarak nitelikli teknik elemanlar yetiştirmektedir." %}
                         </p>
                         <div class="d-flex gap-3">
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-building me-1"></i>2 Meslek Yüksekokulu
+                                <i class="bi bi-building me-1"></i>{% trans "2 Meslek Yüksekokulu" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-book me-1"></i>20+ Program
+                                <i class="bi bi-book me-1"></i>{% trans "20+ Program" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-person me-1"></i>80+ Akademisyen
+                                <i class="bi bi-person me-1"></i>{% trans "80+ Akademisyen" %}
                             </span>
                         </div>
                     </div>
@@ -192,7 +192,7 @@
         <div class="row mb-5">
             <div class="col-12">
                 <h3 class="text-primary mb-4 border-bottom pb-2">
-                    <i class="bi bi-building me-2"></i>Meslek Yüksekokullarımız
+                    <i class="bi bi-building me-2"></i>{% trans "Meslek Yüksekokullarımız" %}
                 </h3>
             </div>
             
@@ -203,29 +203,28 @@
                         <div class="icon-wrapper bg-primary mb-3">
                             <i class="bi bi-tools text-white"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Meslek Yüksekokulu</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Meslek Yüksekokulu" %}</h5>
                         <p class="card-text text-muted small mb-3">
-                            Teknik ve endüstriyel alanlarda uzmanlaşmış ön lisans programları ile 
-                            sektörün ihtiyaç duyduğu nitelikli teknik elemanlar yetiştiriyoruz.
+                            {% trans "Teknik ve endüstriyel alanlarda uzmanlaşmış ön lisans programları ile sektörün ihtiyaç duyduğu nitelikli teknik elemanlar yetiştiriyoruz." %}
                         </p>
                         <div class="stats small text-muted mb-3">
                             <div class="row text-center">
                                 <div class="col-6">
-                                    <strong>12</strong><br>Program
+                                    <strong>12</strong><br>{% trans "Program" %}
                                 </div>
                                 <div class="col-6">
-                                    <strong>45+</strong><br>Akademisyen
+                                    <strong>45+</strong><br>{% trans "Akademisyen" %}
                                 </div>
                             </div>
                         </div>
                         <div class="programs-list small text-muted mb-3">
-                            <strong>Öne Çıkan Programlar:</strong>
-                            <div>• Web Tasarımı ve Kodlama</div>
-                            <div>• Sivil Havacılık</div>
-                            <div>• Moda Tasarımı</div>
-                            <div>• Ergoterapi</div>
+                            <strong>{% trans "Öne Çıkan Programlar:" %}</strong>
+                            <div>{% trans "• Web Tasarımı ve Kodlama" %}</div>
+                            <div>{% trans "• Sivil Havacılık" %}</div>
+                            <div>{% trans "• Moda Tasarımı" %}</div>
+                            <div>{% trans "• Ergoterapi" %}</div>
                         </div>
-                        <a href="{% url 'meslek_yuksekokulu:meslek_yuksekokulu' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                        <a href="{% url 'meslek_yuksekokulu:meslek_yuksekokulu' %}" class="btn btn-outline-primary btn-sm">{% trans "Detaylı Bilgi" %}</a>
                     </div>
                 </div>
             </div>
@@ -237,29 +236,28 @@
                         <div class="icon-wrapper bg-success mb-3">
                             <i class="bi bi-heart-pulse text-white"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Sağlık Hizmetleri Meslek Yüksekokulu</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}</h5>
                         <p class="card-text text-muted small mb-3">
-                            Sağlık sektörünün ihtiyaç duyduğu yardımcı sağlık personelini 
-                            modern eğitim metotları ile yetiştiriyoruz.
+                            {% trans "Sağlık sektörünün ihtiyaç duyduğu yardımcı sağlık personelini modern eğitim metotları ile yetiştiriyoruz." %}
                         </p>
                         <div class="stats small text-muted mb-3">
                             <div class="row text-center">
                                 <div class="col-6">
-                                    <strong>8</strong><br>Program
+                                    <strong>8</strong><br>{% trans "Program" %}
                                 </div>
                                 <div class="col-6">
-                                    <strong>35+</strong><br>Akademisyen
+                                    <strong>35+</strong><br>{% trans "Akademisyen" %}
                                 </div>
                             </div>
                         </div>
                         <div class="programs-list small text-muted mb-3">
-                            <strong>Öne Çıkan Programlar:</strong>
-                            <div>• Fizyoterapi</div>
-                            <div>• Ağız ve Diş Sağlığı</div>
-                            <div>• Elektronorofizyoloji</div>
-                            <div>• Odyometri</div>
+                            <strong>{% trans "Öne Çıkan Programlar:" %}</strong>
+                            <div>{% trans "• Fizyoterapi" %}</div>
+                            <div>{% trans "• Ağız ve Diş Sağlığı" %}</div>
+                            <div>{% trans "• Elektronorofizyoloji" %}</div>
+                            <div>{% trans "• Odyometri" %}</div>
                         </div>
-                        <a href="{% url 'saglik_hizmetleri_myo:saglik_hizmetleri_myo' %}" class="btn btn-outline-primary btn-sm">Detaylı Bilgi</a>
+                        <a href="{% url 'saglik_hizmetleri_myo:saglik_hizmetleri_myo' %}" class="btn btn-outline-primary btn-sm">{% trans "Detaylı Bilgi" %}</a>
                     </div>
                 </div>
             </div>
@@ -269,7 +267,7 @@
         <div class="row mb-5">
             <div class="col-12">
                 <h3 class="text-primary mb-4 border-bottom pb-2">
-                    <i class="bi bi-list-check me-2"></i>Program Alanları
+                    <i class="bi bi-list-check me-2"></i>{% trans "Program Alanları" %}
                 </h3>
             </div>
             
@@ -280,21 +278,21 @@
                         <div class="icon-wrapper bg-warning mb-3">
                             <i class="bi bi-gear text-white"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Teknik Programlar</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Teknik Programlar" %}</h5>
                         <p class="card-text text-muted small mb-3">
-                            Mühendislik ve teknik alanlarda uzmanlaşmış pratik eğitim programları
+                            {% trans "Mühendislik ve teknik alanlarda uzmanlaşmış pratik eğitim programları" %}
                         </p>
                         <div class="stats small text-muted mb-3">
                             <div class="row text-center">
                                 <div class="col-6">
-                                    <strong>2</strong><br>Yıl
+                                    <strong>2</strong><br>{% trans "Yıl" %}
                                 </div>
                                 <div class="col-6">
-                                    <strong>120</strong><br>AKTS
+                                    <strong>120</strong><br>{% trans "AKTS" %}
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-outline-primary btn-sm">Programları Gör</a>
+                        <a href="#" class="btn btn-outline-primary btn-sm">{% trans "Programları Gör" %}</a>
                     </div>
                 </div>
             </div>
@@ -306,21 +304,21 @@
                         <div class="icon-wrapper bg-info mb-3">
                             <i class="bi bi-heart-pulse text-white"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Sağlık Programları</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Sağlık Programları" %}</h5>
                         <p class="card-text text-muted small mb-3">
-                            Sağlık sektörüne yönelik uygulamalı eğitim ve staj imkanları
+                            {% trans "Sağlık sektörüne yönelik uygulamalı eğitim ve staj imkanları" %}
                         </p>
                         <div class="stats small text-muted mb-3">
                             <div class="row text-center">
                                 <div class="col-6">
-                                    <strong>2</strong><br>Yıl
+                                    <strong>2</strong><br>{% trans "Yıl" %}
                                 </div>
                                 <div class="col-6">
-                                    <strong>120</strong><br>AKTS
+                                    <strong>120</strong><br>{% trans "AKTS" %}
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-outline-primary btn-sm">Programları Gör</a>
+                        <a href="#" class="btn btn-outline-primary btn-sm">{% trans "Programları Gör" %}</a>
                     </div>
                 </div>
             </div>
@@ -332,21 +330,21 @@
                         <div class="icon-wrapper bg-secondary mb-3">
                             <i class="bi bi-briefcase text-white"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">İşletme Programları</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "İşletme Programları" %}</h5>
                         <p class="card-text text-muted small mb-3">
-                            İş dünyasının ihtiyaçlarına yönelik pratik işletme eğitimi
+                            {% trans "İş dünyasının ihtiyaçlarına yönelik pratik işletme eğitimi" %}
                         </p>
                         <div class="stats small text-muted mb-3">
                             <div class="row text-center">
                                 <div class="col-6">
-                                    <strong>2</strong><br>Yıl
+                                    <strong>2</strong><br>{% trans "Yıl" %}
                                 </div>
                                 <div class="col-6">
-                                    <strong>120</strong><br>AKTS
+                                    <strong>120</strong><br>{% trans "AKTS" %}
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-outline-primary btn-sm">Programları Gör</a>
+                        <a href="#" class="btn btn-outline-primary btn-sm">{% trans "Programları Gör" %}</a>
                     </div>
                 </div>
             </div>
@@ -361,25 +359,25 @@
                             <div class="col-md-3 mb-3">
                                 <div class="stat-item">
                                     <h3 class="text-primary fw-bold mb-1">2</h3>
-                                    <p class="text-muted mb-0">Meslek Yüksekokulu</p>
+                                    <p class="text-muted mb-0">{% trans "Meslek Yüksekokulu" %}</p>
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <div class="stat-item">
                                     <h3 class="text-primary fw-bold mb-1">20+</h3>
-                                    <p class="text-muted mb-0">Ön Lisans Programı</p>
+                                    <p class="text-muted mb-0">{% trans "Ön Lisans Programı" %}</p>
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <div class="stat-item">
                                     <h3 class="text-primary fw-bold mb-1">80+</h3>
-                                    <p class="text-muted mb-0">Akademik Personel</p>
+                                    <p class="text-muted mb-0">{% trans "Akademik Personel" %}</p>
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <div class="stat-item">
                                     <h3 class="text-primary fw-bold mb-1">2000+</h3>
-                                    <p class="text-muted mb-0">Öğrenci</p>
+                                    <p class="text-muted mb-0">{% trans "Öğrenci" %}</p>
                                 </div>
                             </div>
                         </div>

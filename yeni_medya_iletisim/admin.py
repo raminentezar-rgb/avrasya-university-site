@@ -1,12 +1,13 @@
 # app_name: yeni_medya_iletisim/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     YeniMedyaIletisimDuyuru, YeniMedyaIletisimFaaliyetGrubu, YeniMedyaIletisimFaaliyet, YeniMedya_Etkinlik, YeniMedyaIletisimFaaliyetGorseli, YeniMedyaDersProgrami
 )
 
 @admin.register(YeniMedya_Etkinlik)
-class YeniMedya_EtkinlikAdmin(admin.ModelAdmin):
+class YeniMedya_EtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class YeniMedyaIletisimDuyuruAdmin(admin.ModelAdmin):
         return YeniMedyaIletisimDuyuru.objects.all()
 
 @admin.register(YeniMedyaDersProgrami)
-class YeniMedyaDersProgramiAdmin(admin.ModelAdmin):
+class YeniMedyaDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class YeniMedyaIletisimFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(YeniMedyaIletisimFaaliyetGrubu)
-class YeniMedyaIletisimFaaliyetGrubuAdmin(admin.ModelAdmin):
+class YeniMedyaIletisimFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(YeniMedyaIletisimFaaliyet)
-class YeniMedyaIletisimFaaliyetAdmin(admin.ModelAdmin):
+class YeniMedyaIletisimFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

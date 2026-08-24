@@ -1,4 +1,5 @@
 {% extends 'yatay_gecis/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Yatay Geçişte İstenilen Belgeler{% endblock %}
 
@@ -8,8 +9,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Yatay Geçişte İstenilen Belgeler</h1>
-            <p>Avrasya Üniversitesi'ne yatay geçiş yapmak için gerekli tüm belgeleri aşağıda bulabilirsiniz. Lütfen başvuru türünüze göre gerekli belgeleri hazırlayınız.</p>
+            <h1>{% trans "Yatay Geçişte İstenilen Belgeler" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi'ne yatay geçiş yapmak için gerekli tüm belgeleri aşağıda bulabilirsiniz. Lütfen başvuru türünüze göre gerekli belgeleri hazırlayınız." %}</p>
         </div>
     </div>
 </section>
@@ -28,8 +29,8 @@
             <div class="content-wrapper">
                 <!-- مقدمه -->
                 <div class="page-intro">
-                    <h2 class="section-title">Yatay Geçiş Belgeleri</h2>
-                    <p class="section-subtitle">Yatay geçiş başvurularınız için gerekli belgeleri başvuru türünüze göre aşağıda bulabilirsiniz. Belgelerin eksiksiz ve doğru şekilde hazırlanması başvuru sürecinizin hızlanması için önemlidir.</p>
+                    <h2 class="section-title">{% trans "Yatay Geçiş Belgeleri" %}</h2>
+                    <p class="section-subtitle">{% trans "Yatay geçiş başvurularınız için gerekli belgeleri başvuru türünüze göre aşağıda bulabilirsiniz. Belgelerin eksiksiz ve doğru şekilde hazırlanması başvuru sürecinizin hızlanması için önemlidir." %}</p>
                 </div>
 
                 <!-- بخش‌های اصلی -->
@@ -40,47 +41,47 @@
                             <div class="belge-icon">
                                 <i class="far fa-file-alt"></i>
                             </div>
-                            <h3>ORTALAMAYA GÖRE YAPILAN BAŞVURULARDA İSTENİLEN BELGELER</h3>
+                            <h3>{% trans "ORTALAMAYA GÖRE YAPILAN BAŞVURULARDA İSTENİLEN BELGELER" %}</h3>
                         </div>
                         
                         <!-- Yurtiçi Başvurular -->
                         <div class="belge-subsection">
-                            <h4><i class="fas fa-map-marker-alt me-2"></i>YURTİÇİNDEN Yapılacak Başvurularda</h4>
+                            <h4><i class="fas fa-map-marker-alt me-2"></i>{% trans "YURTİÇİNDEN Yapılacak Başvurularda" %}</h4>
                             <div class="belge-list-container">
                                 <ul class="belge-list">
-                                    <li><i class="fas fa-check-circle"></i> Yatay Geçiş Başvuru Formu</li>
-                                    <li><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Başvuru Dosyası Kapak Formu</li>
-                                    <li><i class="fas fa-check-circle"></i> Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi</li>
-                                    <li><i class="fas fa-check-circle"></i> Lise-Önlisans diplomasının aslı onaylı örneği</li>
-                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri</li>
-                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi</li>
-                                    <li><i class="fas fa-check-circle"></i> Öğrenci Belgesi (Aslı Onaylı)</li>
-                                    <li><i class="fas fa-check-circle"></i> "Yatay geçiş yapmasında sakınca yoktur" şeklinde Üniversiteden alınan onaylı yazı</li>
-                                    <li><i class="fas fa-check-circle"></i> Disiplin Cezası almadığına dair belge</li>
-                                    <li><i class="fas fa-check-circle"></i> Nüfus Cüzdanı Fotokopisi</li>
-                                    <li><i class="fas fa-check-circle"></i> 2 adet fotoğraf</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Yatay Geçiş Başvuru Formu" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Avrasya Üniversitesi Başvuru Dosyası Kapak Formu" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Lise-Önlisans diplomasının aslı onaylı örneği" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Öğrenci Belgesi (Aslı Onaylı)" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "\"Yatay geçiş yapmasında sakınca yoktur\" şeklinde Üniversiteden alınan onaylı yazı" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Disiplin Cezası almadığına dair belge" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Nüfus Cüzdanı Fotokopisi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "2 adet fotoğraf" %}</li>
                                 </ul>
                             </div>
                         </div>
                         
                         <!-- Yurtdışı Başvurular -->
                         <div class="belge-subsection">
-                            <h4><i class="fas fa-globe-americas me-2"></i>YURTDIŞINDAN Yapılacak Başvurularda</h4>
+                            <h4><i class="fas fa-globe-americas me-2"></i>{% trans "YURTDIŞINDAN Yapılacak Başvurularda" %}</h4>
                             <div class="belge-list-container">
                                 <ul class="belge-list">
-                                    <li><i class="fas fa-check-circle"></i> Yatay Geçiş Başvuru Formu</li>
-                                    <li><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Başvuru Dosyası Kapak Formu</li>
-                                    <li><i class="fas fa-check-circle"></i> Öğrencinin ÖSYM sınavına girdiği yıla ait ÖSS sonuç belgesinin fotokopisi veya Son 3 aylık tarihi içeren Yükseköğretim Kurulu Başkanlığından alınan denklik belgesi.</li>
-                                    <li><i class="fas fa-check-circle"></i> Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi</li>
-                                    <li><i class="fas fa-check-circle"></i> Lise diplomasının aslı onaylı örneği</li>
-                                    <li><i class="fas fa-check-circle"></i> Yurtdışı liselerden mezun olan adayların Milli Eğitim Bakanlığı Talim Terbiye Kurulu Başkanlığından alacakları denklik belgesi.</li>
-                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri</li>
-                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi</li>
-                                    <li><i class="fas fa-check-circle"></i> Öğrenci Belgesi (Aslı Onaylı)</li>
-                                    <li><i class="fas fa-check-circle"></i> "Yatay geçiş yapmasında sakınca yoktur" şeklinde Üniversiteden alınan onaylı yazı</li>
-                                    <li><i class="fas fa-check-circle"></i> Disiplin Cezası almadığına dair belge</li>
-                                    <li><i class="fas fa-check-circle"></i> Nüfus Cüzdanı Fotokopisi</li>
-                                    <li><i class="fas fa-check-circle"></i> 2 adet fotoğraf</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Yatay Geçiş Başvuru Formu" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Avrasya Üniversitesi Başvuru Dosyası Kapak Formu" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Öğrencinin ÖSYM sınavına girdiği yıla ait ÖSS sonuç belgesinin fotokopisi veya Son 3 aylık tarihi içeren Yükseköğretim Kurulu Başkanlığından alınan denklik belgesi." %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Lise diplomasının aslı onaylı örneği" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Yurtdışı liselerden mezun olan adayların Milli Eğitim Bakanlığı Talim Terbiye Kurulu Başkanlığından alacakları denklik belgesi." %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Öğrenci Belgesi (Aslı Onaylı)" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "\"Yatay geçiş yapmasında sakınca yoktur\" şeklinde Üniversiteden alınan onaylı yazı" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Disiplin Cezası almadığına dair belge" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Nüfus Cüzdanı Fotokopisi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "2 adet fotoğraf" %}</li>
                                 </ul>
                             </div>
                         </div>
@@ -92,26 +93,26 @@
                             <div class="belge-icon">
                                 <i class="far fa-file-alt"></i>
                             </div>
-                            <h3>EK MADDE 1'E GÖRE YAPILAN BAŞVURULARDA İSTENİLEN BELGELER</h3>
+                            <h3>{% trans "EK MADDE 1'E GÖRE YAPILAN BAŞVURULARDA İSTENİLEN BELGELER" %}</h3>
                         </div>
                         
                         <!-- Yurtiçi Başvurular -->
                         <div class="belge-subsection">
-                            <h4><i class="fas fa-map-marker-alt me-2"></i>YURTİÇİNDEN Yapılacak Başvurularda</h4>
+                            <h4><i class="fas fa-map-marker-alt me-2"></i>{% trans "YURTİÇİNDEN Yapılacak Başvurularda" %}</h4>
                             <div class="belge-list-container">
                                 <ul class="belge-list">
-                                    <li><i class="fas fa-check-circle"></i> Yatay Geçiş Başvuru Formu</li>
-                                    <li><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Başvuru Dosyası Kapak Formu</li>
-                                    <li><i class="fas fa-check-circle"></i> Ek Madde – 1 ile geçiş yapıp yapmadığını gösteren belge.</li>
-                                    <li><i class="fas fa-check-circle"></i> "Yatay geçiş yapmasında sakınca yoktur" şeklinde Üniversiteden alınan onaylı yazı</li>
-                                    <li><i class="fas fa-check-circle"></i> Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi</li>
-                                    <li><i class="fas fa-check-circle"></i> Lise diplomasının aslı onaylı örneği</li>
-                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri</li>
-                                    <li><i class="fas fa-check-circle"></i> Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi</li>
-                                    <li><i class="fas fa-check-circle"></i> Öğrenci Belgesi (Aslı Onaylı)</li>
-                                    <li><i class="fas fa-check-circle"></i> Disiplin Cezası almadığına dair belge</li>
-                                    <li><i class="fas fa-check-circle"></i> Nüfus Cüzdanı Fotokopisi</li>
-                                    <li><i class="fas fa-check-circle"></i> 2 adet fotoğraf</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Yatay Geçiş Başvuru Formu" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Avrasya Üniversitesi Başvuru Dosyası Kapak Formu" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Ek Madde – 1 ile geçiş yapıp yapmadığını gösteren belge." %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "\"Yatay geçiş yapmasında sakınca yoktur\" şeklinde Üniversiteden alınan onaylı yazı" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Lise diplomasının aslı onaylı örneği" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda öğrenimi boyunca alacağı bütün dersleri gösterir öğretim planı/müfredatı ve onaylı ders içerikleri" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Başvuran öğrencinin ayrılacağı yükseköğretim kurumunda izlediği bütün dersleri ve bu derslerden aldığı notları gösteren resmi Transkript aslı veya resmi onaylı fotokopisi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Öğrenci Belgesi (Aslı Onaylı)" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Disiplin Cezası almadığına dair belge" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "Nüfus Cüzdanı Fotokopisi" %}</li>
+                                    <li><i class="fas fa-check-circle"></i> {% trans "2 adet fotoğraf" %}</li>
                                 </ul>
                             </div>
                         </div>
@@ -120,17 +121,17 @@
                         <div class="belge-address-section">
                             <div class="address-header">
                                 <i class="fas fa-map-marked-alt"></i>
-                                <h4>BAŞVURU YERİ</h4>
+                                <h4>{% trans "BAŞVURU YERİ" %}</h4>
                             </div>
-                            <p class="address-description">Aşağıda belirtilen belgelerin şahsen veya posta yolu ile;</p>
+                            <p class="address-description">{% trans "Aşağıda belirtilen belgelerin şahsen veya posta yolu ile;" %}</p>
                             <div class="address-card">
                                 <div class="address-card-header">
                                     <i class="fas fa-university"></i>
-                                    <h5>Avrasya Üniversitesi Öğrenci İşleri Daire Başkanlığı</h5>
+                                    <h5>{% trans "Avrasya Üniversitesi Öğrenci İşleri Daire Başkanlığı" %}</h5>
                                 </div>
                                 <div class="address-card-body">
-                                    <p><i class="fas fa-map-pin"></i> Pelitli Yerleşkesi Adnan Kahveci Mah. Rize Cad. No:226 Ortahisar/TRABZON</p>
-                                    <p class="address-note">adresine iletilmesi gerekmektedir.</p>
+                                    <p><i class="fas fa-map-pin"></i> {% trans "Pelitli Yerleşkesi Adnan Kahveci Mah. Rize Cad. No:226 Ortahisar/TRABZON" %}</p>
+                                    <p class="address-note">{% trans "adresine iletilmesi gerekmektedir." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -142,18 +143,18 @@
                             <div class="belge-icon">
                                 <i class="fas fa-university"></i>
                             </div>
-                            <h3>KURUMİÇİ YATAY GEÇİŞ İSTENİLEN BELGELER</h3>
+                            <h3>{% trans "KURUMİÇİ YATAY GEÇİŞ İSTENİLEN BELGELER" %}</h3>
                         </div>
                         
                         <div class="belge-list-container">
                             <ul class="belge-list">
-                                <li><i class="fas fa-check-circle"></i> Yatay Geçiş Başvuru Formu</li>
-                                <li><i class="fas fa-check-circle"></i> Avrasya Üniversitesi Başvuru Dosyası Kapak Formu</li>
-                                <li><i class="fas fa-check-circle"></i> Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi</li>
-                                <li><i class="fas fa-check-circle"></i> Lise diplomasının aslı onaylı örneği</li>
-                                <li><i class="fas fa-check-circle"></i> Transkript aslı</li>
-                                <li><i class="fas fa-check-circle"></i> Öğrenci Belgesi (Aslı Onaylı)</li>
-                                <li><i class="fas fa-check-circle"></i> Nüfus Cüzdanı Fotokopisi</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Yatay Geçiş Başvuru Formu" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Avrasya Üniversitesi Başvuru Dosyası Kapak Formu" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Kayıtlı olduğu yıla ait ÖSYM-DGS yerleştirme belgesi ve taban puanları gösterir sonuç belgesi" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Lise diplomasının aslı onaylı örneği" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Transkript aslı" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Öğrenci Belgesi (Aslı Onaylı)" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Nüfus Cüzdanı Fotokopisi" %}</li>
                             </ul>
                         </div>
                     </div>
@@ -163,24 +164,24 @@
                 <div class="important-notes">
                     <div class="notes-header">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <h4>Önemli Notlar</h4>
+                        <h4>{% trans "Önemli Notlar" %}</h4>
                     </div>
                     <div class="notes-content">
                         <div class="note-item">
                             <i class="fas fa-info-circle"></i>
-                            <p>Tüm belgelerin eksiksiz ve okunaklı olması gerekmektedir.</p>
+                            <p>{% trans "Tüm belgelerin eksiksiz ve okunaklı olması gerekmektedir." %}</p>
                         </div>
                         <div class="note-item">
                             <i class="fas fa-info-circle"></i>
-                            <p>Onaylı belgelerin resmi kurum mührü ve imzası bulunmalıdır.</p>
+                            <p>{% trans "Onaylı belgelerin resmi kurum mührü ve imzası bulunmalıdır." %}</p>
                         </div>
                         <div class="note-item">
                             <i class="fas fa-info-circle"></i>
-                            <p>Başvuru sürecindeki değişiklikler için Üniversite web sitesini takip ediniz.</p>
+                            <p>{% trans "Başvuru sürecindeki değişiklikler için Üniversite web sitesini takip ediniz." %}</p>
                         </div>
                         <div class="note-item">
                             <i class="fas fa-info-circle"></i>
-                            <p>Fotokopi belgelerin asıllarının da hazır bulundurulması önerilir.</p>
+                            <p>{% trans "Fotokopi belgelerin asıllarının da hazır bulundurulması önerilir." %}</p>
                         </div>
                     </div>
                 </div>

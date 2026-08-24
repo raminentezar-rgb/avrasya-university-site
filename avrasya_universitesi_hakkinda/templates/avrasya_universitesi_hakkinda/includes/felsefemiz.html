@@ -1,4 +1,5 @@
 {% extends 'avrasya_universitesi_hakkinda/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - AVÜ Hakkında{% endblock %}
 
@@ -8,8 +9,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>AVÜ Hakkında</h1>
-            <p>Avrasya Üniversitesi'nin temel ilkeleri ve değerleri</p>
+            <h1>{% trans "AVÜ Hakkında" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi'nin temel ilkeleri ve değerleri" %}</p>
         </div>
     </div>
 </section>
@@ -28,7 +29,7 @@
             <div class="content-wrapper">
                 <!-- Giriş Bölümü -->
                 <div class="page-intro">
-                    <h2 class="section-title">Felsefemiz</h2>
+                    <h2 class="section-title">{% trans "Felsefemiz" %}</h2>
                     {% comment %} <div class="section-divider"></div> {% endcomment %}
                 </div>
 
@@ -36,7 +37,7 @@
                 <div class="image-section mb-5">
                     <div class="philosophy-image-wrapper text-center">
                         <img src="https://avrasya.edu.tr/wp-content/uploads/2021/02/008-scaled-600x399.jpg" 
-                             alt="Avrasya Üniversitesi Felsefesi" 
+                             alt="{% trans 'Avrasya Üniversitesi Felsefesi' %}" 
                              class="img-fluid rounded"
                              style="width: 100%; max-width: 768px; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     </div>
@@ -48,11 +49,11 @@
                         <div class="statement-header" style="background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue)); color: white; padding: 25px; border-radius: 12px; margin-bottom: 30px;">
                             <h3 class="mb-3" style="font-size: 1.8rem; font-weight: 700;  color:white;">
                                 <i class="fas fa-quote-left me-3"></i>
-                                Geçmişte İzimiz, Geleceğe Sözümüz Var
+                                {% trans "Geçmişte İzimiz, Geleceğe Sözümüz Var" %}
                                 <i class="fas fa-quote-right ms-3"></i>
                             </h3>
                             <p class="mb-0" style="font-size: 1.1rem; opacity: 0.9; color:#8dd4e3ff;">
-                                Kurucumuz Dr. Ömer Yıldız'ın İlkesi
+                                {% trans "Kurucumuz Dr. Ömer Yıldız'ın İlkesi" %}
                             </p>
                         </div>
                         
@@ -62,11 +63,11 @@
                                     <div class="icon-wrapper me-3" style="background: var(--accent-light-blue); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                                         <i class="fas fa-bullseye" style="color: var(--primary-dark-blue); font-size: 1.5rem;"></i>
                                     </div>
-                                    <h4 style="color: var(--primary-dark-blue); margin: 0;">Temel Hedefimiz</h4>
+                                    <h4 style="color: var(--primary-dark-blue); margin: 0;">{% trans "Temel Hedefimiz" %}</h4>
                                 </div>
                                 <div class="paragraph-body" style="background: rgba(141, 212, 227, 0.08); padding: 20px; border-radius: 10px; border-left: 4px solid var(--secondary-medium-blue);">
                                     <p style="font-size: 1.1rem; line-height: 1.8; margin: 0; color: var(--text-dark); text-align: justify;">
-                                        Avrasya Üniversitesi temellerini kurucusu Dr. Ömer Yıldız'ın "Geçmişte İzimiz, Geleceğe Sözümüz Var" ilkesinde özetlenen felsefesi üzerine bina etmiştir. Bu ifadeden hareketle, ülkemizin gelişmesi ve ilerlemesine katkıda bulunmak Avrasya Üniversitesi'nin birinci hedefi olmuştur.
+                                        {% trans "Avrasya Üniversitesi temellerini kurucusu Dr. Ömer Yıldız'ın \"Geçmişte İzimiz, Geleceğe Sözümüz Var\" ilkesinde özetlenen felsefesi üzerine bina etmiştir. Bu ifadeden hareketle, ülkemizin gelişmesi ve ilerlemesine katkıda bulunmak Avrasya Üniversitesi'nin birinci hedefi olmuştur." %}
                                     </p>
                                 </div>
                             </div>
@@ -76,11 +77,11 @@
                                     <div class="icon-wrapper me-3" style="background: var(--accent-light-blue); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                                         <i class="fas fa-graduation-cap" style="color: var(--primary-dark-blue); font-size: 1.5rem;"></i>
                                     </div>
-                                    <h4 style="color: var(--primary-dark-blue); margin: 0;">Özümüz</h4>
+                                    <h4 style="color: var(--primary-dark-blue); margin: 0;">{% trans "Özümüz" %}</h4>
                                 </div>
                                 <div class="paragraph-body" style="background: rgba(141, 212, 227, 0.08); padding: 20px; border-radius: 10px; border-left: 4px solid var(--secondary-medium-blue);">
                                     <p style="font-size: 1.1rem; line-height: 1.8; margin: 0; color: var(--text-dark); text-align: justify;">
-                                        Avrasya Üniversitesi felsefesinin özü kendine güvenen, sorgulayan, tüm görüşleri önemseyip hoşgörü ile değerlendirebilen, ulusal ve uluslararası işbirliklerine açık öğrencilerimizin her düzeyde başarılı ve mutlu bireyler olarak toplumda öncü olmalarıdır.
+                                        {% trans "Avrasya Üniversitesi felsefesinin özü kendine güvenen, sorgulayan, tüm görüşleri önemseyip hoşgörü ile değerlendirebilen, ulusal ve uluslararası işbirliklerine açık öğrencilerimizin her düzeyde başarılı ve mutlu bireyler olarak toplumda öncü olmalarıdır." %}
                                     </p>
                                 </div>
                             </div>
@@ -90,11 +91,11 @@
                                     <div class="icon-wrapper me-3" style="background: var(--accent-light-blue); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                                         <i class="fas fa-hands-helping" style="color: var(--primary-dark-blue); font-size: 1.5rem;"></i>
                                     </div>
-                                    <h4 style="color: var(--primary-dark-blue); margin: 0;">Sorumluluk Anlayışımız</h4>
+                                    <h4 style="color: var(--primary-dark-blue); margin: 0;">{% trans "Sorumluluk Anlayışımız" %}</h4>
                                 </div>
                                 <div class="paragraph-body" style="background: rgba(141, 212, 227, 0.08); padding: 20px; border-radius: 10px; border-left: 4px solid var(--secondary-medium-blue);">
                                     <p style="font-size: 1.1rem; line-height: 1.8; margin: 0; color: var(--text-dark); text-align: justify;">
-                                        Avrasya Üniversitesi öğrencilerine ve öğrencilerin ailelerine, çalışanlarına, yöneticilerine ve tüm topluma sorumluluk bilinciyle yaklaşır.
+                                        {% trans "Avrasya Üniversitesi öğrencilerine ve öğrencilerin ailelerine, çalışanlarına, yöneticilerine ve tüm topluma sorumluluk bilinciyle yaklaşır." %}
                                     </p>
                                 </div>
                             </div>
@@ -104,11 +105,11 @@
                                     <div class="icon-wrapper me-3" style="background: var(--accent-light-blue); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                                         <i class="fas fa-flag" style="color: var(--primary-dark-blue); font-size: 1.5rem;"></i>
                                     </div>
-                                    <h4 style="color: var(--primary-dark-blue); margin: 0;">Yol Haritamız</h4>
+                                    <h4 style="color: var(--primary-dark-blue); margin: 0;">{% trans "Yol Haritamız" %}</h4>
                                 </div>
                                 <div class="paragraph-body" style="background: rgba(141, 212, 227, 0.08); padding: 20px; border-radius: 10px; border-left: 4px solid var(--secondary-medium-blue);">
                                     <p style="font-size: 1.1rem; line-height: 1.8; margin: 0; color: var(--text-dark); text-align: justify;">
-                                        Büyük Önder Atatürk'ün gösterdiği çağdaş Türkiye yolunda; 2023 Türkiye vizyonu ile bütünleşen hedefleri ile Avrasya Üniversitesi bilim, akıl ve teknolojide, inançla ilerlemeye devam edecektir.
+                                        {% trans "Büyük Önder Atatürk'ün gösterdiği çağdaş Türkiye yolunda; 2023 Türkiye vizyonu ile bütünleşen hedefleri ile Avrasya Üniversitesi bilim, akıl ve teknolojide, inançla ilerlemeye devam edecektir." %}
                                     </p>
                                 </div>
                             </div>
@@ -123,10 +124,10 @@
                             font-weight: 800; 
                             margin-bottom: 10px;
                             font-family: 'Metropolis', sans-serif;">
-                                Dr. Ömer Yıldız
+                                {% trans "Dr. Ömer Yıldız" %}
                             </h3>
                             <p style="color: var(--secondary-medium-blue); font-size: 1.2rem; font-weight: 600; margin-bottom: 30px;">
-                                Mütevelli Heyet Başkanı
+                                {% trans "Mütevelli Heyet Başkanı" %}
                             </p>
                         </div>
                     </div>

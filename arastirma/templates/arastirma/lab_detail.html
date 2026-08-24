@@ -1,4 +1,5 @@
 {% extends 'arastirma/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}{{ lab.name }} - Avrasya University{% endblock %}
@@ -29,11 +30,11 @@
                         <div class="d-flex flex-wrap gap-2 mb-3">
                             {% if lab.is_active %}
                             <span class="badge badge-success">
-                                <i class="fas fa-check-circle"></i> Aktif
+                                <i class="fas fa-check-circle"></i> {% trans "Aktif" %}
                             </span>
                             {% else %}
                             <span class="badge badge-secondary">
-                                <i class="fas fa-pause-circle"></i> Pasif
+                                <i class="fas fa-pause-circle"></i> {% trans "Pasif" %}
                             </span>
                             {% endif %}
                             <span class="badge badge-primary">
@@ -46,19 +47,19 @@
                     <div class="lab-info mb-4">
                         <div class="row">
                             <div class="col-md-6">
-                                <p><strong><i class="fas fa-user-tie"></i> Sorumlu Öğretim Üyesi:</strong><br>
+                                <p><strong><i class="fas fa-user-tie"></i> {% trans "Sorumlu Öğretim Üyesi:" %}</strong><br>
                                 {{ lab.director }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong><i class="fas fa-university"></i> Fakülte/Bölüm:</strong><br>
+                                <p><strong><i class="fas fa-university"></i> {% trans "Fakülte/Bölüm:" %}</strong><br>
                                 {{ lab.faculty }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong><i class="fas fa-calendar"></i> Oluşturulma Tarihi:</strong><br>
+                                <p><strong><i class="fas fa-calendar"></i> {% trans "Oluşturulma Tarihi:" %}</strong><br>
                                 {{ lab.created_at|date:"d M Y" }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong><i class="fas fa-flask"></i> Durum:</strong><br>
+                                <p><strong><i class="fas fa-flask"></i> {% trans "Durum:" %}</strong><br>
                                 {% if lab.is_active %}Aktif{% else %}Pasif{% endif %}</p>
                             </div>
                         </div>
@@ -66,7 +67,7 @@
 
                     <!-- تجهیزات -->
                     <div class="lab-equipment mb-4">
-                        <h5>Laboratuvar Ekipmanları</h5>
+                        <h5>{% trans "Laboratuvar Ekipmanları" %}</h5>
                         <div class="equipment-content">
                             {{ lab.equipment|linebreaks }}
                         </div>
@@ -77,12 +78,12 @@
                         <div class="row">
                             <div class="col-6">
                                 <a href="{% url 'arastirma:lab_list' %}" class="btn btn-outline-primary">
-                                    <i class="fas fa-arrow-left"></i> Tüm Laboratuvarlar
+                                    <i class="fas fa-arrow-left"></i> {% trans "Tüm Laboratuvarlar" %}
                                 </a>
                             </div>
                             <div class="col-6 text-right">
                                 <a href="{% url 'arastirma:home' %}" class="btn btn-outline-secondary">
-                                    <i class="fas fa-home"></i> Araştırma Ana Sayfa
+                                    <i class="fas fa-home"></i> {% trans "Araştırma Ana Sayfa" %}
                                 </a>
                             </div>
                         </div>

@@ -1,12 +1,13 @@
 # app_name: mutercim_tercumanlik/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     MuterimTercumanlikDersProgrami, MuterimTercumanlikEtkinlik, MutercimTercumanlikFaaliyetGorseli, MutercimTercumanlikFaaliyetGrubu, MuterimTercumanlikDuyuru, MutercimTercumanlikFaaliyet
 )
 
 @admin.register(MuterimTercumanlikEtkinlik)
-class MuterimTercumanlikEtkinlikAdmin(admin.ModelAdmin):
+class MuterimTercumanlikEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class MuterimTercumanlikDuyuruAdmin(admin.ModelAdmin):
         return MuterimTercumanlikDuyuru.objects.all()
 
 @admin.register(MuterimTercumanlikDersProgrami)
-class MuterimTercumanlikDersProgramiAdmin(admin.ModelAdmin):
+class MuterimTercumanlikDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class MutercimTercumanlikFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(MutercimTercumanlikFaaliyetGrubu)
-class MutercimTercumanlikFaaliyetGrubuAdmin(admin.ModelAdmin):
+class MutercimTercumanlikFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(MutercimTercumanlikFaaliyet)
-class MutercimTercumanlikFaaliyetAdmin(admin.ModelAdmin):
+class MutercimTercumanlikFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

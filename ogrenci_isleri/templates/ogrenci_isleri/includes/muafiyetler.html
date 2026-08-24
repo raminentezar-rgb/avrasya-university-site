@@ -1,4 +1,5 @@
 {% extends 'ogrenci_isleri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Muafiyetler
 {% endblock %}
@@ -9,8 +10,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Muafiyetler</h1>
-            <p>Önceden Kazanılmış Yeterliliklerin Tanınması, Kredi Transferi ve İntibak İşlemleri</p>
+            <h1>{% trans "Muafiyetler" %}</h1>
+            <p>{% trans "Önceden Kazanılmış Yeterliliklerin Tanınması, Kredi Transferi ve İntibak İşlemleri" %}</p>
         </div>
     </div>
 </section>
@@ -28,10 +29,9 @@
         <div class="col-lg-9 col-xxl-10">
             <div class="content-wrapper">
                 <div class="page-intro">
-                    <h2 class="section-title">Muafiyet ve İntibak İşlemleri</h2>
+                    <h2 class="section-title">{% trans "Muafiyet ve İntibak İşlemleri" %}</h2>
                     <p class="section-subtitle">
-                        Avrasya Üniversitesi öğrencilerinin önceden kazanılmış yeterliliklerinin tanınması, 
-                        kredi transferi ve intibak işlemleri hakkında detaylı bilgi ve sık sorulan soruların cevapları.
+                        {% trans "Avrasya Üniversitesi öğrencilerinin önceden kazanılmış yeterliliklerinin tanınması, kredi transferi ve intibak işlemleri hakkında detaylı bilgi ve sık sorulan soruların cevapları." %}
                     </p>
                 </div>
 
@@ -41,16 +41,16 @@
                         <div class="tab-header">
                             <ul class="tab-menu">
                                 <li class="tab-menu-item active" data-tab="tab-genel">
-                                    <i class="fas fa-info-circle"></i> Genel Bilgiler
+                                    <i class="fas fa-info-circle"></i> {% trans "Genel Bilgiler" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab-basvuru">
-                                    <i class="fas fa-file-signature"></i> Başvuru Süreci
+                                    <i class="fas fa-file-signature"></i> {% trans "Başvuru Süreci" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab-sartlar">
-                                    <i class="fas fa-check-circle"></i> Şartlar ve Kurallar
+                                    <i class="fas fa-check-circle"></i> {% trans "Şartlar ve Kurallar" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab-sss">
-                                    <i class="fas fa-question-circle"></i> S.S.S.
+                                    <i class="fas fa-question-circle"></i> {% trans "S.S.S." %}
                                 </li>
                             </ul>
                         </div>
@@ -59,30 +59,27 @@
                             <!-- Genel Bilgiler Tab -->
                             <div id="tab-genel" class="tab-content active">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-info-circle"></i> Genel Bilgiler</h3>
+                                    <h3><i class="fas fa-info-circle"></i> {% trans "Genel Bilgiler" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <p>
-                                        Avrasya Üniversitesi'ne ilk defa kayıt yaptıran öğrencilerin, önceden 
-                                        kayıtlı bulundukları yükseköğretim kurumlarında başarılı oldukları 
-                                        derslerde kazanılmış yeterliliklerin tanınması, kredi transferi ve 
-                                        intibak işlemleri bu sayfada belirtilen kurallar çerçevesinde yapılır.
+                                        {% trans "Avrasya Üniversitesi'ne ilk defa kayıt yaptıran öğrencilerin, önceden kayıtlı bulundukları yükseköğretim kurumlarında başarılı oldukları derslerde kazanılmış yeterliliklerin tanınması, kredi transferi ve intibak işlemleri bu sayfada belirtilen kurallar çerçevesinde yapılır." %}
                                     </p>
                                     
                                     <div class="highlight-box">
-                                        <h4><i class="fas fa-exclamation-circle"></i> Önemli Hatırlatmalar</h4>
+                                        <h4><i class="fas fa-exclamation-circle"></i> {% trans "Önemli Hatırlatmalar" %}</h4>
                                         <ul class="responsibilities-list">
                                             <li>
                                                 <i class="fas fa-calendar-alt"></i>
-                                                <strong>Başvuru Süreleri:</strong> Akademik takvimde belirtilen süreler içinde başvuru yapılmalıdır.
+                                                <strong>{% trans "Başvuru Süreleri:" %}</strong> {% trans "Akademik takvimde belirtilen süreler içinde başvuru yapılmalıdır." %}
                                             </li>
                                             <li>
                                                 <i class="fas fa-ban"></i>
-                                                <strong>Muafiyet Verilmeyen Dersler:</strong> Seminer, tez, bitirme çalışması, tasarım projesi derslerinden muafiyet başvurusu kabul edilmez.
+                                                <strong>{% trans "Muafiyet Verilmeyen Dersler:" %}</strong> {% trans "Seminer, tez, bitirme çalışması, tasarım projesi derslerinden muafiyet başvurusu kabul edilmez." %}
                                             </li>
                                             <li>
                                                 <i class="fas fa-graduation-cap"></i>
-                                                <strong>Devam Zorunluluğu:</strong> Muafiyet talebi karara bağlanıncaya kadar öğrenciler, muafiyet talebinde bulunduğu derslere devam ederler.
+                                                <strong>{% trans "Devam Zorunluluğu:" %}</strong> {% trans "Muafiyet talebi karara bağlanıncaya kadar öğrenciler, muafiyet talebinde bulunduğu derslere devam ederler." %}
                                             </li>
                                         </ul>
                                     </div>
@@ -92,35 +89,35 @@
                             <!-- Başvuru Süreci Tab -->
                             <div id="tab-basvuru" class="tab-content">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-file-signature"></i> Başvuru Süreci</h3>
+                                    <h3><i class="fas fa-file-signature"></i> {% trans "Başvuru Süreci" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-box">
-                                        <h4><i class="fas fa-map-marker-alt"></i> Başvuru Yerleri</h4>
+                                        <h4><i class="fas fa-map-marker-alt"></i> {% trans "Başvuru Yerleri" %}</h4>
                                         <p>
-                                            <strong>1. Fakülte/Enstitü/Yüksekokul'a Başvuru:</strong><br>
-                                            Önceden kayıtlı bulunduğu yükseköğretim kurumunda başarılı olunan derslerde kazanılmış yeterliliklere ilişkin başvurular doğrudan ilgili fakülte dekanlığına/enstitü/yüksekokul veya meslek yüksekokulu müdürlüğüne yapılır.
+                                            <strong>{% trans "1. Fakülte/Enstitü/Yüksekokul'a Başvuru:" %}</strong><br>
+                                            {% trans "Önceden kayıtlı bulunduğu yükseköğretim kurumunda başarılı olunan derslerde kazanılmış yeterliliklere ilişkin başvurular doğrudan ilgili fakülte dekanlığına/enstitü/yüksekokul veya meslek yüksekokulu müdürlüğüne yapılır." %}
                                         </p>
                                         <p>
-                                            <strong>2. Öğrenci İşleri Müdürlüğü'ne Başvuru:</strong><br>
-                                            Bir yükseköğretim kurumu dışında kazanılmış yeterliliklerin tanınmasına ilişkin başvurular Öğrenci İşleri Müdürlüğü'ne yapılır.
+                                            <strong>{% trans "2. Öğrenci İşleri Müdürlüğü'ne Başvuru:" %}</strong><br>
+                                            {% trans "Bir yükseköğretim kurumu dışında kazanılmış yeterliliklerin tanınmasına ilişkin başvurular Öğrenci İşleri Müdürlüğü'ne yapılır." %}
                                         </p>
                                     </div>
 
                                     <div class="highlight-box">
-                                        <h4><i class="fas fa-clipboard-list"></i> Gerekli Belgeler</h4>
+                                        <h4><i class="fas fa-clipboard-list"></i> {% trans "Gerekli Belgeler" %}</h4>
                                         <ul class="responsibilities-list">
                                             <li>
                                                 <i class="fas fa-file-alt"></i>
-                                                Daha önce öğrenim görülen YÖK denkliği bulunan yükseköğretim kurumu tarafından onaylanmış (mühürlü, kaşeli ve imzalı) ders içerikleri
+                                                {% trans "Daha önce öğrenim görülen YÖK denkliği bulunan yükseköğretim kurumu tarafından onaylanmış (mühürlü, kaşeli ve imzalı) ders içerikleri" %}
                                             </li>
                                             <li>
                                                 <i class="fas fa-file-certificate"></i>
-                                                Onaylı öğrenim belgesi (transkript)
+                                                {% trans "Onaylı öğrenim belgesi (transkript)" %}
                                             </li>
                                             <li>
                                                 <i class="fas fa-edit"></i>
-                                                Başarılı olunan derslere karşılık Avrasya Üniversitesi'nde kayıtlı bulunduğu programın ders planındaki hangi derslerinden muaf olmak istediğini belirten dilekçe
+                                                {% trans "Başarılı olunan derslere karşılık Avrasya Üniversitesi'nde kayıtlı bulunduğu programın ders planındaki hangi derslerinden muaf olmak istediğini belirten dilekçe" %}
                                             </li>
                                         </ul>
                                     </div>
@@ -130,7 +127,7 @@
                             <!-- Şartlar ve Kurallar Tab -->
                             <div id="tab-sartlar" class="tab-content">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-check-circle"></i> Şartlar ve Kurallar</h3>
+                                    <h3><i class="fas fa-check-circle"></i> {% trans "Şartlar ve Kurallar" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="mission-vision-container">
@@ -138,12 +135,12 @@
                                             <div class="mv-icon">
                                                 <i class="fas fa-balance-scale"></i>
                                             </div>
-                                            <h4>Muafiyet Şartları</h4>
+                                            <h4>{% trans "Muafiyet Şartları" %}</h4>
                                             <p>
-                                                • Muaf olabilmek için başvurulan derslerden başarılı olma şartı aranır.<br>
-                                                • Eşdeğer sayılması istenen dersin içeriği ve öğrenme kazanımlarını en az %70 oranında karşılaması gerekir.<br>
-                                                • Türk Dili, Atatürk İlkeleri ve İnkılâp Tarihi ve Yabancı Dil dersleri için kredi uyumuna bakılmaz.<br>
-                                                • Sadece bu derslerden muafiyet için en az DD (koşullu başarılı) notu yeterlidir.
+                                                {% trans "• Muaf olabilmek için başvurulan derslerden başarılı olma şartı aranır." %}<br>
+                                                {% trans "• Eşdeğer sayılması istenen dersin içeriği ve öğrenme kazanımlarını en az %70 oranında karşılaması gerekir." %}<br>
+                                                {% trans "• Türk Dili, Atatürk İlkeleri ve İnkılâp Tarihi ve Yabancı Dil dersleri için kredi uyumuna bakılmaz." %}<br>
+                                                {% trans "• Sadece bu derslerden muafiyet için en az DD (koşullu başarılı) notu yeterlidir." %}
                                             </p>
                                         </div>
                                         
@@ -151,22 +148,22 @@
                                             <div class="mv-icon">
                                                 <i class="fas fa-exchange-alt"></i>
                                             </div>
-                                            <h4>Kredi Transferi Kuralları</h4>
+                                            <h4>{% trans "Kredi Transferi Kuralları" %}</h4>
                                             <p>
-                                                • Birden fazla dersin bir derse eşdeğer sayılması durumunda, bu derslerin AGNO'su dikkate alınarak intibak yapılır.<br>
-                                                • Bir dersin birden fazla derse eşdeğer sayılması durumunda dersin notu, intibak edilen tüm dersler için geçerlidir.<br>
-                                                • Muafiyetine karar verilen dersler not döküm belgesine not olarak işlenir.
+                                                {% trans "• Birden fazla dersin bir derse eşdeğer sayılması durumunda, bu derslerin AGNO'su dikkate alınarak intibak yapılır." %}<br>
+                                                {% trans "• Bir dersin birden fazla derse eşdeğer sayılması durumunda dersin notu, intibak edilen tüm dersler için geçerlidir." %}<br>
+                                                {% trans "• Muafiyetine karar verilen dersler not döküm belgesine not olarak işlenir." %}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div class="highlight-box">
-                                        <h4><i class="fas fa-calculator"></i> İntibak ve Not Dönüşümü</h4>
+                                        <h4><i class="fas fa-calculator"></i> {% trans "İntibak ve Not Dönüşümü" %}</h4>
                                         <p>
-                                            <strong>İntibak Hesaplaması:</strong> Öğrencilerin intibakları, muaf ve başarılı oldukları derslerin kredilerinin toplamının, öğretim planına göre krediler toplamının yarısından en az bir fazla olduğu yarıyıla yapılır.
+                                            <strong>{% trans "İntibak Hesaplaması:" %}</strong> {% trans "Öğrencilerin intibakları, muaf ve başarılı oldukları derslerin kredilerinin toplamının, öğretim planına göre krediler toplamının yarısından en az bir fazla olduğu yarıyıla yapılır." %}
                                         </p>
                                         <p>
-                                            <strong>Not Dönüşümü:</strong> 100'lük sistemde alınan notların 4'lük sisteme dönüştürülmesinde Yükseköğretim Kurulu tarafından yapılan düzenleme doğrultusundaki "4'lük Sistemdeki Notların 100'lük Sistemdeki Karşılıkları" tablosu esas alınır.
+                                            <strong>{% trans "Not Dönüşümü:" %}</strong> {% trans "100'lük sistemde alınan notların 4'lük sisteme dönüştürülmesinde Yükseköğretim Kurulu tarafından yapılan düzenleme doğrultusundaki \"4'lük Sistemdeki Notların 100'lük Sistemdeki Karşılıkları\" tablosu esas alınır." %}
                                         </p>
                                     </div>
                                 </div>
@@ -175,7 +172,7 @@
                             <!-- S.S.S. Tab -->
                             <div id="tab-sss" class="tab-content">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-question-circle"></i> Sık Sorulan Sorular</h3>
+                                    <h3><i class="fas fa-question-circle"></i> {% trans "Sık Sorulan Sorular" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="accordion" id="muafiyetAccordion">
@@ -183,12 +180,12 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingOne">
                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                                    Muafiyet için kim başvurabilir?
+                                                    {% trans "Muafiyet için kim başvurabilir?" %}
                                                 </button>
                                             </h2>
                                             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#muafiyetAccordion">
                                                 <div class="accordion-body">
-                                                    Avrasya Üniversitesi öğrencisi olmaya hak kazanmış adayların başvuruları kabul edilir.
+                                                    {% trans "Avrasya Üniversitesi öğrencisi olmaya hak kazanmış adayların başvuruları kabul edilir." %}
                                                 </div>
                                             </div>
                                         </div>
@@ -197,12 +194,12 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingTwo">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                                    Muafiyet başvurusu ne zaman yapılır?
+                                                    {% trans "Muafiyet başvurusu ne zaman yapılır?" %}
                                                 </button>
                                             </h2>
                                             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#muafiyetAccordion">
                                                 <div class="accordion-body">
-                                                    Başvuru akademik takvimde belirtilen süreler içinde yapılır. Bu süreler dışında yapılan başvurular kabul edilmez.
+                                                    {% trans "Başvuru akademik takvimde belirtilen süreler içinde yapılır. Bu süreler dışında yapılan başvurular kabul edilmez." %}
                                                 </div>
                                             </div>
                                         </div>
@@ -211,12 +208,12 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingThree">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                                                    Muafiyet kararları ne kadar sürede sonuçlanır?
+                                                    {% trans "Muafiyet kararları ne kadar sürede sonuçlanır?" %}
                                                 </button>
                                             </h2>
                                             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#muafiyetAccordion">
                                                 <div class="accordion-body">
-                                                    Öğrencilerin muafiyet ve intibakları ile ilgili işlemler fakülte/enstitü/müdürlüğe başvuru süresinin bitiminden itibaren iki hafta içinde sonuçlandırılır.
+                                                    {% trans "Öğrencilerin muafiyet ve intibakları ile ilgili işlemler fakülte/enstitü/müdürlüğe başvuru süresinin bitiminden itibaren iki hafta içinde sonuçlandırılır." %}
                                                 </div>
                                             </div>
                                         </div>
@@ -225,12 +222,12 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingFour">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
-                                                    Yabancı Dil ve Temel Bilgi Teknolojisi derslerinden nasıl muaf olunur?
+                                                    {% trans "Yabancı Dil ve Temel Bilgi Teknolojisi derslerinden nasıl muaf olunur?" %}
                                                 </button>
                                             </h2>
                                             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#muafiyetAccordion">
                                                 <div class="accordion-body">
-                                                    Yabancı Dil, Temel Bilgi Teknolojisi Kullanımı gibi üniversitece muafiyet sınavı düzenlenen derslerden muaf olabilmek için, o yıla ait akademik takvimde ilan edilen tarihlerde yapılan Muafiyet Sınavlarına girmeniz gerekir.
+                                                    {% trans "Yabancı Dil, Temel Bilgi Teknolojisi Kullanımı gibi üniversitece muafiyet sınavı düzenlenen derslerden muaf olabilmek için, o yıla ait akademik takvimde ilan edilen tarihlerde yapılan Muafiyet Sınavlarına girmeniz gerekir." %}
                                                 </div>
                                             </div>
                                         </div>
@@ -239,21 +236,21 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingFive">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
-                                                    Kararlara itiraz edilebilir mi?
+                                                    {% trans "Kararlara itiraz edilebilir mi?" %}
                                                 </button>
                                             </h2>
                                             <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#muafiyetAccordion">
                                                 <div class="accordion-body">
-                                                    Evet, itiraz edilebilir. İtiraz, muafiyet işleminin kesinleşip öğrenciye bildirildiği tarihten itibaren en geç 15 gün içinde ilgili birime yapılır.
+                                                    {% trans "Evet, itiraz edilebilir. İtiraz, muafiyet işleminin kesinleşip öğrenciye bildirildiği tarihten itibaren en geç 15 gün içinde ilgili birime yapılır." %}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="highlight-box mt-4">
-                                        <h4><i class="fas fa-exclamation-triangle"></i> Önemli Not</h4>
+                                        <h4><i class="fas fa-exclamation-triangle"></i> {% trans "Önemli Not" %}</h4>
                                         <p>
-                                            Öğrenciler, ileriki yarıyıllarda muafiyet ve intibak talebinde bulunamaz. Tüm muafiyet ve intibak işlemleri kayıt döneminde tamamlanmalıdır.
+                                            {% trans "Öğrenciler, ileriki yarıyıllarda muafiyet ve intibak talebinde bulunamaz. Tüm muafiyet ve intibak işlemleri kayıt döneminde tamamlanmalıdır." %}
                                         </p>
                                     </div>
                                 </div>
@@ -265,33 +262,33 @@
                 <!-- İletişim Bilgileri -->
                 <div class="contact-info-section mt-5">
                     <div class="contact-header">
-                        <h4><i class="fas fa-headset"></i> İletişim ve Destek</h4>
+                        <h4><i class="fas fa-headset"></i> {% trans "İletişim ve Destek" %}</h4>
                     </div>
                     
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-university"></i>
                             <div>
-                                <strong>İlgili Birimler:</strong>
-                                <p>Fakülte Dekanlıkları / Enstitü Müdürlükleri / Yüksekokul Müdürlükleri / Öğrenci İşleri Müdürlüğü</p>
+                                <strong>{% trans "İlgili Birimler:" %}</strong>
+                                <p>{% trans "Fakülte Dekanlıkları / Enstitü Müdürlükleri / Yüksekokul Müdürlükleri / Öğrenci İşleri Müdürlüğü" %}</p>
                             </div>
                         </div>
                         
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
                             <div>
-                                <strong>Başvuru Süreleri:</strong>
-                                <p>Akademik takvimde belirtilen tarihler arasında</p>
+                                <strong>{% trans "Başvuru Süreleri:" %}</strong>
+                                <p>{% trans "Akademik takvimde belirtilen tarihler arasında" %}</p>
                             </div>
                         </div>
                         
                         <div class="contact-item">
                             <i class="fas fa-file-contract"></i>
                             <div>
-                                <strong>İlgili Yönetmelik:</strong>
+                                <strong>{% trans "İlgili Yönetmelik:" %}</strong>
                                 <p>
                                     <a href="{% url 'ogrenci_isleri:yonetmelik' %}" class="external-link" target="_blank">
-                                        <i class="fas fa-external-link-alt"></i> Muafiyet ve İntibak Yönetmeliği
+                                        <i class="fas fa-external-link-alt"></i> {% trans "Muafiyet ve İntibak Yönetmeliği" %}
                                     </a>
                                 </p>
                             </div>

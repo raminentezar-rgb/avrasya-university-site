@@ -1,4 +1,5 @@
 {% extends 'ogrenci_isleri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Online Kayıt YKS 2025{% endblock %}
 
@@ -8,7 +9,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Online Kayıt YKS 2025</h1>
+            <h1>{% trans "Online Kayıt YKS 2025" %}</h1>
             <p></p>
         </div>
     </div>
@@ -30,9 +31,8 @@
                 <div class="ogrenci-isleri-tab-section">
                     <!-- هدر تب‌ها -->
                     <div class="page-intro mb-5">
-                        <h2 class="section-title">Online İşlemler</h2>
-                        <p class="section-subtitle text-center">Aşağıdaki seçeneklerden işleminizi
-                            gerçekleştirebilirsiniz</p>
+                        <h2 class="section-title">{% trans "Online İşlemler" %}</h2>
+                        <p class="section-subtitle text-center">{% trans "Aşağıdaki seçeneklerden işleminizi gerçekleştirebilirsiniz" %}</p>
                     </div>
 
                     <div class="modern-tab-container">
@@ -44,8 +44,8 @@
                                         <i class="fas fa-credit-card"></i>
                                     </div>
                                     <div class="modern-tab-content">
-                                        <h3>Uzaktan Ödeme</h3>
-                                        <p>Kredi kartı ile online ödeme</p>
+                                        <h3>{% trans "Uzaktan Ödeme" %}</h3>
+                                        <p>{% trans "Kredi kartı ile online ödeme" %}</p>
                                     </div>
                                     <div class="modern-tab-indicator"></div>
                                 </div>
@@ -55,8 +55,8 @@
                                         <i class="fas fa-user-plus"></i>
                                     </div>
                                     <div class="modern-tab-content">
-                                        <h3>Online Kayıt</h3>
-                                        <p>Kayıt işlemlerinizi tamamlayın</p>
+                                        <h3>{% trans "Online Kayıt" %}</h3>
+                                        <p>{% trans "Kayıt işlemlerinizi tamamlayın" %}</p>
                                     </div>
                                     <div class="modern-tab-indicator"></div>
                                 </div>
@@ -75,11 +75,9 @@
                                         <div class="form-hero-icon">
                                             <i class="fas fa-shield-alt"></i>
                                         </div>
-                                        <h2 class="form-hero-title">Güvenli Online Ödeme</h2>
+                                        <h2 class="form-hero-title">{% trans "Güvenli Online Ödeme" %}</h2>
                                         <p class="form-hero-description">
-                                            Ücretli ve %50 İndirimli bölümlerimizi kazanıp eğitim ücret ödemesini
-                                            uzaktan Kredi Kartı yöntemi ile yaptıracak olan öğrencilerimiz aşağıdaki
-                                            formu doldurarak ödeme işlemini gerçekleştirebilir.
+                                            {% trans "Ücretli ve %50 İndirimli bölümlerimizi kazanıp eğitim ücret ödemesini uzaktan Kredi Kartı yöntemi ile yaptıracak olan öğrencilerimiz aşağıdaki formu doldurarak ödeme işlemini gerçekleştirebilir." %}
                                         </p>
                                     </div>
                                 </div>
@@ -87,8 +85,8 @@
                                 <div class="form-container">
                                     <div class="form-card">
                                         <div class="form-card-header">
-                                            <h3><i class="fas fa-file-invoice-dollar"></i> Ödeme Bilgileri</h3>
-                                            <p>Lütfen tüm alanları eksiksiz doldurunuz</p>
+                                            <h3><i class="fas fa-file-invoice-dollar"></i> {% trans "Ödeme Bilgileri" %}</h3>
+                                            <p>{% trans "Lütfen tüm alanları eksiksiz doldurunuz" %}</p>
                                         </div>
 
                                         <form action="{% url 'ogrenci_isleri:submit_payment_form' %}" method="post"
@@ -100,7 +98,7 @@
                                                     <div class="form-section-icon">
                                                         <i class="fas fa-user-circle"></i>
                                                     </div>
-                                                    <h4>Kişisel Bilgiler</h4>
+                                                    <h4>{% trans "Kişisel Bilgiler" %}</h4>
                                                 </div>
 
                                                 <div class="row g-3">
@@ -108,46 +106,46 @@
                                                         <div class="form-group floating-label">
                                                             <input type="text" name="your-name" class="form-control"
                                                                 id="fullName" required>
-                                                            <label for="fullName">Ad Soyad*</label>
+                                                            <label for="fullName">{% trans "Ad Soyad*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label">
                                                             <input type="number" name="number-tc" class="form-control"
                                                                 id="tcNumber" required>
-                                                            <label for="tcNumber">TC Kimlik No*</label>
+                                                            <label for="tcNumber">{% trans "TC Kimlik No*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label">
                                                             <input type="email" name="your-email" class="form-control"
                                                                 id="email" required>
-                                                            <label for="email">E-posta Adresi*</label>
+                                                            <label for="email">{% trans "E-posta Adresi*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Geçerli bir e-posta giriniz</div>
+                                                            <div class="form-error">{% trans "Geçerli bir e-posta giriniz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label with-placeholder">
                                                             <input type="tel" name="tel-gsm" class="form-control"
                                                                 id="phone" required>
-                                                            <label for="phone">Telefon Numarası*</label>
-                                                            <div class="form-placeholder-hint">+90 (5XX) XXX XX XX</div>
+                                                            <label for="phone">{% trans "Telefon Numarası*" %}</label>
+                                                            <div class="form-placeholder-hint">{% trans "+90 (5XX) XXX XX XX" %}</div>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group floating-label">
                                                             <input type="text" name="bolum" class="form-control"
                                                                 id="program" required>
-                                                            <label for="program">Kazandığınız Bölüm/Program*</label>
+                                                            <label for="program">{% trans "Kazandığınız Bölüm/Program*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -159,10 +157,10 @@
                                                     <div class="form-section-icon">
                                                         <i class="fas fa-credit-card"></i>
                                                     </div>
-                                                    <h4>Kart Bilgileri</h4>
+                                                    <h4>{% trans "Kart Bilgileri" %}</h4>
                                                     <div class="form-section-security">
                                                         <i class="fas fa-lock"></i>
-                                                        <span>Güvenli Bağlantı</span>
+                                                        <span>{% trans "Güvenli Bağlantı" %}</span>
                                                     </div>
                                                 </div>
 
@@ -171,37 +169,37 @@
                                                         <div class="form-group floating-label">
                                                             <input type="text" name="bankaname" class="form-control"
                                                                 id="bankName" required>
-                                                            <label for="bankName">Banka Adı*</label>
+                                                            <label for="bankName">{% trans "Banka Adı*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label">
                                                             <input type="text" name="kartno" class="form-control"
                                                                 id="cardNumber" required>
-                                                            <label for="cardNumber">Kart Numarası*</label>
+                                                            <label for="cardNumber">{% trans "Kart Numarası*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label with-placeholder">
                                                             <input type="text" name="kartdate" class="form-control"
                                                                 id="cardExpiry" required>
-                                                            <label for="cardExpiry">Son Kullanma Tarihi*</label>
-                                                            <div class="form-placeholder-hint">MM/YY</div>
+                                                            <label for="cardExpiry">{% trans "Son Kullanma Tarihi*" %}</label>
+                                                            <div class="form-placeholder-hint">{% trans "MM/YY" %}</div>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label">
                                                             <input type="number" name="kartcvc" class="form-control"
                                                                 id="cvc" required>
-                                                            <label for="cvc">CVC Kodu*</label>
+                                                            <label for="cvc">{% trans "CVC Kodu*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,7 +211,7 @@
                                                     <div class="form-section-icon">
                                                         <i class="far fa-credit-card"></i>
                                                     </div>
-                                                    <h4>Ödeme Seçenekleri</h4>
+                                                    <h4>{% trans "Ödeme Seçenekleri" %}</h4>
                                                 </div>
 
                                                 <div class="payment-options-grid">
@@ -226,8 +224,8 @@
                                                                 <i class="fas fa-money-bill-wave"></i>
                                                             </div> {% endcomment %}
                                                             <div class="payment-option-content">
-                                                                <h5>Tek Çekim</h5>
-                                                                <p>Ücretin tamamını kredi kartından tek çekim</p>
+                                                                <h5>{% trans "Tek Çekim" %}</h5>
+                                                                <p>{% trans "Ücretin tamamını kredi kartından tek çekim" %}</p>
                                                             </div>
                                                             <div class="payment-option-check">
                                                                 <i class="fas fa-check"></i>
@@ -244,9 +242,9 @@
                                                                 <i class="fas fa-calendar-alt"></i>
                                                             </div> {% endcomment %}
                                                             <div class="payment-option-content">
-                                                                <h5>Kısmi Taksit</h5>
-                                                                <p>1/3'ü peşin,</p>
-                                                                <p> kalanı taksit</p>
+                                                                <h5>{% trans "Kısmi Taksit" %}</h5>
+                                                                <p>{% trans "1/3'ü peşin," %}</p>
+                                                                <p> {% trans "kalanı taksit" %}</p>
                                                             </div>
                                                             <div class="payment-option-check">
                                                                 <i class="fas fa-check"></i>
@@ -263,8 +261,8 @@
                                                                 <i class="fas fa-university"></i>
                                                             </div> {% endcomment %}
                                                             <div class="payment-option-content">
-                                                                <h5>Nakit + Taksit</h5>
-                                                                <p>1/3'ü nakit, kalanı kredi kartı taksit</p>
+                                                                <h5>{% trans "Nakit + Taksit" %}</h5>
+                                                                <p>{% trans "1/3'ü nakit, kalanı kredi kartı taksit" %}</p>
                                                             </div>
                                                             <div class="payment-option-check">
                                                                 <i class="fas fa-check"></i>
@@ -281,8 +279,8 @@
                                                                 <i class="fas fa-file-invoice"></i>
                                                             </div> {% endcomment %}
                                                             <div class="payment-option-content">
-                                                                <h5>Proforma Fatura</h5>
-                                                                <p>Nakit + Proforma fatura</p>
+                                                                <h5>{% trans "Proforma Fatura" %}</h5>
+                                                                <p>{% trans "Nakit + Proforma fatura" %}</p>
                                                             </div>
                                                             <div class="payment-option-check">
                                                                 <i class="fas fa-check"></i>
@@ -298,7 +296,7 @@
                                                     <div class="form-section-icon">
                                                         <i class="fas fa-file-archive"></i>
                                                     </div>
-                                                    <h4>Belgeler</h4>
+                                                    <h4>{% trans "Belgeler" %}</h4>
                                                 </div>
 
                                                 <div class="file-upload-grid">
@@ -307,15 +305,15 @@
                                                             <i class="fas fa-receipt"></i>
                                                         </div> {% endcomment %}
                                                         <div class="file-upload-content">
-                                                            <h5>Ödeme Dekontu</h5>
-                                                            <p>Eğitim ücretine ait dekont</p>
+                                                            <h5>{% trans "Ödeme Dekontu" %}</h5>
+                                                            <p>{% trans "Eğitim ücretine ait dekont" %}</p>
                                                         </div>
                                                         <div class="file-upload-input">
                                                             <input type="file" name="dekont" id="dekont"
                                                                 accept=".png,.jpg,.jpeg,.pdf" class="file-input">
                                                             <label for="dekont" class="file-upload-label">
                                                                 <i class="fas fa-cloud-upload-alt"></i>
-                                                                <span>Dosya Seç</span>
+                                                                <span>{% trans "Dosya Seç" %}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -325,15 +323,15 @@
                                                             <i class="fas fa-file-certificate"></i>
                                                         </div> {% endcomment %}
                                                         <div class="file-upload-content">
-                                                            <h5>YKS Sonuç Belgesi*</h5>
-                                                            <p>2025 YKS-EK yerleştirme sonucu</p>
+                                                            <h5>{% trans "YKS Sonuç Belgesi*" %}</h5>
+                                                            <p>{% trans "2025 YKS-EK yerleştirme sonucu" %}</p>
                                                         </div>
                                                         <div class="file-upload-input">
                                                             <input type="file" name="yks" id="yks" required
                                                                 accept=".png,.jpg,.jpeg,.pdf" class="file-input">
                                                             <label for="yks" class="file-upload-label">
                                                                 <i class="fas fa-cloud-upload-alt"></i>
-                                                                <span>Dosya Seç</span>
+                                                                <span>{% trans "Dosya Seç" %}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -343,20 +341,20 @@
                                                             <i class="fas fa-user-tie"></i>
                                                         </div> {% endcomment %}
                                                         <div class="file-upload-content">
-                                                            <h5>Proforma Bilgileri</h5>
-                                                            <p>Proforma fatura için gerekli</p>
+                                                            <h5>{% trans "Proforma Bilgileri" %}</h5>
+                                                            <p>{% trans "Proforma fatura için gerekli" %}</p>
                                                         </div>
                                                         <div class="file-upload-input">
                                                             <div class="form-group floating-label mb-3">
                                                                 <input type="text" name="proad" class="form-control"
                                                                     id="proName">
-                                                                <label for="proName">Ad Soyad (Opsiyonel)</label>
+                                                                <label for="proName">{% trans "Ad Soyad (Opsiyonel)" %}</label>
                                                                 <div class="form-underline"></div>
                                                             </div>
                                                             <div class="form-group floating-label">
                                                                 <input type="number" name="protc" class="form-control"
                                                                     id="proTc">
-                                                                <label for="proTc">TC No (Opsiyonel)</label>
+                                                                <label for="proTc">{% trans "TC No (Opsiyonel)" %}</label>
                                                                 <div class="form-underline"></div>
                                                             </div>
                                                         </div>
@@ -376,10 +374,8 @@
                                                                 <i class="fas fa-shield-check"></i>
                                                             </div> {% endcomment %}
                                                             <div class="agreement-content">
-                                                                <h5>Kart Onayı</h5>
-                                                                <p>Kredi Kartım ile işlem yapılması için kartımın mail
-                                                                    order'a açık olduğunu beyan eder, aksi durumda
-                                                                    uygulanacak tüm koşulları kabul ederim.</p>
+                                                                <h5>{% trans "Kart Onayı" %}</h5>
+                                                                <p>{% trans "Kredi Kartım ile işlem yapılması için kartımın mail order'a açık olduğunu beyan eder, aksi durumda uygulanacak tüm koşulları kabul ederim." %}</p>
                                                             </div>
                                                         </label>
                                                     </div>
@@ -392,12 +388,10 @@
                                                                 <i class="fas fa-user-shield"></i>
                                                             </div> {% endcomment %}
                                                             <div class="agreement-content">
-                                                                <h5>KVKK Onayı</h5>
-                                                                <p>"Kişisel Verilerin Korunması Kanunu" kapsamında <a
+                                                                <h5>{% trans "KVKK Onayı" %}</h5>
+                                                                <p>{% trans "\"Kişisel Verilerin Korunması Kanunu\" kapsamında" %} <a
                                                                         href="https://aday.avrasya.edu.tr/?page_id=9768"
-                                                                        target="_blank" class="kvkk-link">Bilgilendirme
-                                                                        ve Aydınlatma Metni</a>ni okudum. (*)
-                                                                    Verileriniz paylaşılmayacaktır.</p>
+                                                                        target="_blank" class="kvkk-link">{% trans "Bilgilendirme ve Aydınlatma Metni" %}</a>{% trans "ni okudum. (*) Verileriniz paylaşılmayacaktır." %}</p>
                                                             </div>
                                                         </label>
                                                     </div>
@@ -407,7 +401,7 @@
                                             <!-- دکمه ارسال -->
                                             <div class="form-submit-section">
                                                 <button type="submit" class="modern-submit-btn">
-                                                    <span class="btn-text">Ödemeyi Tamamla</span>
+                                                    <span class="btn-text">{% trans "Ödemeyi Tamamla" %}</span>
                                                     <span class="btn-icon">
                                                         <i class="fas fa-lock"></i>
                                                     </span>
@@ -418,8 +412,7 @@
 
                                                 <div class="form-info-note">
                                                     <i class="fas fa-info-circle"></i>
-                                                    <p>Formu gönderdikten sonra ödeme işleminiz otomatik olarak
-                                                        başlayacaktır. Lütfen sayfayı kapatmayınız.</p>
+                                                    <p>{% trans "Formu gönderdikten sonra ödeme işleminiz otomatik olarak başlayacaktır. Lütfen sayfayı kapatmayınız." %}</p>
                                                 </div>
                                             </div>
                                         </form>
@@ -438,13 +431,10 @@
                                         <div class="form-hero-icon">
                                             <i class="fas fa-user-plus"></i>
                                         </div>
-                                        <h2 class="form-hero-title">Online Kayıt İşlemleri</h2>
+                                        <h2 class="form-hero-title">{% trans "Online Kayıt İşlemleri" %}</h2>
                                         <p class="form-hero-description">
-                                            Sevgili Öğrencilerimiz, online kaydınızı aşağıdaki formu doldurarak
-                                            gerçekleştirebilirsiniz.
-                                            <strong class="warning-text">NOT: Ücretli ve %50 İndirimli bölümlerimizi
-                                                kazanan öğrencilerimiz ödeme yaptıktan sonra kayıt işlemini
-                                                gerçekleştirmelidirler.</strong>
+                                            {% trans "Sevgili Öğrencilerimiz, online kaydınızı aşağıdaki formu doldurarak gerçekleştirebilirsiniz." %}
+                                            <strong class="warning-text">{% trans "NOT: Ücretli ve %50 İndirimli bölümlerimizi kazanan öğrencilerimiz ödeme yaptıktan sonra kayıt işlemini gerçekleştirmelidirler." %}</strong>
                                         </p>
                                     </div>
                                 </div>
@@ -452,8 +442,8 @@
                                 <div class="form-container">
                                     <div class="form-card">
                                         <div class="form-card-header">
-                                            <h3><i class="fas fa-user-graduate"></i> Kayıt Bilgileri</h3>
-                                            <p>Kayıt için gerekli tüm bilgileri eksiksiz doldurunuz</p>
+                                            <h3><i class="fas fa-user-graduate"></i> {% trans "Kayıt Bilgileri" %}</h3>
+                                            <p>{% trans "Kayıt için gerekli tüm bilgileri eksiksiz doldurunuz" %}</p>
                                         </div>
 
                                         <form action="{% url 'ogrenci_isleri:submit_registration_form' %}" method="post"
@@ -465,7 +455,7 @@
                                                     <div class="form-section-icon">
                                                         <i class="fas fa-id-card"></i>
                                                     </div>
-                                                    <h4>Temel Bilgiler</h4>
+                                                    <h4>{% trans "Temel Bilgiler" %}</h4>
                                                 </div>
 
                                                 <div class="row g-3">
@@ -473,46 +463,46 @@
                                                         <div class="form-group floating-label">
                                                             <input type="text" name="your-name" class="form-control"
                                                                 id="regFullName" required>
-                                                            <label for="regFullName">Ad Soyad*</label>
+                                                            <label for="regFullName">{% trans "Ad Soyad*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label">
                                                             <input type="number" name="number-tc" class="form-control"
                                                                 id="regTcNumber" required>
-                                                            <label for="regTcNumber">TC Kimlik No*</label>
+                                                            <label for="regTcNumber">{% trans "TC Kimlik No*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label">
                                                             <input type="email" name="your-email" class="form-control"
                                                                 id="regEmail" required>
-                                                            <label for="regEmail">E-posta Adresi*</label>
+                                                            <label for="regEmail">{% trans "E-posta Adresi*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Geçerli bir e-posta giriniz</div>
+                                                            <div class="form-error">{% trans "Geçerli bir e-posta giriniz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label with-placeholder">
                                                             <input type="tel" name="tel-gsm" class="form-control"
                                                                 id="regPhone" required>
-                                                            <label for="regPhone">Telefon Numarası*</label>
-                                                            <div class="form-placeholder-hint">+90 (5XX) XXX XX XX</div>
+                                                            <label for="regPhone">{% trans "Telefon Numarası*" %}</label>
+                                                            <div class="form-placeholder-hint">{% trans "+90 (5XX) XXX XX XX" %}</div>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group floating-label">
                                                             <input type="text" name="your-bolum" class="form-control"
                                                                 id="regProgram" required>
-                                                            <label for="regProgram">Kazandığınız Fakülte/Bölüm*</label>
+                                                            <label for="regProgram">{% trans "Kazandığınız Fakülte/Bölüm*" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">Bu alanı doldurunuz</div>
+                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -525,10 +515,10 @@
                                                     <div class="form-section-icon">
                                                         <i class="fas fa-folder-open"></i>
                                                     </div>
-                                                    <h4>Gerekli Belgeler</h4>
+                                                    <h4>{% trans "Gerekli Belgeler" %}</h4>
                                                     <div class="form-section-note">
                                                         <i class="fas fa-exclamation-triangle"></i>
-                                                        <span>Zorunlu belgeler</span>
+                                                        <span>{% trans "Zorunlu belgeler" %}</span>
                                                     </div>
                                                 </div>
 
@@ -538,15 +528,15 @@
                                                             <i class="fas fa-graduation-cap"></i>
                                                         </div> {% endcomment %}
                                                         <div class="document-content">
-                                                            <h5>Lise Diploması*</h5>
-                                                            <p>Lise diploma örneği</p>
+                                                            <h5>{% trans "Lise Diploması*" %}</h5>
+                                                            <p>{% trans "Lise diploma örneği" %}</p>
                                                         </div>
                                                         <div class="document-input">
                                                             <input type="file" name="diploma" id="diploma" required
                                                                 accept=".png,.jpg,.jpeg,.pdf" class="file-input">
                                                             <label for="diploma" class="document-upload-label">
                                                                 <i class="fas fa-upload"></i>
-                                                                <span>Yükle</span>
+                                                                <span>{% trans "Yükle" %}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -556,15 +546,15 @@
                                                             <i class="fas fa-id-badge"></i>
                                                         </div> {% endcomment %}
                                                         <div class="document-content">
-                                                            <h5>Nüfus Cüzdanı*</h5>
-                                                            <p>Arkalı önlü fotokopi</p>
+                                                            <h5>{% trans "Nüfus Cüzdanı*" %}</h5>
+                                                            <p>{% trans "Arkalı önlü fotokopi" %}</p>
                                                         </div>
                                                         <div class="document-input">
                                                             <input type="file" name="kimlik" id="kimlik" required
                                                                 accept=".png,.jpg,.jpeg,.pdf" class="file-input">
                                                             <label for="kimlik" class="document-upload-label">
                                                                 <i class="fas fa-upload"></i>
-                                                                <span>Yükle</span>
+                                                                <span>{% trans "Yükle" %}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -574,15 +564,15 @@
                                                             <i class="fas fa-file-signature"></i>
                                                         </div> {% endcomment %}
                                                         <div class="document-content">
-                                                            <h5>YKS Sonuç Belgesi*</h5>
-                                                            <p>2025 YKS yerleştirme sonucu</p>
+                                                            <h5>{% trans "YKS Sonuç Belgesi*" %}</h5>
+                                                            <p>{% trans "2025 YKS yerleştirme sonucu" %}</p>
                                                         </div>
                                                         <div class="document-input">
                                                             <input type="file" name="yks" id="regYks" required
                                                                 accept=".png,.jpg,.jpeg,.pdf" class="file-input">
                                                             <label for="regYks" class="document-upload-label">
                                                                 <i class="fas fa-upload"></i>
-                                                                <span>Yükle</span>
+                                                                <span>{% trans "Yükle" %}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -592,15 +582,15 @@
                                                             <i class="fas fa-plane"></i>
                                                         </div> {% endcomment %}
                                                         <div class="document-content">
-                                                            <h5>Sağlık Raporu</h5>
-                                                            <p>Sivil Havacılık için</p>
+                                                            <h5>{% trans "Sağlık Raporu" %}</h5>
+                                                            <p>{% trans "Sivil Havacılık için" %}</p>
                                                         </div>
                                                         <div class="document-input">
                                                             <input type="file" name="sivil" id="sivil"
                                                                 accept=".png,.jpg,.jpeg,.pdf" class="file-input">
                                                             <label for="sivil" class="document-upload-label">
                                                                 <i class="fas fa-upload"></i>
-                                                                <span>Yükle</span>
+                                                                <span>{% trans "Yükle" %}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -610,15 +600,15 @@
                                                             <i class="fas fa-receipt"></i>
                                                         </div> {% endcomment %}
                                                         <div class="document-content">
-                                                            <h5>Ödeme Dekontu*</h5>
-                                                            <p>Ücretli bölümler için</p>
+                                                            <h5>{% trans "Ödeme Dekontu*" %}</h5>
+                                                            <p>{% trans "Ücretli bölümler için" %}</p>
                                                         </div>
                                                         <div class="document-input">
                                                             <input type="file" name="dekont" id="regDekont" required
                                                                 accept=".png,.jpg,.jpeg,.pdf" class="file-input">
                                                             <label for="regDekont" class="document-upload-label">
                                                                 <i class="fas fa-upload"></i>
-                                                                <span>Yükle</span>
+                                                                <span>{% trans "Yükle" %}</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -633,7 +623,7 @@
                                                     <div class="form-section-icon">
                                                         <i class="fas fa-handshake"></i>
                                                     </div>
-                                                    <h4>Beyan ve Kabul</h4>
+                                                    <h4>{% trans "Beyan ve Kabul" %}</h4>
                                                 </div>
 
                                                 <div class="agreement-cards">
@@ -645,13 +635,8 @@
                                                                 <i class="fas fa-calendar-check"></i>
                                                             </div> {% endcomment %}
                                                             <div class="agreement-content">
-                                                                <h5>Kayıt ve Evrak Teslim Beyanı</h5>
-                                                                <p>Üniversiteye kesin kayıt işlemimin online olarak
-                                                                    yapılmasını talep eder, kayıtta istenilen asıl
-                                                                    evrakların Öğrenci İşleri Daire Başkanlığı'na
-                                                                    tarafımca 31 Ekim 2025 tarihine kadar elden teslim
-                                                                    edeceğimi beyan ederim. Aksi durumda uygulanacak tüm
-                                                                    koşulları kabul ediyorum.</p>
+                                                                <h5>{% trans "Kayıt ve Evrak Teslim Beyanı" %}</h5>
+                                                                <p>{% trans "Üniversiteye kesin kayıt işlemimin online olarak yapılmasını talep eder, kayıtta istenilen asıl evrakların Öğrenci İşleri Daire Başkanlığı'na tarafımca 31 Ekim 2025 tarihine kadar elden teslim edeceğimi beyan ederim. Aksi durumda uygulanacak tüm koşulları kabul ediyorum." %}</p>
                                                             </div>
                                                         </label>
                                                     </div>
@@ -664,13 +649,10 @@
                                                                 <i class="fas fa-file-alt"></i>
                                                             </div> {% endcomment %}
                                                             <div class="agreement-content">
-                                                                <h5>Beyanname Kabulü</h5>
+                                                                <h5>{% trans "Beyanname Kabulü" %}</h5>
                                                                 <p><a href="https://avrasya.edu.tr/wp-content/uploads/2023/09/BEYANNAME_16.08.2019-kayit.pdf"
-                                                                        target="_blank" class="kvkk-link">Beyanname</a>
-                                                                    kapsamında bildirilen tüm şartları okudum ve kabul
-                                                                    ediyorum. Beyannamenin ıslak imzalı aslını Öğrenci
-                                                                    İşleri Daire Başkanlığı'na 31 Ekim 2025 tarihine
-                                                                    kadar elden teslim edeceğimi beyan ederim.</p>
+                                                                        target="_blank" class="kvkk-link">{% trans "Beyanname" %}</a>
+                                                                    {% trans "kapsamında bildirilen tüm şartları okudum ve kabul ediyorum. Beyannamenin ıslak imzalı aslını Öğrenci İşleri Daire Başkanlığı'na 31 Ekim 2025 tarihine kadar elden teslim edeceğimi beyan ederim." %}</p>
                                                             </div>
                                                         </label>
                                                     </div>
@@ -683,14 +665,9 @@
                                                                 <i class="fas fa-handshake"></i>
                                                             </div> {% endcomment %}
                                                             <div class="agreement-content">
-                                                                <h5>Sözleşme Kabulü</h5>
+                                                                <h5>{% trans "Sözleşme Kabulü" %}</h5>
                                                                 <p><a href="https://avrasya.edu.tr/wp-content/uploads/2025/08/ogrenci-sozlesmesi-27.08.2025.pdf"
-                                                                        target="_blank" class="kvkk-link">Eğitim ve
-                                                                        Öğretim Sözleşmesi</a> kapsamında bildirilen tüm
-                                                                    şartları okudum ve kabul ediyorum. Sözleşmenin ıslak
-                                                                    imzalı aslını Öğrenci İşleri Daire Başkanlığı'na 31
-                                                                    Ekim 2025 tarihine kadar elden teslim edeceğimi
-                                                                    beyan ederim.</p>
+                                                                        target="_blank" class="kvkk-link">{% trans "Eğitim ve Öğretim Sözleşmesi" %}</a> {% trans "kapsamında bildirilen tüm şartları okudum ve kabul ediyorum. Sözleşmenin ıslak imzalı aslını Öğrenci İşleri Daire Başkanlığı'na 31 Ekim 2025 tarihine kadar elden teslim edeceğimi beyan ederim." %}</p>
                                                             </div>
                                                         </label>
                                                     </div>
@@ -703,12 +680,10 @@
                                                                 <i class="fas fa-user-shield"></i>
                                                             </div> {% endcomment %}
                                                             <div class="agreement-content">
-                                                                <h5>KVKK Onayı</h5>
-                                                                <p>"Kişisel Verilerin Korunması Kanunu" kapsamında <a
+                                                                <h5>{% trans "KVKK Onayı" %}</h5>
+                                                                <p>{% trans "\"Kişisel Verilerin Korunması Kanunu\" kapsamında" %} <a
                                                                         href="https://aday.avrasya.edu.tr/?page_id=9768"
-                                                                        target="_blank" class="kvkk-link">Bilgilendirme
-                                                                        ve Aydınlatma Metni</a>ni okudum. (*)
-                                                                    Verileriniz paylaşılmayacaktır.</p>
+                                                                        target="_blank" class="kvkk-link">{% trans "Bilgilendirme ve Aydınlatma Metni" %}</a>{% trans "ni okudum. (*) Verileriniz paylaşılmayacaktır." %}</p>
                                                             </div>
                                                         </label>
                                                     </div>
@@ -718,7 +693,7 @@
                                             <!-- دکمه ارسال -->
                                             <div class="form-submit-section">
                                                 <button type="submit" class="modern-submit-btn">
-                                                    <span class="btn-text">Kaydı Tamamla</span>
+                                                    <span class="btn-text">{% trans "Kaydı Tamamla" %}</span>
                                                     <span class="btn-icon">
                                                         <i class="fas fa-check-circle"></i>
                                                     </span>
@@ -729,8 +704,7 @@
 
                                                 <div class="form-info-note">
                                                     <i class="fas fa-clock"></i>
-                                                    <p>Kayıt işleminiz tamamlandıktan sonra en geç 2 iş günü içinde
-                                                        e-posta ile bilgilendirileceksiniz.</p>
+                                                    <p>{% trans "Kayıt işleminiz tamamlandıktan sonra en geç 2 iş günü içinde e-posta ile bilgilendirileceksiniz." %}</p>
                                                 </div>
                                             </div>
                                         </form>

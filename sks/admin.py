@@ -1,4 +1,5 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     News, Announcement, Category
 )
@@ -14,7 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_editable = ['is_active']
 
 @admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(TranslationAdmin):
     list_display = [
         'title', 'news_type', 'category', 'is_featured', 
         'is_published', 'published_at', 'views_count', 'image_preview'
@@ -69,7 +70,7 @@ class NewsAdmin(admin.ModelAdmin):
     make_unfeatured.short_description = _('Öne Çıkarılanı Kaldır')
 
 @admin.register(Announcement)
-class AnnouncementAdmin(admin.ModelAdmin):
+class AnnouncementAdmin(TranslationAdmin):
     list_display = ['title', 'announcement_date', 'is_important', 'is_active', 'created_at']
     list_filter = ['is_important', 'is_active', 'announcement_date']
     search_fields = ['title', 'content', 'summary']

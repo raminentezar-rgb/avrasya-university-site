@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}{{ etkinlik.baslik }} - Avrasya Üniversitesi{% endblock %}
 {% block content %}
@@ -7,8 +8,8 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'core:index' %}" class="text-decoration-none">Ana Sayfa</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'etkinlikler:liste' %}" class="text-decoration-none">Etkinlikler</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'core:index' %}" class="text-decoration-none">{% trans "Ana Sayfa" %}</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'etkinlikler:liste' %}" class="text-decoration-none">{% trans "Etkinlikler" %}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ etkinlik.baslik|truncatewords:4 }}</li>
             </ol>
         </nav>
@@ -38,7 +39,7 @@
                         <div class="col-md-4 text-md-end">
                             {% if etkinlik.kayit_gerekiyor %}
                             <span class="badge bg-warning text-dark fs-6">
-                                <i class="fas fa-user-check me-2"></i> Kayıt Gerekli
+                                <i class="fas fa-user-check me-2"></i> {% trans "Kayıt Gerekli" %}
                             </span>
                             {% endif %}
                         </div>
@@ -59,7 +60,7 @@
                                     <div class="d-flex align-items-center mb-3">
                                         <i class="fas fa-calendar-day text-medium-blue fs-2 me-3"></i>
                                         <div>
-                                            <h2 class="text-muted mb-1" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">Tarih & Saat</h2><br>
+                                            <h2 class="text-muted mb-1" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Tarih & Saat" %}</h2><br>
                                             <h3 class="fw-bold text-dark-blue mb-0">
                                                 {{ etkinlik.baslangic_tarihi|date:'d F Y' }}
                                                 {% if etkinlik.baslangic_tarihi|date:'H:i' != '00:00' %}
@@ -75,7 +76,7 @@
                                     <div class="d-flex align-items-center mb-3">
                                         <i class="fas fa-map-marker-alt text-medium-blue fs-2 me-3"></i>
                                         <div>
-                                            <h2 class="text-muted mb-1" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">Yer</h2><br>
+                                            <h2 class="text-muted mb-1" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Yer" %}</h2><br>
                                             <h3 class="fw-bold text-dark-blue mb-0">{{ etkinlik.yer }}</h3>
                                         </div>
                                     </div>
@@ -87,7 +88,7 @@
                         {% if etkinlik.kisa_aciklama %}
                         <div class="alert alert-light-blue border-0 rounded-3 p-4 mb-5">
                             <h3 class="text-dark-blue mb-3" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">
-                                <i class="fas fa-star me-2"></i> Etkinlik Özeti
+                                <i class="fas fa-star me-2"></i> {% trans "Etkinlik Özeti" %}
                             </h3>
                             <p class="mb-0 fs-5">{{ etkinlik.kisa_aciklama }}</p>
                         </div>
@@ -95,7 +96,7 @@
 
                         <!-- Detaylı Açıklama -->
                         <div class="content mb-5">
-                            <h3 class="text-dark-blue mb-4" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">Etkinlik Detayları</h3>
+                            <h3 class="text-dark-blue mb-4" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Etkinlik Detayları" %}</h3>
                             <div class="content-text">
                                 {{ etkinlik.detayli_aciklama|linebreaks }}
                             </div>
@@ -110,19 +111,19 @@
                                 
                                 {% if etkinlik.katilim_linki %}
                                 <a href="{{ etkinlik.katilim_linki }}" target="_blank" class="btn btn-primary btn-lg w-100 mb-3">
-                                    <i class="fas fa-external-link-alt me-2"></i> Etkinliğe Katıl
+                                    <i class="fas fa-external-link-alt me-2"></i> {% trans "Etkinliğe Katıl" %}
                                 </a>
                                 {% endif %}
                                 
                                 {% if etkinlik.kayit_gerekiyor %}
                                 <button class="btn btn-outline-primary btn-lg w-100 mb-3">
-                                    <i class="fas fa-user-plus me-2"></i> Kayıt Ol
+                                    <i class="fas fa-user-plus me-2"></i> {% trans "Kayıt Ol" %}
                                 </button>
                                 {% endif %}
                                 
                                 <!-- Paylaş Butonu -->
                                 <button type="button" class="btn btn-outline-secondary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#shareModal" style="font-family: 'Metropolis', sans-serif; font-weight: 800; color: var(--secondary-medium-blue);">
-                                    <i class="fas fa-share-alt me-2"></i> Paylaş
+                                    <i class="fas fa-share-alt me-2"></i> {% trans "Paylaş" %}
                                 </button>
                                 
                             </div>
@@ -132,14 +133,14 @@
                         <div class="card info-card-sidebar border-0 rounded-3 shadow-sm">
                             <div class="card-body p-4">
                                 <h3 class="text-dark-blue mb-4" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">
-                                    <i class="fas fa-info-circle me-2"></i> Etkinlik Bilgileri
+                                    <i class="fas fa-info-circle me-2"></i> {% trans "Etkinlik Bilgileri" %}
                                 </h3>
                                 
                                 <div class="info-list">
                                     <div class="info-item d-flex align-items-center mb-3">
                                         <i class="fas fa-tag text-medium-blue me-3"></i>
                                         <div>
-                                            <small class="text-muted">Tür</small>
+                                            <small class="text-muted">{% trans "Tür" %}</small>
                                             <div class="fw-semibold text-dark-blue">{{ etkinlik.get_etkinlik_turu_display }}</div>
                                         </div>
                                     </div>
@@ -147,7 +148,7 @@
                                     <div class="info-item d-flex align-items-center mb-3">
                                         <i class="fas fa-clock text-medium-blue me-3"></i>
                                         <div>
-                                            <small class="text-muted">Süre</small>
+                                            <small class="text-muted">{% trans "Süre" %}</small>
                                             <div class="fw-semibold text-dark-blue">
                                                 {{ etkinlik.baslangic_tarihi|date:'H:i' }}
                                                 {% if etkinlik.bitis_tarihi %}
@@ -160,7 +161,7 @@
                                     <div class="info-item d-flex align-items-center mb-3">
                                         <i class="fas fa-money-bill text-medium-blue me-3"></i>
                                         <div>
-                                            <small class="text-muted">Ücret</small>
+                                            <small class="text-muted">{% trans "Ücret" %}</small>
                                             <div class="fw-semibold text-dark-blue">
                                                 {% if etkinlik.ucretli %}Ücretli{% else %}Ücretsiz{% endif %}
                                             </div>
@@ -170,7 +171,7 @@
                                     <div class="info-item d-flex align-items-center">
                                         <i class="fas fa-users text-medium-blue me-3"></i>
                                         <div>
-                                            <small class="text-muted">Katılım</small>
+                                            <small class="text-muted">{% trans "Katılım" %}</small>
                                             <div class="fw-semibold text-dark-blue">
                                                 {% if etkinlik.kayit_gerekiyor %}Kayıt Gerekli{% else %}Açık Katılım{% endif %}
                                             </div>
@@ -187,10 +188,10 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <a href="{% url 'etkinlikler:liste' %}" class="btn btn-outline-primary btn-lg">
-                                <i class="fas fa-arrow-left me-2"></i> Tüm Etkinliklere Dön
+                                <i class="fas fa-arrow-left me-2"></i> {% trans "Tüm Etkinliklere Dön" %}
                             </a>
                             <a href="{% url 'etkinlikler:yaklasan' %}" class="btn btn-outline-secondary btn-lg">
-                                <i class="fas fa-calendar me-2"></i> Yaklaşan Etkinlikler
+                                <i class="fas fa-calendar me-2"></i> {% trans "Yaklaşan Etkinlikler" %}
                             </a>
                         </div>
                     </div>
@@ -207,9 +208,9 @@
             <div class="modal-header" style="border-bottom: 1px solid #eef2f6; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%); padding: 1.5rem 2rem;">
                 <div>
                     <h5 class="modal-title fw-bold" id="shareModalLabel" style="color: var(--primary-dark-blue); font-size: 1.25rem;">
-                        <i class="fas fa-share-alt me-2" style="color: var(--secondary-medium-blue);"></i> Bu Etkinliği Paylaş
+                        <i class="fas fa-share-alt me-2" style="color: var(--secondary-medium-blue);"></i> {% trans "Bu Etkinliği Paylaş" %}
                     </h5>
-                    <p class="text-muted mb-0 mt-1" style="font-size: 0.85rem;">Arkadaşlarınızı bu harika etkinliğe davet edin!</p>
+                    <p class="text-muted mb-0 mt-1" style="font-size: 0.85rem;">{% trans "Arkadaşlarınızı bu harika etkinliğe davet edin!" %}</p>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -234,7 +235,7 @@
                 </div>
                 
                 <!-- Paylaşım Seçenekleri - Grid Tasarımı -->
-                <h6 class="text-muted mb-3" style="font-size: 0.85rem; letter-spacing: 1px;">PLATFORMLAR</h6>
+                <h6 class="text-muted mb-3" style="font-size: 0.85rem; letter-spacing: 1px;">{% trans "PLATFORMLAR" %}</h6>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin-bottom: 1.5rem;">
                     
@@ -244,7 +245,7 @@
                             <div style="width: 48px; height: 48px; background: #DCF8C5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;">
                                 <i class="fab fa-whatsapp" style="font-size: 28px; color: #25D366;"></i>
                             </div>
-                            <span style="font-size: 12px; font-weight: 600; color: #333;">WhatsApp</span>
+                            <span style="font-size: 12px; font-weight: 600; color: #333;">{% trans "WhatsApp" %}</span>
                         </div>
                     </a>
                     
@@ -254,7 +255,7 @@
                             <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #feda77, #f58529, #dd2a7b, #8134af, #515bd4); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;">
                                 <i class="fab fa-instagram" style="font-size: 28px; color: white;"></i>
                             </div>
-                            <span style="font-size: 12px; font-weight: 600; color: #333;">Instagram</span>
+                            <span style="font-size: 12px; font-weight: 600; color: #333;">{% trans "Instagram" %}</span>
                         </div>
                     </a>
                     
@@ -264,7 +265,7 @@
                             <div style="width: 48px; height: 48px; background: #E8F4FD; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;">
                                 <i class="fab fa-twitter" style="font-size: 28px; color: #1DA1F2;"></i>
                             </div>
-                            <span style="font-size: 12px; font-weight: 600; color: #333;">Twitter</span>
+                            <span style="font-size: 12px; font-weight: 600; color: #333;">{% trans "Twitter" %}</span>
                         </div>
                     </a>
                     
@@ -274,7 +275,7 @@
                             <div style="width: 48px; height: 48px; background: #E7F0FD; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;">
                                 <i class="fab fa-facebook-f" style="font-size: 28px; color: #1877F2;"></i>
                             </div>
-                            <span style="font-size: 12px; font-weight: 600; color: #333;">Facebook</span>
+                            <span style="font-size: 12px; font-weight: 600; color: #333;">{% trans "Facebook" %}</span>
                         </div>
                     </a>
                     
@@ -284,7 +285,7 @@
                             <div style="width: 48px; height: 48px; background: #E8F0FC; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;">
                                 <i class="fab fa-linkedin-in" style="font-size: 28px; color: #0A66C2;"></i>
                             </div>
-                            <span style="font-size: 12px; font-weight: 600; color: #333;">LinkedIn</span>
+                            <span style="font-size: 12px; font-weight: 600; color: #333;">{% trans "LinkedIn" %}</span>
                         </div>
                     </a>
                     
@@ -294,7 +295,7 @@
                             <div style="width: 48px; height: 48px; background: #E8F4FE; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;">
                                 <i class="fab fa-telegram-plane" style="font-size: 28px; color: #26A5E4;"></i>
                             </div>
-                            <span style="font-size: 12px; font-weight: 600; color: #333;">Telegram</span>
+                            <span style="font-size: 12px; font-weight: 600; color: #333;">{% trans "Telegram" %}</span>
                         </div>
                     </a>
                     
@@ -304,7 +305,7 @@
                             <div style="width: 48px; height: 48px; background: #F8F9FA; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;">
                                 <i class="fa fa-envelope" style="font-size: 28px; color: #6c757d;"></i>
                             </div>
-                            <span style="font-size: 12px; font-weight: 600; color: #333;">E-posta</span>
+                            <span style="font-size: 12px; font-weight: 600; color: #333;">{% trans "E-posta" %}</span>
                         </div>
                     </a>
                     
@@ -314,7 +315,7 @@
                             <div style="width: 48px; height: 48px; background: #E8F0F8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;">
                                 <i class="fa fa-link" style="font-size: 28px; color: var(--primary-dark-blue);"></i>
                             </div>
-                            <span style="font-size: 12px; font-weight: 600; color: #333;">Kopyala</span>
+                            <span style="font-size: 12px; font-weight: 600; color: #333;">{% trans "Kopyala" %}</span>
                         </div>
                     </button>
                 </div>
@@ -324,14 +325,14 @@
                     <div class="d-flex align-items-center justify-content-between gap-2">
                         <code style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;">{{ request.build_absolute_uri }}</code>
                         <button class="btn btn-sm btn-outline-secondary" id="copyLinkBtn2" style="border-radius: 10px; padding: 6px 14px; font-size: 12px;">
-                            <i class="fas fa-copy me-1"></i> Kopyala
+                            <i class="fas fa-copy me-1"></i> {% trans "Kopyala" %}
                         </button>
                     </div>
                 </div>
                 
                 <!-- Başarılı kopyalama mesajı -->
                 <div id="copySuccessMsg" class="alert alert-success mt-3 text-center" style="display: none; border-radius: 12px; font-size: 13px; padding: 10px;">
-                    <i class="fas fa-check-circle me-2"></i> Link başarıyla kopyalandı!
+                    <i class="fas fa-check-circle me-2"></i> {% trans "Link başarıyla kopyalandı!" %}
                 </div>
             </div>
         </div>

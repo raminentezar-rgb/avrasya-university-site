@@ -1,4 +1,5 @@
 {% extends 'idari_birimler/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Kütüphane ve Dökümantasyon Daire Başkanlığı
 {% endblock %}
@@ -9,7 +10,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Kütüphane ve Dökümantasyon Daire Başkanlığı
+            <h1>{% trans "Kütüphane ve Dökümantasyon Daire Başkanlığı" %}
 </h1>
             <p></p>
         </div>
@@ -31,24 +32,24 @@
                 <!-- بخش تب‌های اطلاعات دانشجویی -->
                 <div class="ogrenci-isleri-tab-section">
                     {% comment %} <div class="page-intro">
-                        <h2 class="section-title">Kütüphane ve Dökümantasyon Daire Başkanlığı</h2>
-                        <p class="section-subtitle">Kütüphane ve Dökümantasyon Daire Başkanlığı hakkında tüm bilgilere aşağıdaki sekmelerden ulaşabilirsiniz.</p>
+                        <h2 class="section-title">{% trans "Kütüphane ve Dökümantasyon Daire Başkanlığı" %}</h2>
+                        <p class="section-subtitle">{% trans "Kütüphane ve Dökümantasyon Daire Başkanlığı hakkında tüm bilgilere aşağıdaki sekmelerden ulaşabilirsiniz." %}</p>
                     </div> {% endcomment %}
                     
                     <div class="tab-container">
                         <div class="tab-header">
                             <ul class="tab-menu">
                                 <li class="tab-menu-item active" data-tab="tab1">
-                                    <i class="fas fa-university"></i> Başkanlığımız
+                                    <i class="fas fa-university"></i> {% trans "Başkanlığımız" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab2">
-                                    <i class="fas fa-bullseye"></i> Misyon & Vizyon
+                                    <i class="fas fa-bullseye"></i> {% trans "Misyon & Vizyon" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab3">
-                                    <i class="fas fa-users"></i> Personel
+                                    <i class="fas fa-users"></i> {% trans "Personel" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab4">
-                                    <i class="fas fa-address-book"></i> İletişim
+                                    <i class="fas fa-address-book"></i> {% trans "İletişim" %}
                                 </li>
                             </ul>
                         </div>
@@ -57,28 +58,28 @@
                             <!-- Tab 1: Başkanlığımız -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-university"></i> Kütüphane ve Dökümantasyon Daire Başkanlığı</h3>
+                                    <h3><i class="fas fa-university"></i> {% trans "Kütüphane ve Dökümantasyon Daire Başkanlığı" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
-                                    <p>Kütüphane ve Dökümantasyon Daire Başkanlığı olarak kütüphane ve dökümantasyon hizmetlerinin etkin bir şekilde yürütülmesi için gerekli tüm hizmetleri sunmakta, Üniversitemizin kütüphane ve dökümantasyon işlerinin planlanan süreçler doğrultusunda yürütülmesini sağlamakta, çalışanların kendi potansiyellerini ortaya koyduğu ve paydaşları ile karşılıklı etkileşim içinde, geri bildirime dayalı istekler doğrultusunda değişime açık altyapıya sahip bir birim olma çabasındayız.</p>
+                                    <p>{% trans "Kütüphane ve Dökümantasyon Daire Başkanlığı olarak kütüphane ve dökümantasyon hizmetlerinin etkin bir şekilde yürütülmesi için gerekli tüm hizmetleri sunmakta, Üniversitemizin kütüphane ve dökümantasyon işlerinin planlanan süreçler doğrultusunda yürütülmesini sağlamakta, çalışanların kendi potansiyellerini ortaya koyduğu ve paydaşları ile karşılıklı etkileşim içinde, geri bildirime dayalı istekler doğrultusunda değişime açık altyapıya sahip bir birim olma çabasındayız." %}</p>
                                     
-                                    <p><strong><em>KÜTÜPHANE VE DÖKÜMANTASYON</em> sayfası için <a href="{% url 'idari_birimler:kutuphane_dokumantasyon' %}" target="_blank" class="external-link">tıklayınız.</a></strong></p>
+                                    <p><strong><em>{% trans "KÜTÜPHANE VE DÖKÜMANTASYON" %}</em> {% trans "sayfası için" %} <a href="{% url 'idari_birimler:kutuphane_dokumantasyon' %}" target="_blank" class="external-link">{% trans "tıklayınız." %}</a></strong></p>
                                     
                                     <div class="highlight-box">
-                                        <h4><i class="fas fa-tasks"></i> YETKİ, GÖREV VE SORUMLULUKLAR</h4>
-                                        <p>Misyon ve vizyon çerçevesinde; çağın teknolojik değişimlerini yakalayarak, Öğrenci otomasyon sisteminin koordinasyonunu sağlamak ve ilk kayıttan mezuniyete kadar süren;</p>
+                                        <h4><i class="fas fa-tasks"></i> {% trans "YETKİ, GÖREV VE SORUMLULUKLAR" %}</h4>
+                                        <p>{% trans "Misyon ve vizyon çerçevesinde; çağın teknolojik değişimlerini yakalayarak, Öğrenci otomasyon sisteminin koordinasyonunu sağlamak ve ilk kayıttan mezuniyete kadar süren;" %}</p>
                                         <ol class="responsibilities-list">
-                                            <li><i class="fas fa-check-circle"></i> Yeni öğrencilerin kayıt işlemlerinin organizasyonu,</li>
-                                            <li><i class="fas fa-check-circle"></i> Her dönem yapılan kayıt yenileme ve ders kayıt işlemlerinin organizasyonu,</li>
-                                            <li><i class="fas fa-check-circle"></i> Burs/İndirim işlemlerinin takibi,</li>
-                                            <li><i class="fas fa-check-circle"></i> İstatistiksel bilgilerin hazırlanması,</li>
-                                            <li><i class="fas fa-check-circle"></i> Akademik takvimin hazırlanması,</li>
-                                            <li><i class="fas fa-check-circle"></i> Diploma basım işlemleri,</li>
-                                            <li><i class="fas fa-check-circle"></i> Öğrenci Kimlik Kartı basım işlemleri,</li>
-                                            <li><i class="fas fa-check-circle"></i> Öğrenci kayıt işlemleri ile ilgili kılavuzları hazırlamak ve ilan etmek,</li>
-                                            <li><i class="fas fa-check-circle"></i> Öğrencilerle ilgili her türlü duyuruları yayınlamak,</li>
-                                            <li><i class="fas fa-check-circle"></i> YÖK, ÖSYM, Valilik, KYK, diğer kurum ve kuruluşlar ile Üniversitemizin birimleri ile yazışmaların yapılmasını sağlamak,</li>
-                                            <li><i class="fas fa-check-circle"></i> Ve varsa diğer görevleri yerine getirmek,</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Yeni öğrencilerin kayıt işlemlerinin organizasyonu," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Her dönem yapılan kayıt yenileme ve ders kayıt işlemlerinin organizasyonu," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Burs/İndirim işlemlerinin takibi," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "İstatistiksel bilgilerin hazırlanması," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Akademik takvimin hazırlanması," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Diploma basım işlemleri," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Öğrenci Kimlik Kartı basım işlemleri," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Öğrenci kayıt işlemleri ile ilgili kılavuzları hazırlamak ve ilan etmek," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Öğrencilerle ilgili her türlü duyuruları yayınlamak," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "YÖK, ÖSYM, Valilik, KYK, diğer kurum ve kuruluşlar ile Üniversitemizin birimleri ile yazışmaların yapılmasını sağlamak," %}</li>
+                                            <li><i class="fas fa-check-circle"></i> {% trans "Ve varsa diğer görevleri yerine getirmek," %}</li>
                                         </ol>
                                     </div>
                                 </div>
@@ -87,7 +88,7 @@
                             <!-- Tab 2: Misyon & Vizyon -->
                             <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-bullseye"></i> Misyon & Vizyon</h3>
+                                    <h3><i class="fas fa-bullseye"></i> {% trans "Misyon & Vizyon" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="mission-vision-container">
@@ -95,16 +96,16 @@
                                             <div class="mv-icon">
                                                 <i class="fas fa-flag"></i>
                                             </div>
-                                            <h4>MİSYONUMUZ</h4>
-                                            <p>Öğrenci merkezli; teknolojik yenilikleri etkin kullanan, çalışanların kendi potansiyellerini ortaya koyduğu ve paydaşları ile karşılıklı etkileşim içinde, geri bildirime dayalı istekler doğrultusunda değişime açık altyapıya sahip; Üniversitenin diğer birimleri ile işbirliği yaparak eğitim ve öğretime katkıda bulunan, tüm paydaşlarımızın memnuniyetinin üst düzeyde olduğu hizmetler ile Üniversitemizde örnek bir birim olmaktır.</p>
+                                            <h4>{% trans "MİSYONUMUZ" %}</h4>
+                                            <p>{% trans "Öğrenci merkezli; teknolojik yenilikleri etkin kullanan, çalışanların kendi potansiyellerini ortaya koyduğu ve paydaşları ile karşılıklı etkileşim içinde, geri bildirime dayalı istekler doğrultusunda değişime açık altyapıya sahip; Üniversitenin diğer birimleri ile işbirliği yaparak eğitim ve öğretime katkıda bulunan, tüm paydaşlarımızın memnuniyetinin üst düzeyde olduğu hizmetler ile Üniversitemizde örnek bir birim olmaktır." %}</p>
                                         </div>
                                         
                                         <div class="vision-box">
                                             <div class="mv-icon">
                                                 <i class="fas fa-eye"></i>
                                             </div>
-                                            <h4>VİZYONUMUZ</h4>
-                                            <p>Üniversitemizin benimsediği vizyon çerçevesinde eğitim-öğretim etkinliklerinin verimli bir biçimde gerçekleştirilmesinde gerekli bilgi kaynaklarını iç ve dış paydaşların hizmetine en iyi ve hızlı bir biçimde sunabilmektir.</p>
+                                            <h4>{% trans "VİZYONUMUZ" %}</h4>
+                                            <p>{% trans "Üniversitemizin benimsediği vizyon çerçevesinde eğitim-öğretim etkinliklerinin verimli bir biçimde gerçekleştirilmesinde gerekli bilgi kaynaklarını iç ve dış paydaşların hizmetine en iyi ve hızlı bir biçimde sunabilmektir." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +114,7 @@
                             <!-- Tab 3: Personel -->
                             <div class="tab-content" id="tab3">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-users"></i> Personel Bilgisi</h3>
+                                    <h3><i class="fas fa-users"></i> {% trans "Personel Bilgisi" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="personnel-container">
@@ -122,8 +123,8 @@
                                                 <i class="fa fa-female"></i>
                                             </div>
                                             <div class="personnel-info">
-                                                <h4>Elif ALTUNTAŞ</h4>
-                                                <p class="personnel-title">Öğrenci İşleri Daire Başkanı</p>
+                                                <h4>{% trans "Elif ALTUNTAŞ" %}</h4>
+                                                <p class="personnel-title">{% trans "Öğrenci İşleri Daire Başkanı" %}</p>
                                             </div>
                                         </div>
                                         
@@ -132,8 +133,8 @@
                                                 <i class="fa fa-male"></i>
                                             </div>
                                             <div class="personnel-info">
-                                                <h4>Fahrettin GENÇ</h4>
-                                                <p class="personnel-title">Evrak Memuru</p>
+                                                <h4>{% trans "Fahrettin GENÇ" %}</h4>
+                                                <p class="personnel-title">{% trans "Evrak Memuru" %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -143,48 +144,48 @@
                             <!-- Tab 4: İletişim -->
                             <div class="tab-content" id="tab4">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-address-book"></i> İletişim Bilgileri</h3>
+                                    <h3><i class="fas fa-address-book"></i> {% trans "İletişim Bilgileri" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="contact-info-section">
                                         <div class="contact-header">
-                                            <h4>Avrasya Üniversitesi Öğrenci İşleri Daire Başkanlığı</h4>
+                                            <h4>{% trans "Avrasya Üniversitesi Öğrenci İşleri Daire Başkanlığı" %}</h4>
                                         </div>
                                         
                                         <div class="contact-details">
                                             <div class="contact-item">
                                                 <i class="fas fa-map-marker-alt"></i>
                                                 <div>
-                                                    <strong>Adres:</strong>
-                                                    <p>Pelitli Mahallesi Olimpiyat Bulvarı No:35/A Ortahisar/Trabzon</p>
+                                                    <strong>{% trans "Adres:" %}</strong>
+                                                    <p>{% trans "Pelitli Mahallesi Olimpiyat Bulvarı No:35/A Ortahisar/Trabzon" %}</p>
                                                 </div>
                                             </div>
                                             
                                             <div class="contact-item">
                                                 <i class="fas fa-envelope"></i>
                                                 <div>
-                                                    <strong>E-Posta:</strong>
-                                                    <p><a href="mailto:ogrenciisleri@avrasya.edu.tr">ogrenciisleri@avrasya.edu.tr</a></p>
+                                                    <strong>{% trans "E-Posta:" %}</strong>
+                                                    <p><a href="mailto:ogrenciisleri@avrasya.edu.tr">{% trans "ogrenciisleri@avrasya.edu.tr" %}</a></p>
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         <div class="personnel-contact">
                                             <div class="person-contact-card">
-                                                <h5><i class="fas fa-user-tie"></i> Elif ALTUNTAŞ - Öğrenci İşleri Daire Başkanı</h5>
+                                                <h5><i class="fas fa-user-tie"></i> {% trans "Elif ALTUNTAŞ - Öğrenci İşleri Daire Başkanı" %}</h5>
                                                 <div class="contact-details">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:elif.altuntas@avrasya.edu.tr">elif.altuntas@avrasya.edu.tr</a></p>
-                                                    <p><i class="fas fa-phone"></i> Tel: 0462 3346444 Dahili: 1238</p>
-                                                    <p><i class="fas fa-fax"></i> Faks: 0462 3346454</p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:elif.altuntas@avrasya.edu.tr">{% trans "elif.altuntas@avrasya.edu.tr" %}</a></p>
+                                                    <p><i class="fas fa-phone"></i> {% trans "Tel: 0462 3346444 Dahili: 1238" %}</p>
+                                                    <p><i class="fas fa-fax"></i> {% trans "Faks: 0462 3346454" %}</p>
                                                 </div>
                                             </div>
                                             
                                             <div class="person-contact-card">
-                                                <h5><i class="fas fa-user"></i> Fahrettin GENÇ - Evrak Memuru</h5>
+                                                <h5><i class="fas fa-user"></i> {% trans "Fahrettin GENÇ - Evrak Memuru" %}</h5>
                                                 <div class="contact-details">
-                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:fahrettin.genc@avrasya.edu.tr">fahrettin.genc@avrasya.edu.tr</a></p>
-                                                    <p><i class="fas fa-phone"></i> Tel: 0462 3346444 Dahili: 1236</p>
-                                                    <p><i class="fas fa-fax"></i> Faks: 0462 3346454</p>
+                                                    <p><i class="fas fa-envelope"></i> <a href="mailto:fahrettin.genc@avrasya.edu.tr">{% trans "fahrettin.genc@avrasya.edu.tr" %}</a></p>
+                                                    <p><i class="fas fa-phone"></i> {% trans "Tel: 0462 3346444 Dahili: 1236" %}</p>
+                                                    <p><i class="fas fa-fax"></i> {% trans "Faks: 0462 3346454" %}</p>
                                                 </div>
                                             </div>
                                         </div>

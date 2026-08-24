@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}{{ image.title }} | Galeri | Avrasya Üniversitesi{% endblock %}
@@ -11,8 +12,8 @@
             <div class="col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'gallery:main' %}">Galeri</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'gallery:main' %}">{% trans "Galeri" %}</a></li>
                         <li class="breadcrumb-item"><a href="{% url 'gallery:category_detail' image.category.slug %}">{{ image.category.name }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ image.title|truncatechars:30 }}</li>
                     </ol>
@@ -32,11 +33,11 @@
                 <div class="main-image-container">
                     <div class="main-image-wrapper">
                         <img src="{{ image.image.url }}" alt="{{ image.title }}" id="mainImage" loading="lazy">
-                        <button class="image-zoom-btn" onclick="zoomImage()" title="Tam ekran görüntüle">
+                        <button class="image-zoom-btn" onclick="zoomImage()" title="{% trans 'Tam ekran görüntüle' %}">
                             <i class="fas fa-expand-alt"></i>
                         </button>
                         <div class="image-navigation">
-                            <button class="nav-btn prev-btn" onclick="navigateImage('prev')" title="Önceki fotoğraf">
+                            <button class="nav-btn prev-btn" onclick="navigateImage('prev')" title="{% trans 'Önceki fotoğraf' %}">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
                             
@@ -44,21 +45,21 @@
                                 <span id="currentImageCounter">{{ current_image_index|add:1 }} / {{ total_images }}</span>
                             </div>
                             
-                            <button class="nav-btn next-btn" onclick="navigateImage('next')" title="Sonraki fotoğraf">
+                            <button class="nav-btn next-btn" onclick="navigateImage('next')" title="{% trans 'Sonraki fotoğraf' %}">
                                 <i class="fas fa-chevron-right"></i>
                             </button>
                         </div>
                     </div>
                     
                     <div class="image-actions">
-                        <button class="action-btn" onclick="shareImage()" title="Paylaş">
-                            <i class="fas fa-share-alt"></i> Paylaş
+                        <button class="action-btn" onclick="shareImage()" title="{% trans 'Paylaş' %}">
+                            <i class="fas fa-share-alt"></i> {% trans "Paylaş" %}
                         </button>
-                        <button class="action-btn" onclick="downloadImage()" title="İndir">
-                            <i class="fas fa-download"></i> İndir
+                        <button class="action-btn" onclick="downloadImage()" title="{% trans 'İndir' %}">
+                            <i class="fas fa-download"></i> {% trans "İndir" %}
                         </button>
-                        <button class="action-btn" onclick="toggleFavorite()" title="Favorilere ekle">
-                            <i class="far fa-heart"></i> Favoriler
+                        <button class="action-btn" onclick="toggleFavorite()" title="{% trans 'Favorilere ekle' %}">
+                            <i class="far fa-heart"></i> {% trans "Favoriler" %}
                         </button>
                     </div>
                 </div>
@@ -74,40 +75,40 @@
                     
                     {% if image.description %}
                     <div class="image-description">
-                        <h3>Fotoğraf Hakkında</h3>
+                        <h3>{% trans "Fotoğraf Hakkında" %}</h3>
                         <p>{{ image.description }}</p>
                     </div>
                     {% endif %}
                     
                     <!-- EXIF Data (if available) -->
                     <div class="exif-data">
-                        <h3>Fotoğraf Bilgileri</h3>
+                        <h3>{% trans "Fotoğraf Bilgileri" %}</h3>
                         <div class="exif-grid">
                             <div class="exif-item">
                                 <i class="fas fa-camera"></i>
                                 <div>
-                                    <span class="exif-label">Görsel Tipi</span>
-                                    <span class="exif-value">JPG Resim</span>
+                                    <span class="exif-label">{% trans "Görsel Tipi" %}</span>
+                                    <span class="exif-value">{% trans "JPG Resim" %}</span>
                                 </div>
                             </div>
                             <div class="exif-item">
                                 <i class="fas fa-weight-hanging"></i>
                                 <div>
-                                    <span class="exif-label">Boyut</span>
-                                    <span class="exif-value">2.4 MB</span>
+                                    <span class="exif-label">{% trans "Boyut" %}</span>
+                                    <span class="exif-value">{% trans "2.4 MB" %}</span>
                                 </div>
                             </div>
                             <div class="exif-item">
                                 <i class="fas fa-expand"></i>
                                 <div>
-                                    <span class="exif-label">Çözünürlük</span>
-                                    <span class="exif-value">1920x1080</span>
+                                    <span class="exif-label">{% trans "Çözünürlük" %}</span>
+                                    <span class="exif-value">{% trans "1920x1080" %}</span>
                                 </div>
                             </div>
                             <div class="exif-item">
                                 <i class="fas fa-eye"></i>
                                 <div>
-                                    <span class="exif-label">Görüntülenme</span>
+                                    <span class="exif-label">{% trans "Görüntülenme" %}</span>
                                     <span class="exif-value">246</span>
                                 </div>
                             </div>
@@ -120,7 +121,7 @@
             <div class="col-lg-4">
                 <!-- Category Info -->
                 <div class="sidebar-card">
-                    <h3 class="sidebar-title">Kategori Bilgileri</h3>
+                    <h3 class="sidebar-title">{% trans "Kategori Bilgileri" %}</h3>
                     <div class="category-sidebar-info">
                         <div class="category-preview">
                             {% if image.category.cover_image %}
@@ -134,14 +135,14 @@
                         <h4>{{ image.category.name }}</h4>
                         <p>{{ image.category.images.count }} fotoğraf</p>
                         <a href="{% url 'gallery:category_detail' image.category.slug %}" class="btn-view-category">
-                            <i class="fas fa-images"></i> Kategoriyi Görüntüle
+                            <i class="fas fa-images"></i> {% trans "Kategoriyi Görüntüle" %}
                         </a>
                     </div>
                 </div>
                 
                 <!-- Related Images -->
                 <div class="sidebar-card">
-                    <h3 class="sidebar-title">İlgili Fotoğraflar</h3>
+                    <h3 class="sidebar-title">{% trans "İlgili Fotoğraflar" %}</h3>
                     <div class="related-images">
                         {% for related_image in related_images %}
                         <div class="related-image-item">
@@ -153,23 +154,23 @@
                             </a>
                         </div>
                         {% empty %}
-                        <p class="text-muted">Henüz ilgili fotoğraf bulunmuyor.</p>
+                        <p class="text-muted">{% trans "Henüz ilgili fotoğraf bulunmuyor." %}</p>
                         {% endfor %}
                     </div>
                 </div>
                 
                 <!-- Quick Actions -->
                 <div class="sidebar-card">
-                    <h3 class="sidebar-title">Hızlı İşlemler</h3>
+                    <h3 class="sidebar-title">{% trans "Hızlı İşlemler" %}</h3>
                     <div class="quick-actions">
                         <a href="{% url 'gallery:main' %}" class="quick-action-btn">
-                            <i class="fas fa-th-large"></i> Tüm Galeri
+                            <i class="fas fa-th-large"></i> {% trans "Tüm Galeri" %}
                         </a>
                         <a href="{% url 'gallery:category_detail' image.category.slug %}" class="quick-action-btn">
-                            <i class="fas fa-folder"></i> Kategoriye Dön
+                            <i class="fas fa-folder"></i> {% trans "Kategoriye Dön" %}
                         </a>
                         <button class="quick-action-btn" onclick="window.print()">
-                            <i class="fas fa-print"></i> Yazdır
+                            <i class="fas fa-print"></i> {% trans "Yazdır" %}
                         </button>
                     </div>
                 </div>
@@ -183,22 +184,22 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Fotoğrafı Paylaş</h5>
+                <h5 class="modal-title">{% trans "Fotoğrafı Paylaş" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="share-options">
                     <button class="share-option" onclick="shareTo('facebook')">
-                        <i class="fab fa-facebook-f"></i> Facebook
+                        <i class="fab fa-facebook-f"></i> {% trans "Facebook" %}
                     </button>
                     <button class="share-option" onclick="shareTo('twitter')">
-                        <i class="fab fa-twitter"></i> Twitter
+                        <i class="fab fa-twitter"></i> {% trans "Twitter" %}
                     </button>
                     <button class="share-option" onclick="shareTo('whatsapp')">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
+                        <i class="fab fa-whatsapp"></i> {% trans "WhatsApp" %}
                     </button>
                     <button class="share-option" onclick="copyLink()">
-                        <i class="fas fa-link"></i> Linki Kopyala
+                        <i class="fas fa-link"></i> {% trans "Linki Kopyala" %}
                     </button>
                 </div>
             </div>

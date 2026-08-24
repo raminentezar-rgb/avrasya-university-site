@@ -1,4 +1,5 @@
 {% extends 'arastirma/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}{{ project.title }} - Avrasya University{% endblock %}
@@ -8,7 +9,7 @@
     <div class="container">
         <div class="research-hero-content">
             <h1>{{ project.title }}</h1>
-            <p>BAP Projesi</p>
+            <p>{% trans "BAP Projesi" %}</p>
         </div>
     </div>
 </section>
@@ -42,15 +43,15 @@
                     <div class="project-info mb-4">
                         <div class="row">
                             <div class="col-md-6">
-                                <p><strong><i class="fas fa-user"></i> Koordinatör:</strong><br>
+                                <p><strong><i class="fas fa-user"></i> {% trans "Koordinatör:" %}</strong><br>
                                 {{ project.coordinator }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong><i class="fas fa-calendar"></i> Başlangıç Tarihi:</strong><br>
+                                <p><strong><i class="fas fa-calendar"></i> {% trans "Başlangıç Tarihi:" %}</strong><br>
                                 {{ project.start_date|date:"d M Y" }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong><i class="fas fa-clock"></i> Oluşturulma Tarihi:</strong><br>
+                                <p><strong><i class="fas fa-clock"></i> {% trans "Oluşturulma Tarihi:" %}</strong><br>
                                 {{ project.created_at|date:"d M Y" }}</p>
                             </div>
                         </div>
@@ -58,7 +59,7 @@
 
                     <!-- توضیحات پروژه -->
                     <div class="project-description mb-4">
-                        <h5>Proje Açıklaması</h5>
+                        <h5>{% trans "Proje Açıklaması" %}</h5>
                         <div class="description-content">
                             {{ project.description|linebreaks }}
                         </div>
@@ -69,12 +70,12 @@
                         <div class="row">
                             <div class="col-6">
                                 <a href="{% url 'arastirma:bap_list' %}" class="btn btn-outline-primary">
-                                    <i class="fas fa-arrow-left"></i> Tüm Projeler
+                                    <i class="fas fa-arrow-left"></i> {% trans "Tüm Projeler" %}
                                 </a>
                             </div>
                             <div class="col-6 text-right">
                                 <a href="{% url 'arastirma:home' %}" class="btn btn-outline-secondary">
-                                    <i class="fas fa-home"></i> Araştırma Ana Sayfa
+                                    <i class="fas fa-home"></i> {% trans "Araştırma Ana Sayfa" %}
                                 </a>
                             </div>
                         </div>

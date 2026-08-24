@@ -1,4 +1,5 @@
 {% extends 'muhendislik_mimarlik/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Mühendislik ve Mimarlık Fakültesi{% endblock %}
 
@@ -9,8 +10,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Mühendislik ve Mimarlık Fakültesi</h1>
-            <p>Modern mühendislik eğitimi ve yenilikçi mimarlık anlayışıyla geleceği şekillendiriyoruz</p>
+            <h1>{% trans "Mühendislik ve Mimarlık Fakültesi" %}</h1>
+            <p>{% trans "Modern mühendislik eğitimi ve yenilikçi mimarlık anlayışıyla geleceği şekillendiriyoruz" %}</p>
         </div>
     </div>
 </section>
@@ -33,16 +34,16 @@
                         <div class="tab-header">
                             <ul class="tab-menu">
                                 <li class="tab-menu-item active" data-tab="tab1">
-                                    <i class="fas fa-university"></i> Bölümler
+                                    <i class="fas fa-university"></i> {% trans "Bölümler" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab2">
-                                    <i class="fas fa-history"></i> Tarihçe
+                                    <i class="fas fa-history"></i> {% trans "Tarihçe" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab3">
-                                    <i class="fas fa-bullseye"></i> Misyon & Vizyon
+                                    <i class="fas fa-bullseye"></i> {% trans "Misyon & Vizyon" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab4">
-                                    <i class="fas fa-comments"></i> Dekan Mesajı
+                                    <i class="fas fa-comments"></i> {% trans "Dekan Mesajı" %}
                                 </li>
                             </ul>
                         </div>
@@ -51,58 +52,58 @@
                             <!-- Tab 1: Bölümler -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-university"></i> Bölümler</h3>
-                                    <p>Mühendislik ve Mimarlık Fakültesi bünyesinde yer alan bölümler hakkında detaylı bilgi</p>
+                                    <h3><i class="fas fa-university"></i> {% trans "Bölümler" %}</h3>
+                                    <p>{% trans "Mühendislik ve Mimarlık Fakültesi bünyesinde yer alan bölümler hakkında detaylı bilgi" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <!-- Highlight Section -->
                                     <div class="highlight-section">
                                         <div class="highlight-content">
-                                            <h2>Mühendislik ve Mimarlık Fakültesi Bölümleri</h2>
-                                            <p>Fakültemiz, modern eğitim yaklaşımları ve disiplinlerarası işbirliği ile öğrencilerine kapsamlı bir akademik deneyim sunmaktadır. Her bölüm, alanında uzman akademik kadrosu ve güncel müfredatı ile geleceğin profesyonellerini yetiştirmektedir.</p>
+                                            <h2>{% trans "Mühendislik ve Mimarlık Fakültesi Bölümleri" %}</h2>
+                                            <p>{% trans "Fakültemiz, modern eğitim yaklaşımları ve disiplinlerarası işbirliği ile öğrencilerine kapsamlı bir akademik deneyim sunmaktadır. Her bölüm, alanında uzman akademik kadrosu ve güncel müfredatı ile geleceğin profesyonellerini yetiştirmektedir." %}</p>
                                         </div>
                                     </div>
                                     
                                     <!-- Bölüm Kartları -->
                                     <div class="departments-section">
                                         <div class="section-intro">
-                                            <h4><i class="fas fa-graduation-cap"></i> Lisans Programları</h4>
-                                            <p>Aşağıda fakültemiz bünyesindeki lisans programları hakkında detaylı bilgileri bulabilirsiniz:</p>
+                                            <h4><i class="fas fa-graduation-cap"></i> {% trans "Lisans Programları" %}</h4>
+                                            <p>{% trans "Aşağıda fakültemiz bünyesindeki lisans programları hakkında detaylı bilgileri bulabilirsiniz:" %}</p>
                                         </div>
                                         
                                         <div class="departments-grid" id="departments-container">
                                             <a href="{% url 'bilgisayar_muhendisligi:bilgisayar_muhendisligi' %}" class="department-card-simple">
                                                 <div class="department-icon"><i class="fas fa-laptop-code"></i></div>
-                                                <h4>Bilgisayar Mühendisliği</h4>
+                                                <h4>{% trans "Bilgisayar Mühendisliği" %}</h4>
                                             </a>
                                             <a href="{% url 'elektrik_elektronik_muhendisligi:elektrik_elektronik_muhendisligi' %}" class="department-card-simple">
                                                 <div class="department-icon"><i class="fas fa-bolt"></i></div>
-                                                <h4>Elektrik-Elektronik Mühendisliği</h4>
+                                                <h4>{% trans "Elektrik-Elektronik Mühendisliği" %}</h4>
                                             </a>
                                             <a href="{% url 'gida_muhendisligi:gida_muhendisligi' %}" class="department-card-simple">
                                                 <div class="department-icon"><i class="fas fa-utensils"></i></div>
-                                                <h4>Gıda Mühendisliği</h4>
+                                                <h4>{% trans "Gıda Mühendisliği" %}</h4>
                                             </a>
                                             <a href="{% url 'harita_muhendisligi:harita_muhendisligi' %}" class="department-card-simple">
                                                 <div class="department-icon"><i class="fas fa-map-marked-alt"></i></div>
-                                                <h4>Harita Mühendisliği</h4>
+                                                <h4>{% trans "Harita Mühendisliği" %}</h4>
                                             </a>
                                             <a href="{% url 'ic_mimarlik:ic_mimarlik' %}" class="department-card-simple">
                                                 <div class="department-icon"><i class="fas fa-couch"></i></div>
-                                                <h4>İç Mimarlık ve Çevre Tasarımı</h4>
+                                                <h4>{% trans "İç Mimarlık ve Çevre Tasarımı" %}</h4>
                                             </a>
                                             <a href="{% url 'insaat_muhendisligi:insaat_muhendisligi' %}" class="department-card-simple">
                                                 <div class="department-icon"><i class="fas fa-hard-hat"></i></div>
-                                                <h4>İnşaat Mühendisliği</h4>
+                                                <h4>{% trans "İnşaat Mühendisliği" %}</h4>
                                             </a>
                                             <a href="{% url 'makine_muhendisligi:makine_muhendisligi' %}" class="department-card-simple">
                                                 <div class="department-icon"><i class="fas fa-cogs"></i></div>
-                                                <h4>Makine Mühendisliği</h4>
+                                                <h4>{% trans "Makine Mühendisliği" %}</h4>
                                             </a>
                                             <a href="{% url 'mimarlik:mimarlik' %}" class="department-card-simple">
                                                 <div class="department-icon"><i class="fas fa-building"></i></div>
-                                                <h4>Mimarlık</h4>
+                                                <h4>{% trans "Mimarlık" %}</h4>
                                             </a>
                                         </div>
 
@@ -149,14 +150,14 @@
                                     
                                     <!-- İstatistikler -->
                                     <div class="departments-stats">
-                                        <h4><i class="fas fa-chart-line"></i> Bölüm İstatistikleri</h4>
+                                        <h4><i class="fas fa-chart-line"></i> {% trans "Bölüm İstatistikleri" %}</h4>
                                         <div class="stats-container">
                                             <div class="stat-item">
                                                 <div class="stat-icon">
                                                     <i class="fas fa-users"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>Toplam Öğrenci</h5>
+                                                    <h5>{% trans "Toplam Öğrenci" %}</h5>
                                                     <div class="stat-number" data-count="1850">0</div>
                                                 </div>
                                             </div>
@@ -166,7 +167,7 @@
                                                     <i class="fas fa-chalkboard-teacher"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>Akademik Kadro</h5>
+                                                    <h5>{% trans "Akademik Kadro" %}</h5>
                                                     <div class="stat-number" data-count="120">0</div>
                                                 </div>
                                             </div>
@@ -176,7 +177,7 @@
                                                     <i class="fas fa-handshake"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>Endüstri İşbirliği</h5>
+                                                    <h5>{% trans "Endüstri İşbirliği" %}</h5>
                                                     <div class="stat-number" data-count="65">0</div>
                                                 </div>
                                             </div>
@@ -186,7 +187,7 @@
                                                     <i class="fas fa-briefcase"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>Mezun İstihdam Oranı</h5>
+                                                    <h5>{% trans "Mezun İstihdam Oranı" %}</h5>
                                                     <div class="stat-number" data-count="94">0</div>
                                                     <span class="stat-unit">%</span>
                                                 </div>
@@ -199,22 +200,22 @@
                             <!-- Tab 2: Tarihçe -->
                             <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-history"></i> Tarihçe</h3>
-                                    <p>Mühendislik ve Mimarlık Fakültesi'nin kuruluş ve gelişim kronolojisi</p>
+                                    <h3><i class="fas fa-history"></i> {% trans "Tarihçe" %}</h3>
+                                    <p>{% trans "Mühendislik ve Mimarlık Fakültesi'nin kuruluş ve gelişim kronolojisi" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <!-- Highlight Section -->
                                     <div class="highlight-section">
                                         <div class="highlight-content">
-                                            <h2>Mühendislik ve Mimarlık Fakültesi Tarihçesi</h2>
-                                            <p>Mühendislik ve Mimarlık Fakültesinde 2011-2012 eğitim öğretim yılında İnşaat Mühendisliği, Mimarlık, Makine Mühendisliği ve Elektrik-Elektronik Mühendisliği bölümlerinde öğretime başlanmıştır. Bu bölümlere daha sonra toplumsal ve teknolojik istemleri karşılamak amacıyla yeni bölümler eklenmiştir.</p>
+                                            <h2>{% trans "Mühendislik ve Mimarlık Fakültesi Tarihçesi" %}</h2>
+                                            <p>{% trans "Mühendislik ve Mimarlık Fakültesinde 2011-2012 eğitim öğretim yılında İnşaat Mühendisliği, Mimarlık, Makine Mühendisliği ve Elektrik-Elektronik Mühendisliği bölümlerinde öğretime başlanmıştır. Bu bölümlere daha sonra toplumsal ve teknolojik istemleri karşılamak amacıyla yeni bölümler eklenmiştir." %}</p>
                                         </div>
                                     </div>
                                     
                                     <!-- Timeline Section -->
                                     <div class="history-timeline-section">
-                                        <h4><i class="fas fa-stream"></i> Kuruluş ve Gelişim Kronolojisi</h4>
+                                        <h4><i class="fas fa-stream"></i> {% trans "Kuruluş ve Gelişim Kronolojisi" %}</h4>
                                         
                                         <div class="timeline-container">
                                             <!-- Timeline Item 1 -->
@@ -227,11 +228,11 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>Fakültenin Kuruluşu</h5>
+                                                        <h5>{% trans "Fakültenin Kuruluşu" %}</h5>
                                                         <span class="timeline-date">2011</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>Mühendislik ve Mimarlık Fakültesi resmi olarak kuruldu.</p>
+                                                        <p>{% trans "Mühendislik ve Mimarlık Fakültesi resmi olarak kuruldu." %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,11 +247,11 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>İlk Bölümlerin Açılışı</h5>
+                                                        <h5>{% trans "İlk Bölümlerin Açılışı" %}</h5>
                                                         <span class="timeline-date">2011-2012</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>İnşaat Mühendisliği, Mimarlık, Makine Mühendisliği ve Elektrik-Elektronik Mühendisliği bölümlerinde öğretime başlandı.</p>
+                                                        <p>{% trans "İnşaat Mühendisliği, Mimarlık, Makine Mühendisliği ve Elektrik-Elektronik Mühendisliği bölümlerinde öğretime başlandı." %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -265,11 +266,11 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>Yeni Bölümlerin Eklenmesi</h5>
+                                                        <h5>{% trans "Yeni Bölümlerin Eklenmesi" %}</h5>
                                                         <span class="timeline-date">2012-2013</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>Gıda Mühendisliği, Endüstri Mühendisliği, İç Mimarlık ve Çevre Tasarımı ve Bilgisayar Mühendisliği Bölümlerinde öğretime başlandı.</p>
+                                                        <p>{% trans "Gıda Mühendisliği, Endüstri Mühendisliği, İç Mimarlık ve Çevre Tasarımı ve Bilgisayar Mühendisliği Bölümlerinde öğretime başlandı." %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,11 +285,11 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>Harita Mühendisliği Bölümü</h5>
+                                                        <h5>{% trans "Harita Mühendisliği Bölümü" %}</h5>
                                                         <span class="timeline-date">2013-2014</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>Harita Mühendisliği Bölümünde öğrenciler eğitim ve öğretime başladı.</p>
+                                                        <p>{% trans "Harita Mühendisliği Bölümünde öğrenciler eğitim ve öğretime başladı." %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -302,43 +303,43 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <div class="timeline-header">
-                                                        <h5>Güncel Durum</h5>
-                                                        <span class="timeline-date">Bugün</span>
+                                                        <h5>{% trans "Güncel Durum" %}</h5>
+                                                        <span class="timeline-date">{% trans "Bugün" %}</span>
                                                     </div>
                                                     <div class="timeline-body">
-                                                        <p>Fakültemiz, aktif olarak eğitim veren 8 bölüm ile yoluna devam etmektedir:</p>
+                                                        <p>{% trans "Fakültemiz, aktif olarak eğitim veren 8 bölüm ile yoluna devam etmektedir:" %}</p>
                                                         <div class="current-departments">
                                                             <div class="department-badge">
                                                                 <i class="fas fa-laptop-code"></i>
-                                                                <span>Bilgisayar Mühendisliği</span>
+                                                                <span>{% trans "Bilgisayar Mühendisliği" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-bolt"></i>
-                                                                <span>Elektrik-Elektronik Müh.</span>
+                                                                <span>{% trans "Elektrik-Elektronik Müh." %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-utensils"></i>
-                                                                <span>Gıda Mühendisliği</span>
+                                                                <span>{% trans "Gıda Mühendisliği" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-map-marked-alt"></i>
-                                                                <span>Harita Mühendisliği</span>
+                                                                <span>{% trans "Harita Mühendisliği" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-couch"></i>
-                                                                <span>İç Mimarlık ve Çevre Tasarımı</span>
+                                                                <span>{% trans "İç Mimarlık ve Çevre Tasarımı" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-hard-hat"></i>
-                                                                <span>İnşaat Mühendisliği</span>
+                                                                <span>{% trans "İnşaat Mühendisliği" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-cogs"></i>
-                                                                <span>Makine Mühendisliği</span>
+                                                                <span>{% trans "Makine Mühendisliği" %}</span>
                                                             </div>
                                                             <div class="department-badge">
                                                                 <i class="fas fa-building"></i>
-                                                                <span>Mimarlık</span>
+                                                                <span>{% trans "Mimarlık" %}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -349,7 +350,7 @@
                                     
                                     <!-- Statistics Section -->
                                     <div class="history-stats-section">
-                                        <h4><i class="fas fa-chart-bar"></i> Tarihsel İstatistikler</h4>
+                                        <h4><i class="fas fa-chart-bar"></i> {% trans "Tarihsel İstatistikler" %}</h4>
                                         
                                         <div class="stats-grid">
                                             <div class="history-stat-card">
@@ -357,7 +358,7 @@
                                                     <i class="fas fa-calendar-alt"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>Kuruluş Yılı</h5>
+                                                    <h5>{% trans "Kuruluş Yılı" %}</h5>
                                                     <div class="stat-number">2011</div>
                                                 </div>
                                             </div>
@@ -367,7 +368,7 @@
                                                     <i class="fas fa-graduation-cap"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>Toplam Bölüm Sayısı</h5>
+                                                    <h5>{% trans "Toplam Bölüm Sayısı" %}</h5>
                                                     <div class="stat-number">8</div>
                                                 </div>
                                             </div>
@@ -377,7 +378,7 @@
                                                     <i class="fas fa-university"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>İlk Mezun Yılı</h5>
+                                                    <h5>{% trans "İlk Mezun Yılı" %}</h5>
                                                     <div class="stat-number">2015</div>
                                                 </div>
                                             </div>
@@ -387,9 +388,9 @@
                                                     <i class="fas fa-history"></i>
                                                 </div>
                                                 <div class="stat-content">
-                                                    <h5>Eğitim Süresi</h5>
+                                                    <h5>{% trans "Eğitim Süresi" %}</h5>
                                                     <div class="stat-number">12+</div>
-                                                    <span class="stat-unit">Yıl</span>
+                                                    <span class="stat-unit">{% trans "Yıl" %}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -398,9 +399,9 @@
                                     <!-- Final Note -->
                                     <div class="final-note history-note">
                                         <div class="note-content">
-                                            <h4><i class="fas fa-lightbulb"></i> Geleceğe Bakış</h4>
-                                            <p>Mühendislik ve Mimarlık Fakültesi, kuruluşundan bu yana geçen sürede sürekli gelişim ve değişim içinde olmuştur. Modern eğitim yaklaşımlarını benimseyerek, öğrencilerine en iyi akademik deneyimi sunma hedefiyle çalışmalarına devam etmektedir.</p>
-                                            <p>Gelecekte de bilimsel araştırmalar, disiplinlerarası işbirliği ve uluslararası standartlarda eğitim verme misyonuyla yoluna devam edecektir.</p>
+                                            <h4><i class="fas fa-lightbulb"></i> {% trans "Geleceğe Bakış" %}</h4>
+                                            <p>{% trans "Mühendislik ve Mimarlık Fakültesi, kuruluşundan bu yana geçen sürede sürekli gelişim ve değişim içinde olmuştur. Modern eğitim yaklaşımlarını benimseyerek, öğrencilerine en iyi akademik deneyimi sunma hedefiyle çalışmalarına devam etmektedir." %}</p>
+                                            <p>{% trans "Gelecekte de bilimsel araştırmalar, disiplinlerarası işbirliği ve uluslararası standartlarda eğitim verme misyonuyla yoluna devam edecektir." %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -409,16 +410,16 @@
                             <!-- Tab 3: Misyon & Vizyon -->
                             <div class="tab-content" id="tab3">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-bullseye"></i> Misyon & Vizyon</h3>
-                                    <p>Mühendislik ve Mimarlık Fakültesi'nin misyon, vizyon ve temel değerleri</p>
+                                    <h3><i class="fas fa-bullseye"></i> {% trans "Misyon & Vizyon" %}</h3>
+                                    <p>{% trans "Mühendislik ve Mimarlık Fakültesi'nin misyon, vizyon ve temel değerleri" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <!-- Highlight Section -->
                                     <div class="highlight-section">
                                         <div class="highlight-content">
-                                            <h2>Mühendislik ve Mimarlık Fakültesi Misyon & Vizyonu</h2>
-                                            <p>Fakültemiz, modern eğitim anlayışı ve bilimsel yaklaşımıyla, geleceğin dünyasında söz sahibi olacak mühendis ve mimarlar yetiştirmeyi hedeflemektedir. Misyon ve vizyonumuz, bu hedef doğrultusunda şekillenmiştir.</p>
+                                            <h2>{% trans "Mühendislik ve Mimarlık Fakültesi Misyon & Vizyonu" %}</h2>
+                                            <p>{% trans "Fakültemiz, modern eğitim anlayışı ve bilimsel yaklaşımıyla, geleceğin dünyasında söz sahibi olacak mühendis ve mimarlar yetiştirmeyi hedeflemektedir. Misyon ve vizyonumuz, bu hedef doğrultusunda şekillenmiştir." %}</p>
                                         </div>
                                     </div>
                                     
@@ -426,7 +427,7 @@
                                     <div class="mission-vision-section">
                                         <div class="section-title-with-icon">
                                             <i class="fas fa-flag"></i>
-                                            <h4>Misyonumuz</h4>
+                                            <h4>{% trans "Misyonumuz" %}</h4>
                                         </div>
                                         
                                         <div class="mission-card">
@@ -435,17 +436,17 @@
                                                     <i class="fas fa-handshake"></i>
                                                 </div>
                                                 <div class="mission-title">
-                                                    <h5>Fakülte Misyonu</h5>
+                                                    <h5>{% trans "Fakülte Misyonu" %}</h5>
                                                     <div class="mission-badge">
                                                         <i class="fas fa-bullseye"></i>
-                                                        <span>Temel Görev</span>
+                                                        <span>{% trans "Temel Görev" %}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             
                                             <div class="mission-content">
                                                 <div class="mission-statement">
-                                                    <p>Mühendislik ve Mimarlık Fakültesi olarak misyonumuz uluslararası düzeyde eğitim vererek, sanayi ve araştırma kurumlarında tasarım, üretim, uygulama ve araştırma çalışmalarında görev alabilecek, yaratıcı, takım çalışmasına yatkın, çağdaş, emeğe duyarlı, sosyal ve etik değerlere sahip, geleceğin lideri mühendisler yetiştirmektir.</p>
+                                                    <p>{% trans "Mühendislik ve Mimarlık Fakültesi olarak misyonumuz uluslararası düzeyde eğitim vererek, sanayi ve araştırma kurumlarında tasarım, üretim, uygulama ve araştırma çalışmalarında görev alabilecek, yaratıcı, takım çalışmasına yatkın, çağdaş, emeğe duyarlı, sosyal ve etik değerlere sahip, geleceğin lideri mühendisler yetiştirmektir." %}</p>
                                                 </div>
                                                 
                                                 <div class="mission-pillars">
@@ -454,8 +455,8 @@
                                                             <i class="fas fa-graduation-cap"></i>
                                                         </div>
                                                         <div class="pillar-content">
-                                                            <h6>Uluslararası Eğitim</h6>
-                                                            <p>Uluslararası standartlarda kaliteli eğitim vermek</p>
+                                                            <h6>{% trans "Uluslararası Eğitim" %}</h6>
+                                                            <p>{% trans "Uluslararası standartlarda kaliteli eğitim vermek" %}</p>
                                                         </div>
                                                     </div>
                                                     
@@ -464,8 +465,8 @@
                                                             <i class="fas fa-flask"></i>
                                                         </div>
                                                         <div class="pillar-content">
-                                                            <h6>Bilimsel Araştırma</h6>
-                                                            <p>Araştırma ve geliştirme çalışmaları yapmak</p>
+                                                            <h6>{% trans "Bilimsel Araştırma" %}</h6>
+                                                            <p>{% trans "Araştırma ve geliştirme çalışmaları yapmak" %}</p>
                                                         </div>
                                                     </div>
                                                     
@@ -474,8 +475,8 @@
                                                             <i class="fas fa-industry"></i>
                                                         </div>
                                                         <div class="pillar-content">
-                                                            <h6>Endüstriyel İşbirliği</h6>
-                                                            <p>Sanayi ile işbirliği içinde çalışmalar yürütmek</p>
+                                                            <h6>{% trans "Endüstriyel İşbirliği" %}</h6>
+                                                            <p>{% trans "Sanayi ile işbirliği içinde çalışmalar yürütmek" %}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -487,7 +488,7 @@
                                     <div class="mission-vision-section">
                                         <div class="section-title-with-icon">
                                             <i class="fas fa-eye"></i>
-                                            <h4>Vizyonumuz</h4>
+                                            <h4>{% trans "Vizyonumuz" %}</h4>
                                         </div>
                                         
                                         <div class="vision-card">
@@ -496,41 +497,41 @@
                                                     <i class="fas fa-mountain"></i>
                                                 </div>
                                                 <div class="vision-title">
-                                                    <h5>Fakülte Vizyonu</h5>
+                                                    <h5>{% trans "Fakülte Vizyonu" %}</h5>
                                                     <div class="vision-badge">
                                                         <i class="fas fa-rocket"></i>
-                                                        <span>Uzun Vadeli Hedef</span>
+                                                        <span>{% trans "Uzun Vadeli Hedef" %}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             
                                             <div class="vision-content">
                                                 <div class="vision-statement">
-                                                    <p>Mühendislik ve Mimarlık Fakültesinin özgörüşü sürekli gelişim anlayışı ile uluslararası düzeyde eğitim veren, bilimsel araştırmalar ve endüstriyel hizmetler üreten ve yeniliklere önderlik eden bir fakülte olmaktır.</p>
+                                                    <p>{% trans "Mühendislik ve Mimarlık Fakültesinin özgörüşü sürekli gelişim anlayışı ile uluslararası düzeyde eğitim veren, bilimsel araştırmalar ve endüstriyel hizmetler üreten ve yeniliklere önderlik eden bir fakülte olmaktır." %}</p>
                                                 </div>
                                                 
                                                 <div class="vision-goals">
                                                     <div class="goal">
                                                         <div class="goal-number">01</div>
                                                         <div class="goal-content">
-                                                            <h6>Sürekli Gelişim</h6>
-                                                            <p>Daima gelişen ve kendini yenileyen bir eğitim anlayışı</p>
+                                                            <h6>{% trans "Sürekli Gelişim" %}</h6>
+                                                            <p>{% trans "Daima gelişen ve kendini yenileyen bir eğitim anlayışı" %}</p>
                                                         </div>
                                                     </div>
                                                     
                                                     <div class="goal">
                                                         <div class="goal-number">02</div>
                                                         <div class="goal-content">
-                                                            <h6>Uluslararası Standartlar</h6>
-                                                            <p>Uluslararası düzeyde eğitim ve araştırma</p>
+                                                            <h6>{% trans "Uluslararası Standartlar" %}</h6>
+                                                            <p>{% trans "Uluslararası düzeyde eğitim ve araştırma" %}</p>
                                                         </div>
                                                     </div>
                                                     
                                                     <div class="goal">
                                                         <div class="goal-number">03</div>
                                                         <div class="goal-content">
-                                                            <h6>Yeniliklere Önderlik</h6>
-                                                            <p>Teknolojik yeniliklere öncülük eden bir fakülte olmak</p>
+                                                            <h6>{% trans "Yeniliklere Önderlik" %}</h6>
+                                                            <p>{% trans "Teknolojik yeniliklere öncülük eden bir fakülte olmak" %}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -542,7 +543,7 @@
                                     <div class="values-section">
                                         <div class="section-title-with-icon">
                                             <i class="fas fa-star"></i>
-                                            <h4>Temel Değerlerimiz</h4>
+                                            <h4>{% trans "Temel Değerlerimiz" %}</h4>
                                         </div>
                                         
                                         <div class="values-grid">
@@ -551,8 +552,8 @@
                                                     <i class="fas fa-balance-scale"></i>
                                                 </div>
                                                 <div class="value-content">
-                                                    <h5>Etik Değerler</h5>
-                                                    <p>Yüksek ahlaki standartlar ve etik değerlere bağlılık</p>
+                                                    <h5>{% trans "Etik Değerler" %}</h5>
+                                                    <p>{% trans "Yüksek ahlaki standartlar ve etik değerlere bağlılık" %}</p>
                                                 </div>
                                             </div>
                                             
@@ -561,8 +562,8 @@
                                                     <i class="fas fa-lightbulb"></i>
                                                 </div>
                                                 <div class="value-content">
-                                                    <h5>Yaratıcılık</h5>
-                                                    <p>Yaratıcı düşünce ve yenilikçi çözümler üretmek</p>
+                                                    <h5>{% trans "Yaratıcılık" %}</h5>
+                                                    <p>{% trans "Yaratıcı düşünce ve yenilikçi çözümler üretmek" %}</p>
                                                 </div>
                                             </div>
                                             
@@ -571,8 +572,8 @@
                                                     <i class="fas fa-users"></i>
                                                 </div>
                                                 <div class="value-content">
-                                                    <h5>Takım Çalışması</h5>
-                                                    <p>Takım çalışmasına yatkınlık ve işbirliği</p>
+                                                    <h5>{% trans "Takım Çalışması" %}</h5>
+                                                    <p>{% trans "Takım çalışmasına yatkınlık ve işbirliği" %}</p>
                                                 </div>
                                             </div>
                                             
@@ -581,8 +582,8 @@
                                                     <i class="fas fa-globe-americas"></i>
                                                 </div>
                                                 <div class="value-content">
-                                                    <h5>Uluslararası Bakış</h5>
-                                                    <p>Küresel perspektif ve evrensel değerler</p>
+                                                    <h5>{% trans "Uluslararası Bakış" %}</h5>
+                                                    <p>{% trans "Küresel perspektif ve evrensel değerler" %}</p>
                                                 </div>
                                             </div>
                                             
@@ -591,8 +592,8 @@
                                                     <i class="fas fa-hands-helping"></i>
                                                 </div>
                                                 <div class="value-content">
-                                                    <h5>Sosyal Sorumluluk</h5>
-                                                    <p>Topluma ve çevreye duyarlılık</p>
+                                                    <h5>{% trans "Sosyal Sorumluluk" %}</h5>
+                                                    <p>{% trans "Topluma ve çevreye duyarlılık" %}</p>
                                                 </div>
                                             </div>
                                             
@@ -601,8 +602,8 @@
                                                     <i class="fas fa-chart-line"></i>
                                                 </div>
                                                 <div class="value-content">
-                                                    <h5>Sürekli Öğrenme</h5>
-                                                    <p>Hayat boyu öğrenme ve gelişim</p>
+                                                    <h5>{% trans "Sürekli Öğrenme" %}</h5>
+                                                    <p>{% trans "Hayat boyu öğrenme ve gelişim" %}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -614,9 +615,9 @@
                                             <i class="fas fa-quote-left"></i>
                                         </div>
                                         <div class="quote-content">
-                                            <p>"Mühendislik ve Mimarlık, insanlığın gelişimine yön veren en önemli disiplinlerdir. Bizler, bu sorumluluğun bilinciyle geleceğin mühendis ve mimarlarını yetiştiriyoruz."</p>
+                                            <p>{% trans "\"Mühendislik ve Mimarlık, insanlığın gelişimine yön veren en önemli disiplinlerdir. Bizler, bu sorumluluğun bilinciyle geleceğin mühendis ve mimarlarını yetiştiriyoruz.\"" %}</p>
                                             <div class="quote-author">
-                                                <span>— Mühendislik ve Mimarlık Fakültesi</span>
+                                                <span>{% trans "— Mühendislik ve Mimarlık Fakültesi" %}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -626,16 +627,16 @@
                             <!-- Tab 4: Dekan Mesajı -->
                             <div class="tab-content" id="tab4">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-comments"></i> Dekan Mesajı</h3>
-                                    <p>Mühendislik ve Mimarlık Fakültesi Dekanı'nın öğrenci ve ziyaretçilere mesajı</p>
+                                    <h3><i class="fas fa-comments"></i> {% trans "Dekan Mesajı" %}</h3>
+                                    <p>{% trans "Mühendislik ve Mimarlık Fakültesi Dekanı'nın öğrenci ve ziyaretçilere mesajı" %}</p>
                                 </div>
                                 
                                 <div class="tab-content-body">
                                     <!-- Highlight Section -->
                                     <div class="highlight-section">
                                         <div class="highlight-content">
-                                            <h2>Mühendislik ve Mimarlık Fakültesi Dekan Mesajı</h2>
-                                            <p>Değerli öğrenciler, akademisyenler ve ziyaretçiler; Fakültemizin vizyonu, misyonu ve çalışmaları hakkında sizleri bilgilendirmekten mutluluk duyuyorum.</p>
+                                            <h2>{% trans "Mühendislik ve Mimarlık Fakültesi Dekan Mesajı" %}</h2>
+                                            <p>{% trans "Değerli öğrenciler, akademisyenler ve ziyaretçiler; Fakültemizin vizyonu, misyonu ve çalışmaları hakkında sizleri bilgilendirmekten mutluluk duyuyorum." %}</p>
                                         </div>
                                     </div>
                                     
@@ -653,16 +654,16 @@
                                                 </div>
                                                 
                                                 <div class="dean-info">
-                                                    <h3>Prof. Dr. Aytap SEZER</h3>
-                                                    <div class="dean-title">Mühendislik ve Mimarlık Fakültesi Dekanı</div>
+                                                    <h3>{% trans "Prof. Dr. Aytap SEZER" %}</h3>
+                                                    <div class="dean-title">{% trans "Mühendislik ve Mimarlık Fakültesi Dekanı" %}</div>
                                                     <div class="dean-badges">
                                                         <div class="profile-badge">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Profesör Doktor</span>
+                                                            <span>{% trans "Profesör Doktor" %}</span>
                                                         </div>
                                                         <div class="profile-badge">
                                                             <i class="fas fa-university"></i>
-                                                            <span>Avrasya Üniversitesi</span>
+                                                            <span>{% trans "Avrasya Üniversitesi" %}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -674,8 +675,8 @@
                                                         <i class="fas fa-envelope"></i>
                                                     </div>
                                                     <div class="detail-content">
-                                                        <h5>E-posta</h5>
-                                                        <p>dekan.mmf@avrasya.edu.tr</p>
+                                                        <h5>{% trans "E-posta" %}</h5>
+                                                        <p>{% trans "dekan.mmf@avrasya.edu.tr" %}</p>
                                                     </div>
                                                 </div>
                                                 
@@ -684,7 +685,7 @@
                                                         <i class="fas fa-phone"></i>
                                                     </div>
                                                     <div class="detail-content">
-                                                        <h5>Telefon</h5>
+                                                        <h5>{% trans "Telefon" %}</h5>
                                                         <p>+90 (462) 123 45 68</p>
                                                     </div>
                                                 </div>
@@ -694,8 +695,8 @@
                                                         <i class="fas fa-door-open"></i>
                                                     </div>
                                                     <div class="detail-content">
-                                                        <h5>Ziyaret Saatleri</h5>
-                                                        <p>09:00 - 17:00 (Hafta içi)</p>
+                                                        <h5>{% trans "Ziyaret Saatleri" %}</h5>
+                                                        <p>{% trans "09:00 - 17:00 (Hafta içi)" %}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -709,8 +710,8 @@
                                                 <i class="fas fa-quote-right"></i>
                                             </div>
                                             <div class="intro-content">
-                                                <h4>Saygıdeğer Öğrenciler ve Değerli Ziyaretçiler,</h4>
-                                                <p>Avrasya Üniversitesi Mühendislik ve Mimarlık Fakültesi olarak, bilim ve eğitim yolculuğumuzda sizlere rehberlik etmekten gurur duyuyoruz.</p>
+                                                <h4>{% trans "Saygıdeğer Öğrenciler ve Değerli Ziyaretçiler," %}</h4>
+                                                <p>{% trans "Avrasya Üniversitesi Mühendislik ve Mimarlık Fakültesi olarak, bilim ve eğitim yolculuğumuzda sizlere rehberlik etmekten gurur duyuyoruz." %}</p>
                                             </div>
                                         </div>
                                         
@@ -718,25 +719,25 @@
                                             <div class="message-paragraph">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">01</div>
-                                                    <h5>Fakülte Hakkında</h5>
+                                                    <h5>{% trans "Fakülte Hakkında" %}</h5>
                                                 </div>
-                                                <p>Fakültemiz, 2011-2012 eğitim-öğretim yılında İnşaat Mühendisliği, Mimarlık, Makine Mühendisliği ve Elektrik-Elektronik Mühendisliği bölümlerinde öğretime başlamıştır. Bu bölümlere daha sonra toplumsal ve teknolojik istemleri karşılamak amacıyla yeni bölümler eklenerek 2012-2013 öğretim yılında Gıda Mühendisliği, Endüstri Mühendisliği, İç Mimarlık ve Çevre Tasarımı ile Bilgisayar Mühendisliği Bölümlerinde de öğretime başlanmıştır. 2013-2014 öğretim yılında ise Harita Mühendisliği Bölümünde öğrenciler eğitim ve öğretime başlamıştır.</p>
+                                                <p>{% trans "Fakültemiz, 2011-2012 eğitim-öğretim yılında İnşaat Mühendisliği, Mimarlık, Makine Mühendisliği ve Elektrik-Elektronik Mühendisliği bölümlerinde öğretime başlamıştır. Bu bölümlere daha sonra toplumsal ve teknolojik istemleri karşılamak amacıyla yeni bölümler eklenerek 2012-2013 öğretim yılında Gıda Mühendisliği, Endüstri Mühendisliği, İç Mimarlık ve Çevre Tasarımı ile Bilgisayar Mühendisliği Bölümlerinde de öğretime başlanmıştır. 2013-2014 öğretim yılında ise Harita Mühendisliği Bölümünde öğrenciler eğitim ve öğretime başlamıştır." %}</p>
                                             </div>
                                             
                                             <div class="message-paragraph">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">02</div>
-                                                    <h5>Akademik Başarılar</h5>
+                                                    <h5>{% trans "Akademik Başarılar" %}</h5>
                                                 </div>
-                                                <p>Fakültemiz öğretim üyeleri çok sayıda ulusal ve uluslararası başarılara imza atmış, SCI tarafından taranan uluslararası bilimsel dergilerde çok sayıda bilimsel araştırma makaleleri yayınlamışlardır. Bu başarılar, fakültemizin akademik kalitesinin ve araştırma kapasitesinin bir göstergesidir.</p>
+                                                <p>{% trans "Fakültemiz öğretim üyeleri çok sayıda ulusal ve uluslararası başarılara imza atmış, SCI tarafından taranan uluslararası bilimsel dergilerde çok sayıda bilimsel araştırma makaleleri yayınlamışlardır. Bu başarılar, fakültemizin akademik kalitesinin ve araştırma kapasitesinin bir göstergesidir." %}</p>
                                             </div>
                                             
                                             <div class="message-paragraph">
                                                 <div class="paragraph-header">
                                                     <div class="paragraph-number">03</div>
-                                                    <h5>Eğitim Yaklaşımımız</h5>
+                                                    <h5>{% trans "Eğitim Yaklaşımımız" %}</h5>
                                                 </div>
-                                                <p>Avrasya Üniversitesi Mühendislik ve Mimarlık Fakültesi olarak; öğrencilerimizin, temel mühendislik ve mimarlık bilimleri ile donanmasını, analitik düşünmesini, problem çözme ve tasarım yeteneği kazanmasını ve çevre-topluma duyarlı bir şuurla yetişmesini hedeflemekteyiz. Buna ilaveten, Fakültemizde yer alan sosyal/kültürel ve sportif aktiviteler ile sosyal seçimli dersler eğitim programımızda ve yerleşke hayatında önemli yer tutmaktadır.</p>
+                                                <p>{% trans "Avrasya Üniversitesi Mühendislik ve Mimarlık Fakültesi olarak; öğrencilerimizin, temel mühendislik ve mimarlık bilimleri ile donanmasını, analitik düşünmesini, problem çözme ve tasarım yeteneği kazanmasını ve çevre-topluma duyarlı bir şuurla yetişmesini hedeflemekteyiz. Buna ilaveten, Fakültemizde yer alan sosyal/kültürel ve sportif aktiviteler ile sosyal seçimli dersler eğitim programımızda ve yerleşke hayatında önemli yer tutmaktadır." %}</p>
                                             </div>
                                             
                                             <div class="message-paragraph highlight">
@@ -744,13 +745,13 @@
                                                     <div class="paragraph-number">
                                                         <i class="fas fa-heart"></i>
                                                     </div>
-                                                    <h5>Başarı Dileklerimiz</h5>
+                                                    <h5>{% trans "Başarı Dileklerimiz" %}</h5>
                                                 </div>
-                                                <p class="special-message">Tüm bunların neticesinde mezunlarımızın iyi birer mühendis ya da mimar olmalarını arzulamaktayız. Öğrencilerimize üniversite yaşamlarında ve sonrasında başarılar dilerim.</p>
+                                                <p class="special-message">{% trans "Tüm bunların neticesinde mezunlarımızın iyi birer mühendis ya da mimar olmalarını arzulamaktayız. Öğrencilerimize üniversite yaşamlarında ve sonrasında başarılar dilerim." %}</p>
                                                 <div class="signature">
                                                     <div class="signature-line"></div>
-                                                    <div class="signature-name">Prof. Dr. Aytap SEZER</div>
-                                                    <div class="signature-title">Mühendislik ve Mimarlık Fakültesi Dekanı</div>
+                                                    <div class="signature-name">{% trans "Prof. Dr. Aytap SEZER" %}</div>
+                                                    <div class="signature-title">{% trans "Mühendislik ve Mimarlık Fakültesi Dekanı" %}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -760,7 +761,7 @@
                                     <div class="departments-overview">
                                         <div class="section-title-with-icon">
                                             <i class="fas fa-university"></i>
-                                            <h4>Fakültemizdeki Bölümler</h4>
+                                            <h4>{% trans "Fakültemizdeki Bölümler" %}</h4>
                                         </div>
                                         
                                         <div class="departments-list">
@@ -769,15 +770,15 @@
                                                     <i class="fas fa-laptop-code"></i>
                                                 </div>
                                                 <div class="department-details">
-                                                    <h5>Bilgisayar Mühendisliği</h5>
+                                                    <h5>{% trans "Bilgisayar Mühendisliği" %}</h5>
                                                     <div class="department-meta">
                                                         <span class="meta-item">
                                                             <i class="fas fa-language"></i>
-                                                            <span>Eğitim Dili: Türkçe</span>
+                                                            <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                         </span>
                                                         <span class="meta-item">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Lisans</span>
+                                                            <span>{% trans "Lisans" %}</span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -788,15 +789,15 @@
                                                     <i class="fas fa-bolt"></i>
                                                 </div>
                                                 <div class="department-details">
-                                                    <h5>Elektrik-Elektronik Mühendisliği</h5>
+                                                    <h5>{% trans "Elektrik-Elektronik Mühendisliği" %}</h5>
                                                     <div class="department-meta">
                                                         <span class="meta-item">
                                                             <i class="fas fa-language"></i>
-                                                            <span>Eğitim Dili: Türkçe</span>
+                                                            <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                         </span>
                                                         <span class="meta-item">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Lisans</span>
+                                                            <span>{% trans "Lisans" %}</span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -807,15 +808,15 @@
                                                     <i class="fas fa-utensils"></i>
                                                 </div>
                                                 <div class="department-details">
-                                                    <h5>Gıda Mühendisliği</h5>
+                                                    <h5>{% trans "Gıda Mühendisliği" %}</h5>
                                                     <div class="department-meta">
                                                         <span class="meta-item">
                                                             <i class="fas fa-language"></i>
-                                                            <span>Eğitim Dili: Türkçe</span>
+                                                            <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                         </span>
                                                         <span class="meta-item">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Lisans</span>
+                                                            <span>{% trans "Lisans" %}</span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -826,15 +827,15 @@
                                                     <i class="fas fa-map-marked-alt"></i>
                                                 </div>
                                                 <div class="department-details">
-                                                    <h5>Harita Mühendisliği</h5>
+                                                    <h5>{% trans "Harita Mühendisliği" %}</h5>
                                                     <div class="department-meta">
                                                         <span class="meta-item">
                                                             <i class="fas fa-language"></i>
-                                                            <span>Eğitim Dili: Türkçe</span>
+                                                            <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                         </span>
                                                         <span class="meta-item">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Lisans</span>
+                                                            <span>{% trans "Lisans" %}</span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -845,15 +846,15 @@
                                                     <i class="fas fa-couch"></i>
                                                 </div>
                                                 <div class="department-details">
-                                                    <h5>İç Mimarlık ve Çevre Tasarımı</h5>
+                                                    <h5>{% trans "İç Mimarlık ve Çevre Tasarımı" %}</h5>
                                                     <div class="department-meta">
                                                         <span class="meta-item">
                                                             <i class="fas fa-language"></i>
-                                                            <span>Eğitim Dili: Türkçe</span>
+                                                            <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                         </span>
                                                         <span class="meta-item">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Lisans</span>
+                                                            <span>{% trans "Lisans" %}</span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -864,15 +865,15 @@
                                                     <i class="fas fa-hard-hat"></i>
                                                 </div>
                                                 <div class="department-details">
-                                                    <h5>İnşaat Mühendisliği</h5>
+                                                    <h5>{% trans "İnşaat Mühendisliği" %}</h5>
                                                     <div class="department-meta">
                                                         <span class="meta-item">
                                                             <i class="fas fa-language"></i>
-                                                            <span>Eğitim Dili: Türkçe</span>
+                                                            <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                         </span>
                                                         <span class="meta-item">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Lisans</span>
+                                                            <span>{% trans "Lisans" %}</span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -883,15 +884,15 @@
                                                     <i class="fas fa-cogs"></i>
                                                 </div>
                                                 <div class="department-details">
-                                                    <h5>Makine Mühendisliği</h5>
+                                                    <h5>{% trans "Makine Mühendisliği" %}</h5>
                                                     <div class="department-meta">
                                                         <span class="meta-item">
                                                             <i class="fas fa-language"></i>
-                                                            <span>Eğitim Dili: Türkçe</span>
+                                                            <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                         </span>
                                                         <span class="meta-item">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Lisans</span>
+                                                            <span>{% trans "Lisans" %}</span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -902,15 +903,15 @@
                                                     <i class="fas fa-building"></i>
                                                 </div>
                                                 <div class="department-details">
-                                                    <h5>Mimarlık</h5>
+                                                    <h5>{% trans "Mimarlık" %}</h5>
                                                     <div class="department-meta">
                                                         <span class="meta-item">
                                                             <i class="fas fa-language"></i>
-                                                            <span>Eğitim Dili: Türkçe</span>
+                                                            <span>{% trans "Eğitim Dili: Türkçe" %}</span>
                                                         </span>
                                                         <span class="meta-item">
                                                             <i class="fas fa-graduation-cap"></i>
-                                                            <span>Lisans</span>
+                                                            <span>{% trans "Lisans" %}</span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -922,17 +923,17 @@
                                     <div class="dean-cta-section">
                                         <div class="cta-card">
                                             <div class="cta-content">
-                                                <h4><i class="fas fa-handshake"></i> Görüşmeye Davet</h4>
-                                                <p>Fakültemiz hakkında daha fazla bilgi almak veya görüşmek için ofisimize bekleriz. Öğrencilerimizin başarısı için her zaman yanlarındayız.</p>
+                                                <h4><i class="fas fa-handshake"></i> {% trans "Görüşmeye Davet" %}</h4>
+                                                <p>{% trans "Fakültemiz hakkında daha fazla bilgi almak veya görüşmek için ofisimize bekleriz. Öğrencilerimizin başarısı için her zaman yanlarındayız." %}</p>
                                             </div>
                                             <div class="cta-actions">
                                                 <a href="#" class="btn-action">
                                                     <i class="fas fa-calendar-check"></i>
-                                                    Randevu Al
+                                                    {% trans "Randevu Al" %}
                                                 </a>
                                                 <a href="mailto:dekan.mmf@avrasya.edu.tr" class="btn-action secondary">
                                                     <i class="fas fa-envelope"></i>
-                                                    E-posta Gönder
+                                                    {% trans "E-posta Gönder" %}
                                                 </a>
                                             </div>
                                         </div>

@@ -33,7 +33,7 @@
                                     </label>
                                     <input type="text" class="search-input" id="q" name="q" 
                                            value="{{ search_query }}" 
-                                           placeholder="Haber başlığı, özet veya içerikte ara...">
+                                           placeholder="{% trans 'Haber başlığı, özet veya içerikte ara...' %}">
                                 </div>
                                 <div class="date-filter-field">
                                     <label for="date" class="search-label">
@@ -45,7 +45,7 @@
                                 </div>
                                 <button type="submit" class="search-button">
                                     <i class="fas fa-search"></i>
-                                    Ara
+                                    {% trans "Ara" %}
                                 </button>
                             </div>
                         </form>
@@ -63,24 +63,24 @@
                         <div class="results-text">
                             {% if search_query and date_filter %}
                             <span class="result-criteria">
-                                <strong>Aranan:</strong> "{{ search_query }}" 
+                                <strong>{% trans "Aranan:" %}</strong> "{{ search_query }}" 
                                 <span class="separator">|</span>
-                                <strong>Tarih:</strong> {{ date_filter }}
+                                <strong>{% trans "Tarih:" %}</strong> {{ date_filter }}
                             </span>
                             {% elif search_query %}
                             <span class="result-criteria">
-                                <strong>Aranan:</strong> "{{ search_query }}"
+                                <strong>{% trans "Aranan:" %}</strong> "{{ search_query }}"
                             </span>
                             {% elif date_filter %}
                             <span class="result-criteria">
-                                <strong>Filtrelenen Tarih:</strong> {{ date_filter }}
+                                <strong>{% trans "Filtrelenen Tarih:" %}</strong> {{ date_filter }}
                             </span>
                             {% endif %}
                             <span class="results-count">{{ items.count }} sonuç bulundu</span>
                         </div>
                         <a href="{% url 'news:list' %}" class="clear-filters-btn">
                             <i class="fas fa-times"></i>
-                            Filtreyi Temizle
+                            {% trans "Filtreyi Temizle" %}
                         </a>
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                     {% if search_query or date_filter %}
                     <a href="{% url 'news:list' %}" class="btn-primary">
                         <i class="fas fa-times"></i>
-                        Filtreyi Temizle
+                        {% trans "Filtreyi Temizle" %}
                     </a>
                     {% endif %}
                 </div>

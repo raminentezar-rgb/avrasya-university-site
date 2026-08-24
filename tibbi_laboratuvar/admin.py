@@ -1,12 +1,13 @@
 # app_name: tibbi_laboratuvar/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     TibbiLaboratuvarFaaliyetGrubu, TibbiLaboratuvarFaaliyet, TibbiLaboratuvarDuyuru, TibbiLaboratuvarEtkinlik, TibbiLaboratuvarFaaliyetGorseli, TibbiLaboratuvarDersProgrami
 )
 
 @admin.register(TibbiLaboratuvarEtkinlik)
-class TibbiLaboratuvarEtkinlikAdmin(admin.ModelAdmin):
+class TibbiLaboratuvarEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class TibbiLaboratuvarDuyuruAdmin(admin.ModelAdmin):
         return TibbiLaboratuvarDuyuru.objects.all()
 
 @admin.register(TibbiLaboratuvarDersProgrami)
-class TibbiLaboratuvarDersProgramiAdmin(admin.ModelAdmin):
+class TibbiLaboratuvarDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class TibbiLaboratuvarFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(TibbiLaboratuvarFaaliyetGrubu)
-class TibbiLaboratuvarFaaliyetGrubuAdmin(admin.ModelAdmin):
+class TibbiLaboratuvarFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(TibbiLaboratuvarFaaliyet)
-class TibbiLaboratuvarFaaliyetAdmin(admin.ModelAdmin):
+class TibbiLaboratuvarFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

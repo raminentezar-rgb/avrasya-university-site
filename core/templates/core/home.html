@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% load cache %}
 {% get_current_language as CURRENT_LANG %}
@@ -54,29 +55,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     {% else %}
         <!-- تصویر پیش‌فرض -->
-        <img src="{% static 'core/img/default_slider.jpg' %}" class="d-block w-100" alt="Default" style="max-height: 600px; object-fit: cover;">
+        <img src="{% static 'core/img/default_slider.jpg' %}" class="d-block w-100" alt="{% trans 'Default' %}" style="max-height: 600px; object-fit: cover;">
     {% endif %}
     
     <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
         <h5>{{ s.title }}</h5>
         {% if s.link %}
-        <a href="{{ s.link }}" class="btn btn-sm btn-primary mt-2">Daha Fazla</a>
+        <a href="{{ s.link }}" class="btn btn-sm btn-primary mt-2">{% trans "Daha Fazla" %}</a>
         {% endif %}
     </div>
 </div>
 {% empty %}
 <div class="carousel-item active">
-    <img src="{% static 'core/img/default_slider.jpg' %}" class="d-block w-100" alt="Default" style="max-height: 600px; object-fit: cover;">
+    <img src="{% static 'core/img/default_slider.jpg' %}" class="d-block w-100" alt="{% trans 'Default' %}" style="max-height: 600px; object-fit: cover;">
 </div>
 {% endfor %}
 </div>
 <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-<span class="visually-hidden">Previous</span>
+<span class="visually-hidden">{% trans "Previous" %}</span>
 </button>
 <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-<span class="visually-hidden">Next</span>
+<span class="visually-hidden">{% trans "Next" %}</span>
 </button>
 </div>
 </section>
@@ -98,12 +99,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="icon-wrapper mb-3">
                             <i class="bi bi-journals"></i> 
                         </div>
-                        <h5 class="card-title text-primary mb-3">Akademik</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Akademik" %}</h5>
                         <p class="card-text text-muted small mb-4">
-                            Fakülteler, bölümler ve akademik programlar
+                            {% trans "Fakülteler, bölümler ve akademik programlar" %}
                         </p>
                         <a href="/page/akademik/" class="btn btn-outline-primary btn-sm">
-                            Keşfet <i class="bi bi-arrow-right"></i>
+                            {% trans "Keşfet" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -116,13 +117,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="icon-wrapper mb-3">
                             <i class="bi bi-person-badge"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Aday Öğrenci</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Aday Öğrenci" %}</h5>
 
                         <p class="card-text text-muted small mb-4">
-                            uygulamalı eğitim programları 
+                            {% trans "uygulamalı eğitim programları" %} 
                         </p>
                         <a href="{% url 'aday_ogrenci:aday_anasayfa' %}" class="btn btn-outline-primary btn-sm">
-                            Katıl <i class="bi bi-arrow-right"></i>
+                            {% trans "Katıl" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -135,12 +136,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="icon-wrapper mb-3">
                             <i class="bi bi-journal-text"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Kütüphane</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Kütüphane" %}</h5>
                         <p class="card-text text-muted small mb-4">
-                            Dijital kütüphane ve online kaynaklar
+                            {% trans "Dijital kütüphane ve online kaynaklar" %}
                         </p>
                         <a href="{% url 'kutuphane:kutuphane' %}" class="btn btn-outline-primary btn-sm">
-                            Erişim <i class="bi bi-arrow-right"></i>
+                            {% trans "Erişim" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -152,12 +153,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="icon-wrapper mb-3">
                             <i class="bi bi-pencil-square"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Kayıt</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Kayıt" %}</h5>
                         <p class="card-text text-muted small mb-4">
-                            Online başvuru ve kayıt işlemleri
+                            {% trans "Online başvuru ve kayıt işlemleri" %}
                         </p>
                         <a href="/application/" class="btn btn-outline-primary btn-sm">
-                            Başvur <i class="bi bi-arrow-right"></i>
+                            {% trans "Başvur" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -170,12 +171,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="icon-wrapper mb-3">
                             <i class="bi bi-telephone-outbound"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">İletişim</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "İletişim" %}</h5>
                         <p class="card-text text-muted small mb-4">
-                            Bize ulaşın ve sorularınızı yöneltin
+                            {% trans "Bize ulaşın ve sorularınızı yöneltin" %}
                         </p>
                         <a href="/contact/" class="btn btn-outline-primary btn-sm">
-                            İletişim <i class="bi bi-arrow-right"></i>
+                            {% trans "İletişim" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -188,12 +189,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="icon-wrapper mb-3">
                             <i class="bi bi-house-door"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Kampüs Yaşamı</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Kampüs Yaşamı" %}</h5>
                         <p class="card-text text-muted small mb-4">
-                            Sosyal olanaklar ve öğrenci yaşamı
+                            {% trans "Sosyal olanaklar ve öğrenci yaşamı" %}
                         </p>
                         <a href="/campus-life/" class="btn btn-outline-primary btn-sm">
-                            Keşfet <i class="bi bi-arrow-right"></i>
+                            {% trans "Keşfet" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -209,12 +210,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="icon-wrapper mb-3">
                             <i class="bi bi-airplane"></i>
                         </div>
-                        <h5 class="card-title text-primary mb-3">Uluslararası</h5>
+                        <h5 class="card-title text-primary mb-3">{% trans "Uluslararası" %}</h5>
                         <p class="card-text text-muted small mb-4">
-                            Değişim programları ve işbirlikleri
+                            {% trans "Değişim programları ve işbirlikleri" %}
                         </p>
                         <a href="/international/" class="btn btn-outline-primary btn-sm">
-                            Detaylar <i class="bi bi-arrow-right"></i>
+                            {% trans "Detaylar" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -229,12 +230,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="icon-wrapper mb-3">
                                 <i class="bi bi-search-heart"></i>
                             </div>
-                            <h5 class="card-title text-primary mb-3">Araştırma</h5>
+                            <h5 class="card-title text-primary mb-3">{% trans "Araştırma" %}</h5>
                             <p class="card-text text-muted small mb-4">
-                                Bilimsel araştırmalar ve projeler
+                                {% trans "Bilimsel araştırmalar ve projeler" %}
                             </p>
                             <a href="/research/" class="btn btn-outline-primary btn-sm">
-                                İncele <i class="bi bi-arrow-right"></i>
+                                {% trans "İncele" %} <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -266,8 +267,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="container">
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h2 class="fw-bold text-primary mb-3">AKADEMİK</h2>
-                <p class="lead text-muted">Avrasya Üniversitesi'ni daha yakından tanıyın</p>
+                <h2 class="fw-bold text-primary mb-3">{% trans "AKADEMİK" %}</h2>
+                <p class="lead text-muted">{% trans "Avrasya Üniversitesi'ni daha yakından tanıyın" %}</p>
             </div>
         </div>
         
@@ -275,11 +276,11 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- Kart 1: En Yeşil, En Sürdürülebilir Üniversitelerinden -->
             <div class="col-lg-3 col-md-6">
                 <div class="kesfet-card position-relative overflow-hidden rounded shadow-sm">
-                    <img src="{% static 'core/img/student/event-7.jpg' %}" alt="Sürdürülebilir Üniversite" class="img-fluid w-100">
+                    <img src="{% static 'core/img/student/event-7.jpg' %}" alt="{% trans 'Sürdürülebilir Üniversite' %}" class="img-fluid w-100">
                     <div class="kesfet-overlay d-flex align-items-end">
                         <div class="kesfet-content p-3 w-100">
-                            <h5 class="text-white mb-2">ENSTİTÜLER</h5>
-                            <a href="{% url 'enstituler:enstituler' %}" class="btn btn-sm btn-outline-light">Keşfet</a>
+                            <h5 class="text-white mb-2">{% trans "ENSTİTÜLER" %}</h5>
+                            <a href="{% url 'enstituler:enstituler' %}" class="btn btn-sm btn-outline-light">{% trans "Keşfet" %}</a>
                         </div>
                     </div>
                 </div>
@@ -288,11 +289,11 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- Kart 2: Yurt Dışı Üniversite Anlaşmaları -->
             <div class="col-lg-3 col-md-6">
                 <div class="kesfet-card position-relative overflow-hidden rounded shadow-sm">
-                    <img src="{% static 'core/img/student/intructor-account.jpg' %}" alt="Yurt Dışı Anlaşmalar" class="img-fluid w-100">
+                    <img src="{% static 'core/img/student/intructor-account.jpg' %}" alt="{% trans 'Yurt Dışı Anlaşmalar' %}" class="img-fluid w-100">
                     <div class="kesfet-overlay d-flex align-items-end">
                         <div class="kesfet-content p-3 w-100">
-                            <h5 class="text-white mb-2">FAKÜLTELER</h5>
-                            <a href="{% url 'fakulteler:fakulteler' %}" class="btn btn-sm btn-outline-light">Keşfet</a>
+                            <h5 class="text-white mb-2">{% trans "FAKÜLTELER" %}</h5>
+                            <a href="{% url 'fakulteler:fakulteler' %}" class="btn btn-sm btn-outline-light">{% trans "Keşfet" %}</a>
                         </div>
                     </div>
                 </div>
@@ -301,11 +302,11 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- Kart 3: Üniversite Sanayi İş Birliği -->
             <div class="col-lg-3 col-md-6">
                 <div class="kesfet-card position-relative overflow-hidden rounded shadow-sm">
-                    <img src="{% static 'core/img/student/learner-account.jpg' %}" alt="Sanayi İş Birliği" class="img-fluid w-100">
+                    <img src="{% static 'core/img/student/learner-account.jpg' %}" alt="{% trans 'Sanayi İş Birliği' %}" class="img-fluid w-100">
                     <div class="kesfet-overlay d-flex align-items-end">
                         <div class="kesfet-content p-3 w-100">
-                            <h5 class="text-white mb-2">YÜKSEKOKULLAR</h5>
-                            <a href="{% url 'yuksekokullari:yuksekokullari' %}" class="btn btn-sm btn-outline-light">Keşfet</a>
+                            <h5 class="text-white mb-2">{% trans "YÜKSEKOKULLAR" %}</h5>
+                            <a href="{% url 'yuksekokullari:yuksekokullari' %}" class="btn btn-sm btn-outline-light">{% trans "Keşfet" %}</a>
                         </div>
                     </div>
                 </div>
@@ -314,11 +315,11 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- Kart 4: Akreditasyonlarımız -->
             <div class="col-lg-3 col-md-6">
                 <div class="kesfet-card position-relative overflow-hidden rounded shadow-sm">
-                    <img src="{% static 'core/img/student/event-4.jpg' %}" alt="Akreditasyonlar" class="img-fluid w-100">
+                    <img src="{% static 'core/img/student/event-4.jpg' %}" alt="{% trans 'Akreditasyonlar' %}" class="img-fluid w-100">
                     <div class="kesfet-overlay d-flex align-items-end">
                         <div class="kesfet-content p-3 w-100">
-                            <h5 class="text-white mb-2">MESLEK YÜKSEKOKULLARI</h5>
-                            <a href="{% url 'meslekyuksekokullari:meslekyuksekokullari' %}" class="btn btn-sm btn-outline-light">Keşfet</a>
+                            <h5 class="text-white mb-2">{% trans "MESLEK YÜKSEKOKULLARI" %}</h5>
+                            <a href="{% url 'meslekyuksekokullari:meslekyuksekokullari' %}" class="btn btn-sm btn-outline-light">{% trans "Keşfet" %}</a>
                         </div>
                     </div>
                 </div>
@@ -343,12 +344,12 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="container">
         <div class="row align-items-center mb-4">
             <div class="col-md-8">
-                <h2 class="fw-bold text-primary mb-2">Duyurular</h2>
-                <p class="text-muted">Üniversitemizden güncel haber ve duyurular</p>
+                <h2 class="fw-bold text-primary mb-2">{% trans "Duyurular" %}</h2>
+                <p class="text-muted">{% trans "Üniversitemizden güncel haber ve duyurular" %}</p>
             </div>
             <div class="col-md-4 text-end">
                 <a href="{% url 'duyurular:liste' %}" class="btn btn-outline-primary">
-                    Tüm Duyurular <i class="bi bi-arrow-right"></i>
+                    {% trans "Tüm Duyurular" %} <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -399,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         <div class="d-flex justify-content-between align-items-center mt-auto">
                             <a href="{{ duyuru.get_absolute_url }}" class="btn btn-primary btn-sm">
-                                Detay <i class="bi bi-arrow-right"></i>
+                                {% trans "Detay" %} <i class="bi bi-arrow-right"></i>
                             </a>
                             {% if duyuru.mevcut_dosyalar %}
                             <small class="text-muted small">
@@ -414,8 +415,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="col-12">
                 <div class="text-center py-4">
                     <i class="bi bi-megaphone display-1 text-muted"></i>
-                    <h4 class="text-muted mt-3">Henüz duyuru bulunmuyor</h4>
-                    <p class="text-muted">En kısa sürede güncel duyurular paylaşılacaktır.</p>
+                    <h4 class="text-muted mt-3">{% trans "Henüz duyuru bulunmuyor" %}</h4>
+                    <p class="text-muted">{% trans "En kısa sürede güncel duyurular paylaşılacaktır." %}</p>
                 </div>
             </div>
             {% endfor %}
@@ -429,19 +430,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="row text-center">
                         <div class="col-md-3">
                             <h4 class="text-primary fw-bold mb-1">{{ total_announcements }}</h4>
-                            <p class="text-muted mb-0 small">Toplam Duyuru</p>
+                            <p class="text-muted mb-0 small">{% trans "Toplam Duyuru" %}</p>
                         </div>
                         <div class="col-md-3">
                             <h4 class="text-primary fw-bold mb-1">{{ this_month_announcements }}</h4>
-                            <p class="text-muted mb-0 small">Bu Ayki Duyurular</p>
+                            <p class="text-muted mb-0 small">{% trans "Bu Ayki Duyurular" %}</p>
                         </div>
                         <div class="col-md-3">
                             <h4 class="text-primary fw-bold mb-1">{{ with_files_count }}</h4>
-                            <p class="text-muted mb-0 small">Dosya Ekli</p>
+                            <p class="text-muted mb-0 small">{% trans "Dosya Ekli" %}</p>
                         </div>
                         <div class="col-md-3">
                             <h4 class="text-primary fw-bold mb-1">{{ recent_week_count }}</h4>
-                            <p class="text-muted mb-0 small">Son 7 Gün</p>
+                            <p class="text-muted mb-0 small">{% trans "Son 7 Gün" %}</p>
                         </div>
                     </div>
                 </div>
@@ -472,8 +473,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="container">
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h2 class="fw-bold text-primary mb-3">HABERLER</h2>
-                <p class="lead text-muted">Son Gelişmeler ve Yenilikç Çözümlerden Haberdar Olun</p>
+                <h2 class="fw-bold text-primary mb-3">{% trans "HABERLER" %}</h2>
+                <p class="lead text-muted">{% trans "Son Gelişmeler ve Yenilikç Çözümlerden Haberdar Olun" %}</p>
             </div>
         </div>
         
@@ -500,7 +501,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             {{ n.summary|truncatewords:20|default:n.content|truncatewords:20 }}
                                         </p>
                                         <a href="{{ n.get_absolute_url }}" class="btn btn-primary">
-                                            Devamını Oku <i class="bi bi-arrow-right"></i>
+                                            {% trans "Devamını Oku" %} <i class="bi bi-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -512,11 +513,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     <!-- کنترل‌های اسلایدر -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                        <span class="visually-hidden">{% trans "Previous" %}</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
+                        <span class="visually-hidden">{% trans "Next" %}</span>
                     </button>
                 </div>
             </div>
@@ -524,7 +525,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- لیست اخبار اخیر (سمت راست) -->
             <div class="col-lg-4">
                 <div class="recent-news-sidebar">
-                    <h4 class="sidebar-title mb-4">SON HABERLER</h4>
+                    <h4 class="sidebar-title mb-4">{% trans "SON HABERLER" %}</h4>
                     
                     <div class="recent-news-list">
                         {% for n in latest_news|slice:":3" %}
@@ -534,7 +535,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <a href="{{ n.get_absolute_url }}">{{ n.title }}</a>
                                 </h6>
                                 <div class="recent-news-meta">
-                                    <span class="news-category">HABER</span>
+                                    <span class="news-category">{% trans "HABER" %}</span>
                                     <span class="news-date">{{ n.published_at|date:'d M Y' }}</span>
                                 </div>
                             </div>
@@ -547,7 +548,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     <div class="text-center mt-4">
                         <a href="{% url 'news:list' %}" class="btn btn-outline-primary btn-sm">
-                            Tüm Haberler <i class="bi bi-arrow-right"></i>
+                            {% trans "Tüm Haberler" %} <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -564,11 +565,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- About Section -->
 <section id="about" class="py-5 bg-white">
         <div class="container text-center">
-        <h2 class="fw-bold mb-3 text-primary">Avrasya Üniversitesi Hakkında</h2>
+        <h2 class="fw-bold mb-3 text-primary">{% trans "Avrasya Üniversitesi Hakkında" %}</h2>
         <p class="lead text-muted">
-        Avrasya Üniversitesi, yenilikçi eğitim anlayışı, güçlü akademik kadrosu ve çağdaş altyapısıyla geleceğe yön veren bireyler yetiştirmektedir.
+        {% trans "Avrasya Üniversitesi, yenilikçi eğitim anlayışı, güçlü akademik kadrosu ve çağdaş altyapısıyla geleceğe yön veren bireyler yetiştirmektedir." %}
         </p>
-        <a href="{% url 'avrasya_universitesi_hakkinda:anasayfa' %}" class="btn btn-outline-primary mt-3">Devamını Oku</a>
+        <a href="{% url 'avrasya_universitesi_hakkinda:anasayfa' %}" class="btn btn-outline-primary mt-3">{% trans "Devamını Oku" %}</a>
         </div>
 </section>
 
@@ -586,12 +587,12 @@ document.addEventListener('DOMContentLoaded', function() {
    <div class="container">
         <div class="row align-items-center mb-4">
             <div class="col-md-8">
-                <h2 class="fw-bold text-primary mb-2 ">Etkinlikler</h2>
-                <p class="text-muted">Yaklaşan etkinlikler ve organizasyonlar</p>
+                <h2 class="fw-bold text-primary mb-2 ">{% trans "Etkinlikler" %}</h2>
+                <p class="text-muted">{% trans "Yaklaşan etkinlikler ve organizasyonlar" %}</p>
             </div>
             <div class="col-md-4 text-end">
                 <a href="{% url 'etkinlikler:liste' %}" class="btn btn-outline-primary">
-                    Tüm Etkinlikler <i class="bi bi-arrow-right"></i>
+                    {% trans "Tüm Etkinlikler" %} <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -625,7 +626,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         <div class="d-flex justify-content-between align-items-center">
                             <a href="{{ etkinlik.get_absolute_url }}" class="btn btn-primary btn-sm">
-                                Detay
+                                {% trans "Detay" %}
                             </a>
                             {% if etkinlik.yaklasan_etkinlik %}
                             <span class="badge bg-warning text-dark small">
@@ -640,8 +641,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="col-12">
                 <div class="text-center py-4">
                     <i class="bi bi-calendar-event display-1 text-muted"></i>
-                    <h4 class="text-muted mt-3">Yaklaşan etkinlik bulunmuyor</h4>
-                    <p class="text-muted">En kısa sürede yeni etkinlikler duyurulacaktır.</p>
+                    <h4 class="text-muted mt-3">{% trans "Yaklaşan etkinlik bulunmuyor" %}</h4>
+                    <p class="text-muted">{% trans "En kısa sürede yeni etkinlikler duyurulacaktır." %}</p>
                 </div>
             </div>
             {% endfor %}
@@ -664,7 +665,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <section id="full-width-hero" class="mb-5">
     <div class="container-fluid p-0">
         <div class="hero-image position-relative">
-            <img src="{% static 'core/img/akademik/avrasya5.png' %}" alt="Avrasya Üniversitesi" class="img-fluid w-100">
+            <img src="{% static 'core/img/akademik/avrasya5.png' %}" alt="{% trans 'Avrasya Üniversitesi' %}" class="img-fluid w-100">
             
             <!-- Overlay Content -->
             <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
@@ -673,20 +674,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="col-lg-6">
                             <div class="hero-content text-white">
                                 <h1 class="hero-title display-4 fw-bold mb-4">
-                                    Geleceğinizi <span class="text-warning">Avrasya'da</span> Şekillendirin
+                                    {% trans "Geleceğinizi" %} <span class="text-warning">{% trans "Avrasya'da" %}</span> {% trans "Şekillendirin" %}
                                 </h1>
                                 <p class="hero-subtitle lead mb-4">
-                                    Kaliteli eğitim, modern kampüs ve güçlü akademik kadro ile 
-                                    sizleri geleceğe hazırlıyoruz.
+                                    {% trans "Kaliteli eğitim, modern kampüs ve güçlü akademik kadro ile sizleri geleceğe hazırlıyoruz." %}
                                 </p>
                                 <div class="hero-buttons">
                                     <a href="{% url 'aday_ogrenci:basvuru' %}" class="btn btn-warning btn-lg me-3">
                                         <i class="bi bi-pencil-square me-2"></i>
-                                        Hemen Başvur
+                                        {% trans "Hemen Başvur" %}
                                     </a>
                                     <a href="" class="btn btn-outline-light btn-lg">
                                         <i class="bi bi-telephone me-2"></i>
-                                        Bize Ulaşın
+                                        {% trans "Bize Ulaşın" %}
                                     </a>
                                 </div>
                             </div>
@@ -716,8 +716,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="container">
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <h2 class="fw-bold text-primary mb-3">Öğrenci ve Mezun Görüşleri</h2>
-                <p class="lead text-muted">Avrasya Üniversitesi'nde eğitim deneyimlerini paylaşıyorlar</p>
+                <h2 class="fw-bold text-primary mb-3">{% trans "Öğrenci ve Mezun Görüşleri" %}</h2>
+                <p class="lead text-muted">{% trans "Avrasya Üniversitesi'nde eğitim deneyimlerini paylaşıyorlar" %}</p>
             </div>
         </div>
         
@@ -732,10 +732,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Ayşe Yılmaz" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="{% trans 'Ayşe Yılmaz' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Ayşe Yılmaz</h5>
-                                            <p class="text-muted small mb-0">Bilgisayar Mühendisliği, 2022 Mezunu</p>
+                                            <h5 class="mb-1">{% trans "Ayşe Yılmaz" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Bilgisayar Mühendisliği, 2022 Mezunu" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -746,7 +746,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-fill text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Avrasya Üniversitesi'nde geçirdiğim 4 yıl, hem akademik hem de kişisel gelişimim açısından çok değerliydi. Alanında uzman hocalarımızın rehberliği sayesinde mezun olduğumda iş hayatına hazırdım."
+                                        {% trans "\"Avrasya Üniversitesi'nde geçirdiğim 4 yıl, hem akademik hem de kişisel gelişimim açısından çok değerliydi. Alanında uzman hocalarımızın rehberliği sayesinde mezun olduğumda iş hayatına hazırdım.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -757,10 +757,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-6.jpg' %}" alt="Mehmet Demir" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-6.jpg' %}" alt="{% trans 'Mehmet Demir' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Mehmet Demir</h5>
-                                            <p class="text-muted small mb-0">İşletme, 4. Sınıf Öğrencisi</p>
+                                            <h5 class="mb-1">{% trans "Mehmet Demir" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "İşletme, 4. Sınıf Öğrencisi" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -771,7 +771,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-half text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Kampüs hayatı ve sosyal olanaklar açısından Avrasya Üniversitesi gerçekten çok zengin. Ders dışında katıldığım kulüp faaliyetleri sayesinde birçok deneyim kazandım."
+                                        {% trans "\"Kampüs hayatı ve sosyal olanaklar açısından Avrasya Üniversitesi gerçekten çok zengin. Ders dışında katıldığım kulüp faaliyetleri sayesinde birçok deneyim kazandım.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -782,10 +782,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-4.jpg' %}" alt="Zeynep Kaya" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-4.jpg' %}" alt="{% trans 'Zeynep Kaya' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Zeynep Kaya</h5>
-                                            <p class="text-muted small mb-0">Tıp Fakültesi, 2021 Mezunu</p>
+                                            <h5 class="mb-1">{% trans "Zeynep Kaya" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Tıp Fakültesi, 2021 Mezunu" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -796,7 +796,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-fill text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Tıp eğitimim boyunca hem teorik hem de pratik anlamda çok iyi bir eğitim aldım. Hastane stajlarımızda deneyimli doktorlardan öğrendiğimiz bilgiler meslek hayatımda bana çok yardımcı oldu."
+                                        {% trans "\"Tıp eğitimim boyunca hem teorik hem de pratik anlamda çok iyi bir eğitim aldım. Hastane stajlarımızda deneyimli doktorlardan öğrendiğimiz bilgiler meslek hayatımda bana çok yardımcı oldu.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -812,10 +812,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Ahmet Korkmaz" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="{% trans 'Ahmet Korkmaz' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Ahmet Korkmaz</h5>
-                                            <p class="text-muted small mb-0">Elektrik-Elektronik Müh., 2020 Mezunu</p>
+                                            <h5 class="mb-1">{% trans "Ahmet Korkmaz" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Elektrik-Elektronik Müh., 2020 Mezunu" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -826,7 +826,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Üniversitenin sağladığı laboratuvar imkanları ve teknik ekipmanlar sayesinde pratik becerilerimizi geliştirme fırsatı bulduk. Mezuniyet sonrası iş bulma sürecim oldukça hızlı geçti."
+                                        {% trans "\"Üniversitenin sağladığı laboratuvar imkanları ve teknik ekipmanlar sayesinde pratik becerilerimizi geliştirme fırsatı bulduk. Mezuniyet sonrası iş bulma sürecim oldukça hızlı geçti.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -837,10 +837,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Elif Yıldız" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="{% trans 'Elif Yıldız' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Elif Yıldız</h5>
-                                            <p class="text-muted small mb-0">Psikoloji, 3. Sınıf Öğrencisi</p>
+                                            <h5 class="mb-1">{% trans "Elif Yıldız" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Psikoloji, 3. Sınıf Öğrencisi" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -851,7 +851,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-fill text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Akademik kadronun öğrenciye yaklaşımı gerçekten çok sıcak ve destekleyici. Danışman hocalarımız her konuda bize rehberlik ediyor. Kampüs ortamı da oldukça güvenli ve huzurlu."
+                                        {% trans "\"Akademik kadronun öğrenciye yaklaşımı gerçekten çok sıcak ve destekleyici. Danışman hocalarımız her konuda bize rehberlik ediyor. Kampüs ortamı da oldukça güvenli ve huzurlu.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -862,10 +862,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Can Aydın" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="{% trans 'Can Aydın' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Can Aydın</h5>
-                                            <p class="text-muted small mb-0">Mimarlık, 2023 Mezunu</p>
+                                            <h5 class="mb-1">{% trans "Can Aydın" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Mimarlık, 2023 Mezunu" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -876,7 +876,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-half text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Stüdyo derslerinde aldığımız pratik eğitim ve proje tabanlı öğrenme sayesinde portfolyom oldukça zenginleşti. Mezun olduktan sonra bir mimarlık ofisinde işe başladım."
+                                        {% trans "\"Stüdyo derslerinde aldığımız pratik eğitim ve proje tabanlı öğrenme sayesinde portfolyom oldukça zenginleşti. Mezun olduktan sonra bir mimarlık ofisinde işe başladım.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -892,10 +892,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-7.jpg' %}" alt="Deniz Arslan" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-7.jpg' %}" alt="{% trans 'Deniz Arslan' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Deniz Arslan</h5>
-                                            <p class="text-muted small mb-0">Kimya Mühendisliği, 2021 Mezunu</p>
+                                            <h5 class="mb-1">{% trans "Deniz Arslan" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Kimya Mühendisliği, 2021 Mezunu" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -906,7 +906,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-fill text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Laboratuvar çalışmaları ve endüstriyel staj imkanları ile teorik bilgilerimizi pratiğe dökme fırsatı bulduk. Üniversitenin sanayi işbirlikleri sayesinde mezuniyet öncesi iş teklifi aldım."
+                                        {% trans "\"Laboratuvar çalışmaları ve endüstriyel staj imkanları ile teorik bilgilerimizi pratiğe dökme fırsatı bulduk. Üniversitenin sanayi işbirlikleri sayesinde mezuniyet öncesi iş teklifi aldım.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -917,10 +917,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Buse Şahin" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="{% trans 'Buse Şahin' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Buse Şahin</h5>
-                                            <p class="text-muted small mb-0">Hukuk Fakültesi, 2022 Mezunu</p>
+                                            <h5 class="mb-1">{% trans "Buse Şahin" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Hukuk Fakültesi, 2022 Mezunu" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -931,7 +931,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Hukuk kliniği uygulamaları ve mahkeme ziyaretleri sayesinde teorik hukuk bilgimizi pratikle pekiştirdik. Mezun olduktan sonra avukatlık stajıma başladım ve oldukça hazırlıklıydım."
+                                        {% trans "\"Hukuk kliniği uygulamaları ve mahkeme ziyaretleri sayesinde teorik hukuk bilgimizi pratikle pekiştirdik. Mezun olduktan sonra avukatlık stajıma başladım ve oldukça hazırlıklıydım.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -942,10 +942,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="Okan Kılıç" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-3.jpg' %}" alt="{% trans 'Okan Kılıç' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Okan Kılıç</h5>
-                                            <p class="text-muted small mb-0">İnşaat Mühendisliği, 4. Sınıf Öğrencisi</p>
+                                            <h5 class="mb-1">{% trans "Okan Kılıç" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "İnşaat Mühendisliği, 4. Sınıf Öğrencisi" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -956,7 +956,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-half text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Teknik geziler ve saha uygulamaları ile teorik bilgilerimizi gerçek projelerde test etme fırsatı buluyoruz. Öğretim üyelerimizin sektör deneyimleri bize büyük katkı sağlıyor."
+                                        {% trans "\"Teknik geziler ve saha uygulamaları ile teorik bilgilerimizi gerçek projelerde test etme fırsatı buluyoruz. Öğretim üyelerimizin sektör deneyimleri bize büyük katkı sağlıyor.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -972,10 +972,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-4.jpg' %}" alt="Sema Yücel" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-4.jpg' %}" alt="{% trans 'Sema Yücel' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Sema Yücel</h5>
-                                            <p class="text-muted small mb-0">İngilizce Öğretmenliği, 2020 Mezunu</p>
+                                            <h5 class="mb-1">{% trans "Sema Yücel" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "İngilizce Öğretmenliği, 2020 Mezunu" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -986,7 +986,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-fill text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Pedagojik formasyon eğitimi ve staj deneyimleri sayesinde mezun olduğumda kendimi sınıf ortamına hazır hissediyordum. Şu anda bir devlet okulunda İngilizce öğretmeni olarak çalışıyorum."
+                                        {% trans "\"Pedagojik formasyon eğitimi ve staj deneyimleri sayesinde mezun olduğumda kendimi sınıf ortamına hazır hissediyordum. Şu anda bir devlet okulunda İngilizce öğretmeni olarak çalışıyorum.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -997,10 +997,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-6.jpg' %}" alt="Tolga Akgün" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-6.jpg' %}" alt="{% trans 'Tolga Akgün' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Tolga Akgün</h5>
-                                            <p class="text-muted small mb-0">Makine Mühendisliği, 2023 Mezunu</p>
+                                            <h5 class="mb-1">{% trans "Tolga Akgün" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Makine Mühendisliği, 2023 Mezunu" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -1011,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "CAD/CAM laboratuvarları ve modern makine parkuru ile pratik becerilerimizi geliştirdik. Bitirme projem sayesinde bir otomotiv firmasında işe başladım."
+                                        {% trans "\"CAD/CAM laboratuvarları ve modern makine parkuru ile pratik becerilerimizi geliştirdik. Bitirme projem sayesinde bir otomotiv firmasında işe başladım.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -1022,10 +1022,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="card testimonial-card h-100 border-0 shadow-sm">
                                 <div class="card-body p-4">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="{% static 'core/img/student/testimonial-7.jpg' %}" alt="Nur Güler" class="student-avatar rounded-circle me-3">
+                                        <img src="{% static 'core/img/student/testimonial-7.jpg' %}" alt="{% trans 'Nur Güler' %}" class="student-avatar rounded-circle me-3">
                                         <div>
-                                            <h5 class="mb-1">Nur Güler</h5>
-                                            <p class="text-muted small mb-0">Hemşirelik, 2. Sınıf Öğrencisi</p>
+                                            <h5 class="mb-1">{% trans "Nur Güler" %}</h5>
+                                            <p class="text-muted small mb-0">{% trans "Hemşirelik, 2. Sınıf Öğrencisi" %}</p>
                                         </div>
                                     </div>
                                     <div class="rating mb-3">
@@ -1036,7 +1036,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <i class="bi bi-star-half text-warning"></i>
                                     </div>
                                     <p class="card-text text-dark">
-                                        "Klinik uygulamalar ve simülasyon laboratuvarları sayesinde mesleki becerilerimizi güvenli bir ortamda geliştiriyoruz. Hocalarımızın tecrübelerini bizimle paylaşması çok değerli."
+                                        {% trans "\"Klinik uygulamalar ve simülasyon laboratuvarları sayesinde mesleki becerilerimizi güvenli bir ortamda geliştiriyoruz. Hocalarımızın tecrübelerini bizimle paylaşması çok değerli.\"" %}
                                     </p>
                                 </div>
                             </div>
@@ -1048,11 +1048,11 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- Carousel Controls -->
             <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon bg-primary rounded-circle p-3" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+                <span class="visually-hidden">{% trans "Previous" %}</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon bg-primary rounded-circle p-3" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+                <span class="visually-hidden">{% trans "Next" %}</span>
             </button>
             
             <!-- Carousel Indicators -->
@@ -1072,25 +1072,25 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="col-md-3 mb-4">
                             <div class="stat-item">
                                 <h3 class="text-primary fw-bold mb-1">%94</h3>
-                                <p class="text-muted mb-0">Memnuniyet Oranı</p>
+                                <p class="text-muted mb-0">{% trans "Memnuniyet Oranı" %}</p>
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
                             <div class="stat-item">
                                 <h3 class="text-primary fw-bold mb-1">%87</h3>
-                                <p class="text-muted mb-0">Mezun İstihdam Oranı</p>
+                                <p class="text-muted mb-0">{% trans "Mezun İstihdam Oranı" %}</p>
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
                             <div class="stat-item">
                                 <h3 class="text-primary fw-bold mb-1">4.5/5</h3>
-                                <p class="text-muted mb-0">Ortalama Puan</p>
+                                <p class="text-muted mb-0">{% trans "Ortalama Puan" %}</p>
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
                             <div class="stat-item">
                                 <h3 class="text-primary fw-bold mb-1">1500+</h3>
-                                <p class="text-muted mb-0">Paylaşılan Görüş</p>
+                                <p class="text-muted mb-0">{% trans "Paylaşılan Görüş" %}</p>
                             </div>
                         </div>
                     </div>
@@ -1101,12 +1101,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- CTA Section -->
         {% comment %} <div class="row mt-4">
             <div class="col-12 text-center">
-                <p class="mb-3">Siz de deneyimlerinizi paylaşmak ister misiniz?</p>
+                <p class="mb-3">{% trans "Siz de deneyimlerinizi paylaşmak ister misiniz?" %}</p>
                 <a href="#" class="btn btn-primary me-2">
-                    <i class="bi bi-pencil-square me-1"></i>Görüş Bildir
+                    <i class="bi bi-pencil-square me-1"></i>{% trans "Görüş Bildir" %}
                 </a>
                 <a href="#" class="btn btn-outline-primary">
-                    <i class="bi bi-play-btn me-1"></i>Tüm Görüşleri Gör
+                    <i class="bi bi-play-btn me-1"></i>{% trans "Tüm Görüşleri Gör" %}
                 </a>
             </div>
         </div> {% endcomment %}
@@ -1124,7 +1124,7 @@ document.addEventListener('DOMContentLoaded', function() {
 {% comment %} <section id="full-width-banner" class="mb-5">
     <div class="container-fluid p-0">
         <div class="banner-image">
-            <img src="{% static 'core/img/akademik/avrasya12.jpg' %}" alt="Avrasya Üniversitesi" class="img-fluid w-100">
+            <img src="{% static 'core/img/akademik/avrasya12.jpg' %}" alt="{% trans 'Avrasya Üniversitesi' %}" class="img-fluid w-100">
         </div>
     </div>
 </section> {% endcomment %}
@@ -1136,10 +1136,10 @@ document.addEventListener('DOMContentLoaded', function() {
 {% comment %} <section id="links" class="py-5 bg-primary text-light">
     <div class="container text-center">
         <div class="row">
-            <div class="col-md-3 mb-3"><a href="/page/akademik/" class="text-light text-decoration-none">Akademik</a></div>
-            <div class="col-md-3 mb-3"><a href="/events/" class="text-light text-decoration-none">Etkinlikler</a></div>
-            <div class="col-md-3 mb-3"><a href="/page/ogrenci/" class="text-light text-decoration-none">Öğrenci Bilgileri</a></div>
-            <div class="col-md-3 mb-3"><a href="/contact/" class="text-light text-decoration-none">İletişim</a></div>
+            <div class="col-md-3 mb-3"><a href="/page/akademik/" class="text-light text-decoration-none">{% trans "Akademik" %}</a></div>
+            <div class="col-md-3 mb-3"><a href="/events/" class="text-light text-decoration-none">{% trans "Etkinlikler" %}</a></div>
+            <div class="col-md-3 mb-3"><a href="/page/ogrenci/" class="text-light text-decoration-none">{% trans "Öğrenci Bilgileri" %}</a></div>
+            <div class="col-md-3 mb-3"><a href="/contact/" class="text-light text-decoration-none">{% trans "İletişim" %}</a></div>
         </div>
     </div>  
 </section> {% endcomment %}
@@ -1151,8 +1151,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="container">
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <h2 class="fw-bold text-primary mb-3">Kampüslerimiz</h2>
-                <p class="lead text-muted">Avrasya Üniversitesi'nin tüm yerleşkeleri ve iletişim bilgileri</p>
+                <h2 class="fw-bold text-primary mb-3">{% trans "Kampüslerimiz" %}</h2>
+                <p class="lead text-muted">{% trans "Avrasya Üniversitesi'nin tüm yerleşkeleri ve iletişim bilgileri" %}</p>
             </div>
         </div>
         
@@ -1163,25 +1163,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="campus-card">
                         <div class="campus-card-front">
                             <div class="campus-image-container">
-                                <img src="{% static 'core/img/akademik/peelitli.png' %}" alt="Pelitli Yerleşkesi" class="campus-image">
+                                <img src="{% static 'core/img/akademik/peelitli.png' %}" alt="{% trans 'Pelitli Yerleşkesi' %}" class="campus-image">
                                 <div class="image-overlay"></div>
                             </div>
-                            <h3 class="campus-name">PELİTLİ</h3>
-                            <p class="campus-location">Ortahisar / TR4820N</p>
-                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                            <h3 class="campus-name">{% trans "PELİTLİ" %}</h3>
+                            <p class="campus-location">{% trans "Ortahisar / TR4820N" %}</p>
+                            <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                         </div>
                         <div class="campus-card-back">
-                            <h3 class="back-campus-name">PELİTLİ YERLEŞKESİ</h3>
+                            <h3 class="back-campus-name">{% trans "PELİTLİ YERLEŞKESİ" %}</h3>
                             <div class="contact-info">
                                 <div class="contact-item">
                                     <div class="contact-icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div class="contact-text">
-                                        Arrasyon Üniversitesi<br>
-                                        Restolveğin Peliti Mühelfesi<br>
-                                        Otirmiyeti: Birhem, No:26/A<br>
-                                        Ortarlıson/TR4820N
+                                        {% trans "Arrasyon Üniversitesi" %}<br>
+                                        {% trans "Restolveğin Peliti Mühelfesi" %}<br>
+                                        {% trans "Otirmiyeti: Birhem, No:26/A" %}<br>
+                                        {% trans "Ortarlıson/TR4820N" %}
                                     </div>
                                 </div>
                                 <div class="contact-item">
@@ -1194,7 +1194,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                            <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                         </div>
                     </div>
                 </div>
@@ -1206,24 +1206,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="campus-card">
                         <div class="campus-card-front">
                             <div class="campus-image-container">
-                                <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" alt="Yalıncak Yerleşkesi" class="campus-image">
+                                <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" alt="{% trans 'Yalıncak Yerleşkesi' %}" class="campus-image">
                                 <div class="image-overlay"></div>
                             </div>
-                            <h3 class="campus-name">YALINCAK</h3>
-                            <p class="campus-location">Ortahisar / Trabzon</p>
-                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                            <h3 class="campus-name">{% trans "YALINCAK" %}</h3>
+                            <p class="campus-location">{% trans "Ortahisar / Trabzon" %}</p>
+                            <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                         </div>
                         <div class="campus-card-back">
-                            <h3 class="back-campus-name">YALINCAK YERLEŞKESİ</h3>
+                            <h3 class="back-campus-name">{% trans "YALINCAK YERLEŞKESİ" %}</h3>
                             <div class="contact-info">
                                 <div class="contact-item">
                                     <div class="contact-icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div class="contact-text">
-                                        Yalıncak Mahallesi<br>
-                                        Bize Cad. No: 126/1<br>
-                                        Ortahtar / Trabzon
+                                        {% trans "Yalıncak Mahallesi" %}<br>
+                                        {% trans "Bize Cad. No: 126/1" %}<br>
+                                        {% trans "Ortahtar / Trabzon" %}
                                     </div>
                                 </div>
                                 <div class="contact-item">
@@ -1236,7 +1236,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                            <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                         </div>
                     </div>
                 </div>
@@ -1248,23 +1248,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="campus-card">
                         <div class="campus-card-front">
                             <div class="campus-image-container">
-                                <img src="{% static 'core/img/akademik/kasustu-1024x683-1.jpg' %}" alt="Kaşüstü Yerleşkesi" class="campus-image">
+                                <img src="{% static 'core/img/akademik/kasustu-1024x683-1.jpg' %}" alt="{% trans 'Kaşüstü Yerleşkesi' %}" class="campus-image">
                                 <div class="image-overlay"></div>
                             </div>
-                            <h3 class="campus-name">KAŞÜSTÜ</h3>
-                            <p class="campus-location">Yomra / Trabzon</p>
-                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                            <h3 class="campus-name">{% trans "KAŞÜSTÜ" %}</h3>
+                            <p class="campus-location">{% trans "Yomra / Trabzon" %}</p>
+                            <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                         </div>
                         <div class="campus-card-back">
-                            <h3 class="back-campus-name">KAŞÜSTÜ YERLEŞKESİ</h3>
+                            <h3 class="back-campus-name">{% trans "KAŞÜSTÜ YERLEŞKESİ" %}</h3>
                             <div class="contact-info">
                                 <div class="contact-item">
                                     <div class="contact-icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div class="contact-text">
-                                        Koşüstü, Limramet Road<br>
-                                        02180 Yormu/Trabzon
+                                        {% trans "Koşüstü, Limramet Road" %}<br>
+                                        {% trans "02180 Yormu/Trabzon" %}
                                     </div>
                                 </div>
                                 <div class="contact-item">
@@ -1277,7 +1277,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                            <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                         </div>
                     </div>
                 </div>
@@ -1289,24 +1289,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="campus-card">
                         <div class="campus-card-front">
                             <div class="campus-image-container">
-                                <img src="{% static 'core/img/akademik/yomra.png' %}" alt="Yomra Yerleşkesi" class="campus-image">
+                                <img src="{% static 'core/img/akademik/yomra.png' %}" alt="{% trans 'Yomra Yerleşkesi' %}" class="campus-image">
                                 <div class="image-overlay"></div>
                             </div>
-                            <h3 class="campus-name">YOMRA</h3>
-                            <p class="campus-location">Yomra / Trabzon</p>
-                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                            <h3 class="campus-name">{% trans "YOMRA" %}</h3>
+                            <p class="campus-location">{% trans "Yomra / Trabzon" %}</p>
+                            <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                         </div>
                         <div class="campus-card-back">
-                            <h3 class="back-campus-name">YOMRA YERLEŞKESİ</h3>
+                            <h3 class="back-campus-name">{% trans "YOMRA YERLEŞKESİ" %}</h3>
                             <div class="contact-info">
                                 <div class="contact-item">
                                     <div class="contact-icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div class="contact-text">
-                                        Sencok, Nüzümet Cd.<br>
-                                        BİZGÖ<br>
-                                        Yomro/Tirabzon
+                                        {% trans "Sencok, Nüzümet Cd." %}<br>
+                                        {% trans "BİZGÖ" %}<br>
+                                        {% trans "Yomro/Tirabzon" %}
                                     </div>
                                 </div>
                                 <div class="contact-item">
@@ -1319,7 +1319,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flip-hint">Bilgiler için üzerine gelin</div>
+                            <div class="flip-hint">{% trans "Bilgiler için üzerine gelin" %}</div>
                         </div>
                     </div>
                 </div>
@@ -1340,8 +1340,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="container">
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h3 class="fw-bold text-primary mb-3">Diğer Bağlantılar</h3>
-                <p class="text-muted">Uluslararası iş birliklerimiz ve akreditasyonlarımız</p>
+                <h3 class="fw-bold text-primary mb-3">{% trans "Diğer Bağlantılar" %}</h3>
+                <p class="text-muted">{% trans "Uluslararası iş birliklerimiz ve akreditasyonlarımız" %}</p>
             </div>
         </div>
         
@@ -1350,53 +1350,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 <!-- First set of 8 logos -->
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="ELFA" class="logo-img">
+                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="{% trans 'ELFA' %}" class="logo-img">
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/osym.png' %}" alt="ELFA" class="logo-img">
+                        <img src="{% static 'core/img/logos/osym.png' %}" alt="{% trans 'ELFA' %}" class="logo-img">
                         {% comment %} <div class="logo-placeholder bg-primary text-white rounded d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">CFA</span>
+                            <span class="fw-bold">{% trans "CFA" %}</span>
                         </div> {% endcomment %}
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/yok.png' %}" alt="BREEAM" class="logo-img">
+                        <img src="{% static 'core/img/logos/yok.png' %}" alt="{% trans 'BREEAM' %}" class="logo-img">
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="BREEAM" class="logo-img">
+                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="{% trans 'BREEAM' %}" class="logo-img">
                         {% comment %} <div class="logo-placeholder bg-success text-white rounded d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">IEEE</span>
+                            <span class="fw-bold">{% trans "IEEE" %}</span>
                         </div> {% endcomment %}
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="Erasmus+" class="logo-img">
+                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="{% trans 'Erasmus+' %}" class="logo-img">
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/osym.png' %}" alt="Erasmus+" class="logo-img">
+                        <img src="{% static 'core/img/logos/osym.png' %}" alt="{% trans 'Erasmus+' %}" class="logo-img">
                         {% comment %} <div class="logo-placeholder bg-warning text-dark rounded d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">ESI</span>
+                            <span class="fw-bold">{% trans "ESI" %}</span>
                         </div> {% endcomment %}
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/yok.png' %}" alt="IAMU" class="logo-img">
+                        <img src="{% static 'core/img/logos/yok.png' %}" alt="{% trans 'IAMU' %}" class="logo-img">
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="IAMU" class="logo-img">
+                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="{% trans 'IAMU' %}" class="logo-img">
                         {% comment %} <div class="logo-placeholder bg-info text-white rounded d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">ABET</span>
+                            <span class="fw-bold">{% trans "ABET" %}</span>
                         </div> {% endcomment %}
                     </a>
                 </div>
@@ -1404,53 +1404,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 <!-- Duplicate set for seamless loop -->
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="ELFA" class="logo-img">
+                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="{% trans 'ELFA' %}" class="logo-img">
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/osym.png' %}" alt="ELFA" class="logo-img">
+                        <img src="{% static 'core/img/logos/osym.png' %}" alt="{% trans 'ELFA' %}" class="logo-img">
                         {% comment %} <div class="logo-placeholder bg-primary text-white rounded d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">CFA</span>
+                            <span class="fw-bold">{% trans "CFA" %}</span>
                         </div> {% endcomment %}
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/yok.png' %}" alt="BREEAM" class="logo-img">
+                        <img src="{% static 'core/img/logos/yok.png' %}" alt="{% trans 'BREEAM' %}" class="logo-img">
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="BREEAM" class="logo-img">
+                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="{% trans 'BREEAM' %}" class="logo-img">
                         {% comment %} <div class="logo-placeholder bg-success text-white rounded d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">IEEE</span>
+                            <span class="fw-bold">{% trans "IEEE" %}</span>
                         </div> {% endcomment %}
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="Erasmus+" class="logo-img">
+                        <img src="{% static 'core/img/logos/indir-1-150x150.png' %}" alt="{% trans 'Erasmus+' %}" class="logo-img">
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/osym.png' %}" alt="Erasmus+" class="logo-img">
+                        <img src="{% static 'core/img/logos/osym.png' %}" alt="{% trans 'Erasmus+' %}" class="logo-img">
                         {% comment %} <div class="logo-placeholder bg-warning text-dark rounded d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">ESI</span>
+                            <span class="fw-bold">{% trans "ESI" %}</span>
                         </div> {% endcomment %}
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/yok.png' %}" alt="IAMU" class="logo-img">
+                        <img src="{% static 'core/img/logos/yok.png' %}" alt="{% trans 'IAMU' %}" class="logo-img">
                     </a>
                 </div>
                 <div class="logo-item">
                     <a href="#" class="logo-link">
-                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="IAMU" class="logo-img">
+                        <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="{% trans 'IAMU' %}" class="logo-img">
                         {% comment %} <div class="logo-placeholder bg-info text-white rounded d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">ABET</span>
+                            <span class="fw-bold">{% trans "ABET" %}</span>
                         </div> {% endcomment %}
                     </a>
                 </div>

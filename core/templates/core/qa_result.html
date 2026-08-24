@@ -1,3 +1,4 @@
+{% load i18n %}
 <h2>“{{ query }}” için sonuçlar</h2>
 
 {% for item in results %}
@@ -6,5 +7,5 @@
         <p>{{ item.answer }}</p>
     </div>
 {% empty %}
-    <p>Bu soruya ait hazır bir cevap bulunamadı.</p>
+    <p>{% trans "Bu soruya ait hazır bir cevap bulunamadı." %}</p>
 {% endfor %}

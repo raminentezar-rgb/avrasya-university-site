@@ -1,12 +1,13 @@
 # app_name: ebelik/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     EbelikFaaliyetGorseli, EbelikFaaliyet, EbelikDuyuru, EbelikFaaliyetGrubu, EbelikEtkinlik, EbelikDersProgrami
 )
 
 @admin.register(EbelikEtkinlik)
-class EbelikEtkinlikAdmin(admin.ModelAdmin):
+class EbelikEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class EbelikDuyuruAdmin(admin.ModelAdmin):
         return EbelikDuyuru.objects.all()
 
 @admin.register(EbelikDersProgrami)
-class EbelikDersProgramiAdmin(admin.ModelAdmin):
+class EbelikDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class EbelikFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(EbelikFaaliyetGrubu)
-class EbelikFaaliyetGrubuAdmin(admin.ModelAdmin):
+class EbelikFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(EbelikFaaliyet)
-class EbelikFaaliyetAdmin(admin.ModelAdmin):
+class EbelikFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

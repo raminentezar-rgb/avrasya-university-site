@@ -1,4 +1,5 @@
 {% extends 'arastirma/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Uzaktan Eğitim Uygulama ve Araştırma Merkezi - Avrasya University{% endblock %}
@@ -7,8 +8,8 @@
 <section class="research-hero" style="background: linear-gradient(135deg, #1d61a9 0%, #092442 100%); padding: 100px 0 60px;">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Uzaktan Eğitim Uygulama ve Araştırma Merkezi</h1>
-            <p>İletişim ve bilgi teknolojilerine dayalı modern eğitim çözümleri</p>
+            <h1>{% trans "Uzaktan Eğitim Uygulama ve Araştırma Merkezi" %}</h1>
+            <p>{% trans "İletişim ve bilgi teknolojilerine dayalı modern eğitim çözümleri" %}</p>
         </div>
     </div>
 </section>
@@ -26,82 +27,82 @@
                 <!-- بخش مدیر مرکز -->
                 <div class="director-card">
                     <div class="director-image">
-                        <img src="{% static 'core/img/teacher/Handan-Erdogan-1.jpg' %}" alt="Öğr. Gör. Handan ERDOĞAN">
+                        <img src="{% static 'core/img/teacher/Handan-Erdogan-1.jpg' %}" alt="{% trans 'Öğr. Gör. Handan ERDOĞAN' %}">
                     </div>
                     <div class="director-info">
-                        <h3>Öğr. Gör. Handan ERDOĞAN</h3>
-                        <p class="position">Merkez Müdürü</p>
+                        <h3>{% trans "Öğr. Gör. Handan ERDOĞAN" %}</h3>
+                        <p class="position">{% trans "Merkez Müdürü" %}</p>
                     </div>
                 </div>
                 
                 <!-- بخش اهداف مرکز -->
                 <div class="content-section">
-                    <h2 class="section-title">Merkezimizin Amacı</h2>
+                    <h2 class="section-title">{% trans "Merkezimizin Amacı" %}</h2>
                     <div class="section-content">
-                        <p>Merkezimizin amacı; iletişim ve bilgi teknolojilerine dayalı olarak Üniversitenin ön lisans, lisans, lisansüstü ve yaşam boyu eğitim dahil tüm programları için plan, program, koordinasyon ve uygulama faaliyetleri yürüterek; uzaktan eğitim ile ilgili araştırma-geliştirme ve uygulama çalışmaları yapmak, kurum ve kuruluşların uzaktan eğitim ihtiyaç ve isteklerine yardımcı olmak, ön lisans, lisans, lisansüstü ve yetişkin eğitiminde e-öğrenme temelli ders ve programları geliştirmektir.</p>
+                        <p>{% trans "Merkezimizin amacı; iletişim ve bilgi teknolojilerine dayalı olarak Üniversitenin ön lisans, lisans, lisansüstü ve yaşam boyu eğitim dahil tüm programları için plan, program, koordinasyon ve uygulama faaliyetleri yürüterek; uzaktan eğitim ile ilgili araştırma-geliştirme ve uygulama çalışmaları yapmak, kurum ve kuruluşların uzaktan eğitim ihtiyaç ve isteklerine yardımcı olmak, ön lisans, lisans, lisansüstü ve yetişkin eğitiminde e-öğrenme temelli ders ve programları geliştirmektir." %}</p>
                     </div>
                 </div>
                 
                 <!-- بخش فناوری‌های مورد استفاده -->
                 <div class="content-section">
-                    <h2 class="section-title">Kullandığımız Teknolojiler</h2>
+                    <h2 class="section-title">{% trans "Kullandığımız Teknolojiler" %}</h2>
                     <div class="technologies-grid">
                         <div class="tech-item">
                             <div class="tech-icon">
                                 <i class="fas fa-globe"></i>
                             </div>
-                            <h4>İnternet</h4>
-                            <p>Veri iletişim ağları üzerinden eğitim</p>
+                            <h4>{% trans "İnternet" %}</h4>
+                            <p>{% trans "Veri iletişim ağları üzerinden eğitim" %}</p>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
                                 <i class="fas fa-tv"></i>
                             </div>
-                            <h4>Radyo & Televizyon</h4>
-                            <p>Geleneksel medya araçları</p>
+                            <h4>{% trans "Radyo & Televizyon" %}</h4>
+                            <p>{% trans "Geleneksel medya araçları" %}</p>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
                                 <i class="fas fa-phone"></i>
                             </div>
-                            <h4>Telefon</h4>
-                            <p>Sesli iletişim desteği</p>
+                            <h4>{% trans "Telefon" %}</h4>
+                            <p>{% trans "Sesli iletişim desteği" %}</p>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
                                 <i class="fas fa-laptop"></i>
                             </div>
-                            <h4>Bilgisayar</h4>
-                            <p>Dijital eğitim platformları</p>
+                            <h4>{% trans "Bilgisayar" %}</h4>
+                            <p>{% trans "Dijital eğitim platformları" %}</p>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
                                 <i class="fas fa-video"></i>
                             </div>
-                            <h4>Görüntü & Ses</h4>
-                            <p>Multimedya içerikler</p>
+                            <h4>{% trans "Görüntü & Ses" %}</h4>
+                            <p>{% trans "Multimedya içerikler" %}</p>
                         </div>
                         <div class="tech-item">
                             <div class="tech-icon">
                                 <i class="fas fa-mail-bulk"></i>
                             </div>
-                            <h4>Posta</h4>
-                            <p>Basılı materyal dağıtımı</p>
+                            <h4>{% trans "Posta" %}</h4>
+                            <p>{% trans "Basılı materyal dağıtımı" %}</p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- بخش فعالیت‌های مرکز -->
                 <div class="content-section">
-                    <h2 class="section-title">Faaliyet Alanlarımız</h2>
+                    <h2 class="section-title">{% trans "Faaliyet Alanlarımız" %}</h2>
                     <div class="activities-list">
                         <div class="activity-item">
                             <div class="activity-icon">
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
                             <div class="activity-content">
-                                <h3>Akademik Programlar</h3>
-                                <p>İletişim ve bilgi teknolojilerine dayalı eğitimle yapılan ön lisans, lisans, yüksek lisans derslerini, kursları, seminerleri ve konferansları içerir.</p>
+                                <h3>{% trans "Akademik Programlar" %}</h3>
+                                <p>{% trans "İletişim ve bilgi teknolojilerine dayalı eğitimle yapılan ön lisans, lisans, yüksek lisans derslerini, kursları, seminerleri ve konferansları içerir." %}</p>
                             </div>
                         </div>
                         
@@ -110,8 +111,8 @@
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <div class="activity-content">
-                                <h3>Danışmanlık Hizmetleri</h3>
-                                <p>Kamu, özel sektör, ulusal ve uluslararası kurum, kuruluş ve kişilerin uzaktan eğitim kapsamındaki danışmanlık ve uzaktan eğitim olanaklarından yararlanma taleplerini ilgili birimlerle birlikte projelendirir.</p>
+                                <h3>{% trans "Danışmanlık Hizmetleri" %}</h3>
+                                <p>{% trans "Kamu, özel sektör, ulusal ve uluslararası kurum, kuruluş ve kişilerin uzaktan eğitim kapsamındaki danışmanlık ve uzaktan eğitim olanaklarından yararlanma taleplerini ilgili birimlerle birlikte projelendirir." %}</p>
                             </div>
                         </div>
                         
@@ -120,8 +121,8 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="activity-content">
-                                <h3>Kalite Değerlendirme</h3>
-                                <p>Kurs, seminer, konferans, ders ve program örgütlenmesinin yeterliliği, sunucu/istemci altyapı örgütlenmesi, iletişim/etkileşim planlama ve uygulamaları ile öğrenci destek hizmetleri ölçme ve değerlendirme çalışmaları yapılır.</p>
+                                <h3>{% trans "Kalite Değerlendirme" %}</h3>
+                                <p>{% trans "Kurs, seminer, konferans, ders ve program örgütlenmesinin yeterliliği, sunucu/istemci altyapı örgütlenmesi, iletişim/etkileşim planlama ve uygulamaları ile öğrenci destek hizmetleri ölçme ve değerlendirme çalışmaları yapılır." %}</p>
                             </div>
                         </div>
                     </div>
@@ -129,48 +130,48 @@
                 
                 <!-- بخش خدمات ما -->
                 <div class="content-section">
-                    <h2 class="section-title">Hizmetlerimiz</h2>
+                    <h2 class="section-title">{% trans "Hizmetlerimiz" %}</h2>
                     <div class="services-grid">
                         <div class="service-card">
-                            <h3>Eğitim Programları</h3>
+                            <h3>{% trans "Eğitim Programları" %}</h3>
                             <ul class="service-list">
-                                <li>Üniversite öğrencilerine ve topluma iletişim ve bilgi teknolojilerine dayalı uzaktan eğitim yoluyla dersler, kurslar, seminerler, konferanslar ve benzeri eğitim programlarını planlamak</li>
+                                <li>{% trans "Üniversite öğrencilerine ve topluma iletişim ve bilgi teknolojilerine dayalı uzaktan eğitim yoluyla dersler, kurslar, seminerler, konferanslar ve benzeri eğitim programlarını planlamak" %}</li>
                             </ul>
                         </div>
                         
                         <div class="service-card">
-                            <h3>Teknoloji Takibi</h3>
+                            <h3>{% trans "Teknoloji Takibi" %}</h3>
                             <ul class="service-list">
-                                <li>Uzaktan eğitimin gerektirdiği iletişim ve bilgi teknolojilerinin gelişimini takip etmek</li>
+                                <li>{% trans "Uzaktan eğitimin gerektirdiği iletişim ve bilgi teknolojilerinin gelişimini takip etmek" %}</li>
                             </ul>
                         </div>
                         
                         <div class="service-card">
-                            <h3>Teknik Altyapı</h3>
+                            <h3>{% trans "Teknik Altyapı" %}</h3>
                             <ul class="service-list">
-                                <li>Uzaktan eğitime ilişkin tüm teknik alt yapı işlerini yürütmek</li>
-                                <li>Uzaktan eğitim konularına ilişkin olarak TÜBİTAK ve iletişim hizmeti sunan diğer kurum ve kuruluşlarla işbirliğinde bulunmak</li>
+                                <li>{% trans "Uzaktan eğitime ilişkin tüm teknik alt yapı işlerini yürütmek" %}</li>
+                                <li>{% trans "Uzaktan eğitim konularına ilişkin olarak TÜBİTAK ve iletişim hizmeti sunan diğer kurum ve kuruluşlarla işbirliğinde bulunmak" %}</li>
                             </ul>
                         </div>
                         
                         <div class="service-card">
-                            <h3>Mevzuat Uyumu</h3>
+                            <h3>{% trans "Mevzuat Uyumu" %}</h3>
                             <ul class="service-list">
-                                <li>Uzaktan eğitim konusunda uygulanmakta olan tüm mevzuatı takip edip, uygulamaları bu kapsamda düzenlemek</li>
+                                <li>{% trans "Uzaktan eğitim konusunda uygulanmakta olan tüm mevzuatı takip edip, uygulamaları bu kapsamda düzenlemek" %}</li>
                             </ul>
                         </div>
                         
                         <div class="service-card">
-                            <h3>Yaşam Boyu Eğitim</h3>
+                            <h3>{% trans "Yaşam Boyu Eğitim" %}</h3>
                             <ul class="service-list">
-                                <li>Kamu ve özel kuruluşlar ile kişilere uzaktan eğitim yoluyla verilecek yaşam boyu eğitim derslerini/programlarını Avrasya Üniversitesi Yaşam boyu Eğitim Araştırma ve Uygulama Merkezi ile birlikte projelendirmek</li>
+                                <li>{% trans "Kamu ve özel kuruluşlar ile kişilere uzaktan eğitim yoluyla verilecek yaşam boyu eğitim derslerini/programlarını Avrasya Üniversitesi Yaşam boyu Eğitim Araştırma ve Uygulama Merkezi ile birlikte projelendirmek" %}</li>
                             </ul>
                         </div>
                         
                         <div class="service-card">
-                            <h3>Sürekli Gelişim</h3>
+                            <h3>{% trans "Sürekli Gelişim" %}</h3>
                             <ul class="service-list">
-                                <li>Değişen ve gelişen koşullara göre uzaktan eğitim alanındaki diğer görevlerin yerine getirilmesi ile ilgili tüm çalışmaları yürütmek</li>
+                                <li>{% trans "Değişen ve gelişen koşullara göre uzaktan eğitim alanındaki diğer görevlerin yerine getirilmesi ile ilgili tüm çalışmaları yürütmek" %}</li>
                             </ul>
                         </div>
                     </div>
@@ -178,13 +179,13 @@
                 
                 <!-- بخش تماس -->
                 <div class="content-section contact-section">
-                    <h2 class="section-title">İletişim</h2>
+                    <h2 class="section-title">{% trans "İletişim" %}</h2>
                     <div class="contact-info">
-                        <p>Uzaktan Eğitim Uygulama ve Araştırma Merkezi hakkında daha fazla bilgi almak v danışmanlık hizmetlerimizden yararlanmak için bizimle iletişime geçebilirsiniz.</p>
+                        <p>{% trans "Uzaktan Eğitim Uygulama ve Araştırma Merkezi hakkında daha fazla bilgi almak v danışmanlık hizmetlerimizden yararlanmak için bizimle iletişime geçebilirsiniz." %}</p>
                         <div class="contact-details">
                             <div class="contact-item">
                                 <i class="fas fa-envelope"></i>
-                                <span>uzaktanegitim@avrasya.edu.tr</span>
+                                <span>{% trans "uzaktanegitim@avrasya.edu.tr" %}</span>
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-phone"></i>
@@ -192,7 +193,7 @@
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>Pelitli Mahallesi Rize caddesi No:226 TRABZON</span>
+                                <span>{% trans "Pelitli Mahallesi Rize caddesi No:226 TRABZON" %}</span>
                             </div>
                         </div>
                     </div>

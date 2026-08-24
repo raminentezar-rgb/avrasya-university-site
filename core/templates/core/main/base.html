@@ -3,7 +3,7 @@
 {% load i18n %}
 <html lang="en">
 <head>
-<title>Course</title>
+<title>{% trans "Course" %}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Course Project">
@@ -29,19 +29,19 @@
 			<div class="top_bar_container">
 				<div class="top_bar_left">
 					<ul class="top_bar_list">
-						<li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/">OBS</a></li>
-						<li class="top_bar_item"><a href="https://avukalite.avrasya.edu.tr/">Kalite</a></li>
-						<li class="top_bar_item"><a href="https://ebys.avrasya.edu.tr/Giris.aspx">EBYS</a></li>
-						<li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/">Bologna</a></li>
-						<li class="top_bar_item"><a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F">Online Eğitim</a></li>
-						<li class="top_bar_item"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638996701980044877.MjRiNzMxNjQtMjE3YS00YTE5LWIxMTAtNmI1OGE1ODg1MTExYjYxZWRkYTktMTA3ZS00ZTgzLWE0YjMtZGQxYzRkMGU4NDRm&ui_locales=tr-TR&mkt=tr-TR&client-request-id=552d74f3-e879-46b5-8cf9-af6111fc0737&state=aoBhGvBmR_CkgkJYuR98DDaLwkfd6kISsF4I3D3gxShv1udv4H2O4JLpjx6Zg-RxAAPsosdtPe4ZQ8dwmpEHqs9UID2r3kKLbv8VWoK4Aze4XpRbP-K17MWLR9y-wMrih4SoGJ8fwL5t30Iw5ZuTmtBrdIWm20UxdoknRwbcYekQgO-D5WuZ2XY0oAoVD97wKPBPcmFzdzE1ojFkcDKxY4PwfVpR2MFdPCXYmjvISJWcs3sT0oN28WS0pzBx9XF-4_s_EXpkCQ7nNs2pGxv8W7b4owvr_cqeynfqVP2DuKM&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true">Mail</a></li>
+						<li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/">{% trans "OBS" %}</a></li>
+						<li class="top_bar_item"><a href="https://avukalite.avrasya.edu.tr/">{% trans "Kalite" %}</a></li>
+						<li class="top_bar_item"><a href="https://ebys.avrasya.edu.tr/Giris.aspx">{% trans "EBYS" %}</a></li>
+						<li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/">{% trans "Bologna" %}</a></li>
+						<li class="top_bar_item"><a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F">{% trans "Online Eğitim" %}</a></li>
+						<li class="top_bar_item"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638996701980044877.MjRiNzMxNjQtMjE3YS00YTE5LWIxMTAtNmI1OGE1ODg1MTExYjYxZWRkYTktMTA3ZS00ZTgzLWE0YjMtZGQxYzRkMGU4NDRm&ui_locales=tr-TR&mkt=tr-TR&client-request-id=552d74f3-e879-46b5-8cf9-af6111fc0737&state=aoBhGvBmR_CkgkJYuR98DDaLwkfd6kISsF4I3D3gxShv1udv4H2O4JLpjx6Zg-RxAAPsosdtPe4ZQ8dwmpEHqs9UID2r3kKLbv8VWoK4Aze4XpRbP-K17MWLR9y-wMrih4SoGJ8fwL5t30Iw5ZuTmtBrdIWm20UxdoknRwbcYekQgO-D5WuZ2XY0oAoVD97wKPBPcmFzdzE1ojFkcDKxY4PwfVpR2MFdPCXYmjvISJWcs3sT0oN28WS0pzBx9XF-4_s_EXpkCQ7nNs2pGxv8W7b4owvr_cqeynfqVP2DuKM&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true">{% trans "Mail" %}</a></li>
 						<li class="top_bar_item"><a href="{% url 'kutuphane:kutuphane' %}">{% trans "Kütüphane" %}</a></li>
 						<li class="top_bar_item" style="margin-left: 700px;"><a href="{% url 'support:create_ticket' %}">{% trans "Destek Almak İçin Tiklayin" %}</a></li>
 					</ul>
 				</div>
 				<div class="top_bar_right">
 					<div class="language_selector">
-						<span class="current_language">tr Turkish</span>
+						<span class="current_language">{% trans "tr Turkish" %}</span>
 						<span class="language_dropdown">▼</span>
 					</div>
 				</div>
@@ -125,14 +125,14 @@
 		<div class="menu_inner menu_mm">
 			<div class="menu menu_mm">
 				<ul class="menu_list menu_mm">
-					<li class="menu_item menu_mm"><a href="#">Home</a></li>
-					<li class="menu_item menu_mm"><a href="#">About us</a></li>
-					<li class="menu_item menu_mm"><a href="courses.html">Courses</a></li>
-					<li class="menu_item menu_mm"><a href="elements.html">Elements</a></li>
-					<li class="menu_item menu_mm"><a href="news.html">News</a></li>
-					<li class="menu_item menu_mm"><a href="contact.html">Contact</a></li>
-					<li class="menu_item menu_mm"><a href="news.html">News</a></li>
-					<li class="menu_item menu_mm"><a href="contact.html">Contact</a></li>
+					<li class="menu_item menu_mm"><a href="#">{% trans "Home" %}</a></li>
+					<li class="menu_item menu_mm"><a href="#">{% trans "About us" %}</a></li>
+					<li class="menu_item menu_mm"><a href="courses.html">{% trans "Courses" %}</a></li>
+					<li class="menu_item menu_mm"><a href="elements.html">{% trans "Elements" %}</a></li>
+					<li class="menu_item menu_mm"><a href="news.html">{% trans "News" %}</a></li>
+					<li class="menu_item menu_mm"><a href="contact.html">{% trans "Contact" %}</a></li>
+					<li class="menu_item menu_mm"><a href="news.html">{% trans "News" %}</a></li>
+					<li class="menu_item menu_mm"><a href="contact.html">{% trans "Contact" %}</a></li>
 				</ul>
 
 				<!-- Menu Social -->
@@ -147,7 +147,7 @@
 					</ul>
 				</div>
 
-				<div class="menu_copyright menu_mm">Colorlib All rights reserved</div>
+				<div class="menu_copyright menu_mm">{% trans "Colorlib All rights reserved" %}</div>
 			</div>
 
 		</div>
@@ -170,7 +170,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="section_title text-center">
-							<h1>Subscribe to newsletter</h1>
+							<h1>{% trans "Subscribe to newsletter" %}</h1>
 						</div>
 					</div>
 				</div>
@@ -180,8 +180,8 @@
 						<div class="newsletter_form_container mx-auto">
 							<form action="post">
 								<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-center">
-									<input id="newsletter_email" class="newsletter_email" type="email" placeholder="Email Address" required="required" data-error="Valid email is required.">
-									<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Subscribe</button>
+									<input id="newsletter_email" class="newsletter_email" type="email" placeholder="{% trans 'Email Address' %}" required="required" data-error="Valid email is required.">
+									<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">{% trans "Subscribe" %}</button>
 								</div>
 							</form>
 						</div>
@@ -210,20 +210,20 @@
 							<ul>
 								<li class="footer_contact_item">
 									<div class="footer_contact_icon">
-										<img src="{% static 'core/main/images/placeholder.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+										<img src="{% static 'core/main/images/placeholder.svg' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
 									</div>
-									Blvd Libertad, 34 m05200 Arévalo
+									{% trans "Blvd Libertad, 34 m05200 Arévalo" %}
 								</li>
 								<li class="footer_contact_item">
 									<div class="footer_contact_icon">
-										<img src="{% static 'core/main/images/smartphone.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+										<img src="{% static 'core/main/images/smartphone.svg' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
 									</div>
 									0034 37483 2445 322
 								</li>
 								<li class="footer_contact_item">
 									<div class="footer_contact_icon">
-										<img src="{% static 'core/main/images/envelope.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
-									</div>hello@company.com
+										<img src="{% static 'core/main/images/envelope.svg' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
+									</div>{% trans "hello@company.com" %}
 								</li>
 							</ul>
 						</div>
@@ -233,14 +233,14 @@
 					<!-- Footer Column - Menu -->
 
 					<div class="col-lg-3 footer_col">
-						<div class="footer_column_title">Menu</div>
+						<div class="footer_column_title">{% trans "Menu" %}</div>
 						<div class="footer_column_content">
 							<ul>
-								<li class="footer_list_item"><a href="#">Home</a></li>
-								<li class="footer_list_item"><a href="#">About Us</a></li>
-								<li class="footer_list_item"><a href="courses.html">Courses</a></li>
-								<li class="footer_list_item"><a href="news.html">News</a></li>
-								<li class="footer_list_item"><a href="contact.html">Contact</a></li>
+								<li class="footer_list_item"><a href="#">{% trans "Home" %}</a></li>
+								<li class="footer_list_item"><a href="#">{% trans "About Us" %}</a></li>
+								<li class="footer_list_item"><a href="courses.html">{% trans "Courses" %}</a></li>
+								<li class="footer_list_item"><a href="news.html">{% trans "News" %}</a></li>
+								<li class="footer_list_item"><a href="contact.html">{% trans "Contact" %}</a></li>
 							</ul>
 						</div>
 					</div>
@@ -248,14 +248,14 @@
 					<!-- Footer Column - Usefull Links -->
 
 					<div class="col-lg-3 footer_col">
-						<div class="footer_column_title">Usefull Links</div>
+						<div class="footer_column_title">{% trans "Usefull Links" %}</div>
 						<div class="footer_column_content">
 							<ul>
-								<li class="footer_list_item"><a href="#">Testimonials</a></li>
-								<li class="footer_list_item"><a href="#">FAQ</a></li>
-								<li class="footer_list_item"><a href="#">Community</a></li>
-								<li class="footer_list_item"><a href="#">Campus Pictures</a></li>
-								<li class="footer_list_item"><a href="#">Tuitions</a></li>
+								<li class="footer_list_item"><a href="#">{% trans "Testimonials" %}</a></li>
+								<li class="footer_list_item"><a href="#">{% trans "FAQ" %}</a></li>
+								<li class="footer_list_item"><a href="#">{% trans "Community" %}</a></li>
+								<li class="footer_list_item"><a href="#">{% trans "Campus Pictures" %}</a></li>
+								<li class="footer_list_item"><a href="#">{% trans "Tuitions" %}</a></li>
 							</ul>
 						</div>
 					</div>
@@ -268,20 +268,20 @@
 							<ul>
 								<li class="footer_contact_item">
 									<div class="campus_image">
-										<img src="{% static 'core/img/menu/peelitli.png' %}" alt="https://www.flaticon.com/authors/lucy-g">
+										<img src="{% static 'core/img/menu/peelitli.png' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
 									</div>
 									
 								</li>
 								{% comment %} <li class="footer_contact_item">
 									<div class="footer_contact_icon">
-										<img src="{% static 'core/main/images/smartphone.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+										<img src="{% static 'core/main/images/smartphone.svg' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
 									</div>
 									0034 37483 2445 322
 								</li>
 								<li class="footer_contact_item">
 									<div class="footer_contact_icon">
-										<img src="{% static 'core/main/images/envelope.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
-									</div>hello@company.com
+										<img src="{% static 'core/main/images/envelope.svg' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
+									</div>{% trans "hello@company.com" %}
 								</li> {% endcomment %}
 							</ul>
 						</div>
@@ -295,7 +295,7 @@
 			<div class="footer_bar d-flex flex-column flex-sm-row align-items-center">
 				<div class="footer_copyright">
 					<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+{% trans "Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with" %} <i class="fa fa-heart" aria-hidden="true"></i> {% trans "by" %} <a href="https://colorlib.com" target="_blank">{% trans "Colorlib" %}</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
 				</div>
 				<div class="footer_social ml-sm-auto">
@@ -315,18 +315,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </div>
 
 <!-- اصلاح مسیر اسکریپت‌ها -->
-<script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script>
-<script src="{% static 'core/main/styles/bootstrap4/popper.js' %}"></script>
-<script src="{% static 'core/main/styles/bootstrap4/bootstrap.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/greensock/TweenMax.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/greensock/TimelineMax.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/greensock/animation.gsap.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/greensock/ScrollToPlugin.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
-<script src="{% static 'core/main/plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/easing/easing.js' %}"></script>
-<script src="{% static 'core/main/js/custom.js' %}"></script>
+<script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script> <script src="{% static 'core/main/styles/bootstrap4/popper.js' %}"></script> <script src="{% static 'core/main/styles/bootstrap4/bootstrap.min.js' %}"></script> <script src="{% static 'core/main/plugins/greensock/TweenMax.min.js' %}"></script> <script src="{% static 'core/main/plugins/greensock/TimelineMax.min.js' %}"></script> <script src="{% static 'core/main/plugins/scrollmagic/ScrollMagic.min.js' %}"></script> <script src="{% static 'core/main/plugins/greensock/animation.gsap.min.js' %}"></script> <script src="{% static 'core/main/plugins/greensock/ScrollToPlugin.min.js' %}"></script> <script src="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script> <script src="{% static 'core/main/plugins/scrollTo/jquery.scrollTo.min.js' %}"></script> <script src="{% static 'core/main/plugins/easing/easing.js' %}"></script> <script src="{% static 'core/main/js/custom.js' %}"></script>
 
 
 </body>

@@ -5,7 +5,7 @@
 {% comment %} {% get_current_language as CURRENT_LANG %} {% endcomment %}
 <html lang="en">
 <head>
-    <title>Avrasya University</title>
+    <title>{% trans "Avrasya University" %}</title>
     <link rel="icon" type="image/x-icon" href="{% static 'core/img/Avrasya Logo.png' %}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -74,12 +74,12 @@
         <div class="top_bar_container">
             <div class="top_bar_left">
                 <ul class="top_bar_list">
-                    <li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/">OBS</a></li>
-                    <li class="top_bar_item"><a href="https://avukalite.avrasya.edu.tr/">Kalite</a></li>
-                    <li class="top_bar_item"><a href="https://ebys.avrasya.edu.tr/Giris.aspx">EBYS</a></li>
-                    <li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/">Bologna</a></li>
-                    <li class="top_bar_item"><a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F">Online Eğitim</a></li>
-                    <li class="top_bar_item"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638996701980044877.MjRiNzMxNjQtMjE3YS00YTE5LWIxMTAtNmI1OGE1ODg1MTExYjYxZWRkYTktMTA3ZS00ZTgzLWE0YjMtZGQxYzRkMGU4NDRm&ui_locales=tr-TR&mkt=tr-TR&client-request-id=552d74f3-e879-46b5-8cf9-af6111fc0737&state=aoBhGvBmR_CkgkJYuR98DDaLwkfd6kISsF4I3D3gxShv1udv4H2O4JLpjx6Zg-RxAAPsosdtPe4ZQ8dwmpEHqs9UID2r3kKLbv8VWoK4Aze4XpRbP-K17MWLR9y-wMrih4SoGJ8fwL5t30Iw5ZuTmtBrdIWm20UxdoknRwbcYekQgO-D5WuZ2XY0oAoVD97wKPBPcmFzdzE1ojFkcDKxY4PwfVpR2MFdPCXYmjvISJWcs3sT0oN28WS0pzBx9XF-4_s_EXpkCQ7nNs2pGxv8W7b4owvr_cqeynfqVP2DuKM&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true">Mail</a></li>
+                    <li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/">{% trans "OBS" %}</a></li>
+                    <li class="top_bar_item"><a href="https://avukalite.avrasya.edu.tr/">{% trans "Kalite" %}</a></li>
+                    <li class="top_bar_item"><a href="https://ebys.avrasya.edu.tr/Giris.aspx">{% trans "EBYS" %}</a></li>
+                    <li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/">{% trans "Bologna" %}</a></li>
+                    <li class="top_bar_item"><a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F">{% trans "Online Eğitim" %}</a></li>
+                    <li class="top_bar_item"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638996701980044877.MjRiNzMxNjQtMjE3YS00YTE5LWIxMTAtNmI1OGE1ODg1MTExYjYxZWRkYTktMTA3ZS00ZTgzLWE0YjMtZGQxYzRkMGU4NDRm&ui_locales=tr-TR&mkt=tr-TR&client-request-id=552d74f3-e879-46b5-8cf9-af6111fc0737&state=aoBhGvBmR_CkgkJYuR98DDaLwkfd6kISsF4I3D3gxShv1udv4H2O4JLpjx6Zg-RxAAPsosdtPe4ZQ8dwmpEHqs9UID2r3kKLbv8VWoK4Aze4XpRbP-K17MWLR9y-wMrih4SoGJ8fwL5t30Iw5ZuTmtBrdIWm20UxdoknRwbcYekQgO-D5WuZ2XY0oAoVD97wKPBPcmFzdzE1ojFkcDKxY4PwfVpR2MFdPCXYmjvISJWcs3sT0oN28WS0pzBx9XF-4_s_EXpkCQ7nNs2pGxv8W7b4owvr_cqeynfqVP2DuKM&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true">{% trans "Mail" %}</a></li>
                     
                     <li class="top_bar_item"><a href="{% url 'kutuphane:kutuphane' %}">{% trans "Kütüphane" %}</a></li>
                     <li class="top_bar_item"><a href="{% url 'core:iletisim' %}">{% trans "İLETİŞİM" %}</a></li>
@@ -260,7 +260,7 @@
                     <div class="row">
                         <div class="col-lg-3 hero_box_col">
                             <div class="hero_box d-flex flex-row align-items-center justify-content-start">
-                                <a href="{% url 'international:international' %}" class="hero_box_link"><img src="{% static 'core/main/images/earth-globe.svg' %}" class="svg" alt="International"></a>
+                                <a href="{% url 'international:international' %}" class="hero_box_link"><img src="{% static 'core/main/images/earth-globe.svg' %}" class="svg" alt="{% trans 'International' %}"></a>
                                 <div class="hero_box_content">
                                     <h1 class="hero_box_title"><a href="{% url 'international:international' %}" class="hero_box_link">{% trans "International" %}</a></h1>
                                 </div>
@@ -278,7 +278,7 @@
 
                         <div class="col-lg-3 hero_box_col">
                             <div class="hero_box d-flex flex-row align-items-center justify-content-start">
-                                <a href="{% url 'ogrenci_isleri:kayit' %}" class="hero_box_link"><img src="{% static 'core/main/images/exam.svg' %}" class="svg" alt="Kayıt İşlemleri"></a>
+                                <a href="{% url 'ogrenci_isleri:kayit' %}" class="hero_box_link"><img src="{% static 'core/main/images/exam.svg' %}" class="svg" alt="{% trans 'Kayıt İşlemleri' %}"></a>
                                 <div class="hero_box_content">
                                     <h1 class="hero_box_title" style="margin-left:-120px;"><a href="{% url 'ogrenci_isleri:kayit' %}" class="hero_box_link">{% trans "Kayıt İşlemleri" %}</a></h1>
                                 </div>
@@ -287,7 +287,7 @@
 
                         <div class="col-lg-3 hero_box_col">
                             <div class="hero_box d-flex flex-row align-items-center justify-content-start">
-                                <a href="{% url 'ogrenci_isleri:akademik_takvim' %}" class="hero_box_link"><img src="{% static 'core/main/images/calendar-svgrepo-com.svg' %}" class="svg" alt="Akademik Takvim"></a>
+                                <a href="{% url 'ogrenci_isleri:akademik_takvim' %}" class="hero_box_link"><img src="{% static 'core/main/images/calendar-svgrepo-com.svg' %}" class="svg" alt="{% trans 'Akademik Takvim' %}"></a>
                                 <div class="hero_box_content">
                                     <h1 class="hero_box_title" style="margin-left:-130px;"><a href="{% url 'ogrenci_isleri:akademik_takvim' %}" class="hero_box_link">{% trans "Akademik Takvim" %}</a></h1>
                                 </div>
@@ -641,7 +641,7 @@
                             <div class="service-card-inner">
                                 <div class="service-card-front">
                                     <div class="service-icon">
-                                        <img src="{% static 'core/main/images/chemistry.svg' %}" alt="Laboratuvarlar">
+                                        <img src="{% static 'core/main/images/chemistry.svg' %}" alt="{% trans 'Laboratuvarlar' %}">
                                         <div class="icon-overlay"></div>
                                     </div>
                                     <h3 class="service-title" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "LABORATUVARLAR" %}</h3>
@@ -696,7 +696,7 @@
                             <div class="service-card-inner">
                                 <div class="service-card-front">
                                     <div class="service-icon">
-                                        <img src="{% static 'core/main/images/hostel.svg' %}" alt="Yurt Olanakları">
+                                        <img src="{% static 'core/main/images/hostel.svg' %}" alt="{% trans 'Yurt Olanakları' %}">
                                         <div class="icon-overlay"></div>
                                     </div>
                                     <h3 class="service-title" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "YURT OLANAKLARI" %}</h3>
@@ -751,7 +751,7 @@
                             <div class="service-card-inner">
                                 <div class="service-card-front">
                                     <div class="service-icon">
-                                        <img src="{% static 'core/main/images/school.svg' %}" alt="Kampüste Yaşam">
+                                        <img src="{% static 'core/main/images/school.svg' %}" alt="{% trans 'Kampüste Yaşam' %}">
                                         <div class="icon-overlay"></div>
                                     </div>
                                     <h3 class="service-title" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "KAMPÜSTE YAŞAM" %}</h3>
@@ -806,7 +806,7 @@
                             <div class="service-card-inner">
                                 <div class="service-card-front">
                                     <div class="service-icon">
-                                        <img src="{% static 'core/main/images/library.svg' %}" alt="Kütüphane">
+                                        <img src="{% static 'core/main/images/library.svg' %}" alt="{% trans 'Kütüphane' %}">
                                         <div class="icon-overlay"></div>
                                     </div>
                                     <h3 class="service-title" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "KÜTÜPHANE" %}</h3>
@@ -839,7 +839,7 @@
                                         </div>
                                         <div class="service-stats">
                                             <div class="stat-item">
-                                                <span class="stat-number">50K+</span>
+                                                <span class="stat-number">{% trans "50K+" %}</span>
                                                 <span class="stat-label">{% trans "Kitap" %}</span>
                                             </div>
                                             <div class="stat-item">
@@ -861,7 +861,7 @@
                             <div class="service-card-inner">
                                 <div class="service-card-front">
                                     <div class="service-icon">
-                                        <img src="{% static 'core/main/images/banner.svg' %}" alt="Öğrenci Kulüpleri">
+                                        <img src="{% static 'core/main/images/banner.svg' %}" alt="{% trans 'Öğrenci Kulüpleri' %}">
                                         <div class="icon-overlay"></div>
                                     </div>
                                     <h3 class="service-title" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "ÖĞRENCİ KULÜPLERİ" %}</h3>
@@ -916,7 +916,7 @@
                             <div class="service-card-inner">
                                 <div class="service-card-front">
                                     <div class="service-icon">
-                                        <img src="{% static 'core/main/images/online-learning.svg' %}" alt="Online Eğitim">
+                                        <img src="{% static 'core/main/images/online-learning.svg' %}" alt="{% trans 'Online Eğitim' %}">
                                         <div class="icon-overlay"></div>
                                     </div>
                                     <h3 class="service-title" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "ONLINE EĞİTİM" %}</h3>
@@ -986,11 +986,11 @@
                         <div class="campus_card_inner">
                             <div class="campus_card_front">
                                 <div class="campus_image">
-                                    <img src="{% static 'core/img/akademik/peelitli.png' %}" alt="Pelitli Yerleşkesi">
+                                    <img src="{% static 'core/img/akademik/peelitli.png' %}" alt="{% trans 'Pelitli Yerleşkesi' %}">
                                     <div class="campus_overlay"></div>
                                     <div class="campus_content">
-                                        <h3 class="campus_name" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">PELİTLİ</h3>
-                                        <p class="campus_location">Ortahisar / TR4820N</p>
+                                        <h3 class="campus_name" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "PELİTLİ" %}</h3>
+                                        <p class="campus_location">{% trans "Ortahisar / TR4820N" %}</p>
                                         <div class="flip_hint">
                                             <i class="fas fa-sync-alt"></i>
                                             {% trans "Bilgiler için üzerine gelin" %}
@@ -1000,7 +1000,7 @@
                             </div>
                             <div class="campus_card_back">
                                 <div class="campus_back_image">
-                                    <img src="{% static 'core/img/akademik/peelitli.png' %}" alt="Pelitli Yerleşkesi">
+                                    <img src="{% static 'core/img/akademik/peelitli.png' %}" alt="{% trans 'Pelitli Yerleşkesi' %}">
                                     <div class="campus_back_overlay"></div>
                                 </div>
                                 <div class="campus_back_content">
@@ -1011,9 +1011,9 @@
                                                 <i class="fas fa-map-marker-alt"></i>
                                             </div>
                                             <div class="contact_text">
-                                                Avrasya Üniversitesi<br>
-                                                Pelitli Mahallesi<br>
-                                                Ortahisar/TR4820N
+                                                {% trans "Avrasya Üniversitesi" %}<br>
+                                                {% trans "Pelitli Mahallesi" %}<br>
+                                                {% trans "Ortahisar/TR4820N" %}
                                             </div>
                                         </div>
                                         <div class="contact_item">
@@ -1042,11 +1042,11 @@
                         <div class="campus_card_inner">
                             <div class="campus_card_front">
                                 <div class="campus_image">
-                                    <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" alt="Yalıncak Yerleşkesi">
+                                    <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" alt="{% trans 'Yalıncak Yerleşkesi' %}">
                                     <div class="campus_overlay"></div>
                                     <div class="campus_content">
-                                        <h3 class="campus_name" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">YALINCAK</h3>
-                                        <p class="campus_location">Ortahisar / Trabzon</p>
+                                        <h3 class="campus_name" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "YALINCAK" %}</h3>
+                                        <p class="campus_location">{% trans "Ortahisar / Trabzon" %}</p>
                                         <div class="flip_hint">
                                             <i class="fas fa-sync-alt"></i>
                                             {% trans "Bilgiler için üzerine gelin" %}
@@ -1056,7 +1056,7 @@
                             </div>
                             <div class="campus_card_back">
                                 <div class="campus_back_image">
-                                    <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" alt="Yalıncak Yerleşkesi">
+                                    <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" alt="{% trans 'Yalıncak Yerleşkesi' %}">
                                     <div class="campus_back_overlay"></div>
                                 </div>
                                 <div class="campus_back_content">
@@ -1067,9 +1067,9 @@
                                                 <i class="fas fa-map-marker-alt"></i>
                                             </div>
                                             <div class="contact_text">
-                                                Yalıncak Mahallesi<br>
-                                                Bize Cad. No: 126/1<br>
-                                                Ortahisar / Trabzon
+                                                {% trans "Yalıncak Mahallesi" %}<br>
+                                                {% trans "Bize Cad. No: 126/1" %}<br>
+                                                {% trans "Ortahisar / Trabzon" %}
                                             </div>
                                         </div>
                                         <div class="contact_item">
@@ -1098,11 +1098,11 @@
                         <div class="campus_card_inner">
                             <div class="campus_card_front">
                                 <div class="campus_image">
-                                    <img src="{% static 'core/img/akademik/kasustu-1024x683-1.jpg' %}" alt="Kaşüstü Yerleşkesi">
+                                    <img src="{% static 'core/img/akademik/kasustu-1024x683-1.jpg' %}" alt="{% trans 'Kaşüstü Yerleşkesi' %}">
                                     <div class="campus_overlay"></div>
                                     <div class="campus_content">
-                                        <h3 class="campus_name" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">KAŞÜSTÜ</h3>
-                                        <p class="campus_location">Yomra / Trabzon</p>
+                                        <h3 class="campus_name" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "KAŞÜSTÜ" %}</h3>
+                                        <p class="campus_location">{% trans "Yomra / Trabzon" %}</p>
                                         <div class="flip_hint">
                                             <i class="fas fa-sync-alt"></i>
                                             {% trans "Bilgiler için üzerine gelin" %}
@@ -1112,7 +1112,7 @@
                             </div>
                             <div class="campus_card_back">
                                 <div class="campus_back_image">
-                                    <img src="{% static 'core/img/akademik/kasustu-1024x683-1.jpg' %}" alt="Kaşüstü Yerleşkesi">
+                                    <img src="{% static 'core/img/akademik/kasustu-1024x683-1.jpg' %}" alt="{% trans 'Kaşüstü Yerleşkesi' %}">
                                     <div class="campus_back_overlay"></div>
                                 </div>
                                 <div class="campus_back_content">
@@ -1123,9 +1123,9 @@
                                                 <i class="fas fa-map-marker-alt"></i>
                                             </div>
                                             <div class="contact_text">
-                                                Kaşüstü Mahallesi<br>
-                                                Liman Road<br>
-                                                02180 Yomra/Trabzon
+                                                {% trans "Kaşüstü Mahallesi" %}<br>
+                                                {% trans "Liman Road" %}<br>
+                                                {% trans "02180 Yomra/Trabzon" %}
                                             </div>
                                         </div>
                                         <div class="contact_item">
@@ -1154,11 +1154,11 @@
                         <div class="campus_card_inner">
                             <div class="campus_card_front">
                                 <div class="campus_image">
-                                    <img src="{% static 'core/img/akademik/yomra.png' %}" alt="Yomra Yerleşkesi">
+                                    <img src="{% static 'core/img/akademik/yomra.png' %}" alt="{% trans 'Yomra Yerleşkesi' %}">
                                     <div class="campus_overlay"></div>
                                     <div class="campus_content">
-                                        <h3 class="campus_name" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">YOMRA</h3>
-                                        <p class="campus_location">Yomra / Trabzon</p>
+                                        <h3 class="campus_name" style="font-family: 'Metropolis', sans-serif; font-weight: 900;">{% trans "YOMRA" %}</h3>
+                                        <p class="campus_location">{% trans "Yomra / Trabzon" %}</p>
                                         <div class="flip_hint">
                                             <i class="fas fa-sync-alt"></i>
                                             {% trans "Bilgiler için üzerine gelin" %}
@@ -1168,7 +1168,7 @@
                             </div>
                             <div class="campus_card_back">
                                 <div class="campus_back_image">
-                                    <img src="{% static 'core/img/akademik/yomra.png' %}" alt="Yomra Yerleşkesi">
+                                    <img src="{% static 'core/img/akademik/yomra.png' %}" alt="{% trans 'Yomra Yerleşkesi' %}">
                                     <div class="campus_back_overlay"></div>
                                 </div>
                                 <div class="campus_back_content">
@@ -1179,9 +1179,9 @@
                                                 <i class="fas fa-map-marker-alt"></i>
                                             </div>
                                             <div class="contact_text">
-                                                Sancak Mahallesi<br>
-                                                Nüzhet Cd.<br>
-                                                Yomra/Trabzon
+                                                {% trans "Sancak Mahallesi" %}<br>
+                                                {% trans "Nüzhet Cd." %}<br>
+                                                {% trans "Yomra/Trabzon" %}
                                             </div>
                                         </div>
                                         <div class="contact_item">
@@ -1213,8 +1213,8 @@
         <div class="row">
             <div class="col">
                 <div class="section_title text-center">
-                    <h1>DİĞER BAĞLANTILAR</h1>
-                    <p class="section_subtitle">Uluslararası iş birliklerimiz ve akreditasyonlarımız</p>
+                    <h1>{% trans "DİĞER BAĞLANTILAR" %}</h1>
+                    <p class="section_subtitle">{% trans "Uluslararası iş birliklerimiz ve akreditasyonlarımız" %}</p>
                 </div>
             </div>
         </div>
@@ -1225,11 +1225,11 @@
                 <div class="logo-item">
                     <a href="https://www.cimer.gov.tr/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/cimer-iletisim.png' %}" alt="ELFA" class="logo-img">
+                            <img src="{% static 'core/img/logos/cimer-iletisim.png' %}" alt="{% trans 'ELFA' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">CIMER</span>
+                            <span class="logo-title">{% trans "CIMER" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1237,11 +1237,11 @@
                 <div class="logo-item">
                     <a href="https://osym.gov.tr/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/osym.png' %}" alt="ÖSYM" class="logo-img">
+                            <img src="{% static 'core/img/logos/osym.png' %}" alt="{% trans 'ÖSYM' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">ÖSYM</span>
+                            <span class="logo-title">{% trans "ÖSYM" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1249,11 +1249,11 @@
                 <div class="logo-item">
                     <a href="https://www.yok.gov.tr/tr" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/yok.png' %}" alt="YÖK" class="logo-img">
+                            <img src="{% static 'core/img/logos/yok.png' %}" alt="{% trans 'YÖK' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">YÖK</span>
+                            <span class="logo-title">{% trans "YÖK" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1261,11 +1261,11 @@
                 <div class="logo-item">
                     <a href="https://www.askturkiye.com/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="Partner" class="logo-img">
+                            <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="{% trans 'Partner' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">ASK TÜRKİYE</span>
+                            <span class="logo-title">{% trans "ASK TÜRKİYE" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1276,11 +1276,11 @@
                 <div class="logo-item">
                     <a href="https://www.trabzon.gov.tr/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/Valilik-Kurumsal-Logo_-280x300.png' %}" alt="TRABZON VALİLİĞ" class="logo-img">
+                            <img src="{% static 'core/img/logos/Valilik-Kurumsal-Logo_-280x300.png' %}" alt="{% trans 'TRABZON VALİLİĞ' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">TRABZON VALİLİĞİ</span>
+                            <span class="logo-title">{% trans "TRABZON VALİLİĞİ" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1288,11 +1288,11 @@
                 <div class="logo-item">
                     <a href="https://www.dokap.gov.tr/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/dokap1.png' %}" alt="ÖSYM" class="logo-img">
+                            <img src="{% static 'core/img/logos/dokap1.png' %}" alt="{% trans 'ÖSYM' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">DOKAP</span>
+                            <span class="logo-title">{% trans "DOKAP" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1305,11 +1305,11 @@
                  <div class="logo-item">
                     <a href="https://www.cimer.gov.tr/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/cimer-iletisim.png' %}" alt="ELFA" class="logo-img">
+                            <img src="{% static 'core/img/logos/cimer-iletisim.png' %}" alt="{% trans 'ELFA' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">CIMER</span>
+                            <span class="logo-title">{% trans "CIMER" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1317,11 +1317,11 @@
                 <div class="logo-item">
                     <a href="https://osym.gov.tr/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/osym.png' %}" alt="ÖSYM" class="logo-img">
+                            <img src="{% static 'core/img/logos/osym.png' %}" alt="{% trans 'ÖSYM' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">ÖSYM</span>
+                            <span class="logo-title">{% trans "ÖSYM" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1329,11 +1329,11 @@
                 <div class="logo-item">
                     <a href="https://www.yok.gov.tr/tr" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/yok.png' %}" alt="YÖK" class="logo-img">
+                            <img src="{% static 'core/img/logos/yok.png' %}" alt="{% trans 'YÖK' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">YÖK</span>
+                            <span class="logo-title">{% trans "YÖK" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1341,11 +1341,11 @@
                 <div class="logo-item">
                     <a href="https://www.askturkiye.com/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="Partner" class="logo-img">
+                            <img src="{% static 'core/img/logos/unnamed-300x169.jpg' %}" alt="{% trans 'Partner' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">ASK TÜRKİYE</span>
+                            <span class="logo-title">{% trans "ASK TÜRKİYE" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1355,11 +1355,11 @@
                 <div class="logo-item">
                     <a href="#" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/cimer-iletisim.png' %}" alt="ELFA" class="logo-img">
+                            <img src="{% static 'core/img/logos/cimer-iletisim.png' %}" alt="{% trans 'ELFA' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">CIMER</span>
+                            <span class="logo-title">{% trans "CIMER" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1376,11 +1376,11 @@
                 <div class="logo-item">
                     <a href="https://www.trabzon.gov.tr/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/Valilik-Kurumsal-Logo_-280x300.png' %}" alt="TRABZON VALİLİĞ" class="logo-img">
+                            <img src="{% static 'core/img/logos/Valilik-Kurumsal-Logo_-280x300.png' %}" alt="{% trans 'TRABZON VALİLİĞ' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">TRABZON VALİLİĞİ</span>
+                            <span class="logo-title">{% trans "TRABZON VALİLİĞİ" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1388,11 +1388,11 @@
                 <div class="logo-item">
                     <a href="https://www.dokap.gov.tr/" class="logo-link">
                         <div class="logo-img-container">
-                            <img src="{% static 'core/img/logos/dokap1.png' %}" alt="ÖSYM" class="logo-img">
+                            <img src="{% static 'core/img/logos/dokap1.png' %}" alt="{% trans 'ÖSYM' %}" class="logo-img">
                             <div class="logo-overlay"></div>
                         </div>
                         <div class="logo-content">
-                            <span class="logo-title">DOKAP</span>
+                            <span class="logo-title">{% trans "DOKAP" %}</span>
                             <span class="logo-subtitle"></span>
                         </div>
                     </a>
@@ -1423,7 +1423,7 @@
                     <div class="col-lg-3 col-md-6 milestone_col">
                         <div class="milestone text-center">
                             <div class="milestone_icon">
-                                <img src="{% static 'core/main/images/milestone_1.svg' %}" alt="Mevcut Öğrenciler">
+                                <img src="{% static 'core/main/images/milestone_1.svg' %}" alt="{% trans 'Mevcut Öğrenciler' %}">
                             </div>
                             <div class="milestone_counter" data-end-value="6500">0</div>
                             <div class="milestone_text">{% trans "Mevcut Öğrenciler" %}</div>
@@ -1434,7 +1434,7 @@
                     <div class="col-lg-3 col-md-6 milestone_col">
                         <div class="milestone text-center">
                             <div class="milestone_icon">
-                                <img src="{% static 'core/main/images/diploma-svgrepo-com (2).svg' %}" alt="Sertifikalı Öğretmenler">
+                                <img src="{% static 'core/main/images/diploma-svgrepo-com (2).svg' %}" alt="{% trans 'Sertifikalı Öğretmenler' %}">
                             </div>
                             <div class="milestone_counter" data-end-value="62">0</div>
                             <div class="milestone_text">{% trans "Lisans ve Önlisans Programı" %}</div>
@@ -1445,7 +1445,7 @@
                     <div class="col-lg-3 col-md-6 milestone_col">
                         <div class="milestone text-center">
                             <div class="milestone_icon">
-                                <img src="{% static 'core/main/images/diploma-certificate-svgrepo-com.svg' %}" alt="Onaylı Kurslar">
+                                <img src="{% static 'core/main/images/diploma-certificate-svgrepo-com.svg' %}" alt="{% trans 'Onaylı Kurslar' %}">
                             </div>
                             <div class="milestone_counter" data-end-value="14">0</div>
                             <div class="milestone_text">{% trans "Yüksek Lisans ve Doktora Programları" %}</div>
@@ -1456,7 +1456,7 @@
                     <div class="col-lg-3 col-md-6 milestone_col">
                         <div class="milestone text-center">
                             <div class="milestone_icon">
-                                <img src="{% static 'core/main/images/milestone_4.svg' %}" alt="Mezun Öğrenciler">
+                                <img src="{% static 'core/main/images/milestone_4.svg' %}" alt="{% trans 'Mezun Öğrenciler' %}">
                             </div>
                             <div class="milestone_counter" data-end-value="16300" data-sign-before="+">0</div>
                             <div class="milestone_text">{% trans "Mezun Öğrenciler" %}</div>
@@ -1494,7 +1494,7 @@
                             <ul>
                                 <li class="footer_contact_item">
                                     <div class="footer_contact_icon">
-                                        <img src="{% static 'core/main/images/placeholder.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+                                        <img src="{% static 'core/main/images/placeholder.svg' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
                                     </div>
                                     <p class="footer_about_text">{% trans "Pelitli Mahallesi Rize caddesi No:226 TRABZON" %}</p>
 
@@ -1502,15 +1502,15 @@
                                 </li>
                                 <li class="footer_contact_item">
                                     <div class="footer_contact_icon">
-                                        <img src="{% static 'core/main/images/smartphone.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+                                        <img src="{% static 'core/main/images/smartphone.svg' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
                                     </div>
                                     +90 462 334 05 50
                                 </li>
                                 <li class="footer_contact_item">
                                     <div class="footer_contact_icon">
-                                        <img src="{% static 'core/main/images/envelope.svg' %}" alt="https://www.flaticon.com/authors/lucy-g">
+                                        <img src="{% static 'core/main/images/envelope.svg' %}" alt="{% trans 'https://www.flaticon.com/authors/lucy-g' %}">
                                     </div>
-                                    iletisim@avrasya.edu.tr
+                                    {% trans "iletisim@avrasya.edu.tr" %}
                                 </li>
                             </ul>
                         </div>
@@ -5382,21 +5382,7 @@ input:last-of-type { margin-bottom: 0px; }
 
 <!-- اصلاح مسیر اسکریپت‌ها -->
 
-<script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script>
-<script src="{% static 'core/main/js/elements_custom.js' %}"></script>
-<script src="{% static 'core/main/styles/bootstrap4/popper.js' %}"></script>
-<script src="{% static 'core/main/styles/bootstrap4/bootstrap.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/greensock/TweenMax.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/greensock/TimelineMax.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/greensock/animation.gsap.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/greensock/ScrollToPlugin.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
-<script src="{% static 'core/main/plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
-<script src="{% static 'core/main/plugins/easing/easing.js' %}"></script>
-<script src="{% static 'core/main/js/custom.js' %}"></script>
-
-<script>
+<script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script> <script src="{% static 'core/main/js/elements_custom.js' %}"></script> <script src="{% static 'core/main/styles/bootstrap4/popper.js' %}"></script> <script src="{% static 'core/main/styles/bootstrap4/bootstrap.min.js' %}"></script> <script src="{% static 'core/main/plugins/greensock/TweenMax.min.js' %}"></script> <script src="{% static 'core/main/plugins/greensock/TimelineMax.min.js' %}"></script> <script src="{% static 'core/main/plugins/scrollmagic/ScrollMagic.min.js' %}"></script> <script src="{% static 'core/main/plugins/greensock/animation.gsap.min.js' %}"></script> <script src="{% static 'core/main/plugins/greensock/ScrollToPlugin.min.js' %}"></script> <script src="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script> <script src="{% static 'core/main/plugins/scrollTo/jquery.scrollTo.min.js' %}"></script> <script src="{% static 'core/main/plugins/easing/easing.js' %}"></script> <script src="{% static 'core/main/js/custom.js' %}"></script> <script>
 
 
 

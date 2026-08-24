@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Öğrenci İşleri Personel Bilgisi{% endblock %}
 
@@ -16,19 +17,19 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">Personel Bilgisi</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "Personel Bilgisi" %}</h1>
                         <p class="lead mb-4">
-                            Öğrenci İşleri Daire Başkanlığı - Ekibimiz
+                            {% trans "Öğrenci İşleri Daire Başkanlığı - Ekibimiz" %}
                         </p>
                         <div class="d-flex gap-3 flex-wrap">
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-people me-1"></i>Uzman Kadro
+                                <i class="bi bi-people me-1"></i>{% trans "Uzman Kadro" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-telephone me-1"></i>7/24 Destek
+                                <i class="bi bi-telephone me-1"></i>{% trans "7/24 Destek" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-award me-1"></i>Deneyimli Ekip
+                                <i class="bi bi-award me-1"></i>{% trans "Deneyimli Ekip" %}
                             </span>
                         </div>
                     </div>
@@ -46,18 +47,18 @@
                 <div class="card border-0 shadow-sm h-100 personnel-card">
                     <div class="card-body text-center p-4">
                         <div class="personnel-avatar mb-3">
-                            <img src="{% static 'core/img/placeholder-avatar.jpg' %}" alt="Elli ALTUNTAŞ" class="rounded-circle" width="120" height="120">
+                            <img src="{% static 'core/img/placeholder-avatar.jpg' %}" alt="{% trans 'Elli ALTUNTAŞ' %}" class="rounded-circle" width="120" height="120">
                         </div>
-                        <h4 class="card-title fw-bold text-primary">Elif ALTUNTAŞ</h4>
-                        <h6 class="card-subtitle mb-3 text-muted">Öğrenci İşleri Daire Başkanı</h6>
+                        <h4 class="card-title fw-bold text-primary">{% trans "Elif ALTUNTAŞ" %}</h4>
+                        <h6 class="card-subtitle mb-3 text-muted">{% trans "Öğrenci İşleri Daire Başkanı" %}</h6>
                         <div class="personnel-contact mb-3">
                             <div class="d-flex justify-content-center align-items-center mb-2">
                                 <i class="bi bi-telephone text-primary me-2"></i>
-                                <span>0462 3346444 Dahili: 1238</span>
+                                <span>{% trans "0462 3346444 Dahili: 1238" %}</span>
                             </div>
                             <div class="d-flex justify-content-center align-items-center mb-2">
                                 <i class="bi bi-envelope text-primary me-2"></i>
-                                <span>elli.altuntas@avrasya.edu.tr</span>
+                                <span>{% trans "elli.altuntas@avrasya.edu.tr" %}</span>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
                                 <i class="bi bi-printer text-primary me-2"></i>
@@ -65,9 +66,9 @@
                             </div>
                         </div>
                         <div class="personnel-badges">
-                            <span class="badge bg-primary me-1">Liderlik</span>
-                            <span class="badge bg-success me-1">Koordinasyon</span>
-                            <span class="badge bg-info">Yönetim</span>
+                            <span class="badge bg-primary me-1">{% trans "Liderlik" %}</span>
+                            <span class="badge bg-success me-1">{% trans "Koordinasyon" %}</span>
+                            <span class="badge bg-info">{% trans "Yönetim" %}</span>
                         </div>
                     </div>
                 </div>
@@ -78,18 +79,18 @@
                 <div class="card border-0 shadow-sm h-100 personnel-card">
                     <div class="card-body text-center p-4">
                         <div class="personnel-avatar mb-3">
-                            <img src="{% static 'core/img/placeholder-avatar.jpg' %}" alt="Fahrettin GENÇ" class="rounded-circle" width="120" height="120">
+                            <img src="{% static 'core/img/placeholder-avatar.jpg' %}" alt="{% trans 'Fahrettin GENÇ' %}" class="rounded-circle" width="120" height="120">
                         </div>
-                        <h4 class="card-title fw-bold text-primary">Fahrettin GENÇ</h4>
-                        <h6 class="card-subtitle mb-3 text-muted">Evrak Memuru</h6>
+                        <h4 class="card-title fw-bold text-primary">{% trans "Fahrettin GENÇ" %}</h4>
+                        <h6 class="card-subtitle mb-3 text-muted">{% trans "Evrak Memuru" %}</h6>
                         <div class="personnel-contact mb-3">
                             <div class="d-flex justify-content-center align-items-center mb-2">
                                 <i class="bi bi-telephone text-primary me-2"></i>
-                                <span>0462 3346444 Dahili: 1238</span>
+                                <span>{% trans "0462 3346444 Dahili: 1238" %}</span>
                             </div>
                             <div class="d-flex justify-content-center align-items-center mb-2">
                                 <i class="bi bi-envelope text-primary me-2"></i>
-                                <span>fahrettin.genc@avrasya.edu.tr</span>
+                                <span>{% trans "fahrettin.genc@avrasya.edu.tr" %}</span>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
                                 <i class="bi bi-printer text-primary me-2"></i>
@@ -97,9 +98,9 @@
                             </div>
                         </div>
                         <div class="personnel-badges">
-                            <span class="badge bg-warning me-1 text-dark">Evrak İşlemleri</span>
-                            <span class="badge bg-secondary me-1">Arşiv</span>
-                            <span class="badge bg-dark">Dokümantasyon</span>
+                            <span class="badge bg-warning me-1 text-dark">{% trans "Evrak İşlemleri" %}</span>
+                            <span class="badge bg-secondary me-1">{% trans "Arşiv" %}</span>
+                            <span class="badge bg-dark">{% trans "Dokümantasyon" %}</span>
                         </div>
                     </div>
                 </div>
@@ -110,20 +111,20 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-light">
                 <h3 class="card-title mb-0 text-primary">
-                    <i class="bi bi-clock me-2"></i>Çalışma Saatleri
+                    <i class="bi bi-clock me-2"></i>{% trans "Çalışma Saatleri" %}
                 </h3>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>Hafta İçi</h5>
-                        <p class="mb-2"><strong>Pazartesi - Cuma:</strong> 08:30 - 17:30</p>
-                        <p class="text-muted">Öğle arası: 12:30 - 13:30</p>
+                        <h5>{% trans "Hafta İçi" %}</h5>
+                        <p class="mb-2"><strong>{% trans "Pazartesi - Cuma:" %}</strong> 08:30 - 17:30</p>
+                        <p class="text-muted">{% trans "Öğle arası: 12:30 - 13:30" %}</p>
                     </div>
                     <div class="col-md-6">
-                        <h5>Hafta Sonu</h5>
-                        <p class="mb-2"><strong>Cumartesi:</strong> 09:00 - 13:00</p>
-                        <p class="mb-2"><strong>Pazar:</strong> Kapalı</p>
+                        <h5>{% trans "Hafta Sonu" %}</h5>
+                        <p class="mb-2"><strong>{% trans "Cumartesi:" %}</strong> 09:00 - 13:00</p>
+                        <p class="mb-2"><strong>{% trans "Pazar:" %}</strong> {% trans "Kapalı" %}</p>
                     </div>
                 </div>
             </div>
@@ -133,30 +134,30 @@
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-warning text-dark">
                 <h3 class="card-title mb-0">
-                    <i class="bi bi-exclamation-triangle me-2"></i>Acil Durum İletişim
+                    <i class="bi bi-exclamation-triangle me-2"></i>{% trans "Acil Durum İletişim" %}
                 </h3>
             </div>
             <div class="card-body">
-                <p class="mb-3">Acil durumlarda aşağıdaki iletişim kanallarını kullanabilirsiniz:</p>
+                <p class="mb-3">{% trans "Acil durumlarda aşağıdaki iletişim kanallarını kullanabilirsiniz:" %}</p>
                 <div class="row">
                     <div class="col-md-4 text-center mb-3">
                         <div class="p-3 border rounded">
                             <i class="bi bi-telephone-fill text-primary display-6 mb-2"></i>
-                            <h5>Telefon</h5>
+                            <h5>{% trans "Telefon" %}</h5>
                             <p class="mb-0">0462 3346444</p>
                         </div>
                     </div>
                     <div class="col-md-4 text-center mb-3">
                         <div class="p-3 border rounded">
                             <i class="bi bi-envelope-fill text-success display-6 mb-2"></i>
-                            <h5>E-posta</h5>
-                            <p class="mb-0">ogrenciisleri@avrasya.edu.tr</p>
+                            <h5>{% trans "E-posta" %}</h5>
+                            <p class="mb-0">{% trans "ogrenciisleri@avrasya.edu.tr" %}</p>
                         </div>
                     </div>
                     <div class="col-md-4 text-center mb-3">
                         <div class="p-3 border rounded">
                             <i class="bi bi-whatsapp text-success display-6 mb-2"></i>
-                            <h5>WhatsApp</h5>
+                            <h5>{% trans "WhatsApp" %}</h5>
                             <p class="mb-0">+90 462 334 64 44</p>
                         </div>
                     </div>

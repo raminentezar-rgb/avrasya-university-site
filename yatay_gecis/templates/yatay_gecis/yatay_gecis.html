@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Yatay Geçiş{% endblock %}
 
@@ -8,24 +9,24 @@
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <h1 class="display-4 fw-bold text-white mb-3 animate-fade-in">Yatay Geçiş</h1>
+                <h1 class="display-4 fw-bold text-white mb-3 animate-fade-in">{% trans "Yatay Geçiş" %}</h1>
                 <p class="lead text-white mb-4 animate-fade-in" style="animation-delay: 0.2s;">
-                    Avrasya Üniversitesi'ne Yatay Geçiş Başvuru, Kayıt ve Esasları
+                    {% trans "Avrasya Üniversitesi'ne Yatay Geçiş Başvuru, Kayıt ve Esasları" %}
                 </p>
                 <div class="d-flex gap-3 flex-wrap animate-fade-in" style="animation-delay: 0.4s;">
                     <span class="badge bg-orange text-white fs-6 p-2">
-                        <i class="bi bi-clock me-1"></i>Başvurular Açık
+                        <i class="bi bi-clock me-1"></i>{% trans "Başvurular Açık" %}
                     </span>
                     <span class="badge bg-orange text-white fs-6 p-2">
-                        <i class="bi bi-info-circle me-1"></i>Detaylı Bilgi
+                        <i class="bi bi-info-circle me-1"></i>{% trans "Detaylı Bilgi" %}
                     </span>
                     <span class="badge bg-orange text-white fs-6 p-2">
-                        <i class="bi bi-telephone me-1"></i>Danışma Hattı
+                        <i class="bi bi-telephone me-1"></i>{% trans "Danışma Hattı" %}
                     </span>
                 </div>
             </div>
             <div class="col-lg-4 text-center animate-fade-in" style="animation-delay: 0.6s;">
-                <img src="{% static 'core/img/avu_logo.png' %}" alt="Avrasya Üniversitesi" class="img-fluid hero-logo">
+                <img src="{% static 'core/img/avu_logo.png' %}" alt="{% trans 'Avrasya Üniversitesi' %}" class="img-fluid hero-logo">
             </div>
         </div>
     </div>
@@ -38,9 +39,9 @@
         <div class="col-12">
             <div class="card border-0 shadow-lg p-4">
                 <div class="card-body">
-                    <h2 class="section-title text-center mb-4">Yatay Geçiş Başvuru, Kayıt ve Esasları</h2>
+                    <h2 class="section-title text-center mb-4">{% trans "Yatay Geçiş Başvuru, Kayıt ve Esasları" %}</h2>
                     <p class="lead text-center mb-4">
-                        Avrasya Üniversitesi'ne, Yükseköğretim Kurulu (YÖK) tarafından hazırlanan Yönetmelik ve Üniversite tarafından belirlenen esaslar çerçevesinde yatay geçiş yapabilirsiniz.
+                        {% trans "Avrasya Üniversitesi'ne, Yükseköğretim Kurulu (YÖK) tarafından hazırlanan Yönetmelik ve Üniversite tarafından belirlenen esaslar çerçevesinde yatay geçiş yapabilirsiniz." %}
                     </p>
                 </div>
             </div>
@@ -50,7 +51,7 @@
     <!-- Quick Access Cards -->
     <div class="row mb-5">
         <div class="col-12 mb-4">
-            <h2 class="section-title text-center mb-4">Hızlı Erişim</h2>
+            <h2 class="section-title text-center mb-4">{% trans "Hızlı Erişim" %}</h2>
         </div>
         
         <!-- Row 1 -->
@@ -59,19 +60,19 @@
                 <div class="card-image-container">
                     <img src="{% static 'core/img/student/event-7.jpg' %}" 
                          class="card-img" 
-                         alt="Yatay Geçiş Kontenjanları">
+                         alt="{% trans 'Yatay Geçiş Kontenjanları' %}">
                     <div class="card-overlay"></div>
                     <div class="card-badge">
-                        <span class="badge bg-blue">Güncel</span>
+                        <span class="badge bg-blue">{% trans "Güncel" %}</span>
                     </div>
                 </div>
                 <div class="card-body text-center p-4">
                     <div class="card-icon mb-3">
                         <i class="bi bi-list-ol"></i>
                     </div>
-                    <h5 class="card-title fw-bold">Yatay Geçiş Kontenjanları</h5>
-                    <p class="card-text text-muted">Bölümlere göre kontenjan bilgileri ve boş kontenjan durumu</p>
-                    <a href="#" class="btn btn-orange btn-hover">Kontenjanları Gör</a>
+                    <h5 class="card-title fw-bold">{% trans "Yatay Geçiş Kontenjanları" %}</h5>
+                    <p class="card-text text-muted">{% trans "Bölümlere göre kontenjan bilgileri ve boş kontenjan durumu" %}</p>
+                    <a href="#" class="btn btn-orange btn-hover">{% trans "Kontenjanları Gör" %}</a>
                 </div>
             </div>
         </div>
@@ -81,19 +82,19 @@
                 <div class="card-image-container">
                     <img src="{% static 'core/img/student/avu.jpg' %}" 
                          class="card-img" 
-                         alt="Yatay Geçiş Başvuru Formu">
+                         alt="{% trans 'Yatay Geçiş Başvuru Formu' %}">
                     <div class="card-overlay"></div>
                     <div class="card-badge">
-                        <span class="badge bg-blue">Aktif</span>
+                        <span class="badge bg-blue">{% trans "Aktif" %}</span>
                     </div>
                 </div>
                 <div class="card-body text-center p-4">
                     <div class="card-icon mb-3">
                         <i class="bi bi-file-earmark-text"></i>
                     </div>
-                    <h5 class="card-title fw-bold">Yatay Geçiş Başvuru Formu</h5>
-                    <p class="card-text text-muted">Online başvuru formu ve başvuru süreci hakkında bilgi</p>
-                    <a href="#" class="btn btn-orange btn-hover">Başvuru Yap</a>
+                    <h5 class="card-title fw-bold">{% trans "Yatay Geçiş Başvuru Formu" %}</h5>
+                    <p class="card-text text-muted">{% trans "Online başvuru formu ve başvuru süreci hakkında bilgi" %}</p>
+                    <a href="#" class="btn btn-orange btn-hover">{% trans "Başvuru Yap" %}</a>
                 </div>
             </div>
         </div>
@@ -103,19 +104,19 @@
                 <div class="card-image-container">
                     <img src="{% static 'core/img/student/avu5.jpg' %}" 
                          class="card-img" 
-                         alt="Başvuru Belgeleri">
+                         alt="{% trans 'Başvuru Belgeleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-badge">
-                        <span class="badge bg-blue">Yeni</span>
+                        <span class="badge bg-blue">{% trans "Yeni" %}</span>
                     </div>
                 </div>
                 <div class="card-body text-center p-4">
                     <div class="card-icon mb-3">
                         <i class="bi bi-folder"></i>
                     </div>
-                    <h5 class="card-title fw-bold">Başvuru Belgeleri</h5>
-                    <p class="card-text text-muted">Gerekli belgeler ve belge hazırlama süreci hakkında bilgi</p>
-                    <a href="#" class="btn btn-orange btn-hover">Belgeleri Gör</a>
+                    <h5 class="card-title fw-bold">{% trans "Başvuru Belgeleri" %}</h5>
+                    <p class="card-text text-muted">{% trans "Gerekli belgeler ve belge hazırlama süreci hakkında bilgi" %}</p>
+                    <a href="#" class="btn btn-orange btn-hover">{% trans "Belgeleri Gör" %}</a>
                 </div>
             </div>
         </div>
@@ -125,19 +126,19 @@
                 <div class="card-image-container">
                     <img src="{% static 'core/img/student/book-3.jpg' %}" 
                          class="card-img" 
-                         alt="Ortalamaya Göre Başvuru Koşulları">
+                         alt="{% trans 'Ortalamaya Göre Başvuru Koşulları' %}">
                     <div class="card-overlay"></div>
                     <div class="card-badge">
-                        <span class="badge bg-blue">Özel</span>
+                        <span class="badge bg-blue">{% trans "Özel" %}</span>
                     </div>
                 </div>
                 <div class="card-body text-center p-4">
                     <div class="card-icon mb-3">
                         <i class="bi bi-graph-up"></i>
                     </div>
-                    <h5 class="card-title fw-bold">Ortalamaya Göre Başvuru Koşulları</h5>
-                    <p class="card-text text-muted">Not ortalaması ve diğer akademik kriterler hakkında bilgi</p>
-                    <a href="#" class="btn btn-orange btn-hover">Koşulları Gör</a>
+                    <h5 class="card-title fw-bold">{% trans "Ortalamaya Göre Başvuru Koşulları" %}</h5>
+                    <p class="card-text text-muted">{% trans "Not ortalaması ve diğer akademik kriterler hakkında bilgi" %}</p>
+                    <a href="#" class="btn btn-orange btn-hover">{% trans "Koşulları Gör" %}</a>
                 </div>
             </div>
         </div>
@@ -148,7 +149,7 @@
         <div class="col-12">
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-5">
-                    <h2 class="section-title text-center mb-5">Yatay Geçiş Süreci</h2>
+                    <h2 class="section-title text-center mb-5">{% trans "Yatay Geçiş Süreci" %}</h2>
                     
                     <div class="row">
                         <div class="col-lg-6 mb-4">
@@ -159,8 +160,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h4 class="fw-bold text-blue">Başvuru Ön Koşulları</h4>
-                                    <p class="text-muted">Yatay geçiş için gerekli ön koşullar ve akademik şartlar hakkında detaylı bilgi.</p>
+                                    <h4 class="fw-bold text-blue">{% trans "Başvuru Ön Koşulları" %}</h4>
+                                    <p class="text-muted">{% trans "Yatay geçiş için gerekli ön koşullar ve akademik şartlar hakkında detaylı bilgi." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -173,8 +174,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h4 class="fw-bold text-blue">Başvuru Süreci</h4>
-                                    <p class="text-muted">Başvuru formu doldurma, belgelerin hazırlanması ve başvuru takvimi hakkında bilgi.</p>
+                                    <h4 class="fw-bold text-blue">{% trans "Başvuru Süreci" %}</h4>
+                                    <p class="text-muted">{% trans "Başvuru formu doldurma, belgelerin hazırlanması ve başvuru takvimi hakkında bilgi." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -187,8 +188,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h4 class="fw-bold text-blue">Değerlendirme</h4>
-                                    <p class="text-muted">Başvuruların değerlendirilme süreci ve kabul kriterleri hakkında detaylı bilgi.</p>
+                                    <h4 class="fw-bold text-blue">{% trans "Değerlendirme" %}</h4>
+                                    <p class="text-muted">{% trans "Başvuruların değerlendirilme süreci ve kabul kriterleri hakkında detaylı bilgi." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -201,8 +202,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h4 class="fw-bold text-blue">Kayıt İşlemleri</h4>
-                                    <p class="text-muted">Kabul sonrası kayıt işlemleri ve ders intibak süreci hakkında bilgi.</p>
+                                    <h4 class="fw-bold text-blue">{% trans "Kayıt İşlemleri" %}</h4>
+                                    <p class="text-muted">{% trans "Kabul sonrası kayıt işlemleri ve ders intibak süreci hakkında bilgi." %}</p>
                                 </div>
                             </div>
                         </div>
@@ -217,16 +218,16 @@
         <div class="col-12">
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-5 text-center">
-                    <h2 class="section-title mb-4">İletişim ve Danışma</h2>
-                    <p class="lead mb-4">Yatay geçiş süreci hakkında detaylı bilgi almak için bizimle iletişime geçebilirsiniz.</p>
+                    <h2 class="section-title mb-4">{% trans "İletişim ve Danışma" %}</h2>
+                    <p class="lead mb-4">{% trans "Yatay geçiş süreci hakkında detaylı bilgi almak için bizimle iletişime geçebilirsiniz." %}</p>
                     
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <div class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-telephone text-blue fs-3 me-3"></i>
                                 <div class="text-start">
-                                    <h5 class="fw-bold mb-1">Telefon</h5>
-                                    <p class="text-muted mb-0">+90 (XXX) XXX XX XX</p>
+                                    <h5 class="fw-bold mb-1">{% trans "Telefon" %}</h5>
+                                    <p class="text-muted mb-0">{% trans "+90 (XXX) XXX XX XX" %}</p>
                                 </div>
                             </div>
                         </div>
@@ -235,8 +236,8 @@
                             <div class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-envelope text-blue fs-3 me-3"></i>
                                 <div class="text-start">
-                                    <h5 class="fw-bold mb-1">E-posta</h5>
-                                    <p class="text-muted mb-0">yataygecis@avrasya.edu.tr</p>
+                                    <h5 class="fw-bold mb-1">{% trans "E-posta" %}</h5>
+                                    <p class="text-muted mb-0">{% trans "yataygecis@avrasya.edu.tr" %}</p>
                                 </div>
                             </div>
                         </div>
@@ -245,15 +246,15 @@
                             <div class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-geo-alt text-blue fs-3 me-3"></i>
                                 <div class="text-start">
-                                    <h5 class="fw-bold mb-1">Ofis</h5>
-                                    <p class="text-muted mb-0">Öğrenci İşleri Daire Başkanlığı</p>
+                                    <h5 class="fw-bold mb-1">{% trans "Ofis" %}</h5>
+                                    <p class="text-muted mb-0">{% trans "Öğrenci İşleri Daire Başkanlığı" %}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mt-4">
-                        <a href="#" class="btn btn-orange btn-lg px-4">Online Danışma</a>
+                        <a href="#" class="btn btn-orange btn-lg px-4">{% trans "Online Danışma" %}</a>
                     </div>
                 </div>
             </div>

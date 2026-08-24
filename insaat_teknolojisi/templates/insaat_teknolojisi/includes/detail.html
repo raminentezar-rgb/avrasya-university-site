@@ -1,4 +1,5 @@
 {% extends 'insaat_teknolojisi/base.html' %}
+{% load i18n %}
 {% block title %}{{ duyuru.baslik }} - İnşaat Teknolojisi - Avrasya Üniversitesi{% endblock %}
 {% block content %}
 
@@ -542,15 +543,15 @@
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{% url 'duyurular:liste' %}">
-                                <i class="bi bi-house-door me-1"></i>Tüm Duyurular
+                                <i class="bi bi-house-door me-1"></i>{% trans "Tüm Duyurular" %}
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{% url 'insaat_teknolojisi:liste' %}">
-                                <i class="bi bi-book me-1"></i>İnşaat Teknolojisi
+                                <i class="bi bi-book me-1"></i>{% trans "İnşaat Teknolojisi" %}
                             </a>
                         </li>
-                        <li class="breadcrumb-item active text-primary fw-semibold">Duyuru Detayı</li>
+                        <li class="breadcrumb-item active text-primary fw-semibold">{% trans "Duyuru Detayı" %}</li>
                     </ol>
                 </nav>
                 
@@ -561,7 +562,7 @@
                             <i class="bi bi-building me-1"></i>{{ duyuru.get_fakulte_display }}
                         </span>
                         <span class="badge-bolum">
-                            <i class="bi bi-book me-1"></i>İnşaat Teknolojisi
+                            <i class="bi bi-book me-1"></i>{% trans "İnşaat Teknolojisi" %}
                         </span>
                     </div>
                     
@@ -592,9 +593,9 @@
                 {% if dosyalar %}
                 <div class="files-section">
                     <h3 class="section-title-detail">
-                        <i class="bi bi-download me-2"></i>İndirilebilir Dosyalar
+                        <i class="bi bi-download me-2"></i>{% trans "İndirilebilir Dosyalar" %}
                     </h3>
-                    <p class="text-muted mb-4">Bu duyuruya ait ekli dosyaları aşağıdan indirebilirsiniz.</p>
+                    <p class="text-muted mb-4">{% trans "Bu duyuruya ait ekli dosyaları aşağıdan indirebilirsiniz." %}</p>
                     
                     <div class="row g-4">
                         {% for dosya in dosyalar %}
@@ -626,9 +627,9 @@
             {% if ilgili_duyurular %}
             <div class="related-section">
                 <h3 class="section-title-detail">
-                    <i class="bi bi-link me-2"></i>Diğer İnşaat Teknolojisi Duyuruları
+                    <i class="bi bi-link me-2"></i>{% trans "Diğer İnşaat Teknolojisi Duyuruları" %}
                 </h3>
-                <p class="text-muted mb-4">Aşağıda benzer İnşaat Teknolojisi duyurularını inceleyebilirsiniz.</p>
+                <p class="text-muted mb-4">{% trans "Aşağıda benzer İnşaat Teknolojisi duyurularını inceleyebilirsiniz." %}</p>
 
                 <div class="row g-4">
                     {% for ilgili in ilgili_duyurular %}
@@ -636,7 +637,7 @@
                         <div class="related-card">
                             <div class="related-badges">
                                 <span class="badge bg-primary">{{ ilgili.get_fakulte_display }}</span>
-                                <span class="badge bg-success">İnşaat Teknolojisi</span>
+                                <span class="badge bg-success">{% trans "İnşaat Teknolojisi" %}</span>
                             </div>
                             <h4 class="related-title">{{ ilgili.baslik }}</h4>
                             <div class="related-date">
@@ -644,7 +645,7 @@
                                 {{ ilgili.yayin_tarihi|date:'d M Y' }}
                             </div>
                             <a href="{% url 'insaat_teknolojisi:detay' ilgili.slug %}" class="related-link">
-                                Detaylı İncele
+                                {% trans "Detaylı İncele" %}
                                 <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
@@ -659,7 +660,7 @@
                 <div class="nav-buttons">
                     <a href="{% url 'insaat_teknolojisi:liste' %}" class="nav-btn nav-btn-outline">
                         <i class="bi bi-arrow-left"></i>
-                        Tüm İnşaat Teknolojisi Duyuruları
+                        {% trans "Tüm İnşaat Teknolojisi Duyuruları" %}
                     </a>
                     
                     <div class="d-flex gap-3">
@@ -669,7 +670,7 @@
                         </a>
                         <a href="{% url 'duyurular:liste' %}" class="nav-btn nav-btn-outline">
                             <i class="bi bi-grid"></i>
-                            Tüm Duyurular
+                            {% trans "Tüm Duyurular" %}
                         </a>
                     </div>
                 </div>

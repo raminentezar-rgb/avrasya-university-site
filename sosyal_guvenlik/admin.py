@@ -1,12 +1,13 @@
 # app_name: sosyal_guvenlik/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     SosyalGuvenlikEtkinlik, SosyalGuvenlikFaaliyet, SosyalGuvenlikDuyuru, SosyalGuvenlikFaaliyetGorseli, SosyalGuvenlikFaaliyetGrubu, SosyalGuvenlikDersProgrami
 )
 
 @admin.register(SosyalGuvenlikEtkinlik)
-class SosyalGuvenlikEtkinlikAdmin(admin.ModelAdmin):
+class SosyalGuvenlikEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class SosyalGuvenlikDuyuruAdmin(admin.ModelAdmin):
         return SosyalGuvenlikDuyuru.objects.all()
 
 @admin.register(SosyalGuvenlikDersProgrami)
-class SosyalGuvenlikDersProgramiAdmin(admin.ModelAdmin):
+class SosyalGuvenlikDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class SosyalGuvenlikFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(SosyalGuvenlikFaaliyetGrubu)
-class SosyalGuvenlikFaaliyetGrubuAdmin(admin.ModelAdmin):
+class SosyalGuvenlikFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(SosyalGuvenlikFaaliyet)
-class SosyalGuvenlikFaaliyetAdmin(admin.ModelAdmin):
+class SosyalGuvenlikFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

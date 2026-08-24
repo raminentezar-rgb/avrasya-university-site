@@ -1,4 +1,5 @@
 {% extends 'arastirma/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Ödüller - Avrasya University{% endblock %}
@@ -7,8 +8,8 @@
 <section class="research-hero" style="background: linear-gradient(135deg, #8dd4e3 0%, #1d61a9 100%); padding: 100px 0 60px;">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Ödüller</h1>
-            <p>Üniversitemizin Başarıları ve Bilimsel Ödülleri</p>
+            <h1>{% trans "Ödüller" %}</h1>
+            <p>{% trans "Üniversitemizin Başarıları ve Bilimsel Ödülleri" %}</p>
         </div>
     </div>
 </section>
@@ -29,25 +30,25 @@
                         <div class="col-md-3">
                             <div class="stat-box text-center">
                                 <h3>24</h3>
-                                <p>Ulusal Ödül</p>
+                                <p>{% trans "Ulusal Ödül" %}</p>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="stat-box text-center">
                                 <h3>18</h3>
-                                <p>Uluslararası Ödül</p>
+                                <p>{% trans "Uluslararası Ödül" %}</p>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="stat-box text-center">
                                 <h3>12</h3>
-                                <p>TÜBİTAK Ödülü</p>
+                                <p>{% trans "TÜBİTAK Ödülü" %}</p>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="stat-box text-center">
                                 <h3>8</h3>
-                                <p>Patent Ödülü</p>
+                                <p>{% trans "Patent Ödülü" %}</p>
                             </div>
                         </div>
                     </div>
@@ -55,17 +56,17 @@
 
                 <!-- فیلترها -->
                 <div class="research-card mb-4">
-                    <h5 class="mb-3">Ödül Filtreleme</h5>
+                    <h5 class="mb-3">{% trans "Ödül Filtreleme" %}</h5>
                     <div class="btn-group" role="group">
-                        <a href="#" class="btn btn-outline-primary">Tümü</a>
-                        <a href="#" class="btn btn-outline-primary">Uluslararası</a>
-                        <a href="#" class="btn btn-outline-primary">Ulusal</a>
-                        <a href="#" class="btn btn-outline-primary">TÜBİTAK</a>
-                        <a href="#" class="btn btn-outline-primary">Patent</a>
+                        <a href="#" class="btn btn-outline-primary">{% trans "Tümü" %}</a>
+                        <a href="#" class="btn btn-outline-primary">{% trans "Uluslararası" %}</a>
+                        <a href="#" class="btn btn-outline-primary">{% trans "Ulusal" %}</a>
+                        <a href="#" class="btn btn-outline-primary">{% trans "TÜBİTAK" %}</a>
+                        <a href="#" class="btn btn-outline-primary">{% trans "Patent" %}</a>
                     </div>
                     <div class="mt-3">
                         <select class="form-control" onchange="location = this.value;">
-                            <option value="">Yıla Göre Filtrele</option>
+                            <option value="">{% trans "Yıla Göre Filtrele" %}</option>
                             <option value="?year=2024">2024</option>
                             <option value="?year=2023">2023</option>
                             <option value="?year=2022">2022</option>
@@ -76,211 +77,211 @@
 
                 <!-- لیست جایزه ها -->
                 <div class="research-card mb-4">
-                    <h3>TÜBİTAK Bilim Ödülü - Prof. Dr. Ahmet Yılmaz</h3>
+                    <h3>{% trans "TÜBİTAK Bilim Ödülü - Prof. Dr. Ahmet Yılmaz" %}</h3>
                     <div class="project-meta mb-3">
                         <span class="badge badge-success">
-                            Ulusal Ödül
+                            {% trans "Ulusal Ödül" %}
                         </span>
                         <span class="badge badge-warning">
-                            TÜBİTAK
+                            {% trans "TÜBİTAK" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-user"></i> Prof. Dr. Ahmet Yılmaz
+                            <i class="fas fa-user"></i> {% trans "Prof. Dr. Ahmet Yılmaz" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-university"></i> Tıp Fakültesi
+                            <i class="fas fa-university"></i> {% trans "Tıp Fakültesi" %}
                         </span>
                     </div>
                     
-                    <p><strong>Ödül:</strong> TÜBİTAK 2023 Bilim Ödülü | <strong>Kategori:</strong> Tıp Bilimleri | <strong>Ödül Tutarı:</strong> 100.000 TL</p>
-                    <p>Kanser tedavisinde yenilikçi immünoterapi yöntemleri üzerine yaptığı öncü çalışmalar ve klinik uygulamalara katkılarından dolayı verilmiştir. Çalışmaları 150'den fazla atıf almıştır.</p>
+                    <p><strong>{% trans "Ödül:" %}</strong> {% trans "TÜBİTAK 2023 Bilim Ödülü |" %} <strong>{% trans "Kategori:" %}</strong> {% trans "Tıp Bilimleri |" %} <strong>{% trans "Ödül Tutarı:" %}</strong> {% trans "100.000 TL" %}</p>
+                    <p>{% trans "Kanser tedavisinde yenilikçi immünoterapi yöntemleri üzerine yaptığı öncü çalışmalar ve klinik uygulamalara katkılarından dolayı verilmiştir. Çalışmaları 150'den fazla atıf almıştır." %}</p>
                     
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div>
                             <small class="text-muted">
-                                <i class="fas fa-calendar"></i> Ödül Tarihi: 15 Aralık 2023
+                                <i class="fas fa-calendar"></i> {% trans "Ödül Tarihi: 15 Aralık 2023" %}
                             </small>
                             <small class="text-muted ml-3">
-                                <i class="fas fa-trophy"></i> En Prestijli Ödül
+                                <i class="fas fa-trophy"></i> {% trans "En Prestijli Ödül" %}
                             </small>
                         </div>
                         <a href="#" class="btn btn-primary">
-                            Detayları Gör <i class="fas fa-arrow-right"></i>
+                            {% trans "Detayları Gör" %} <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="research-card mb-4">
-                    <h3>Avrupa Araştırma Konseyi (ERC) Starting Grant</h3>
+                    <h3>{% trans "Avrupa Araştırma Konseyi (ERC) Starting Grant" %}</h3>
                     <div class="project-meta mb-3">
                         <span class="badge badge-info">
-                            Uluslararası Ödül
+                            {% trans "Uluslararası Ödül" %}
                         </span>
                         <span class="badge badge-success">
-                            ERC Grant
+                            {% trans "ERC Grant" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-user"></i> Doç. Dr. Mehmet Kaya
+                            <i class="fas fa-user"></i> {% trans "Doç. Dr. Mehmet Kaya" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-university"></i> Mühendislik Fakültesi
+                            <i class="fas fa-university"></i> {% trans "Mühendislik Fakültesi" %}
                         </span>
                     </div>
                     
-                    <p><strong>Ödül:</strong> ERC Starting Grant 2024 | <strong>Kategori:</strong> Malzeme Bilimi | <strong>Fon Miktarı:</strong> 1.5 Milyon €</p>
-                    <p>"Akıllı Nanomalzemeler ile Enerji Depolama Sistemlerinin Geliştirilmesi" projesi ile Avrupa'nın en prestijli araştırma fonlarından birini kazanmıştır. 5 yıl sürecek projede 8 kişilik araştırma ekibi çalışacaktır.</p>
+                    <p><strong>{% trans "Ödül:" %}</strong> {% trans "ERC Starting Grant 2024 |" %} <strong>{% trans "Kategori:" %}</strong> {% trans "Malzeme Bilimi |" %} <strong>{% trans "Fon Miktarı:" %}</strong> {% trans "1.5 Milyon €" %}</p>
+                    <p>{% trans "\"Akıllı Nanomalzemeler ile Enerji Depolama Sistemlerinin Geliştirilmesi\" projesi ile Avrupa'nın en prestijli araştırma fonlarından birini kazanmıştır. 5 yıl sürecek projede 8 kişilik araştırma ekibi çalışacaktır." %}</p>
                     
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div>
                             <small class="text-muted">
-                                <i class="fas fa-calendar"></i> Ödül Tarihi: 10 Mart 2024
+                                <i class="fas fa-calendar"></i> {% trans "Ödül Tarihi: 10 Mart 2024" %}
                             </small>
                             <small class="text-muted ml-3">
-                                <i class="fas fa-euro-sign"></i> 1.5M € Bütçe
+                                <i class="fas fa-euro-sign"></i> {% trans "1.5M € Bütçe" %}
                             </small>
                         </div>
                         <a href="#" class="btn btn-primary">
-                            Detayları Gör <i class="fas fa-arrow-right"></i>
+                            {% trans "Detayları Gör" %} <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="research-card mb-4">
-                    <h3>En İyi Genç Araştırmacı Ödülü - IEEE</h3>
+                    <h3>{% trans "En İyi Genç Araştırmacı Ödülü - IEEE" %}</h3>
                     <div class="project-meta mb-3">
                         <span class="badge badge-info">
-                            Uluslararası Ödül
+                            {% trans "Uluslararası Ödül" %}
                         </span>
                         <span class="badge badge-primary">
-                            IEEE
+                            {% trans "IEEE" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-user"></i> Dr. Zeynep Demir
+                            <i class="fas fa-user"></i> {% trans "Dr. Zeynep Demir" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-university"></i> Elektrik-Elektronik Mühendisliği
+                            <i class="fas fa-university"></i> {% trans "Elektrik-Elektronik Mühendisliği" %}
                         </span>
                     </div>
                     
-                    <p><strong>Ödül:</strong> IEEE En İyi Genç Araştırmacı 2023 | <strong>Kategori:</strong> Elektronik Mühendisliği | <strong>Konferans:</strong> IEEE International Conference</p>
-                    <p>"Yüksek Frekanslı Entegre Devre Tasarımında Yenilikçi Yaklaşımlar" başlıklı çalışması ile 35 yaş altı araştırmacılar arasında birinci seçilmiştir. Çalışma 500'den fazla katılımcı arasından seçilmiştir.</p>
+                    <p><strong>{% trans "Ödül:" %}</strong> {% trans "IEEE En İyi Genç Araştırmacı 2023 |" %} <strong>{% trans "Kategori:" %}</strong> {% trans "Elektronik Mühendisliği |" %} <strong>{% trans "Konferans:" %}</strong> {% trans "IEEE International Conference" %}</p>
+                    <p>{% trans "\"Yüksek Frekanslı Entegre Devre Tasarımında Yenilikçi Yaklaşımlar\" başlıklı çalışması ile 35 yaş altı araştırmacılar arasında birinci seçilmiştir. Çalışma 500'den fazla katılımcı arasından seçilmiştir." %}</p>
                     
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div>
                             <small class="text-muted">
-                                <i class="fas fa-calendar"></i> Ödül Tarihi: 25 Eylül 2023
+                                <i class="fas fa-calendar"></i> {% trans "Ödül Tarihi: 25 Eylül 2023" %}
                             </small>
                             <small class="text-muted ml-3">
-                                <i class="fas fa-award"></i> Genç Araştırmacı
+                                <i class="fas fa-award"></i> {% trans "Genç Araştırmacı" %}
                             </small>
                         </div>
                         <a href="#" class="btn btn-primary">
-                            Detayları Gör <i class="fas fa-arrow-right"></i>
+                            {% trans "Detayları Gör" %} <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="research-card mb-4">
-                    <h3>Türk Patent Ödülü - En İyi Üniversite Patenti</h3>
+                    <h3>{% trans "Türk Patent Ödülü - En İyi Üniversite Patenti" %}</h3>
                     <div class="project-meta mb-3">
                         <span class="badge badge-success">
-                            Ulusal Ödül
+                            {% trans "Ulusal Ödül" %}
                         </span>
                         <span class="badge badge-info">
-                            Patent Ödülü
+                            {% trans "Patent Ödülü" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-user"></i> Prof. Dr. Can Yıldız
+                            <i class="fas fa-user"></i> {% trans "Prof. Dr. Can Yıldız" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-university"></i> Kimya Mühendisliği
+                            <i class="fas fa-university"></i> {% trans "Kimya Mühendisliği" %}
                         </span>
                     </div>
                     
-                    <p><strong>Ödül:</strong> Türk Patent 2023 Ödülü | <strong>Kategori:</strong> En İyi Üniversite Patenti | <strong>Patent No:</strong> TR 2022 12345 B</p>
-                    <p>"Biyobozunur Ambalaj Malzemesi Geliştirilmesi" patenti ile çevre dostu malzeme alanında yaptığı yenilikçi çalışma ödüllendirilmiştir. Patent 3 farklı ülkede tescillenmiştir.</p>
+                    <p><strong>{% trans "Ödül:" %}</strong> {% trans "Türk Patent 2023 Ödülü |" %} <strong>{% trans "Kategori:" %}</strong> {% trans "En İyi Üniversite Patenti |" %} <strong>{% trans "Patent No:" %}</strong> {% trans "TR 2022 12345 B" %}</p>
+                    <p>{% trans "\"Biyobozunur Ambalaj Malzemesi Geliştirilmesi\" patenti ile çevre dostu malzeme alanında yaptığı yenilikçi çalışma ödüllendirilmiştir. Patent 3 farklı ülkede tescillenmiştir." %}</p>
                     
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div>
                             <small class="text-muted">
-                                <i class="fas fa-calendar"></i> Ödül Tarihi: 18 Kasım 2023
+                                <i class="fas fa-calendar"></i> {% trans "Ödül Tarihi: 18 Kasım 2023" %}
                             </small>
                             <small class="text-muted ml-3">
-                                <i class="fas fa-leaf"></i> Çevre Dostu
+                                <i class="fas fa-leaf"></i> {% trans "Çevre Dostu" %}
                             </small>
                         </div>
                         <a href="#" class="btn btn-primary">
-                            Detayları Gör <i class="fas fa-arrow-right"></i>
+                            {% trans "Detayları Gör" %} <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="research-card mb-4">
-                    <h3>Sanayi İşbirliği Ödülü - TÜBİTAK 1512</h3>
+                    <h3>{% trans "Sanayi İşbirliği Ödülü - TÜBİTAK 1512" %}</h3>
                     <div class="project-meta mb-3">
                         <span class="badge badge-success">
-                            Ulusal Ödül
+                            {% trans "Ulusal Ödül" %}
                         </span>
                         <span class="badge badge-warning">
-                            TÜBİTAK
+                            {% trans "TÜBİTAK" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-user"></i> Doç. Dr. Ayşe Şahin
+                            <i class="fas fa-user"></i> {% trans "Doç. Dr. Ayşe Şahin" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-university"></i> Endüstri Mühendisliği
+                            <i class="fas fa-university"></i> {% trans "Endüstri Mühendisliği" %}
                         </span>
                     </div>
                     
-                    <p><strong>Ödül:</strong> TÜBİTAK 1512 Bireysel Genç Girişimci | <strong>Kategori:</strong> Sanayi İşbirliği | <strong>Ödül Tutarı:</strong> 250.000 TL</p>
-                    <p>"Akıllı Üretim Sistemleri için IoT Tabanlı Çözümler" projesi ile sanayi-üniversite işbirliği alanında örnek teşkil eden çalışma ödüllendirilmiştir. Proje 3 farklı fabrikada uygulanmıştır.</p>
+                    <p><strong>{% trans "Ödül:" %}</strong> {% trans "TÜBİTAK 1512 Bireysel Genç Girişimci |" %} <strong>{% trans "Kategori:" %}</strong> {% trans "Sanayi İşbirliği |" %} <strong>{% trans "Ödül Tutarı:" %}</strong> {% trans "250.000 TL" %}</p>
+                    <p>{% trans "\"Akıllı Üretim Sistemleri için IoT Tabanlı Çözümler\" projesi ile sanayi-üniversite işbirliği alanında örnek teşkil eden çalışma ödüllendirilmiştir. Proje 3 farklı fabrikada uygulanmıştır." %}</p>
                     
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div>
                             <small class="text-muted">
-                                <i class="fas fa-calendar"></i> Ödül Tarihi: 30 Haziran 2023
+                                <i class="fas fa-calendar"></i> {% trans "Ödül Tarihi: 30 Haziran 2023" %}
                             </small>
                             <small class="text-muted ml-3">
-                                <i class="fas fa-industry"></i> Sanayi İşbirliği
+                                <i class="fas fa-industry"></i> {% trans "Sanayi İşbirliği" %}
                             </small>
                         </div>
                         <a href="#" class="btn btn-primary">
-                            Detayları Gör <i class="fas fa-arrow-right"></i>
+                            {% trans "Detayları Gör" %} <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="research-card mb-4">
-                    <h3>En İyi Poster Ödülü - Uluslararası Konferans</h3>
+                    <h3>{% trans "En İyi Poster Ödülü - Uluslararası Konferans" %}</h3>
                     <div class="project-meta mb-3">
                         <span class="badge badge-info">
-                            Uluslararası Ödül
+                            {% trans "Uluslararası Ödül" %}
                         </span>
                         <span class="badge badge-secondary">
-                            Poster Ödülü
+                            {% trans "Poster Ödülü" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-user"></i> Arş. Gör. Ali Demir
+                            <i class="fas fa-user"></i> {% trans "Arş. Gör. Ali Demir" %}
                         </span>
                         <span class="text-muted ml-3">
-                            <i class="fas fa-university"></i> Bilgisayar Mühendisliği
+                            <i class="fas fa-university"></i> {% trans "Bilgisayar Mühendisliği" %}
                         </span>
                     </div>
                     
-                    <p><strong>Ödül:</strong> En İyi Poster Ödülü 2024 | <strong>Konferans:</strong> International AI Conference | <strong>Yer:</strong> Amsterdam, Hollanda</p>
-                    <p>"Derin Öğrenme ile Görüntü İşleme Uygulamaları" başlıklı poster sunumu ile 200'den fazla poster arasından birinci seçilmiştir. Çalışma tıbbi görüntüleme alanında yenilikçi bir yaklaşım sunmaktadır.</p>
+                    <p><strong>{% trans "Ödül:" %}</strong> {% trans "En İyi Poster Ödülü 2024 |" %} <strong>{% trans "Konferans:" %}</strong> {% trans "International AI Conference |" %} <strong>{% trans "Yer:" %}</strong> {% trans "Amsterdam, Hollanda" %}</p>
+                    <p>{% trans "\"Derin Öğrenme ile Görüntü İşleme Uygulamaları\" başlıklı poster sunumu ile 200'den fazla poster arasından birinci seçilmiştir. Çalışma tıbbi görüntüleme alanında yenilikçi bir yaklaşım sunmaktadır." %}</p>
                     
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div>
                             <small class="text-muted">
-                                <i class="fas fa-calendar"></i> Ödül Tarihi: 12 Mayıs 2024
+                                <i class="fas fa-calendar"></i> {% trans "Ödül Tarihi: 12 Mayıs 2024" %}
                             </small>
                             <small class="text-muted ml-3">
-                                <i class="fas fa-image"></i> Poster Sunumu
+                                <i class="fas fa-image"></i> {% trans "Poster Sunumu" %}
                             </small>
                         </div>
                         <a href="#" class="btn btn-primary">
-                            Detayları Gör <i class="fas fa-arrow-right"></i>
+                            {% trans "Detayları Gör" %} <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>

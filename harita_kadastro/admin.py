@@ -1,12 +1,13 @@
 # harita_kadastro/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     HaritaKadastroDuyuru, HaritaKadastroFaaliyetGrubu, HaritaKadastroEtkinlik, HaritaKadastroFaaliyet, HaritaKadastroFaaliyetGorseli, HaritaKadastroDersProgrami
 )
 
 @admin.register(HaritaKadastroEtkinlik)
-class HaritaKadastroEtkinlikAdmin(admin.ModelAdmin):
+class HaritaKadastroEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class HaritaKadastroDuyuruAdmin(admin.ModelAdmin):
         return HaritaKadastroDuyuru.objects.all()
 
 @admin.register(HaritaKadastroDersProgrami)
-class HaritaKadastroDersProgramiAdmin(admin.ModelAdmin):
+class HaritaKadastroDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class HaritaKadastroFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(HaritaKadastroFaaliyetGrubu)
-class HaritaKadastroFaaliyetGrubuAdmin(admin.ModelAdmin):
+class HaritaKadastroFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(HaritaKadastroFaaliyet)
-class HaritaKadastroFaaliyetAdmin(admin.ModelAdmin):
+class HaritaKadastroFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

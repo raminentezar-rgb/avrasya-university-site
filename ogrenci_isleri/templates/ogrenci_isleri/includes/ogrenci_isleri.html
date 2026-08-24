@@ -1,4 +1,5 @@
 {% extends 'ogrenci_isleri/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Öğrenci İşleri{% endblock %}
@@ -9,8 +10,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>ÖĞRENCİ İŞLERİ</h1>
-            <p>Avrasya Üniversitesi'nde sınırları zorluyor, yeniliğe imza atıyoruz</p>
+            <h1>{% trans "ÖĞRENCİ İŞLERİ" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi'nde sınırları zorluyor, yeniliğe imza atıyoruz" %}</p>
         </div>
     </div>
 </section>
@@ -20,7 +21,7 @@
     <!-- Quick Access Cards -->
     <div class="row mb-5">
         <div class="col-12 mb-4">
-            <h2 class="section-title text-center mb-4">Hızlı Erişim</h2>
+            <h2 class="section-title text-center mb-4">{% trans "Hızlı Erişim" %}</h2>
         </div>
         
         <!-- Row 1 -->
@@ -30,10 +31,10 @@
                     <a href="{% url 'ogrenci_isleri:daire_baskanligi' %}">
                     <img src="{% static 'core/img/yatay/yatay11.png' %}" 
                          class="card-img" 
-                         alt="Daire Başkanlığı">
+                         alt="{% trans 'Daire Başkanlığı' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Öğrenci İşleri Daire Başkanlığı</h5>
+                        <h5 class="card-title fw-bold">{% trans "Öğrenci İşleri Daire Başkanlığı" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -46,10 +47,10 @@
                     <a href="https://obs.avrasya.edu.tr/" target='blank'>
                     <img src="{% static 'core/img/orenci/obs.jpg' %}" 
                          class="card-img" 
-                         alt="Öğrenci Bilgi Sistemi">
+                         alt="{% trans 'Öğrenci Bilgi Sistemi' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Öğrenci Bilgi Sistemi</h5>
+                        <h5 class="card-title fw-bold">{% trans "Öğrenci Bilgi Sistemi" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -62,10 +63,10 @@
                     <a href="{% url 'ogrenci_isleri:ogrenim_ucretleri' %}">
                     <img src="{% static 'core/img/orenci/educationucret.jpg' %}" 
                          class="card-img" 
-                         alt="Kayıt İşlemleri">
+                         alt="{% trans 'Kayıt İşlemleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Öğrenim Ücretleri</h5>
+                        <h5 class="card-title fw-bold">{% trans "Öğrenim Ücretleri" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -80,10 +81,10 @@
                     <a href="{% url 'ogrenci_isleri:kayit' %}">
                     <img src="{% static 'core/img/orenci/kayit.jpg' %}" 
                          class="card-img" 
-                         alt="Transkript">
+                         alt="{% trans 'Transkript' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Kayıt İşlemleri</h5>
+                        <h5 class="card-title fw-bold">{% trans "Kayıt İşlemleri" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -96,10 +97,10 @@
                     <a href="{% url 'ogrenci_isleri:burslar' %}">
                     <img src="{% static 'core/img/orenci/burse.jpg' %}" 
                          class="card-img" 
-                         alt="Akademik Takvim">
+                         alt="{% trans 'Akademik Takvim' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Burslar ve İndirimler</h5>
+                        <h5 class="card-title fw-bold">{% trans "Burslar ve İndirimler" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -113,10 +114,10 @@
                     <a href="{% url 'ogrenci_isleri:yurtlar' %}">
                     <img src="{% static 'core/img/akademik/avrasya2.jpeg' %}" 
                          class="card-img" 
-                         alt="Öğrenci Kulüpleri">
+                         alt="{% trans 'Öğrenci Kulüpleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Yurtlar</h5>
+                        <h5 class="card-title fw-bold">{% trans "Yurtlar" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -129,10 +130,10 @@
                     <a href="{% url 'international:international' %}">
                     <img src="{% static 'core/img/aday/yabanci.png' %}" 
                          class="card-img" 
-                         alt="Kariyer Merkezi">
+                         alt="{% trans 'Kariyer Merkezi' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Uluslararası Öğrenciler</h5>
+                        <h5 class="card-title fw-bold">{% trans "Uluslararası Öğrenciler" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -145,10 +146,10 @@
                     <a href="{% url 'yatay_gecis:yatay_gecis' %}">
                     <img src="{% static 'core/img/aday/Yatay Geçiş.png' %}" 
                          class="card-img" 
-                         alt="Sağlık Hizmetleri">
+                         alt="{% trans 'Sağlık Hizmetleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Yatay Geçiş</h5>
+                        <h5 class="card-title fw-bold">{% trans "Yatay Geçiş" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -161,10 +162,10 @@
                     <a href="{% url 'ogrenci_isleri:muafiyetler' %}">
                     <img src="{% static 'core/img/orenci/muafiyet.jpg' %}" 
                          class="card-img" 
-                         alt="Spor Tesisleri">
+                         alt="{% trans 'Spor Tesisleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Muafiyet</h5>
+                        <h5 class="card-title fw-bold">{% trans "Muafiyet" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -177,10 +178,10 @@
                     <a href="{% url 'ogrenci_isleri:kulupler' %}">
                     <img src="{% static 'core/img/orenci/klupeler.png' %}" 
                          class="card-img" 
-                         alt="Kariyer Merkezi">
+                         alt="{% trans 'Kariyer Merkezi' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Öğrenci Kulüpleri</h5>
+                        <h5 class="card-title fw-bold">{% trans "Öğrenci Kulüpleri" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -193,10 +194,10 @@
                     <a href="{% url 'aday_ogrenci:yabanci_ogrenci' %}">
                     <img src="{% static 'core/img/aday/erasmus.png' %}" 
                          class="card-img" 
-                         alt="Sağlık Hizmetleri">
+                         alt="{% trans 'Sağlık Hizmetleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Erasmus</h5>
+                        <h5 class="card-title fw-bold">{% trans "Erasmus" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -209,10 +210,10 @@
                     <a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/" target="blank">
                     <img src="{% static 'core/img/orenci/bilgi.png' %}" 
                          class="card-img" 
-                         alt="Spor Tesisleri">
+                         alt="{% trans 'Spor Tesisleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Ders Bilgi Paketi</h5>
+                        <h5 class="card-title fw-bold">{% trans "Ders Bilgi Paketi" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -225,10 +226,10 @@
                     <a href="{% url 'ogrenci_isleri:dikey' %}">
                     <img src="{% static 'core/img/aday/DİKEY GEÇİŞ.png' %}" 
                          class="card-img" 
-                         alt="Spor Tesisleri">
+                         alt="{% trans 'Spor Tesisleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Dikey Geçiş</h5>
+                        <h5 class="card-title fw-bold">{% trans "Dikey Geçiş" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -241,10 +242,10 @@
                     <a href="{% url 'ogrenci_isleri:yonetmelik' %}">
                     <img src="{% static 'core/img/orenci/yoneim.png' %}" 
                          class="card-img" 
-                         alt="Kariyer Merkezi">
+                         alt="{% trans 'Kariyer Merkezi' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Yönetmelik ve Yönergeler</h5>
+                        <h5 class="card-title fw-bold">{% trans "Yönetmelik ve Yönergeler" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -257,10 +258,10 @@
                     <a href="{% url 'ogrenci_isleri:formlar' %}">
                     <img src="{% static 'core/img/orenci/form.png' %}" 
                          class="card-img" 
-                         alt="Sağlık Hizmetleri">
+                         alt="{% trans 'Sağlık Hizmetleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Formlar</h5>
+                        <h5 class="card-title fw-bold">{% trans "Formlar" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -273,10 +274,10 @@
                     <a href="{% url 'ogrenci_isleri:cift_Anadal_yandal' %}">
                     <img src="{% static 'core/img/student/avu1.jpg' %}" 
                          class="card-img" 
-                         alt="Spor Tesisleri">
+                         alt="{% trans 'Spor Tesisleri' %}">
                     <div class="card-overlay"></div>
                     <div class="card-title-overlay">
-                        <h5 class="card-title fw-bold">Çift Anadal/Yandal</h5>
+                        <h5 class="card-title fw-bold">{% trans "Çift Anadal/Yandal" %}</h5>
                     </div>
                     </a>
                 </div>
@@ -289,14 +290,13 @@
         <div class="col-12 mb-4">
                 <div class="cta-box">
                     <h2 style="font-family: 'Metropolis', sans-serif; font-weight: 800; margin-bottom: 20px; color:#f1f5f9">
-                        Soru ve Görüşleriniz İçin Bize Yazın
+                        {% trans "Soru ve Görüşleriniz İçin Bize Yazın" %}
                     </h2>
                     <p style="font-size: 1.1rem; opacity: 0.5; max-width: 600px; margin: 0 auto; color:#f1f5f9">
-                        Herhangi bir konuda bilgi almak, öneri iletmek veya soru sormak için iletişim formumuzu
-                        kullanabilirsiniz.
+                        {% trans "Herhangi bir konuda bilgi almak, öneri iletmek veya soru sormak için iletişim formumuzu kullanabilirsiniz." %}
                     </p>
                     <a href="{% url 'contact:contact' %}" class="cta-btn">
-                        <i class="fas fa-envelope mr-2"></i> İletişim Formuna Git
+                        <i class="fas fa-envelope mr-2"></i> {% trans "İletişim Formuna Git" %}
                     </a>
                 </div>
         </div>

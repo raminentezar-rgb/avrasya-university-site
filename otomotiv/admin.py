@@ -1,12 +1,13 @@
 # app_name: otomotiv/admin.py
 
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     OtomotivDuyuru, OtomotivFaaliyetGorseli, OtomotivFaaliyet, OtomotivFaaliyetGrubu, OtomotivDersProgrami, OtomotivEtkinlik
 )
 
 @admin.register(OtomotivEtkinlik)
-class OtomotivEtkinlikAdmin(admin.ModelAdmin):
+class OtomotivEtkinlikAdmin(TranslationAdmin):
     list_display = ['baslik', 'etkinlik_turu', 'baslangic_tarihi', 'yer', 'yayinda']
     list_filter = ['etkinlik_turu', 'yayinda', 'baslangic_tarihi', 'kayit_gerekiyor']
     search_fields = ['baslik', 'yer', 'kisa_aciklama']
@@ -38,7 +39,7 @@ class OtomotivDuyuruAdmin(admin.ModelAdmin):
         return OtomotivDuyuru.objects.all()
 
 @admin.register(OtomotivDersProgrami)
-class OtomotivDersProgramiAdmin(admin.ModelAdmin):
+class OtomotivDersProgramiAdmin(TranslationAdmin):
     list_display = ['baslik', 'sinif', 'yayin_tarihi', 'aktif']
     list_filter = ['sinif', 'aktif', 'yayin_tarihi']
     search_fields = ['baslik', 'aciklama']
@@ -58,13 +59,13 @@ class OtomotivFaaliyetGorseliInline(admin.TabularInline):
     extra = 1
 
 @admin.register(OtomotivFaaliyetGrubu)
-class OtomotivFaaliyetGrubuAdmin(admin.ModelAdmin):
+class OtomotivFaaliyetGrubuAdmin(TranslationAdmin):
     list_display = ['baslik', 'faaliyet_turu', 'sira']
     list_filter = ['faaliyet_turu']
     list_editable = ['sira']
 
 @admin.register(OtomotivFaaliyet)
-class OtomotivFaaliyetAdmin(admin.ModelAdmin):
+class OtomotivFaaliyetAdmin(TranslationAdmin):
     list_display = ['baslik', 'grup', 'tarih', 'sira']
     list_filter = ['grup__faaliyet_turu', 'grup']
     list_editable = ['sira']

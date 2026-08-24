@@ -1,4 +1,5 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% block content %}
 
 <style>
@@ -544,8 +545,8 @@ input:checked + .toggle-slider:before {
 </style>
 <div class="page-header" style="margin-top: -100px; position: relative; ">
     <div class="page-header-content">
-        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">Talebi Onayla ve Yanıtla</h1>
-        <p >Öğrencinin destek talebine yanıt verin. Yanıtınız öğrenciye gönderilecek ve talep durumu güncellenecektir.</p>
+        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Talebi Onayla ve Yanıtla" %}</h1>
+        <p >{% trans "Öğrencinin destek talebine yanıt verin. Yanıtınız öğrenciye gönderilecek ve talep durumu güncellenecektir." %}</p>
     </div>
     
     <!-- قسمت احراز هویت در گوشه بالا راست -->
@@ -560,15 +561,15 @@ input:checked + .toggle-slider:before {
                 <!-- دکمه داشبورد -->
                 {% if user.profile.role == 'student' %}
                     <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> Taleplerim
+                        <i class="fas fa-tachometer-alt"></i> {% trans "Taleplerim" %}
                     </a>
                 {% elif user.profile.role == 'staff' %}
                     <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
                     </a>
                 {% else %}
                     <a href="/" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
                     </a>
                 {% endif %}
                 
@@ -576,7 +577,7 @@ input:checked + .toggle-slider:before {
                 <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                        <i class="fas fa-sign-out-alt"></i> {% trans "Çıkış Yap" %}
                     </button>
                 </form>
             </div>
@@ -584,10 +585,10 @@ input:checked + .toggle-slider:before {
             <!-- اگر کاربر لاگین نکرده باشد -->
             <div class="guest-buttons" style="display: flex; gap: 10px;">
                 <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
-                    <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                    <i class="fas fa-sign-in-alt"></i> {% trans "Giriş Yap" %}
                 </a>
                 <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm" style="background-color: white; color: var(--primary-dark-blue);">
-                    <i class="fas fa-user-plus"></i> Kayıt Ol
+                    <i class="fas fa-user-plus"></i> {% trans "Kayıt Ol" %}
                 </a>
             </div>
         {% endif %}
@@ -617,7 +618,7 @@ input:checked + .toggle-slider:before {
                     <div class="meta-item">
                         <div class="meta-label">
                             <i class="fas fa-user-graduate"></i>
-                            Öğrenci
+                            {% trans "Öğrenci" %}
                         </div>
                         <div class="meta-value">
                             {% if ticket.user.get_full_name %}
@@ -631,7 +632,7 @@ input:checked + .toggle-slider:before {
                     <div class="meta-item">
                         <div class="meta-label">
                             <i class="fas fa-envelope"></i>
-                            E-posta
+                            {% trans "E-posta" %}
                         </div>
                         <div class="meta-value">{{ ticket.user.email }}</div>
                     </div>
@@ -639,7 +640,7 @@ input:checked + .toggle-slider:before {
                     <div class="meta-item">
                         <div class="meta-label">
                             <i class="fas fa-layer-group"></i>
-                            Bölüm
+                            {% trans "Bölüm" %}
                         </div>
                         <div class="meta-value">{{ ticket.get_department_display }}</div>
                     </div>
@@ -647,7 +648,7 @@ input:checked + .toggle-slider:before {
                     <div class="meta-item">
                         <div class="meta-label">
                             <i class="fas fa-calendar"></i>
-                            Oluşturma Tarihi
+                            {% trans "Oluşturma Tarihi" %}
                         </div>
                         <div class="meta-value">{{ ticket.created_at|date:"d F Y - H:i" }}</div>
                     </div>
@@ -657,7 +658,7 @@ input:checked + .toggle-slider:before {
                 <div class="original-message-container">
                     <h3 style="color: var(--reply-text); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
                         <i class="fas fa-comment-alt" style="color: var(--reply-accent);"></i>
-                        Öğrencinin Talep Metni
+                        {% trans "Öğrencinin Talep Metni" %}
                     </h3>
                     
                     <div class="message-bubble">
@@ -677,7 +678,7 @@ input:checked + .toggle-slider:before {
                                         {{ ticket.user.username }}
                                     {% endif %}
                                 </h4>
-                                <span>Avrasya Üniversitesi Öğrencisi</span>
+                                <span>{% trans "Avrasya Üniversitesi Öğrencisi" %}</span>
                             </div>
                         </div>
                         
@@ -700,9 +701,9 @@ input:checked + .toggle-slider:before {
                 <div class="form-header">
                     <h3>
                         <i class="fas fa-edit"></i>
-                        Yanıtınızı Yazın
+                        {% trans "Yanıtınızı Yazın" %}
                     </h3>
-                    <p>Yanıtınız doğrudan öğrenciye gönderilecektir</p>
+                    <p>{% trans "Yanıtınız doğrudan öğrenciye gönderilecektir" %}</p>
                 </div>
 
                 <form method="post" id="replyForm">
@@ -711,28 +712,28 @@ input:checked + .toggle-slider:before {
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-align-left"></i>
-                            Yanıt Metni
+                            {% trans "Yanıt Metni" %}
                         </label>
                         <textarea 
                             name="message" 
                             class="reply-textarea" 
-                            placeholder="Detaylı ve eksiksiz yanıtınızı buraya yazın. HTML işaretlemesi kullanabilirsiniz..."
+                            placeholder="{% trans 'Detaylı ve eksiksiz yanıtınızı buraya yazın. HTML işaretlemesi kullanabilirsiniz...' %}"
                             required
                         ></textarea>
-                        <div class="char-counter">0 karakter</div>
+                        <div class="char-counter">{% trans "0 karakter" %}</div>
                     </div>
 
                     <!-- Yanıt ayarları -->
                     {% comment %} <div class="reply-settings">
                         <h4 style="color: var(--reply-text); margin-bottom: 1rem; font-size: 1.1rem;">
                             <i class="fas fa-cog"></i>
-                            Yanıt Ayarları
+                            {% trans "Yanıt Ayarları" %}
                         </h4>
                         
                         <div class="setting-item">
                             <div class="setting-label">
                                 <i class="fas fa-check-circle" style="color: #10b981;"></i>
-                                Durumu "Yanıtlandı" olarak değiştir
+                                {% trans "Durumu \"Yanıtlandı\" olarak değiştir" %}
                             </div>
                             <label class="toggle-switch">
                                 <input type="checkbox" name="change_status" checked>
@@ -743,7 +744,7 @@ input:checked + .toggle-slider:before {
                         <div class="setting-item">
                             <div class="setting-label">
                                 <i class="fas fa-paper-plane" style="color: #3b82f6;"></i>
-                                Öğrenciye e-posta gönder
+                                {% trans "Öğrenciye e-posta gönder" %}
                             </div>
                             <label class="toggle-switch">
                                 <input type="checkbox" name="send_email" checked>
@@ -754,7 +755,7 @@ input:checked + .toggle-slider:before {
                         <div class="setting-item">
                             <div class="setting-label">
                                 <i class="fas fa-bell" style="color: #f59e0b;"></i>
-                                Dahili bildirim
+                                {% trans "Dahili bildirim" %}
                             </div>
                             <label class="toggle-switch">
                                 <input type="checkbox" name="internal_notify">
@@ -767,12 +768,12 @@ input:checked + .toggle-slider:before {
                     <div class="action-buttons" style="margin-top: 180px;">
                         <button type="submit" class="btn-reply">
                             <i class="fas fa-paper-plane"></i>
-                            Yanıtı Gönder
+                            {% trans "Yanıtı Gönder" %}
                         </button>
                         
                         <button type="button" class="btn-cancel" onclick="window.history.back()">
                             <i class="fas fa-arrow-right"></i>
-                            Geri Dön
+                            {% trans "Geri Dön" %}
                         </button>
                     </div>
                 </form>
@@ -785,7 +786,7 @@ input:checked + .toggle-slider:before {
                     <div class="history-icon">
                         <i class="fas fa-history"></i>
                     </div>
-                    <h3 style="margin: 0; color: var(--reply-text);">Yanıt Geçmişi</h3>
+                    <h3 style="margin: 0; color: var(--reply-text);">{% trans "Yanıt Geçmişi" %}</h3>
                 </div>
                 
                 <div class="history-list">

@@ -1,5 +1,6 @@
 <!-- genel_sekreter.html -->
 {% extends 'avrasya_universitesi_yonetim/about_base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Avrasya Üniversitesi - Genel Sekreter{% endblock %}
@@ -10,10 +11,9 @@
     <div class="card-body text-white py-5">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">GENEL SEKRETER</h1>
+                <h1 class="display-5 fw-bold mb-3">{% trans "GENEL SEKRETER" %}</h1>
                 <p class="lead mb-4">
-                    Üniversitemizin idari işleyişinden ve sekreterya hizmetlerinden 
-                    sorumlu Genel Sekreterimiz.
+                    {% trans "Üniversitemizin idari işleyişinden ve sekreterya hizmetlerinden sorumlu Genel Sekreterimiz." %}
                 </p>
             </div>
             <div class="col-md-4 text-center">
@@ -30,40 +30,36 @@
             <div class="col-md-4 text-center">
                 <div class="position-relative">
                     <img src="{% static 'avrasya_universitesi_yonetim/images/gülay yeniçeri.png' %}" 
-                         alt="Genel Sekreter Gülay Yeniçeri" 
+                         alt="{% trans 'Genel Sekreter Gülay Yeniçeri' %}" 
                          class="img-fluid rounded shadow-lg" 
                          style="max-height: 400px; object-fit: cover;">
                     <div class="position-absolute top-0 start-0 m-3">
                         <span class="badge bg-warning text-dark fs-6 p-2">
-                            <i class="bi bi-person-vcard me-1"></i>Genel Sekreter
+                            <i class="bi bi-person-vcard me-1"></i>{% trans "Genel Sekreter" %}
                         </span>
                     </div>
                 </div>
-                <h4 class="mt-4 mb-1 text-primary fw-bold">Gülay Yeniçeri</h4>
-                <p class="text-muted fs-5">Genel Sekreter</p>
+                <h4 class="mt-4 mb-1 text-primary fw-bold">{% trans "Gülay Yeniçeri" %}</h4>
+                <p class="text-muted fs-5">{% trans "Genel Sekreter" %}</p>
             </div>
             <div class="col-md-8">
-                <h3 class="text-primary mb-4 border-bottom pb-2">Genel Sekreter'in Mesajı</h3>
+                <h3 class="text-primary mb-4 border-bottom pb-2">{% trans "Genel Sekreter'in Mesajı" %}</h3>
                 <div class="message-content">
                     <p class="mb-4 fs-6">
-                        <strong>Değerli Öğrencilerimiz,</strong>
+                        <strong>{% trans "Değerli Öğrencilerimiz," %}</strong>
                     </p>
                     <p class="mb-4">
-                        Avrasya Üniversitesi, katılımcı farklılığa saygılı, özgürlükçü bir kurum kültürü içinde, 
-                        tüm paydaşlarımızın gereksinimlerine duyarlı, yenilikçi, disiplinlerarası bir eğitim altyapısı ile, 
-                        öncülüğe yol açan özgün bilginin yaratılmasını ve yayılmasını sağlayan, araştırma ve eğitim alanındaki 
-                        yaratıcılığı ile uluslararası bir referans noktası olmayı hedeflemektedir.
+                        {% trans "Avrasya Üniversitesi, katılımcı farklılığa saygılı, özgürlükçü bir kurum kültürü içinde, tüm paydaşlarımızın gereksinimlerine duyarlı, yenilikçi, disiplinlerarası bir eğitim altyapısı ile, öncülüğe yol açan özgün bilginin yaratılmasını ve yayılmasını sağlayan, araştırma ve eğitim alanındaki yaratıcılığı ile uluslararası bir referans noktası olmayı hedeflemektedir." %}
                     </p>
                     
                     <p class="mb-4">
-                        Ve en önemlisi Avrasya Üniversitesi'ne yakışır mezunlar vermek amacıyla her geçen gün kendimizi 
-                        geliştirerek sizlere kaliteli eğitim vermeyi hedefliyoruz.
+                        {% trans "Ve en önemlisi Avrasya Üniversitesi'ne yakışır mezunlar vermek amacıyla her geçen gün kendimizi geliştirerek sizlere kaliteli eğitim vermeyi hedefliyoruz." %}
                     </p>
                     
                     <p class="mb-0 fst-italic text-primary">
-                        Başarılar diliyorum…<br>
-                        <strong>Gülay Yeniçeri</strong><br>
-                        Genel Sekreter
+                        {% trans "Başarılar diliyorum…" %}<br>
+                        <strong>{% trans "Gülay Yeniçeri" %}</strong><br>
+                        {% trans "Genel Sekreter" %}
                     </p>
                 </div>
             </div>
@@ -75,7 +71,7 @@
 <div class="card border-0 shadow-sm">
     <div class="card-body">
         <h3 class="text-primary mb-4 border-bottom pb-2">
-            <i class="bi bi-list-task me-2"></i>Genel Sekreter'in Görevleri
+            <i class="bi bi-list-task me-2"></i>{% trans "Genel Sekreter'in Görevleri" %}
         </h3>
         
         <div class="row">
@@ -87,10 +83,9 @@
                                 <i class="bi bi-check-circle-fill text-success fs-4"></i>
                             </div>
                             <div>
-                                <h5 class="text-primary mb-2">İdari Koordinasyon</h5>
+                                <h5 class="text-primary mb-2">{% trans "İdari Koordinasyon" %}</h5>
                                 <p class="mb-0">
-                                    Üniversitemiz idari teşkilatında bulunan birimlerin verimli, düzenli ve 
-                                    uyumlu şekilde çalışmasını sağlamak
+                                    {% trans "Üniversitemiz idari teşkilatında bulunan birimlerin verimli, düzenli ve uyumlu şekilde çalışmasını sağlamak" %}
                                 </p>
                             </div>
                         </div>
@@ -102,11 +97,9 @@
                                 <i class="bi bi-check-circle-fill text-success fs-4"></i>
                             </div>
                             <div>
-                                <h5 class="text-primary mb-2">Kurul Görevleri</h5>
+                                <h5 class="text-primary mb-2">{% trans "Kurul Görevleri" %}</h5>
                                 <p class="mb-0">
-                                    Üniversite Senatosu ile Üniversite Yönetim Kurulu'nda oya katılmaksızın 
-                                    raportörlük görevi yapmak; bu kurullarda alınan kararların yazılması, 
-                                    korunması ve saklanmasını sağlamak
+                                    {% trans "Üniversite Senatosu ile Üniversite Yönetim Kurulu'nda oya katılmaksızın raportörlük görevi yapmak; bu kurullarda alınan kararların yazılması, korunması ve saklanmasını sağlamak" %}
                                 </p>
                             </div>
                         </div>
@@ -118,10 +111,9 @@
                                 <i class="bi bi-check-circle-fill text-success fs-4"></i>
                             </div>
                             <div>
-                                <h5 class="text-primary mb-2">Karar İletişimi</h5>
+                                <h5 class="text-primary mb-2">{% trans "Karar İletişimi" %}</h5>
                                 <p class="mb-0">
-                                    Üniversite Senatosu ile Üniversite Yönetim Kurulunun kararlarını 
-                                    üniversiteye bağlı birimlere iletmek
+                                    {% trans "Üniversite Senatosu ile Üniversite Yönetim Kurulunun kararlarını üniversiteye bağlı birimlere iletmek" %}
                                 </div>
                         </div>
                     </div>
@@ -132,10 +124,9 @@
                                 <i class="bi bi-check-circle-fill text-success fs-4"></i>
                             </div>
                             <div>
-                                <h5 class="text-primary mb-2">Personel Yönetimi</h5>
+                                <h5 class="text-primary mb-2">{% trans "Personel Yönetimi" %}</h5>
                                 <p class="mb-0">
-                                    Üniversite idari teşkilatında görevlendirilecek personel hakkında 
-                                    rektöre öneride bulunmak
+                                    {% trans "Üniversite idari teşkilatında görevlendirilecek personel hakkında rektöre öneride bulunmak" %}
                                 </p>
                             </div>
                         </div>
@@ -147,30 +138,30 @@
                 <div class="additional-duties">
                     <div class="card bg-light border-0 h-100">
                         <div class="card-body">
-                            <h5 class="text-primary mb-3">Diğer Görevler</h5>
+                            <h5 class="text-primary mb-3">{% trans "Diğer Görevler" %}</h5>
                             <div class="additional-list">
                                 <div class="additional-item mb-3">
                                     <div class="d-flex align-items-center">
                                         <i class="bi bi-megaphone text-info me-2"></i>
-                                        <span>Basın ve halkla ilişkiler hizmetinin yürütülmesini sağlamak</span>
+                                        <span>{% trans "Basın ve halkla ilişkiler hizmetinin yürütülmesini sağlamak" %}</span>
                                     </div>
                                 </div>
                                 <div class="additional-item mb-3">
                                     <div class="d-flex align-items-center">
                                         <i class="bi bi-envelope text-info me-2"></i>
-                                        <span>Rektörlüğün yazışmalarını yürütmek</span>
+                                        <span>{% trans "Rektörlüğün yazışmalarını yürütmek" %}</span>
                                     </div>
                                 </div>
                                 <div class="additional-item mb-3">
                                     <div class="d-flex align-items-center">
                                         <i class="bi bi-calendar-event text-info me-2"></i>
-                                        <span>Rektörlüğün protokol, ziyaret ve tören işlerini düzenlemek</span>
+                                        <span>{% trans "Rektörlüğün protokol, ziyaret ve tören işlerini düzenlemek" %}</span>
                                     </div>
                                 </div>
                                 <div class="additional-item">
                                     <div class="d-flex align-items-center">
                                         <i class="bi bi-gear text-info me-2"></i>
-                                        <span>Rektör tarafından verilecek benzeri görevleri yapmak</span>
+                                        <span>{% trans "Rektör tarafından verilecek benzeri görevleri yapmak" %}</span>
                                     </div>
                                 </div>
                             </div>
@@ -186,10 +177,9 @@
                 <div class="card border-primary">
                     <div class="card-body text-center py-4">
                         <i class="bi bi-bullseye display-4 text-primary mb-3"></i>
-                        <h4 class="text-primary mb-3">Misyonumuz</h4>
+                        <h4 class="text-primary mb-3">{% trans "Misyonumuz" %}</h4>
                         <p class="lead mb-0">
-                            Avrasya Üniversitesi'ne yakışır mezunlar vermek amacıyla her geçen gün kendimizi 
-                            geliştirerek kaliteli eğitim vermeyi hedefliyoruz.
+                            {% trans "Avrasya Üniversitesi'ne yakışır mezunlar vermek amacıyla her geçen gün kendimizi geliştirerek kaliteli eğitim vermeyi hedefliyoruz." %}
                         </p>
                     </div>
                 </div>

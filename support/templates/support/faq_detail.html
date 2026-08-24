@@ -1,21 +1,22 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block content %}
 <div class="support-container">
     <div class="breadcrumb">
-        <a href="/" class="breadcrumb-item">Ana Sayfa</a>
+        <a href="/" class="breadcrumb-item">{% trans "Ana Sayfa" %}</a>
         <span class="breadcrumb-divider">/</span>
-        <a href="{% url 'support:search' %}" class="breadcrumb-item">Destek Merkezi</a>
+        <a href="{% url 'support:search' %}" class="breadcrumb-item">{% trans "Destek Merkezi" %}</a>
         <span class="breadcrumb-divider">/</span>
-        <span class="breadcrumb-item active">Sıkça Sorulan Soru</span>
+        <span class="breadcrumb-item active">{% trans "Sıkça Sorulan Soru" %}</span>
     </div>
 
     <div class="support-section">
         <div class="card" style="border-left: 5px solid var(--secondary-blue);">
             <div class="card-header">
                 <span class="status-badge" style="background: #e8f6f3; color: #1abc9c;">
-                    <i class="fas fa-question-circle"></i> SSS
+                    <i class="fas fa-question-circle"></i> {% trans "SSS" %}
                 </span>
                 <span class="text-muted">{{ faq.department.name|default:"Genel" }}</span>
             </div>
@@ -33,9 +34,9 @@
         </div>
 
         <div style="margin-top: 3rem; text-align: center;">
-            <p>Aradığınız cevabı bulamadınız mı?</p>
+            <p>{% trans "Aradığınız cevabı bulamadınız mı?" %}</p>
             <a href="{% url 'support:create_ticket' %}" class="btn btn-primary">
-                <i class="fas fa-paper-plane"></i> Yeni Destek Talebi Oluştur
+                <i class="fas fa-paper-plane"></i> {% trans "Yeni Destek Talebi Oluştur" %}
             </a>
         </div>
     </div>

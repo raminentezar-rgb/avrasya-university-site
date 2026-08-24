@@ -1,5 +1,6 @@
 <!-- iletisim/templates/iletisim/duyurular.html -->
 {% extends 'core/base.html' %}
+{% load i18n %}
 {% block title %}İletişim Duyuruları - Avrasya Üniversitesi{% endblock %}
 
 {% block content %}
@@ -17,20 +18,20 @@
             <div class="card-body text-white py-5">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="display-5 fw-bold mb-3">Duyurular</h1>
+                        <h1 class="display-5 fw-bold mb-3">{% trans "Duyurular" %}</h1>
  
                         <p class="lead mb-4">
                            
                         </p>
                         {% comment %} <div class="d-flex gap-3">
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-calendar me-1"></i>1999'dan Beri
+                                <i class="bi bi-calendar me-1"></i>{% trans "1999'dan Beri" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-building me-1"></i>5 Bölüm
+                                <i class="bi bi-building me-1"></i>{% trans "5 Bölüm" %}
                             </span>
                             <span class="badge bg-light text-dark fs-6 p-2">
-                                <i class="bi bi-award me-1"></i>25 Yıllık Deneyim
+                                <i class="bi bi-award me-1"></i>{% trans "25 Yıllık Deneyim" %}
                             </span>
                         </div> {% endcomment %}
                     </div>
@@ -44,7 +45,7 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-primary text-white">
                 <h4 class="mb-0">
-                    <i class="bi bi-megaphone me-2"></i>İletişim Fakültesi Duyuruları
+                    <i class="bi bi-megaphone me-2"></i>{% trans "İletişim Fakültesi Duyuruları" %}
                 </h4>
             </div>
             <div class="card-body">
@@ -53,39 +54,39 @@
                     <div class="d-flex flex-wrap gap-2">
                         <a href="{% url 'iletisim:duyurular' %}" 
                            class="btn {% if not kategori %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Tümü
+                            {% trans "Tümü" %}
                         </a>
                         <a href="?kategori=akademik" 
                            class="btn {% if kategori == 'akademik' %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Akademik
+                            {% trans "Akademik" %}
                         </a>
                         <a href="?kategori=etkinlik" 
                            class="btn {% if kategori == 'etkinlik' %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Etkinlik
+                            {% trans "Etkinlik" %}
                         </a>
                         <a href="?kategori=ogrenci" 
                            class="btn {% if kategori == 'ogrenci' %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Öğrenci
+                            {% trans "Öğrenci" %}
                         </a>
                         <a href="?kategori=staj" 
                            class="btn {% if kategori == 'staj' %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Staj
+                            {% trans "Staj" %}
                         </a>
                         <a href="?kategori=seminer" 
                            class="btn {% if kategori == 'seminer' %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Seminer
+                            {% trans "Seminer" %}
                         </a>
                         <a href="?kategori=workshop" 
                            class="btn {% if kategori == 'workshop' %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Workshop
+                            {% trans "Workshop" %}
                         </a>
                         <a href="?kategori=proje" 
                            class="btn {% if kategori == 'proje' %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Proje
+                            {% trans "Proje" %}
                         </a>
                         <a href="?kategori=medya" 
                            class="btn {% if kategori == 'medya' %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
-                            Medya
+                            {% trans "Medya" %}
                         </a>
                     </div>
                 </div> {% endcomment %}
@@ -94,7 +95,7 @@
                 {% if onemli_duyurular %}
                 <div class="alert alert-warning border-0 mb-4">
                     <h5 class="alert-heading">
-                        <i class="bi bi-exclamation-triangle me-2"></i>Önemli Duyurular
+                        <i class="bi bi-exclamation-triangle me-2"></i>{% trans "Önemli Duyurular" %}
                     </h5>
                     {% for duyuru in onemli_duyurular %}
                     <div class="mb-2">
@@ -116,7 +117,7 @@
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <span class="badge bg-primary">{{ duyuru.get_kategori_display }}</span>
                                     {% if duyuru.onemli %}
-                                    <span class="badge bg-warning">Önemli</span>
+                                    <span class="badge bg-warning">{% trans "Önemli" %}</span>
                                     {% endif %}
                                 </div>
                                 
@@ -136,7 +137,7 @@
                                         {{ duyuru.yayin_tarihi|date:"d F Y" }}
                                     </small>
                                     <a href="{% url 'iletisim:duyuru_detay' duyuru.id %}" class="btn btn-primary btn-sm">
-                                        Devamını Oku
+                                        {% trans "Devamını Oku" %}
                                     </a>
                                 </div>
                             </div>
@@ -146,7 +147,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            Henüz duyuru bulunmamaktadır.
+                            {% trans "Henüz duyuru bulunmamaktadır." %}
                         </div>
                     </div>
                     {% endfor %}

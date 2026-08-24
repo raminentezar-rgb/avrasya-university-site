@@ -1,4 +1,5 @@
 {% extends "support/base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block content %}
@@ -10,15 +11,14 @@
     <div class="container position-relative">
         <div class="header-content-wrapper text-center animate-fade-in">
             <nav class="premium-breadcrumb mb-4">
-                <a href="/">Ana Sayfa</a>
+                <a href="/">{% trans "Ana Sayfa" %}</a>
                 <span class="divider"><i class="fas fa-chevron-right"></i></span>
-                <a href="{% url 'support:search' %}">Destek Merkezi</a>
+                <a href="{% url 'support:search' %}">{% trans "Destek Merkezi" %}</a>
                 <span class="divider"><i class="fas fa-chevron-right"></i></span>
-                <span class="active">Talep Oluştur</span>
+                <span class="active">{% trans "Talep Oluştur" %}</span>
             </nav>
-            <h1 class="premium-title">Nasıl Yardımcı Olabiliriz?</h1>
-            <p class="premium-subtitle">Sorununuzu veya sorunuzu iletin, uzman ekibimiz en kısa sürede size geri dönüş
-                yapsın.</p>
+            <h1 class="premium-title">{% trans "Nasıl Yardımcı Olabiliriz?" %}</h1>
+            <p class="premium-subtitle">{% trans "Sorununuzu veya sorunuzu iletin, uzman ekibimiz en kısa sürede size geri dönüş yapsın." %}</p>
         </div>
     </div>
 
@@ -32,10 +32,10 @@
             <div class="user-details">
                 <span class="username">{{ user.username }}</span>
                 <div class="badge-actions">
-                    <a href="{% url 'support:my_tickets' %}" title="Taleplerim"><i class="fas fa-ticket-alt"></i></a>
+                    <a href="{% url 'support:my_tickets' %}" title="{% trans 'Taleplerim' %}"><i class="fas fa-ticket-alt"></i></a>
                     <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" title="ÇıkışYap" class="logout-btn"><i
+                        <button type="submit" title="{% trans 'ÇıkışYap' %}" class="logout-btn"><i
                                 class="fas fa-sign-out-alt"></i></button>
                     </form>
                 </div>
@@ -43,9 +43,9 @@
         </div>
         {% else %}
         <div class="guest-badge shadow-lg">
-            <a href="{% url 'accounts:login' %}" class="login-link">Giriş Yap</a>
+            <a href="{% url 'accounts:login' %}" class="login-link">{% trans "Giriş Yap" %}</a>
             <span class="sep">|</span>
-            <a href="{% url 'accounts:signup' %}" class="signup-btn">Kayıt Ol</a>
+            <a href="{% url 'accounts:signup' %}" class="signup-btn">{% trans "Kayıt Ol" %}</a>
         </div>
         {% endif %}
     </div>
@@ -60,7 +60,7 @@
                         <div class="icon-circle shadow-sm">
                             <i class="fas fa-paper-plane"></i>
                         </div>
-                        <h2>Yeni Destek Talebi</h2>
+                        <h2>{% trans "Yeni Destek Talebi" %}</h2>
                         <div class="drag-line"></div>
                     </div>
 
@@ -77,8 +77,7 @@
                                         <option value="{{ dept.id }}">{{ dept.name }}</option>
                                         {% endfor %}
                                     </select>
-                                    <label class="floating-label"><i class=""></i>İlgili Bölüm
-                                        *</label>
+                                    <label class="floating-label"><i class=""></i>{% trans "İlgili Bölüm *" %}</label>
                                     <div class="focus-line"></div>
                                 </div>
                             </div>
@@ -90,7 +89,7 @@
                                         disabled>
                                         <option value="" disabled selected></option>
                                     </select>
-                                    <label class="floating-label"><i class=""></i>Kategori *</label>
+                                    <label class="floating-label"><i class=""></i>{% trans "Kategori *" %}</label>
                                     <div class="focus-line"></div>
                                 </div>
                             </div>
@@ -100,8 +99,7 @@
                                 <div class="floating-group">
                                     <input type="text" id="subject" name="subject" class="premium-input" placeholder=" "
                                         required>
-                                    <label class="floating-label"><i class=""></i>Konu Başlığı
-                                        *</label>
+                                    <label class="floating-label"><i class=""></i>{% trans "Konu Başlığı *" %}</label>
                                     <div class="focus-line"></div>
                                 </div>
                             </div>
@@ -111,27 +109,26 @@
                                 <div class="floating-group">
                                     <textarea id="message" name="message" class="premium-textarea" placeholder=" "
                                         required></textarea>
-                                    <label class="floating-label"><i class=""></i>Sorun veya Soru
-                                        Detayı *</label>
+                                    <label class="floating-label"><i class=""></i>{% trans "Sorun veya Soru Detayı *" %}</label>
                                     <div class="focus-line"></div>
                                     <div class="textarea-support-info">
                                         <i class="fas fa-info-circle"></i>
-                                        Lütfen hata mesajlarını veya işlem adımlarını detaylı yazın.
+                                        {% trans "Lütfen hata mesajlarını veya işlem adımlarını detaylı yazın." %}
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Priority Selection -->
                             <div class="col-12 mt-4">
-                                <label class="section-label mb-3">Öncelik Seviyesi</label>
+                                <label class="section-label mb-3">{% trans "Öncelik Seviyesi" %}</label>
                                 <div class="priority-selector-grid">
                                     <label class="priority-option low" for="p-low">
                                         <input type="radio" id="p-low" name="priority" value="low">
                                         <div class="option-content">
                                             <div class="indicator"></div>
                                             <div class="text">
-                                                <span class="p-title">Düşük</span>
-                                                <span class="p-desc">Bilgi alma veya öneriler</span>
+                                                <span class="p-title">{% trans "Düşük" %}</span>
+                                                <span class="p-desc">{% trans "Bilgi alma veya öneriler" %}</span>
                                             </div>
                                             <i class="fas fa-check-circle check-icon"></i>
                                         </div>
@@ -142,8 +139,8 @@
                                         <div class="option-content">
                                             <div class="indicator"></div>
                                             <div class="text">
-                                                <span class="p-title">Orta</span>
-                                                <span class="p-desc">Normal işleyiş soruları</span>
+                                                <span class="p-title">{% trans "Orta" %}</span>
+                                                <span class="p-desc">{% trans "Normal işleyiş soruları" %}</span>
                                             </div>
                                             <i class="fas fa-check-circle check-icon"></i>
                                         </div>
@@ -154,8 +151,8 @@
                                         <div class="option-content">
                                             <div class="indicator"></div>
                                             <div class="text">
-                                                <span class="p-title">Yüksek</span>
-                                                <span class="p-desc">Sistem erişim veya kritik hatalar</span>
+                                                <span class="p-title">{% trans "Yüksek" %}</span>
+                                                <span class="p-desc">{% trans "Sistem erişim veya kritik hatalar" %}</span>
                                             </div>
                                             <i class="fas fa-check-circle check-icon"></i>
                                         </div>
@@ -167,14 +164,14 @@
                         <!-- Form Submission -->
                         <div class="form-footer mt-5">
                             <div class="footer-note">
-                                <i class="fas fa-shield-alt"></i> Verileriniz güvenli altyapımızda korunmaktadır.
+                                <i class="fas fa-shield-alt"></i> {% trans "Verileriniz güvenli altyapımızda korunmaktadır." %}
                             </div>
                             <div class="action-buttons">
                                 <a href="{% url 'support:search' %}" class="btn-cancel">
-                                    <i class="fas fa-times me-2"></i> Vazgeç
+                                    <i class="fas fa-times me-2"></i> {% trans "Vazgeç" %}
                                 </a>
                                 <button type="submit" class="btn-submit-premium">
-                                    <span>Talebi Gönder</span>
+                                    <span>{% trans "Talebi Gönder" %}</span>
                                     <div class="icon-box">
                                         <i class="fas fa-paper-plane default-icon"></i>
                                         <i class="fas fa-spinner fa-spin loading-icon"></i>
@@ -194,28 +191,24 @@
                     <div class="card-glow"></div>
                     <div class="info-header">
                         <i class="fas fa-lightbulb"></i>
-                        <h4>Hızlı Çözüm İçin İpuçları</h4>
+                        <h4>{% trans "Hızlı Çözüm İçin İpuçları" %}</h4>
                     </div>
                     <ul class="tips-list">
                         <li>
                             <div class="tip-icon"><i class="fas fa-check"></i></div>
-                            <div class="tip-text"><b>SSS Kontrolü:</b> Sorunuzun cevabı Sıkça Sorulan Sorular bölümünde
-                                olabilir.</div>
+                            <div class="tip-text"><b>{% trans "SSS Kontrolü:" %}</b> {% trans "Sorunuzun cevabı Sıkça Sorulan Sorular bölümünde olabilir." %}</div>
                         </li>
                         <li>
                             <div class="tip-icon"><i class="fas fa-search"></i></div>
-                            <div class="tip-text"><b>Arama:</b> Destek merkezindeki arama çubuğunu kullanarak daha önce
-                                verilmiş cevapları tarayın.</div>
+                            <div class="tip-text"><b>{% trans "Arama:" %}</b> {% trans "Destek merkezindeki arama çubuğunu kullanarak daha önce verilmiş cevapları tarayın." %}</div>
                         </li>
                         <li>
                             <div class="tip-icon"><i class="fas fa-pen-nib"></i></div>
-                            <div class="tip-text"><b>Detaylı Yazım:</b> Yaşadığınız sorunu adım adım anlatmanız çözüm
-                                sürecini hızlandırır.</div>
+                            <div class="tip-text"><b>{% trans "Detaylı Yazım:" %}</b> {% trans "Yaşadığınız sorunu adım adım anlatmanız çözüm sürecini hızlandırır." %}</div>
                         </li>
                         <li>
                             <div class="tip-icon"><i class="fas fa-clock"></i></div>
-                            <div class="tip-text"><b>Takip:</b> Talebinizden sonra bilet numaranızı "Taleplerim"
-                                sayfasından takip edebilirsiniz.</div>
+                            <div class="tip-text"><b>{% trans "Takip:" %}</b> {% trans "Talebinizden sonra bilet numaranızı \"Taleplerim\" sayfasından takip edebilirsiniz." %}</div>
                         </li>
                     </ul>
                 </div>
@@ -227,8 +220,8 @@
                             <i class="fab fa-whatsapp"></i>
                         </div>
                         <div class="wa-text">
-                            <h6>Bize Yazın!</h6>
-                            <p>Canlı destek için WhatsApp hattımız hazır.</p>
+                            <h6>{% trans "Bize Yazın!" %}</h6>
+                            <p>{% trans "Canlı destek için WhatsApp hattımız hazır." %}</p>
                         </div>
                         <a href="https://wa.me/905353334555" target="_blank" class="wa-btn"><i
                                 class="fas fa-arrow-right"></i></a>

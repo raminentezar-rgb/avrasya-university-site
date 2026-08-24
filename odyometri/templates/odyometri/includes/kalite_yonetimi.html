@@ -1,4 +1,5 @@
 {% extends 'odyometri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Odyometri Programı Kalite Yönetimi{% endblock %}
 
@@ -9,8 +10,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Odyometri Kalite Yönetimi</h1>
-            <p>Akademik standartlar, akreditasyon ve kalite güvence süreçleri</p>
+            <h1>{% trans "Odyometri Kalite Yönetimi" %}</h1>
+            <p>{% trans "Akademik standartlar, akreditasyon ve kalite güvence süreçleri" %}</p>
         </div>
     </div>
 </section>
@@ -63,26 +64,26 @@
                             <!-- Tab 1: FEDEK Akreditasyon Belgesi -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-certificate"></i> FEDEK Akreditasyon Belgesi</h3>
+                                    <h3><i class="fas fa-certificate"></i> {% trans "FEDEK Akreditasyon Belgesi" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="certificate-display">
                                         <img src="{% static 'core/img/fedek/psikoloji.jpg' %} " 
-                                             alt="FEDEK Akreditasyon Belgesi" 
+                                             alt="{% trans 'FEDEK Akreditasyon Belgesi' %}" 
                                              class="img-fluid certificate-image"
                                              style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                                         <div class="certificate-info mt-4 p-4" style="background: #f8f9fa; border-radius: 10px;">
-                                            <h4 class="mb-3">Akreditasyon Detayları</h4>
+                                            <h4 class="mb-3">{% trans "Akreditasyon Detayları" %}</h4>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p><strong>Üniversite:</strong> Avrasya Üniversitesi</p>
-                                                    <p><strong>Fakülte:</strong> Fen Edebiyat Fakültesi</p>
-                                                    <p><strong>Bölüm:</strong> Psikoloji Lisans Programı</p>
+                                                    <p><strong>{% trans "Üniversite:" %}</strong> {% trans "Avrasya Üniversitesi" %}</p>
+                                                    <p><strong>{% trans "Fakülte:" %}</strong> {% trans "Fen Edebiyat Fakültesi" %}</p>
+                                                    <p><strong>{% trans "Bölüm:" %}</strong> {% trans "Psikoloji Lisans Programı" %}</p>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p><strong>Geçerlilik Tarihi:</strong> 21 Mart 2025 – 30 Eylül 2030</p>
-                                                    <p><strong>Belge No:</strong> 21.03.2025-30.09.2030-529</p>
-                                                    <p><strong>Akreditasyon Kuruluşu:</strong> FEDEK</p>
+                                                    <p><strong>{% trans "Geçerlilik Tarihi:" %}</strong> {% trans "21 Mart 2025 – 30 Eylül 2030" %}</p>
+                                                    <p><strong>{% trans "Belge No:" %}</strong> 21.03.2025-30.09.2030-529</p>
+                                                    <p><strong>{% trans "Akreditasyon Kuruluşu:" %}</strong> {% trans "FEDEK" %}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,22 +94,22 @@
                             <!-- Tab 2: Komisyon/Sorumlular -->
                             <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-users"></i> Komisyon/Sorumlular</h3>
+                                    <h3><i class="fas fa-users"></i> {% trans "Komisyon/Sorumlular" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>Psikoloji Bölümü'nün kalite yönetimi ve akreditasyon süreçlerinden sorumlu komisyon ve görevliler.</p>
+                                        <p>{% trans "Psikoloji Bölümü'nün kalite yönetimi ve akreditasyon süreçlerinden sorumlu komisyon ve görevliler." %}</p>
                                     </div>
                                     
-                                    <h4>İntibak Komisyonu</h4>
+                                    <h4>{% trans "İntibak Komisyonu" %}</h4>
                                     <div class="commission-cards">
                                         <div class="commission-card">
                                             <div class="commission-icon">
                                                 <i class="fas fa-user-tie"></i>
                                             </div>
                                             <div class="commission-details">
-                                                <h5>Prof.Dr. Şermin ÖNDER KÜLAHOĞLU</h5>
-                                                <p>İntibak Komisyonu Üyesi</p>
+                                                <h5>{% trans "Prof.Dr. Şermin ÖNDER KÜLAHOĞLU" %}</h5>
+                                                <p>{% trans "İntibak Komisyonu Üyesi" %}</p>
                                             </div>
                                         </div>
                                         
@@ -117,8 +118,8 @@
                                                 <i class="fas fa-user-tie"></i>
                                             </div>
                                             <div class="commission-details">
-                                                <h5>Prof.Dr. Ferda AYSAN</h5>
-                                                <p>İntibak Komisyonu Üyesi</p>
+                                                <h5>{% trans "Prof.Dr. Ferda AYSAN" %}</h5>
+                                                <p>{% trans "İntibak Komisyonu Üyesi" %}</p>
                                             </div>
                                         </div>
                                         
@@ -127,51 +128,51 @@
                                                 <i class="fas fa-chalkboard-teacher"></i>
                                             </div>
                                             <div class="commission-details">
-                                                <h5>Öğr. Gör. Burak BAYRAK</h5>
-                                                <p>İntibak Komisyonu Üyesi</p>
+                                                <h5>{% trans "Öğr. Gör. Burak BAYRAK" %}</h5>
+                                                <p>{% trans "İntibak Komisyonu Üyesi" %}</p>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <h4 class="mt-5">Diğer Sorumlular</h4>
+                                    <h4 class="mt-5">{% trans "Diğer Sorumlular" %}</h4>
                                     <div class="responsible-grid">
                                         <div class="responsible-card">
                                             <div class="responsible-header">
                                                 <i class="fas fa-exchange-alt"></i>
-                                                <h5>Değişim Programı Sorumlusu</h5>
+                                                <h5>{% trans "Değişim Programı Sorumlusu" %}</h5>
                                             </div>
                                             <div class="responsible-body">
-                                                <p>Dr. Öğr. Üyesi Mehmet Emin SARDOĞAN</p>
+                                                <p>{% trans "Dr. Öğr. Üyesi Mehmet Emin SARDOĞAN" %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="responsible-card">
                                             <div class="responsible-header">
                                                 <i class="fas fa-chart-line"></i>
-                                                <h5>Stratejik Plan/BİDR Sorumlusu</h5>
+                                                <h5>{% trans "Stratejik Plan/BİDR Sorumlusu" %}</h5>
                                             </div>
                                             <div class="responsible-body">
-                                                <p>Prof. Dr. Şermin ÖNDER</p>
+                                                <p>{% trans "Prof. Dr. Şermin ÖNDER" %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="responsible-card">
                                             <div class="responsible-header">
                                                 <i class="fas fa-project-diagram"></i>
-                                                <h5>Proje Sorumlusu</h5>
+                                                <h5>{% trans "Proje Sorumlusu" %}</h5>
                                             </div>
                                             <div class="responsible-body">
-                                                <p>Prof. Dr. Ferda AYSAN</p>
+                                                <p>{% trans "Prof. Dr. Ferda AYSAN" %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="responsible-card">
                                             <div class="responsible-header">
                                                 <i class="fas fa-user-graduate"></i>
-                                                <h5>Mezun İzleme Sorumlusu</h5>
+                                                <h5>{% trans "Mezun İzleme Sorumlusu" %}</h5>
                                             </div>
                                             <div class="responsible-body">
-                                                <p>Öğr. Gör. Burak BAYRAK</p>
+                                                <p>{% trans "Öğr. Gör. Burak BAYRAK" %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -181,51 +182,51 @@
                             <!-- Tab 3: Program Öğretim Amaçları -->
                             <div class="tab-content" id="tab3">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-bullseye"></i> Program Öğretim Amaçları</h3>
+                                    <h3><i class="fas fa-bullseye"></i> {% trans "Program Öğretim Amaçları" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>Psikoloji Bölümü'nün eğitim-öğretim faaliyetlerini yönlendiren temel amaçlar ve hedefler.</p>
+                                        <p>{% trans "Psikoloji Bölümü'nün eğitim-öğretim faaliyetlerini yönlendiren temel amaçlar ve hedefler." %}</p>
                                     </div>
                                     
                                     <div class="objectives-list">
                                         <div class="objective-item">
-                                            <div class="objective-number">PÖA 1</div>
+                                            <div class="objective-number">{% trans "PÖA 1" %}</div>
                                             <div class="objective-content">
-                                                <h5>Araştırma ve Uygulama Temelli Eğitim</h5>
-                                                <p>Araştırma, uygulama temelli eğitim-öğretim kazanımı sağlatarak mesleki uygulama ve araştırma yürütebilecek temel bilgi ve becerileri kazandırmak.</p>
+                                                <h5>{% trans "Araştırma ve Uygulama Temelli Eğitim" %}</h5>
+                                                <p>{% trans "Araştırma, uygulama temelli eğitim-öğretim kazanımı sağlatarak mesleki uygulama ve araştırma yürütebilecek temel bilgi ve becerileri kazandırmak." %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="objective-item">
-                                            <div class="objective-number">PÖA 2</div>
+                                            <div class="objective-number">{% trans "PÖA 2" %}</div>
                                             <div class="objective-content">
-                                                <h5>Multidisipliner Bakış Açısı</h5>
-                                                <p>Multidisipliner bakış açısı kazandırarak uluslararası standartlarda eğitim-öğretim planı sunmak.</p>
+                                                <h5>{% trans "Multidisipliner Bakış Açısı" %}</h5>
+                                                <p>{% trans "Multidisipliner bakış açısı kazandırarak uluslararası standartlarda eğitim-öğretim planı sunmak." %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="objective-item">
-                                            <div class="objective-number">PÖA 3</div>
+                                            <div class="objective-number">{% trans "PÖA 3" %}</div>
                                             <div class="objective-content">
-                                                <h5>Mesleki Etik ve Standartlar</h5>
-                                                <p>Psikoloji biliminin gelişimine ve yaygınlaşmasına katkı sağlarken mesleki etik ve uygulamaları esas almak.</p>
+                                                <h5>{% trans "Mesleki Etik ve Standartlar" %}</h5>
+                                                <p>{% trans "Psikoloji biliminin gelişimine ve yaygınlaşmasına katkı sağlarken mesleki etik ve uygulamaları esas almak." %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="objective-item">
-                                            <div class="objective-number">PÖA 4</div>
+                                            <div class="objective-number">{% trans "PÖA 4" %}</div>
                                             <div class="objective-content">
-                                                <h5>Alt Dallarda Uzmanlık</h5>
-                                                <p>Mezunların psikolojinin alt dallarında bilgi sahibi olmasını sağlamak.</p>
+                                                <h5>{% trans "Alt Dallarda Uzmanlık" %}</h5>
+                                                <p>{% trans "Mezunların psikolojinin alt dallarında bilgi sahibi olmasını sağlamak." %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="objective-item">
-                                            <div class="objective-number">PÖA 5</div>
+                                            <div class="objective-number">{% trans "PÖA 5" %}</div>
                                             <div class="objective-content">
-                                                <h5>İstihdam Olanakları</h5>
-                                                <p>Mezunların okul, hastane, cezaevi, adliye, kreş, rehabilitasyon vb. kamu ve özel kuruluşlarda çalışma imkanı kazanmasını sağlamak.</p>
+                                                <h5>{% trans "İstihdam Olanakları" %}</h5>
+                                                <p>{% trans "Mezunların okul, hastane, cezaevi, adliye, kreş, rehabilitasyon vb. kamu ve özel kuruluşlarda çalışma imkanı kazanmasını sağlamak." %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -235,11 +236,11 @@
                             <!-- Tab 4: Program Öğrenim Çıktıları -->
                             <div class="tab-content" id="tab4">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-graduation-cap"></i> Program Öğrenim Çıktıları</h3>
+                                    <h3><i class="fas fa-graduation-cap"></i> {% trans "Program Öğrenim Çıktıları" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>Psikoloji Bölümü mezunlarının sahip olacağı bilgi, beceri ve yetkinlikler.</p>
+                                        <p>{% trans "Psikoloji Bölümü mezunlarının sahip olacağı bilgi, beceri ve yetkinlikler." %}</p>
                                     </div>
                                     
                                     <div class="outcomes-grid">
@@ -292,11 +293,11 @@
                             <!-- Tab 5: Anketler -->
                             <div class="tab-content" id="tab5">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-chart-bar"></i> Anketler</h3>
+                                    <h3><i class="fas fa-chart-bar"></i> {% trans "Anketler" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>Psikoloji Bölümü'nün kalite geliştirme süreçlerinde kullanılan anket sonuçları ve değerlendirme raporları.</p>
+                                        <p>{% trans "Psikoloji Bölümü'nün kalite geliştirme süreçlerinde kullanılan anket sonuçları ve değerlendirme raporları." %}</p>
                                     </div>
                                     
                                     <div class="surveys-list">
@@ -305,10 +306,10 @@
                                                 <i class="fas fa-user-graduate"></i>
                                             </div>
                                             <div class="survey-content">
-                                                <h5>2025 Yılı Öğrenci Memnuniyet Anketi</h5>
-                                                <p>Öğrencilerin bölüm ve eğitim süreçlerinden memnuniyet düzeylerini ölçen anket.</p>
+                                                <h5>{% trans "2025 Yılı Öğrenci Memnuniyet Anketi" %}</h5>
+                                                <p>{% trans "Öğrencilerin bölüm ve eğitim süreçlerinden memnuniyet düzeylerini ölçen anket." %}</p>
                                                 <a href="#" class="survey-link">
-                                                    <i class="fas fa-external-link-alt"></i> Ankete ulaşmak için tıklayınız.
+                                                    <i class="fas fa-external-link-alt"></i> {% trans "Ankete ulaşmak için tıklayınız." %}
                                                 </a>
                                             </div>
                                         </div>
@@ -318,10 +319,10 @@
                                                 <i class="fas fa-chalkboard-teacher"></i>
                                             </div>
                                             <div class="survey-content">
-                                                <h5>2025 Yılı Akademik Personel Memnuniyet Anketi</h5>
-                                                <p>Akademik personelin çalışma koşulları ve mesleki memnuniyet düzeylerini ölçen anket.</p>
+                                                <h5>{% trans "2025 Yılı Akademik Personel Memnuniyet Anketi" %}</h5>
+                                                <p>{% trans "Akademik personelin çalışma koşulları ve mesleki memnuniyet düzeylerini ölçen anket." %}</p>
                                                 <a href="#" class="survey-link">
-                                                    <i class="fas fa-external-link-alt"></i> Ankete ulaşmak için tıklayınız.
+                                                    <i class="fas fa-external-link-alt"></i> {% trans "Ankete ulaşmak için tıklayınız." %}
                                                 </a>
                                             </div>
                                         </div>
@@ -331,10 +332,10 @@
                                                 <i class="fas fa-user-tie"></i>
                                             </div>
                                             <div class="survey-content">
-                                                <h5>2025 Yılı İdari Personel Memnuniyet Anketi</h5>
-                                                <p>İdari personelin çalışma koşulları ve mesleki memnuniyet düzeylerini ölçen anket.</p>
+                                                <h5>{% trans "2025 Yılı İdari Personel Memnuniyet Anketi" %}</h5>
+                                                <p>{% trans "İdari personelin çalışma koşulları ve mesleki memnuniyet düzeylerini ölçen anket." %}</p>
                                                 <a href="#" class="survey-link">
-                                                    <i class="fas fa-external-link-alt"></i> Ankete ulaşmak için tıklayınız.
+                                                    <i class="fas fa-external-link-alt"></i> {% trans "Ankete ulaşmak için tıklayınız." %}
                                                 </a>
                                             </div>
                                         </div>
@@ -344,10 +345,10 @@
                                                 <i class="fas fa-file-contract"></i>
                                             </div>
                                             <div class="survey-content">
-                                                <h5>2024-2025 Güz Dönemi Ders ve Öğretim Elemanı Değerlendirme Anketi</h5>
-                                                <p>Dersler ve öğretim elemanlarının performans değerlendirme raporu.</p>
+                                                <h5>{% trans "2024-2025 Güz Dönemi Ders ve Öğretim Elemanı Değerlendirme Anketi" %}</h5>
+                                                <p>{% trans "Dersler ve öğretim elemanlarının performans değerlendirme raporu." %}</p>
                                                 <a href="#" class="survey-link">
-                                                    <i class="fas fa-external-link-alt"></i> Sonuç raporuna ulaşmak için tıklayınız.
+                                                    <i class="fas fa-external-link-alt"></i> {% trans "Sonuç raporuna ulaşmak için tıklayınız." %}
                                                 </a>
                                             </div>
                                         </div>
@@ -357,10 +358,10 @@
                                                 <i class="fas fa-file-contract"></i>
                                             </div>
                                             <div class="survey-content">
-                                                <h5>2023-2024 Bahar Dönemi Ders ve Öğretim Elemanı Değerlendirme Anketi</h5>
-                                                <p>Dersler ve öğretim elemanlarının performans değerlendirme raporu.</p>
+                                                <h5>{% trans "2023-2024 Bahar Dönemi Ders ve Öğretim Elemanı Değerlendirme Anketi" %}</h5>
+                                                <p>{% trans "Dersler ve öğretim elemanlarının performans değerlendirme raporu." %}</p>
                                                 <a href="#" class="survey-link">
-                                                    <i class="fas fa-external-link-alt"></i> Sonuç raporuna ulaşmak için tıklayınız.
+                                                    <i class="fas fa-external-link-alt"></i> {% trans "Sonuç raporuna ulaşmak için tıklayınız." %}
                                                 </a>
                                             </div>
                                         </div>
@@ -370,10 +371,10 @@
                                                 <i class="fas fa-file-contract"></i>
                                             </div>
                                             <div class="survey-content">
-                                                <h5>2023-2024 Güz Dönemi Ders ve Öğretim Elemanı Değerlendirme Anketi</h5>
-                                                <p>Dersler ve öğretim elemanlarının performans değerlendirme raporu.</p>
+                                                <h5>{% trans "2023-2024 Güz Dönemi Ders ve Öğretim Elemanı Değerlendirme Anketi" %}</h5>
+                                                <p>{% trans "Dersler ve öğretim elemanlarının performans değerlendirme raporu." %}</p>
                                                 <a href="#" class="survey-link">
-                                                    <i class="fas fa-external-link-alt"></i> Sonuç raporuna ulaşmak için tıklayınız.
+                                                    <i class="fas fa-external-link-alt"></i> {% trans "Sonuç raporuna ulaşmak için tıklayınız." %}
                                                 </a>
                                             </div>
                                         </div>
@@ -384,11 +385,11 @@
                             <!-- Tab 6: Ders Planı -->
                             <div class="tab-content" id="tab6">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-calendar-alt"></i> Ders Planı</h3>
+                                    <h3><i class="fas fa-calendar-alt"></i> {% trans "Ders Planı" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>Psikoloji Bölümü 2023-2024 Akademik Yılı Ders Planı ve müfredat detayları.</p>
+                                        <p>{% trans "Psikoloji Bölümü 2023-2024 Akademik Yılı Ders Planı ve müfredat detayları." %}</p>
                                     </div>
                                     
                                     <div class="lesson-plan-display">
@@ -396,41 +397,41 @@
                                             <div class="col-md-6 mb-4">
                                                 <div class="plan-image-container">
                                                    <a href="{% static 'core/img/fedek/dersplani-1-1.jpg' %}" download> <img src="{% static 'core/img/fedek/dersplani-1-1.jpg' %}" 
-                                             alt="FEDEK Akreditasyon Belgesi" 
+                                             alt="{% trans 'FEDEK Akreditasyon Belgesi' %}" 
                                              class="img-fluid certificate-image"
                                              style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);"> </a>
                                                     <div class="image-caption mt-2">
-                                                        <p><strong>1. ve 2. Dönem Ders Planı</strong></p>
+                                                        <p><strong>{% trans "1. ve 2. Dönem Ders Planı" %}</strong></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-4">
                                                 <div class="plan-image-container">
                                                    <a href="{% static 'core/img/fedek/dersplani-2-1.jpg' %}" download> <img src="{% static 'core/img/fedek/dersplani-2-1.jpg' %}" 
-                                             alt="FEDEK Akreditasyon Belgesi" 
+                                             alt="{% trans 'FEDEK Akreditasyon Belgesi' %}" 
                                              class="img-fluid certificate-image"
                                              style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);"> </a>
                                                     <div class="image-caption mt-2">
-                                                        <p><strong>3. ve 4. Dönem Ders Planı</strong></p>
+                                                        <p><strong>{% trans "3. ve 4. Dönem Ders Planı" %}</strong></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         <div class="plan-info mt-4 p-4" style="background: #f8f9fa; border-radius: 10px;">
-                                            <h4 class="mb-3">Ders Planı Detayları</h4>
+                                            <h4 class="mb-3">{% trans "Ders Planı Detayları" %}</h4>
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <p><strong>Akademik Yıl:</strong> 2023-2024</p>
-                                                    <p><strong>Program:</strong> Psikoloji Lisans</p>
+                                                    <p><strong>{% trans "Akademik Yıl:" %}</strong> 2023-2024</p>
+                                                    <p><strong>{% trans "Program:" %}</strong> {% trans "Psikoloji Lisans" %}</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p><strong>Toplam Kredi:</strong> 240 AKTS</p>
-                                                    <p><strong>Süre:</strong> 4 Yıl (8 Dönem)</p>
+                                                    <p><strong>{% trans "Toplam Kredi:" %}</strong> {% trans "240 AKTS" %}</p>
+                                                    <p><strong>{% trans "Süre:" %}</strong> {% trans "4 Yıl (8 Dönem)" %}</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p><strong>Eğitim Dili:</strong> Türkçe</p>
-                                                    <p><strong>Öğrenim Türü:</strong> Örgün Öğretim</p>
+                                                    <p><strong>{% trans "Eğitim Dili:" %}</strong> {% trans "Türkçe" %}</p>
+                                                    <p><strong>{% trans "Öğrenim Türü:" %}</strong> {% trans "Örgün Öğretim" %}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -450,7 +451,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Ders Planı Görüntüleme</h5>
+                <h5 class="modal-title">{% trans "Ders Planı Görüntüleme" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">

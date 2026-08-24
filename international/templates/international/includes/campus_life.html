@@ -1,4 +1,5 @@
 {% extends 'international/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - CAMPUS LIFE{% endblock %}
 {% block content %}
@@ -7,7 +8,7 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>CAMPUS LIFE</h1>
+            <h1>{% trans "CAMPUS LIFE" %}</h1>
             <p></p>
         </div>
     </div>
@@ -31,28 +32,28 @@
                         <div class="tab-header">
                             <ul class="tab-menu">
                                 <li class="tab-menu-item active" data-tab="tab1">
-                                     Accommodation
+                                     {% trans "Accommodation" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab2">
-                                     Dining Services
+                                     {% trans "Dining Services" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab3">
-                                     Sports Facilities
+                                     {% trans "Sports Facilities" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab4">
-                                     Social & Cultural Activities
+                                     {% trans "Social & Cultural Activities" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab5">
-                                     Transportation
+                                     {% trans "Transportation" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab6">
-                                     Student Union
+                                     {% trans "Student Union" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab7">
-                                     Counseling
+                                     {% trans "Counseling" %}
                                 </li>
                                 <li class="tab-menu-item" data-tab="tab8">
-                                     Campus Map
+                                     {% trans "Campus Map" %}
                                 </li>
                             </ul>
                         </div>
@@ -61,45 +62,38 @@
                             <!-- Tab 1: Accommodation -->
                             <div class="tab-content active" id="tab1">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-home"></i> Accommodation</h3>
+                                    <h3><i class="fas fa-home"></i> {% trans "Accommodation" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>Our dormitories – consisting of 6 buildings with various designs and features, 
-                                        provide a peaceful, secure, comfortable, pleasant and hygienic atmosphere for
-                                        more than 1,000 students from diverse backgrounds, who have chosen to 
-                                        take advantage of the excellence in higher education offered 
-                                        by Avrasya University.</p>
+                                        <p>{% trans "Our dormitories – consisting of 6 buildings with various designs and features, provide a peaceful, secure, comfortable, pleasant and hygienic atmosphere for more than 1,000 students from diverse backgrounds, who have chosen to take advantage of the excellence in higher education offered by Avrasya University." %}</p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-building"></i>
-                                            <h3>Campus Locations</h3>
+                                            <h3>{% trans "Campus Locations" %}</h3>
                                         </div>
-                                        <p>Our special and standard dormitories, 
-                                        all located on our <strong class="text-primary">Pelitli</strong> and <strong class="text-primary">Ömer Yıldız</strong> Campuses,
-                                        offer single, double, triple, quadruple and suite 
-                                        accommodation alternatives for our students, at varying rates.</p>
+                                        <p>{% trans "Our special and standard dormitories, all located on our" %} <strong class="text-primary">{% trans "Pelitli" %}</strong> {% trans "and" %} <strong class="text-primary">{% trans "Ömer Yıldız" %}</strong> {% trans "Campuses, offer single, double, triple, quadruple and suite accommodation alternatives for our students, at varying rates." %}</p>
                                         
                                         <div class="room-types">
-                                            <h4>Available Room Types:</h4>
+                                            <h4>{% trans "Available Room Types:" %}</h4>
                                             <div class="tags-container">
-                                                <span class="info-tag"><i class="fas fa-user"></i> Single</span>
-                                                <span class="info-tag"><i class="fas fa-user-friends"></i> Double</span>
-                                                <span class="info-tag"><i class="fas fa-users"></i> Triple</span>
-                                                <span class="info-tag"><i class="fas fa-users-cog"></i> Quadruple</span>
-                                                <span class="info-tag"><i class="fas fa-crown"></i> Suite</span>
+                                                <span class="info-tag"><i class="fas fa-user"></i> {% trans "Single" %}</span>
+                                                <span class="info-tag"><i class="fas fa-user-friends"></i> {% trans "Double" %}</span>
+                                                <span class="info-tag"><i class="fas fa-users"></i> {% trans "Triple" %}</span>
+                                                <span class="info-tag"><i class="fas fa-users-cog"></i> {% trans "Quadruple" %}</span>
+                                                <span class="info-tag"><i class="fas fa-crown"></i> {% trans "Suite" %}</span>
                                             </div>
                                         </div>
                                     </div>
                                     
                                     <div class="quote-box">
-                                        <p>"A home away from home - where comfort meets convenience in the heart of our campuses."</p>
+                                        <p>{% trans "\"A home away from home - where comfort meets convenience in the heart of our campuses.\"" %}</p>
                                     </div>
                                     
                                     <a href="#" class="action-button">
-                                        <i class="fas fa-file-download"></i> Download Dormitory Application Form
+                                        <i class="fas fa-file-download"></i> {% trans "Download Dormitory Application Form" %}
                                     </a>
                                 </div>
                             </div>
@@ -107,72 +101,69 @@
                             <!-- Tab 2: Dining Services -->
                             <div class="tab-content" id="tab2">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-utensils"></i> Dining Services</h3>
+                                    <h3><i class="fas fa-utensils"></i> {% trans "Dining Services" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>All Campuses have a variety of eateries at convenient locations for 
-                                        enjoying a quick snack or having a full meal with friends. 
-                                        Snack shops serving sandwiches, salads, soup, coffee, tea, 
-                                        and soft drinks are located in buildings around campuses.</p>
+                                        <p>{% trans "All Campuses have a variety of eateries at convenient locations for enjoying a quick snack or having a full meal with friends. Snack shops serving sandwiches, salads, soup, coffee, tea, and soft drinks are located in buildings around campuses." %}</p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-utensils"></i>
-                                            <h3>Dining Options</h3>
+                                            <h3>{% trans "Dining Options" %}</h3>
                                         </div>
                                         
                                         <div class="info-accordion">
                                             <div class="accordion-item">
                                                 <div class="accordion-header">
-                                                    <span>Main Cafeteria</span>
+                                                    <span>{% trans "Main Cafeteria" %}</span>
                                                     <i class="fas fa-chevron-down"></i>
                                                 </div>
                                                 <div class="accordion-content">
-                                                    <p>Spacious dining area serving breakfast, lunch, and dinner with daily menu options including vegetarian and international dishes.</p>
-                                                    <p><strong>Hours:</strong> 7:00 AM - 9:00 PM</p>
+                                                    <p>{% trans "Spacious dining area serving breakfast, lunch, and dinner with daily menu options including vegetarian and international dishes." %}</p>
+                                                    <p><strong>{% trans "Hours:" %}</strong> {% trans "7:00 AM - 9:00 PM" %}</p>
                                                 </div>
                                             </div>
                                             
                                             <div class="accordion-item">
                                                 <div class="accordion-header">
-                                                    <span>Coffee Shops & Cafés</span>
+                                                    <span>{% trans "Coffee Shops & Cafés" %}</span>
                                                     <i class="fas fa-chevron-down"></i>
                                                 </div>
                                                 <div class="accordion-content">
-                                                    <p>Multiple locations across campus offering coffee, pastries, sandwiches, and snacks throughout the day.</p>
-                                                    <p><strong>Hours:</strong> 8:00 AM - 10:00 PM</p>
+                                                    <p>{% trans "Multiple locations across campus offering coffee, pastries, sandwiches, and snacks throughout the day." %}</p>
+                                                    <p><strong>{% trans "Hours:" %}</strong> {% trans "8:00 AM - 10:00 PM" %}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         
-                                        <p>The Residence halls have small snack bars selling items of convenience as well as food.</p>
+                                        <p>{% trans "The Residence halls have small snack bars selling items of convenience as well as food." %}</p>
                                     </div>
                                     
-                                    <h3>Weekly Specials</h3>
+                                    <h3>{% trans "Weekly Specials" %}</h3>
                                     <table class="simple-table">
                                         <thead>
                                             <tr>
-                                                <th>Day</th>
-                                                <th>Special Dish</th>
-                                                <th>Price</th>
+                                                <th>{% trans "Day" %}</th>
+                                                <th>{% trans "Special Dish" %}</th>
+                                                <th>{% trans "Price" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Monday</td>
-                                                <td>Traditional Turkish Cuisine</td>
+                                                <td>{% trans "Monday" %}</td>
+                                                <td>{% trans "Traditional Turkish Cuisine" %}</td>
                                                 <td>₺25</td>
                                             </tr>
                                             <tr>
-                                                <td>Wednesday</td>
-                                                <td>International Buffet</td>
+                                                <td>{% trans "Wednesday" %}</td>
+                                                <td>{% trans "International Buffet" %}</td>
                                                 <td>₺30</td>
                                             </tr>
                                             <tr>
-                                                <td>Friday</td>
-                                                <td>Seafood Special</td>
+                                                <td>{% trans "Friday" %}</td>
+                                                <td>{% trans "Seafood Special" %}</td>
                                                 <td>₺35</td>
                                             </tr>
                                         </tbody>
@@ -183,58 +174,52 @@
                             <!-- Tab 3: Sports Facilities -->
                             <div class="tab-content" id="tab3">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-running"></i> Sports Facilities</h3>
+                                    <h3><i class="fas fa-running"></i> {% trans "Sports Facilities" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>The mission of the Physical Education and 
-                                        Sports Center is to provide the environment and 
-                                        programs through which the Avrasya University 
-                                        community can participate in and attain a healthy lifestyle. 
-                                        By participating in quality health, physical education, 
-                                        sports and fitness programs, students enrich their campus 
-                                        lives and achieve their fullest individual capacity.</p>
+                                        <p>{% trans "The mission of the Physical Education and Sports Center is to provide the environment and programs through which the Avrasya University community can participate in and attain a healthy lifestyle. By participating in quality health, physical education, sports and fitness programs, students enrich their campus lives and achieve their fullest individual capacity." %}</p>
                                     </div>
                                     
                                     <div class="facilities-grid">
                                         <div class="facility-card">
                                             <i class="fas fa-swimming-pool"></i>
-                                            <h4>Olympic Swimming Pool</h4>
-                                            <p>50-meter indoor pool with professional coaching</p>
+                                            <h4>{% trans "Olympic Swimming Pool" %}</h4>
+                                            <p>{% trans "50-meter indoor pool with professional coaching" %}</p>
                                         </div>
                                         <div class="facility-card">
                                             <i class="fas fa-basketball-ball"></i>
-                                            <h4>Basketball Courts</h4>
-                                            <p>Indoor and outdoor courts for recreational and competitive play</p>
+                                            <h4>{% trans "Basketball Courts" %}</h4>
+                                            <p>{% trans "Indoor and outdoor courts for recreational and competitive play" %}</p>
                                         </div>
                                         <div class="facility-card">
                                             <i class="fas fa-dumbbell"></i>
-                                            <h4>Fitness Center</h4>
-                                            <p>Modern gym with cardio and weight training equipment</p>
+                                            <h4>{% trans "Fitness Center" %}</h4>
+                                            <p>{% trans "Modern gym with cardio and weight training equipment" %}</p>
                                         </div>
                                         <div class="facility-card">
                                             <i class="fas fa-futbol"></i>
-                                            <h4>Soccer Field</h4>
-                                            <p>Full-size artificial turf field with lighting</p>
+                                            <h4>{% trans "Soccer Field" %}</h4>
+                                            <p>{% trans "Full-size artificial turf field with lighting" %}</p>
                                         </div>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-calendar-alt"></i>
-                                            <h3>Sports Programs</h3>
+                                            <h3>{% trans "Sports Programs" %}</h3>
                                         </div>
                                         <ul>
-                                            <li>Inter-University Sports Competitions</li>
-                                            <li>Fitness Classes (Yoga, Pilates, Zumba)</li>
-                                            <li>Martial Arts Training</li>
-                                            <li>Outdoor Adventure Activities</li>
-                                            <li>Intramural Sports Leagues</li>
-                                            <li>Personal Training Sessions</li>
+                                            <li>{% trans "Inter-University Sports Competitions" %}</li>
+                                            <li>{% trans "Fitness Classes (Yoga, Pilates, Zumba)" %}</li>
+                                            <li>{% trans "Martial Arts Training" %}</li>
+                                            <li>{% trans "Outdoor Adventure Activities" %}</li>
+                                            <li>{% trans "Intramural Sports Leagues" %}</li>
+                                            <li>{% trans "Personal Training Sessions" %}</li>
                                         </ul>
                                         
                                         <a href="#" class="action-button">
-                                            <i class="fas fa-clipboard-list"></i> View Sports Schedule
+                                            <i class="fas fa-clipboard-list"></i> {% trans "View Sports Schedule" %}
                                         </a>
                                     </div>
                                 </div>
@@ -243,64 +228,54 @@
                             <!-- Tab 4: Social & Cultural Activities -->
                             <div class="tab-content" id="tab4">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-users"></i> Social and Cultural Activities</h3>
+                                    <h3><i class="fas fa-users"></i> {% trans "Social and Cultural Activities" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>In addition to offering a model academic environment, 
-                                        Avrasya University provides ideal social, cultural 
-                                        and sports opportunities for students throughout 
-                                        the academic year to enrich student life in Avrasya. 
-                                        The Avrasya Spring Festival, held every May, 
-                                        culminates these events.</p>
+                                        <p>{% trans "In addition to offering a model academic environment, Avrasya University provides ideal social, cultural and sports opportunities for students throughout the academic year to enrich student life in Avrasya. The Avrasya Spring Festival, held every May, culminates these events." %}</p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-calendar-check"></i>
-                                            <h3>Annual Events</h3>
+                                            <h3>{% trans "Annual Events" %}</h3>
                                         </div>
-                                        <p>The majority of these activities are organized by the 
-                                        Student Council, which is elected by the students. 
-                                        Groups and clubs established with the support of the 
-                                        Council regularly organize talks, panels, concerts, exhibitions, 
-                                        competitions, parties, and festivals, and host numerous renowned 
-                                        politicians, business people, artists, and scientists.</p>
+                                        <p>{% trans "The majority of these activities are organized by the Student Council, which is elected by the students. Groups and clubs established with the support of the Council regularly organize talks, panels, concerts, exhibitions, competitions, parties, and festivals, and host numerous renowned politicians, business people, artists, and scientists." %}</p>
                                         
                                         <div class="event-highlights">
                                             <div class="event-item">
-                                                <div class="event-date">MAY</div>
+                                                <div class="event-date">{% trans "MAY" %}</div>
                                                 <div class="event-details">
-                                                    <h4>Avrasya Spring Festival</h4>
-                                                    <p>A week-long celebration featuring music, food, and cultural events</p>
+                                                    <h4>{% trans "Avrasya Spring Festival" %}</h4>
+                                                    <p>{% trans "A week-long celebration featuring music, food, and cultural events" %}</p>
                                                 </div>
                                             </div>
                                             <div class="event-item">
-                                                <div class="event-date">OCT</div>
+                                                <div class="event-date">{% trans "OCT" %}</div>
                                                 <div class="event-details">
-                                                    <h4>International Student Day</h4>
-                                                    <p>Celebrating cultural diversity with performances and food from around the world</p>
+                                                    <h4>{% trans "International Student Day" %}</h4>
+                                                    <p>{% trans "Celebrating cultural diversity with performances and food from around the world" %}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <h3>Cultural Clubs & Organizations</h3>
+                                    <h3>{% trans "Cultural Clubs & Organizations" %}</h3>
                                     <div class="clubs-container">
                                         <div class="club-card">
                                             <i class="fas fa-theater-masks"></i>
-                                            <h4>Theater Club</h4>
-                                            <p>Productions and workshops throughout the year</p>
+                                            <h4>{% trans "Theater Club" %}</h4>
+                                            <p>{% trans "Productions and workshops throughout the year" %}</p>
                                         </div>
                                         <div class="club-card">
                                             <i class="fas fa-music"></i>
-                                            <h4>Music Society</h4>
-                                            <p>Choir, orchestra, and band performances</p>
+                                            <h4>{% trans "Music Society" %}</h4>
+                                            <p>{% trans "Choir, orchestra, and band performances" %}</p>
                                         </div>
                                         <div class="club-card">
                                             <i class="fas fa-paint-brush"></i>
-                                            <h4>Art Collective</h4>
-                                            <p>Exhibitions and creative workshops</p>
+                                            <h4>{% trans "Art Collective" %}</h4>
+                                            <p>{% trans "Exhibitions and creative workshops" %}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -309,53 +284,39 @@
                             <!-- Tab 5: Transportation -->
                             <div class="tab-content" id="tab5">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-bus"></i> Transportation</h3>
+                                    <h3><i class="fas fa-bus"></i> {% trans "Transportation" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="info-accordion">
                                         <div class="accordion-item active">
                                             <div class="accordion-header">
-                                                <span><i class="fas fa-plane-arrival"></i> Arriving in Trabzon</span>
+                                                <span><i class="fas fa-plane-arrival"></i> {% trans "Arriving in Trabzon" %}</span>
                                                 <i class="fas fa-chevron-down"></i>
                                             </div>
                                             <div class="accordion-content">
-                                                <p>You can use city shuttle buses, which provide transportation 
-                                                between the city center and Trabzon airport. City shuttle 
-                                                buses stop at two terminals; the first stop is 
-                                                City Terminal and then Trabzon intercity bus terminal.</p>
+                                                <p>{% trans "You can use city shuttle buses, which provide transportation between the city center and Trabzon airport. City shuttle buses stop at two terminals; the first stop is City Terminal and then Trabzon intercity bus terminal." %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="accordion-item">
                                             <div class="accordion-header">
-                                                <span><i class="fas fa-bus"></i> Urban Transportation</span>
+                                                <span><i class="fas fa-bus"></i> {% trans "Urban Transportation" %}</span>
                                                 <i class="fas fa-chevron-down"></i>
                                             </div>
                                             <div class="accordion-content">
-                                                <h4>City Bus Transportation</h4>
-                                                <p>Halk Buses is the acronym for public bus transportation in Trabzon. 
-                                                You can purchase single and multiple use bus cards at most newspaper kiosks, 
-                                                at halk buses booths, and at Private "Halk" buses also provide transportation. 
-                                                Halk Buses cards are not accepted on these buses. Tickets are purchased on 
-                                                board from a conductor seated near the entrance.</p>
+                                                <h4>{% trans "City Bus Transportation" %}</h4>
+                                                <p>{% trans "Halk Buses is the acronym for public bus transportation in Trabzon. You can purchase single and multiple use bus cards at most newspaper kiosks, at halk buses booths, and at Private \"Halk\" buses also provide transportation. Halk Buses cards are not accepted on these buses. Tickets are purchased on board from a conductor seated near the entrance." %}</p>
                                             </div>
                                         </div>
                                         
                                         <div class="accordion-item">
                                             <div class="accordion-header">
-                                                <span><i class="fas fa-road"></i> Intercity Travel</span>
+                                                <span><i class="fas fa-road"></i> {% trans "Intercity Travel" %}</span>
                                                 <i class="fas fa-chevron-down"></i>
                                             </div>
                                             <div class="accordion-content">
-                                                <h4>Bus Services</h4>
-                                                <p>Trabzon Şehirlerarası Terminal İşletmesi – Trabzon Intercity Bus Terminal  
-                                                is located on Boulevard. There, you will find buses 
-                                                with service to virtually every location in Turkey. 
-                                                Bus transportation is an efficient and affordable way 
-                                                to travel. All bus companies are privately owned, and may 
-                                                have varying service schedules. It is best to make a reservation 
-                                                in advance for your trip. Please note that a single person is
-                                                generally seated next to a passenger of the same sex.</p>
+                                                <h4>{% trans "Bus Services" %}</h4>
+                                                <p>{% trans "Trabzon Şehirlerarası Terminal İşletmesi – Trabzon Intercity Bus Terminal is located on Boulevard. There, you will find buses with service to virtually every location in Turkey. Bus transportation is an efficient and affordable way to travel. All bus companies are privately owned, and may have varying service schedules. It is best to make a reservation in advance for your trip. Please note that a single person is generally seated next to a passenger of the same sex." %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -363,12 +324,12 @@
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-shuttle-van"></i>
-                                            <h3>Campus Shuttle Service</h3>
+                                            <h3>{% trans "Campus Shuttle Service" %}</h3>
                                         </div>
-                                        <p>Avrasya University provides free shuttle services between campuses and key locations in the city. The schedule is updated each semester and available at campus information desks.</p>
+                                        <p>{% trans "Avrasya University provides free shuttle services between campuses and key locations in the city. The schedule is updated each semester and available at campus information desks." %}</p>
                                         
                                         <a href="#" class="action-button">
-                                            <i class="fas fa-clock"></i> View Shuttle Schedule
+                                            <i class="fas fa-clock"></i> {% trans "View Shuttle Schedule" %}
                                         </a>
                                     </div>
                                 </div>
@@ -377,42 +338,42 @@
                             <!-- Tab 6: Student Union -->
                             <div class="tab-content" id="tab6">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-user-friends"></i> Student Union</h3>
+                                    <h3><i class="fas fa-user-friends"></i> {% trans "Student Union" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>The Student Council organizes students' social and cultural activities. Student representatives are elected by the student body; they are responsible for managing the Student Council and creating a program of activities. Located in the Yomra Campus.</p>
+                                        <p>{% trans "The Student Council organizes students' social and cultural activities. Student representatives are elected by the student body; they are responsible for managing the Student Council and creating a program of activities. Located in the Yomra Campus." %}</p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-users-cog"></i>
-                                            <h3>Student Clubs & Organizations</h3>
+                                            <h3>{% trans "Student Clubs & Organizations" %}</h3>
                                         </div>
                                         
-                                        <p><strong>Some of These Clubs are:</strong></p>
+                                        <p><strong>{% trans "Some of These Clubs are:" %}</strong></p>
                                         <ul>
-                                            <li>Chess Club</li>
-                                            <li>Model United Nations Club</li>
-                                            <li>Psychology Club</li>
-                                            <li>Electric Electronic Club</li>
-                                            <li>Turks World Club</li>
-                                            <li>Theater Club</li>
-                                            <li>Yeşilay Club</li>
-                                            <li>Photography Club</li>
+                                            <li>{% trans "Chess Club" %}</li>
+                                            <li>{% trans "Model United Nations Club" %}</li>
+                                            <li>{% trans "Psychology Club" %}</li>
+                                            <li>{% trans "Electric Electronic Club" %}</li>
+                                            <li>{% trans "Turks World Club" %}</li>
+                                            <li>{% trans "Theater Club" %}</li>
+                                            <li>{% trans "Yeşilay Club" %}</li>
+                                            <li>{% trans "Photography Club" %}</li>
                                         </ul>
                                         
-                                        <p>In addition, meetings, seminars, debates and trips are regularly organized allowing students to participate in various activities.</p>
+                                        <p>{% trans "In addition, meetings, seminars, debates and trips are regularly organized allowing students to participate in various activities." %}</p>
                                     </div>
                                     
                                     <div class="contact-box">
-                                        <h3>Student Council Coordination Office</h3>
-                                        <p><strong><i class="fas fa-user-tie"></i> Coordinator:</strong> <a href="mailto:info@avrasya.edu.tr">info@avrasya.edu.tr</a></p>
-                                        <p><strong><i class="fas fa-map-marker-alt"></i> Address:</strong></p>
-                                        <p>Yomra Campus<br>Student Council Office<br>Avrasya University<br>Trabzon / Turkey</p>
+                                        <h3>{% trans "Student Council Coordination Office" %}</h3>
+                                        <p><strong><i class="fas fa-user-tie"></i> {% trans "Coordinator:" %}</strong> <a href="mailto:info@avrasya.edu.tr">{% trans "info@avrasya.edu.tr" %}</a></p>
+                                        <p><strong><i class="fas fa-map-marker-alt"></i> {% trans "Address:" %}</strong></p>
+                                        <p>{% trans "Yomra Campus" %}<br>{% trans "Student Council Office" %}<br>{% trans "Avrasya University" %}<br>{% trans "Trabzon / Turkey" %}</p>
                                         
                                         <a href="#" class="action-button">
-                                            <i class="fas fa-envelope"></i> Contact Student Council
+                                            <i class="fas fa-envelope"></i> {% trans "Contact Student Council" %}
                                         </a>
                                     </div>
                                 </div>
@@ -421,53 +382,53 @@
                             <!-- Tab 7: Counseling -->
                             <div class="tab-content" id="tab7">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-heart"></i> Psychological Counseling and Development Center</h3>
+                                    <h3><i class="fas fa-heart"></i> {% trans "Psychological Counseling and Development Center" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="highlight-section">
-                                        <p>The goals of Psychological Counseling and Development Center are to provide a range of services related to the challenges of student life as well as personal transition and growth. PCDC Center offers counseling, consultation and referral services free of charge to students enrolled at Avrasya University.</p>
+                                        <p>{% trans "The goals of Psychological Counseling and Development Center are to provide a range of services related to the challenges of student life as well as personal transition and growth. PCDC Center offers counseling, consultation and referral services free of charge to students enrolled at Avrasya University." %}</p>
                                     </div>
                                     
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-hands-helping"></i>
-                                            <h3>Our Services</h3>
+                                            <h3>{% trans "Our Services" %}</h3>
                                         </div>
                                         
                                         <div class="services-grid">
                                             <div class="service-item">
                                                 <i class="fas fa-comments"></i>
-                                                <h4>Individual Counseling</h4>
-                                                <p>One-on-one sessions with licensed psychologists</p>
+                                                <h4>{% trans "Individual Counseling" %}</h4>
+                                                <p>{% trans "One-on-one sessions with licensed psychologists" %}</p>
                                             </div>
                                             <div class="service-item">
                                                 <i class="fas fa-users"></i>
-                                                <h4>Group Therapy</h4>
-                                                <p>Support groups for various student concerns</p>
+                                                <h4>{% trans "Group Therapy" %}</h4>
+                                                <p>{% trans "Support groups for various student concerns" %}</p>
                                             </div>
                                             <div class="service-item">
                                                 <i class="fas fa-graduation-cap"></i>
-                                                <h4>Academic Support</h4>
-                                                <p>Study skills and time management workshops</p>
+                                                <h4>{% trans "Academic Support" %}</h4>
+                                                <p>{% trans "Study skills and time management workshops" %}</p>
                                             </div>
                                             <div class="service-item">
                                                 <i class="fas fa-heartbeat"></i>
-                                                <h4>Wellness Programs</h4>
-                                                <p>Stress management and mindfulness training</p>
+                                                <h4>{% trans "Wellness Programs" %}</h4>
+                                                <p>{% trans "Stress management and mindfulness training" %}</p>
                                             </div>
                                         </div>
                                     </div>
                                     
                                     <div class="contact-box">
-                                        <h3>Contact Information</h3>
-                                        <p>The Center is staffed by licensed psychologists in clinical psychology. For more information about our services, feel free browse our web site. We look forward to working with you soon.</p>
+                                        <h3>{% trans "Contact Information" %}</h3>
+                                        <p>{% trans "The Center is staffed by licensed psychologists in clinical psychology. For more information about our services, feel free browse our web site. We look forward to working with you soon." %}</p>
                                         
-                                        <p><strong><i class="fas fa-clock"></i> Hours:</strong> Monday-Friday, 9:00 AM - 5:00 PM</p>
-                                        <p><strong><i class="fas fa-phone"></i> Phone:</strong> +90 (462) 555 55 55</p>
-                                        <p><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:counseling@avrasya.edu.tr">counseling@avrasya.edu.tr</a></p>
+                                        <p><strong><i class="fas fa-clock"></i> {% trans "Hours:" %}</strong> {% trans "Monday-Friday, 9:00 AM - 5:00 PM" %}</p>
+                                        <p><strong><i class="fas fa-phone"></i> {% trans "Phone:" %}</strong> +90 (462) 555 55 55</p>
+                                        <p><strong><i class="fas fa-envelope"></i> {% trans "Email:" %}</strong> <a href="mailto:counseling@avrasya.edu.tr">{% trans "counseling@avrasya.edu.tr" %}</a></p>
                                         
                                         <a href="#" class="action-button">
-                                            <i class="fas fa-calendar-check"></i> Schedule an Appointment
+                                            <i class="fas fa-calendar-check"></i> {% trans "Schedule an Appointment" %}
                                         </a>
                                     </div>
                                 </div>
@@ -476,71 +437,71 @@
                             <!-- Tab 8: Campus Map -->
                             <div class="tab-content" id="tab8">
                                 <div class="tab-content-header">
-                                    <h3><i class="fas fa-map-marked-alt"></i> Campus Map & Facilities</h3>
+                                    <h3><i class="fas fa-map-marked-alt"></i> {% trans "Campus Map & Facilities" %}</h3>
                                 </div>
                                 <div class="tab-content-body">
                                     <div class="info-card">
                                         <div class="info-card-header">
                                             <i class="fas fa-university"></i>
-                                            <h3>Campus Locations</h3>
+                                            <h3>{% trans "Campus Locations" %}</h3>
                                         </div>
                                         
                                         <div class="campus-info">
                                             <div class="campus-item">
-                                                <h4><i class="fas fa-map-pin text-primary"></i> Pelitli Campus</h4>
-                                                <p>Main academic buildings, library, and administrative offices</p>
+                                                <h4><i class="fas fa-map-pin text-primary"></i> {% trans "Pelitli Campus" %}</h4>
+                                                <p>{% trans "Main academic buildings, library, and administrative offices" %}</p>
                                                 <a href="#" class="action-button small">
-                                                    <i class="fas fa-map"></i> View Map
+                                                    <i class="fas fa-map"></i> {% trans "View Map" %}
                                                 </a>
                                             </div>
                                             
                                             <div class="campus-item">
-                                                <h4><i class="fas fa-map-pin text-secondary"></i> Ömer Yıldız Campus</h4>
-                                                <p>Engineering and technology departments, research centers</p>
+                                                <h4><i class="fas fa-map-pin text-secondary"></i> {% trans "Ömer Yıldız Campus" %}</h4>
+                                                <p>{% trans "Engineering and technology departments, research centers" %}</p>
                                                 <a href="#" class="action-button small">
-                                                    <i class="fas fa-map"></i> View Map
+                                                    <i class="fas fa-map"></i> {% trans "View Map" %}
                                                 </a>
                                             </div>
                                             
                                             <div class="campus-item">
-                                                <h4><i class="fas fa-map-pin text-accent"></i> Yomra Campus</h4>
-                                                <p>Student union, sports facilities, dormitories</p>
+                                                <h4><i class="fas fa-map-pin text-accent"></i> {% trans "Yomra Campus" %}</h4>
+                                                <p>{% trans "Student union, sports facilities, dormitories" %}</p>
                                                 <a href="#" class="action-button small">
-                                                    <i class="fas fa-map"></i> View Map
+                                                    <i class="fas fa-map"></i> {% trans "View Map" %}
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                     
                                     <div class="highlight-section">
-                                        <h3>Key Facilities Directory</h3>
+                                        <h3>{% trans "Key Facilities Directory" %}</h3>
                                         <table class="simple-table">
                                             <thead>
                                                 <tr>
-                                                    <th>Facility</th>
-                                                    <th>Location</th>
-                                                    <th>Hours</th>
+                                                    <th>{% trans "Facility" %}</th>
+                                                    <th>{% trans "Location" %}</th>
+                                                    <th>{% trans "Hours" %}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Main Library</td>
-                                                    <td>Pelitli Campus, Building A</td>
+                                                    <td>{% trans "Main Library" %}</td>
+                                                    <td>{% trans "Pelitli Campus, Building A" %}</td>
                                                     <td>24/7</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Health Center</td>
-                                                    <td>Yomra Campus, Building C</td>
+                                                    <td>{% trans "Health Center" %}</td>
+                                                    <td>{% trans "Yomra Campus, Building C" %}</td>
                                                     <td>8:00-20:00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sports Complex</td>
-                                                    <td>Yomra Campus</td>
+                                                    <td>{% trans "Sports Complex" %}</td>
+                                                    <td>{% trans "Yomra Campus" %}</td>
                                                     <td>6:00-22:00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Student Center</td>
-                                                    <td>Yomra Campus</td>
+                                                    <td>{% trans "Student Center" %}</td>
+                                                    <td>{% trans "Yomra Campus" %}</td>
                                                     <td>8:00-23:00</td>
                                                 </tr>
                                             </tbody>
@@ -548,7 +509,7 @@
                                     </div>
                                     
                                     <a href="#" class="action-button">
-                                        <i class="fas fa-download"></i> Download Complete Campus Map
+                                        <i class="fas fa-download"></i> {% trans "Download Complete Campus Map" %}
                                     </a>
                                 </div>
                             </div>

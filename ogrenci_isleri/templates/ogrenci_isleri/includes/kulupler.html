@@ -1,4 +1,5 @@
 {% extends 'ogrenci_isleri/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}Avrasya Üniversitesi - Öğrenci Kulüpleri
 {% endblock %}
@@ -9,8 +10,8 @@
 <section class="research-hero">
     <div class="container">
         <div class="research-hero-content">
-            <h1>Öğrenci Kulüpleri</h1>
-            <p>Avrasya Üniversitesi'ndeki tüm öğrenci kulüpleri ve etkinlikleri keşfedin</p>
+            <h1>{% trans "Öğrenci Kulüpleri" %}</h1>
+            <p>{% trans "Avrasya Üniversitesi'ndeki tüm öğrenci kulüpleri ve etkinlikleri keşfedin" %}</p>
         </div>
     </div>
 </section>
@@ -28,27 +29,27 @@
         <div class="col-lg-9 col-xxl-10">
             <div class="content-wrapper">
                 <div class="page-intro">
-                    <h2 class="section-title">Öğrenci Kulüpleri</h2>
-                    <p class="section-subtitle">Avrasya Üniversitesi'nde öğrencilerimizin kişisel ve profesyonel gelişimlerini destekleyen çeşitli kulüpler bulunmaktadır. Aşağıdaki kulüplerden birine katılarak yeteneklerinizi geliştirebilir, yeni arkadaşlar edinebilir ve üniversite hayatınızı renklendirebilirsiniz.</p>
+                    <h2 class="section-title">{% trans "Öğrenci Kulüpleri" %}</h2>
+                    <p class="section-subtitle">{% trans "Avrasya Üniversitesi'nde öğrencilerimizin kişisel ve profesyonel gelişimlerini destekleyen çeşitli kulüpler bulunmaktadır. Aşağıdaki kulüplerden birine katılarak yeteneklerinizi geliştirebilir, yeni arkadaşlar edinebilir ve üniversite hayatınızı renklendirebilirsiniz." %}</p>
                 </div>
                 
                 <!-- Info Boxes -->
                 <div class="row mb-5">
                     <div class="col-md-6">
                         <div class="highlight-box">
-                            <h4><i class="fas fa-question-circle"></i> Kulüp Nasıl Kurulur?</h4>
-                            <p>Yeni bir öğrenci kulübü kurmak için gerekli tüm adımları ve şartları aşağıda bulabilirsiniz.</p>
+                            <h4><i class="fas fa-question-circle"></i> {% trans "Kulüp Nasıl Kurulur?" %}</h4>
+                            <p>{% trans "Yeni bir öğrenci kulübü kurmak için gerekli tüm adımları ve şartları aşağıda bulabilirsiniz." %}</p>
                             <button class="btn-show-more mt-3" id="showClubRules">
-                                <i class="fas fa-chevron-down"></i> Tüm Kuralları Gör
+                                <i class="fas fa-chevron-down"></i> {% trans "Tüm Kuralları Gör" %}
                             </button>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="highlight-box">
-                            <h4><i class="fas fa-file-pdf"></i> Kulüp Yönergesi</h4>
-                            <p>Öğrenci kulüplerinin kurulması, işleyişi ve desteklenmesi hakkında resmi yönergeyi inceleyin.</p>
+                            <h4><i class="fas fa-file-pdf"></i> {% trans "Kulüp Yönergesi" %}</h4>
+                            <p>{% trans "Öğrenci kulüplerinin kurulması, işleyişi ve desteklenmesi hakkında resmi yönergeyi inceleyin." %}</p>
                             <a href="{% static "files/ÖĞRENCİ-KULÜPLERİNİN-KURULMASI-İŞLEYİŞİ-VE-DESTEKLENMESİ-YÖNERGESİ (1).pdf" %}" class="external-link mt-3" target="_blank">
-                                <i class="fas fa-download"></i> Yönergeyi İndir (PDF)
+                                <i class="fas fa-download"></i> {% trans "Yönergeyi İndir (PDF)" %}
                             </a>
                         </div>
                     </div>
@@ -57,7 +58,7 @@
                 <!-- Kulüp Kurma Detayları (Initially Hidden) -->
                 <div class="detailed-rules-box" id="clubRulesDetails" style="display: none;">
                     <div class="detailed-rules-header">
-                        <h3><i class="fas fa-info-circle"></i> Kulüp Kurma Detaylı Kuralları</h3>
+                        <h3><i class="fas fa-info-circle"></i> {% trans "Kulüp Kurma Detaylı Kuralları" %}</h3>
                         <button class="btn-close-rules" id="closeClubRules">
                             <i class="fas fa-times"></i>
                         </button>
@@ -67,82 +68,82 @@
                         <div class="rule-step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h5>Asgari Üye Sayısı</h5>
-                                <p>Bir öğrenci kulübünün kurulabilmesi için, en az <strong>yirmi (20) öğrenciden</strong> oluşan üye listesinin hazırlanmış olması gerekir.</p>
+                                <h5>{% trans "Asgari Üye Sayısı" %}</h5>
+                                <p>{% trans "Bir öğrenci kulübünün kurulabilmesi için, en az" %} <strong>{% trans "yirmi (20) öğrenciden" %}</strong> {% trans "oluşan üye listesinin hazırlanmış olması gerekir." %}</p>
                             </div>
                         </div>
                         
                         <div class="rule-step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h5>Başvuru Süreci</h5>
-                                <p>Başvuru, Avrasya Üniversitesi Öğrenci Kulüpleri Yönergesi <strong>Madde – 22</strong>'de belirtilen formata uygun hazırlanmış bir <strong>Kulüp Tüzüğü</strong> ile birlikte eğitim öğretim yılı içinde <strong>Sağlık Kültür ve Spor Daire Başkanlığı</strong>'na yapılır.</p>
+                                <h5>{% trans "Başvuru Süreci" %}</h5>
+                                <p>{% trans "Başvuru, Avrasya Üniversitesi Öğrenci Kulüpleri Yönergesi" %} <strong>{% trans "Madde – 22" %}</strong>{% trans "'de belirtilen formata uygun hazırlanmış bir" %} <strong>{% trans "Kulüp Tüzüğü" %}</strong> {% trans "ile birlikte eğitim öğretim yılı içinde" %} <strong>{% trans "Sağlık Kültür ve Spor Daire Başkanlığı" %}</strong>{% trans "'na yapılır." %}</p>
                             </div>
                         </div>
                         
                         <div class="rule-step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h5>Başvuru Değerlendirme</h5>
-                                <p>Sağlık Kültür ve Spor Daire Başkanlığı, gelen dilekçe ve tüzüğü <strong>Öğrenci Kulüpleri Üst Kurulu</strong>'na sevk eder.</p>
+                                <h5>{% trans "Başvuru Değerlendirme" %}</h5>
+                                <p>{% trans "Sağlık Kültür ve Spor Daire Başkanlığı, gelen dilekçe ve tüzüğü" %} <strong>{% trans "Öğrenci Kulüpleri Üst Kurulu" %}</strong>{% trans "'na sevk eder." %}</p>
                             </div>
                         </div>
                         
                         <div class="rule-step">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <h5>Üst Kurul Değerlendirmesi</h5>
-                                <p>Öğrenci Kulüpleri Üst Kurulu, dilekçe ve tüzüğü değerlendirerek, değerlendirmenin sonucunu bir raporla <strong>Rektörlük</strong>'e sunar.</p>
+                                <h5>{% trans "Üst Kurul Değerlendirmesi" %}</h5>
+                                <p>{% trans "Öğrenci Kulüpleri Üst Kurulu, dilekçe ve tüzüğü değerlendirerek, değerlendirmenin sonucunu bir raporla" %} <strong>{% trans "Rektörlük" %}</strong>{% trans "'e sunar." %}</p>
                             </div>
                         </div>
                         
                         <div class="rule-step">
                             <div class="step-number">5</div>
                             <div class="step-content">
-                                <h5>Rektörlük Onayı</h5>
-                                <p>Rektörlük, başvuru ile ilgili cevabı <strong>Sağlık Kültür ve Spor Daire Başkanlığı</strong> aracılığıyla bildirir.</p>
+                                <h5>{% trans "Rektörlük Onayı" %}</h5>
+                                <p>{% trans "Rektörlük, başvuru ile ilgili cevabı" %} <strong>{% trans "Sağlık Kültür ve Spor Daire Başkanlığı" %}</strong> {% trans "aracılığıyla bildirir." %}</p>
                             </div>
                         </div>
                         
                         <div class="important-rules">
-                            <h4><i class="fas fa-exclamation-triangle"></i> Önemli Kurallar ve Kısıtlamalar</h4>
+                            <h4><i class="fas fa-exclamation-triangle"></i> {% trans "Önemli Kurallar ve Kısıtlamalar" %}</h4>
                             
                             <div class="rules-grid">
                                 <div class="rule-card rule-warning">
                                     <i class="fas fa-ban"></i>
-                                    <h6>Aynı Konuda Birden Fazla Kulüp</h6>
-                                    <p>Üniversite içerisinde <strong>aynı etkinlik konusu</strong> ile ilgili birden fazla kulüp kurulamaz.</p>
+                                    <h6>{% trans "Aynı Konuda Birden Fazla Kulüp" %}</h6>
+                                    <p>{% trans "Üniversite içerisinde" %} <strong>{% trans "aynı etkinlik konusu" %}</strong> {% trans "ile ilgili birden fazla kulüp kurulamaz." %}</p>
                                 </div>
                                 
                                 <div class="rule-card rule-warning">
                                     <i class="fas fa-users"></i>
-                                    <h6>Kapsam Kısıtlaması</h6>
-                                    <p>Kurulan kulüp yalnızca bir <strong>anabilim dalı/bölüm, yüksekokul ya da fakülte</strong> öğrencilerine yönelik olamaz.</p>
+                                    <h6>{% trans "Kapsam Kısıtlaması" %}</h6>
+                                    <p>{% trans "Kurulan kulüp yalnızca bir" %} <strong>{% trans "anabilim dalı/bölüm, yüksekokul ya da fakülte" %}</strong> {% trans "öğrencilerine yönelik olamaz." %}</p>
                                 </div>
                                 
                                 <div class="rule-card rule-warning">
                                     <i class="fas fa-gavel"></i>
-                                    <h6>Üst Kurul Yetkisi</h6>
-                                    <p>Öğrenci Kulüpleri Üst Kurulu, etkinlik konusunu onaylamadığı kulüplerin kuruluşuna <strong>izin vermeme hakkına</strong> sahiptir.</p>
+                                    <h6>{% trans "Üst Kurul Yetkisi" %}</h6>
+                                    <p>{% trans "Öğrenci Kulüpleri Üst Kurulu, etkinlik konusunu onaylamadığı kulüplerin kuruluşuna" %} <strong>{% trans "izin vermeme hakkına" %}</strong> {% trans "sahiptir." %}</p>
                                 </div>
                                 
                                 <div class="rule-card rule-warning">
                                     <i class="fas fa-calendar-times"></i>
-                                    <h6>Süreklilik Şartı</h6>
-                                    <p>Faaliyet alanları <strong>süreklilik arz etmeyen</strong>, belirli zaman aralığını kapsayan çalışmaları gerektiren konularda kulüp kurulamaz.</p>
+                                    <h6>{% trans "Süreklilik Şartı" %}</h6>
+                                    <p>{% trans "Faaliyet alanları" %} <strong>{% trans "süreklilik arz etmeyen" %}</strong>{% trans ", belirli zaman aralığını kapsayan çalışmaları gerektiren konularda kulüp kurulamaz." %}</p>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="final-step">
-                            <h4><i class="fas fa-flag-checkered"></i> Faaliyetlere Başlama ve Genel Kurul</h4>
+                            <h4><i class="fas fa-flag-checkered"></i> {% trans "Faaliyetlere Başlama ve Genel Kurul" %}</h4>
                             <div class="final-step-content">
-                                <p>Rektörlük onayından geçtikten ve gerekli şartları tamamlandıktan sonra hazırlanan çalma esaslarına göre kulüp faaliyetlerine başlar.</p>
+                                <p>{% trans "Rektörlük onayından geçtikten ve gerekli şartları tamamlandıktan sonra hazırlanan çalma esaslarına göre kulüp faaliyetlerine başlar." %}</p>
                                 <div class="important-note">
                                     <i class="fas fa-clock"></i>
                                     <div>
-                                        <strong>Önemli Zaman Sınırı:</strong>
-                                        <p>Faaliyetlere başlanmasından itibaren <strong>4 (dört) hafta</strong> içerisinde başvuruyu gerçekleştiren 20 üyenin belirleyeceği <strong>Geçici Yönetim Kurulu</strong> en az <strong>20 (yirmi) üyenin</strong> katılımıyla, <strong>"Genel Kurul Toplantısı"</strong>'nı yapmak zorundadır.</p>
+                                        <strong>{% trans "Önemli Zaman Sınırı:" %}</strong>
+                                        <p>{% trans "Faaliyetlere başlanmasından itibaren" %} <strong>{% trans "4 (dört) hafta" %}</strong> {% trans "içerisinde başvuruyu gerçekleştiren 20 üyenin belirleyeceği" %} <strong>{% trans "Geçici Yönetim Kurulu" %}</strong> {% trans "en az" %} <strong>{% trans "20 (yirmi) üyenin" %}</strong> {% trans "katılımıyla," %} <strong>{% trans "\"Genel Kurul Toplantısı\"" %}</strong>{% trans "'nı yapmak zorundadır." %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -150,10 +151,10 @@
                         
                         <div class="contact-action">
                             <div class="action-content">
-                                <h5><i class="fas fa-file"></i> Öğrenci Kulüpleri Formlar</h5>
+                                <h5><i class="fas fa-file"></i> {% trans "Öğrenci Kulüpleri Formlar" %}</h5>
                                 <p></p>
                                 <a href="{% static 'files/ÖĞRENCİ-KULÜPLERİ-FORMLAR.docx' %}" class="btn-action" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i> Formları indirin
+                                    <i class="fas fa-external-link-alt"></i> {% trans "Formları indirin" %}
                                 </a>
                             </div>
                         </div>
@@ -165,174 +166,174 @@
                 <!-- Kulüp Listesi -->
                 <div class="clubs-section">
                     <div class="section-header">
-                        <h3><i class="fas fa-users"></i> Aktif Öğrenci Kulüpleri</h3>
-                        <p class="section-description">Üniversitemizde faaliyet gösteren tüm öğrenci kulüpleri</p>
+                        <h3><i class="fas fa-users"></i> {% trans "Aktif Öğrenci Kulüpleri" %}</h3>
+                        <p class="section-description">{% trans "Üniversitemizde faaliyet gösteren tüm öğrenci kulüpleri" %}</p>
                     </div>
                     
                     <div class="clubs-grid">
                         <!-- Row 1 -->
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/3-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/3-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Bilgisayar Bilimleri Kulübü</h5>
-                            <span class="club-category academic">Akademik</span>
+                            <h5>{% trans "Bilgisayar Bilimleri Kulübü" %}</h5>
+                            <span class="club-category academic">{% trans "Akademik" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/6-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/6-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Mühendislik Kulübü</h5>
-                            <span class="club-category academic">Akademik</span>
+                            <h5>{% trans "Mühendislik Kulübü" %}</h5>
+                            <span class="club-category academic">{% trans "Akademik" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/7-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/7-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>İşletme ve Ekonomi Kulübü</h5>
-                            <span class="club-category academic">Akademik</span>
+                            <h5>{% trans "İşletme ve Ekonomi Kulübü" %}</h5>
+                            <span class="club-category academic">{% trans "Akademik" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/1-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/1-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Tiyatro Kulübü</h5>
-                            <span class="club-category social">Sosyal</span>
+                            <h5>{% trans "Tiyatro Kulübü" %}</h5>
+                            <span class="club-category social">{% trans "Sosyal" %}</span>
                         </div>
                         
                         <!-- Row 2 -->
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/15-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/15-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Müzik Kulübü</h5>
-                            <span class="club-category social">Sosyal</span>
+                            <h5>{% trans "Müzik Kulübü" %}</h5>
+                            <span class="club-category social">{% trans "Sosyal" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/2-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/2-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Fotoğrafçılık Kulübü</h5>
-                            <span class="club-category social">Sosyal</span>
+                            <h5>{% trans "Fotoğrafçılık Kulübü" %}</h5>
+                            <span class="club-category social">{% trans "Sosyal" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/4-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/4-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Doğa Sporları Kulübü</h5>
-                            <span class="club-category sports">Spor</span>
+                            <h5>{% trans "Doğa Sporları Kulübü" %}</h5>
+                            <span class="club-category sports">{% trans "Spor" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/12-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/12-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Basketbol Kulübü</h5>
-                            <span class="club-category sports">Spor</span>
+                            <h5>{% trans "Basketbol Kulübü" %}</h5>
+                            <span class="club-category sports">{% trans "Spor" %}</span>
                         </div>
                         
                         <!-- Row 3 -->
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/14-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/14-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Futbol Kulübü</h5>
-                            <span class="club-category sports">Spor</span>
+                            <h5>{% trans "Futbol Kulübü" %}</h5>
+                            <span class="club-category sports">{% trans "Spor" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/9-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/9-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Satranç Kulübü</h5>
-                            <span class="club-category sports">Spor</span>
+                            <h5>{% trans "Satranç Kulübü" %}</h5>
+                            <span class="club-category sports">{% trans "Spor" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/5-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/5-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Yabancı Diller Kulübü</h5>
-                            <span class="club-category academic">Akademik</span>
+                            <h5>{% trans "Yabancı Diller Kulübü" %}</h5>
+                            <span class="club-category academic">{% trans "Akademik" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/11-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/11-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Girişimcilik Kulübü</h5>
-                            <span class="club-category academic">Akademik</span>
+                            <h5>{% trans "Girişimcilik Kulübü" %}</h5>
+                            <span class="club-category academic">{% trans "Akademik" %}</span>
                         </div>
                         
                         <!-- Row 4 -->
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/8-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/8-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Çevre Kulübü</h5>
-                            <span class="club-category social">Sosyal</span>
+                            <h5>{% trans "Çevre Kulübü" %}</h5>
+                            <span class="club-category social">{% trans "Sosyal" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/10-300x300.png" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2023/02/10-300x300.png" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Sosyal Sorumluluk Kulübü</h5>
-                            <span class="club-category social">Sosyal</span>
+                            <h5>{% trans "Sosyal Sorumluluk Kulübü" %}</h5>
+                            <span class="club-category social">{% trans "Sosyal" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2025/09/logo-300x300.png" alt="Beslenme ve Diyetetik Kulübü">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2025/09/logo-300x300.png" alt="{% trans 'Beslenme ve Diyetetik Kulübü' %}">
                             </div>
-                            <h5>Beslenme ve Diyetetik Kulübü</h5>
-                            <span class="club-category academic">Akademik</span>
+                            <h5>{% trans "Beslenme ve Diyetetik Kulübü" %}</h5>
+                            <span class="club-category academic">{% trans "Akademik" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2025/10/Adsiz-tasarim-9-300x300.jpg" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2025/10/Adsiz-tasarim-9-300x300.jpg" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Yeni Kulüp 1</h5>
-                            <span class="club-category social">Sosyal</span>
+                            <h5>{% trans "Yeni Kulüp 1" %}</h5>
+                            <span class="club-category social">{% trans "Sosyal" %}</span>
                         </div>
                         
                         <!-- Row 5 -->
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2025/10/Logo-300x300.jpeg" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2025/10/Logo-300x300.jpeg" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Yeni Kulüp 2</h5>
-                            <span class="club-category academic">Akademik</span>
+                            <h5>{% trans "Yeni Kulüp 2" %}</h5>
+                            <span class="club-category academic">{% trans "Akademik" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2022/11/isimsiz-1-1.jpg" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2022/11/isimsiz-1-1.jpg" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Yapı İşleri Kulübü</h5>
-                            <span class="club-category academic">Akademik</span>
+                            <h5>{% trans "Yapı İşleri Kulübü" %}</h5>
+                            <span class="club-category academic">{% trans "Akademik" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2022/11/isimsiz-1-1.jpg" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2022/11/isimsiz-1-1.jpg" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Egzersiz ve Spor Kulübü</h5>
-                            <span class="club-category sports">Spor</span>
+                            <h5>{% trans "Egzersiz ve Spor Kulübü" %}</h5>
+                            <span class="club-category sports">{% trans "Spor" %}</span>
                         </div>
                         
                         <div class="club-item">
                             <div class="club-logo">
-                                <img src="https://avrasya.edu.tr/wp-content/uploads/2022/11/isimsiz-1-1.jpg" alt="Kulüp Logosu">
+                                <img src="https://avrasya.edu.tr/wp-content/uploads/2022/11/isimsiz-1-1.jpg" alt="{% trans 'Kulüp Logosu' %}">
                             </div>
-                            <h5>Çevre ve Sürdürülebilirlik Kulübü</h5>
-                            <span class="club-category social">Sosyal</span>
+                            <h5>{% trans "Çevre ve Sürdürülebilirlik Kulübü" %}</h5>
+                            <span class="club-category social">{% trans "Sosyal" %}</span>
                         </div>
                     </div>
                 </div>
@@ -340,22 +341,22 @@
                 <!-- İletişim Bilgileri -->
                 <div class="contact-info-section mt-5">
                     <div class="contact-header">
-                        <h4><i class="fas fa-info-circle"></i> Kulüp İşleri İletişim</h4>
+                        <h4><i class="fas fa-info-circle"></i> {% trans "Kulüp İşleri İletişim" %}</h4>
                     </div>
                     
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
-                                <strong>Adres</strong>
-                                <p style="color: #000000;">Avrasya Üniversitesi Rektörlüğü<br>Pelitli Mahallesi Rize caddesi No:226 TRABZON</p>
+                                <strong>{% trans "Adres" %}</strong>
+                                <p style="color: #000000;">{% trans "Avrasya Üniversitesi Rektörlüğü" %}<br>{% trans "Pelitli Mahallesi Rize caddesi No:226 TRABZON" %}</p>
                             </div>
                         </div>
                         
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
                             <div>
-                                <strong>Telefon</strong>
+                                <strong>{% trans "Telefon" %}</strong>
                                 <p><a href="tel:+904623340550">+90 462 334 05 50</a></p>
                             </div>
                         </div>
@@ -363,15 +364,15 @@
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <div>
-                                <strong>E-posta</strong>
-                                <p><a href="mailto:iletisim@avrasya.edu.tr">iletisim@avrasya.edu.tr</a></p>
+                                <strong>{% trans "E-posta" %}</strong>
+                                <p><a href="mailto:iletisim@avrasya.edu.tr">{% trans "iletisim@avrasya.edu.tr" %}</a></p>
                             </div>
                         </div>
                         
                         <div class="contact-item">
                             <i class="fab fa-whatsapp"></i>
                             <div>
-                                <strong>WhatsApp</strong>
+                                <strong>{% trans "WhatsApp" %}</strong>
                                 <p><a href="https://wa.me/905353334555">+90 535 333 4 555</a></p>
                             </div>
                         </div>
