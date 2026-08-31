@@ -3,32 +3,32 @@ from django.urls import reverse
 
 class SliderItem(models.Model):
     CONTENT_TYPE_CHOICES = [
-        ('image', 'تصویر'),
-        ('video', 'ویدیو'),
+        ('image', 'Resim'),
+        ('video', 'Video'),
     ]
     
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, blank=True, null=True, verbose_name="Başlık")
     content_type = models.CharField(
         max_length=10, 
         choices=CONTENT_TYPE_CHOICES, 
         default='image',
-        verbose_name="نوع محتوا"
+        verbose_name="İçerik Türü"
     )
     image = models.ImageField(
         upload_to='slider/', 
         blank=True, 
         null=True,
-        verbose_name="تصویر"
+        verbose_name="Resim"
     )
     video = models.FileField(
         upload_to='slider/videos/',
         blank=True,
         null=True,
-        verbose_name="فایل ویدیو"
+        verbose_name="Video Dosyası"
     )
     video_url = models.URLField(
         blank=True,
-        verbose_name="لینک ویدیو (YouTube, Vimeo, etc.)"
+        verbose_name="Video Linki (YouTube, Vimeo, vs.)"
     )
     link = models.URLField(blank=True)
     order = models.PositiveIntegerField(default=0)
@@ -38,7 +38,7 @@ class SliderItem(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return self.title
+        return self.title or f"Slider #{self.id}" if self.id else "Yeni Slider"
 
     def get_media_url(self):
         """برگرداندن URL رسانه بر اساس نوع محتوا"""

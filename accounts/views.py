@@ -1,5 +1,5 @@
-
 from django.shortcuts import render, redirect
+from django.db.models import Count, Q
 from django.contrib.auth import login, logout 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.http import require_POST
@@ -28,9 +28,14 @@ def logout_view(request):
 @user_passes_test(lambda u: u.is_superuser)
 def crm_dashboard(request):
     total_users = User.objects.count()
-    students_count = Profile.objects.filter(role='student').count()
-    staff_count = Profile.objects.filter(role='staff').count()
-    professors_count = Profile.objects.filter(role='professor').count()
+    profile_counts = Profile.objects.aggregate(
+        students_count=Count('id', filter=Q(role='student')),
+        staff_count=Count('id', filter=Q(role='staff')),
+        professors_count=Count('id', filter=Q(role='professor'))
+    )
+    students_count = profile_counts['students_count']
+    staff_count = profile_counts['staff_count']
+    professors_count = profile_counts['professors_count']
     
     recent_users = User.objects.select_related('profile').order_by('-date_joined')[:10]
     all_users = User.objects.select_related('profile', 'profile__department').all().order_by('-date_joined')

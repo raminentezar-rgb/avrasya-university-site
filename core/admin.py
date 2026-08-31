@@ -14,12 +14,12 @@ class SliderAdmin(TranslationAdmin): # تغییر از admin.ModelAdmin به Tra
     
     # فیلد title_tr, title_en و غیره به صورت خودکار در این بخش ظاهر می‌شوند
     fieldsets = (
-        ('اطلاعات اصلی', {
+        ('Temel Bilgiler', {
             'fields': ('title', 'content_type', 'order', 'is_active', 'link')
         }),
-        ('محتوا', {
+        ('İçerik', {
             'fields': ('image', 'video', 'video_url'),
-            'description': 'فقط یکی از فیلدهای تصویر یا ویدیو را پر کنید'
+            'description': 'Lütfen sadece resim veya video alanından birini doldurun'
         }),
     )
 
@@ -28,11 +28,11 @@ class SliderAdmin(TranslationAdmin): # تغییر از admin.ModelAdmin به Tra
             return format_html('<img src="{}" style="max-height: 50px;" />', obj.image.url)
         elif obj.content_type == 'video':
             if obj.video:
-                return "ویدیو آپلودی"
+                return "Yüklenen Video"
             elif obj.video_url:
-                return "لینک ویدیو"
-        return "بدون رسانه"
-    media_preview.short_description = 'پیش‌نمایش'
+                return "Video Linki"
+        return "Medya Yok"
+    media_preview.short_description = 'Önizleme'
 
 @admin.register(Page)
 class PageAdmin(TranslationAdmin): # تغییر برای پشتیبانی از ترجمه در صفحات

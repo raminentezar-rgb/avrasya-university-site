@@ -1179,6 +1179,8 @@
         let currentThreadId = {% if first_valid_thread %}{{ first_valid_thread.thread.id }}{% else %}null{% endif %};
         let selectedUserId = null;
         let supportSocket = null;
+        let chatSocket = null;
+        let notificationSocket = null;
         let currentSupportSession = null;
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1192,6 +1194,7 @@
                     document.querySelector('.send-btn').disabled = false;
                     loadMessages(currentThreadId);
                     updateChatHeader(this);
+                    connectChatSocket(currentThreadId);
                 });
             });
 
@@ -1213,7 +1216,7 @@
             });
 
             fetchNotifications();
-            setInterval(fetchNotifications, 30000);
+            connectNotificationSocket();
         });
 
         function loadMessages(threadId) {
@@ -1304,7 +1307,7 @@
                 if (data.success) {
                     input.value = '';
                     fileInput.value = '';
-                    loadMessages(currentThreadId);
+                    // WS will automatically append the message
                 } else alert('Mesaj gönderilemedi');
             })
             .catch(err => console.error('Hata:', err));
@@ -1386,6 +1389,85 @@
                         </div>
                     `;
                     container.scrollTop = container.scrollHeight;
+                }
+            };
+        }
+
+        function connectChatSocket(threadId) {
+            if (chatSocket) chatSocket.close();
+            const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            chatSocket = new WebSocket(`${protocol}://${window.location.host}/ws/chat/${threadId}/`);
+            chatSocket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                if (data.type === 'message') {
+                    const container = document.getElementById('messagesContainer');
+                    const isSent = data.sender_id == "{{ user.id }}";
+                    
+                    // Remove empty state if present
+                    const emptyState = container.querySelector('.empty-state');
+                    if (emptyState) emptyState.remove();
+
+                    const msgDate = data.created_at_full ? new Date(data.created_at_full).toLocaleDateString('tr-TR') : null;
+                    const dateDividers = container.querySelectorAll('.date-text');
+                    const lastDate = dateDividers.length > 0 ? dateDividers[dateDividers.length - 1].textContent : null;
+                    
+                    if (msgDate && lastDate !== msgDate) {
+                        container.innerHTML += `<div class="message-date-divider"><span class="date-text">${msgDate}</span></div>`;
+                    }
+
+                    container.innerHTML += `
+                        <div class="message-wrapper ${isSent ? 'sent' : 'received'}">
+                            <div class="message-bubble">
+                                ${data.file_url ? `
+                                <div class="file-message">
+                                    <div class="file-icon"><i class="fas fa-file"></i></div>
+                                    <div class="file-info">
+                                        <div class="file-name">${data.file_name || 'Dosya'}</div>
+                                        <div class="file-size">${data.file_size ? (data.file_size/1024).toFixed(1)+' KB' : ''}</div>
+                                    </div>
+                                    <a href="${data.file_url}" class="file-download" download><i class="fas fa-download"></i></a>
+                                </div>
+                                ` : ''}
+                                ${data.message ? `<div class="message-text">${escapeHtml(data.message)}</div>` : ''}
+                                <div class="message-meta">
+                                    <span>${data.created_at || ''}</span>
+                                    ${isSent ? `<i class="fas ${data.is_read ? 'fa-check-double' : 'fa-check'}"></i>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.scrollTop = container.scrollHeight;
+                    
+                    // Mark as read if not sent by us
+                    if (!isSent) {
+                        fetch('/chat/mark-read/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': getCookie('csrftoken')
+                            },
+                            body: JSON.stringify({ thread_id: threadId })
+                        });
+                    }
+                }
+            };
+        }
+
+        function connectNotificationSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            notificationSocket = new WebSocket(`${protocol}://${window.location.host}/ws/notifications/`);
+            notificationSocket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                if (data.type === 'unread_count') {
+                    const badge = document.getElementById('notificationBadge');
+                    if (data.count > 0) {
+                        badge.textContent = data.count > 99 ? '99+' : data.count;
+                        badge.style.display = 'flex';
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                } else if (data.type === 'notification' || data.type === 'new_support_request') {
+                    fetchNotifications();
                 }
             };
         }

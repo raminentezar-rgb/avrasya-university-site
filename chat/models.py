@@ -17,11 +17,17 @@ class Thread(models.Model):
     
     def get_other_participant(self, user):
         """Return the other participant in the thread"""
-        return self.participants.exclude(id=user.id).first()
+        for participant in self.participants.all():
+            if participant.id != user.id:
+                return participant
+        return None
     
     def get_last_message(self):
         """Return the last message in the thread"""
-        return self.messages.order_by('-created_at').first()
+        messages = list(self.messages.all())
+        if not messages:
+            return None
+        return sorted(messages, key=lambda m: m.created_at, reverse=True)[0]
 
 class Message(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name='messages')
@@ -40,9 +46,8 @@ class Message(models.Model):
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        # Update thread's updated_at when new message is created
-        self.thread.updated_at = self.created_at
-        self.thread.save()
+        # Update thread's updated_at using update() to avoid saving full object
+        Thread.objects.filter(id=self.thread_id).update(updated_at=self.created_at)
 
 
 

@@ -191,7 +191,11 @@ def index(request):
     except ImportError:
         pass
     
+    # Get active sliders
+    sliders = SliderItem.objects.filter(is_active=True).order_by('order')
+
     context = {
+        'sliders': sliders,
         'latest_news': latest_news,
         'latest_announcements': latest_announcements,
         'latest_events': latest_events,

@@ -75,10 +75,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'type': 'message',
             'message': event['message'],
             'file_url': event.get('file_url'),
+            'file_name': event.get('file_name'),
+            'file_size': event.get('file_size'),
             'sender_id': event['sender_id'],
             'sender_name': event['sender_name'],
             'created_at': event['created_at'],
-            'message_id': event['message_id']
+            'created_at_full': event.get('created_at_full'),
+            'message_id': event['message_id'],
+            'is_read': event.get('is_read', False)
         }))
     
     async def typing_status(self, event):

@@ -9,6 +9,8 @@ import json
 from django.contrib import messages
 import os
 from django.utils.timesince import timesince
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 
 @login_required
@@ -168,6 +170,40 @@ def send_message(request):
                         thread_id=thread.id,
                         sender_id=request.user.id
                     )
+
+            # Broadcast message via WebSockets
+            channel_layer = get_channel_layer()
+            async_to_sync(channel_layer.group_send)(
+                f'chat_{thread.id}',
+                {
+                    'type': 'chat_message',
+                    'message': msg.text,
+                    'file_url': msg.file.url if msg.file else None,
+                    'file_name': msg.file.name.split('/')[-1] if msg.file else None,
+                    'file_size': msg.file.size if msg.file else None,
+                    'sender_id': msg.sender.id,
+                    'sender_name': msg.sender.get_full_name() or msg.sender.username,
+                    'created_at': msg.created_at.strftime('%H:%M'),
+                    'created_at_full': msg.created_at.strftime('%Y-%m-%d %H:%M'),
+                    'message_id': msg.id,
+                    'is_read': False,
+                }
+            )
+            
+            # Broadcast notifications via WebSockets
+            for user in other_users:
+                async_to_sync(channel_layer.group_send)(
+                    f'notifications_{user.id}',
+                    {
+                        'type': 'send_notification',
+                        'notification_id': msg.id,
+                        'title': f'Yeni mesaj: {request.user.get_full_name() or request.user.username}',
+                        'message': msg.text[:50] + '...' if len(msg.text) > 50 else (msg.text or 'Bir dosya gÃ¶nderdi'),
+                        'thread_id': thread.id,
+                        'sender_id': request.user.id,
+                        'created_at': msg.created_at.strftime('%H:%M')
+                    }
+                )
 
             return JsonResponse({
                 'success': True,
