@@ -553,7 +553,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const etkinlikDetay = "{{ etkinlik.kisa_aciklama|escapejs|truncatechars:100 }}";
     
     // Paylaşım metni oluştur
-    const shareText = `${etkinlikBaslik} 📅 ${etkinlikTarih} 📍 ${etkinlikYer}\n\n${etkinlikDetay}\n\nDetaylar ve katılım için:`;
+    const shareText = `${etkinlikBaslik} <i class="fas fa-calendar-alt"></i>  ${etkinlikTarih} <i class="fas fa-map-marker-alt"></i>  ${etkinlikYer}\n\n${etkinlikDetay}\n\nDetaylar ve katılım için:`;
     
     // Paylaşım linkleri
     const shareUrls = {
@@ -574,7 +574,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (platform === 'instagram') {
                 e.preventDefault();
-                alert('📸 Instagram\'da paylaşmak için:\n\n1. Etkinlik afişini kaydedin\n2. Instagram uygulamasını açın\n3. Gönderi oluşturun\n\n🔗 Etkinlik linki: ' + etkinlikUrl);
+                alert(' Instagram\'da paylaşmak için:\n\n1. Etkinlik afişini kaydedin\n2. Instagram uygulamasını açın\n3. Gönderi oluşturun\n\n<i class="fas fa-link"></i>  Etkinlik linki: ' + etkinlikUrl);
                 return;
             }
             
