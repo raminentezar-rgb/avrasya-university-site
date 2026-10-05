@@ -1,4 +1,8 @@
-{% extends 'ogrenci_isleri/base.html' %}
+import os
+
+html_path = r'd:\avrasya_site\ogrenci_isleri\templates\ogrenci_isleri\includes\kayit.html'
+
+new_content = """{% extends 'ogrenci_isleri/base.html' %}
 {% load static %}
 {% load i18n %}
 {% block title %}{% trans "Avrasya Üniversitesi - Kayıt İşlemleri" %}{% endblock %}
@@ -933,3 +937,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {% endblock %}
+"""
+
+with open(html_path, 'w', encoding='utf-8') as f:
+    f.write(new_content)
+
+print("HTML template updated successfully!")
