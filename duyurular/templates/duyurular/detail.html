@@ -3,6 +3,17 @@
 {% load static %}
 {% block title %}{{ duyuru.baslik }} - Avrasya Üniversitesi{% endblock %}
 
+{% block meta %}
+<meta property="og:title" content="{{ duyuru.baslik }}">
+<meta property="og:description" content="{{ duyuru.ozet|default:duyuru.icerik|striptags|truncatechars:150 }}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Avrasya Üniversitesi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ duyuru.baslik }}">
+<meta name="twitter:description" content="{{ duyuru.ozet|default:duyuru.icerik|striptags|truncatechars:150 }}">
+{% endblock %}
+
 {% block content %}
 <div class="super_container">
     <!-- Page Content -->
@@ -34,7 +45,7 @@
                                     <span class="meta-badge faculty">{{ duyuru.get_fakulte_display }}</span>
                                     {% if duyuru.bolumler.exists %}
                                         {% for bolum in duyuru.bolumler.all %}
-                                            <span class="meta-badge department">{{ bolum.ad }}</span>
+                                            <span class="meta-badge department">{{ bolum.isim }}</span>
                                         {% endfor %}
                                     {% endif %}
                                 </div>
@@ -153,7 +164,7 @@
                                     {% for bolum in duyuru.bolumler.all %}
                                     <a href="{% url 'duyurular:bolum_liste' bolum_kodu=bolum.kod %}" class="nav-link1">
                                         <i class="fas fa-bookmark"></i>
-                                        {{ bolum.ad }} Duyuruları
+                                        {{ bolum.isim }} Duyuruları
                                     </a>
                                     {% endfor %}
                                 {% endif %}
@@ -180,7 +191,7 @@
                                     <span class="info-label">{% trans "Bölümler:" %}</span>
                                     <span class="info-value">
                                         {% for bolum in duyuru.bolumler.all %}
-                                            {{ bolum.ad }}{% if not forloop.last %}, {% endif %}
+                                            {{ bolum.isim }}{% if not forloop.last %}, {% endif %}
                                         {% endfor %}
                                     </span>
                                 </div>

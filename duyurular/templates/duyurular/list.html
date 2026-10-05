@@ -114,7 +114,7 @@
                                 <span class="category-badge faculty">{{ duyuru.get_fakulte_display }}</span>
                                 {% if duyuru.bolumler.exists %}
                                     {% for bolum in duyuru.bolumler.all|slice:":2" %}
-                                        <span class="category-badge department" >{{ bolum.ad }}</span>
+                                        <span class="category-badge department" >{{ bolum.isim }}</span>
                                     {% endfor %}
                                     {% if duyuru.bolumler.count > 2 %}
                                         <span class="category-badge more">+{{ duyuru.bolumler.count|add:"-2" }}</span>

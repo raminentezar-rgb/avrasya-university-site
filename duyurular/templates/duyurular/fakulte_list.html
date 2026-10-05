@@ -43,7 +43,7 @@
                         <div class="departments-grid">
                             {% for bolum in bolumler %}
                             <a href="{% url 'duyurular:bolum_liste' bolum_kodu=bolum.kod %}" class="department-card">
-                                <span class="department-name">{{ bolum.ad }}</span>
+                                <span class="department-name">{{ bolum.isim }}</span>
                                 <span class="department-count">{{ bolum.duyuru_set.count }}</span>
                             </a>
                             {% endfor %}
@@ -64,7 +64,7 @@
                                     <span class="announcement-badge">{{ duyuru.get_fakulte_display }}</span>
                                     {% if duyuru.bolumler.exists %}
                                         {% for bolum in duyuru.bolumler.all|slice:":2" %}
-                                            <span class="announcement-badge bg-secondary">{{ bolum.ad }}</span>
+                                            <span class="announcement-badge bg-secondary">{{ bolum.isim }}</span>
                                         {% endfor %}
                                     {% endif %}
                                 </div>

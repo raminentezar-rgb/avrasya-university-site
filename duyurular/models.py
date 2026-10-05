@@ -33,8 +33,17 @@ class Bolum(models.Model):
         verbose_name_plural = "Bölümler"
         ordering = ['fakulte', 'ad']
     
+    @property
+    def isim(self):
+        val = getattr(self, 'ad_tr', None) or getattr(self, 'ad_en', None)
+        if not val:
+            val = self.__dict__.get('ad')
+        if not val:
+            val = self.kod
+        return val
+
     def __str__(self):
-        return f"{self.ad} - {self.get_fakulte_display()}"
+        return f"{self.isim} - {self.get_fakulte_display()}"
 
 class Duyuru(models.Model):
     FAKULTE_CHOICES = FAKULTE_CHOICES

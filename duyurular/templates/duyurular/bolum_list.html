@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block title %}{{ bolum.ad }} Duyuruları - Avrasya Üniversitesi{% endblock %}
+{% block title %}{{ bolum.isim }} Duyuruları - Avrasya Üniversitesi{% endblock %}
 
 {% block content %}
 <div class="super_container">
@@ -18,15 +18,15 @@
                                     <li class="breadcrumb-item"><a href="{% url 'core:index' %}">{% trans "Ana Sayfa" %}</a></li>
                                     <li class="breadcrumb-item"><a href="{% url 'duyurular:liste' %}">{% trans "Duyurular" %}</a></li>
                                     <li class="breadcrumb-item"><a href="{% url 'duyurular:fakulte_liste' fakulte_kodu=bolum.fakulte %}">{{ fakulte_adi }}</a></li>
-                                    <li class="breadcrumb-item active">{{ bolum.ad }}</li>
+                                    <li class="breadcrumb-item active">{{ bolum.isim }}</li>
                                 </ol>
                             </nav>
                         </div>
                         
                         <div class="header-content">
                             <div class="title-section">
-                                <h1 class="page-title">{{ bolum.ad }} Duyuruları</h1>
-                                <p class="page-subtitle">{{ bolum.ad }} bölümüne ait en güncel duyurular</p>
+                                <h1 class="page-title">{{ bolum.isim }} Duyuruları</h1>
+                                <p class="page-subtitle">{{ bolum.isim }} bölümüne ait en güncel duyurular</p>
                             </div>
                             <div class="header-stats">
                                 <div class="stat-item">
@@ -50,7 +50,7 @@
                                     <span class="category-badge faculty">{{ duyuru.get_fakulte_display }}</span>
                                     {% if duyuru.bolumler.exists %}
                                         {% for bolum in duyuru.bolumler.all %}
-                                            <span class="category-badge department">{{ bolum.ad }}</span>
+                                            <span class="category-badge department">{{ bolum.isim }}</span>
                                         {% endfor %}
                                     {% endif %}
                                 </div>
@@ -128,7 +128,7 @@
                             <div class="info-list">
                                 <div class="info-item">
                                     <span class="info-label">{% trans "Bölüm Adı:" %}</span>
-                                    <span class="info-value">{{ bolum.ad }}</span>
+                                    <span class="info-value">{{ bolum.isim }}</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">{% trans "Fakülte:" %}</span>
