@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 <!-- هدر مخصوص  -->
 <style>
     /* استایل‌های مخصوص هدر  */
@@ -246,7 +247,18 @@
     .research-hamburger_container {
         display: none;
         cursor: pointer;
-        margin-left: 15px; /* کاهش margin */
+        margin-left: 15px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        transition: all 0.3s ease;
+        line-height: 1;
+    }
+    
+    .research-hamburger_container:hover {
+        background: rgba(141, 212, 227, 0.25);
+        border-color: rgba(141, 212, 227, 0.5);
     }
 
     {% comment %} /* تنظیمات خاص برای آیتم‌های دوکلمه‌ای */
@@ -418,6 +430,197 @@
     .research-main_nav_item > a {
         transition: color 0.3s ease, text-shadow 0.3s ease;
     }
+
+    /* ========== استایل‌های منوی کشویی موبایل (Mobile Navigation Drawer) ========== */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        max-width: 380px;
+        height: 100vh;
+        background: linear-gradient(145deg, #092442 0%, #0d3461 50%, #1d61a9 100%);
+        z-index: 99999;
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-nav.open {
+        right: 0;
+    }
+
+    .mobile-nav-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 22px 20px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(0, 0, 0, 0.15);
+    }
+
+    .mobile-logo img {
+        height: 48px;
+        width: auto;
+    }
+
+    .mobile-close-btn {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        cursor: pointer;
+        color: white;
+        font-size: 18px;
+        transition: all 0.25s ease;
+    }
+
+    .mobile-close-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: rotate(90deg);
+        color: #8dd4e3;
+    }
+
+    /* بخش انتخاب زبان در موبایل */
+    .mobile-language-section {
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+    .mobile-language-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #8dd4e3;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+    }
+
+    .mobile-language-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .mobile-language-option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 7px 6px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .mobile-language-option:hover {
+        background: rgba(141, 212, 227, 0.2);
+        border-color: #8dd4e3;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .mobile-language-option.active {
+        background: rgba(141, 212, 227, 0.25);
+        border-color: #8dd4e3;
+        color: #8dd4e3;
+        font-weight: 700;
+    }
+
+    .mobile-language-option .flag-icon {
+        width: 16px;
+        height: 12px;
+        border-radius: 2px;
+    }
+
+    /* لیست آیتم‌های منوی موبایل */
+    .mobile-nav-list {
+        list-style: none;
+        padding: 15px 15px;
+        margin: 0;
+        flex: 1;
+    }
+
+    .mobile-nav-item {
+        margin-bottom: 6px;
+    }
+
+    .mobile-nav-item > a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.25s ease;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid transparent;
+    }
+
+    .mobile-nav-item > a:hover {
+        background: rgba(141, 212, 227, 0.15);
+        border-color: rgba(141, 212, 227, 0.3);
+        color: #8dd4e3;
+        padding-left: 18px;
+        text-decoration: none;
+    }
+
+    .mobile-nav-item > a i {
+        width: 20px;
+        font-size: 15px;
+        color: #8dd4e3;
+        text-align: center;
+    }
+
+    /* فوتر منوی کشویی */
+    .mobile-nav-footer {
+        padding: 16px 20px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* لایه پس‌زمینه تیره (Overlay) */
+    .mobile-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(5, 18, 33, 0.65);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 99998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
 </style>
 
 <header class="research-header">
@@ -479,11 +682,111 @@
         </nav>
 
         <!-- Hamburger Menu -->
-        <div class="research-hamburger_container">
+        <div class="research-hamburger_container" id="hamburger-menu" title="{% trans "Menü" %}" role="button" aria-label="Menü">
             <i class="fas fa-bars" style="color: white; font-size: 24px;"></i>
         </div>
     </div>
 </header>
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-header">
+        <div class="mobile-logo">
+            <a href="{% url 'core:index' %}">
+                <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="{% trans 'Avrasya University' %}">
+            </a>
+        </div>
+        <div class="mobile-close-btn" id="mobile-close-btn" title="{% trans 'Kapat' %}">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+    
+    <!-- زبان در منوی موبایل -->
+    <div class="mobile-language-section">
+        <div class="mobile-language-title">
+            <i class="fas fa-globe"></i>
+            <span>{% trans "Dil Seçimi" %}</span>
+        </div>
+        <div class="mobile-language-options">
+            <a href="javascript:void(0)" onclick="changeLanguage('tr')" class="mobile-language-option {% if LANGUAGE_CODE == 'tr' or not LANGUAGE_CODE %}active{% endif %}">
+                <span class="flag-icon flag-icon-tr"></span>
+                <span>TR</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('en')" class="mobile-language-option {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+                <span class="flag-icon flag-icon-gb"></span>
+                <span>EN</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('fa')" class="mobile-language-option {% if LANGUAGE_CODE == 'fa' %}active{% endif %}">
+                <span class="flag-icon flag-icon-ir"></span>
+                <span>FA</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('ar')" class="mobile-language-option {% if LANGUAGE_CODE == 'ar' %}active{% endif %}">
+                <span class="flag-icon flag-icon-sa"></span>
+                <span>AR</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('ru')" class="mobile-language-option {% if LANGUAGE_CODE == 'ru' %}active{% endif %}">
+                <span class="flag-icon flag-icon-ru"></span>
+                <span>RU</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('de')" class="mobile-language-option {% if LANGUAGE_CODE == 'de' %}active{% endif %}">
+                <span class="flag-icon flag-icon-de"></span>
+                <span>DE</span>
+            </a>
+        </div>
+    </div>
+    
+    <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+            <a href="{% url 'core:index' %}">
+                <i class="fas fa-home"></i>
+                <span>{% trans "Home" %}</span>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="{% url 'international:campus_life' %}">
+                <i class="fas fa-tree"></i>
+                <span>{% trans "Campus Life" %}</span>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="{% url 'international:city_of_trabzon' %}">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{% trans "City of Trabzon" %}</span>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="{% url 'international:application' %}">
+                <i class="fas fa-file-alt"></i>
+                <span>{% trans "Application" %}</span>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="{% url 'international:academic_enviorment' %}">
+                <i class="fas fa-university"></i>
+                <span>{% trans "Academic Environment" %}</span>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="{% url 'international:programers' %}">
+                <i class="fas fa-list-alt"></i>
+                <span>{% trans "Programmes" %}</span>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="{% url 'core:iletisim' %}">
+                <i class="fas fa-envelope"></i>
+                <span>{% trans "Contact" %}</span>
+            </a>
+        </li>
+    </ul>
+    
+    <div class="mobile-nav-footer">
+        <p class="m-0">{% trans "© Avrasya Üniversitesi" %}</p>
+    </div>
+</div>
+
+<!-- Overlay for mobile menu -->
+<div class="mobile-overlay" id="mobile-overlay"></div>
+
 
 <!-- Space for fixed header -->
 <div style="height: 200px;"></div>
@@ -491,6 +794,76 @@
 <script>
     // اسکریپت برای هدر ثابت
     document.addEventListener('DOMContentLoaded', function() {
+
+        // ========== مدیریت منوی موبایل (Mobile Navigation Drawer) ==========
+        const hamburgerBtn = document.getElementById('hamburger-menu') || document.querySelector('.research-hamburger_container');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const mobileCloseBtn = document.getElementById('mobile-close-btn');
+
+        function toggleMobileMenu(open) {
+            if (!mobileNav || !mobileOverlay) return;
+            if (open) {
+                mobileNav.classList.add('open');
+                mobileOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileNav.classList.remove('open');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const isOpen = mobileNav && mobileNav.classList.contains('open');
+                toggleMobileMenu(!isOpen);
+            });
+        }
+
+        if (mobileCloseBtn) {
+            mobileCloseBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMobileMenu(false);
+            });
+        }
+
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleMobileMenu(false);
+            });
+        }
+
+        // بستن با کلیک روی هر لینک در منوی موبایل
+        if (mobileNav) {
+            mobileNav.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (!link.classList.contains('mobile-language-option')) {
+                        toggleMobileMenu(false);
+                    }
+                });
+            });
+        }
+
+        // بستن با کلید Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('open')) {
+                toggleMobileMenu(false);
+            }
+        });
+
+        // بستن در صورت بزرگ شدن سایز پنجره
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992 && mobileNav && mobileNav.classList.contains('open')) {
+                toggleMobileMenu(false);
+            }
+        });
+
+
         const header = document.querySelector('.research-header');
         
         window.addEventListener('scroll', function() {
