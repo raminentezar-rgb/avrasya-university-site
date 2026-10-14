@@ -1,0 +1,70 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Döküman" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+<!-- Page Title Header (matching old site style) -->
+<div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+    <h2 class="font-weight-bold" style="color: #163269; font-size: 2rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+        {% trans "Döküman" %}
+    </h2>
+    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+    </p>
+</div>
+
+<!-- Documents List Card -->
+<div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+    <ul class="list-unstyled mb-0 dokuman-list" style="line-height: 2.5;">
+        <li class="mb-3">
+            <a href="https://www.yokak.gov.tr/ulusal-degerlendirme-programlarina-ait-dokumanlar/" target="_blank" rel="noopener noreferrer" class="d-flex align-items-center font-weight-bold dokuman-link">
+                <i class="fas fa-external-link-alt text-primary mr-3" style="font-size: 1.15rem;"></i>
+                <span>{% trans "YÖKAK Ulusal Değerlendirme Programlarına Ait Dokümanlar" %}</span>
+            </a>
+        </li>
+        <li class="mb-3">
+            <a href="https://www.yokak.gov.tr/uluslararasi-degerlendirme-programlarina-ait-dokumanlar/" target="_blank" rel="noopener noreferrer" class="d-flex align-items-center font-weight-bold dokuman-link">
+                <i class="fas fa-external-link-alt text-primary mr-3" style="font-size: 1.15rem;"></i>
+                <span>{% trans "YÖKAK Uluslararası Değerlendirme Programlarına Ait Dokümanlar" %}</span>
+            </a>
+        </li>
+        <li class="mb-0">
+            <a href="https://www.yokak.gov.tr/yetkilendirme-ve-tanima-dokumanlari/" target="_blank" rel="noopener noreferrer" class="d-flex align-items-center font-weight-bold dokuman-link">
+                <i class="fas fa-external-link-alt text-primary mr-3" style="font-size: 1.15rem;"></i>
+                <span>{% trans "YÖKAK Yetkilendirme ve Tanıma Dokümanları" %}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<style>
+.dokuman-link {
+    color: #163269;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px solid #eef2f6;
+}
+
+.dokuman-link:hover {
+    color: #1d61a9;
+    background: rgba(29, 97, 169, 0.08);
+    transform: translateX(6px);
+    text-decoration: none;
+    border-color: rgba(29, 97, 169, 0.25);
+}
+
+.dokuman-link i {
+    transition: transform 0.25s ease;
+}
+
+.dokuman-link:hover i {
+    transform: scale(1.15);
+}
+</style>
+{% endblock %}

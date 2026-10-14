@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('avrasya-yonetim-paneli-2026/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
@@ -122,6 +123,8 @@ urlpatterns += i18n_patterns(
     path('yonetim_bilisim_sistemleri/', include('yonetim_bilisim_sistemleri.urls')),
     path('gastronomi_mutfak_sanatlari/', include('gastronomi_mutfak_sanatlari.urls')),
     path('sks/', include('sks.urls')),
+    path('kalite_ve_akreditasyon_koordinatorlugu/', include('kalite_akreditasyon.urls')),
+    path('kalite_akreditasyon/', include('kalite_akreditasyon.urls', namespace='kalite_alias')),
     path('odeme/', include('tuition.urls', namespace='tuition')),
     prefix_default_language=False
 )

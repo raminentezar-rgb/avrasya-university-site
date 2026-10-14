@@ -1,0 +1,1638 @@
+{% load i18n %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+<!-- هدر مخصوص  -->
+<style>
+    /* استایل‌های مخصوص هدر  */
+    .research-header {
+        position: fixed;
+        top: 45px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1600px;
+        height: 104px;
+        background: rgba(9, 36, 66, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 1000;
+        transition: all 200ms ease;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(9, 36, 66, 0.3);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+    }
+    
+    .research-header.scrolled {
+        top: 15px;
+    }
+    
+    .research-header-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        padding: 0 20px;
+        position: relative;
+    }
+    
+    .research-logo_container {
+        display: inline-block;
+        padding-left: 30px;
+    }
+    
+    /* اصلاح اندازه لوگو - بزرگتر شده */
+    .research-logo_container img {
+         
+        /* افزایش از 40px به 60px */
+        height: 80px;
+        width: auto;
+        transition: all 0.3s ease;
+    }
+    
+    .research-main_nav_container {
+        display: inline-block;
+        margin-left: 80px;
+        padding-right: 50px;
+        background: transparent;
+        position: relative;
+    }
+    
+    .research-main_nav {
+        margin-top: 7px;
+    }
+    
+    .research-main_nav_list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 25px; /* کاهش gap برای فشرده‌تر شدن */
+        align-items: center;
+    }
+    
+    .research-main_nav_item {
+        display: inline-block;
+        position: relative;
+        white-space: nowrap; /* جلوگیری از شکستن خط */
+    }
+    
+    .research-main_nav_item > a {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px; /* کاهش سایز فونت */
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--pure-white);
+        transition: all 200ms ease;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+        padding: 10px 8px; /* کاهش padding */
+        display: block;
+        position: relative;
+        line-height: 1.2;
+        text-align: center;
+    }
+    
+    .research-main_nav_item > a:hover {
+        color: var(--accent-light-blue);
+        text-shadow: 0 2px 4px rgba(141, 212, 227, 0.3);
+    }
+    
+    .research-main_nav_item > a.active {
+        color: var(--accent-light-blue);
+    }
+
+    /* استایل‌های مگا منو تحقیقات */
+    .research-mega-menu {
+        position: static !important;
+    }
+
+    .research-mega-menu-content {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        max-width: 1200px;
+        background: rgba(9, 36, 66, 5);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(9, 36, 66, 0.4);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1001;
+        padding: 25px; /* کاهش padding */
+        margin-top: 15px;
+    }
+
+    /* حل مشکل gap بین منو و زیرمنو */
+    .research-main_nav_item::before {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: -10px;
+        right: -10px;
+        height: 20px;
+        background: transparent;
+        z-index: 1002;
+    }
+
+    .research-main_nav_item:hover .research-mega-menu-content {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* ایجاد یک پل نامرئی بین منو و زیرمنو */
+    .research-mega-menu-content::before {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background: transparent;
+    }
+
+    .research-mega-menu-content h6 {
+        color: var(--accent-light-blue) !important;
+        font-weight: 700;
+        font-size: 16px; /* کاهش سایز فونت */
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--accent-light-blue);
+    }
+
+    .research-dropdown-item {
+        display: block;
+        padding: 6px 0; /* کاهش padding */
+        color: white;
+        text-decoration: none;
+        font-size: 14px; /* کاهش سایز فونت */
+        transition: all 0.2s ease;
+        border-left: 3px solid transparent;
+        font-family: 'Open Sans', sans-serif;
+        line-height: 1.3;
+        white-space: nowrap; /* جلوگیری از شکستن خط */
+    }
+
+    .research-dropdown-item:hover {
+        background: transparent;
+        color: var(--accent-light-blue);
+        border-left-color: var(--accent-light-blue);
+        padding-left: 8px; /* کاهش padding */
+        transform: translateX(3px); /* کاهش transform */
+    }
+
+    .research-mega-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -12px; /* کاهش margin */
+    }
+
+    .research-mega-col {
+        flex: 1;
+        min-width: 180px; /* کاهش min-width */
+        padding: 0 12px; /* کاهش padding */
+        margin-bottom: 15px;
+    }
+
+    .research-list-unstyled {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* تاخیر در بسته شدن منو */
+    .research-main_nav_item {
+        transition: all 0.3s ease 0.1s;
+    }
+
+    .research-mega-menu-content {
+        transition: all 0.3s ease 0.1s;
+    }
+    
+    .research-header_side {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px; /* کاهش gap */
+    }
+    
+    .research-header_icon_container {
+        display: flex;
+        align-items: center;
+        gap: 0px;
+        cursor: pointer;
+        padding: 8px; /* کاهش padding */
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+    
+    .research-header_icon_container:hover {
+        background: rgba(141, 212, 227, 0.1);
+    }
+    
+    .research-header_icon {
+        width: 24px; /* کاهش سایز */
+        height: 24px; /* کاهش سایز */
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+        filter: brightness(0) invert(1);
+    }
+    
+    .research-hamburger_container {
+        display: none;
+        cursor: pointer;
+        margin-left: 15px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        transition: all 0.3s ease;
+        line-height: 1;
+    }
+    
+    .research-hamburger_container:hover {
+        background: rgba(141, 212, 227, 0.25);
+        border-color: rgba(141, 212, 227, 0.5);
+    }
+
+    {% comment %} /* تنظیمات خاص برای آیتم‌های دوکلمه‌ای */
+    .research-main_nav_item:nth-child(1) > a { /* Araştırma Politikaları */
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+    
+    .research-main_nav_item:nth-child(3) > a { /* Laboratuvarlar */
+        font-size: 13px;
+        padding: 10px 6px;
+    }
+    
+    .research-main_nav_item:nth-child(4) > a { /* Araştırma Merkezleri */
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+    
+    .research-main_nav_item:nth-child(5) > a { /* Fikri ve Sınai Mülkiyet */
+        font-size: 11px;
+        padding: 10px 4px;
+    }
+    
+    .research-main_nav_item:nth-child(6) > a { /* Araştırma Çıktıları */
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+     {% endcomment %}
+    /* responsive */
+    @media (max-width: 1400px) {
+        .research-header {
+            width: 95%;
+            height: 120px;
+        }
+        
+        .research-mega-menu-content {
+            width: 95vw;
+        }
+        
+        .research-main_nav_list {
+            gap: 20px;
+        }
+        
+        .research-main_nav_item > a {
+            font-size: 12px;
+            padding: 10px 6px;
+        }
+        
+        /* اصلاح اندازه لوگو در حالت responsive */
+        .research-logo_container img {
+            height: 55px;
+        }
+    }
+    
+    @media (max-width: 1200px) {
+        .research-main_nav_container {
+            padding-right: 20px;
+            margin-left: 30px;
+        }
+        
+        .research-main_nav_list {
+            gap: 15px;
+        }
+        
+        .research-mega-menu-content {
+            padding: 20px;
+        }
+        
+        .research-mega-col {
+            min-width: 160px;
+        }
+        
+        .research-main_nav_item > a {
+            font-size: 11px;
+            padding: 10px 4px;
+        }
+        
+        /* اصلاح اندازه لوگو در حالت responsive */
+        .research-logo_container img {
+            height: 50px;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .research-main_nav_container {
+            display: none;
+        }
+        
+        .research-hamburger_container {
+            display: block;
+        }
+        
+        .research-header_side {
+            display: none;
+        }
+        
+        .research-mega-menu-content {
+            display: none;
+        }
+        
+        .research-main_nav_item::before {
+            display: none;
+        }
+        
+        /* اصلاح اندازه لوگو در موبایل */
+        .research-logo_container img {
+            height: 45px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .research-header {
+            height: 100px;
+            top: 15px;
+        }
+        
+        .research-logo_container {
+            padding-left: 15px;
+        }
+        
+        /* اصلاح اندازه لوگو در موبایل کوچک */
+        .research-logo_container img {
+            height: 40px;
+        }
+
+        .research-logo_container .logo span {
+            font-size: 16px; 
+            /* کاهش سایز فونت در موبایل */
+        }
+
+        /* استایل برای کلمه Araştırma */
+        .research-logo_container .logo span {
+            display: block;
+            font-size: 18px; /* افزایش سایز فونت */
+            font-weight: bold;
+            color: white;
+            margin-top: 5px;
+            text-align: center;
+        }
+    }
+      /* استایل‌های مخصوص هدر تحقیقات */
+    
+    /* کلاس جدید برای زمانی که هدر در حالت اسکرول است */
+    .research-header.scrolled .research-main_nav_item > a {
+        color: #1e90ff; /* آبی پررنگ - می‌توانید تغییر دهید */
+        text-shadow: 0 2px 4px rgba(30, 144, 255, 0.4);
+    }
+    
+    /* حفظ رنگ آبی در هاور حتی در حالت اسکرول */
+    .research-header.scrolled .research-main_nav_item > a:hover {
+        color: var(--accent-light-blue) !important;
+        text-shadow: 0 2px 4px rgba(141, 212, 227, 0.3) !important;
+    }
+    
+    /* حفظ رنگ آبی برای لینک فعال در حالت اسکرول */
+    .research-header.scrolled .research-main_nav_item > a.active {
+        color: var(--accent-light-blue) !important;
+    }
+
+    /* تضمین کنتراست بهتر */
+    .research-header.scrolled {
+        background: rgba(9, 36, 66, 0); /* پس‌زمینه تیره‌تر در اسکرول */
+        {% comment %} border: 1px solid rgba(30, 144, 255, 0.5); /* حاشیه آبی */ {% endcomment %}
+        box-shadow: 0 8px 32px rgba(30, 144, 255, 0.2); /* سایه آبی */
+    }
+
+    /* (اختیاری) انیمیشن ملایم برای تغییر رنگ */
+    .research-main_nav_item > a {
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    /* ========== استایل‌های مدرن و شیک منوی موبایل (Mobile Navigation Drawer) ========== */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 88%;
+        max-width: 380px;
+        height: 100vh;
+        background: linear-gradient(180deg, #071e38 0%, #0c2b4e 50%, #081d34 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 999999;
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-shadow: -15px 0 45px rgba(0, 0, 0, 0.7);
+        border-left: 1px solid rgba(141, 212, 227, 0.25);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-nav.open {
+        right: 0;
+    }
+
+    .mobile-nav::-webkit-scrollbar {
+        width: 5px;
+    }
+    .mobile-nav::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.15);
+    }
+    .mobile-nav::-webkit-scrollbar-thumb {
+        background: rgba(141, 212, 227, 0.3);
+        border-radius: 4px;
+    }
+
+    .mobile-nav-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 20px 18px;
+        border-bottom: 1px solid rgba(141, 212, 227, 0.2);
+        background: rgba(0, 0, 0, 0.25);
+    }
+
+    .mobile-logo-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .mobile-logo-wrapper img {
+        height: 48px;
+        width: auto;
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+    }
+
+    .mobile-logo-text {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+    }
+
+    .mobile-logo-title {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        line-height: 1.2;
+    }
+
+    .mobile-logo-subtitle {
+        color: #f79f10;
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .mobile-close-btn {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        border-radius: 50%;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-close-btn:hover {
+        background: rgba(247, 159, 16, 0.25);
+        border-color: #f79f10;
+        transform: rotate(90deg) scale(1.05);
+        color: #f79f10;
+    }
+
+    /* بخش انتخاب زبان در موبایل */
+    .mobile-language-section {
+        padding: 12px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.12);
+    }
+
+    .mobile-language-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #8dd4e3;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-bottom: 8px;
+    }
+
+    .mobile-language-options {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 6px;
+    }
+
+    .mobile-language-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 6px 2px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        color: #e2e8f0;
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    .mobile-language-option:hover {
+        background: rgba(141, 212, 227, 0.2);
+        border-color: #8dd4e3;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .mobile-language-option.active {
+        background: rgba(141, 212, 227, 0.28);
+        border-color: #8dd4e3;
+        color: #8dd4e3;
+        font-weight: 700;
+        box-shadow: 0 0 10px rgba(141, 212, 227, 0.35);
+    }
+
+    .mobile-language-option .flag-icon {
+        width: 16px;
+        height: 12px;
+        border-radius: 2px;
+    }
+
+    /* لیست آیتم‌های منوی موبایل */
+    .mobile-nav-list {
+        list-style: none;
+        padding: 14px 14px;
+        margin: 0;
+        flex: 1;
+    }
+
+    .mobile-nav-item {
+        margin-bottom: 7px;
+        list-style: none;
+    }
+
+    /* کانتینر ردیف آیتم اصلی */
+    .mobile-nav-link-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 8px 6px 12px;
+        color: #ffffff;
+        border-radius: 10px;
+        transition: all 0.25s ease;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+    }
+
+    .mobile-nav-link-row:hover {
+        background: rgba(141, 212, 227, 0.14);
+        border-color: rgba(141, 212, 227, 0.35);
+    }
+
+    .mobile-nav-item.open > .mobile-nav-link-row {
+        background: rgba(29, 97, 169, 0.35);
+        border-color: rgba(141, 212, 227, 0.5);
+    }
+
+    .mobile-nav-main-action {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 6px 0;
+    }
+
+    .mobile-nav-main-action:hover {
+        color: #8dd4e3;
+        text-decoration: none;
+    }
+
+    .mobile-nav-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: rgba(141, 212, 227, 0.14);
+        border: 1px solid rgba(141, 212, 227, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #8dd4e3;
+        font-size: 14px;
+        flex-shrink: 0;
+        transition: all 0.25s ease;
+    }
+
+    .mobile-nav-link-row:hover .mobile-nav-icon,
+    .mobile-nav-item.open .mobile-nav-icon {
+        background: #8dd4e3;
+        color: #092442;
+        box-shadow: 0 0 10px rgba(141, 212, 227, 0.45);
+    }
+
+    .mobile-nav-title {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        color: inherit;
+    }
+
+    /* دکمه فلش شیک برای باز کردن زیرمنوها بدون بوردر زشت پیش‌فرض */
+    .mobile-toggle-btn {
+        background: rgba(255, 255, 255, 0.06) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        outline: none !important;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.8) !important;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        padding: 0;
+        margin: 0;
+        box-shadow: none !important;
+    }
+
+    .mobile-toggle-btn:hover {
+        background: rgba(141, 212, 227, 0.25) !important;
+        color: #8dd4e3 !important;
+        border-color: #8dd4e3 !important;
+    }
+
+    .mobile-toggle-btn i {
+        transition: transform 0.3s ease;
+        pointer-events: none;
+    }
+
+    .mobile-nav-item.open > .mobile-nav-link-row .mobile-toggle-btn {
+        background: rgba(141, 212, 227, 0.25) !important;
+        color: #8dd4e3 !important;
+        border-color: #8dd4e3 !important;
+    }
+
+    .mobile-nav-item.open > .mobile-nav-link-row .mobile-toggle-btn i {
+        transform: rotate(180deg);
+    }
+
+    /* زیرمنوهای آکاردئونی روان */
+    .mobile-submenu {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 14px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, margin 0.25s ease;
+        border-left: 2px solid rgba(141, 212, 227, 0.35);
+        margin-left: 20px;
+    }
+
+    .mobile-nav-item.open > .mobile-submenu {
+        max-height: 700px;
+        opacity: 1;
+        margin-top: 6px;
+        margin-bottom: 8px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    .mobile-submenu-item {
+        list-style: none;
+        margin-bottom: 2px;
+    }
+
+    .mobile-submenu-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        color: rgba(255, 255, 255, 0.88);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .mobile-submenu-link i {
+        font-size: 10px;
+        color: #8dd4e3;
+        opacity: 0.65;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .mobile-submenu-link:hover {
+        background: rgba(141, 212, 227, 0.16);
+        color: #ffffff;
+        text-decoration: none;
+        padding-left: 16px;
+    }
+
+    .mobile-submenu-link:hover i {
+        opacity: 1;
+        transform: translateX(3px);
+    }
+
+    /* زیرمنوی سطح دوم (Nested: Alt Çalışma Grupları) */
+    .mobile-nested-item {
+        margin-bottom: 2px;
+        list-style: none;
+    }
+
+    .mobile-nested-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .mobile-nested-header:hover {
+        background: rgba(141, 212, 227, 0.14);
+        color: #8dd4e3;
+    }
+
+    .mobile-nested-btn {
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.6);
+        transition: transform 0.25s ease;
+    }
+
+    .mobile-nested-item.open > .mobile-nested-header .mobile-nested-btn {
+        transform: rotate(180deg);
+        color: #8dd4e3;
+    }
+
+    .mobile-nested-list {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 12px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.25s ease;
+        border-left: 2px dashed rgba(141, 212, 227, 0.35);
+        margin-left: 12px;
+    }
+
+    .mobile-nested-item.open > .mobile-nested-list {
+        max-height: 200px;
+        opacity: 1;
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+    /* پشتیبانی از حالت راست به چپ (RTL) */
+    [dir="rtl"] .mobile-nav,
+    body.rtl .mobile-nav {
+        right: auto;
+        left: -100%;
+        border-left: none;
+        border-right: 1px solid rgba(141, 212, 227, 0.25);
+        box-shadow: 15px 0 45px rgba(0, 0, 0, 0.7);
+        transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [dir="rtl"] .mobile-nav.open,
+    body.rtl .mobile-nav.open {
+        left: 0;
+        right: auto;
+    }
+
+    [dir="rtl"] .mobile-submenu,
+    body.rtl .mobile-submenu {
+        padding: 0 14px 0 0;
+        border-left: none;
+        border-right: 2px solid rgba(141, 212, 227, 0.35);
+        margin-left: 0;
+        margin-right: 20px;
+    }
+
+    [dir="rtl"] .mobile-nested-list,
+    body.rtl .mobile-nested-list {
+        padding: 0 12px 0 0;
+        border-left: none;
+        border-right: 2px dashed rgba(141, 212, 227, 0.35);
+        margin-left: 0;
+        margin-right: 12px;
+    }
+
+    [dir="rtl"] .mobile-submenu-link:hover,
+    body.rtl .mobile-submenu-link:hover {
+        padding-left: 12px;
+        padding-right: 16px;
+    }
+
+    [dir="rtl"] .mobile-submenu-link:hover i,
+    body.rtl .mobile-submenu-link:hover i {
+        transform: translateX(-3px);
+    }
+
+    /* فوتر منوی کشویی */
+    .mobile-nav-footer {
+        padding: 16px 20px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 12px;
+        border-top: 1px solid rgba(141, 212, 227, 0.15);
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .mobile-nav-footer p {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    /* لایه پس‌زمینه تیره (Overlay) */
+    .mobile-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(5, 18, 33, 0.72);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 999998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .mobile-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Submenu Dropdown (Matching Image 1) */
+    .has-dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu-custom {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 270px;
+        background: #f4f6f8;
+        border-radius: 8px;
+        box-shadow: 0 12px 35px rgba(9, 36, 66, 0.22);
+        border: 1px solid rgba(141, 212, 227, 0.35);
+        padding: 8px 0;
+        margin: 5px 0 0 0;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        transition: all 0.25s ease;
+        z-index: 1002;
+    }
+
+    .has-dropdown:hover .dropdown-menu-custom {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-menu-custom li {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .dropdown-menu-custom li a {
+        display: block !important;
+        padding: 10px 18px !important;
+        color: #2d3748 !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        text-transform: none !important;
+        text-align: left !important;
+        text-shadow: none !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease !important;
+        background: transparent !important;
+    }
+
+    .dropdown-menu-custom li:last-child a {
+        border-bottom: none;
+    }
+
+    .dropdown-menu-custom li a:hover {
+        background: rgba(29, 97, 169, 0.09) !important;
+        color: #1d61a9 !important;
+    }
+
+    /* Flyout Submenu (Matching Image) */
+    .has-flyout {
+        position: relative;
+    }
+
+    .dropdown-flyout-custom {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        min-width: 260px;
+        background: #f4f6f8;
+        border-radius: 8px;
+        box-shadow: 0 12px 35px rgba(9, 36, 66, 0.22);
+        border: 1px solid rgba(141, 212, 227, 0.35);
+        padding: 8px 0;
+        margin: 0;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(8px);
+        transition: all 0.25s ease;
+        z-index: 1005;
+    }
+
+    .dropdown-flyout-custom::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -15px;
+        width: 15px;
+        height: 100%;
+        background: transparent;
+    }
+
+    [dir="rtl"] .dropdown-flyout-custom,
+    body.rtl .dropdown-flyout-custom {
+        left: auto;
+        right: 100%;
+        transform: translateX(-8px);
+    }
+
+    [dir="rtl"] .dropdown-flyout-custom::before,
+    body.rtl .dropdown-flyout-custom::before {
+        left: auto;
+        right: -15px;
+    }
+
+    .has-flyout:hover .dropdown-flyout-custom {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    [dir="rtl"] .has-flyout:hover .dropdown-flyout-custom,
+    body.rtl .has-flyout:hover .dropdown-flyout-custom {
+        transform: translateX(0);
+    }
+
+    .dropdown-flyout-custom li a {
+        display: block !important;
+        padding: 10px 18px !important;
+        color: #2d3748 !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        text-transform: none !important;
+        text-align: left !important;
+        text-shadow: none !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease !important;
+        background: transparent !important;
+    }
+
+    .dropdown-flyout-custom li:last-child a {
+        border-bottom: none;
+    }
+
+    .dropdown-flyout-custom li a:hover {
+        background: rgba(29, 97, 169, 0.09) !important;
+        color: #1d61a9 !important;
+        padding-left: 22px !important;
+    }
+
+    /* Nested Mobile Submenu */
+    .has-nested-mobile.open .nested-mobile-list {
+        display: block !important;
+    }
+
+    .nested-mobile-list li a {
+        border-left: 2px dashed rgba(141, 212, 227, 0.5) !important;
+        color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+</style>
+
+<header class="research-header">
+    <div class="research-header-content">
+        <!-- Logo -->
+        <div class="research-logo_container">
+            <div class="logo">
+                <a href="{% url 'kalite_akreditasyon:home' %}" class="navbar-brand d-flex align-items-center">
+                    <img src="{% static 'core/img/Şeffaf Arka Planlı Avrasya Üniversitesi Logosu.png' %}" alt="{% trans 'Avrasya University' %}" style="height: 75px;">
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Navigation (9 Items Matching Sidebar) -->
+        <nav class="research-main_nav_container">
+            <div class="research-main_nav">
+                <ul class="research-main_nav_list">
+                    <li class="research-main_nav_item">
+                        <a href="{% url 'core:index' %}" class="{% if active_menu == 'duyurular' %}active{% endif %}">{% trans "Anasayfa" %}</a>
+                    </li>
+                    <li class="research-main_nav_item has-dropdown">
+                        <a href="{% url 'kalite_akreditasyon:hakkinda' %}" class="{% if active_menu == 'hakkinda' %}active{% endif %}">
+                            {% trans "Hakkında" %} <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                        </a>
+                        <ul class="dropdown-menu-custom">
+                            <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-yonetim">{% trans "Yönetim" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-komisyon">{% trans "Kalite Komisyon Üyeleri" %}</a></li>
+                            <li class="has-flyout">
+                                <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-alt-calisma" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span>{% trans "Alt Çalışma Grupları" %}</span>
+                                    <i class="fas fa-chevron-right" style="font-size: 10px; opacity: 0.65; margin-left: 8px;"></i>
+                                </a>
+                                <ul class="dropdown-flyout-custom">
+                                    <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-alt-idari-destek">{% trans "İdari Destek Yapılanması" %}</a></li>
+                                    <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-alt-birim-komisyon">{% trans "Birim Kalite Alt Komisyonları" %}</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-danisma">{% trans "Danışma Kurulu" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-politika">{% trans "Kurum Kalite Politikası" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-stratejik">{% trans "Stratejik Plan" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-organizasyon">{% trans "Organizasyon Şeması" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-kurullar">{% trans "Kurul ve Komisyonlar" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-misyon">{% trans "Misyon & Vizyon" %}</a></li>
+                        </ul>
+                    </li>
+                    <li class="research-main_nav_item">
+                        <a href="{% url 'kalite_akreditasyon:duyurular' %}" class="{% if active_menu == 'duyurular' %}active{% endif %}">{% trans "Duyurular" %}</a>
+                    </li>
+                    <li class="research-main_nav_item">
+                        <a href="{% url 'kalite_akreditasyon:haberler' %}" class="{% if active_menu == 'haberler' %}active{% endif %}">{% trans "Haberler" %}</a>
+                    </li>
+                    <li class="research-main_nav_item has-dropdown">
+                        <a href="{% url 'kalite_akreditasyon:mevzuat' %}" class="{% if active_menu == 'mevzuat' %}active{% endif %}">
+                            {% trans "Mevzuat" %} <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                        </a>
+                        <ul class="dropdown-menu-custom">
+                            <li><a href="{% url 'kalite_akreditasyon:mevzuat' %}">{% trans "İlgili Mevzuatlar" %}</a></li>
+                        </ul>
+                    </li>
+                    <li class="research-main_nav_item has-dropdown">
+                        <a href="{% url 'kalite_akreditasyon:takvim' %}" class="{% if active_menu == 'takvim' %}active{% endif %}">
+                            {% trans "Takvim" %} <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                        </a>
+                        <ul class="dropdown-menu-custom">
+                            <li><a href="{% url 'kalite_akreditasyon:takvim' %}#tab-komisyon-takvim">{% trans "Komisyon Çalışma Takvimi" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:takvim' %}#tab-tamamlanan-calismalar">{% trans "Tamamlanan Çalışmalar" %}</a></li>
+                        </ul>
+                    </li>
+                    <li class="research-main_nav_item has-dropdown">
+                        <a href="{% url 'kalite_akreditasyon:raporlar' %}" class="{% if active_menu == 'raporlar' %}active{% endif %}">
+                            {% trans "Raporlar" %} <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                        </a>
+                        <ul class="dropdown-menu-custom">
+                            <li><a href="{% url 'kalite_akreditasyon:raporlar' %}">{% trans "Kurum İç Değerlendirme Raporları" %}</a></li>
+                        </ul>
+                    </li>
+                    <li class="research-main_nav_item has-dropdown">
+                        <a href="{% url 'kalite_akreditasyon:izleme' %}" class="{% if active_menu == 'izleme' %}active{% endif %}">
+                            {% trans "İzleme" %} <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                        </a>
+                        <ul class="dropdown-menu-custom">
+                            <li><a href="{% url 'kalite_akreditasyon:izleme' %}#tab-bidr-yukleme">{% trans "BİDR Yükleme Sistemi" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:izleme' %}#tab-paydas-analizi">{% trans "Paydaş Analizi Sonuçları" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:izleme' %}#tab-dis-degerlendirme">{% trans "Dış Değerlendirme" %}</a></li>
+                            <li><a href="{% url 'kalite_akreditasyon:izleme' %}#tab-surec-degerlendirme">{% trans "Süreç Değerlendirme" %}</a></li>
+                        </ul>
+                    </li>
+                    <li class="research-main_nav_item">
+                        <a href="{% url 'kalite_akreditasyon:dokuman' %}" class="{% if active_menu == 'dokuman' %}active{% endif %}">{% trans "Doküman" %}</a>
+                    </li>
+                    <li class="research-main_nav_item">
+                        <a href="{% url 'kalite_akreditasyon:sss' %}" class="{% if active_menu == 'sss' %}active{% endif %}">{% trans "S.S.S" %}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hamburger Menu -->
+        <div class="research-hamburger_container" id="hamburger-menu" title="{% trans 'Menü' %}" role="button" aria-label="Menü">
+            <i class="fas fa-bars" style="color: white; font-size: 24px;"></i>
+        </div>
+    </div>
+</header>
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-header">
+        <div class="mobile-logo-wrapper">
+            <a href="{% url 'kalite_akreditasyon:home' %}" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="{% static 'core/img/Şeffaf Arka Planlı Avrasya Üniversitesi Logosu.png' %}" alt="{% trans 'Avrasya University' %}">
+                <div class="mobile-logo-text">
+                    <span class="mobile-logo-title">AVRASYA</span>
+                    <span class="mobile-logo-subtitle">Kalite ve Akreditasyon</span>
+                </div>
+            </a>
+        </div>
+        <div class="mobile-close-btn" id="mobile-close-btn" title="{% trans 'Kapat' %}">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+    
+    <!-- زبان در منوی موبایل -->
+    <div class="mobile-language-section">
+        <div class="mobile-language-title">
+            <i class="fas fa-globe"></i>
+            <span>{% trans "Dil Seçimi" %}</span>
+        </div>
+        <div class="mobile-language-options">
+            <a href="javascript:void(0)" onclick="changeLanguage('tr')" class="mobile-language-option {% if LANGUAGE_CODE == 'tr' or not LANGUAGE_CODE %}active{% endif %}">
+                <span class="flag-icon flag-icon-tr"></span>
+                <span>TR</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('en')" class="mobile-language-option {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+                <span class="flag-icon flag-icon-gb"></span>
+                <span>EN</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('fa')" class="mobile-language-option {% if LANGUAGE_CODE == 'fa' %}active{% endif %}">
+                <span class="flag-icon flag-icon-ir"></span>
+                <span>FA</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('ar')" class="mobile-language-option {% if LANGUAGE_CODE == 'ar' %}active{% endif %}">
+                <span class="flag-icon flag-icon-sa"></span>
+                <span>AR</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('ru')" class="mobile-language-option {% if LANGUAGE_CODE == 'ru' %}active{% endif %}">
+                <span class="flag-icon flag-icon-ru"></span>
+                <span>RU</span>
+            </a>
+            <a href="javascript:void(0)" onclick="changeLanguage('de')" class="mobile-language-option {% if LANGUAGE_CODE == 'de' %}active{% endif %}">
+                <span class="flag-icon flag-icon-de"></span>
+                <span>DE</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu: 10 items matching Desktop Navigation -->
+    <ul class="mobile-nav-list">
+        
+        <!-- 1. Anasayfa -->
+        <li class="mobile-nav-item">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'core:index' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-home"></i></span>
+                    <span class="mobile-nav-title">{% trans "Anasayfa" %}</span>
+                </a>
+            </div>
+        </li>
+
+        <!-- 2. Hakkında (Accordion with Submenu) -->
+        <li class="mobile-nav-item has-accordion">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:hakkinda' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-info-circle"></i></span>
+                    <span class="mobile-nav-title">{% trans "Hakkında" %}</span>
+                </a>
+                <button type="button" class="mobile-toggle-btn" aria-label="Toggle Hakkında Submenu">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <ul class="mobile-submenu">
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-yonetim" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Yönetim" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-komisyon" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Kalite Komisyon Üyeleri" %}</span>
+                    </a>
+                </li>
+                <!-- Nested Alt Çalışma Grupları -->
+                <li class="mobile-nested-item">
+                    <div class="mobile-nested-header">
+                        <span style="display: flex; align-items: center; gap: 6px;">
+                            <i class="fas fa-users" style="font-size: 11px; color: #8dd4e3;"></i>
+                            <span>{% trans "Alt Çalışma Grupları" %}</span>
+                        </span>
+                        <span class="mobile-nested-btn"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <ul class="mobile-nested-list">
+                        <li class="mobile-submenu-item">
+                            <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-alt-idari-destek" class="mobile-submenu-link">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                                <span>{% trans "İdari Destek Yapılanması" %}</span>
+                            </a>
+                        </li>
+                        <li class="mobile-submenu-item">
+                            <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-alt-birim-komisyon" class="mobile-submenu-link">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                                <span>{% trans "Birim Kalite Alt Komisyonları" %}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-danisma" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Danışma Kurulu" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-politika" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Kurum Kalite Politikası" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-stratejik" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Stratejik Plan" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-organizasyon" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Organizasyon Şeması" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-kurullar" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Kurul ve Komisyonlar" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:hakkinda' %}#tab-misyon" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Misyon & Vizyon" %}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- 3. Duyurular -->
+        <li class="mobile-nav-item">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:duyurular' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-bullhorn"></i></span>
+                    <span class="mobile-nav-title">{% trans "Duyurular" %}</span>
+                </a>
+            </div>
+        </li>
+
+        <!-- 4. Haberler -->
+        <li class="mobile-nav-item">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:haberler' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-newspaper"></i></span>
+                    <span class="mobile-nav-title">{% trans "Haberler" %}</span>
+                </a>
+            </div>
+        </li>
+
+        <!-- 5. Mevzuat (Accordion with Submenu) -->
+        <li class="mobile-nav-item has-accordion">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:mevzuat' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-balance-scale"></i></span>
+                    <span class="mobile-nav-title">{% trans "Mevzuat" %}</span>
+                </a>
+                <button type="button" class="mobile-toggle-btn" aria-label="Toggle Mevzuat Submenu">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <ul class="mobile-submenu">
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:mevzuat' %}" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "İlgili Mevzuatlar" %}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- 6. Takvim (Accordion with Submenu) -->
+        <li class="mobile-nav-item has-accordion">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:takvim' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-calendar-alt"></i></span>
+                    <span class="mobile-nav-title">{% trans "Takvim" %}</span>
+                </a>
+                <button type="button" class="mobile-toggle-btn" aria-label="Toggle Takvim Submenu">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <ul class="mobile-submenu">
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:takvim' %}#tab-komisyon-takvim" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Komisyon Çalışma Takvimi" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:takvim' %}#tab-tamamlanan-calismalar" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Tamamlanan Çalışmalar" %}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- 7. Raporlar (Accordion with Submenu) -->
+        <li class="mobile-nav-item has-accordion">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:raporlar' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-file-contract"></i></span>
+                    <span class="mobile-nav-title">{% trans "Raporlar" %}</span>
+                </a>
+                <button type="button" class="mobile-toggle-btn" aria-label="Toggle Raporlar Submenu">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <ul class="mobile-submenu">
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:raporlar' %}" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Kurum İç Değerlendirme Raporları" %}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- 8. İzleme (Accordion with Submenu) -->
+        <li class="mobile-nav-item has-accordion">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:izleme' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-chart-line"></i></span>
+                    <span class="mobile-nav-title">{% trans "İzleme" %}</span>
+                </a>
+                <button type="button" class="mobile-toggle-btn" aria-label="Toggle İzleme Submenu">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <ul class="mobile-submenu">
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:izleme' %}#tab-bidr-yukleme" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "BİDR Yükleme Sistemi" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:izleme' %}#tab-paydas-analizi" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Paydaş Analizi Sonuçları" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:izleme' %}#tab-dis-degerlendirme" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Dış Değerlendirme" %}</span>
+                    </a>
+                </li>
+                <li class="mobile-submenu-item">
+                    <a href="{% url 'kalite_akreditasyon:izleme' %}#tab-surec-degerlendirme" class="mobile-submenu-link">
+                        <i class="fas fa-angle-right"></i>
+                        <span>{% trans "Süreç Değerlendirme" %}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- 9. Doküman -->
+        <li class="mobile-nav-item">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:dokuman' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-folder-open"></i></span>
+                    <span class="mobile-nav-title">{% trans "Doküman" %}</span>
+                </a>
+            </div>
+        </li>
+
+        <!-- 10. S.S.S -->
+        <li class="mobile-nav-item">
+            <div class="mobile-nav-link-row">
+                <a href="{% url 'kalite_akreditasyon:sss' %}" class="mobile-nav-main-action">
+                    <span class="mobile-nav-icon"><i class="fas fa-question-circle"></i></span>
+                    <span class="mobile-nav-title">{% trans "S.S.S" %}</span>
+                </a>
+            </div>
+        </li>
+
+    </ul>
+    
+    <div class="mobile-nav-footer">
+        <p>{% trans "© Avrasya Üniversitesi - Kalite ve Akreditasyon" %}</p>
+    </div>
+</div>
+
+<!-- Overlay for mobile menu -->
+<div class="mobile-overlay" id="mobile-overlay"></div>
+
+
+<!-- Space for fixed header handled by hero padding -->
+
+<script>
+    // اسکریپت برای هدر ثابت
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ========== مدیریت منوی موبایل (Mobile Navigation Drawer) ==========
+        const hamburgerBtn = document.getElementById('hamburger-menu') || document.querySelector('.research-hamburger_container');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const mobileCloseBtn = document.getElementById('mobile-close-btn');
+
+        function toggleMobileMenu(open) {
+            if (!mobileNav || !mobileOverlay) return;
+            if (open) {
+                mobileNav.classList.add('open');
+                mobileOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileNav.classList.remove('open');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const isOpen = mobileNav && mobileNav.classList.contains('open');
+                toggleMobileMenu(!isOpen);
+            });
+        }
+
+        if (mobileCloseBtn) {
+            mobileCloseBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMobileMenu(false);
+            });
+        }
+
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleMobileMenu(false);
+            });
+        }
+
+        // مدیریت باز و بسته شدن آکاردئون‌ها در منوی موبایل
+        if (mobileNav) {
+            // کلیک روی دکمه چورون برای باز کردن زیرمنو
+            mobileNav.querySelectorAll('.mobile-toggle-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const item = this.closest('.mobile-nav-item');
+                    if (item) {
+                        item.classList.toggle('open');
+                    }
+                });
+            });
+
+            // مدیریت زیرمنوی تو در تو (Nested)
+            mobileNav.querySelectorAll('.mobile-nested-header').forEach(function(header) {
+                header.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const nestedItem = this.closest('.mobile-nested-item');
+                    if (nestedItem) {
+                        nestedItem.classList.toggle('open');
+                    }
+                });
+            });
+
+            // بستن منو فقط با کلیک روی لینک‌های واقعی مقصد
+            mobileNav.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    const href = this.getAttribute('href');
+                    if (!this.classList.contains('mobile-language-option') && href && href !== 'javascript:void(0)' && !href.startsWith('#toggle')) {
+                        toggleMobileMenu(false);
+                    }
+                });
+            });
+        }
+
+        // بستن با کلید Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('open')) {
+                toggleMobileMenu(false);
+            }
+        });
+
+        // بستن در صورت بزرگ شدن سایز پنجره
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992 && mobileNav && mobileNav.classList.contains('open')) {
+                toggleMobileMenu(false);
+            }
+        });
+
+
+        const header = document.querySelector('.research-header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // حل مشکل transition بین منوها
+        const navItems = document.querySelectorAll('.research-main_nav_item');
+        
+        navItems.forEach(item => {
+            const megaMenu = item.querySelector('.research-mega-menu-content');
+            
+            // وقتی ماوس وارد منو می‌شود
+            item.addEventListener('mouseenter', function() {
+                // بستن سایر منوها
+                navItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // باز کردن منوی جاری
+                item.classList.add('active');
+            });
+            
+            // وقتی ماوس از منو خارج می‌شود
+            item.addEventListener('mouseleave', function(e) {
+                // بررسی کنید که آیا ماوس به منوی همسایه رفته یا نه
+                const relatedTarget = e.relatedTarget;
+                if (!relatedTarget || !item.contains(relatedTarget)) {
+                    setTimeout(() => {
+                        if (!item.matches(':hover')) {
+                            item.classList.remove('active');
+                        }
+                    }, 100);
+                }
+            });
+            
+            // وقتی ماوس وارد مگا منو می‌شود
+            if (megaMenu) {
+                megaMenu.addEventListener('mouseenter', function() {
+                    item.classList.add('active');
+                });
+                
+                megaMenu.addEventListener('mouseleave', function(e) {
+                    const relatedTarget = e.relatedTarget;
+                    if (!relatedTarget || !item.contains(relatedTarget)) {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,292 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ page_title|default:"Kalite ve Akreditasyon Koordinatörlüğü" }} - Avrasya Üniversitesi{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'core/img/Avrasya Logo.png' %}">
+    
+    <!-- Core styles -->
+    <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/bootstrap4/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/main_styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-dark-blue: #092442;
+            --secondary-medium-blue: #1d61a9;
+            --accent-light-blue: #8dd4e3;
+            --bg-light: #f7fafc;
+            --text-dark: #1a202c;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Open Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Hero Banner */
+        .research-hero {
+            background: linear-gradient(135deg, rgba(9, 36, 66, 0.94) 0%, rgba(29, 97, 169, 0.90) 100%),
+                        url('{% static "core/img/aday/idari1.png" %}') center/cover no-repeat !important;
+            padding: 170px 0 65px !important;
+            color: #ffffff;
+            margin-bottom: 40px;
+            margin-top: 100px !important;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(9, 36, 66, 0.15);
+        }
+
+        .research-hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .research-hero-content p {
+            font-size: 1.1rem;
+            color: #8dd4e3;
+            max-width: 800px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .breadcrumb-nav {
+            margin-top: 15px;
+        }
+
+        .breadcrumb-nav a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: #ffffff;
+        }
+
+        .breadcrumb-nav span {
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 8px;
+        }
+
+        .breadcrumb-nav .active {
+            color: #8dd4e3;
+            font-weight: 600;
+        }
+
+        /* Two-column layout matching Adalet: Sidebar on the LEFT, Content on the RIGHT */
+        .erasmus-container {
+            max-width: 1440px !important;
+            margin: 0 auto !important;
+            padding: 30px 20px 80px !important;
+        }
+
+        .erasmus-container > .row {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            gap: 30px !important;
+            justify-content: flex-start !important;
+            margin: 0 !important;
+        }
+
+        .erasmus-container .sidebar-col {
+            flex: 0 0 320px !important;
+            width: 320px !important;
+            max-width: 320px !important;
+            min-width: 280px !important;
+            padding: 0 !important;
+        }
+
+        .erasmus-container .content-col {
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            width: calc(100% - 350px) !important;
+            padding: 0 !important;
+        }
+
+        .sidebar-wrapper {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .content-wrapper {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(141, 212, 227, 0.3);
+            min-height: 500px;
+            width: 100%;
+        }
+
+        @media (max-width: 992px) {
+            .erasmus-container > .row {
+                flex-direction: column !important;
+                flex-wrap: wrap !important;
+            }
+            .erasmus-container .sidebar-col {
+                flex: none !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-bottom: 25px !important;
+            }
+            .erasmus-container .content-col {
+                width: 100% !important;
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #edf2f7;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark-blue);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: var(--secondary-medium-blue);
+        }
+
+        /* Buttons */
+        .btn-avrasya-primary {
+            background: linear-gradient(135deg, var(--secondary-medium-blue) 0%, #0d4a8a 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 22px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-avrasya-primary:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(29, 97, 169, 0.35);
+        }
+
+        .btn-avrasya-outline {
+            background: transparent;
+            color: var(--secondary-medium-blue);
+            border: 2px solid var(--secondary-medium-blue);
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-avrasya-outline:hover {
+            background: var(--secondary-medium-blue);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .research-hero {
+                padding: 120px 0 45px;
+            }
+            .research-hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .content-card {
+                padding: 20px;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- Header with Mobile Navigation Drawer -->
+    {% include 'kalite_akreditasyon/header.html' %}
+
+    <!-- Voice Accessibility & Live Support Widget -->
+    {% include 'chat/support_widget.html' %}
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="research-hero">
+            <div class="container">
+                <div class="research-hero-content">
+                    <h1>{% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}</h1>
+                    <p>{% trans "Avrasya Üniversitesi Kalite Güvencesi ve Akreditasyon Yönetimi" %}</p>
+                    <div class="breadcrumb-nav">
+                        <a href="/">{% trans "Ana Sayfa" %}</a>
+                        <span>/</span>
+                        <a href="{% url 'kalite_akreditasyon:home' %}">{% trans "Kalite ve Akreditasyon" %}</a>
+                        {% if page_title and page_title != "Kalite ve Akreditasyon Koordinatörlüğü" %}
+                            <span>/</span>
+                            <span class="active">{{ page_title }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Two-column Layout: Sidebar on LEFT, Main Content on RIGHT (Exactly matching Adalet) -->
+        <div class="container-fluid erasmus-container">
+            <div class="row g-4">
+                <!-- سایدبار سمت چپ (Sidebar on the LEFT) -->
+                <div class="sidebar-col">
+                    <div class="sidebar-wrapper">
+                        {% include 'kalite_akreditasyon/kalite_sidebar.html' %}
+                    </div>
+                </div>
+
+                <!-- محتوای اصلی سمت راست (Main Content on the RIGHT) -->
+                <div class="content-col">
+                    <div class="content-wrapper">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    {% include 'kalite_akreditasyon/footer.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'core/main/styles/bootstrap4/popper.js' %}"></script>
+    <script src="{% static 'core/main/styles/bootstrap4/bootstrap.min.js' %}"></script>
+    <script src="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+    <script src="{% static 'core/main/js/custom.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

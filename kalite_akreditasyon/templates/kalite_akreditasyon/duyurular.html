@@ -1,0 +1,175 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Duyurular" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+<div class="section-header">
+    <h3 class="section-title">
+        <i class="fas fa-bullhorn"></i> {% trans "Duyurular" %}
+    </h3>
+</div>
+
+<!-- Search -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <form method="get" class="search-form d-flex">
+            <input type="text" name="q" value="{{ search_query }}" class="form-control" placeholder="{% trans 'Duyurularda ara...' %}" style="border-radius: 8px 0 0 8px;">
+            <button type="submit" class="btn btn-primary" style="border-radius: 0 8px 8px 0; background: var(--secondary-medium-blue);">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Announcements list -->
+<div class="announcements-stack">
+    {% if page_obj.object_list %}
+        {% for ann in page_obj %}
+            <div class="ann-item-row {% if ann.is_important %}important-ann{% endif %}">
+                <div class="ann-date-box">
+                    <span class="day">{{ ann.get_day }}</span>
+                    <span class="month">{{ ann.get_month_short }}</span>
+                    <span class="year">{{ ann.get_year }}</span>
+                </div>
+                <div class="ann-details">
+                    {% if ann.is_important %}
+                        <span class="badge badge-danger mb-2">{% trans "Önemli Duyuru" %}</span>
+                    {% endif %}
+                    <h4 class="ann-title">
+                        <a href="{{ ann.get_absolute_url }}">{{ ann.title }}</a>
+                    </h4>
+                    {% if ann.summary %}
+                        <p class="ann-summary-text">{{ ann.summary }}</p>
+                    {% endif %}
+                    <div class="ann-meta-footer">
+                        <a href="{{ ann.get_absolute_url }}" class="ann-read-btn">
+                            {% trans "Detayları Gör" %} <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                        {% if ann.document %}
+                            <span class="badge badge-light border text-muted">
+                                <i class="fas fa-paperclip mr-1"></i> {% trans "Ek Dosya Mevcut" %}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-bullhorn fa-3x mb-3 text-secondary"></i>
+            <h5>{% trans "Henüz yayınlanmış duyuru bulunmamaktadır." %}</h5>
+            <p>{% trans "Yeni duyurular eklendiğinde bu alanda görüntülenecektir." %}</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Pagination -->
+{% if page_obj.has_other_pages %}
+    <div class="d-flex justify-content-center mt-4">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">&laquo;</a>
+                </li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}">{{ num }}</a>
+                </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}
+
+<style>
+.ann-item-row {
+    display: flex;
+    gap: 20px;
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+.ann-item-row:hover {
+    transform: translateX(6px);
+    box-shadow: 0 8px 24px rgba(9, 36, 66, 0.08);
+    border-color: #8dd4e3;
+}
+.important-ann {
+    border-left: 5px solid #dc3545;
+}
+.ann-date-box {
+    width: 75px;
+    height: 75px;
+    border-radius: 12px;
+    background: #edf5fd;
+    border: 1px solid #cce2f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.ann-date-box .day {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #1d61a9;
+    line-height: 1;
+}
+.ann-date-box .month {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+}
+.ann-date-box .year {
+    font-size: 0.65rem;
+    color: #94a3b8;
+}
+.ann-details {
+    flex-grow: 1;
+}
+.ann-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+.ann-title a {
+    color: #092442;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.ann-title a:hover {
+    color: #1d61a9;
+}
+.ann-summary-text {
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.55;
+    margin-bottom: 12px;
+}
+.ann-meta-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.ann-read-btn {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #1d61a9;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+</style>
+{% endblock %}

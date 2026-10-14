@@ -1,0 +1,173 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Takım / Komisyon Üyeleri" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+<div class="section-header d-flex justify-content-between align-items-center flex-wrap">
+    <div>
+        <h3 class="section-title">
+            <i class="fas fa-users"></i> {% trans "Kalite Komisyonu Üyeleri" %}
+        </h3>
+        <p class="text-muted mb-0 small mt-1">{% trans "Avrasya Üniversitesi Kalite ve Akreditasyon Komisyonu Resmi Üye Listesi" %}</p>
+    </div>
+    <span class="badge badge-light border p-2 text-muted">
+        <i class="fas fa-user-check text-success mr-1"></i> 17 {% trans "Komisyon Üyesi" %}
+    </span>
+</div>
+
+<!-- Management Highlight Cards -->
+<div class="row mb-4">
+    <div class="col-md-4 mb-3">
+        <div class="p-3 border rounded bg-light text-center h-100 shadow-sm" style="border-top: 4px solid #092442 !important;">
+            <div class="default-avatar mx-auto rounded-circle d-flex align-items-center justify-content-center bg-white text-primary mb-2 shadow-sm" style="width: 70px; height: 70px; font-size: 28px;">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <h6 class="font-weight-bold text-dark mb-1">Prof. Dr. Mahir KADAKAL</h6>
+            <span class="badge badge-primary mb-2">{% trans "Rektör / Komisyon Başkanı" %}</span>
+            <p class="text-muted small mb-0"><i class="fas fa-envelope mr-1"></i> rektorluk@avrasya.edu.tr</p>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="p-3 border rounded bg-light text-center h-100 shadow-sm" style="border-top: 4px solid #1d61a9 !important;">
+            <div class="default-avatar mx-auto rounded-circle d-flex align-items-center justify-content-center bg-white text-info mb-2 shadow-sm" style="width: 70px; height: 70px; font-size: 28px;">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <h6 class="font-weight-bold text-dark mb-1">Prof. Dr. Yavuz ÖZORAN</h6>
+            <span class="badge badge-info mb-2">{% trans "Rektör Yardımcısı / Başkan V." %}</span>
+            <p class="text-muted small mb-0"><i class="fas fa-envelope mr-1"></i> kalite@avrasya.edu.tr</p>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="p-3 border rounded bg-light text-center h-100 shadow-sm" style="border-top: 4px solid #0d8a58 !important;">
+            <div class="default-avatar mx-auto rounded-circle d-flex align-items-center justify-content-center bg-white text-success mb-2 shadow-sm" style="width: 70px; height: 70px; font-size: 28px;">
+                <i class="fas fa-clipboard-check"></i>
+            </div>
+            <h6 class="font-weight-bold text-dark mb-1">Öğr. Gör. Handan ERDOĞAN</h6>
+            <span class="badge badge-success mb-2">{% trans "Kalite Koordinatörü (Doğal Üye)" %}</span>
+            <p class="text-muted small mb-0"><i class="fas fa-envelope mr-1"></i> kalite@avrasya.edu.tr</p>
+        </div>
+    </div>
+</div>
+
+<!-- Full Table of 17 Members -->
+<div class="table-responsive">
+    <table class="table table-bordered table-hover bg-white shadow-sm" style="border-radius: 10px; overflow: hidden;">
+        <thead style="background: linear-gradient(135deg, #092442 0%, #1d61a9 100%); color: #ffffff;">
+            <tr>
+                <th style="width: 8%; text-align: center;">{% trans "#" %}</th>
+                <th style="width: 45%;">{% trans "Adı Soyadı" %}</th>
+                <th style="width: 32%;">{% trans "Komisyondaki Görevi" %}</th>
+                <th style="width: 15%; text-align: center;">{% trans "Üyelik Türü" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">1</td>
+                <td><strong class="text-dark">Prof. Dr. Mahir KADAKAL</strong></td>
+                <td>{% trans "Rektör / Başkan (Doğal Üye)" %}</td>
+                <td class="text-center"><span class="badge badge-primary px-3 py-2">{% trans "Doğal Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">2</td>
+                <td><strong class="text-dark">Prof. Dr. Yavuz ÖZORAN</strong></td>
+                <td>{% trans "Rektör Yardımcısı / Başkan V." %}</td>
+                <td class="text-center"><span class="badge badge-info px-3 py-2">{% trans "Başkan V." %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">3</td>
+                <td><strong class="text-dark">Gülay YENİÇERİ</strong></td>
+                <td>{% trans "Genel Sekreter (Doğal Üye)" %}</td>
+                <td class="text-center"><span class="badge badge-primary px-3 py-2">{% trans "Doğal Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">4</td>
+                <td><strong class="text-dark">Öğr. Gör. Handan ERDOĞAN</strong></td>
+                <td>{% trans "Kalite ve Akreditasyon Koordinatörü (Doğal Üye)" %}</td>
+                <td class="text-center"><span class="badge badge-success px-3 py-2">{% trans "Doğal Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">5</td>
+                <td><strong class="text-dark">Öğr. Gör. Hilal TİRYAKİ</strong></td>
+                <td>{% trans "Kalite ve Akreditasyon Koordinatör Yardımcısı" %}</td>
+                <td class="text-center"><span class="badge badge-success px-3 py-2">{% trans "Koordinatör Yrd." %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">6</td>
+                <td><strong class="text-dark">Doç. Dr. Gül ERTEM</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">7</td>
+                <td><strong class="text-dark">Dr. Öğr. Üyesi Abdurrahman ATALAY</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">8</td>
+                <td><strong class="text-dark">Dr. Öğr. Üyesi Cansu İSKENDER</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">9</td>
+                <td><strong class="text-dark">Dr. Öğr. Üyesi Erdoğan ALTUN</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">10</td>
+                <td><strong class="text-dark">Dr. Öğr. Üyesi Pınar KÜÇÜK</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">11</td>
+                <td><strong class="text-dark">Dr. Öğr. Üyesi Adiye ŞİMŞEK</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">12</td>
+                <td><strong class="text-dark">Dr. Öğr. Üyesi Selfiye ÖZKAN</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">13</td>
+                <td><strong class="text-dark">Dr. Öğr. Üyesi Meral BELDÜZ KOLCU</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">14</td>
+                <td><strong class="text-dark">Öğr. Gör. Elif KESKİN</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">15</td>
+                <td><strong class="text-dark">Öğr. Gör. Emre MURAT</strong></td>
+                <td>{% trans "Üye" %}</td>
+                <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">16</td>
+                <td><strong class="text-dark">Elif ALTUNTAŞ</strong></td>
+                <td>{% trans "Öğrenci İşleri Daire Başkanı (Doğal Üye)" %}</td>
+                <td class="text-center"><span class="badge badge-primary px-3 py-2">{% trans "Doğal Üye" %}</span></td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold text-muted">17</td>
+                <td><strong class="text-dark">{% trans "Kurum Kalite Öğrenci Elçisi" %}</strong></td>
+                <td>{% trans "Öğrenci Temsilci" %}</td>
+                <td class="text-center"><span class="badge badge-warning px-3 py-2 text-dark font-weight-bold">{% trans "Öğrenci Temsilci" %}</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

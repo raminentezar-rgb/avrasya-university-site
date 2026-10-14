@@ -1,0 +1,238 @@
+{% load static %}
+{% load i18n %}
+
+<!-- Kalite ve Akreditasyon Koordinatörlüğü Sایدبار اختصاصی -->
+<aside class="policy-sidebar-new">
+    <div class="sidebar-header-new">
+        <a href="{% url 'kalite_akreditasyon:home' %}">
+            <h2>{% trans "Kalite ve Akreditasyon" %}</h2>
+        </a>
+        <div class="sidebar-subtitle">
+            <h3>{% trans "Koordinatörlüğü" %}</h3>
+        </div>
+    </div>
+    
+    <nav class="sidebar-nav-new">
+        <div class="nav-section">
+            <ul class="nav-list">
+                <!-- 1. Hakkında -->
+                <li class="nav-item {% if active_menu == 'hakkinda' %}active{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-info-circle"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:hakkinda' %}" class="main-link">{% trans "Hakkında" %}</a>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- 2. Duyurular -->
+                <li class="nav-item {% if active_menu == 'duyurular' %}active{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-bullhorn"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:duyurular' %}" class="main-link">{% trans "Duyurular" %}</a>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- 3. Haberler -->
+                <li class="nav-item {% if active_menu == 'haberler' %}active{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-newspaper"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:haberler' %}" class="main-link">{% trans "Haberler" %}</a>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- 4. Mevzuat -->
+                <li class="nav-item {% if active_menu == 'mevzuat' %}active{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-balance-scale"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:mevzuat' %}" class="main-link">{% trans "Mevzuat" %}</a>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- 5. Takvim -->
+                <li class="nav-item has-sub {% if active_menu == 'takvim' %}active open{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:takvim' %}" class="main-link">{% trans "Takvim" %}</a>
+                        </span>
+                        
+                    </div>
+                    
+                </li>
+
+                <!-- 6. Raporlar -->
+                <li class="nav-item {% if active_menu == 'raporlar' %}active{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-file-contract"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:raporlar' %}" class="main-link">{% trans "Raporlar" %}</a>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- 7. İzleme -->
+                <li class="nav-item {% if active_menu == 'izleme' %}active{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:izleme' %}" class="main-link">{% trans "İzleme" %}</a>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- 8. Doküman -->
+                <li class="nav-item {% if active_menu == 'dokuman' %}active{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-folder-open"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:dokuman' %}" class="main-link">{% trans "Doküman" %}</a>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- 9. S.S.S -->
+                <li class="nav-item {% if active_menu == 'sss' %}active{% endif %}">
+                    <div class="nav-link-wrapper">
+                        <span class="nav-icon"><i class="fas fa-question-circle"></i></span>
+                        <span class="nav-text">
+                            <a href="{% url 'kalite_akreditasyon:sss' %}" class="main-link">{% trans "S.S.S" %}</a>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>
+
+<style>
+.policy-sidebar-new {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(9, 36, 66, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.25);
+    overflow: hidden;
+    margin-bottom: 30px;
+    position: sticky;
+    top: 130px;
+}
+
+.sidebar-header-new {
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+    padding: 24px 20px;
+    color: #ffffff;
+    border-bottom: 3px solid #8dd4e3;
+}
+
+.sidebar-header-new a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.sidebar-header-new h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #ffffff;
+    letter-spacing: -0.2px;
+}
+
+.sidebar-subtitle h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #8dd4e3;
+    margin: 0;
+}
+
+.sidebar-nav-new {
+    padding: 10px 0;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    border-bottom: 1px solid #f0f4f8;
+    transition: all 0.2s ease;
+}
+
+.nav-item:last-child {
+    border-bottom: none;
+}
+
+.nav-link-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 13px 20px;
+    gap: 12px;
+    transition: all 0.25s ease;
+}
+
+.nav-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(29, 97, 169, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1d61a9;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.nav-text {
+    flex-grow: 1;
+}
+
+.nav-text a.main-link {
+    color: #092442;
+    text-decoration: none;
+    font-size: 0.94rem;
+    font-weight: 500;
+    display: block;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+    background: #f7fafc;
+}
+
+.nav-item:hover .nav-icon {
+    background: #1d61a9;
+    color: #ffffff;
+    transform: scale(1.08);
+}
+
+.nav-item:hover .nav-text a.main-link {
+    color: #1d61a9;
+    font-weight: 600;
+    transform: translateX(4px);
+}
+
+.nav-item.active {
+    background: rgba(29, 97, 169, 0.08);
+    border-left: 4px solid #1d61a9;
+}
+
+.nav-item.active .nav-icon {
+    background: #1d61a9;
+    color: #ffffff;
+}
+
+.nav-item.active .nav-text a.main-link {
+    color: #1d61a9;
+    font-weight: 700;
+}
+
+</style>

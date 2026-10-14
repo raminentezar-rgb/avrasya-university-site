@@ -1,0 +1,224 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Takvim" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+
+<!-- Tab Section (Designed exactly like Hakkında tabs) -->
+<div class="ogrenci-isleri-tab-section">
+    <div class="tab-container">
+        
+        <!-- Tab Header (Horizontal Tabs) -->
+        <div class="tab-header">
+            <ul class="tab-menu" id="takvimTabMenu">
+                <li class="tab-menu-item {% if active_tab == 'tab-komisyon-takvim' or not active_tab %}active{% endif %}" data-tab="tab-komisyon-takvim">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>{% trans "Komisyon Çalışma Takvimi" %}</span>
+                </li>
+                <li class="tab-menu-item {% if active_tab == 'tab-tamamlanan-calismalar' %}active{% endif %}" data-tab="tab-tamamlanan-calismalar">
+                    <i class="fas fa-check-circle"></i>
+                    <span>{% trans "Tamamlanan Çalışmalar" %}</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Tab Contents Wrapper -->
+        <div class="tab-content-wrapper">
+            
+            <!-- 1. TAB: KOMİSYON ÇALIŞMA TAKVİMİ -->
+            <div class="tab-content {% if active_tab == 'tab-komisyon-takvim' or not active_tab %}active{% endif %}" id="tab-komisyon-takvim">
+                <div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+                    <h2 class="font-weight-bold" style="color: #163269; font-size: 1.9rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+                        {% trans "Komisyon Çalışma Takvimi" %}
+                    </h2>
+                    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+                        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+                    </p>
+                </div>
+                
+                <!-- Notice Card -->
+                <div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+                    <div class="text-center py-5">
+                        <i class="fas fa-calendar-alt text-muted mb-3" style="font-size: 3rem; opacity: 0.35;"></i>
+                        <h5 class="text-muted font-weight-bold mb-2">{% trans "Komisyon Çalışma Takvimi" %}</h5>
+                        <p class="text-muted small mb-0">{% trans "Bu bölümle ilgili içerik hazırlık ve güncelleme çalışmaları devam etmektedir." %}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. TAB: TAMAMLANAN ÇALIŞMALAR -->
+            <div class="tab-content {% if active_tab == 'tab-tamamlanan-calismalar' %}active{% endif %}" id="tab-tamamlanan-calismalar">
+                <div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+                    <h2 class="font-weight-bold" style="color: #163269; font-size: 1.9rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+                        {% trans "Tamamlanan Çalışmalar" %}
+                    </h2>
+                    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+                        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+                    </p>
+                </div>
+                
+                <!-- Notice Card -->
+                <div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+                    <div class="text-center py-5">
+                        <i class="fas fa-check-circle text-muted mb-3" style="font-size: 3rem; opacity: 0.35;"></i>
+                        <h5 class="text-muted font-weight-bold mb-2">{% trans "Tamamlanan Çalışmalar" %}</h5>
+                        <p class="text-muted small mb-0">{% trans "Bu bölümle ilgili içerik hazırlık ve güncelleme çalışmaları devam etmektedir." %}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+/* ========== Tab Styles Matching Hakkında ========== */
+.ogrenci-isleri-tab-section {
+    width: 100%;
+}
+
+.tab-container {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-header {
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+    padding: 0;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.4);
+}
+
+.tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.tab-menu-item {
+    flex: 1 1 0;
+    min-width: 220px;
+    padding: 20px 24px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.tab-menu-item.active {
+    background: #3f6b9d;
+    color: #ffffff;
+    border-bottom: 4px solid #8dd4e3;
+    font-weight: 700;
+}
+
+.tab-menu-item i {
+    font-size: 1.15rem;
+    color: #8dd4e3;
+}
+
+.tab-menu-item.active i {
+    color: #ffffff;
+}
+
+.tab-content-wrapper {
+    padding: 30px;
+    min-height: 400px;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeInTab 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabItems = document.querySelectorAll('#takvimTabMenu .tab-menu-item');
+    const tabPanes = document.querySelectorAll('.tab-content');
+
+    function activateTab(tabId) {
+        if (!tabId) return;
+
+        tabItems.forEach(item => {
+            if (item.getAttribute('data-tab') === tabId) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+
+        tabPanes.forEach(pane => {
+            if (pane.id === tabId) {
+                pane.classList.add('active');
+                pane.style.display = 'block';
+            } else {
+                pane.classList.remove('active');
+                pane.style.display = 'none';
+            }
+        });
+    }
+
+    tabItems.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-tab');
+            activateTab(targetId);
+            if (history.pushState) {
+                history.pushState(null, null, '#' + targetId);
+            } else {
+                location.hash = '#' + targetId;
+            }
+        });
+    });
+
+    function routeByHash() {
+        const hash = window.location.hash ? window.location.hash.substring(1) : '';
+        if (hash && document.getElementById(hash)) {
+            activateTab(hash);
+        }
+    }
+
+    // Check hash on page load
+    routeByHash();
+
+    // Listen to hash change from links/browser navigation
+    window.addEventListener('hashchange', routeByHash);
+});
+</script>
+
+{% endblock %}

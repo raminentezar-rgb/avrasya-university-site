@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'gorsel_iletisim_tasarimi',
     'idari_birimler',
     'sks',
+    'kalite_akreditasyon',
     'channels',
     'chat',
     'tuition',

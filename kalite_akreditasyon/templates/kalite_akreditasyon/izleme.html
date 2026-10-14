@@ -1,0 +1,412 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "İzleme" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+
+<!-- Tab Section (Designed exactly like Hakkında and Takvim tabs) -->
+<div class="ogrenci-isleri-tab-section">
+    <div class="tab-container">
+        
+        <!-- Tab Header (Horizontal Tabs) -->
+        <div class="tab-header">
+            <ul class="tab-menu" id="izlemeTabMenu">
+                <li class="tab-menu-item {% if active_tab == 'tab-bidr-yukleme' or not active_tab %}active{% endif %}" data-tab="tab-bidr-yukleme">
+                    <i class="fas fa-upload"></i>
+                    <span>{% trans "BİDR Yükleme Sistemi" %}</span>
+                </li>
+                <li class="tab-menu-item {% if active_tab == 'tab-paydas-analizi' %}active{% endif %}" data-tab="tab-paydas-analizi">
+                    <i class="fas fa-poll"></i>
+                    <span>{% trans "Paydaş Analizi Sonuçları" %}</span>
+                </li>
+                <li class="tab-menu-item {% if active_tab == 'tab-dis-degerlendirme' %}active{% endif %}" data-tab="tab-dis-degerlendirme">
+                    <i class="fas fa-award"></i>
+                    <span>{% trans "Dış Değerlendirme" %}</span>
+                </li>
+                <li class="tab-menu-item {% if active_tab == 'tab-surec-degerlendirme' %}active{% endif %}" data-tab="tab-surec-degerlendirme">
+                    <i class="fas fa-cogs"></i>
+                    <span>{% trans "Süreç Değerlendirme" %}</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Tab Contents Wrapper -->
+        <div class="tab-content-wrapper">
+            
+            <!-- 1. TAB: BİDR YÜKLEME SİSTEMİ -->
+            <div class="tab-content {% if active_tab == 'tab-bidr-yukleme' or not active_tab %}active{% endif %}" id="tab-bidr-yukleme">
+                <div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+                    <h2 class="font-weight-bold" style="color: #163269; font-size: 1.9rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+                        {% trans "BİDR Yükleme Sistemi" %}
+                    </h2>
+                    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+                        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+                    </p>
+                </div>
+                
+                <!-- Main BİDR Card (Dark Blue Container Matching Original Site) -->
+                <div class="p-4 p-md-5 rounded shadow" style="background-color: #182b49; color: #ffffff;">
+                    <div class="row align-items-start">
+                        
+                        <!-- Left Column: Information & Downloadable Guides -->
+                        <div class="col-lg-6 mb-4 mb-lg-0 pr-lg-4">
+                            <h3 class="font-weight-bold text-white mb-4" style="font-size: 1.55rem; letter-spacing: 0.5px;">
+                                {% trans "BİDR YÜKLEME SİSTEMİ" %}
+                            </h3>
+                            
+                            <p class="text-white mb-4" style="line-height: 1.85; font-size: 0.98rem; opacity: 0.95;">
+                                {% trans "Aşağıda verilen rapor taslaklarından biriminize ait olanı indiriniz. İndirdiğiniz rapor taslağı üzerinde ilgili alanlara içeriklerinizi ekleyerek yan tarafta yer alan form üzerinden gönderiniz." %}
+                            </p>
+
+                            <ul class="list-unstyled mb-4" style="line-height: 2.2;">
+                                <li class="mb-2">
+                                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Enstitu.docx' %}" class="bidr-download-link" download>
+                                        <i class="fas fa-file-word text-info mr-2"></i>
+                                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Enstitü)" %}</span>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Daire-Baskanliklari.docx' %}" class="bidr-download-link" download>
+                                        <i class="fas fa-file-word text-info mr-2"></i>
+                                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Daire Başkanlıkları)" %}</span>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Fakulteler.docx' %}" class="bidr-download-link" download>
+                                        <i class="fas fa-file-word text-info mr-2"></i>
+                                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Fakülteler)" %}</span>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Meslek-Yuksekokullari.docx' %}" class="bidr-download-link" download>
+                                        <i class="fas fa-file-word text-info mr-2"></i>
+                                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Meslek Yüksekokulları)" %}</span>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Uygulama-ve-Arastirma-Merkezleri.docx' %}" class="bidr-download-link" download>
+                                        <i class="fas fa-file-word text-info mr-2"></i>
+                                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Uygulama ve Araştırma Merkezleri)" %}</span>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Koordinatorlukler.docx' %}" class="bidr-download-link" download>
+                                        <i class="fas fa-file-word text-info mr-2"></i>
+                                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Koordinatörlükler)" %}</span>
+                                    </a>
+                                </li>
+                                <li class="mb-0">
+                                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Yuksekokul.docx' %}" class="bidr-download-link" download>
+                                        <i class="fas fa-file-word text-info mr-2"></i>
+                                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Yüksekokul)" %}</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Contact info -->
+                            <div class="mt-4 pt-4 border-top border-secondary text-white" style="font-size: 0.95rem;">
+                                <p class="mb-2">
+                                    <i class="fas fa-phone-alt mr-2 text-warning" style="transform: rotate(90deg);"></i>
+                                    <span class="font-weight-bold">+90 462 334 05 50</span>
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fas fa-envelope mr-2 text-warning"></i>
+                                    <a href="mailto:kalite@avrasya.edu.tr" class="text-white" style="text-decoration: underline;">kalite@avrasya.edu.tr</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Submission Form -->
+                        <div class="col-lg-6 pl-lg-4">
+                            {% if submitted %}
+                                <div class="alert alert-success border-0 shadow-sm mb-4" style="background-color: #28a745; color: #ffffff;">
+                                    <i class="fas fa-check-circle mr-2"></i>
+                                    {% trans "Birim İç Değerlendirme Raporunuz başarıyla yüklenmiştir. Teşekkür ederiz." %}
+                                </div>
+                            {% endif %}
+
+                            <form method="post" enctype="multipart/form-data" action="{% url 'kalite_akreditasyon:izleme' %}">
+                                {% csrf_token %}
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold d-block mb-1" style="color: #c94a29; font-size: 0.95rem;">
+                                        {% trans "Sorumlunun Adı Soyadı" %}
+                                    </label>
+                                    <input type="text" name="name" class="form-control" placeholder="{% trans 'Ad/Soyadınızı Giriniz*' %}" required style="background: #ffffff; color: #2d3748; border-radius: 4px; padding: 12px 14px; height: 46px; border: none;">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold d-block mb-1" style="color: #c94a29; font-size: 0.95rem;">
+                                        {% trans "E-posta" %}
+                                    </label>
+                                    <input type="email" name="email" class="form-control" placeholder="{% trans 'Email Adresiniz*' %}" required style="background: #ffffff; color: #2d3748; border-radius: 4px; padding: 12px 14px; height: 46px; border: none;">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold d-block mb-1" style="color: #c94a29; font-size: 0.95rem;">
+                                        {% trans "Birim" %}
+                                    </label>
+                                    <select name="birim" class="form-control" required style="background: #ffffff; color: #2d3748; border-radius: 4px; padding: 10px 14px; height: 46px; border: none;">
+                                        <option value="" disabled selected>{% trans "Biriminizi Seçiniz" %}</option>
+                                        <option value="Enstitü">{% trans "Enstitü" %}</option>
+                                        <option value="Fakülte">{% trans "Fakülte" %}</option>
+                                        <option value="Meslek Yüksekokulu">{% trans "Meslek Yüksekokulu" %}</option>
+                                        <option value="Yüksekokul">{% trans "Yüksekokul" %}</option>
+                                        <option value="Uygulama ve Araştırma Merkezi">{% trans "Uygulama ve Araştırma Merkezi" %}</option>
+                                        <option value="Koordinatörlük">{% trans "Koordinatörlük" %}</option>
+                                        <option value="Daire Başkanlığı">{% trans "Daire Başkanlığı" %}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label class="font-weight-bold d-block mb-2" style="color: #c94a29; font-size: 0.95rem;">
+                                        {% trans "Birim İç Değerlendirme Raporunuzu yükleyiniz." %}
+                                    </label>
+                                    <input type="file" name="rapor_dosyasi" class="form-control-file" required style="background: #ffffff; color: #2d3748 !important; padding: 10px; border-radius: 4px; width: 100%;">
+                                </div>
+
+                                <button type="submit" class="btn font-weight-bold px-4 py-2" style="background: #f79f10; color: #ffffff; font-size: 1rem; border-radius: 4px; min-width: 140px; border: none; box-shadow: 0 4px 12px rgba(247, 159, 16, 0.35);">
+                                    {% trans "Gönder" %}
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. TAB: PAYDAŞ ANALİZİ SONUÇLARI -->
+            <div class="tab-content {% if active_tab == 'tab-paydas-analizi' %}active{% endif %}" id="tab-paydas-analizi">
+                <div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+                    <h2 class="font-weight-bold" style="color: #163269; font-size: 1.9rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+                        {% trans "Paydaş Analizi Sonuçları" %}
+                    </h2>
+                    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+                        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+                    </p>
+                </div>
+                
+                <!-- Notice Card -->
+                <div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+                    <div class="text-center py-5">
+                        <i class="fas fa-poll text-muted mb-3" style="font-size: 3rem; opacity: 0.35;"></i>
+                        <h5 class="text-muted font-weight-bold mb-2">{% trans "Paydaş Analizi Sonuçları" %}</h5>
+                        <p class="text-muted small mb-0">{% trans "Bu bölümle ilgili içerik hazırlık ve güncelleme çalışmaları devam etmektedir." %}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. TAB: DIŞ DEĞERLENDİRME -->
+            <div class="tab-content {% if active_tab == 'tab-dis-degerlendirme' %}active{% endif %}" id="tab-dis-degerlendirme">
+                <div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+                    <h2 class="font-weight-bold" style="color: #163269; font-size: 1.9rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+                        {% trans "Dış Değerlendirme" %}
+                    </h2>
+                    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+                        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+                    </p>
+                </div>
+                
+                <!-- Main Content Card -->
+                <div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+                    <p class="mb-0 text-dark" style="font-size: 1.05rem; line-height: 1.9;">
+                        {% trans "Üniversitemizin 2019 yılı Yükseköğretim Kalite Kurulu dış değerlendirmesi Mayıs-Haziran aylarında gerçekleştirilmiştir." %}
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4. TAB: SÜREÇ DEĞERLENDİRME -->
+            <div class="tab-content {% if active_tab == 'tab-surec-degerlendirme' %}active{% endif %}" id="tab-surec-degerlendirme">
+                <div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+                    <h2 class="font-weight-bold" style="color: #163269; font-size: 1.9rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+                        {% trans "Süreç Değerlendirme" %}
+                    </h2>
+                    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+                        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+                    </p>
+                </div>
+                
+                <!-- Notice Card -->
+                <div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+                    <div class="text-center py-5">
+                        <i class="fas fa-cogs text-muted mb-3" style="font-size: 3rem; opacity: 0.35;"></i>
+                        <h5 class="text-muted font-weight-bold mb-2">{% trans "Süreç Değerlendirme" %}</h5>
+                        <p class="text-muted small mb-0">{% trans "Bu bölümle ilgili içerik hazırlık ve güncelleme çalışmaları devam etmektedir." %}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+/* ========== Tab Styles Matching Hakkında and Takvim ========== */
+.ogrenci-isleri-tab-section {
+    width: 100%;
+}
+
+.tab-container {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-header {
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+    padding: 0;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.4);
+}
+
+.tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.tab-menu-item {
+    flex: 1 1 0;
+    min-width: 190px;
+    padding: 20px 18px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.tab-menu-item.active {
+    background: #3f6b9d;
+    color: #ffffff;
+    border-bottom: 4px solid #8dd4e3;
+    font-weight: 700;
+}
+
+.tab-menu-item i {
+    font-size: 1.1rem;
+    color: #8dd4e3;
+}
+
+.tab-menu-item.active i {
+    color: #ffffff;
+}
+
+.tab-content-wrapper {
+    padding: 30px;
+    min-height: 450px;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeInTab 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.bidr-download-link {
+    color: #ffffff;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+    font-size: 0.94rem;
+}
+
+.bidr-download-link:hover {
+    color: #8dd4e3;
+    text-decoration: underline;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 992px) {
+    .tab-menu-item {
+        min-width: 160px;
+        font-size: 0.88rem;
+        padding: 16px 12px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabItems = document.querySelectorAll('#izlemeTabMenu .tab-menu-item');
+    const tabPanes = document.querySelectorAll('.tab-content');
+
+    function activateTab(tabId) {
+        if (!tabId) return;
+
+        tabItems.forEach(item => {
+            if (item.getAttribute('data-tab') === tabId) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+
+        tabPanes.forEach(pane => {
+            if (pane.id === tabId) {
+                pane.classList.add('active');
+                pane.style.display = 'block';
+            } else {
+                pane.classList.remove('active');
+                pane.style.display = 'none';
+            }
+        });
+    }
+
+    tabItems.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-tab');
+            activateTab(targetId);
+            if (history.pushState) {
+                history.pushState(null, null, '#' + targetId);
+            } else {
+                location.hash = '#' + targetId;
+            }
+        });
+    });
+
+    function routeByHash() {
+        const hash = window.location.hash ? window.location.hash.substring(1) : '';
+        if (hash && document.getElementById(hash)) {
+            activateTab(hash);
+        }
+    }
+
+    // Check hash on page load
+    routeByHash();
+
+    // Listen to hash change from links/browser navigation
+    window.addEventListener('hashchange', routeByHash);
+});
+</script>
+
+{% endblock %}

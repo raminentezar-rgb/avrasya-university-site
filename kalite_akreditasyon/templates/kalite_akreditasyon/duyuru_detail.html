@@ -1,0 +1,84 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ announcement.title }} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+<div class="section-header">
+    <h3 class="section-title">
+        <i class="fas fa-bullhorn"></i> {{ announcement.title }}
+    </h3>
+</div>
+
+<!-- Announcement Meta -->
+<div class="d-flex flex-wrap align-items-center justify-content-between mb-4 pb-3 border-bottom text-muted">
+    <div>
+        <span class="mr-3">
+            <i class="far fa-calendar-alt text-primary mr-1"></i> {{ announcement.announcement_date|date:"d F Y" }}
+        </span>
+        {% if announcement.is_important %}
+            <span class="badge badge-danger p-2">{% trans "Önemli Duyuru" %}</span>
+        {% endif %}
+    </div>
+    <div>
+        <span><i class="far fa-eye text-primary mr-1"></i> {{ announcement.views_count }} {% trans "görüntülenme" %}</span>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="announcement-content mb-5" style="line-height: 1.85; font-size: 1.05rem; color: #2d3748;">
+    {{ announcement.content|linebreaks }}
+</div>
+
+<!-- Document Download or External Link -->
+{% if announcement.document or announcement.external_link %}
+    <div class="p-4 mb-4 rounded bg-light border">
+        <h5 class="mb-3 font-weight-bold" style="color: var(--primary-dark-blue);">
+            <i class="fas fa-paperclip mr-2 text-primary"></i> {% trans "Ek Belgeler ve Bağlantılar" %}
+        </h5>
+        <div class="d-flex flex-wrap gap-3">
+            {% if announcement.document %}
+                <a href="{{ announcement.document.url }}" class="btn-avrasya-primary" target="_blank" download>
+                    <i class="fas fa-download"></i> {% trans "Ek Dosyayı İndir" %}
+                </a>
+            {% endif %}
+            {% if announcement.external_link %}
+                <a href="{{ announcement.external_link }}" class="btn-avrasya-outline" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> {% trans "İlgili Bağlantıya Git" %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+<hr>
+
+<!-- Back button -->
+<div class="d-flex justify-content-between align-items-center mt-4">
+    <a href="{% url 'kalite_akreditasyon:duyurular' %}" class="btn-avrasya-outline">
+        <i class="fas fa-arrow-left"></i> {% trans "Tüm Duyurulara Dön" %}
+    </a>
+</div>
+
+<!-- Other Announcements -->
+{% if other_announcements %}
+    <div class="mt-5 pt-4 border-top">
+        <h5 class="mb-3 font-weight-bold" style="color: var(--primary-dark-blue);">{% trans "Diğer Güncel Duyurular" %}</h5>
+        <div class="row">
+            {% for other in other_announcements %}
+                <div class="col-md-6 mb-3">
+                    <div class="p-3 border rounded h-100 bg-light">
+                        <small class="text-muted d-block mb-1">{{ other.announcement_date|date:"d M Y" }}</small>
+                        <h6 class="mb-0">
+                            <a href="{{ other.get_absolute_url }}" class="text-dark font-weight-bold text-decoration-none">
+                                {{ other.title }}
+                            </a>
+                        </h6>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

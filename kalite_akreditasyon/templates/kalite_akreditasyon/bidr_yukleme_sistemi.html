@@ -1,0 +1,161 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "BİDR Yükleme Sistemi" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+<!-- Page Title Header (matching old site style) -->
+<div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+    <h2 class="font-weight-bold" style="color: #163269; font-size: 2rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+        {% trans "BİDR Yükleme Sistemi" %}
+    </h2>
+    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+    </p>
+</div>
+
+<!-- Main BİDR Card (Matching Image 2: Dark Blue Container) -->
+<div class="p-4 p-md-5 rounded shadow" style="background-color: #182b49; color: #ffffff;">
+    <div class="row align-items-start">
+        
+        <!-- Left Column: Information & Downloadable Guides -->
+        <div class="col-lg-6 mb-4 mb-lg-0 pr-lg-4">
+            <h3 class="font-weight-bold text-white mb-4" style="font-size: 1.6rem; letter-spacing: 0.5px;">
+                {% trans "BİDR YÜKLEME SİSTEMİ" %}
+            </h3>
+            
+            <p class="text-white mb-4" style="line-height: 1.85; font-size: 0.98rem; opacity: 0.95;">
+                {% trans "Aşağıda verilen rapor taslaklarından biriminize ait olanı indiriniz. İndirdiğiniz rapor taslağı üzerinde ilgili alanlara içeriklerinizi ekleyerek yan tarafta yer alan form üzerinden gönderiniz." %}
+            </p>
+
+            <ul class="list-unstyled mb-4" style="line-height: 2.2;">
+                <li class="mb-2">
+                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Enstitu.docx' %}" class="bidr-download-link" download>
+                        <i class="fas fa-file-word text-info mr-2"></i>
+                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Enstitü)" %}</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Daire-Baskanliklari.docx' %}" class="bidr-download-link" download>
+                        <i class="fas fa-file-word text-info mr-2"></i>
+                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Daire Başkanlıkları)" %}</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Fakulteler.docx' %}" class="bidr-download-link" download>
+                        <i class="fas fa-file-word text-info mr-2"></i>
+                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Fakülteler)" %}</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Meslek-Yuksekokullari.docx' %}" class="bidr-download-link" download>
+                        <i class="fas fa-file-word text-info mr-2"></i>
+                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Meslek Yüksekokulları)" %}</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Uygulama-ve-Arastirma-Merkezleri.docx' %}" class="bidr-download-link" download>
+                        <i class="fas fa-file-word text-info mr-2"></i>
+                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Uygulama ve Araştırma Merkezleri)" %}</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Koordinatorlukler.docx' %}" class="bidr-download-link" download>
+                        <i class="fas fa-file-word text-info mr-2"></i>
+                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Koordinatörlükler)" %}</span>
+                    </a>
+                </li>
+                <li class="mb-0">
+                    <a href="{% static 'core/docs/bidr/Birim-Ic-Degerlendirme-Raporu-Hazirlama-Kilavuzu-Yuksekokul.docx' %}" class="bidr-download-link" download>
+                        <i class="fas fa-file-word text-info mr-2"></i>
+                        <span>{% trans "Birim İç Değerlendirme Raporu Hazırlama Kılavuzu (Yüksekokul)" %}</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Contact info matching Image 2 bottom-left -->
+            <div class="mt-4 pt-4 border-top border-secondary text-white" style="font-size: 0.95rem;">
+                <p class="mb-2">
+                    <i class="fas fa-phone-alt mr-2 text-warning" style="transform: rotate(90deg);"></i>
+                    <span class="font-weight-bold">+90 462 334 05 50</span>
+                </p>
+                <p class="mb-0">
+                    <i class="fas fa-envelope mr-2 text-warning"></i>
+                    <a href="mailto:kalite@avrasya.edu.tr" class="text-white" style="text-decoration: underline;">kalite@avrasya.edu.tr</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Column: Submission Form (Matching Image 2) -->
+        <div class="col-lg-6 pl-lg-4">
+            {% if submitted %}
+                <div class="alert alert-success border-0 shadow-sm mb-4" style="background-color: #28a745; color: #ffffff;">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    {% trans "Birim İç Değerlendirme Raporunuz başarıyla yüklenmiştir. Teşekkür ederiz." %}
+                </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold d-block mb-1" style="color: #c94a29; font-size: 0.95rem;">
+                        {% trans "Sorumlunun Adı Soyadı" %}
+                    </label>
+                    <input type="text" name="name" class="form-control" placeholder="{% trans 'Ad/Soyadınızı Giriniz*' %}" required style="background: #ffffff; color: #2d3748; border-radius: 4px; padding: 12px 14px; height: 46px; border: none;">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold d-block mb-1" style="color: #c94a29; font-size: 0.95rem;">
+                        {% trans "E-posta" %}
+                    </label>
+                    <input type="email" name="email" class="form-control" placeholder="{% trans 'Email Adresiniz*' %}" required style="background: #ffffff; color: #2d3748; border-radius: 4px; padding: 12px 14px; height: 46px; border: none;">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold d-block mb-1" style="color: #c94a29; font-size: 0.95rem;">
+                        {% trans "Birim" %}
+                    </label>
+                    <select name="birim" class="form-control" required style="background: #ffffff; color: #2d3748; border-radius: 4px; padding: 10px 14px; height: 46px; border: none;">
+                        <option value="" disabled selected>{% trans "Biriminizi Seçiniz" %}</option>
+                        <option value="Enstitü">{% trans "Enstitü" %}</option>
+                        <option value="Fakülte">{% trans "Fakülte" %}</option>
+                        <option value="Meslek Yüksekokulu">{% trans "Meslek Yüksekokulu" %}</option>
+                        <option value="Yüksekokul">{% trans "Yüksekokul" %}</option>
+                        <option value="Uygulama ve Araştırma Merkezi">{% trans "Uygulama ve Araştırma Merkezi" %}</option>
+                        <option value="Koordinatörlük">{% trans "Koordinatörlük" %}</option>
+                        <option value="Daire Başkanlığı">{% trans "Daire Başkanlığı" %}</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="font-weight-bold d-block mb-2" style="color: #c94a29; font-size: 0.95rem;">
+                        {% trans "Birim İç Değerlendirme Raporunuzu yükleyiniz." %}
+                    </label>
+                    <input type="file" name="rapor_dosyasi" class="form-control-file" required style="background: #ffffff; color: #2d3748 !important; padding: 10px; border-radius: 4px; width: 100%;">
+                </div>
+
+                <button type="submit" class="btn font-weight-bold px-4 py-2" style="background: #f79f10; color: #ffffff; font-size: 1rem; border-radius: 4px; min-width: 140px; border: none; box-shadow: 0 4px 12px rgba(247, 159, 16, 0.35);">
+                    {% trans "Gönder" %}
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.bidr-download-link {
+    color: #ffffff;
+    text-decoration: underline;
+    font-size: 0.96rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+.bidr-download-link:hover {
+    color: #f79f10;
+    text-decoration: underline;
+    transform: translateX(3px);
+}
+</style>
+{% endblock %}

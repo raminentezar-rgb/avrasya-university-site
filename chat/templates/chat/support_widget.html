@@ -1,16 +1,133 @@
 {% load i18n %}
 {% load static %}
 
-<!-- Live Support Widget -->
+<!-- ========================================== -->
+<!-- Accessibility Voice Assistant & Live Support -->
+<!-- ========================================== -->
 <div id="live-support-widget" class="live-support-minimized">
-    <div id="live-support-button" class="live-support-circle" title="{% trans 'Canlı Destek' %}">
-        <i class="fa-solid fa-headset" style="font-size: 30px; color: #ffffff !important; display: block; line-height: 1; z-index: 10;"></i>
-        <div class="support-notification-badge" id="support-badge" style="display: none;">0</div>
+
+    <!-- Floating Buttons Stack (Right Bottom) -->
+    <div id="floating-actions-stack" class="floating-actions-stack">
+        <!-- 1. Voice Accessibility Button (Görme Engelliler İçin Sesli Asistan) -->
+        <div id="voice-assistant-button" class="voice-assistant-circle" 
+             title="{% trans 'Görme Engelliler İçin Sesli Asistan (Kısayol: Alt + V)' %}" 
+             role="button" tabindex="0" 
+             aria-label="{% trans 'Görme Engelliler İçin Sesli Asistan ve Ekran Okuyucu' %}">
+            <i class="fa-solid fa-universal-access" style="font-size: 28px; color: #ffffff !important; display: block; line-height: 1; z-index: 10;"></i>
+            <span class="accessibility-tooltip">{% trans "Sesli Asistan (Alt+V)" %}</span>
+            <span class="voice-pulse-ring"></span>
+        </div>
+
+        <!-- 2. Live Support Button (Canlı Destek) -->
+        <div id="live-support-button" class="live-support-circle" 
+             title="{% trans 'Canlı Destek' %}" role="button" tabindex="0" aria-label="{% trans 'Canlı Destek' %}">
+            <i class="fa-solid fa-headset" style="font-size: 28px; color: #ffffff !important; display: block; line-height: 1; z-index: 10;"></i>
+            <span class="accessibility-tooltip">{% trans "Canlı Destek" %}</span>
+            <div class="support-notification-badge" id="support-badge" style="display: none;">0</div>
+        </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- Voice Assistant Modal Window -->
+    <!-- ========================================== -->
+    <div id="voice-assistant-window" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="va-title">
+        <div class="va-header">
+            <div class="va-header-left">
+                <div class="va-header-icon">
+                    <i class="fa-solid fa-universal-access"></i>
+                </div>
+                <div>
+                    <div id="va-title" class="va-title">{% trans "Sesli Asistan" %}</div>
+                    <div class="va-subtitle">{% trans "Görme Engelliler İçin Sesli Dolaşım & Okuyucu" %}</div>
+                </div>
+            </div>
+            <div class="va-controls">
+                <button id="minimize-voice-assistant" title="{% trans 'Küçült' %}"><i class="fa-solid fa-minus"></i></button>
+                <button id="close-voice-assistant" title="{% trans 'Kapat' %}"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+
+        <div class="va-body">
+            <!-- Status banner -->
+            <div id="va-status-banner" class="va-status-banner" aria-live="polite">
+                <span id="va-status-icon"><i class="fa-solid fa-microphone"></i></span>
+                <span id="va-status-text">{% trans "Dinlemeye hazır... Konuşmak için butona basın veya Alt+V kullanın." %}</span>
+            </div>
+
+            <!-- Wave Animation when speaking/listening -->
+            <div class="va-wave-container" id="va-wave-container">
+                <div class="va-wave-bar"></div>
+                <div class="va-wave-bar"></div>
+                <div class="va-wave-bar"></div>
+                <div class="va-wave-bar"></div>
+                <div class="va-wave-bar"></div>
+                <div class="va-wave-bar"></div>
+                <div class="va-wave-bar"></div>
+            </div>
+
+            <!-- Real-time speech transcript -->
+            <div class="va-transcript-card">
+                <div class="va-transcript-label">
+                    <i class="fa-solid fa-ear-listen me-1"></i> {% trans "Algılanan Ses:" %}
+                </div>
+                <div id="va-transcript" class="va-transcript-text">{% trans "Henüz ses algılanmadı..." %}</div>
+            </div>
+
+            <!-- Main Actions -->
+            <div class="va-actions-grid">
+                <button id="va-toggle-mic-btn" class="va-action-btn va-mic-btn" title="{% trans 'Mikrofonu Aç/Kapat' %}">
+                    <i class="fa-solid fa-microphone"></i>
+                    <span id="va-mic-btn-label">{% trans "Konuş / Dinle" %}</span>
+                </button>
+                <button id="va-read-page-btn" class="va-action-btn va-read-btn" title="{% trans 'Bu Sayfayı Oku' %}">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <span>{% trans "Sayfayı Oku" %}</span>
+                </button>
+                <button id="va-stop-speech-btn" class="va-action-btn va-stop-btn" title="{% trans 'Okumayı Durdur' %}">
+                    <i class="fa-solid fa-stop"></i>
+                    <span>{% trans "Durdur" %}</span>
+                </button>
+            </div>
+
+            <!-- Speech Speed -->
+            <div class="va-speed-control">
+                <span class="va-speed-label"><i class="fa-solid fa-gauge-high me-1"></i> {% trans "Ses Hızı:" %}</span>
+                <div class="va-speed-buttons">
+                    <button class="va-speed-btn" data-speed="0.8">0.8x</button>
+                    <button class="va-speed-btn active" data-speed="1.0">1.0x</button>
+                    <button class="va-speed-btn" data-speed="1.25">1.25x</button>
+                </div>
+            </div>
+
+            <!-- Suggestions -->
+            <div class="va-suggestions">
+                <div class="va-suggestions-title">
+                    <i class="fa-solid fa-lightbulb me-1"></i> {% trans "Örnek Sesli Komutlar:" %}
+                </div>
+                <div class="va-tags-list">
+                    <button class="va-tag-btn" data-cmd="Aday Öğrenci">"Aday Öğrenci"</button>
+                    <button class="va-tag-btn" data-cmd="Kayıt İşlemleri">"Kayıt İşlemleri"</button>
+                    <button class="va-tag-btn" data-cmd="Öğrenim Ücretleri">"Öğrenim Ücretleri"</button>
+                    <button class="va-tag-btn" data-cmd="Fakülteler">"Fakülteler"</button>
+                    <button class="va-tag-btn" data-cmd="Akademik Takvim">"Akademik Takvim"</button>
+                    <button class="va-tag-btn" data-cmd="İletişim">"İletişim"</button>
+                    <button class="va-tag-btn" data-cmd="Sayfayı Oku">"Sayfayı Oku"</button>
+                    <button class="va-tag-btn" data-cmd="Ana Sayfa">"Ana Sayfa"</button>
+                </div>
+            </div>
+
+            <div class="va-footer-note">
+                <i class="fa-solid fa-keyboard me-1"></i> {% trans "Klavye Kısayolu: <strong>Alt + V</strong> ile her an açıp kapatabilirsiniz." %}
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- Live Support Window (Canlı Destek) -->
+    <!-- ========================================== -->
     <div id="live-support-window" style="display: none;">
         <div class="support-header">
-            <div class="support-title">{% trans "Canlı Destek" %}</div>
+            <div class="support-title"><i class="fa-solid fa-headset me-2"></i>{% trans "Canlı Destek" %}</div>
             <div class="support-controls">
                 <button id="minimize-support" title="{% trans 'Küçült' %}"><i class="fa-solid fa-minus" style="color: #ffffff !important; font-size: 18px;"></i></button>
                 <button id="close-support" title="{% trans 'Kapat' %}" style="margin-left: 10px;"><i class="fa-solid fa-xmark" style="color: #ffffff !important; font-size: 20px;"></i></button>
@@ -51,27 +168,99 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        z-index: 9999;
+        z-index: 99999;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    .live-support-circle {
+    /* Stack of Floating Action Buttons */
+    .floating-actions-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-end;
+    }
+
+    /* Common Button Style */
+    .live-support-circle,
+    .voice-assistant-circle {
         width: 60px;
         height: 60px;
-        background: linear-gradient(135deg, #1d61a9, #00d2ff);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
-        font-size: 24px;
         cursor: pointer;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease, background 0.3s ease;
+        box-shadow: 0 6px 20px rgba(9, 36, 66, 0.4);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        outline: none;
+    }
+
+    .live-support-circle {
+        background: linear-gradient(135deg, #1d61a9, #00d2ff);
     }
 
     .live-support-circle:hover {
         transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(0, 210, 255, 0.5);
+    }
+
+    /* Voice Assistant Special High-Contrast & Pulsing Styling */
+    .voice-assistant-circle {
+        background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+        border: 2px solid #8dd4e3;
+    }
+
+    .voice-assistant-circle:hover,
+    .voice-assistant-circle:focus {
+        transform: scale(1.12);
+        box-shadow: 0 0 25px rgba(141, 212, 227, 0.7);
+        border-color: #ffffff;
+    }
+
+    .voice-pulse-ring {
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        border-radius: 50%;
+        border: 2px solid #8dd4e3;
+        animation: vaPulseRing 2.5s infinite;
+        pointer-events: none;
+    }
+
+    @keyframes vaPulseRing {
+        0% { transform: scale(1); opacity: 0.9; }
+        50% { transform: scale(1.22); opacity: 0; }
+        100% { transform: scale(1); opacity: 0; }
+    }
+
+    /* Tooltip */
+    .accessibility-tooltip {
+        position: absolute;
+        right: 72px;
+        background: rgba(9, 36, 66, 0.95);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateX(10px);
+        transition: all 0.25s ease;
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .live-support-circle:hover .accessibility-tooltip,
+    .voice-assistant-circle:hover .accessibility-tooltip,
+    .voice-assistant-circle:focus .accessibility-tooltip {
+        opacity: 1;
+        transform: translateX(0);
     }
 
     .support-notification-badge {
@@ -87,6 +276,332 @@
         border: 2px solid white;
     }
 
+    /* ========================================== */
+    <!-- Voice Assistant Modal Window Styling -->
+    /* ========================================== */
+    #voice-assistant-window {
+        width: 380px;
+        max-width: 92vw;
+        height: 560px;
+        max-height: 85vh;
+        background: #092442;
+        color: white;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.55);
+        border: 1px solid rgba(141, 212, 227, 0.35);
+        display: flex;
+        flex-direction: column;
+        animation: vaSlideUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes vaSlideUp {
+        from { transform: translateY(30px) scale(0.95); opacity: 0; }
+        to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .va-header {
+        background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(141, 212, 227, 0.25);
+    }
+
+    .va-header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .va-header-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(141, 212, 227, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #8dd4e3;
+        font-size: 20px;
+    }
+
+    .va-title {
+        font-weight: 700;
+        font-size: 16px;
+        color: #ffffff;
+    }
+
+    .va-subtitle {
+        font-size: 11px;
+        color: #8dd4e3;
+        opacity: 0.9;
+    }
+
+    .va-controls button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+
+    .va-controls button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        color: #8dd4e3;
+    }
+
+    .va-body {
+        flex: 1;
+        padding: 18px 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        background: linear-gradient(180deg, #092442 0%, #0d325a 100%);
+    }
+
+    /* Status banner */
+    .va-status-banner {
+        background: rgba(141, 212, 227, 0.12);
+        border: 1px solid rgba(141, 212, 227, 0.35);
+        border-radius: 12px;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: #8dd4e3;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .va-status-banner.listening {
+        background: rgba(0, 230, 118, 0.15);
+        border-color: #00e676;
+        color: #00e676;
+    }
+
+    .va-status-banner.speaking {
+        background: rgba(255, 193, 7, 0.15);
+        border-color: #ffc107;
+        color: #ffc107;
+    }
+
+    /* Wave visualizer */
+    .va-wave-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        height: 32px;
+        padding: 4px 0;
+    }
+
+    .va-wave-bar {
+        width: 5px;
+        height: 8px;
+        background: rgba(141, 212, 227, 0.4);
+        border-radius: 4px;
+        transition: all 0.2s;
+    }
+
+    .va-wave-container.active .va-wave-bar {
+        background: #00e676;
+        animation: vaWave 1s ease-in-out infinite alternate;
+    }
+
+    .va-wave-container.speaking .va-wave-bar {
+        background: #ffc107;
+        animation: vaWave 0.8s ease-in-out infinite alternate;
+    }
+
+    .va-wave-container.active .va-wave-bar:nth-child(1) { animation-delay: 0.1s; }
+    .va-wave-container.active .va-wave-bar:nth-child(2) { animation-delay: 0.2s; }
+    .va-wave-container.active .va-wave-bar:nth-child(3) { animation-delay: 0.3s; }
+    .va-wave-container.active .va-wave-bar:nth-child(4) { animation-delay: 0.4s; }
+    .va-wave-container.active .va-wave-bar:nth-child(5) { animation-delay: 0.3s; }
+    .va-wave-container.active .va-wave-bar:nth-child(6) { animation-delay: 0.2s; }
+    .va-wave-container.active .va-wave-bar:nth-child(7) { animation-delay: 0.1s; }
+
+    @keyframes vaWave {
+        0% { height: 8px; }
+        100% { height: 28px; }
+    }
+
+    /* Transcript Card */
+    .va-transcript-card {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 12px 14px;
+        min-height: 60px;
+    }
+
+    .va-transcript-label {
+        font-size: 11px;
+        color: #8dd4e3;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+
+    .va-transcript-text {
+        font-size: 14px;
+        color: #ffffff;
+        font-style: italic;
+        line-height: 1.4;
+    }
+
+    /* Actions Grid */
+    .va-actions-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 0.8fr;
+        gap: 8px;
+    }
+
+    .va-action-btn {
+        border: none;
+        border-radius: 10px;
+        padding: 11px 8px;
+        color: white;
+        font-weight: 600;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        text-align: center;
+    }
+
+    .va-mic-btn {
+        background: linear-gradient(135deg, #1d61a9, #00d2ff);
+    }
+    .va-mic-btn:hover {
+        background: linear-gradient(135deg, #00d2ff, #1d61a9);
+        transform: translateY(-2px);
+    }
+    .va-mic-btn.active {
+        background: linear-gradient(135deg, #00c853, #69f0ae);
+        color: #092442;
+    }
+
+    .va-read-btn {
+        background: linear-gradient(135deg, #ff8f00, #ffc107);
+        color: #092442;
+    }
+    .va-read-btn:hover {
+        background: linear-gradient(135deg, #ffc107, #ff8f00);
+        transform: translateY(-2px);
+    }
+
+    .va-stop-btn {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .va-stop-btn:hover {
+        background: rgba(255, 77, 77, 0.3);
+        border-color: #ff4d4d;
+        color: #ff4d4d;
+    }
+
+    /* Speed Control */
+    .va-speed-control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-size: 12px;
+    }
+
+    .va-speed-label {
+        color: #8dd4e3;
+        font-weight: 600;
+    }
+
+    .va-speed-buttons {
+        display: flex;
+        gap: 6px;
+    }
+
+    .va-speed-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        border-radius: 6px;
+        padding: 4px 8px;
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .va-speed-btn.active,
+    .va-speed-btn:hover {
+        background: #8dd4e3;
+        color: #092442;
+        font-weight: 700;
+    }
+
+    /* Suggestions */
+    .va-suggestions {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        padding: 10px 12px;
+    }
+
+    .va-suggestions-title {
+        font-size: 11px;
+        color: #8dd4e3;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .va-tags-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .va-tag-btn {
+        background: rgba(141, 212, 227, 0.12);
+        border: 1px solid rgba(141, 212, 227, 0.3);
+        color: white;
+        border-radius: 15px;
+        padding: 4px 10px;
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .va-tag-btn:hover {
+        background: #8dd4e3;
+        color: #092442;
+        transform: translateY(-1px);
+    }
+
+    .va-footer-note {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
+        padding-top: 4px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* ========================================== */
+    <!-- Live Support Window Original Styles -->
+    /* ========================================== */
     #live-support-window {
         width: 320px;
         height: 450px;
@@ -200,41 +715,500 @@
         background: #00d2ff;
     }
 
-    /* Force Font Awesome 6 for widget icons to prevent conflicts */
+    /* Force Font Awesome for all icons */
     #live-support-widget i.fas,
     #live-support-widget i.fa-solid {
-        font-family: "Font Awesome 6 Free" !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", sans-serif !important;
         font-weight: 900 !important;
     }
 </style>
 
 <script>
-    (function() {
-        console.log('Live Support Widget Loading...');
-        const supportBtn = document.getElementById('live-support-button');
-        const supportWindow = document.getElementById('live-support-window');
-        const closeBtn = document.getElementById('close-support');
-        const minimizeBtn = document.getElementById('minimize-support');
-        const onboarding = document.getElementById('support-onboarding');
-        const chatContainer = document.getElementById('support-chat-container');
-        const initForm = document.getElementById('support-init-form');
-        const msgList = document.getElementById('support-messages');
-        const msgInput = document.getElementById('support-input');
-        const sendBtn = document.getElementById('send-support-msg');
-        const badge = document.getElementById('support-badge');
+(function() {
+    console.log('Live Support & Voice Accessibility Assistant Loaded.');
 
-        let socket = null;
-        let sessionKey = localStorage.getItem('support_session_key');
-        let visitorName = localStorage.getItem('support_visitor_name') || 'Ziyaretçi';
-        let unreadCount = 0;
+    // -------------------------------------------------------------
+    // Audio Cues Synthesizer (Web Audio API)
+    // -------------------------------------------------------------
+    let audioCtx = null;
+    function getAudioContext() {
+        if (!audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) audioCtx = new AudioContextClass();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+        return audioCtx;
+    }
 
-        if (!sessionKey) {
-            sessionKey = 'vis_' + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('support_session_key', sessionKey);
+    function playTone(freq, duration, type='sine', gainVal=0.1) {
+        try {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+            gain.gain.setValueAtTime(gainVal, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + duration);
+        } catch(e) {
+            console.warn('Audio chime error:', e);
+        }
+    }
+
+    function playChime(kind) {
+        if (kind === 'start') {
+            playTone(440, 0.08, 'sine', 0.12);
+            setTimeout(() => playTone(880, 0.12, 'sine', 0.12), 90);
+        } else if (kind === 'success') {
+            playTone(523.25, 0.08, 'sine', 0.15); // C5
+            setTimeout(() => playTone(659.25, 0.08, 'sine', 0.15), 80); // E5
+            setTimeout(() => playTone(783.99, 0.16, 'sine', 0.15), 160); // G5
+        } else if (kind === 'stop') {
+            playTone(660, 0.08, 'sine', 0.1);
+            setTimeout(() => playTone(440, 0.12, 'sine', 0.1), 90);
+        } else if (kind === 'error') {
+            playTone(330, 0.12, 'sawtooth', 0.08);
+            setTimeout(() => playTone(220, 0.16, 'sawtooth', 0.08), 120);
+        }
+    }
+
+    // -------------------------------------------------------------
+    // Voice Navigation Routes Directory
+    // -------------------------------------------------------------
+    const voiceRoutes = [
+        { keywords: ['ana sayfa', 'anasayfa', 'giriş', 'ana sayfaya', 'home'], url: "{% url 'core:index' %}", name: 'Ana Sayfa' },
+        { keywords: ['aday', 'aday öğrenci', 'aday öğrenciye', 'kontenjan', 'kontenjanlar', 'taban puan', 'taban puanlar'], url: "{% url 'aday_ogrenci:aday_anasayfa' %}", name: 'Aday Öğrenci' },
+        { keywords: ['kayıt', 'kayıt işlemleri', 'kayıt işlemi', 'yeni kayıt', 'nasıl kayıt olurum'], url: "{% url 'ogrenci_isleri:kayit' %}", name: 'Kayıt İşlemleri' },
+        { keywords: ['ücret', 'ücretler', 'öğrenim ücretleri', 'öğrenim ücreti', 'fiyat', 'fiyatlar', 'bölüm ücretleri', 'harç'], url: "{% url 'ogrenci_isleri:ogrenim_ucretleri' %}", name: 'Öğrenim Ücretleri' },
+        { keywords: ['öğrenci işleri', 'öğrenci işlerine', 'öğrenci servisi', 'daire başkanlığı'], url: "{% url 'ogrenci_isleri:ogrenci_isleri' %}", name: 'Öğrenci İşleri' },
+        { keywords: ['burs', 'burslar', 'indirim', 'indirimler'], url: "{% url 'ogrenci_isleri:burslar' %}", name: 'Burslar ve İndirimler' },
+        { keywords: ['takvim', 'akademik takvim', 'sınav takvimi', 'sınav tarihleri'], url: "{% url 'ogrenci_isleri:akademik_takvim' %}", name: 'Akademik Takvim' },
+        { keywords: ['yurt', 'yurtlar', 'yurt olanakları', 'konaklama'], url: "{% url 'ogrenci_isleri:yurtlar' %}", name: 'Yurt Olanakları' },
+        { keywords: ['fakülte', 'fakülteler', 'fakültelere', 'lisans'], url: "{% url 'fakulteler:fakulteler' %}", name: 'Fakülteler' },
+        { keywords: ['yüksekokul', 'yüksekokullar'], url: "{% url 'yuksekokullari:yuksekokullari' %}", name: 'Yüksekokullar' },
+        { keywords: ['meslek yüksekokul', 'meslek yüksekokulu', 'meslek yüksekokulları', 'myo', 'önlisans'], url: "{% url 'meslekyuksekokullari:meslekyuksekokullari' %}", name: 'Meslek Yüksekokulları' },
+        { keywords: ['enstitü', 'enstitüler', 'lisansüstü', 'yüksek lisans', 'doktora'], url: "{% url 'lee:lee' %}", name: 'Lisansüstü Eğitim Enstitüsü' },
+        { keywords: ['akademik'], url: "{% url 'akademik:akademik' %}", name: 'Akademik' },
+        { keywords: ['araştırma', 'laboratuvar', 'laboratuvarlar', 'bap'], url: "{% url 'arastirma:home' %}", name: 'Araştırma' },
+        { keywords: ['kütüphane', 'kitap', 'açık erişim'], url: "{% url 'kutuphane:kutuphane' %}", name: 'Kütüphane' },
+        { keywords: ['uluslararası', 'international', 'yabancı öğrenci', 'yabancı uyruklu'], url: "{% url 'international:campus_life' %}", name: 'Uluslararası Ofis' },
+        { keywords: ['erasmus', 'değişim programı'], url: "{% url 'erasmus:erasmus' %}", name: 'Erasmus' },
+        { keywords: ['yatay geçiş', 'yatay'], url: "{% url 'yatay_gecis:yatay_gecis' %}", name: 'Yatay Geçiş' },
+        { keywords: ['iletişim', 'adres', 'telefon', 'konum', 'ulaşım', 'bize ulaşın'], url: "{% url 'core:iletisim' %}", name: 'İletişim' }
+    ];
+
+    // -------------------------------------------------------------
+    // Speech Synthesis (Text-to-Speech)
+    // -------------------------------------------------------------
+    let speechRate = 1.0;
+    let isSpeaking = false;
+
+    function speakText(text, onComplete) {
+        if (!('speechSynthesis' in window)) {
+            console.warn('Speech synthesis not supported');
+            if (onComplete) onComplete();
+            return;
         }
 
+        window.speechSynthesis.cancel(); // Stop any ongoing speech
+        if (!text) return;
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = speechRate;
+        utterance.lang = 'tr-TR';
+
+        // Select Turkish voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const trVoice = voices.find(v => v.lang.startsWith('tr') || v.lang.includes('TR'));
+        if (trVoice) {
+            utterance.voice = trVoice;
+        }
+
+        utterance.onstart = function() {
+            isSpeaking = true;
+            updateStatus('speaking', text.length > 50 ? text.substring(0, 50) + '...' : text);
+            setWaveAnimation('speaking');
+        };
+
+        utterance.onend = function() {
+            isSpeaking = false;
+            setWaveAnimation('idle');
+            updateStatus('idle', 'Dinlemeye hazır... Konuşmak için butona basın.');
+            if (onComplete) onComplete();
+        };
+
+        utterance.onerror = function(err) {
+            console.warn('SpeechSynthesis error:', err);
+            isSpeaking = false;
+            setWaveAnimation('idle');
+            if (onComplete) onComplete();
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function stopSpeaking() {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+        isSpeaking = false;
+        playChime('stop');
+        setWaveAnimation('idle');
+        updateStatus('idle', 'Ses durduruldu.');
+    }
+
+    // Read full contents of current page for screen reader
+    function readCurrentPageContent() {
+        stopListening();
+        playChime('start');
+        
+        const pageTitle = document.title.replace('Avrasya University', 'Avrasya Üniversitesi').replace('Avrasya Üniversitesi', '').replace('-', '').trim();
+        
+        // Find main headings
+        const headings = Array.from(document.querySelectorAll('main h1, main h2, main h3, .research-hero h1, header h1, .policy-title'))
+            .map(h => h.innerText.trim())
+            .filter(t => t.length > 2 && t.length < 100);
+
+        // Find main paragraphs
+        const paragraphs = Array.from(document.querySelectorAll('main p, .hero-content p, .unit-description, .contact-info p, .content p'))
+            .map(p => p.innerText.trim())
+            .filter(t => t.length > 15 && t.length < 350)
+            .slice(0, 4);
+
+        let speechScript = `${pageTitle ? pageTitle + ' sayfası. ' : ''}`;
+        if (headings.length > 0) {
+            speechScript += `Önemli başlıklar: ${headings.slice(0, 3).join('. ')}. `;
+        }
+        if (paragraphs.length > 0) {
+            speechScript += `Sayfa içeriği: ${paragraphs.join('. ')}. `;
+        } else {
+            speechScript += `Sayfadaki bağlantıları ve menüyü keşfetmek için gitmek istediğiniz yeri söyleyebilirsiniz.`;
+        }
+
+        document.getElementById('va-transcript').textContent = 'Sayfa içeriği seslendiriliyor...';
+        speakText(speechScript);
+    }
+
+    // -------------------------------------------------------------
+    // Speech Recognition (Voice Input)
+    // -------------------------------------------------------------
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+    let isListening = false;
+
+    if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = true;
+        recognition.lang = 'tr-TR';
+
+        recognition.onstart = function() {
+            isListening = true;
+            playChime('start');
+            updateStatus('listening', 'Sizi dinliyorum... Gitmek istediğiniz yeri söyleyin.');
+            setWaveAnimation('listening');
+            document.getElementById('va-mic-btn-label').textContent = 'Dinleniyor...';
+            document.getElementById('va-toggle-mic-btn').classList.add('active');
+        };
+
+        recognition.onresult = function(event) {
+            let interimTranscript = '';
+            let finalTranscript = '';
+
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+
+            const currentText = finalTranscript || interimTranscript;
+            if (currentText) {
+                document.getElementById('va-transcript').textContent = currentText;
+            }
+
+            if (finalTranscript) {
+                handleVoiceCommand(finalTranscript.trim().toLowerCase());
+            }
+        };
+
+        recognition.onerror = function(event) {
+            console.warn('Speech recognition error:', event.error);
+            isListening = false;
+            setWaveAnimation('idle');
+            document.getElementById('va-mic-btn-label').textContent = 'Konuş / Dinle';
+            document.getElementById('va-toggle-mic-btn').classList.remove('active');
+            
+            if (event.error === 'no-speech') {
+                updateStatus('idle', 'Ses algılanamadı. Lütfen tekrar deneyin.');
+            } else if (event.error === 'not-allowed') {
+                updateStatus('idle', 'Mikrofon izni verilmedi. Lütfen tarayıcıdan mikrofon iznini onaylayın.');
+            } else {
+                updateStatus('idle', 'Dinleme sonlandı.');
+            }
+        };
+
+        recognition.onend = function() {
+            isListening = false;
+            document.getElementById('va-mic-btn-label').textContent = 'Konuş / Dinle';
+            document.getElementById('va-toggle-mic-btn').classList.remove('active');
+            if (!isSpeaking) {
+                setWaveAnimation('idle');
+            }
+        };
+    }
+
+    function startListening() {
+        if (!recognition) {
+            alert('Tarayıcınız ses tanıma özelliğini desteklemiyor. Lütfen Google Chrome veya Microsoft Edge kullanın.');
+            return;
+        }
+        if (isSpeaking) {
+            stopSpeaking();
+        }
+        try {
+            recognition.start();
+        } catch(e) {
+            console.log('Recognition restart:', e);
+        }
+    }
+
+    function stopListening() {
+        if (recognition && isListening) {
+            recognition.stop();
+        }
+        isListening = false;
+        setWaveAnimation('idle');
+        document.getElementById('va-mic-btn-label').textContent = 'Konuş / Dinle';
+        document.getElementById('va-toggle-mic-btn').classList.remove('active');
+    }
+
+    // -------------------------------------------------------------
+    // Voice Command Dispatcher
+    // -------------------------------------------------------------
+    function handleVoiceCommand(cmd) {
+        console.log('Voice Command Received:', cmd);
+        document.getElementById('va-transcript').textContent = `"${cmd}"`;
+
+        // Command: Sayfayı oku
+        if (cmd.includes('oku') || cmd.includes('sayfayı oku') || cmd.includes('metni oku') || cmd.includes('içeriği oku')) {
+            readCurrentPageContent();
+            return;
+        }
+
+        // Command: Durdur
+        if (cmd.includes('dur') || cmd.includes('durdur') || cmd.includes('sus') || cmd.includes('iptal')) {
+            stopSpeaking();
+            return;
+        }
+
+        // Command: Navigation matching
+        let matchedRoute = null;
+        for (const route of voiceRoutes) {
+            for (const kw of route.keywords) {
+                if (cmd.includes(kw)) {
+                    matchedRoute = route;
+                    break;
+                }
+            }
+            if (matchedRoute) break;
+        }
+
+        if (matchedRoute) {
+            playChime('success');
+            updateStatus('speaking', `${matchedRoute.name} sayfasına yönlendiriliyorsunuz...`);
+            
+            // Set auto announce on destination page
+            sessionStorage.setItem('va_auto_announce', matchedRoute.name);
+
+            speakText(`${matchedRoute.name} sayfasına yönlendiriliyorsunuz...`, function() {
+                window.location.href = matchedRoute.url;
+            });
+        } else {
+            playChime('error');
+            updateStatus('idle', `"${cmd}" komutu anlaşılamadı. Lütfen örneğin "Kayıt İşlemleri" veya "Aday Öğrenci" deyin.`);
+            speakText(`Üzgünüm, ${cmd} anlaşılamadı. Örneğin Kayıt İşlemleri veya Sayfayı Oku diyebilirsiniz.`);
+        }
+    }
+
+    // -------------------------------------------------------------
+    // UI Helpers
+    // -------------------------------------------------------------
+    function updateStatus(state, message) {
+        const banner = document.getElementById('va-status-banner');
+        const icon = document.getElementById('va-status-icon');
+        const text = document.getElementById('va-status-text');
+
+        banner.className = 'va-status-banner ' + state;
+        text.textContent = message;
+
+        if (state === 'listening') {
+            icon.innerHTML = '<i class="fa-solid fa-microphone-lines"></i>';
+        } else if (state === 'speaking') {
+            icon.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+        } else {
+            icon.innerHTML = '<i class="fa-solid fa-circle-info"></i>';
+        }
+    }
+
+    function setWaveAnimation(state) {
+        const wave = document.getElementById('va-wave-container');
+        wave.className = 'va-wave-container';
+        if (state === 'listening') wave.classList.add('active');
+        if (state === 'speaking') wave.classList.add('speaking');
+    }
+
+    // -------------------------------------------------------------
+    // Modal Open/Close & Controls
+    // -------------------------------------------------------------
+    const vaBtn = document.getElementById('voice-assistant-button');
+    const vaWindow = document.getElementById('voice-assistant-window');
+    const vaCloseBtn = document.getElementById('close-voice-assistant');
+    const vaMinimizeBtn = document.getElementById('minimize-voice-assistant');
+    const vaMicBtn = document.getElementById('va-toggle-mic-btn');
+    const vaReadBtn = document.getElementById('va-read-page-btn');
+    const vaStopBtn = document.getElementById('va-stop-speech-btn');
+    const speedBtns = document.querySelectorAll('.va-speed-btn');
+    const tagBtns = document.querySelectorAll('.va-tag-btn');
+
+    // Live Support elements
+    const supportBtn = document.getElementById('live-support-button');
+    const supportWindow = document.getElementById('live-support-window');
+    const closeSupportBtn = document.getElementById('close-support');
+    const minimizeSupportBtn = document.getElementById('minimize-support');
+    const actionsStack = document.getElementById('floating-actions-stack');
+
+    function openVoiceAssistant(autoListen=true) {
+        if (supportWindow) supportWindow.style.display = 'none';
+        if (actionsStack) actionsStack.style.display = 'none';
+        vaWindow.style.display = 'flex';
+        playChime('start');
+
+        // Welcome voice prompt
+        speakText('Avrasya Üniversitesi Sesli Asistanına hoş geldiniz. Nereye gitmek istersiniz? Örneğin Aday Öğrenci, Kayıt İşlemleri veya Sayfayı Oku diyebilirsiniz.', function() {
+            if (autoListen) {
+                startListening();
+            }
+        });
+    }
+
+    function closeVoiceAssistant() {
+        stopSpeaking();
+        stopListening();
+        vaWindow.style.display = 'none';
+        if (actionsStack) actionsStack.style.display = 'flex';
+    }
+
+    if (vaBtn) {
+        vaBtn.addEventListener('click', () => openVoiceAssistant(true));
+        vaBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openVoiceAssistant(true);
+            }
+        });
+    }
+
+    if (vaCloseBtn) vaCloseBtn.addEventListener('click', closeVoiceAssistant);
+    if (vaMinimizeBtn) vaMinimizeBtn.addEventListener('click', closeVoiceAssistant);
+
+    if (vaMicBtn) {
+        vaMicBtn.addEventListener('click', function() {
+            if (isListening) {
+                stopListening();
+            } else {
+                startListening();
+            }
+        });
+    }
+
+    if (vaReadBtn) {
+        vaReadBtn.addEventListener('click', readCurrentPageContent);
+    }
+
+    if (vaStopBtn) {
+        vaStopBtn.addEventListener('click', function() {
+            stopSpeaking();
+            stopListening();
+        });
+    }
+
+    // Speed buttons
+    speedBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            speedBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            speechRate = parseFloat(this.getAttribute('data-speed')) || 1.0;
+            speakText(`Okuma hızı ${speechRate} katına ayarlandı.`);
+        });
+    });
+
+    // Tag buttons (click to run voice command)
+    tagBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const cmd = this.getAttribute('data-cmd');
+            if (cmd) {
+                handleVoiceCommand(cmd.toLowerCase());
+            }
+        });
+    });
+
+    // Global Keyboard Shortcut: Alt + V
+    document.addEventListener('keydown', function(e) {
+        if (e.altKey && (e.key === 'v' || e.key === 'V' || e.code === 'KeyV')) {
+            e.preventDefault();
+            if (vaWindow.style.display === 'flex') {
+                closeVoiceAssistant();
+            } else {
+                openVoiceAssistant(true);
+            }
+        }
+        if (e.key === 'Escape' && vaWindow.style.display === 'flex') {
+            closeVoiceAssistant();
+        }
+    });
+
+    // Check cross-page auto-announce
+    const autoAnnounce = sessionStorage.getItem('va_auto_announce');
+    if (autoAnnounce) {
+        sessionStorage.removeItem('va_auto_announce');
+        setTimeout(() => {
+            speakText(`${autoAnnounce} sayfasına hoş geldiniz. Sayfa içeriğini dinlemek için Alt + V tuşlarına basın veya sayfayı oku deyin.`);
+        }, 800);
+    }
+
+    // -------------------------------------------------------------
+    // Live Support Original Chat Socket Logic
+    // -------------------------------------------------------------
+    const onboarding = document.getElementById('support-onboarding');
+    const chatContainer = document.getElementById('support-chat-container');
+    const initForm = document.getElementById('support-init-form');
+    const msgList = document.getElementById('support-messages');
+    const msgInput = document.getElementById('support-input');
+    const sendBtn = document.getElementById('send-support-msg');
+    const badge = document.getElementById('support-badge');
+
+    let socket = null;
+    let sessionKey = localStorage.getItem('support_session_key');
+    let visitorName = localStorage.getItem('support_visitor_name') || 'Ziyaretçi';
+    let unreadCount = 0;
+
+    if (!sessionKey) {
+        sessionKey = 'vis_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('support_session_key', sessionKey);
+    }
+
+    if (supportBtn) {
         supportBtn.addEventListener('click', () => {
-            supportBtn.style.display = 'none';
+            if (vaWindow) vaWindow.style.display = 'none';
+            if (actionsStack) actionsStack.style.display = 'none';
             supportWindow.style.display = 'flex';
             unreadCount = 0;
             updateBadge();
@@ -247,15 +1221,17 @@
                 chatContainer.style.display = 'none';
             }
         });
+    }
 
-        function hideSupportWindow() {
-            supportWindow.style.display = 'none';
-            supportBtn.style.display = 'flex';
-        }
+    function hideSupportWindow() {
+        supportWindow.style.display = 'none';
+        if (actionsStack) actionsStack.style.display = 'flex';
+    }
 
-        closeBtn.addEventListener('click', hideSupportWindow);
-        minimizeBtn.addEventListener('click', hideSupportWindow);
+    if (closeSupportBtn) closeSupportBtn.addEventListener('click', hideSupportWindow);
+    if (minimizeSupportBtn) minimizeSupportBtn.addEventListener('click', hideSupportWindow);
 
+    if (initForm) {
         initForm.addEventListener('submit', (e) => {
             e.preventDefault();
             visitorName = document.getElementById('support-name').value;
@@ -264,68 +1240,70 @@
             showChat();
             connectSocket();
         });
+    }
 
-        function showChat() {
-            onboarding.style.display = 'none';
-            chatContainer.style.display = 'flex';
-        }
+    function showChat() {
+        onboarding.style.display = 'none';
+        chatContainer.style.display = 'flex';
+    }
 
-        function connectSocket() {
-            const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-            socket = new WebSocket(`${protocol}://${window.location.host}/ws/support/${sessionKey}/`);
+    function connectSocket() {
+        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        socket = new WebSocket(`${protocol}://${window.location.host}/ws/support/${sessionKey}/`);
 
-            socket.onmessage = function(e) {
-                const data = JSON.parse(e.data);
-                if (data.type === 'message') {
-                    addMessage(data.message, data.sender_name, data.is_staff);
-                    if (supportWindow.style.display === 'none') {
-                        unreadCount++;
-                        updateBadge();
-                    }
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            if (data.type === 'message') {
+                addMessage(data.message, data.sender_name, data.is_staff);
+                if (supportWindow.style.display === 'none') {
+                    unreadCount++;
+                    updateBadge();
                 }
-            };
-
-            socket.onclose = function() {
-                console.error('Support socket closed');
-                // Auto reconnect?
-            };
-        }
-
-        function addMessage(text, sender, isStaff) {
-            const div = document.createElement('div');
-            div.className = `support-msg ${isStaff ? 'support-msg-staff' : 'support-msg-visitor'}`;
-            div.textContent = text;
-            msgList.appendChild(div);
-            msgList.scrollTop = msgList.scrollHeight;
-        }
-
-        function updateBadge() {
-            if (unreadCount > 0) {
-                badge.textContent = unreadCount;
-                badge.style.display = 'block';
-            } else {
-                badge.style.display = 'none';
             }
-        }
+        };
 
-        sendBtn.addEventListener('click', sendMessage);
+        socket.onclose = function() {
+            console.error('Support socket closed');
+        };
+    }
+
+    function addMessage(text, sender, isStaff) {
+        const div = document.createElement('div');
+        div.className = `support-msg ${isStaff ? 'support-msg-staff' : 'support-msg-visitor'}`;
+        div.textContent = text;
+        msgList.appendChild(div);
+        msgList.scrollTop = msgList.scrollHeight;
+    }
+
+    function updateBadge() {
+        if (unreadCount > 0) {
+            badge.textContent = unreadCount;
+            badge.style.display = 'block';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    if (sendBtn) sendBtn.addEventListener('click', sendMessage);
+    if (msgInput) {
         msgInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
             }
         });
+    }
 
-        function sendMessage() {
-            const msg = msgInput.value.trim();
-            if (msg && socket && socket.readyState === WebSocket.OPEN) {
-                socket.send(JSON.stringify({
-                    'type': 'message',
-                    'message': msg,
-                    'sender_name': visitorName
-                }));
-                msgInput.value = '';
-            }
+    function sendMessage() {
+        const msg = msgInput.value.trim();
+        if (msg && socket && socket.readyState === WebSocket.OPEN) {
+            socket.send(JSON.stringify({
+                'type': 'message',
+                'message': msg,
+                'sender_name': visitorName
+            }));
+            msgInput.value = '';
         }
-    })();
+    }
+})();
 </script>

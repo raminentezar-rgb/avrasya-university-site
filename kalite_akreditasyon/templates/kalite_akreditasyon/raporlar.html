@@ -1,0 +1,92 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "İç Değerlendirme Raporları" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+<!-- Page Title Header (matching old site style) -->
+<div class="tab-content-header mb-4 pb-2" style="border-bottom: 2px solid #eef2f6;">
+    <h2 class="font-weight-bold" style="color: #163269; font-size: 2rem; margin-bottom: 6px; letter-spacing: -0.5px;">
+        {% trans "İç Değerlendirme Raporları" %}
+    </h2>
+    <p style="color: #f79f10; font-weight: 600; font-size: 1.05rem; margin-bottom: 0;">
+        {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+    </p>
+</div>
+
+<!-- Reports List Card -->
+<div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+    <ul class="list-unstyled mb-0 kidr-reports-list" style="line-height: 2.4;">
+        <li class="mb-2">
+            <a href="{% static 'core/pdf/kidr/kidr-2023.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2023 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="{% static 'core/pdf/kidr/kidr-2022.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2022 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="{% static 'core/pdf/kidr/kidr-2021.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2021 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="{% static 'core/pdf/kidr/kidr-2020.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2020 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="{% static 'core/pdf/kidr/kidr-2019.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2019 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="{% static 'core/pdf/kidr/kidr-2018.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2018 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="{% static 'core/pdf/kidr/kidr-2017.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2017 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="{% static 'core/pdf/kidr/kidr-2016.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2016 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+        <li class="mb-0">
+            <a href="{% static 'core/pdf/kidr/kidr-2015.pdf' %}" target="_blank" rel="noopener" class="d-flex align-items-center font-weight-bold report-link">
+                <i class="fas fa-file-pdf text-danger mr-3" style="font-size: 1.25rem;"></i>
+                <span>{% trans "2015 KURUM İÇİ DEĞERLENDİRME RAPORU" %}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<style>
+.report-link {
+    color: #163269;
+    font-size: 1.08rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 4px 0;
+}
+.report-link:hover {
+    color: #f79f10;
+    text-decoration: underline;
+    transform: translateX(4px);
+}
+</style>
+{% endblock %}

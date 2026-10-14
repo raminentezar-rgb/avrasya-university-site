@@ -1,0 +1,75 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ news.title }} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+<div class="section-header">
+    <h3 class="section-title">
+        <i class="fas fa-newspaper"></i> {{ news.title }}
+    </h3>
+</div>
+
+<!-- Article Header -->
+<div class="article-meta-bar mb-4 pb-3 border-bottom d-flex flex-wrap align-items-center justify-content-between text-muted">
+    <div>
+        <span class="mr-3"><i class="far fa-calendar-alt text-primary mr-1"></i> {{ news.published_at|date:"d F Y" }}</span>
+        {% if news.category %}
+            <span class="badge badge-info p-1">{{ news.category.name }}</span>
+        {% endif %}
+    </div>
+    <div>
+        <span><i class="far fa-eye text-primary mr-1"></i> {{ news.views_count }} {% trans "okunma" %}</span>
+    </div>
+</div>
+
+<!-- Featured Image -->
+{% if news.image %}
+    <div class="article-featured-image mb-4 text-center">
+        <img src="{{ news.get_image_url }}" alt="{{ news.title }}" class="img-fluid rounded shadow-sm" style="max-height: 480px; width: 100%; object-fit: cover;">
+    </div>
+{% endif %}
+
+<!-- Summary lead -->
+{% if news.summary %}
+    <div class="article-summary p-3 mb-4 rounded bg-light border-left border-primary" style="border-left-width: 4px !important;">
+        <p class="lead mb-0 text-dark" style="font-weight: 500; font-size: 1.05rem;">{{ news.summary }}</p>
+    </div>
+{% endif %}
+
+<!-- Content -->
+<div class="article-body mb-5" style="line-height: 1.85; font-size: 1.05rem; color: #2d3748;">
+    {{ news.content|linebreaks }}
+</div>
+
+<hr>
+
+<!-- Back button -->
+<div class="d-flex justify-content-between align-items-center mt-4">
+    <a href="{% url 'kalite_akreditasyon:haberler' %}" class="btn-avrasya-outline">
+        <i class="fas fa-arrow-left"></i> {% trans "Tüm Haberlere Dön" %}
+    </a>
+</div>
+
+<!-- Related News -->
+{% if related_news %}
+    <div class="related-news-section mt-5 pt-4 border-top">
+        <h5 class="mb-3 font-weight-bold" style="color: var(--primary-dark-blue);">{% trans "Diğer Güncel Haberler" %}</h5>
+        <div class="row">
+            {% for r_news in related_news %}
+                <div class="col-md-6 mb-3">
+                    <div class="p-3 border rounded h-100 bg-light">
+                        <small class="text-muted d-block mb-1">{{ r_news.published_at|date:"d M Y" }}</small>
+                        <h6 class="mb-0">
+                            <a href="{{ r_news.get_absolute_url }}" class="text-dark font-weight-bold text-decoration-none">
+                                {{ r_news.title }}
+                            </a>
+                        </h6>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

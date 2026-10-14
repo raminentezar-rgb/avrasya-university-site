@@ -1,0 +1,1233 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Hakkında" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+
+<!-- Tab Section (Designed exactly like Adalet Programı) -->
+<div class="ogrenci-isleri-tab-section">
+    <div class="tab-container">
+        
+        <!-- Tab Header (Horizontal Tabs matching Adalet Image 2) -->
+        <div class="tab-header">
+            <ul class="tab-menu" id="hakkindaTabMenu">
+                <li class="tab-menu-item active" data-tab="tab-yonetim">
+                    <span>{% trans "Yönetim" %}</span>
+                </li>
+                <li class="tab-menu-item" data-tab="tab-komisyon">
+                    <span>{% trans "Kalite Komisyon Üyeleri" %}</span>
+                </li>
+                <li class="tab-menu-item" data-tab="tab-alt-calisma">
+                    <span>{% trans "Alt Çalışma Grupları" %}</span>
+                </li>
+                <li class="tab-menu-item" data-tab="tab-danisma">
+                    <span>{% trans "Danışma Kurulu" %}</span>
+                </li>
+                <li class="tab-menu-item" data-tab="tab-politika">
+                    <span>{% trans "Kurum Kalite Politikası" %}</span>
+                </li>
+                <li class="tab-menu-item" data-tab="tab-stratejik">
+                    <span>{% trans "Stratejik Plan" %}</span>
+                </li>
+                <li class="tab-menu-item" data-tab="tab-organizasyon">
+                    <span>{% trans "Organizasyon Şeması" %}</span>
+                </li>
+                <li class="tab-menu-item" data-tab="tab-kurullar">
+                    <span>{% trans "Kurul ve Komisyonlar" %}</span>
+                </li>
+                <li class="tab-menu-item" data-tab="tab-misyon">
+                    <span>{% trans "Misyon & Vizyon" %}</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Tab Contents Wrapper -->
+        <div class="tab-content-wrapper">
+            
+            <!-- 1. TAB: YÖNETİM -->
+            <div class="tab-content active" id="tab-yonetim">
+                <div class="tab-content-header">
+                    <h3><i class="fas fa-user-tie text-primary mr-2"></i> {% trans "Koordinatörlük Yönetimi" %}</h3>
+                    <p class="text-muted">{% trans "Kalite ve Akreditasyon Koordinatörlüğü yönetim organları ve yöneticileri." %}</p>
+                </div>
+                
+            </div>
+
+            <!-- 2. TAB: KALİTE KOMİSYON ÜYELERİ (RESMİ ÜYE LİSTESİ) -->
+            <div class="tab-content" id="tab-komisyon">
+                <div class="tab-content-header d-flex justify-content-between align-items-center flex-wrap">
+                    <div>
+                        <h3><i class="fas fa-users text-primary mr-2"></i> {% trans "Komisyon Üyeleri" %}</h3>
+                        <p class="text-muted mb-0">{% trans "Avrasya Üniversitesi Kalite ve Akreditasyon Komisyonu Üyeleri" %}</p>
+                    </div>
+                    <div class="mt-2 mt-md-0">
+                        <span class="badge badge-light border p-2 text-muted">
+                            <i class="fas fa-user-check text-success mr-1"></i> 17 {% trans "Komisyon Üyesi" %}
+                        </span>
+                    </div>
+                </div>
+                <div class="tab-content-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover bg-white shadow-sm" style="border-radius: 10px; overflow: hidden;">
+                            <thead style="background: linear-gradient(135deg, #092442 0%, #1d61a9 100%); color: #ffffff;">
+                                <tr>
+                                    <th style="width: 8%; text-align: center;">{% trans "#" %}</th>
+                                    <th style="width: 45%;">{% trans "Adı Soyadı" %}</th>
+                                    <th style="width: 32%;">{% trans "Komisyondaki Görevi" %}</th>
+                                    <th style="width: 15%; text-align: center;">{% trans "Üyelik Türü" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">1</td>
+                                    <td><strong class="text-dark">Prof. Dr. Mahir KADAKAL</strong></td>
+                                    <td>{% trans "Rektör / Başkan (Doğal Üye)" %}</td>
+                                    <td class="text-center"><span class="badge badge-primary px-3 py-2">{% trans "Doğal Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">2</td>
+                                    <td><strong class="text-dark">Prof. Dr. Yavuz ÖZORAN</strong></td>
+                                    <td>{% trans "Rektör Yardımcısı / Başkan V." %}</td>
+                                    <td class="text-center"><span class="badge badge-info px-3 py-2">{% trans "Başkan V." %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">3</td>
+                                    <td><strong class="text-dark">Gülay YENİÇERİ</strong></td>
+                                    <td>{% trans "Genel Sekreter (Doğal Üye)" %}</td>
+                                    <td class="text-center"><span class="badge badge-primary px-3 py-2">{% trans "Doğal Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">4</td>
+                                    <td><strong class="text-dark">Öğr. Gör. Handan ERDOĞAN</strong></td>
+                                    <td>{% trans "Kalite ve Akreditasyon Koordinatörü (Doğal Üye)" %}</td>
+                                    <td class="text-center"><span class="badge badge-success px-3 py-2">{% trans "Doğal Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">5</td>
+                                    <td><strong class="text-dark">Öğr. Gör. Hilal TİRYAKİ</strong></td>
+                                    <td>{% trans "Kalite ve Akreditasyon Koordinatör Yardımcısı" %}</td>
+                                    <td class="text-center"><span class="badge badge-success px-3 py-2">{% trans "Koordinatör Yrd." %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">6</td>
+                                    <td><strong class="text-dark">Doç. Dr. Gül ERTEM</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">7</td>
+                                    <td><strong class="text-dark">Dr. Öğr. Üyesi Abdurrahman ATALAY</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">8</td>
+                                    <td><strong class="text-dark">Dr. Öğr. Üyesi Cansu İSKENDER</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">9</td>
+                                    <td><strong class="text-dark">Dr. Öğr. Üyesi Erdoğan ALTUN</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">10</td>
+                                    <td><strong class="text-dark">Dr. Öğr. Üyesi Pınar KÜÇÜK</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">11</td>
+                                    <td><strong class="text-dark">Dr. Öğr. Üyesi Adiye ŞİMŞEK</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">12</td>
+                                    <td><strong class="text-dark">Dr. Öğr. Üyesi Selfiye ÖZKAN</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">13</td>
+                                    <td><strong class="text-dark">Dr. Öğr. Üyesi Meral BELDÜZ KOLCU</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">14</td>
+                                    <td><strong class="text-dark">Öğr. Gör. Elif KESKİN</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">15</td>
+                                    <td><strong class="text-dark">Öğr. Gör. Emre MURAT</strong></td>
+                                    <td>{% trans "Üye" %}</td>
+                                    <td class="text-center"><span class="badge badge-secondary px-3 py-2">{% trans "Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">16</td>
+                                    <td><strong class="text-dark">Elif ALTUNTAŞ</strong></td>
+                                    <td>{% trans "Öğrenci İşleri Daire Başkanı (Doğal Üye)" %}</td>
+                                    <td class="text-center"><span class="badge badge-primary px-3 py-2">{% trans "Doğal Üye" %}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center font-weight-bold text-muted">17</td>
+                                    <td><strong class="text-dark">{% trans "Kurum Kalite Öğrenci Elçisi" %}</strong></td>
+                                    <td>{% trans "Öğrenci Temsilci" %}</td>
+                                    <td class="text-center"><span class="badge badge-warning px-3 py-2 text-dark font-weight-bold">{% trans "Öğrenci Temsilci" %}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. TAB: ALT ÇALIŞMA GRUPLARI -->
+            <div class="tab-content" id="tab-alt-calisma">
+                <div class="tab-content-header">
+                    <h3><i class="fas fa-layer-group text-primary mr-2"></i> {% trans "Alt Çalışma Grupları" %}</h3>
+                    <p class="text-muted">{% trans "YÖKAK kriterleri ve üniversite kurumsal kalite yapılanması odaklı alt çalışma grupları." %}</p>
+                </div>
+                <div class="tab-content-body">
+                    <!-- Sub-tabs Navigation -->
+                    <div class="subtabs-nav-wrapper mb-4">
+                        <ul class="subtabs-nav" id="altCalismaSubtabs" role="tablist">
+                            <li class="subtab-item">
+                                <button type="button" class="subtab-btn active" data-subtab="subtab-idari-destek" role="tab" aria-selected="true">
+                                    <i class="fas fa-sitemap mr-2"></i> {% trans "İdari Destek Yapılanması" %}
+                                </button>
+                            </li>
+                            <li class="subtab-item">
+                                <button type="button" class="subtab-btn" data-subtab="subtab-birim-komisyon" role="tab" aria-selected="false">
+                                    <i class="fas fa-users-cog mr-2"></i> {% trans "Birim Kalite Alt Komisyonları" %}
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Sub-tab 1: İdari Destek Yapılanması -->
+                    <div class="subtab-pane active" id="subtab-idari-destek" role="tabpanel">
+                        <div class="subtab-card p-4 border rounded bg-white shadow-sm mb-4">
+                            <div class="d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom">
+                                <div>
+                                    <h4 class="font-weight-bold text-primary mb-1">
+                                        <i class="fas fa-sitemap mr-2"></i> {% trans "İdari Destek Yapılanması" %}
+                                    </h4>
+                                    <p class="text-muted small mb-0">{% trans "Kalite güvence sistemi idari birimler çalışma ve destek yapısı" %}</p>
+                                </div>
+                                <span class="badge badge-primary px-3 py-2">{% trans "Alt Çalışma Grubu" %}</span>
+                            </div>
+
+                            <div class="p-4 rounded border bg-light text-center my-3">
+                                <div class="mb-3">
+                                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle" style="width: 70px; height: 70px; background: rgba(29, 97, 169, 0.1); color: #1d61a9; font-size: 28px;">
+                                        <i class="fas fa-network-wired"></i>
+                                    </span>
+                                </div>
+                                <h5 class="text-dark font-weight-bold mb-2">{% trans "İdari Destek Yapılanması Bilgileri" %}</h5>
+                                <p class="text-muted small mx-auto mb-0" style="max-width: 650px; line-height: 1.8;">
+                                    {% trans "Üniversitemiz İdari Birimler Kalite ve Destek Yapılanması süreçleri Kalite ve Akreditasyon Koordinatörlüğü bünyesinde güncellenmekte olup, birim bazlı görev tanımları ve çalışma esasları yakında yayınlanacaktır." %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-tab 2: Birim Kalite Alt Komisyonları -->
+                    <div class="subtab-pane" id="subtab-birim-komisyon" role="tabpanel">
+                        <div class="subtab-card p-4 border rounded bg-white shadow-sm mb-4">
+                            <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom">
+                                <div>
+                                    <h4 class="font-weight-bold text-primary mb-1">
+                                        <i class="fas fa-users-cog mr-2"></i> {% trans "Birim Kalite Alt Komisyonları" %}
+                                    </h4>
+                                    <p class="text-muted small mb-0">{% trans "Üniversitemiz fakülte, yüksekokul ve enstitülerine ait birim kalite alt komisyonları ve üyeleri" %}</p>
+                                </div>
+                                <span class="badge badge-primary px-3 py-2">{% trans "10 Birim Komisyonu" %}</span>
+                            </div>
+
+                            <div class="row">
+                                <!-- 1. Meslek Yüksekokulu -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-user-graduate mr-2"></i> {% trans "Meslek Yüksekokulu" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">MYO</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Doç. Dr.</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 2. Sağlık Hizmetleri Meslek Yüksekokulu -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-hospital mr-2"></i> {% trans "Sağlık Hizmetleri Meslek Yüksekokulu" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">SHMYO</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 3. Uygulamalı Bilimler Yüksekokulu -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-briefcase mr-2"></i> {% trans "Uygulamalı Bilimler Yüksekokulu" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">UBYO</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Dr. Öğr. Üyesi</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 4. Mühendislik ve Doğa Bilimleri Fakültesi -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-cogs mr-2"></i> {% trans "Mühendislik ve Doğa Bilimleri Fakültesi" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">MMF</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Prof. Dr. Orhan DURGUN</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Handan ERDOĞAN</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Özlem KARAHASAN</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Yasemin ŞİMŞEK BEYAZ</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kübra DEMİRCİ</td>
+                                                        <td class="text-center"><span class="badge badge-success">{% trans "Raportör" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 5. İnsan ve Toplum Bilimleri Fakültesi -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-book-open mr-2"></i> {% trans "İnsan ve Toplum Bilimleri Fakültesi" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">İTBF</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Prof. Dr. Mustafa EMİR</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Havva Esra OCAK</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Rukiye ÖZTÜRK</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Cansu DAŞDEMİR DOĞAN</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Sara SOLMAZ</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Adiye ŞİMŞEK</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Oğulcan KAHRAMAN</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 6. İktisadi ve İdari Bilimler Fakültesi -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-chart-pie mr-2"></i> {% trans "İktisadi ve İdari Bilimler Fakültesi" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">İİBF</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Prof. Dr.</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Doç. Dr.</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 7. Sağlık Bilimleri Fakültesi -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-heartbeat mr-2"></i> {% trans "Sağlık Bilimleri Fakültesi" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">SBF</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Prof. Dr. Yavuz ÖZORAN</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Abdurrahman ATALAY</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Faruk GALYON</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör. Burcu UÇAR</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör. Ayşenur ÖZKUL</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Öğr. Gör. Hilal Ebru ÇAKAR</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ayşe ERTEM</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 8. Spor Bilimleri Fakültesi -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-running mr-2"></i> {% trans "Spor Bilimleri Fakültesi" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">SBF</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Prof. Dr. Birol DOĞAN</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Doç. Dr. Gül ERTEM</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Doç. Dr. Mehmet DERELİOĞLU</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Seda Nur TURHAL</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Tarık SİVRİKAYA</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Ceyhun KABAL</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Oğulcan KAHRAMAN</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 9. Lisansüstü Eğitim Enstitüsü -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-graduation-cap mr-2"></i> {% trans "Lisansüstü Eğitim Enstitüsü" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">LEE</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Prof. Dr.</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 10. İletişim Fakültesi -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="card-header bg-light py-3 border-bottom d-flex align-items-center justify-content-between">
+                                            <h6 class="font-weight-bold text-primary mb-0">
+                                                <i class="fas fa-broadcast-tower mr-2"></i> {% trans "İletişim Fakültesi" %}
+                                            </h6>
+                                            <span class="badge badge-secondary small">İLF</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-hover table-striped mb-0 small">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>{% trans "Unvan / İsim" %}</th>
+                                                        <th class="text-center" style="width: 120px;">{% trans "Görevi" %}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="font-weight-bold text-dark">Dr. Öğr. Üyesi Selfiye ÖZKAN</td>
+                                                        <td class="text-center"><span class="badge badge-primary">{% trans "Başkan" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Yusuf Tolga ÜNKER</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dr. Öğr. Üyesi Ahmet Can AKGÜN</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kübra DEMİRCİ</td>
+                                                        <td class="text-center"><span class="badge badge-light border">{% trans "Üye" %}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. TAB: DANIŞMA KURULU -->
+            <div class="tab-content" id="tab-danisma">
+                <div class="tab-content-header">
+                    <h3><i class="fas fa-handshake text-primary mr-2"></i> {% trans "Danışma Kurulu" %}</h3>
+                    <p class="text-muted">{% trans "İç ve dış paydaş katılımını sağlayan Kalite Danışma Kurulu yapısı ve üyeleri." %}</p>
+                </div>
+                <div class="tab-content-body">
+                    <div class="p-4 rounded border bg-light mb-4 border-left-primary">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge px-3 py-1 font-weight-bold" style="background-color: #f79f10; color: #fff;">
+                                {% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}
+                            </span>
+                        </div>
+                        <h5 class="font-weight-bold text-dark mt-2 mb-3">{% trans "Danışma Kurulu Tanımı ve Amacı" %}</h5>
+                        <p class="text-dark mb-0" style="font-size: 1.05rem; line-height: 1.9;">
+                            {% trans "Eğitim Öğretim ve Araştırma süreçleri öncelikli olmak üzere ilgili birim, bölüm ve programlara görüş ve öneri bildirmek üzere iş gücü piyasası temsilcileri ile diğer paydaşların da yer alacağı kuruldur." %}
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 border rounded bg-white shadow-sm h-100">
+                                <h6 class="font-weight-bold text-primary mb-2">{% trans "Dış Paydaş Temsilcileri" %}</h6>
+                                <ul class="small text-muted pl-3 mb-0" style="line-height: 1.8;">
+                                    <li>{% trans "Trabzon Ticaret ve Sanayi Odası Temsilcisi" %}</li>
+                                    <li>{% trans "İl Sağlık Müdürlüğü Temsilcisi" %}</li>
+                                    <li>{% trans "İl Milli Eğitim Müdürlüğü Temsilcisi" %}</li>
+                                    <li>{% trans "Sektörel Meslek Kuruluşları ve Baro Temsilcileri" %}</li>
+                                    <li>{% trans "Bölgesel Sanayi Kuruluşları Yöneticileri" %}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 border rounded bg-white shadow-sm h-100">
+                                <h6 class="font-weight-bold text-success mb-2">{% trans "İç Paydaş Temsilcileri" %}</h6>
+                                <ul class="small text-muted pl-3 mb-0" style="line-height: 1.8;">
+                                    <li>{% trans "Fakülte ve Yüksekokul Bölüm Başkanları" %}</li>
+                                    <li>{% trans "Mezunlar Derneği Temsilcileri" %}</li>
+                                    <li>{% trans "Öğrenci Kulüpleri Temsilcileri" %}</li>
+                                    <li>{% trans "İdari Daire Başkanlıkları" %}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. TAB: KURUM KALİTE POLİTİKASI -->
+            <div class="tab-content" id="tab-politika">
+                <div class="tab-content-header">
+                    <h3><i class="fas fa-certificate text-primary mr-2"></i> {% trans "Kurum Kalite Politikası" %}</h3>
+                    <p class="text-muted">{% trans "Avrasya Üniversitesi resmi Kalite Politikası taahhüdü ve ilkeleri." %}</p>
+                </div>
+                <div class="tab-content-body">
+                    <!-- Official Policy Document Card -->
+                    <div class="policy-official-card p-4 p-md-5 bg-white rounded border shadow-sm mx-auto" style="max-width: 920px; position: relative;">
+                        <!-- Top Emblem & Title -->
+                        <div class="text-center mb-4 pb-3 border-bottom">
+                            <img src="{% static 'core/img/avrasya_seal_colored.png' %}" alt="Avrasya Üniversitesi" style="height: 120px; width: auto; margin-bottom: 16px;" class="img-fluid">
+                            <h3 class="font-weight-bold text-dark mb-1" style="letter-spacing: 1px; font-size: 1.55rem; font-family: 'Open Sans', sans-serif;">
+                                {% trans "AVRASYA ÜNİVERSİTESİ" %}
+                            </h3>
+                            <h4 class="font-weight-bold text-primary mb-0" style="letter-spacing: 2px; font-size: 1.35rem;">
+                                {% trans "KALİTE POLİTİKASI" %}
+                            </h4>
+                        </div>
+
+                        <!-- Policy Body -->
+                        <div class="policy-body text-dark" style="font-size: 15px; line-height: 1.95;">
+                            <p class="font-weight-bold mb-3" style="font-size: 1.05rem;">
+                                {% trans "Üniversitemiz," %}
+                            </p>
+
+                            <ul class="policy-points-list pl-0 mb-4" style="list-style: none;">
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Paydaşlarımızın gereksinim ve beklentilerini dikkate alarak eğitim-öğretim, araştırma, geliştirme ve hizmet süreçlerini sürekli iyileştirmeyi," %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Kalite bilincini kurum kültürü olarak benimsemeyi, Kalite Güvence Sistemini tüm çalışanların katılımıyla yapılandırmayı ve verilen hizmetlere ilişkin sistematik yapılar kurarak kaliteyi ölçülebilir kılmayı," %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Çalışanların ve öğrencilerin uluslararası değişim programlarına katılımını destekleyerek kişisel ve mesleki gelişimlerine katkıda bulunmayı," %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Üniversitemizin ve ülkemizin ulusal ve uluslararası düzeyde tanınırlığına katkıda bulunmayı," %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Geribildirim ve öneri kültürünü oluşturmayı," %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Açık, adil, şeffaf, hesap verebilen, sorumlu ve etik kurallara uygun bir yönetim tarzıyla hareket etmeyi," %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Kurumsallaşmış ve rekabet gücüne sahip bir vakıf üniversitesi olarak kamu, sanayi, üniversite, STK ve tüm paydaşlarla iş birliği ile toplum yararına projeler üreten, bölge ve ülke kalkınmasına katkı sağlayan girişimci ve yenilikçi bir üniversite olmayı," %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Sürekli iyileştirme kültürünü oluşturmayı ve “Planla – Uygula – Kontrol Et – İyileştir” yaklaşımını," %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle text-primary mr-3 mt-1" style="font-size: 16px; flex-shrink: 0;"></i>
+                                    <span>{% trans "Uluslararası kabul görmüş kalite sistemlerine göre yapılanmayı," %}</span>
+                                </li>
+                            </ul>
+
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-end pt-3 border-top mt-4">
+                                <p class="font-weight-bold mb-3 mb-sm-0" style="font-size: 1.05rem;">
+                                    {% trans "Kalite Politikası olarak benimsemiştir." %}
+                                </p>
+                                <div class="text-right">
+                                    <span class="font-weight-bold text-dark d-block" style="font-size: 1.15rem; letter-spacing: 1px;">
+                                        {% trans "REKTÖR" %}
+                                    </span>
+                                    <small class="text-muted">Avrasya Üniversitesi</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. TAB: STRATEJİK PLAN -->
+            <div class="tab-content" id="tab-stratejik">
+                <div class="tab-content-header">
+                    <h3><i class="fas fa-bullseye text-primary mr-2"></i> {% trans "Stratejik Plan" %}</h3>
+                    <p class="text-muted">{% trans "Kalite ve Akreditasyon Koordinatörlüğü Stratejik Planı." %}</p>
+                </div>
+                <div class="tab-content-body">
+                    <div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #f79f10 !important;">
+                        <h4 class="font-weight-bold text-dark mb-3" style="font-size: 1.35rem;">
+                            {% trans "Stratejik Plan" %}
+                        </h4>
+                        <p class="mb-0 text-dark" style="font-size: 1.05rem; line-height: 1.9;">
+                            {% trans "Üniversitemiz 2026–2030 Stratejik Planı dosyasını görüntülemek veya indirmek için" %}
+                            <a href="{% static 'core/pdf/Avrasya_Universitesi_Stratejik_Plan_2026_2030.pdf' %}" target="_blank" class="font-weight-bold" style="color: #f79f10 !important; text-decoration: underline;">
+                                {% trans "buraya tıklayınız." %}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. TAB: ORGANİZASYON ŞEMASI -->
+            <div class="tab-content" id="tab-organizasyon">
+                <div class="tab-content-header">
+                    <h3><i class="fas fa-sitemap text-primary mr-2"></i> {% trans "Organizasyon Şeması" %}</h3>
+                    <p class="text-muted">{% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}</p>
+                </div>
+                <div class="tab-content-body">
+                    <div class="p-4 border rounded bg-white shadow-sm mb-4">
+                        <div class="text-center">
+                            <a href="{% static 'core/img/kalite_organizasyon_semasi.png' %}" target="_blank" title="{% trans 'Tam boyutta görüntülemek için tıklayınız' %}">
+                                <img src="{% static 'core/img/kalite_organizasyon_semasi.png' %}" alt="{% trans 'Avrasya Üniversitesi Kalite Güvence Sistemi Organizasyon Şeması' %}" class="img-fluid rounded border shadow-sm" style="max-width: 100%; height: auto; max-height: 850px; display: inline-block;">
+                            </a>
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="{% static 'core/img/kalite_organizasyon_semasi.png' %}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-search-plus mr-1"></i> {% trans "Tam Boyutta Görüntüle" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. TAB: KURUL VE KOMİSYONLAR -->
+            <div class="tab-content" id="tab-kurullar">
+                <div class="tab-content-header">
+                    <h3><i class="fas fa-landmark text-primary mr-2"></i> {% trans "Kurul ve Komisyonlar" %}</h3>
+                    <p class="text-muted">{% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}</p>
+                </div>
+                <div class="tab-content-body">
+                    <div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+                        <h4 class="font-weight-bold mb-3" style="font-size: 1.25rem; color: #4a1500 !important;">
+                            {% trans "Kurullar" %}
+                        </h4>
+                        <ul class="mb-0 pl-3" style="font-size: 1.05rem; line-height: 2;">
+                            <li class="font-weight-bold text-dark">
+                                {% trans "Etik Kurul" %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. TAB: MİSYON & VİZYON -->
+            <div class="tab-content" id="tab-misyon">
+                <div class="tab-content-header">
+                    <h3><i class="fas fa-compass text-primary mr-2"></i> {% trans "Misyon & Vizyon" %}</h3>
+                    <p class="text-muted">{% trans "Kalite ve Akreditasyon Koordinatörlüğü" %}</p>
+                </div>
+                <div class="tab-content-body">
+                    <div class="p-4 border rounded bg-white shadow-sm mb-4" style="border-left: 6px solid #1d61a9 !important;">
+                        <!-- Misyon Section -->
+                        <div class="mb-4 pb-3 border-bottom">
+                            <h4 class="font-weight-bold mb-3" style="font-size: 1.35rem; color: #174276;">
+                                {% trans "Misyon" %}
+                            </h4>
+                            <ul class="pl-4 mb-0 text-dark" style="font-size: 1.05rem; line-height: 2.1;">
+                                <li>{% trans "Eğitimde; sürdürülebilir, kaliteli eğitim veren lider üniversitelerden biri olmak," %}</li>
+                                <li>{% trans "Bilimsel üretim, uygulanabilir teknoloji ve yenilikçi çalışmalar yapmak," %}</li>
+                                <li>{% trans "Topluma katkı yapmak," %}</li>
+                                <li>{% trans "Kendi kendini denetleyen yenileyen geliştiren, sürdürülebilir bir üniversite idare sistemi kurmak," %}</li>
+                                <li>{% trans "Kendi ekonomik kaynaklarını geliştiren ve çeşitlendiren bir üniversite olmak" %}</li>
+                                <li>{% trans "Uluslararası akredite programlara sahip olmak" %}</li>
+                            </ul>
+                        </div>
+
+                        <!-- Vizyon Section -->
+                        <div>
+                            <h4 class="font-weight-bold mb-3" style="font-size: 1.35rem; color: #174276;">
+                                {% trans "Vizyon" %}
+                            </h4>
+                            <ul class="pl-4 mb-0 text-dark" style="font-size: 1.05rem; line-height: 2.1;">
+                                <li>{% trans "Türkiye’de ve dünyada saygın üniversitelerden biri olmak." %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+/* ========== Tab Styles Matching Adalet Image 2 ========== */
+.ogrenci-isleri-tab-section {
+    width: 100%;
+}
+
+.tab-container {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(141, 212, 227, 0.3);
+}
+
+.tab-header {
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+    padding: 0;
+    border-bottom: 2px solid rgba(141, 212, 227, 0.4);
+}
+
+.tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8dd4e3 #092442;
+}
+
+/* Custom scrollbar matching Image 2 */
+.tab-menu::-webkit-scrollbar {
+    height: 7px;
+}
+
+.tab-menu::-webkit-scrollbar-track {
+    background: #092442;
+}
+
+.tab-menu::-webkit-scrollbar-thumb {
+    background: #8dd4e3;
+    border-radius: 4px;
+}
+
+.tab-menu-item {
+    flex: 0 0 auto;
+    min-width: 170px;
+    padding: 20px 18px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 600;
+    font-size: 0.94rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.tab-menu-item.active {
+    background: #3f6b9d;
+    color: #ffffff;
+    border-bottom: 4px solid #8dd4e3;
+    font-weight: 700;
+}
+
+.tab-content-wrapper {
+    padding: 30px;
+    min-height: 480px;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeInTab 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-content-header {
+    border-bottom: 2px solid #edf2f7;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.tab-content-header h3 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #092442;
+    margin-bottom: 6px;
+}
+
+.border-left-primary {
+    border-left: 5px solid #1d61a9 !important;
+}
+
+.border-left-success {
+    border-left: 5px solid #0d8a58 !important;
+}
+
+/* Subtabs within Alt Çalışma Grupları */
+.subtabs-nav-wrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.subtabs-nav {
+    display: inline-flex;
+    list-style: none;
+    margin: 0;
+    padding: 6px;
+    background: #edf2f7;
+    border-radius: 12px;
+    gap: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.subtab-item {
+    margin: 0;
+    padding: 0;
+}
+
+.subtab-btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #4a5568;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.subtab-btn:hover {
+    color: #1d61a9;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.subtab-btn.active {
+    background: #1d61a9;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(29, 97, 169, 0.28);
+}
+
+.subtab-pane {
+    display: none;
+    animation: fadeInSubtab 0.3s ease;
+}
+
+.subtab-pane.active {
+    display: block;
+}
+
+@keyframes fadeInSubtab {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.subtab-pane .card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.subtab-pane .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(9, 36, 66, 0.08) !important;
+}
+
+.subtab-pane .card-header {
+    background: #f8fafc !important;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.subtab-pane .table td, .subtab-pane .table th {
+    vertical-align: middle;
+    padding: 10px 14px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabItems = document.querySelectorAll('.tab-menu-item');
+    const tabPanes = document.querySelectorAll('.tab-content');
+    const subtabBtns = document.querySelectorAll('.subtab-btn');
+    const subtabPanes = document.querySelectorAll('.subtab-pane');
+
+    function activateTab(targetId) {
+        if (!targetId) return;
+        const targetBtn = document.querySelector(`.tab-menu-item[data-tab="${targetId}"]`);
+        const targetContent = document.getElementById(targetId);
+
+        if (targetBtn && targetContent) {
+            tabItems.forEach(i => i.classList.remove('active'));
+            tabPanes.forEach(p => p.classList.remove('active'));
+
+            targetBtn.classList.add('active');
+            targetContent.classList.add('active');
+
+            // Scroll button into view within tab-menu
+            targetBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+    }
+
+    function activateSubtab(subtabId) {
+        if (!subtabId) return;
+        const targetBtn = document.querySelector(`.subtab-btn[data-subtab="${subtabId}"]`);
+        const targetPane = document.getElementById(subtabId);
+
+        if (targetBtn && targetPane) {
+            subtabBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            subtabPanes.forEach(p => p.classList.remove('active'));
+
+            targetBtn.classList.add('active');
+            targetBtn.setAttribute('aria-selected', 'true');
+            targetPane.classList.add('active');
+        }
+    }
+
+    // Sub-tab button click
+    subtabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const subtabId = this.getAttribute('data-subtab');
+            activateSubtab(subtabId);
+            const hashToPush = subtabId === 'subtab-idari-destek' ? 'tab-alt-idari-destek' : 'tab-alt-birim-komisyon';
+            if (history.pushState) {
+                history.pushState(null, null, '#' + hashToPush);
+            } else {
+                location.hash = '#' + hashToPush;
+            }
+        });
+    });
+
+    // Tab button click
+    tabItems.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-tab');
+            activateTab(targetId);
+            if (history.pushState) {
+                history.pushState(null, null, '#' + targetId);
+            } else {
+                location.hash = '#' + targetId;
+            }
+        });
+    });
+
+    function routeByHash() {
+        const hash = window.location.hash ? window.location.hash.substring(1) : '';
+        if (!hash) return;
+
+        if (hash === 'tab-alt-idari-destek' || hash === 'subtab-idari-destek') {
+            activateTab('tab-alt-calisma');
+            activateSubtab('subtab-idari-destek');
+        } else if (hash === 'tab-alt-birim-komisyon' || hash === 'subtab-birim-komisyon') {
+            activateTab('tab-alt-calisma');
+            activateSubtab('subtab-birim-komisyon');
+        } else if (document.getElementById(hash)) {
+            activateTab(hash);
+        }
+    }
+
+    // Check hash on page load
+    routeByHash();
+
+    // Listen to hash change from links
+    window.addEventListener('hashchange', routeByHash);
+});
+</script>
+
+{% endblock %}

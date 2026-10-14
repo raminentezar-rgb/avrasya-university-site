@@ -1,0 +1,181 @@
+{% extends 'kalite_akreditasyon/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Haberler" %} - {% trans "Kalite ve Akreditasyon" %}{% endblock %}
+
+{% block content %}
+<div class="section-header">
+    <h3 class="section-title">
+        <i class="fas fa-newspaper"></i> {% trans "Haberler" %}
+    </h3>
+</div>
+
+<!-- Search & Filters -->
+<div class="row mb-4">
+    <div class="col-md-7 mb-2">
+        <form method="get" class="search-form d-flex">
+            <input type="text" name="q" value="{{ search_query }}" class="form-control" placeholder="{% trans 'Haberlerde ara...' %}" style="border-radius: 8px 0 0 8px;">
+            <button type="submit" class="btn btn-primary" style="border-radius: 0 8px 8px 0; background: var(--secondary-medium-blue);">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+    {% if categories %}
+        <div class="col-md-5 mb-2">
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{% url 'kalite_akreditasyon:haberler' %}" class="badge {% if not current_category %}badge-primary{% else %}badge-light border{% endif %} p-2">
+                    {% trans "Tümü" %}
+                </a>
+                {% for cat in categories %}
+                    <a href="?category={{ cat.slug }}" class="badge {% if current_category == cat.slug %}badge-primary{% else %}badge-light border{% endif %} p-2">
+                        {{ cat.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!-- News Grid -->
+<div class="row">
+    {% if page_obj.object_list %}
+        {% for news in page_obj %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="news-card-box h-100">
+                    <div class="news-card-img">
+                        <img src="{{ news.get_image_url }}" alt="{{ news.title }}">
+                        {% if news.category %}
+                            <span class="news-cat-tag">{{ news.category.name }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="news-card-body">
+                        <div class="news-card-date">
+                            <i class="far fa-calendar-alt"></i> {{ news.published_at|date:"d M Y" }}
+                        </div>
+                        <h4 class="news-card-title">
+                            <a href="{{ news.get_absolute_url }}">{{ news.title }}</a>
+                        </h4>
+                        <p class="news-card-excerpt">{{ news.summary|truncatechars:110 }}</p>
+                        <a href="{{ news.get_absolute_url }}" class="news-read-more">
+                            {% trans "Devamını Oku" %} <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12 text-center py-5 text-muted">
+            <i class="fas fa-newspaper fa-3x mb-3 text-secondary"></i>
+            <h5>{% trans "Henüz yayınlanmış haber bulunmamaktadır." %}</h5>
+            <p>{% trans "Yeni haberler eklendiğinde bu alanda görüntülenecektir." %}</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Pagination -->
+{% if page_obj.has_other_pages %}
+    <div class="d-flex justify-content-center mt-4">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">&laquo;</a>
+                </li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}">{{ num }}</a>
+                </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}
+
+<style>
+.news-card-box {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.news-card-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(9, 36, 66, 0.1);
+    border-color: #8dd4e3;
+}
+.news-card-img {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+}
+.news-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.news-card-box:hover .news-card-img img {
+    transform: scale(1.08);
+}
+.news-cat-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(9, 36, 66, 0.85);
+    color: #8dd4e3;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+.news-card-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.news-card-date {
+    font-size: 0.75rem;
+    color: #8a99ad;
+    margin-bottom: 6px;
+}
+.news-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+.news-card-title a {
+    color: #092442;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.news-card-title a:hover {
+    color: #1d61a9;
+}
+.news-card-excerpt {
+    font-size: 0.84rem;
+    color: #64748b;
+    line-height: 1.5;
+    flex-grow: 1;
+    margin-bottom: 14px;
+}
+.news-read-more {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1d61a9;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+</style>
+{% endblock %}
