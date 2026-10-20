@@ -337,7 +337,7 @@
                                 <div class="news-slide-content">
                                     <div class="news-date-badge">
                                         <div class="news-day">{{ n.published_at|date:'d' }}</div>
-                                        <div class="news-month">{{ n.published_at|date:'M'|upper }}</div>
+                                        <div class="news-month">{{ n.published_at|tr_month_box }}</div>
                                     </div>
                                     <h3 class="news-slide-title">{{ n.title }}</h3>
                                     <p class="news-slide-summary">
@@ -388,7 +388,7 @@
                             <div class="recent-news-item">
                                 <div class="recent-news-date">
                                     <div class="recent-day">{{ n.published_at|date:'d' }}</div>
-                                    <div class="recent-month">{{ n.published_at|date:'M'|upper }}</div>
+                                    <div class="recent-month">{{ n.published_at|tr_month_box }}</div>
                                 </div>
                                 <div class="recent-news-content">
                                     <div class="recent-news-title">
@@ -396,7 +396,7 @@
                                     </div>
                                     <div class="recent-news-meta">
                                         <span class="news-category">{% trans "HABER" %}</span>
-                                        <span class="news-date">{{ n.published_at|date:'d M Y' }}</span>
+                                        <span class="news-date">{{ n.published_at|tr_date:'short' }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -448,7 +448,7 @@
                             
                             <div class="announcement-date">
                                 <i class="far fa-calendar-alt"></i>
-                                {{ duyuru.yayin_tarihi|date:'d M Y' }}
+                                {{ duyuru.yayin_tarihi|tr_date:'short' }}
                             </div>
                             
                             <div class="announcement-content">
@@ -771,7 +771,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="etkinlik-date-section">
                         <div class="etkinlik-date">
                             <div class="etkinlik-day">{{ etkinlik.baslangic_tarihi|date:'d' }}</div>
-                            <div class="etkinlik-month">{{ etkinlik.baslangic_tarihi|date:'M'|upper }}</div>
+                            <div class="etkinlik-month">{{ etkinlik.baslangic_tarihi|tr_month_box }}</div>
                         </div>
                     </div>
                     

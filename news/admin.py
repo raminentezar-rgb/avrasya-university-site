@@ -27,11 +27,19 @@ class NewsAdmin(TranslationAdmin):
     
     def image_count(self, obj):
         return obj.images.count()
-    image_count.short_description = 'تعداد تصاویر'
+    image_count.short_description = 'Görsel Sayısı'
     
     def attachment_count(self, obj):
         return obj.attachments.count()
-    attachment_count.short_description = 'تعداد پیوست‌ها'
+    attachment_count.short_description = 'Ek Dosya Sayısı'
+
+    class Media:
+        js = (
+            'news/js/auto_summary.js',
+        )
+        css = {
+            'all': ('news/css/auto_summary.css',)
+        }
 
 @admin.register(NewsImage)
 class NewsImageAdmin(admin.ModelAdmin):
@@ -43,7 +51,7 @@ class NewsImageAdmin(admin.ModelAdmin):
         if obj.image:
             return format_html('<img src="{}" style="max-height: 50px; max-width: 50px;" />', obj.image.url)
         return "-"
-    image_preview.short_description = 'پیش‌نمایش'
+    image_preview.short_description = 'Önizleme'
 
 @admin.register(NewsAttachment)
 class NewsAttachmentAdmin(TranslationAdmin):
@@ -53,6 +61,6 @@ class NewsAttachmentAdmin(TranslationAdmin):
     
     def file_preview(self, obj):
         if obj.file:
-            return format_html('<a href="{}" target="_blank">📄 دانلود</a>', obj.file.url)
+            return format_html('<a href="{}" target="_blank">📄 İndir</a>', obj.file.url)
         return "-"
-    file_preview.short_description = 'فایل'
+    file_preview.short_description = 'Dosya'

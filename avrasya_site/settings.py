@@ -195,6 +195,9 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'core.context_processors.languages',
             ],
+            'builtins': [
+                'core.templatetags.turkish_date',
+            ],
         },
     },
 ]

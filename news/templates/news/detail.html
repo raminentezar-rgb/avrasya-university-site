@@ -14,10 +14,10 @@
                     <div class="news-detail-header">
                         <div class="d-flex justify-content-between align-items-start">
                             <div>
-                                <h1 class="news-detail-title" >{{ item.title }}</h1>
+                                <h1 class="news-detail-title">{{ item.title }}</h1>
                                 <div class="news-detail-meta">
-                                    <i class="far fa-calendar-alt"></i>
-                                    {{ item.published_at|date:'d F Y H:i' }}
+                                    <i class="far fa-calendar-alt me-1"></i>
+                                    {{ item.published_at|tr_date:'with_time' }}
                                 </div>
                             </div>
                             <a href="{% url 'news:list' %}" class="btn-outline-primary">

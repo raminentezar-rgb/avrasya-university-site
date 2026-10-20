@@ -26,3 +26,11 @@ class EtkinlikAdmin(TranslationAdmin):
             'fields': ('yayinda',)
         }),
     )
+
+    class Media:
+        js = (
+            'etkinlikler/js/auto_summary.js',
+        )
+        css = {
+            'all': ('etkinlikler/css/auto_summary.css',)
+        }

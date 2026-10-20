@@ -112,17 +112,19 @@
                             <h3 class="news-card-title">{{ it.title }}</h3>
                             <div class="news-card-meta">
                                 <i class="far fa-clock"></i>
-                                <span class="news-date">{{ it.published_at|date:'d F Y' }}</span>
+                                <span class="news-date">{{ it.published_at|tr_date:'full' }}</span>
                                 <span class="news-time">{{ it.published_at|date:'H:i' }}</span>
                             </div>
                         </div>
                         
                         <div class="news-card-body">
                             <p class="news-card-excerpt">
-                                {% if it.summary %}
-                                    {{ it.summary|truncatewords:20 }}
+                                {% if it.get_summary %}
+                                    {{ it.get_summary }}
+                                {% elif it.summary %}
+                                    {{ it.summary }}
                                 {% else %}
-                                    {{ it.content|truncatewords:20 }}
+                                    {{ it.content|truncatewords:25 }}
                                 {% endif %}
                             </p>
                         </div>

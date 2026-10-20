@@ -1,0 +1,78 @@
+/* Auto Summary Toolbar & Admin Enhancements */
+
+.auto-summary-toolbar {
+    margin-top: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.auto-summary-btn-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-auto-summary {
+    background: linear-gradient(135deg, #1d61a9 0%, #00d2ff 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 6px 14px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    box-shadow: 0 4px 12px rgba(0, 210, 255, 0.25) !important;
+    transition: all 0.25s ease !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+.btn-auto-summary:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(0, 210, 255, 0.4) !important;
+    background: linear-gradient(135deg, #00d2ff 0%, #1d61a9 100%) !important;
+}
+
+.auto-summary-badge {
+    font-size: 12px;
+    color: #94a3b8;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.auto-summary-count {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Pulsing effect when summary is auto-generated */
+.pulse-highlight {
+    animation: autoSummaryGlow 1.2s ease-out;
+}
+
+@keyframes autoSummaryGlow {
+    0% {
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.6);
+        border-color: #10b981 !important;
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.2);
+        border-color: #10b981 !important;
+    }
+    100% {
+        box-shadow: none;
+    }
+}
