@@ -35,6 +35,10 @@ urlpatterns = [
     path('notifications/', views.get_notifications, name='notifications'),
     path('notifications/mark-read/', views.mark_notification_read, name='mark_notification_read'),
     path('support/<str:session_key>/messages/', views.get_support_messages, name='get_support_messages'),
+    
+    # Sesli Asistan API Endpoint'leri
+    path('voice-assistant/directory/', views.voice_assistant_directory, name='voice_assistant_directory'),
+    path('voice-assistant/search/', views.voice_assistant_search, name='voice_assistant_search'),
 ]
 
 # اضافه کردن مسیر فایل‌های مدیا در حالت توسعه

@@ -431,3 +431,33 @@ def get_support_messages(request, session_key):
         return JsonResponse({'success': True, 'messages': data, 'visitor_name': thread.full_name})
     except SupportThread.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Oturum bulunamadı'})
+
+
+def voice_assistant_directory(request):
+    """Tüm Avrasya Üniversitesi konu ve uygulama dizinini JSON olarak döndürür."""
+    from .voice_directory import get_voice_directory
+    try:
+        directory = get_voice_directory()
+        return JsonResponse({'success': True, 'total': len(directory), 'topics': directory}, safe=False)
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+def voice_assistant_search(request):
+    """Sesli veya yazılı arama sorgusuna göre eşleşen konuları ve canlı içerikleri döndürür."""
+    from .voice_directory import search_voice_topics
+    query = request.GET.get('q', '').strip()
+    if not query:
+        return JsonResponse({'success': True, 'count': 0, 'results': []})
+
+    try:
+        results = search_voice_topics(query, max_results=8)
+        return JsonResponse({
+            'success': True,
+            'query': query,
+            'count': len(results),
+            'results': results
+        })
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+

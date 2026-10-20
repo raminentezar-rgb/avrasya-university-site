@@ -30,6 +30,9 @@
     <!-- ========================================== -->
     <!-- Voice Assistant Modal Window -->
     <!-- ========================================== -->
+    <!-- ========================================== -->
+    <!-- Voice Assistant Modal Window -->
+    <!-- ========================================== -->
     <div id="voice-assistant-window" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="va-title">
         <div class="va-header">
             <div class="va-header-left">
@@ -37,8 +40,8 @@
                     <i class="fa-solid fa-universal-access"></i>
                 </div>
                 <div>
-                    <div id="va-title" class="va-title">{% trans "Sesli Asistan" %}</div>
-                    <div class="va-subtitle">{% trans "Görme Engelliler İçin Sesli Dolaşım & Okuyucu" %}</div>
+                    <div id="va-title" class="va-title">{% trans "Sesli Asistan & Ekran Okuyucu" %}</div>
+                    <div class="va-subtitle">{% trans "Tüm Üniversite Konuları, Bölümler & Sayfalar" %}</div>
                 </div>
             </div>
             <div class="va-controls">
@@ -48,10 +51,19 @@
         </div>
 
         <div class="va-body">
+            <!-- Search & Speech Input Bar -->
+            <div class="va-search-wrapper">
+                <div class="va-search-box">
+                    <i class="fa-solid fa-magnifying-glass va-search-icon"></i>
+                    <input type="text" id="va-search-input" placeholder="{% trans 'Konu söyleyin veya yazın (Örn: Kalite, Adalet, Bilgisayar, Burslar)...' %}" autocomplete="off">
+                    <button id="va-search-clear" class="va-search-clear" title="{% trans 'Temizle' %}" style="display: none;"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+
             <!-- Status banner -->
             <div id="va-status-banner" class="va-status-banner" aria-live="polite">
                 <span id="va-status-icon"><i class="fa-solid fa-microphone"></i></span>
-                <span id="va-status-text">{% trans "Dinlemeye hazır... Konuşmak için butona basın veya Alt+V kullanın." %}</span>
+                <span id="va-status-text">{% trans "Dinlemeye hazır... Bir konu söyleyin veya Alt+V kullanın." %}</span>
             </div>
 
             <!-- Wave Animation when speaking/listening -->
@@ -68,12 +80,12 @@
             <!-- Real-time speech transcript -->
             <div class="va-transcript-card">
                 <div class="va-transcript-label">
-                    <i class="fa-solid fa-ear-listen me-1"></i> {% trans "Algılanan Ses:" %}
+                    <i class="fa-solid fa-ear-listen me-1"></i> {% trans "Algılanan Ses / Komut:" %}
                 </div>
                 <div id="va-transcript" class="va-transcript-text">{% trans "Henüz ses algılanmadı..." %}</div>
             </div>
 
-            <!-- Main Actions -->
+            <!-- Main Actions Toolbar -->
             <div class="va-actions-grid">
                 <button id="va-toggle-mic-btn" class="va-action-btn va-mic-btn" title="{% trans 'Mikrofonu Aç/Kapat' %}">
                     <i class="fa-solid fa-microphone"></i>
@@ -89,7 +101,26 @@
                 </button>
             </div>
 
-            <!-- Speech Speed -->
+            <!-- Category Filter Chips -->
+            <div class="va-cat-chips-scroll" id="va-cat-chips">
+                <button class="va-cat-chip active" data-cat="all">{% trans "Tümü (120+)" %}</button>
+                <button class="va-cat-chip" data-cat="Koordinatörlük">{% trans "Kalite & Akreditasyon" %}</button>
+                <button class="va-cat-chip" data-cat="Program (MYO)">{% trans "Adalet & MYO" %}</button>
+                <button class="va-cat-chip" data-cat="Bölüm (Lisans)">{% trans "Lisans Bölümleri" %}</button>
+                <button class="va-cat-chip" data-cat="Fakülte">{% trans "Fakülteler" %}</button>
+                <button class="va-cat-chip" data-cat="Program (SHMYO)">{% trans "Sağlık SHMYO" %}</button>
+                <button class="va-cat-chip" data-cat="Öğrenci Hizmetleri">{% trans "Öğrenci & Burs" %}</button>
+                <button class="va-cat-chip" data-cat="Mali Hizmetler">{% trans "Harç & Ücretler" %}</button>
+                <button class="va-cat-chip" data-cat="Öğrenci Yaşamı">{% trans "SKS & Yemekhane" %}</button>
+                <button class="va-cat-chip" data-cat="Enstitü">{% trans "Lisansüstü (LEE)" %}</button>
+            </div>
+
+            <!-- Dynamic Topic Display & Results Container -->
+            <div id="va-dynamic-content" class="va-dynamic-content">
+                <!-- Injected via JS: Matched Topic Card or Suggestions -->
+            </div>
+
+            <!-- Speech Speed & Accessibility Controls -->
             <div class="va-speed-control">
                 <span class="va-speed-label"><i class="fa-solid fa-gauge-high me-1"></i> {% trans "Ses Hızı:" %}</span>
                 <div class="va-speed-buttons">
@@ -99,25 +130,8 @@
                 </div>
             </div>
 
-            <!-- Suggestions -->
-            <div class="va-suggestions">
-                <div class="va-suggestions-title">
-                    <i class="fa-solid fa-lightbulb me-1"></i> {% trans "Örnek Sesli Komutlar:" %}
-                </div>
-                <div class="va-tags-list">
-                    <button class="va-tag-btn" data-cmd="Aday Öğrenci">"Aday Öğrenci"</button>
-                    <button class="va-tag-btn" data-cmd="Kayıt İşlemleri">"Kayıt İşlemleri"</button>
-                    <button class="va-tag-btn" data-cmd="Öğrenim Ücretleri">"Öğrenim Ücretleri"</button>
-                    <button class="va-tag-btn" data-cmd="Fakülteler">"Fakülteler"</button>
-                    <button class="va-tag-btn" data-cmd="Akademik Takvim">"Akademik Takvim"</button>
-                    <button class="va-tag-btn" data-cmd="İletişim">"İletişim"</button>
-                    <button class="va-tag-btn" data-cmd="Sayfayı Oku">"Sayfayı Oku"</button>
-                    <button class="va-tag-btn" data-cmd="Ana Sayfa">"Ana Sayfa"</button>
-                </div>
-            </div>
-
             <div class="va-footer-note">
-                <i class="fa-solid fa-keyboard me-1"></i> {% trans "Klavye Kısayolu: <strong>Alt + V</strong> ile her an açıp kapatabilirsiniz." %}
+                <i class="fa-solid fa-keyboard me-1"></i> {% trans "Klavye Kısayolu: <strong>Alt + V</strong> | Konuşunca doğrudan algılar ve okur." %}
             </div>
         </div>
     </div>
@@ -280,10 +294,10 @@
     <!-- Voice Assistant Modal Window Styling -->
     /* ========================================== */
     #voice-assistant-window {
-        width: 380px;
-        max-width: 92vw;
-        height: 560px;
-        max-height: 85vh;
+        width: 430px;
+        max-width: 95vw;
+        height: 640px;
+        max-height: 90vh;
         background: #092442;
         color: white;
         border-radius: 18px;
@@ -302,7 +316,7 @@
 
     .va-header {
         background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
-        padding: 16px 20px;
+        padding: 14px 18px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -329,7 +343,7 @@
 
     .va-title {
         font-weight: 700;
-        font-size: 16px;
+        font-size: 15px;
         color: #ffffff;
     }
 
@@ -344,8 +358,8 @@
         border: 1px solid rgba(255, 255, 255, 0.15);
         color: white;
         cursor: pointer;
-        width: 32px;
-        height: 32px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         display: inline-flex;
         align-items: center;
@@ -360,24 +374,78 @@
 
     .va-body {
         flex: 1;
-        padding: 18px 20px;
+        padding: 14px 16px;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 10px;
         background: linear-gradient(180deg, #092442 0%, #0d325a 100%);
+    }
+
+    /* Search Input Bar */
+    .va-search-wrapper {
+        width: 100%;
+    }
+
+    .va-search-box {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(141, 212, 227, 0.35);
+        border-radius: 12px;
+        padding: 6px 12px;
+        transition: all 0.2s;
+    }
+
+    .va-search-box:focus-within {
+        border-color: #00d2ff;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
+    }
+
+    .va-search-icon {
+        color: #8dd4e3;
+        font-size: 14px;
+        margin-right: 8px;
+    }
+
+    .va-search-box input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 13px;
+        outline: none;
+    }
+
+    .va-search-box input::placeholder {
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 12px;
+    }
+
+    .va-search-clear {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        padding: 2px 6px;
+        font-size: 12px;
+    }
+
+    .va-search-clear:hover {
+        color: #ff4d4d;
     }
 
     /* Status banner */
     .va-status-banner {
         background: rgba(141, 212, 227, 0.12);
         border: 1px solid rgba(141, 212, 227, 0.35);
-        border-radius: 12px;
-        padding: 10px 14px;
+        border-radius: 10px;
+        padding: 8px 12px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 13px;
+        gap: 8px;
+        font-size: 12px;
         color: #8dd4e3;
         font-weight: 600;
         transition: all 0.3s;
@@ -400,27 +468,27 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
-        height: 32px;
-        padding: 4px 0;
+        gap: 5px;
+        height: 24px;
+        padding: 2px 0;
     }
 
     .va-wave-bar {
-        width: 5px;
-        height: 8px;
+        width: 4px;
+        height: 6px;
         background: rgba(141, 212, 227, 0.4);
-        border-radius: 4px;
+        border-radius: 3px;
         transition: all 0.2s;
     }
 
     .va-wave-container.active .va-wave-bar {
         background: #00e676;
-        animation: vaWave 1s ease-in-out infinite alternate;
+        animation: vaWave 0.9s ease-in-out infinite alternate;
     }
 
     .va-wave-container.speaking .va-wave-bar {
         background: #ffc107;
-        animation: vaWave 0.8s ease-in-out infinite alternate;
+        animation: vaWave 0.7s ease-in-out infinite alternate;
     }
 
     .va-wave-container.active .va-wave-bar:nth-child(1) { animation-delay: 0.1s; }
@@ -432,54 +500,54 @@
     .va-wave-container.active .va-wave-bar:nth-child(7) { animation-delay: 0.1s; }
 
     @keyframes vaWave {
-        0% { height: 8px; }
-        100% { height: 28px; }
+        0% { height: 6px; }
+        100% { height: 22px; }
     }
 
     /* Transcript Card */
     .va-transcript-card {
         background: rgba(0, 0, 0, 0.35);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 12px 14px;
-        min-height: 60px;
+        border-radius: 10px;
+        padding: 8px 12px;
+        min-height: 48px;
     }
 
     .va-transcript-label {
-        font-size: 11px;
+        font-size: 10px;
         color: #8dd4e3;
         font-weight: 700;
         text-transform: uppercase;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
 
     .va-transcript-text {
-        font-size: 14px;
+        font-size: 13px;
         color: #ffffff;
         font-style: italic;
-        line-height: 1.4;
+        line-height: 1.35;
     }
 
     /* Actions Grid */
     .va-actions-grid {
         display: grid;
         grid-template-columns: 1.2fr 1fr 0.8fr;
-        gap: 8px;
+        gap: 6px;
     }
 
     .va-action-btn {
         border: none;
-        border-radius: 10px;
-        padding: 11px 8px;
+        border-radius: 8px;
+        padding: 8px 6px;
         color: white;
         font-weight: 600;
         font-size: 12px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 5px;
+        gap: 4px;
         cursor: pointer;
-        transition: all 0.25s ease;
+        transition: all 0.2s ease;
         text-align: center;
     }
 
@@ -488,7 +556,7 @@
     }
     .va-mic-btn:hover {
         background: linear-gradient(135deg, #00d2ff, #1d61a9);
-        transform: translateY(-2px);
+        transform: translateY(-1px);
     }
     .va-mic-btn.active {
         background: linear-gradient(135deg, #00c853, #69f0ae);
@@ -501,7 +569,7 @@
     }
     .va-read-btn:hover {
         background: linear-gradient(135deg, #ffc107, #ff8f00);
-        transform: translateY(-2px);
+        transform: translateY(-1px);
     }
 
     .va-stop-btn {
@@ -514,47 +582,277 @@
         color: #ff4d4d;
     }
 
-    /* Speed Control */
-    .va-speed-control {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 8px 12px;
-        border-radius: 10px;
-        font-size: 12px;
-    }
-
-    .va-speed-label {
-        color: #8dd4e3;
-        font-weight: 600;
-    }
-
-    .va-speed-buttons {
+    /* Category Filter Chips */
+    .va-cat-chips-scroll {
         display: flex;
         gap: 6px;
+        overflow-x: auto;
+        padding: 4px 0;
+        scrollbar-width: none;
+    }
+    .va-cat-chips-scroll::-webkit-scrollbar {
+        display: none;
     }
 
-    .va-speed-btn {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        color: white;
-        border-radius: 6px;
-        padding: 4px 8px;
+    .va-cat-chip {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(141, 212, 227, 0.25);
+        color: #8dd4e3;
+        border-radius: 14px;
+        padding: 4px 10px;
         font-size: 11px;
+        white-space: nowrap;
         cursor: pointer;
         transition: all 0.2s;
     }
 
-    .va-speed-btn.active,
-    .va-speed-btn:hover {
+    .va-cat-chip:hover,
+    .va-cat-chip.active {
         background: #8dd4e3;
         color: #092442;
         font-weight: 700;
+        border-color: #ffffff;
     }
 
-    /* Suggestions */
-    .va-suggestions {
+    /* Dynamic Content Container */
+    .va-dynamic-content {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 2px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-height: 160px;
+    }
+
+    /* Matched Single Topic Card */
+    .va-topic-card {
+        background: linear-gradient(135deg, rgba(13, 50, 90, 0.85) 0%, rgba(9, 36, 66, 0.95) 100%);
+        border: 1.5px solid #00d2ff;
+        border-radius: 14px;
+        padding: 14px;
+        box-shadow: 0 8px 25px rgba(0, 210, 255, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        animation: vaCardPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes vaCardPop {
+        from { transform: scale(0.95); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .va-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .va-card-title-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .va-card-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #1d61a9, #00d2ff);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0, 210, 255, 0.3);
+    }
+
+    .va-card-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.3;
+    }
+
+    .va-cat-badge {
+        background: rgba(0, 210, 255, 0.15);
+        border: 1px solid #00d2ff;
+        color: #00d2ff;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        align-self: flex-start;
+        flex-shrink: 0;
+    }
+
+    .va-topic-desc {
+        font-size: 12.5px;
+        color: #e0f2fe;
+        line-height: 1.5;
+        background: rgba(0, 0, 0, 0.25);
+        padding: 10px 12px;
+        border-radius: 8px;
+        border-left: 3px solid #00d2ff;
+    }
+
+    .va-sub-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .va-sub-link-chip {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #8dd4e3;
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .va-sub-link-chip:hover {
+        background: #00d2ff;
+        color: #092442;
+        font-weight: 600;
+        border-color: #00d2ff;
+    }
+
+    .va-card-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .va-go-btn {
+        flex: 1;
+        background: linear-gradient(135deg, #00c853, #00e676);
+        color: #092442;
+        border: none;
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.2s;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
+    }
+
+    .va-go-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5);
+        color: #092442;
+    }
+
+    .va-speak-card-btn {
+        background: linear-gradient(135deg, #ff8f00, #ffc107);
+        color: #092442;
+        border: none;
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-weight: 700;
+        font-size: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+    }
+
+    .va-speak-card-btn:hover {
+        transform: translateY(-1px);
+    }
+
+    /* Multiple Results List */
+    .va-results-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .va-result-item {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(141, 212, 227, 0.2);
+        border-radius: 10px;
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .va-result-item:hover {
+        background: rgba(0, 210, 255, 0.15);
+        border-color: #00d2ff;
+        transform: translateX(3px);
+    }
+
+    .va-result-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .va-result-top {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 2px;
+    }
+
+    .va-result-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .va-result-desc {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.7);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .va-result-btn {
+        background: rgba(0, 210, 255, 0.2);
+        border: 1px solid #00d2ff;
+        color: #00d2ff;
+        border-radius: 6px;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s;
+    }
+
+    .va-result-btn:hover {
+        background: #00d2ff;
+        color: #092442;
+    }
+
+    /* Suggestions View */
+    .va-suggestions-box {
         background: rgba(0, 0, 0, 0.2);
         border-radius: 12px;
         padding: 10px 12px;
@@ -591,8 +889,47 @@
         transform: translateY(-1px);
     }
 
-    .va-footer-note {
+    /* Speed Control */
+    .va-speed-control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 6px 12px;
+        border-radius: 8px;
         font-size: 11px;
+    }
+
+    .va-speed-label {
+        color: #8dd4e3;
+        font-weight: 600;
+    }
+
+    .va-speed-buttons {
+        display: flex;
+        gap: 6px;
+    }
+
+    .va-speed-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        border-radius: 6px;
+        padding: 3px 7px;
+        font-size: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .va-speed-btn.active,
+    .va-speed-btn:hover {
+        background: #8dd4e3;
+        color: #092442;
+        font-weight: 700;
+    }
+
+    .va-footer-note {
+        font-size: 10.5px;
         color: rgba(255, 255, 255, 0.6);
         text-align: center;
         padding-top: 4px;
@@ -779,29 +1116,100 @@
     }
 
     // -------------------------------------------------------------
-    // Voice Navigation Routes Directory
+    // Comprehensive Project Topics & Voice Navigation Directory
     // -------------------------------------------------------------
-    const voiceRoutes = [
-        { keywords: ['ana sayfa', 'anasayfa', 'giriş', 'ana sayfaya', 'home'], url: "{% url 'core:index' %}", name: 'Ana Sayfa' },
-        { keywords: ['aday', 'aday öğrenci', 'aday öğrenciye', 'kontenjan', 'kontenjanlar', 'taban puan', 'taban puanlar'], url: "{% url 'aday_ogrenci:aday_anasayfa' %}", name: 'Aday Öğrenci' },
-        { keywords: ['kayıt', 'kayıt işlemleri', 'kayıt işlemi', 'yeni kayıt', 'nasıl kayıt olurum'], url: "{% url 'ogrenci_isleri:kayit' %}", name: 'Kayıt İşlemleri' },
-        { keywords: ['ücret', 'ücretler', 'öğrenim ücretleri', 'öğrenim ücreti', 'fiyat', 'fiyatlar', 'bölüm ücretleri', 'harç'], url: "{% url 'ogrenci_isleri:ogrenim_ucretleri' %}", name: 'Öğrenim Ücretleri' },
-        { keywords: ['öğrenci işleri', 'öğrenci işlerine', 'öğrenci servisi', 'daire başkanlığı'], url: "{% url 'ogrenci_isleri:ogrenci_isleri' %}", name: 'Öğrenci İşleri' },
-        { keywords: ['burs', 'burslar', 'indirim', 'indirimler'], url: "{% url 'ogrenci_isleri:burslar' %}", name: 'Burslar ve İndirimler' },
-        { keywords: ['takvim', 'akademik takvim', 'sınav takvimi', 'sınav tarihleri'], url: "{% url 'ogrenci_isleri:akademik_takvim' %}", name: 'Akademik Takvim' },
-        { keywords: ['yurt', 'yurtlar', 'yurt olanakları', 'konaklama'], url: "{% url 'ogrenci_isleri:yurtlar' %}", name: 'Yurt Olanakları' },
-        { keywords: ['fakülte', 'fakülteler', 'fakültelere', 'lisans'], url: "{% url 'fakulteler:fakulteler' %}", name: 'Fakülteler' },
-        { keywords: ['yüksekokul', 'yüksekokullar'], url: "{% url 'yuksekokullari:yuksekokullari' %}", name: 'Yüksekokullar' },
-        { keywords: ['meslek yüksekokul', 'meslek yüksekokulu', 'meslek yüksekokulları', 'myo', 'önlisans'], url: "{% url 'meslekyuksekokullari:meslekyuksekokullari' %}", name: 'Meslek Yüksekokulları' },
-        { keywords: ['enstitü', 'enstitüler', 'lisansüstü', 'yüksek lisans', 'doktora'], url: "{% url 'lee:lee' %}", name: 'Lisansüstü Eğitim Enstitüsü' },
-        { keywords: ['akademik'], url: "{% url 'akademik:akademik' %}", name: 'Akademik' },
-        { keywords: ['araştırma', 'laboratuvar', 'laboratuvarlar', 'bap'], url: "{% url 'arastirma:home' %}", name: 'Araştırma' },
-        { keywords: ['kütüphane', 'kitap', 'açık erişim'], url: "{% url 'kutuphane:kutuphane' %}", name: 'Kütüphane' },
-        { keywords: ['uluslararası', 'international', 'yabancı öğrenci', 'yabancı uyruklu'], url: "{% url 'international:campus_life' %}", name: 'Uluslararası Ofis' },
-        { keywords: ['erasmus', 'değişim programı'], url: "{% url 'erasmus:erasmus' %}", name: 'Erasmus' },
-        { keywords: ['yatay geçiş', 'yatay'], url: "{% url 'yatay_gecis:yatay_gecis' %}", name: 'Yatay Geçiş' },
-        { keywords: ['iletişim', 'adres', 'telefon', 'konum', 'ulaşım', 'bize ulaşın'], url: "{% url 'core:iletisim' %}", name: 'İletişim' }
-    ];
+    let allTopicsDirectory = [];
+    let currentActiveTopic = null;
+    let activeCategoryFilter = 'all';
+    let searchDebounceTimer = null;
+
+    // Normalization helper (Turkish-aware lowercasing and diacritic stripping)
+    function normalizeSearchText(text) {
+        if (!text) return '';
+        let str = text.toString().toLowerCase();
+        const map = {
+            'ı': 'i', 'İ': 'i', 'I': 'i',
+            'ğ': 'g', 'Ğ': 'g',
+            'ü': 'u', 'Ü': 'u',
+            'ş': 's', 'Ş': 's',
+            'ö': 'o', 'Ö': 'o',
+            'ç': 'c', 'Ç': 'c'
+        };
+        for (const [k, v] of Object.entries(map)) {
+            str = str.replace(new RegExp(k, 'g'), v);
+        }
+        return str.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+
+    // Load full topics directory from server / cache
+    function loadTopicsDirectory() {
+        // Try sessionStorage cache first for instant 0ms load
+        const cached = sessionStorage.getItem('va_topics_directory_cache');
+        if (cached) {
+            try {
+                allTopicsDirectory = JSON.parse(cached);
+                console.log('Loaded ' + allTopicsDirectory.length + ' topics from cache.');
+                renderDefaultSuggestions();
+            } catch(e) {}
+        }
+
+        // Fetch fresh directory asynchronously
+        fetch("{% url 'chat:voice_assistant_directory' %}")
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.topics && data.topics.length > 0) {
+                    allTopicsDirectory = data.topics;
+                    sessionStorage.setItem('va_topics_directory_cache', JSON.stringify(data.topics));
+                    console.log('Voice Assistant synced ' + allTopicsDirectory.length + ' project topics.');
+                    if (!currentActiveTopic) {
+                        renderDefaultSuggestions();
+                    }
+                }
+            })
+            .catch(err => console.warn('Could not sync topics directory:', err));
+    }
+
+    // Client-side instant scoring & matching
+    function searchLocalTopics(queryText, limit=8) {
+        if (!queryText || !queryText.trim()) return [];
+        const normQ = normalizeSearchText(queryText);
+        const tokens = normQ.split(' ').filter(t => t.length > 1);
+
+        const scored = [];
+        for (const item of allTopicsDirectory) {
+            let score = 0;
+            const normTitle = item._norm_title || normalizeSearchText(item.title);
+            const normCat = item._norm_cat || normalizeSearchText(item.category);
+            const normDesc = item._norm_desc || normalizeSearchText(item.description);
+            const normKeywords = item._norm_keywords || (item.keywords ? item.keywords.map(normalizeSearchText) : []);
+
+            if (normQ === normTitle) score += 150;
+            else if (normTitle.includes(normQ)) score += 80;
+
+            for (const kw of normKeywords) {
+                if (normQ === kw) { score += 120; break; }
+                else if (kw.includes(normQ) || normQ.includes(kw)) { score += 50; break; }
+            }
+
+            if (normQ === normCat || normCat.includes(normQ)) score += 40;
+
+            for (const t of tokens) {
+                if (normTitle.includes(t)) score += 30;
+                for (const kw of normKeywords) {
+                    if (kw.includes(t)) score += 20;
+                }
+                if (normCat.includes(t)) score += 15;
+                if (normDesc.includes(t)) score += 10;
+            }
+
+            if (score > 0) {
+                scored.push({ score, item });
+            }
+        }
+
+        scored.sort((a, b) => b.score - a.score);
+        return scored.slice(0, limit).map(s => s.item);
+    }
 
     // -------------------------------------------------------------
     // Speech Synthesis (Text-to-Speech)
@@ -816,14 +1224,13 @@
             return;
         }
 
-        window.speechSynthesis.cancel(); // Stop any ongoing speech
+        window.speechSynthesis.cancel();
         if (!text) return;
 
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.rate = speechRate;
         utterance.lang = 'tr-TR';
 
-        // Select Turkish voice if available
         const voices = window.speechSynthesis.getVoices();
         const trVoice = voices.find(v => v.lang.startsWith('tr') || v.lang.includes('TR'));
         if (trVoice) {
@@ -832,14 +1239,14 @@
 
         utterance.onstart = function() {
             isSpeaking = true;
-            updateStatus('speaking', text.length > 50 ? text.substring(0, 50) + '...' : text);
+            updateStatus('speaking', text.length > 55 ? text.substring(0, 55) + '...' : text);
             setWaveAnimation('speaking');
         };
 
         utterance.onend = function() {
             isSpeaking = false;
             setWaveAnimation('idle');
-            updateStatus('idle', 'Dinlemeye hazır... Konuşmak için butona basın.');
+            updateStatus('idle', 'Dinlemeye hazır... Konuşmak için mikrofon butonuna basın.');
             if (onComplete) onComplete();
         };
 
@@ -870,12 +1277,10 @@
         
         const pageTitle = document.title.replace('Avrasya University', 'Avrasya Üniversitesi').replace('Avrasya Üniversitesi', '').replace('-', '').trim();
         
-        // Find main headings
         const headings = Array.from(document.querySelectorAll('main h1, main h2, main h3, .research-hero h1, header h1, .policy-title'))
             .map(h => h.innerText.trim())
             .filter(t => t.length > 2 && t.length < 100);
 
-        // Find main paragraphs
         const paragraphs = Array.from(document.querySelectorAll('main p, .hero-content p, .unit-description, .contact-info p, .content p'))
             .map(p => p.innerText.trim())
             .filter(t => t.length > 15 && t.length < 350)
@@ -896,6 +1301,202 @@
     }
 
     // -------------------------------------------------------------
+    // Display Functions: Topic Card & Results List ("به کاربر نمایش دهد")
+    // -------------------------------------------------------------
+    function displayTopicCard(topic, autoSpeak=true) {
+        currentActiveTopic = topic;
+        const container = document.getElementById('va-dynamic-content');
+        if (!container) return;
+
+        playChime('success');
+
+        let quickLinksHtml = '';
+        if (topic.quick_links && topic.quick_links.length > 0) {
+            quickLinksHtml = `
+                <div class="va-sub-links">
+                    ${topic.quick_links.map(ql => `<a href="${ql.url}" class="va-sub-link-chip"><i class="fa-solid fa-angle-right"></i> ${ql.title}</a>`).join('')}
+                </div>
+            `;
+        }
+
+        container.innerHTML = `
+            <div class="va-topic-card">
+                <div class="va-card-header">
+                    <div class="va-card-title-group">
+                        <div class="va-card-icon">
+                            <i class="fa-solid ${topic.icon || 'fa-graduation-cap'}"></i>
+                        </div>
+                        <div>
+                            <div class="va-card-title">${topic.title}</div>
+                        </div>
+                    </div>
+                    <span class="va-cat-badge">${topic.category || 'Birim'}</span>
+                </div>
+
+                <div class="va-topic-desc">
+                    ${topic.description}
+                </div>
+
+                ${quickLinksHtml}
+
+                <div class="va-card-actions">
+                    <a href="${topic.url}" class="va-go-btn" id="va-card-open-link">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <span>Sayfayı Aç / Git</span>
+                    </a>
+                    <button class="va-speak-card-btn" id="va-card-read-again-btn" title="Detayları Seslendir">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <span>Seslendir</span>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Bind Card Buttons
+        const readBtn = document.getElementById('va-card-read-again-btn');
+        if (readBtn) {
+            readBtn.addEventListener('click', () => {
+                speakText(topic.description);
+            });
+        }
+
+        const openLink = document.getElementById('va-card-open-link');
+        if (openLink) {
+            openLink.addEventListener('click', () => {
+                sessionStorage.setItem('va_auto_announce', topic.title);
+            });
+        }
+
+        // Voice Announce ("آنرا بخواند")
+        if (autoSpeak) {
+            updateStatus('speaking', `${topic.title} bulundu.`);
+            const speechSentence = `${topic.title} bulundu. ${topic.description} Sayfayı açmak için 'Git' diyebilir veya butona tıklayabilirsiniz.`;
+            speakText(speechSentence);
+        }
+    }
+
+    function displayMultipleResults(results, queryText, autoSpeak=true) {
+        currentActiveTopic = results[0];
+        const container = document.getElementById('va-dynamic-content');
+        if (!container) return;
+
+        playChime('success');
+
+        container.innerHTML = `
+            <div class="va-results-list">
+                <div style="font-size: 11px; color: #8dd4e3; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">
+                    <i class="fa-solid fa-list-check me-1"></i> "${queryText}" ile ilgili ${results.length} sonuç bulundu:
+                </div>
+                ${results.map((r, idx) => `
+                    <div class="va-result-item" data-topic-id="${r.id}">
+                        <div class="va-card-icon" style="width: 32px; height: 32px; font-size: 15px;">
+                            <i class="fa-solid ${r.icon || 'fa-circle-dot'}"></i>
+                        </div>
+                        <div class="va-result-info">
+                            <div class="va-result-top">
+                                <span class="va-cat-badge" style="font-size: 9px; padding: 1px 5px;">${r.category}</span>
+                            </div>
+                            <div class="va-result-title">${r.title}</div>
+                            <div class="va-result-desc">${r.description}</div>
+                        </div>
+                        <button class="va-result-btn" data-url="${r.url}" data-title="${r.title}">Aç</button>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+
+        // Click to view single card
+        container.querySelectorAll('.va-result-item').forEach(el => {
+            el.addEventListener('click', (e) => {
+                if (e.target.classList.contains('va-result-btn')) {
+                    const url = e.target.getAttribute('data-url');
+                    const t = e.target.getAttribute('data-title');
+                    sessionStorage.setItem('va_auto_announce', t);
+                    window.location.href = url;
+                    return;
+                }
+                const tid = el.getAttribute('data-topic-id');
+                const matched = allTopicsDirectory.find(t => t.id === tid) || results.find(t => t.id === tid);
+                if (matched) displayTopicCard(matched, true);
+            });
+        });
+
+        if (autoSpeak) {
+            const topNames = results.slice(0, 3).map(r => r.title).join(', ');
+            speakText(`Aradığınız konuyla ilgili ${results.length} sonuç bulundu: ${topNames}. İncelemek istediğinizi seçebilir veya adını söyleyebilirsiniz.`);
+        }
+    }
+
+    function renderDefaultSuggestions(cat='all') {
+        const container = document.getElementById('va-dynamic-content');
+        if (!container) return;
+
+        let filtered = allTopicsDirectory;
+        if (cat !== 'all') {
+            filtered = allTopicsDirectory.filter(t => t.category === cat);
+        }
+
+        if (cat !== 'all') {
+            container.innerHTML = `
+                <div class="va-results-list">
+                    <div style="font-size: 11px; color: #8dd4e3; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">
+                        <i class="fa-solid fa-layer-group me-1"></i> ${cat} (${filtered.length} Birim):
+                    </div>
+                    ${filtered.map(r => `
+                        <div class="va-result-item" data-topic-id="${r.id}">
+                            <div class="va-card-icon" style="width: 30px; height: 30px; font-size: 14px;">
+                                <i class="fa-solid ${r.icon || 'fa-circle-dot'}"></i>
+                            </div>
+                            <div class="va-result-info">
+                                <div class="va-result-title">${r.title}</div>
+                                <div class="va-result-desc">${r.description}</div>
+                            </div>
+                            <button class="va-result-btn" data-url="${r.url}" data-title="${r.title}">Aç</button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            container.querySelectorAll('.va-result-item').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    const tid = el.getAttribute('data-topic-id');
+                    const matched = allTopicsDirectory.find(t => t.id === tid);
+                    if (matched) displayTopicCard(matched, true);
+                });
+            });
+            return;
+        }
+
+        // Default 'all' view with popular quick prompts
+        container.innerHTML = `
+            <div class="va-suggestions-box">
+                <div class="va-suggestions-title">
+                    <i class="fa-solid fa-lightbulb me-1"></i> Hızlı Sesli Komut veya Konu Örnekleri:
+                </div>
+                <div class="va-tags-list">
+                    <button class="va-tag-btn" data-cmd="Kalite ve Akreditasyon"><i class="fa-solid fa-award me-1"></i> "Kalite ve Akreditasyon"</button>
+                    <button class="va-tag-btn" data-cmd="Adalet"><i class="fa-solid fa-scale-balanced me-1"></i> "Adalet Programı"</button>
+                    <button class="va-tag-btn" data-cmd="Bilgisayar Mühendisliği"><i class="fa-solid fa-laptop-code me-1"></i> "Bilgisayar Mühendisliği"</button>
+                    <button class="va-tag-btn" data-cmd="Öğrenim Ücretleri"><i class="fa-solid fa-money-bill-wave me-1"></i> "Öğrenim Ücretleri"</button>
+                    <button class="va-tag-btn" data-cmd="Hemşirelik"><i class="fa-solid fa-user-nurse me-1"></i> "Hemşirelik"</button>
+                    <button class="va-tag-btn" data-cmd="Burslar"><i class="fa-solid fa-hand-holding-dollar me-1"></i> "Burslar & İndirim"</button>
+                    <button class="va-tag-btn" data-cmd="Aday Öğrenci"><i class="fa-solid fa-user-graduate me-1"></i> "Aday Öğrenci"</button>
+                    <button class="va-tag-btn" data-cmd="Yemekhane"><i class="fa-solid fa-utensils me-1"></i> "SKS & Yemekhane"</button>
+                    <button class="va-tag-btn" data-cmd="Akademik Takvim"><i class="fa-solid fa-calendar-days me-1"></i> "Akademik Takvim"</button>
+                    <button class="va-tag-btn" data-cmd="Sayfayı Oku"><i class="fa-solid fa-volume-high me-1"></i> "Sayfayı Oku"</button>
+                </div>
+            </div>
+        `;
+
+        container.querySelectorAll('.va-tag-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const cmd = this.getAttribute('data-cmd');
+                if (cmd) handleVoiceCommand(cmd);
+            });
+        });
+    }
+
+    // -------------------------------------------------------------
     // Speech Recognition (Voice Input)
     // -------------------------------------------------------------
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -911,7 +1512,7 @@
         recognition.onstart = function() {
             isListening = true;
             playChime('start');
-            updateStatus('listening', 'Sizi dinliyorum... Gitmek istediğiniz yeri söyleyin.');
+            updateStatus('listening', 'Sizi dinliyorum... İstediğiniz konuyu veya bölümü söyleyin.');
             setWaveAnimation('listening');
             document.getElementById('va-mic-btn-label').textContent = 'Dinleniyor...';
             document.getElementById('va-toggle-mic-btn').classList.add('active');
@@ -935,7 +1536,7 @@
             }
 
             if (finalTranscript) {
-                handleVoiceCommand(finalTranscript.trim().toLowerCase());
+                handleVoiceCommand(finalTranscript.trim());
             }
         };
 
@@ -947,9 +1548,9 @@
             document.getElementById('va-toggle-mic-btn').classList.remove('active');
             
             if (event.error === 'no-speech') {
-                updateStatus('idle', 'Ses algılanamadı. Lütfen tekrar deneyin.');
+                updateStatus('idle', 'Ses algılanamadı. Tekrar denemek için mikrofona basın.');
             } else if (event.error === 'not-allowed') {
-                updateStatus('idle', 'Mikrofon izni verilmedi. Lütfen tarayıcıdan mikrofon iznini onaylayın.');
+                updateStatus('idle', 'Mikrofon izni verilmedi. Lütfen tarayıcı ayarlarından onaylayın.');
             } else {
                 updateStatus('idle', 'Dinleme sonlandı.');
             }
@@ -991,55 +1592,96 @@
     }
 
     // -------------------------------------------------------------
-    // Voice Command Dispatcher
+    // Intelligent Voice Command Dispatcher ("شناسایی شده و نمایش دهد و بخواند")
     // -------------------------------------------------------------
-    function handleVoiceCommand(cmd) {
-        console.log('Voice Command Received:', cmd);
+    function handleVoiceCommand(rawCmd) {
+        if (!rawCmd || !rawCmd.trim()) return;
+        const cmd = rawCmd.trim();
+        const normCmd = normalizeSearchText(cmd);
+        console.log('Voice Command Received:', cmd, '-> normalized:', normCmd);
         document.getElementById('va-transcript').textContent = `"${cmd}"`;
 
-        // Command: Sayfayı oku
-        if (cmd.includes('oku') || cmd.includes('sayfayı oku') || cmd.includes('metni oku') || cmd.includes('içeriği oku')) {
+        // Update search input text
+        const searchInput = document.getElementById('va-search-input');
+        if (searchInput) {
+            searchInput.value = cmd;
+            const clearBtn = document.getElementById('va-search-clear');
+            if (clearBtn) clearBtn.style.display = 'block';
+        }
+
+        // 1. Command: Sayfayı oku
+        if (normCmd.includes('sayfayi oku') || normCmd.includes('metni oku') || normCmd.includes('ekrani oku') || normCmd.includes('oku sayfayi')) {
             readCurrentPageContent();
             return;
         }
 
-        // Command: Durdur
-        if (cmd.includes('dur') || cmd.includes('durdur') || cmd.includes('sus') || cmd.includes('iptal')) {
+        // 2. Command: Durdur
+        if (normCmd === 'dur' || normCmd === 'durdur' || normCmd === 'sus' || normCmd === 'iptal' || normCmd === 'sessiz') {
             stopSpeaking();
             return;
         }
 
-        // Command: Navigation matching
-        let matchedRoute = null;
-        for (const route of voiceRoutes) {
-            for (const kw of route.keywords) {
-                if (cmd.includes(kw)) {
-                    matchedRoute = route;
-                    break;
-                }
+        // 3. Command: Git / Aç / Sayfayı Aç (Confirming currently active topic)
+        if (normCmd === 'git' || normCmd === 'ac' || normCmd === 'evet' || normCmd === 'sayfaya git' || normCmd === 'sayfayi ac' || normCmd === 'yonlendir') {
+            if (currentActiveTopic) {
+                playChime('success');
+                speakText(`${currentActiveTopic.title} sayfasına yönlendiriliyorsunuz...`, function() {
+                    sessionStorage.setItem('va_auto_announce', currentActiveTopic.title);
+                    window.location.href = currentActiveTopic.url;
+                });
+                return;
             }
-            if (matchedRoute) break;
         }
 
-        if (matchedRoute) {
-            playChime('success');
-            updateStatus('speaking', `${matchedRoute.name} sayfasına yönlendiriliyorsunuz...`);
-            
-            // Set auto announce on destination page
-            sessionStorage.setItem('va_auto_announce', matchedRoute.name);
+        // 4. Command: Detayları Oku / Tekrar Oku
+        if (normCmd.includes('tekrar') || normCmd.includes('detaylari oku') || normCmd === 'oku') {
+            if (currentActiveTopic) {
+                speakText(currentActiveTopic.description);
+                return;
+            }
+        }
 
-            speakText(`${matchedRoute.name} sayfasına yönlendiriliyorsunuz...`, function() {
-                window.location.href = matchedRoute.url;
+        // 5. Intelligent Topic Search Across ALL Project Apps & Topics
+        let localMatches = searchLocalTopics(cmd, 8);
+
+        // Also query backend dynamic search for live items (news/announcements/kalite)
+        fetch("{% url 'chat:voice_assistant_search' %}?q=" + encodeURIComponent(cmd))
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.results && data.results.length > 0) {
+                    // Merge live database results with local matches
+                    const merged = [...data.results];
+                    for (const lm of localMatches) {
+                        if (!merged.some(m => m.id === lm.id || m.title === lm.title)) {
+                            merged.push(lm);
+                        }
+                    }
+                    processTopicSearchResults(merged, cmd);
+                } else {
+                    processTopicSearchResults(localMatches, cmd);
+                }
+            })
+            .catch(() => {
+                processTopicSearchResults(localMatches, cmd);
             });
+    }
+
+    function processTopicSearchResults(results, queryText) {
+        if (results && results.length > 0) {
+            if (results.length === 1 || results[0].score >= 80) {
+                displayTopicCard(results[0], true);
+            } else {
+                displayMultipleResults(results, queryText, true);
+            }
         } else {
             playChime('error');
-            updateStatus('idle', `"${cmd}" komutu anlaşılamadı. Lütfen örneğin "Kayıt İşlemleri" veya "Aday Öğrenci" deyin.`);
-            speakText(`Üzgünüm, ${cmd} anlaşılamadı. Örneğin Kayıt İşlemleri veya Sayfayı Oku diyebilirsiniz.`);
+            updateStatus('idle', `"${queryText}" konusuna ilişkin kayıt bulunamadı.`);
+            speakText(`Üzgünüm, ${queryText} ile ilgili bir birim veya sayfa bulunamadı. Lütfen Kalite, Adalet, Bilgisayar Mühendisliği, Öğrenim Ücretleri veya Burslar gibi bir konu adı söyleyin.`);
         }
     }
 
     // -------------------------------------------------------------
-    // UI Helpers
+    // UI Helpers & Controls
     // -------------------------------------------------------------
     function updateStatus(state, message) {
         const banner = document.getElementById('va-status-banner');
@@ -1065,9 +1707,7 @@
         if (state === 'speaking') wave.classList.add('speaking');
     }
 
-    // -------------------------------------------------------------
     // Modal Open/Close & Controls
-    // -------------------------------------------------------------
     const vaBtn = document.getElementById('voice-assistant-button');
     const vaWindow = document.getElementById('voice-assistant-window');
     const vaCloseBtn = document.getElementById('close-voice-assistant');
@@ -1076,13 +1716,12 @@
     const vaReadBtn = document.getElementById('va-read-page-btn');
     const vaStopBtn = document.getElementById('va-stop-speech-btn');
     const speedBtns = document.querySelectorAll('.va-speed-btn');
-    const tagBtns = document.querySelectorAll('.va-tag-btn');
+    const searchInput = document.getElementById('va-search-input');
+    const searchClearBtn = document.getElementById('va-search-clear');
+    const catChipsContainer = document.getElementById('va-cat-chips');
 
-    // Live Support elements
     const supportBtn = document.getElementById('live-support-button');
     const supportWindow = document.getElementById('live-support-window');
-    const closeSupportBtn = document.getElementById('close-support');
-    const minimizeSupportBtn = document.getElementById('minimize-support');
     const actionsStack = document.getElementById('floating-actions-stack');
 
     function openVoiceAssistant(autoListen=true) {
@@ -1091,8 +1730,9 @@
         vaWindow.style.display = 'flex';
         playChime('start');
 
-        // Welcome voice prompt
-        speakText('Avrasya Üniversitesi Sesli Asistanına hoş geldiniz. Nereye gitmek istersiniz? Örneğin Aday Öğrenci, Kayıt İşlemleri veya Sayfayı Oku diyebilirsiniz.', function() {
+        loadTopicsDirectory();
+
+        speakText('Avrasya Üniversitesi Sesli Asistanına hoş geldiniz. Kalite, Adalet, Bölümler, Burslar veya gitmek istediğiniz konuyu söyleyebilirsiniz.', function() {
             if (autoListen) {
                 startListening();
             }
@@ -1140,6 +1780,47 @@
         });
     }
 
+    // Real-time Text Search in Voice Assistant
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const val = this.value.trim();
+            if (searchClearBtn) {
+                searchClearBtn.style.display = val ? 'block' : 'none';
+            }
+
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(() => {
+                if (val.length >= 2) {
+                    const matches = searchLocalTopics(val, 8);
+                    processTopicSearchResults(matches, val);
+                } else if (val.length === 0) {
+                    renderDefaultSuggestions(activeCategoryFilter);
+                }
+            }, 200);
+        });
+    }
+
+    if (searchClearBtn) {
+        searchClearBtn.addEventListener('click', function() {
+            if (searchInput) searchInput.value = '';
+            this.style.display = 'none';
+            renderDefaultSuggestions(activeCategoryFilter);
+        });
+    }
+
+    // Category Chips Filter
+    if (catChipsContainer) {
+        catChipsContainer.querySelectorAll('.va-cat-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                catChipsContainer.querySelectorAll('.va-cat-chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                const cat = this.getAttribute('data-cat');
+                activeCategoryFilter = cat;
+                renderDefaultSuggestions(cat);
+            });
+        });
+    }
+
     // Speed buttons
     speedBtns.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -1147,16 +1828,6 @@
             this.classList.add('active');
             speechRate = parseFloat(this.getAttribute('data-speed')) || 1.0;
             speakText(`Okuma hızı ${speechRate} katına ayarlandı.`);
-        });
-    });
-
-    // Tag buttons (click to run voice command)
-    tagBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const cmd = this.getAttribute('data-cmd');
-            if (cmd) {
-                handleVoiceCommand(cmd.toLowerCase());
-            }
         });
     });
 
@@ -1175,7 +1846,7 @@
         }
     });
 
-    // Check cross-page auto-announce
+    // Cross-page auto-announce
     const autoAnnounce = sessionStorage.getItem('va_auto_announce');
     if (autoAnnounce) {
         sessionStorage.removeItem('va_auto_announce');
