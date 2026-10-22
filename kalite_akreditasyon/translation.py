@@ -1,5 +1,8 @@
 from modeltranslation.translator import TranslationOptions, register
-from .models import News, Announcement, Mevzuat, Takim, Rapor, Izleme, Dokuman, SSS
+from .models import (
+    News, Announcement, Mevzuat, Takim, Rapor,
+    Izleme, Dokuman, SSS, BolumKalite, BolumKaliteDosya
+)
 
 @register(News)
 class NewsTranslationOptions(TranslationOptions):
@@ -32,3 +35,11 @@ class DokumanTranslationOptions(TranslationOptions):
 @register(SSS)
 class SSSTranslationOptions(TranslationOptions):
     fields = ('question', 'answer')
+
+@register(BolumKalite)
+class BolumKaliteTranslationOptions(TranslationOptions):
+    fields = ('baslik', 'icerik')
+
+@register(BolumKaliteDosya)
+class BolumKaliteDosyaTranslationOptions(TranslationOptions):
+    fields = ('aciklama',)

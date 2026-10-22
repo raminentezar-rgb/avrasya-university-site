@@ -40,6 +40,12 @@ class DuyuruAdmin(TranslationAdmin):
             'fields': ('yayin_tarihi', 'yayinda')
         }),
     )
+
+    def formfield_for_dbfield(self, db_field, request=None, **kwargs):
+        if db_field.name == 'icerik' or db_field.name.startswith('icerik_'):
+            from ckeditor_uploader.widgets import CKEditorUploadingWidget
+            kwargs['widget'] = CKEditorUploadingWidget(config_name='default')
+        return super().formfield_for_dbfield(db_field, request=request, **kwargs)
     
     def get_bolumler(self, obj):
         return obj.get_bolum_adlari()

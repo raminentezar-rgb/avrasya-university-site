@@ -49,7 +49,7 @@ class Duyuru(models.Model):
     FAKULTE_CHOICES = FAKULTE_CHOICES
     
     baslik = models.CharField(max_length=255, verbose_name="Başlık")
-    slug = models.SlugField(unique=True, verbose_name="SEO URL")
+    slug = models.SlugField(max_length=255, unique=True, verbose_name="SEO URL")
     ozet = models.TextField(blank=True, verbose_name="Özet")
     icerik = models.TextField(verbose_name="İçerik")
     yayin_tarihi = models.DateTimeField(verbose_name="Yayın Tarihi")
@@ -82,6 +82,27 @@ class Duyuru(models.Model):
 
     def get_absolute_url(self):
         return reverse('duyurular:detay', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        import html
+        from django.utils.html import strip_tags
+        if not self.ozet and self.icerik:
+            clean = html.unescape(strip_tags(self.icerik)).replace('\xa0', ' ').strip()
+            clean = ' '.join(clean.split())
+            if clean:
+                self.ozet = clean[:250] + ('...' if len(clean) > 250 else '')
+        for lang in ['tr', 'en', 'fa', 'ar', 'ru', 'de']:
+            ozet_f = f'ozet_{lang}'
+            icerik_f = f'icerik_{lang}'
+            if hasattr(self, ozet_f) and hasattr(self, icerik_f):
+                val_ozet = getattr(self, ozet_f)
+                val_icerik = getattr(self, icerik_f)
+                if not val_ozet and val_icerik:
+                    clean = html.unescape(strip_tags(val_icerik)).replace('\xa0', ' ').strip()
+                    clean = ' '.join(clean.split())
+                    if clean:
+                        setattr(self, ozet_f, clean[:250] + ('...' if len(clean) > 250 else ''))
+        super().save(*args, **kwargs)
 
     def mevcut_dosyalar(self):
         """Mevcut dosyaları liste olarak döndürür"""
@@ -135,6 +156,7 @@ class DuyuruDosya(models.Model):
         verbose_name="Duyuru"
     )
     dosya = models.FileField(
+        max_length=500,
         upload_to='duyurular/dosyalar/%Y/%m/%d/',
         verbose_name="Dosya"
     )

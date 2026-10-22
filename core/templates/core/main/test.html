@@ -357,9 +357,9 @@
                             
                             <div class="announcement-content">
                                 {% if duyuru.ozet %}
-                                    {{ duyuru.ozet|truncatewords:15 }}
+                                    {{ duyuru.ozet|striptags|truncatewords:15 }}
                                 {% else %}
-                                    {{ duyuru.icerik|truncatewords:15 }}
+                                    {{ duyuru.icerik|striptags|truncatewords:15 }}
                                 {% endif %}
                             </div>
                             

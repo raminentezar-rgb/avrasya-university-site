@@ -589,7 +589,11 @@
             <!-- Main Content -->
             <div class="duyuru-content-wrapper">
                 <div class="duyuru-content">
-                    {{ duyuru.icerik|linebreaks }}
+                    {% if '<table' in duyuru.icerik or '<p' in duyuru.icerik or '<div' in duyuru.icerik or '<ul' in duyuru.icerik or '<ol' in duyuru.icerik or '<h' in duyuru.icerik or '<span' in duyuru.icerik %}
+    {{ duyuru.icerik|safe }}
+{% else %}
+    {{ duyuru.icerik|linebreaks }}
+{% endif %}
                 </div>
             </div>
             

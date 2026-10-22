@@ -16,6 +16,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'axes',
+    'ckeditor',
+    'ckeditor_uploader',
 
     # local apps
     'core',
@@ -360,16 +362,36 @@ AXES_PROXY_COUNT = 1
 
 # CKEditor configuration
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',
-        'height': 400,
+        'skin': 'moono-lisa',
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Source', '-', 'Preview', '-', 'Templates'],
+            ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'],
+            ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'],
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak'],
+            '/',
+            ['Styles', 'Format', 'Font', 'FontSize'],
+            ['TextColor', 'BGColor'],
+            ['Maximize', 'ShowBlocks'],
+        ],
+        'height': 380,
         'width': '100%',
         'extraPlugins': ','.join([
-            'codesnippet',
-            'youtube',
+            'table',
+            'tableresize',
+            'tableselection',
+            'tabletools',
+            'pastefromword',
+            'clipboard',
             'image2',
         ]),
+        'allowedContent': True,  # Tablo ve zengin içeriklerin bozulmadan yapıştırılması için
     },
 }
 
@@ -387,5 +409,4 @@ CHANNEL_LAYERS = {
     },
 }
 
-
-
+# Auto-reload trigger

@@ -1,0 +1,748 @@
+{% load i18n %}
+{% load static %}
+
+<div class="bolum-kalite-wrapper">
+    <!-- Tab Navigasyonu -->
+    <div class="tab-header-wrapper">
+        <ul class="tab-menu-custom">
+            {% for tab in tabs_data %}
+            <li class="tab-menu-item-custom {% if forloop.first %}active{% endif %}" data-target="#{{ tab.id }}">
+                <i class="{{ tab.icon }} me-2"></i>
+                <span>{{ tab.title }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Tab İçerikleri -->
+    <div class="tab-content-container-custom">
+        {% for tab in tabs_data %}
+        <div class="tab-pane-custom {% if forloop.first %}active{% endif %}" id="{{ tab.id }}">
+            <div class="tab-inner-card">
+                <div class="tab-card-header">
+                    <h3 class="tab-heading">
+                        <i class="{{ tab.icon }} text-primary me-2"></i>
+                        {{ tab.title }}
+                    </h3>
+                </div>
+
+                <div class="tab-card-body">
+                    {% if tab.obj.icerik and tab.obj.icerik.strip %}
+                        <div class="content-body kalite-content-body">
+                            {{ tab.obj.icerik|safe }}
+                        </div>
+                    {% elif not tab.has_content %}
+                        <div class="empty-state-card text-center py-5">
+                            <div class="empty-icon-circle mb-3">
+                                <i class="bi bi-folder2-open"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal">{% trans "Bu sekme için henüz içerik eklenmemiştir." %}</h5>
+                            <p class="text-muted small mb-0">{% trans "İçerik hazırlandığında burada görüntülenecektir." %}</p>
+                        </div>
+                    {% endif %}
+
+                    <!-- Ekli Dosyalar / Belgeler -->
+                    {% if tab.dosyalar %}
+                    <div class="kalite-attachments-section">
+                        <div class="kalite-attachments-header">
+                            <h4 class="attachments-title mb-0">
+                                <i class="bi bi-paperclip me-2 text-primary"></i>
+                                {% trans "İndirilebilir Dosyalar ve Belgeler" %}
+                            </h4>
+                            <span class="kalite-count-pill">
+                                {{ tab.dosyalar|length }} {% trans "Dosya Mevcut" %}
+                            </span>
+                        </div>
+
+                        <div class="kalite-attachments-grid">
+                            {% for dosya in tab.dosyalar %}
+                            <div class="kalite-file-card">
+                                <div class="kalite-file-card-top">
+                                    <div class="kalite-file-icon-box">
+                                        <i class="bi {{ dosya.get_icon }}"></i>
+                                    </div>
+                                    <div class="kalite-file-info">
+                                        <h5 class="kalite-file-title" title="{{ dosya.display_name }}">
+                                            {{ dosya.display_name }}
+                                        </h5>
+                                        <div class="kalite-file-tags">
+                                            {% if dosya.extension %}
+                                            <span class="kalite-file-ext-tag">{{ dosya.extension }}</span>
+                                            {% endif %}
+                                            <span class="kalite-file-type-tag">{{ dosya.get_tur_display }}</span>
+                                            {% if dosya.dosya.size %}
+                                            <span class="kalite-file-size">{{ dosya.dosya.size|filesizeformat }}</span>
+                                            {% endif %}
+                                        </div>
+                                        {% if dosya.aciklama %}
+                                        <p class="kalite-file-desc">{{ dosya.aciklama }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="kalite-file-card-bottom">
+                                    <span class="kalite-file-date">
+                                        <i class="bi bi-calendar3 me-1"></i>{{ dosya.olusturulma_tarihi|date:"d.m.Y" }}
+                                    </span>
+                                    <div class="kalite-file-actions">
+                                        {% if dosya.tur == 'resim' %}
+                                        <button type="button" class="btn btn-sm kalite-btn-preview preview-image-btn" data-img-url="{{ dosya.dosya.url }}" title="{% trans 'Görseli Büyüt' %}">
+                                            <i class="bi bi-arrows-fullscreen"></i> {% trans "Önizle" %}
+                                        </button>
+                                        {% endif %}
+                                        <a href="{{ dosya.dosya.url }}" class="btn btn-sm kalite-btn-download" download target="_blank">
+                                            <i class="bi bi-download"></i> {% trans "İndir" %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+/* ========================================================
+   Bölüm Kalite Yönetimi Modern & Robust Styling
+   ======================================================== */
+.bolum-kalite-wrapper {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Tab Header & Custom Scrollbar */
+.tab-header-wrapper {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 8px 10px;
+    box-shadow: 0 4px 20px rgba(10, 43, 77, 0.06);
+    border: 1px solid rgba(141, 212, 227, 0.25);
+    margin-bottom: 25px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(29, 97, 169, 0.35) transparent;
+}
+
+.tab-header-wrapper::-webkit-scrollbar {
+    height: 5px;
+}
+
+.tab-header-wrapper::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.tab-header-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.tab-header-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #1d61a9;
+}
+
+.tab-menu-custom {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 8px;
+    min-width: max-content;
+}
+
+.tab-menu-item-custom {
+    padding: 10px 18px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.tab-menu-item-custom i {
+    font-size: 1.05rem;
+    color: #1d61a9;
+    transition: color 0.25s ease;
+}
+
+.tab-menu-item-custom:hover {
+    color: #0A2B4D;
+    background: #f1f5f9;
+}
+
+.tab-menu-item-custom.active {
+    background: linear-gradient(135deg, #0A2B4D 0%, #1d61a9 100%);
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(29, 97, 169, 0.3);
+}
+
+.tab-menu-item-custom.active i {
+    color: #8dd4e3 !important;
+}
+
+/* Tab Panes */
+.tab-content-container-custom {
+    position: relative;
+    width: 100%;
+}
+
+.tab-pane-custom {
+    display: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-pane-custom.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tab-inner-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px 36px;
+    box-shadow: 0 8px 30px rgba(10, 43, 77, 0.06);
+    border: 1px solid rgba(141, 212, 227, 0.25);
+    overflow: hidden !important;
+    max-width: 100% !important;
+}
+
+@media (max-width: 768px) {
+    .tab-inner-card {
+        padding: 22px 18px;
+    }
+}
+
+.tab-card-header {
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.tab-heading {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #0A2B4D;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.tab-heading i {
+    font-size: 1.5rem;
+}
+
+/* Content Body */
+.tab-card-body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.kalite-content-body {
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: #334155;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.kalite-content-body p {
+    margin-bottom: 1.15rem;
+}
+
+.kalite-content-body h2,
+.kalite-content-body h3,
+.kalite-content-body h4 {
+    color: #0A2B4D;
+    font-weight: 700;
+    margin-top: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+/* IMAGE CONSTRAINTS - STRICTLY BOUNDED TO CARD */
+.kalite-content-body img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(10, 43, 77, 0.08) !important;
+    display: block !important;
+    margin: 1.5rem auto !important;
+    object-fit: contain !important;
+    cursor: zoom-in;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.kalite-content-body img:hover {
+    transform: scale(1.008);
+    box-shadow: 0 8px 30px rgba(10, 43, 77, 0.16) !important;
+}
+
+.kalite-content-body figure,
+.kalite-content-body picture {
+    max-width: 100% !important;
+    margin: 1.5rem auto !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+.kalite-content-body figure img {
+    margin: 0 auto !important;
+}
+
+/* Modern University Table Styles for Kalite Content */
+.table-responsive-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    margin: 24px 0 !important;
+    border-radius: 8px !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 4px 14px rgba(10, 43, 77, 0.06) !important;
+    background: #ffffff !important;
+}
+
+.kalite-content-body table {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border: none !important;
+    background: #ffffff !important;
+}
+
+.kalite-content-body table th,
+.kalite-content-body table thead td,
+.kalite-content-body table tr.table-header-row td,
+.kalite-content-body table tr.table-header-row th,
+.kalite-content-body table:not(:has(th)) tr:first-child td {
+    background: linear-gradient(135deg, #0A2B4D 0%, #1d61a9 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    padding: 13px 16px !important;
+    font-size: 14.5px !important;
+    text-align: left !important;
+    border-bottom: 2px solid #08213b !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+    letter-spacing: 0.3px !important;
+}
+
+.kalite-content-body table th *,
+.kalite-content-body table thead td *,
+.kalite-content-body table tr.table-header-row td *,
+.kalite-content-body table tr.table-header-row th *,
+.kalite-content-body table:not(:has(th)) tr:first-child td * {
+    color: #ffffff !important;
+}
+
+.kalite-content-body table th:last-child,
+.kalite-content-body table thead td:last-child,
+.kalite-content-body table tr.table-header-row td:last-child,
+.kalite-content-body table:not(:has(th)) tr:first-child td:last-child {
+    border-right: none !important;
+}
+
+.kalite-content-body table td {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    color: #334155 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    border-right: 1px solid #e2e8f0 !important;
+    vertical-align: middle !important;
+    line-height: 1.5 !important;
+}
+
+.kalite-content-body table td p,
+.kalite-content-body table th p {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.kalite-content-body table td:last-child {
+    border-right: none !important;
+}
+
+.kalite-content-body table tr:last-child td {
+    border-bottom: none !important;
+}
+
+.kalite-content-body table tr:nth-child(even) td {
+    background-color: #f8fafc !important;
+}
+
+.kalite-content-body table tr.table-header-row td,
+.kalite-content-body table:not(:has(th)) tr:first-child td {
+    background-color: transparent !important;
+}
+
+.kalite-content-body table tr:hover td {
+    background-color: #eff6ff !important;
+    color: #0f172a !important;
+}
+
+/* Empty State */
+.empty-state-card {
+    padding: 50px 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 2px dashed #cbd5e1;
+}
+
+.empty-icon-circle {
+    width: 65px;
+    height: 65px;
+    background: #e2e8f0;
+    color: #64748b;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+/* ========================================================
+   ATTACHMENTS SECTION & CARDS (NO CONFLICT WITH GLOBAL CSS)
+   ======================================================== */
+.kalite-attachments-section {
+    margin-top: 35px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.kalite-attachments-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.attachments-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0A2B4D;
+}
+
+/* Count Pill - Explicitly reset any global .badge styles */
+.kalite-count-pill {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    height: auto !important;
+    background: #eff6ff !important;
+    color: #1d61a9 !important;
+    border: 1px solid #bfdbfe !important;
+    padding: 6px 14px !important;
+    border-radius: 50px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    box-shadow: none !important;
+}
+
+/* Responsive Grid */
+.kalite-attachments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    .kalite-attachments-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modern File Card */
+.kalite-file-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 10px rgba(10, 43, 77, 0.04);
+    min-width: 0;
+    max-width: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.kalite-file-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(10, 43, 77, 0.12);
+    border-color: #8dd4e3;
+}
+
+.kalite-file-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.kalite-file-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.kalite-file-info {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.kalite-file-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0A2B4D;
+    margin: 0 0 6px 0;
+    line-height: 1.35;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.kalite-file-tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+/* File Tags - Explicitly reset any global .badge rules */
+.kalite-file-ext-tag,
+.kalite-file-type-tag {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    height: auto !important;
+    vertical-align: middle !important;
+    line-height: 1.2 !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+}
+
+.kalite-file-ext-tag {
+    background: #e0f2fe !important;
+    color: #0369a1 !important;
+    border: 1px solid #bae6fd !important;
+    padding: 3px 8px !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+}
+
+.kalite-file-type-tag {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 3px 8px !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+
+.kalite-file-size {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 500;
+    display: inline-block;
+    margin-left: 2px;
+}
+
+.kalite-file-desc {
+    font-size: 12.5px;
+    color: #64748b;
+    margin: 4px 0 0 0;
+    line-height: 1.4;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.kalite-file-card-bottom {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.kalite-file-date {
+    font-size: 12px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.kalite-file-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.kalite-btn-preview {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 12.5px !important;
+    padding: 6px 12px !important;
+    color: #1d61a9 !important;
+    border: 1px solid #1d61a9 !important;
+    background: transparent !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+}
+
+.kalite-btn-preview:hover {
+    background: #1d61a9 !important;
+    color: #ffffff !important;
+}
+
+.kalite-btn-download {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 12.5px !important;
+    padding: 6px 14px !important;
+    color: #ffffff !important;
+    background: #0A2B4D !important;
+    border: 1px solid #0A2B4D !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+}
+
+.kalite-btn-download:hover {
+    background: #1d61a9 !important;
+    border-color: #1d61a9 !important;
+    color: #ffffff !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('.tab-menu-item-custom');
+    const tabPanes = document.querySelectorAll('.tab-pane-custom');
+
+    // Tab Navigation
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const targetSelector = this.getAttribute('data-target');
+            const targetPane = document.querySelector(targetSelector);
+
+            if (!targetPane) return;
+
+            menuItems.forEach(mi => mi.classList.remove('active'));
+            this.classList.add('active');
+
+            tabPanes.forEach(pane => {
+                pane.classList.remove('active');
+            });
+            targetPane.classList.add('active');
+
+            this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        });
+    });
+
+    // Image Modal Helper
+    function showInImageModal(src, title) {
+        let modalEl = document.getElementById('imageModal');
+        let modalImg = document.getElementById('modalImage');
+        if (modalEl && modalImg) {
+            modalImg.src = src;
+            let titleEl = modalEl.querySelector('.modal-title');
+            if (titleEl && title) titleEl.textContent = title;
+            let bsModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            bsModal.show();
+        } else {
+            window.open(src, '_blank');
+        }
+    }
+
+    // Click on content images to zoom
+    document.querySelectorAll('.kalite-content-body img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            showInImageModal(this.src, this.alt || 'Görsel Önizleme');
+        });
+    });
+
+    // Click on preview image buttons in file attachments
+    document.querySelectorAll('.preview-image-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const url = this.getAttribute('data-img-url');
+            if (url) showInImageModal(url, 'Dosya Görsel Önizleme');
+        });
+    });
+
+    // Table responsive wrapper & cleanup
+    document.querySelectorAll('.kalite-content-body table').forEach(function(table) {
+        // Clean empty rows
+        var rows = table.querySelectorAll('tr');
+        rows.forEach(function(row) {
+            var rowText = row.textContent.replace(/\u00a0/g, ' ').replace(/\s+/g, '').trim();
+            if (rowText === '' && row.querySelectorAll('img, svg, input').length === 0) {
+                row.remove();
+            }
+        });
+
+        // Wrap in responsive container
+        if (!table.parentElement.classList.contains('table-responsive-wrapper')) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive-wrapper';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        }
+    });
+});
+</script>

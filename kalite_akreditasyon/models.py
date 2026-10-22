@@ -286,3 +286,141 @@ class SSS(models.Model):
 
     def __str__(self):
         return self.question
+
+
+class BolumKalite(models.Model):
+    """Bölüm Kalite Yönetimi Sekmeleri Modeli"""
+    SEKME_CHOICES = [
+        ('tab1', _('FEDEK Akreditasyon Belgesi')),
+        ('tab2', _('Komisyon/Sorumlular')),
+        ('tab3', _('Program Öğretim Amaçları')),
+        ('tab4', _('Program Öğrenim Çıktıları')),
+        ('tab5', _('Anketler')),
+        ('tab6', _('Ders Planı')),
+    ]
+
+    bolum = models.ForeignKey(
+        'duyurular.Bolum',
+        on_delete=models.CASCADE,
+        related_name='kalite_sekmeleri',
+        verbose_name=_('Bölüm')
+    )
+    sekme = models.CharField(
+        _('Sekme'),
+        max_length=50,
+        choices=SEKME_CHOICES
+    )
+    baslik = models.CharField(
+        _('Özel Başlık (Opsiyonel)'),
+        max_length=255,
+        blank=True,
+        help_text=_('Boş bırakılırsa varsayılan sekme adı kullanılır.')
+    )
+    icerik = models.TextField(
+        _('İçerik'),
+        blank=True,
+        help_text=_('Zengin metin editörü ile tablo, metin ve görsel ekleyebilirsiniz.')
+    )
+    aktif = models.BooleanField(
+        _('Yayında'),
+        default=True
+    )
+    guncellenme_tarihi = models.DateTimeField(
+        _('Son Güncelleme'),
+        auto_now=True
+    )
+
+    class Meta:
+        verbose_name = _('Bölüm Kalite Sekmesi')
+        verbose_name_plural = _('Bölüm Kalite Yönetimi')
+        unique_together = ['bolum', 'sekme']
+        ordering = ['bolum__ad', 'sekme']
+
+    def __str__(self):
+        return f"{self.bolum.isim} - {self.get_sekme_display()}"
+
+    def get_baslik(self):
+        return self.baslik if self.baslik else self.get_sekme_display()
+
+
+class BolumKaliteDosya(models.Model):
+    """Bölüm Kalite Sekmesine Ait Ekli Dosyalar Modeli"""
+    DOSYA_TURleri = [
+        ('pdf', _('PDF Belgesi')),
+        ('word', _('Word Belgesi')),
+        ('excel', _('Excel Dosyası')),
+        ('resim', _('Resim / Görsel')),
+        ('arsiv', _('Arşiv Dosyası (ZIP/RAR)')),
+        ('diger', _('Diğer')),
+    ]
+
+    kalite = models.ForeignKey(
+        BolumKalite,
+        on_delete=models.CASCADE,
+        related_name='dosyalar',
+        verbose_name=_('Kalite Sekmesi')
+    )
+    dosya = models.FileField(
+        _('Dosya'),
+        upload_to='kalite/dosyalar/%Y/%m/'
+    )
+    dosya_adi = models.CharField(
+        _('Dosya Adı / Başlığı'),
+        max_length=255,
+        blank=True,
+        help_text=_('Kullanıcıların göreceği isim (boş bırakılırsa dosyanın kendi adı kullanılır).')
+    )
+    tur = models.CharField(
+        _('Dosya Türü'),
+        max_length=20,
+        choices=DOSYA_TURleri,
+        default='pdf'
+    )
+    aciklama = models.TextField(
+        _('Açıklama (Opsiyonel)'),
+        blank=True
+    )
+    sira = models.PositiveIntegerField(
+        _('Sıralama'),
+        default=0
+    )
+    olusturulma_tarihi = models.DateTimeField(
+        _('Yüklenme Tarihi'),
+        auto_now_add=True
+    )
+
+    class Meta:
+        verbose_name = _('Ekli Dosya')
+        verbose_name_plural = _('Ekli Dosyalar')
+        ordering = ['sira', 'id']
+
+    def __str__(self):
+        return self.display_name
+
+    @property
+    def display_name(self):
+        if self.dosya_adi and self.dosya_adi.strip():
+            return self.dosya_adi.strip()
+        if self.dosya:
+            import os
+            return os.path.basename(self.dosya.name)
+        return "Dosya"
+
+    @property
+    def extension(self):
+        if self.dosya:
+            import os
+            _, ext = os.path.splitext(self.dosya.name)
+            return ext.lstrip('.').upper()
+        return ''
+
+    def get_icon(self):
+        icons = {
+            'pdf': 'bi-file-earmark-pdf-fill text-danger',
+            'word': 'bi-file-earmark-word-fill text-primary',
+            'excel': 'bi-file-earmark-excel-fill text-success',
+            'resim': 'bi-file-earmark-image-fill text-warning',
+            'arsiv': 'bi-file-earmark-zip-fill text-secondary',
+            'diger': 'bi-file-earmark-fill text-muted',
+        }
+        return icons.get(self.tur, 'bi-file-earmark-text-fill text-primary')

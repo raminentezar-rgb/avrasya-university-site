@@ -257,6 +257,134 @@
     word-wrap: break-word;
 }
 
+/* ========================================================
+   Modern University Table Styles for Announcement Content
+   ======================================================== */
+.duyuru-detay-content table,
+.content-body table {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 24px 0 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 14px rgba(10, 43, 77, 0.06) !important;
+    background: #ffffff !important;
+}
+
+.duyuru-detay-content table th,
+.duyuru-detay-content table thead td,
+.duyuru-detay-content table tr.table-header-row td,
+.duyuru-detay-content table tr.table-header-row th,
+.duyuru-detay-content table:not(:has(th)) tr:first-child td,
+.content-body table th,
+.content-body table thead td,
+.content-body table tr.table-header-row td,
+.content-body table tr.table-header-row th,
+.content-body table:not(:has(th)) tr:first-child td {
+    background: linear-gradient(135deg, #0A2B4D 0%, #1d61a9 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    padding: 13px 16px !important;
+    font-size: 14.5px !important;
+    text-align: left !important;
+    border-bottom: 2px solid #08213b !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+    letter-spacing: 0.3px !important;
+}
+
+.duyuru-detay-content table th *,
+.duyuru-detay-content table thead td *,
+.duyuru-detay-content table tr.table-header-row td *,
+.duyuru-detay-content table tr.table-header-row th *,
+.duyuru-detay-content table:not(:has(th)) tr:first-child td *,
+.content-body table th *,
+.content-body table thead td *,
+.content-body table tr.table-header-row td *,
+.content-body table tr.table-header-row th *,
+.content-body table:not(:has(th)) tr:first-child td * {
+    color: #ffffff !important;
+}
+
+.duyuru-detay-content table th:last-child,
+.duyuru-detay-content table thead td:last-child,
+.duyuru-detay-content table tr.table-header-row td:last-child,
+.duyuru-detay-content table:not(:has(th)) tr:first-child td:last-child,
+.content-body table th:last-child,
+.content-body table thead td:last-child,
+.content-body table tr.table-header-row td:last-child,
+.content-body table:not(:has(th)) tr:first-child td:last-child {
+    border-right: none !important;
+}
+
+.duyuru-detay-content table td,
+.content-body table td {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    color: #334155 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    border-right: 1px solid #e2e8f0 !important;
+    vertical-align: middle !important;
+    line-height: 1.5 !important;
+}
+
+.duyuru-detay-content table td p,
+.duyuru-detay-content table th p,
+.content-body table td p,
+.content-body table th p {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: inherit !important;
+}
+
+.duyuru-detay-content table td:last-child,
+.content-body table td:last-child {
+    border-right: none !important;
+}
+
+.duyuru-detay-content table tr:last-child td,
+.content-body table tr:last-child td {
+    border-bottom: none !important;
+}
+
+.duyuru-detay-content table tr:nth-child(even) td,
+.content-body table tr:nth-child(even) td {
+    background-color: #f8fafc !important;
+}
+
+.duyuru-detay-content table tr.table-header-row td,
+.duyuru-detay-content table:not(:has(th)) tr:first-child td,
+.content-body table tr.table-header-row td,
+.content-body table:not(:has(th)) tr:first-child td {
+    background-color: transparent !important;
+}
+
+.duyuru-detay-content table tr:hover td,
+.content-body table tr:hover td {
+    background-color: #eff6ff !important;
+    color: #0f172a !important;
+}
+
+.duyuru-detay-content table tr.table-header-row:hover td,
+.duyuru-detay-content table tr.table-header-row:hover th,
+.duyuru-detay-content table:not(:has(th)) tr:first-child:hover td,
+.content-body table tr.table-header-row:hover td,
+.content-body table tr.table-header-row:hover th,
+.content-body table:not(:has(th)) tr:first-child:hover td {
+    background: linear-gradient(135deg, #0A2B4D 0%, #1d61a9 100%) !important;
+    color: #ffffff !important;
+}
+
+.table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
 .empty-content {
     text-align: center;
     padding: 60px 20px;
@@ -868,7 +996,11 @@
                     <div class="duyuru-detay-content mt-5">
                         {% if duyuru.icerik %}
                             <div class="content-body long-text">
-                                {{ duyuru.icerik|linebreaks }}
+                                {% if '<table' in duyuru.icerik or '<p' in duyuru.icerik or '<div' in duyuru.icerik or '<ul' in duyuru.icerik or '<ol' in duyuru.icerik or '<h' in duyuru.icerik or '<span' in duyuru.icerik %}
+    {{ duyuru.icerik|safe }}
+{% else %}
+    {{ duyuru.icerik|linebreaks }}
+{% endif %}
                             </div>
                         {% else %}
                             <div class="empty-content">

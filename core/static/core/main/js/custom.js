@@ -29,7 +29,7 @@ $(document).ready(function()
 	var header = $('.header');
 	var hambActive = false;
 	var menuActive = false;
-	var ctrl = new ScrollMagic.Controller();
+	var ctrl = typeof ScrollMagic !== 'undefined' ? new ScrollMagic.Controller() : null;
 
 	setHeader();
 
@@ -378,4 +378,35 @@ $(document).ready(function() {
             }
         }
     });
+
+    // Automatically detect headers and wrap announcement tables across all pages
+    function initAnnouncementTables() {
+        var tables = document.querySelectorAll('.content-body table, .duyuru-content table, .duyuru-detay-content table, .article-content table');
+        tables.forEach(function(table) {
+            // Remove accidental empty rows (e.g. pasted from Outlook/Word)
+            var rows = table.querySelectorAll('tr');
+            rows.forEach(function(row) {
+                var rowText = row.textContent.replace(/\u00a0/g, ' ').replace(/\s+/g, '').trim();
+                if (rowText === '' && row.querySelectorAll('img, svg, input').length === 0) {
+                    row.remove();
+                }
+            });
+
+            var ths = table.querySelectorAll('th');
+            if (ths.length === 0) {
+                var firstRow = table.querySelector('tr');
+                if (firstRow) {
+                    firstRow.classList.add('table-header-row');
+                }
+            }
+
+            if (!table.parentElement.classList.contains('table-responsive-wrapper')) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'table-responsive-wrapper';
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+            }
+        });
+    }
+    initAnnouncementTables();
 });
