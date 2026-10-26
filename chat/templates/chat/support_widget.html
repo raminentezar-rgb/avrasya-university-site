@@ -124,9 +124,9 @@
             <div class="va-speed-control">
                 <span class="va-speed-label"><i class="fa-solid fa-gauge-high me-1"></i> {% trans "Ses Hızı:" %}</span>
                 <div class="va-speed-buttons">
-                    <button class="va-speed-btn" data-speed="0.8">0.8x</button>
-                    <button class="va-speed-btn active" data-speed="1.0">1.0x</button>
-                    <button class="va-speed-btn" data-speed="1.25">1.25x</button>
+                    <button class="va-speed-btn" data-speed="0.75" title="{% trans 'Sakin ve Tane Tane' %}">0.75x</button>
+                    <button class="va-speed-btn active" data-speed="0.85" title="{% trans 'Doğal ve Net (Önerilen)' %}">0.85x {% trans "(Doğal)" %}</button>
+                    <button class="va-speed-btn" data-speed="1.0" title="{% trans 'Standart Hızlı' %}">1.0x</button>
                 </div>
             </div>
 
@@ -291,7 +291,7 @@
     }
 
     /* ========================================== */
-    <!-- Voice Assistant Modal Window Styling -->
+    /* Voice Assistant Modal Window Styling */
     /* ========================================== */
     #voice-assistant-window {
         width: 430px;
@@ -937,18 +937,21 @@
     }
 
     /* ========================================== */
-    <!-- Live Support Window Original Styles -->
+    /* Live Support Window Original Styles */
     /* ========================================== */
     #live-support-window {
-        width: 320px;
-        height: 450px;
-        background: white;
-        border-radius: 15px;
+        width: 340px;
+        max-width: calc(100vw - 40px);
+        height: 480px;
+        max-height: calc(100vh - 100px);
+        background: #ffffff;
+        border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 15px 45px rgba(9, 36, 66, 0.25);
+        border: 1px solid rgba(29, 97, 169, 0.2);
         display: flex;
         flex-direction: column;
-        animation: slideUp 0.3s ease-out;
+        animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     @keyframes slideUp {
@@ -957,25 +960,47 @@
     }
 
     .support-header {
-        background: #1d61a9;
+        background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
         color: white;
-        padding: 15px;
+        padding: 14px 18px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-shrink: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .support-title {
-        font-weight: 600;
-        font-size: 16px;
+        font-weight: 700;
+        font-size: 15px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+    }
+
+    .support-controls {
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
 
     .support-controls button {
-        background: none;
+        background: rgba(255, 255, 255, 0.15);
         border: none;
         color: white;
         cursor: pointer;
-        font-size: 18px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .support-controls button:hover {
+        background: rgba(255, 255, 255, 0.3);
+        color: #ffffff;
     }
 
     .support-body {
@@ -984,6 +1009,51 @@
         overflow-y: auto;
         display: flex;
         flex-direction: column;
+        background: #ffffff;
+    }
+
+    #support-onboarding {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #support-onboarding p {
+        color: #334155;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    #support-onboarding .form-control {
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 14px;
+        box-shadow: none;
+        transition: border-color 0.2s;
+    }
+
+    #support-onboarding .form-control:focus {
+        border-color: #1d61a9;
+        box-shadow: 0 0 0 3px rgba(29, 97, 169, 0.15);
+    }
+
+    #support-onboarding .btn-primary {
+        background: linear-gradient(135deg, #1d61a9 0%, #00d2ff 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        color: white;
+        transition: all 0.2s ease;
+    }
+
+    #support-onboarding .btn-primary:hover {
+        box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+        transform: translateY(-1px);
     }
 
     .support-messages-list {
@@ -1212,92 +1282,432 @@
     }
 
     // -------------------------------------------------------------
-    // Speech Synthesis (Text-to-Speech)
     // -------------------------------------------------------------
-    let speechRate = 1.0;
+    // Speech Synthesis (Text-to-Speech) - Profesyonel Türkçe Ses Motoru
+    // -------------------------------------------------------------
+    let speechRate = 0.85; // Doğal, sakin, net ve tane tane okuma hızı (Önerilen: 0.85)
+    let speechPitch = 1.05; // Tolga ve benzeri robotik seslerin boğukluğunu gideren sıcak ton
     let isSpeaking = false;
+    let availableVoices = [];
+    let selectedTurkishVoice = null;
+    let activeSpeechQueue = [];
+    let activeSpeechIndex = 0;
+    let sentenceTimeoutId = null;
 
-    function speakText(text, onComplete) {
+    // Üniversite ve Akademik Terminoloji için Fonetik Telaffuz Düzeltici
+    function cleanTurkishSpeechText(rawText) {
+        if (!rawText) return '';
+        let t = rawText;
+
+        // HTML etiketlerini ve markdown işaretlerini temizle
+        t = t.replace(/<[^>]*>/g, ' ');
+        t = t.replace(/[*_#`~\[\]\(\)\{\}]/g, ' ');
+
+        // Kısaltmaları ve unvanları doğal Türkçe seslendirmeye genişlet
+        const phonetics = [
+            [/\bProf\.\s*Dr\./gi, 'Profesör Doktor '],
+            [/\bDoç\.\s*Dr\./gi, 'Doçent Doktor '],
+            [/\bDr\.\s*Öğr\.\s*Üyesi/gi, 'Doktor Öğretim Üyesi '],
+            [/\bÖğr\.\s*Gör\./gi, 'Öğretim Görevlisi '],
+            [/\bArş\.\s*Gör\./gi, 'Araştırma Görevlisi '],
+            [/\bDr\./gi, 'Doktor '],
+            [/\bvb\./gi, 've benzeri.'],
+            [/\bvs\./gi, 've saire.'],
+            [/\bSHMYO\b/g, 'Sağlık Hizmetleri Meslek Yüksekokulu'],
+            [/\bMYO\b/g, 'Meslek Yüksekokulu'],
+            [/\bSKS\b/g, 'Sağlık, Kültür ve Spor Daire Başkanlığı'],
+            [/\bLEE\b/g, 'Lisansüstü Eğitim Enstitüsü'],
+            [/\bFEDEK\b/g, 'Fedek'],
+            [/\bAÖF\b/g, 'Açık Öğretim Fakültesi'],
+            [/\bÖSYM\b/g, 'ÖSYM'],
+            [/\bYÖK\b/g, 'Yükseköğretim Kurulu'],
+            [/\bYKS\b/g, 'YKS'],
+            [/\bKDV\b/g, 'KDV'],
+            [/\bNo:\s*(\d+)/gi, 'Numara $1'],
+            [/\bTel:\s*/gi, 'Telefon: '],
+            [/\bE-posta:\s*/gi, 'E-posta: '],
+            [/\bT\.C\./gi, 'Türkiye Cumhuriyeti'],
+            [/\bTC\b/gi, 'Türkiye Cumhuriyeti'],
+        ];
+
+        for (const [regex, rep] of phonetics) {
+            t = t.replace(regex, rep);
+        }
+
+        // Sembolleri ve karmaşık işaretleri seslendirilebilir ifadelere dönüştür
+        t = t.replace(/(\w+)\/(\w+)/g, '$1 veya $2'); // Örn: Komisyon/Sorumlular -> Komisyon veya Sorumlular
+        t = t.replace(/\s*\/\s*/g, ' veya ');
+        t = t.replace(/\s*&\s*/g, ' ve ');
+        t = t.replace(/%/g, 'yüzde ');
+        t = t.replace(/\+/g, ' artı ');
+        t = t.replace(/[:;]/g, '. '); // İki nokta ve noktalı virgülleri doğal duraklama noktasına dönüştür
+
+        // Noktalama işaretlerinden sonra doğal nefes alma boşluğu bırak
+        t = t.replace(/([.,!?])(?=[^\s])/g, '$1 ');
+        t = t.replace(/\s+/g, ' ').trim();
+
+        return t;
+    }
+
+    // Metni cümlelere bölerek cümle aralarında insan gibi nefes alma duraklaması sağlama
+    function getSpeechSentences(text) {
+        if (!text) return [];
+        const cleaned = cleanTurkishSpeechText(text);
+        const matches = cleaned.match(/[^.!?\n]+[.!?\n]*/g) || [cleaned];
+        return matches.map(s => s.trim()).filter(s => s.length > 0);
+    }
+
+    // Sistemdeki en kaliteli ve doğal Türkçe sesi akıllıca seçme
+    function resolveTurkishVoice() {
+        if (!('speechSynthesis' in window)) return null;
+        availableVoices = window.speechSynthesis.getVoices() || [];
+        if (availableVoices.length === 0) return null;
+
+        const trVoices = availableVoices.filter(v => 
+            v.lang && (v.lang.toLowerCase().startsWith('tr') || v.lang.toLowerCase().includes('tr'))
+        );
+
+        if (trVoices.length === 0) {
+            return availableVoices.find(v => v.default) || availableVoices[0];
+        }
+
+        // 1. Doğal / Neural / Online sesler (Microsoft Emel Online Natural, Ahmet Online Natural, Google Türkçe)
+        const naturalVoice = trVoices.find(v => 
+            v.name.includes('Natural') || 
+            v.name.includes('Online') || 
+            v.name.includes('Neural') || 
+            v.name.includes('Google')
+        );
+        if (naturalVoice) return naturalVoice;
+
+        // 2. Akıcı kadın ve erkek sesleri (Emel, Yelda, Filiz, Ahmet, Seda)
+        const warmVoice = trVoices.find(v => 
+            v.name.includes('Emel') || 
+            v.name.includes('Yelda') || 
+            v.name.includes('Filiz') || 
+            v.name.includes('Ahmet') || 
+            v.name.includes('Seda')
+        );
+        if (warmVoice) return warmVoice;
+
+        // 3. Sistem Türkçe sesi (Tolga vb.)
+        return trVoices[0];
+    }
+
+    function initVoices() {
+        selectedTurkishVoice = resolveTurkishVoice();
+        if (selectedTurkishVoice) {
+            console.log('Sesli Asistan aktif ses:', selectedTurkishVoice.name, '(' + selectedTurkishVoice.lang + ')');
+        }
+    }
+
+    if ('speechSynthesis' in window) {
+        initVoices();
+        window.speechSynthesis.onvoiceschanged = initVoices;
+    }
+
+    // Cümle cümle ve tane tane profesyonel okuma fonksiyonu
+    function speakText(rawText, onComplete) {
         if (!('speechSynthesis' in window)) {
             console.warn('Speech synthesis not supported');
             if (onComplete) onComplete();
             return;
         }
 
-        window.speechSynthesis.cancel();
-        if (!text) return;
+        // Halihazırda çalan varsa durdur
+        stopSpeaking(false);
 
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = speechRate;
-        utterance.lang = 'tr-TR';
-
-        const voices = window.speechSynthesis.getVoices();
-        const trVoice = voices.find(v => v.lang.startsWith('tr') || v.lang.includes('TR'));
-        if (trVoice) {
-            utterance.voice = trVoice;
+        // Konuşurken mikrofonun kendi sesini yankı yapıp dinlemesini engelle
+        if (isListening && recognition) {
+            try { recognition.abort(); } catch(e){}
+            isListening = false;
+            document.getElementById('va-mic-btn-label').textContent = 'Konuş / Dinle';
+            document.getElementById('va-toggle-mic-btn').classList.remove('active');
         }
 
-        utterance.onstart = function() {
-            isSpeaking = true;
-            updateStatus('speaking', text.length > 55 ? text.substring(0, 55) + '...' : text);
-            setWaveAnimation('speaking');
-        };
-
-        utterance.onend = function() {
-            isSpeaking = false;
-            setWaveAnimation('idle');
-            updateStatus('idle', 'Dinlemeye hazır... Konuşmak için mikrofon butonuna basın.');
+        if (!rawText || !rawText.trim()) {
             if (onComplete) onComplete();
-        };
+            return;
+        }
 
-        utterance.onerror = function(err) {
-            console.warn('SpeechSynthesis error:', err);
-            isSpeaking = false;
-            setWaveAnimation('idle');
+        activeSpeechQueue = getSpeechSentences(rawText);
+        activeSpeechIndex = 0;
+        if (activeSpeechQueue.length === 0) {
             if (onComplete) onComplete();
-        };
+            return;
+        }
 
-        window.speechSynthesis.speak(utterance);
+        isSpeaking = true;
+        setWaveAnimation('speaking');
+        updateStatus('speaking', rawText.length > 60 ? rawText.substring(0, 60) + '...' : rawText);
+
+        function playNextSentence() {
+            if (!isSpeaking || activeSpeechIndex >= activeSpeechQueue.length) {
+                isSpeaking = false;
+                setWaveAnimation('idle');
+                updateStatus('idle', 'Dinlemeye hazır... Konuşmak için mikrofon butonuna basın.');
+                if (onComplete) onComplete();
+                return;
+            }
+
+            const sentence = activeSpeechQueue[activeSpeechIndex];
+            const currentIndex = activeSpeechIndex + 1;
+            const totalCount = activeSpeechQueue.length;
+            activeSpeechIndex++;
+
+            updateStatus('speaking', `Okunuyor (${currentIndex}/${totalCount}): ${sentence.substring(0, 40)}...`);
+            document.getElementById('va-transcript').textContent = sentence;
+
+            const utterance = new SpeechSynthesisUtterance(sentence);
+            utterance.rate = speechRate;
+            utterance.pitch = speechPitch;
+            utterance.lang = 'tr-TR';
+
+            if (!selectedTurkishVoice) {
+                selectedTurkishVoice = resolveTurkishVoice();
+            }
+            if (selectedTurkishVoice) {
+                utterance.voice = selectedTurkishVoice;
+            }
+
+            utterance.onend = function() {
+                // Cümleler arasında insansı sakin nefes aralığı (160ms)
+                sentenceTimeoutId = setTimeout(playNextSentence, 160);
+            };
+
+            utterance.onerror = function(err) {
+                console.warn('Utterance hatası:', err);
+                sentenceTimeoutId = setTimeout(playNextSentence, 100);
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        playNextSentence();
     }
 
-    function stopSpeaking() {
+    function stopSpeaking(playStopSound=true) {
+        if (sentenceTimeoutId) {
+            clearTimeout(sentenceTimeoutId);
+            sentenceTimeoutId = null;
+        }
+        activeSpeechQueue = [];
+        activeSpeechIndex = 0;
+
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
         }
         isSpeaking = false;
-        playChime('stop');
-        setWaveAnimation('idle');
-        updateStatus('idle', 'Ses durduruldu.');
+        if (playStopSound) {
+            playChime('stop');
+            setWaveAnimation('idle');
+            updateStatus('idle', 'Ses durduruldu.');
+        }
     }
 
-    // Read full contents of current page for screen reader
+    // -------------------------------------------------------------
+    // Comprehensive Page Content Extractor & Reader
+    // -------------------------------------------------------------
+    function extractTableSpeech(tableEl) {
+        if (!tableEl) return '';
+        const headers = Array.from(tableEl.querySelectorAll('th')).map(th => th.innerText.trim()).filter(Boolean);
+        const rows = Array.from(tableEl.querySelectorAll('tbody tr, tr')).filter(tr => tr.querySelectorAll('td').length > 0);
+        
+        if (rows.length === 0) return '';
+        
+        let tableScript = 'Tablo içeriği: ';
+        rows.forEach((row, idx) => {
+            const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim()).filter(Boolean);
+            if (cells.length === 0) return;
+            
+            let rowText = `${idx + 1}. satır: `;
+            if (headers.length === cells.length && headers.length > 0) {
+                rowText += cells.map((c, i) => `${headers[i]}: ${c}`).join(', ') + '. ';
+            } else {
+                rowText += cells.join(' - ') + '. ';
+            }
+            tableScript += rowText;
+        });
+        return tableScript;
+    }
+
+    function extractCurrentPageDetails() {
+        // 1. Detect Main Title of Current Page
+        const articleTitleEl = document.querySelector('.article-title, .news-title, .duyuru-title, .page-title, .policy-title, article h1, .research-hero h1, .hero-content h1');
+        const mainH1 = document.querySelector('main h1, h1');
+        
+        let rawTitle = '';
+        if (articleTitleEl) {
+            rawTitle = articleTitleEl.innerText.trim();
+        } else if (mainH1 && !mainH1.closest('.research-header') && !mainH1.closest('#live-support-widget')) {
+            rawTitle = mainH1.innerText.trim();
+        } else {
+            rawTitle = document.title || '';
+        }
+
+        const cleanTitle = rawTitle
+            .replace(/Avrasya Üniversitesi/gi, '')
+            .replace(/Avrasya University/gi, '')
+            .replace(/Course/gi, '')
+            .replace(/^[\s\-|–—]+|[\s\-|–—]+$/g, '')
+            .trim();
+
+        // 2. Detect Badges / Meta Info (Faculty, Department, Date)
+        const metaBadges = Array.from(document.querySelectorAll('.meta-badge, .badge-faculty, .badge-dept, .related-badge, .article-meta .publish-date, .publish-date'))
+            .map(b => b.innerText.trim())
+            .filter(t => t.length > 2 && t.length < 80);
+        const metaText = metaBadges.length > 0 ? Array.from(new Set(metaBadges)).join(', ') : '';
+
+        // 3. Locate Main Content Container
+        const contentContainers = [
+            '.content-body',
+            '.article-content',
+            '.news-detail-content',
+            '.duyuru-icerik',
+            '.kalite-content-body',
+            'article.news-article',
+            'article',
+            '.unit-description',
+            '.department-content',
+            '.program-detail',
+            '.policy-content',
+            '.bolum-content',
+            'main',
+            '#main-content',
+            '.page_section .container'
+        ];
+
+        let rootContainer = null;
+        for (const sel of contentContainers) {
+            const el = document.querySelector(sel);
+            if (el && el.innerText.trim().length > 25 && !el.closest('#live-support-widget')) {
+                rootContainer = el;
+                break;
+            }
+        }
+
+        if (!rootContainer) {
+            rootContainer = document.querySelector('.super_container') || document.body;
+        }
+
+        // 4. Extract Spoken Text Blocks
+        const excludeSelectors = '#live-support-widget, header, nav, .breadcrumb, .article-sidebar, .sidebar, .related-section, footer, .footer, script, style, noscript, .va-dynamic-content';
+        const speechBlocks = [];
+
+        if (cleanTitle) {
+            speechBlocks.push(`${cleanTitle}.`);
+        }
+        if (metaText) {
+            speechBlocks.push(`Birim ve tarih: ${metaText}.`);
+        }
+
+        // Direct content elements inside container
+        const contentElements = rootContainer.querySelectorAll('p, h2, h3, h4, ul, ol, table');
+        
+        if (contentElements.length > 0) {
+            contentElements.forEach(el => {
+                if (el.closest(excludeSelectors)) return;
+                const tag = el.tagName.toLowerCase();
+
+                if (tag === 'table') {
+                    const tblText = extractTableSpeech(el);
+                    if (tblText) speechBlocks.push(tblText);
+                } else if (tag === 'ul' || tag === 'ol') {
+                    const listItems = Array.from(el.querySelectorAll('li'))
+                        .map(li => li.innerText.trim())
+                        .filter(t => t.length > 3 && !t.closest(excludeSelectors));
+                    if (listItems.length > 0) {
+                        speechBlocks.push('Maddeler: ' + listItems.join('. ') + '.');
+                    }
+                } else if (tag === 'p') {
+                    if (el.closest('table') || el.closest('ul') || el.closest('ol')) return;
+                    const txt = el.innerText.trim();
+                    if (txt.length > 5) {
+                        speechBlocks.push(txt);
+                    }
+                } else if (['h2', 'h3', 'h4'].includes(tag)) {
+                    const hText = el.innerText.trim();
+                    if (hText.length > 3 && hText.length < 120) {
+                        speechBlocks.push(`${hText}.`);
+                    }
+                }
+            });
+        } else {
+            const rawText = rootContainer.innerText.trim();
+            if (rawText.length > 20) {
+                speechBlocks.push(rawText);
+            }
+        }
+
+        // 5. Downloadable attachments
+        const attachmentEls = document.querySelectorAll('.attachment-name, .attachment-card h4');
+        if (attachmentEls.length > 0) {
+            const attNames = Array.from(attachmentEls)
+                .map(a => a.innerText.trim())
+                .filter(t => t.length > 2 && !t.toLowerCase().includes('indir'));
+            const uniqueAtt = Array.from(new Set(attNames));
+            if (uniqueAtt.length > 0) {
+                speechBlocks.push(`Bu duyuruda ${uniqueAtt.length} adet ek dosya bulunmaktadır: ${uniqueAtt.join(', ')}.`);
+            }
+        }
+
+        return {
+            title: cleanTitle,
+            meta: metaText,
+            fullSpeechText: speechBlocks.join(' ')
+        };
+    }
+
+    function displayCurrentPageCard(details) {
+        const container = document.getElementById('va-dynamic-content');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="va-topic-card" style="border: 2px solid #00d2ff; background: rgba(0, 210, 255, 0.08);">
+                <div class="va-card-header">
+                    <div class="va-card-title-group">
+                        <div class="va-card-icon" style="background: rgba(0, 210, 255, 0.2); color: #00d2ff;">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div>
+                            <div class="va-card-title">${details.title}</div>
+                            ${details.meta ? `<div style="font-size: 11px; color: #8dd4e3; margin-top: 2px;">${details.meta}</div>` : ''}
+                        </div>
+                    </div>
+                    <span class="va-cat-badge" style="background: #00d2ff; color: #092442; font-weight: bold;">Mevcut Sayfa</span>
+                </div>
+
+                <div class="va-topic-desc" style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.85);">
+                    Bu sayfanın başlığı, birim bilgileri, duyuru veya haber metni ve ekli tabloları hazırlandı.
+                </div>
+
+                <div class="va-card-actions" style="margin-top: 12px;">
+                    <button id="va-read-active-card-btn" class="va-btn va-btn-primary" style="flex: 1; justify-content: center;">
+                        <i class="fa-solid fa-volume-high me-1"></i> Sayfa İçeriğini Oku
+                    </button>
+                </div>
+            </div>
+        `;
+
+        const readBtn = document.getElementById('va-read-active-card-btn');
+        if (readBtn) {
+            readBtn.addEventListener('click', readCurrentPageContent);
+        }
+    }
+
     function readCurrentPageContent() {
         stopListening();
         playChime('start');
-        
-        const pageTitle = document.title.replace('Avrasya University', 'Avrasya Üniversitesi').replace('Avrasya Üniversitesi', '').replace('-', '').trim();
-        
-        const headings = Array.from(document.querySelectorAll('main h1, main h2, main h3, .research-hero h1, header h1, .policy-title'))
-            .map(h => h.innerText.trim())
-            .filter(t => t.length > 2 && t.length < 100);
 
-        const paragraphs = Array.from(document.querySelectorAll('main p, .hero-content p, .unit-description, .contact-info p, .content p'))
-            .map(p => p.innerText.trim())
-            .filter(t => t.length > 15 && t.length < 350)
-            .slice(0, 4);
+        const pageDetails = extractCurrentPageDetails();
 
-        let speechScript = `${pageTitle ? pageTitle + ' sayfası. ' : ''}`;
-        if (headings.length > 0) {
-            speechScript += `Önemli başlıklar: ${headings.slice(0, 3).join('. ')}. `;
-        }
-        if (paragraphs.length > 0) {
-            speechScript += `Sayfa içeriği: ${paragraphs.join('. ')}. `;
-        } else {
-            speechScript += `Sayfadaki bağlantıları ve menüyü keşfetmek için gitmek istediğiniz yeri söyleyebilirsiniz.`;
+        if (!pageDetails.fullSpeechText || pageDetails.fullSpeechText.trim().length < 10) {
+            speakText('Sayfa içeriği bulunamadı. Lütfen gitmek istediğiniz bölüm veya konuyu söyleyin.');
+            return;
         }
 
-        document.getElementById('va-transcript').textContent = 'Sayfa içeriği seslendiriliyor...';
-        speakText(speechScript);
+        document.getElementById('va-transcript').textContent = `${pageDetails.title || 'Sayfa içeriği'} baştan sona seslendiriliyor...`;
+        speakText(pageDetails.fullSpeechText);
     }
 
     // -------------------------------------------------------------
@@ -1610,7 +2020,7 @@
         }
 
         // 1. Command: Sayfayı oku
-        if (normCmd.includes('sayfayi oku') || normCmd.includes('metni oku') || normCmd.includes('ekrani oku') || normCmd.includes('oku sayfayi')) {
+        if (normCmd.includes('sayfayi oku') || normCmd.includes('metni oku') || normCmd.includes('ekrani oku') || normCmd.includes('oku sayfayi') || normCmd === 'oku' || normCmd === 'bu sayfayi oku' || normCmd.includes('haberi oku') || normCmd.includes('duyuruyu oku')) {
             readCurrentPageContent();
             return;
         }
@@ -1732,11 +2142,31 @@
 
         loadTopicsDirectory();
 
-        speakText('Avrasya Üniversitesi Sesli Asistanına hoş geldiniz. Kalite, Adalet, Bölümler, Burslar veya gitmek istediğiniz konuyu söyleyebilirsiniz.', function() {
-            if (autoListen) {
-                startListening();
-            }
-        });
+        const pageDetails = extractCurrentPageDetails();
+        const isContentPage = pageDetails.title && 
+                              pageDetails.title !== 'Ana Sayfa' && 
+                              pageDetails.title !== 'Avrasya' && 
+                              pageDetails.title.length > 3 &&
+                              window.location.pathname !== '/' &&
+                              window.location.pathname !== '/tr/' &&
+                              window.location.pathname !== '/en/' &&
+                              window.location.pathname !== '/fa/';
+
+        if (isContentPage) {
+            displayCurrentPageCard(pageDetails);
+            const welcomeMsg = `Şu anda ${pageDetails.title} sayfasındasınız. Bu sayfanın içeriğini baştan sona dinlemek için sayfayı oku butonuna basabilir veya oku diyebilirsiniz.`;
+            speakText(welcomeMsg, function() {
+                if (autoListen) {
+                    startListening();
+                }
+            });
+        } else {
+            speakText('Avrasya Üniversitesi Sesli Asistanına hoş geldiniz. Kalite, Adalet, Bölümler, Burslar veya gitmek istediğiniz konuyu söyleyebilirsiniz.', function() {
+                if (autoListen) {
+                    startListening();
+                }
+            });
+        }
     }
 
     function closeVoiceAssistant() {
@@ -1826,8 +2256,9 @@
         btn.addEventListener('click', function() {
             speedBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            speechRate = parseFloat(this.getAttribute('data-speed')) || 1.0;
-            speakText(`Okuma hızı ${speechRate} katına ayarlandı.`);
+            speechRate = parseFloat(this.getAttribute('data-speed')) || 0.85;
+            const label = this.textContent.trim();
+            speakText(`Okuma hızı ${label} olarak ayarlandı.`);
         });
     });
 
@@ -1841,8 +2272,13 @@
                 openVoiceAssistant(true);
             }
         }
-        if (e.key === 'Escape' && vaWindow.style.display === 'flex') {
-            closeVoiceAssistant();
+        if (e.key === 'Escape') {
+            if (vaWindow && vaWindow.style.display === 'flex') {
+                closeVoiceAssistant();
+            }
+            if (supportWindow && supportWindow.style.display === 'flex') {
+                hideSupportWindow();
+            }
         }
     });
 
@@ -1865,6 +2301,8 @@
     const msgInput = document.getElementById('support-input');
     const sendBtn = document.getElementById('send-support-msg');
     const badge = document.getElementById('support-badge');
+    const closeSupportBtn = document.getElementById('close-support');
+    const minimizeSupportBtn = document.getElementById('minimize-support');
 
     let socket = null;
     let sessionKey = localStorage.getItem('support_session_key');
