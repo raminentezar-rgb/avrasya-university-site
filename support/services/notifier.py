@@ -1,8 +1,6 @@
 # support/services/notifier.py
 from django.core.mail import send_mail
-from django.core.mail import send_mail
 from django.conf import settings
-
 
 
 def notify_department(ticket):
@@ -10,47 +8,28 @@ def notify_department(ticket):
         send_mail(
             subject=f"Yeni Destek Talebi: {ticket.subject}",
             message=ticket.message,
-            from_email=None,
+            from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[ticket.department.email],
+            fail_silently=True,
         )
 
 
 def notify_student(ticket):
-    send_mail(
-        subject=f"Destek Talebinize Yanıt Verildi",
-        message=f"""
-Merhaba {ticket.user.username},
-
-Sorunuza yanıt verilmiştir:
-
-{ticket.response}
-
-Avrasya Üniversitesi
-Öğrenci Destek Merkezi
-""",
-        from_email=None,
-        recipient_list=[ticket.user.email],
-    )
-
-
-
-def notify_student(ticket):
-    send_mail(
-        subject=f"Answer to your ticket: {ticket.subject}",
-        message="Your ticket has been answered. Please login to view the response.",
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[ticket.user.email],
-    )
-
-
-
-
+    if ticket.user and ticket.user.email:
+        send_mail(
+            subject=f"Destek Talebinize Yanıt Verildi: {ticket.subject}",
+            message="Destek talebinize yanıt verilmiştir. Yanıtı görüntülemek için lütfen sisteme giriş yapınız.",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[ticket.user.email],
+            fail_silently=True,
+        )
 
 
 def notify_student_reply(ticket, reply_message):
+    if not ticket.user or not ticket.user.email:
+        return
     subject = f"Destek Talebinize Yanıt: {ticket.subject}"
-    message = f"""
-Merhaba {ticket.user.username},
+    message = f"""Merhaba {ticket.user.username},
 
 Destek talebinize ilgili birim tarafından yanıt verilmiştir:
 
@@ -59,12 +38,12 @@ Destek talebinize ilgili birim tarafından yanıt verilmiştir:
 Sorularınız için bizimle tekrar iletişime geçebilirsiniz.
 
 Saygılarımızla,
-Üniversite Destek Birimi
+Avrasya Üniversitesi Öğrenci Destek Birimi
 """
     send_mail(
         subject,
         message,
         settings.DEFAULT_FROM_EMAIL,
         [ticket.user.email],
-        fail_silently=False
+        fail_silently=True,
     )

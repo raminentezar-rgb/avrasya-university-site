@@ -161,7 +161,7 @@ After=network.target
 User=root
 Group=www-data
 WorkingDirectory=/var/www/avrasya_site
-ExecStart=/var/www/avrasya_site/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/avrasya_site/avrasya.sock avrasya_site.wsgi:application
+ExecStart=/var/www/avrasya_site/venv/bin/gunicorn --access-logfile - -k uvicorn.workers.UvicornWorker --workers 3 --bind unix:/var/www/avrasya_site/avrasya.sock avrasya_site.asgi:application
 
 [Install]
 WantedBy=multi-user.target

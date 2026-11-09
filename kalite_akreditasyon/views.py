@@ -1,11 +1,27 @@
+import os
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q, F
 from django.utils import timezone
+from django.utils.text import get_valid_filename
+from django.conf import settings
+from django.contrib import messages
 from .models import (
     Category, News, Announcement, Mevzuat,
     Takim, Rapor, Izleme, Dokuman, SSS
 )
+
+ALLOWED_BIDR_EXTENSIONS = {'.pdf', '.doc', '.docx', '.xls', '.xlsx', '.zip', '.rar'}
+MAX_BIDR_FILE_SIZE = 25 * 1024 * 1024  # 25MB
+ALLOWED_BIRIM_VALUES = {
+    'Enstitü',
+    'Fakülte',
+    'Meslek Yüksekokulu',
+    'Yüksekokul',
+    'Uygulama ve Araştırma Merkezi',
+    'Koordinatörlük',
+    'Daire Başkanlığı',
+}
 
 
 def home(request):
@@ -208,32 +224,54 @@ def kurum_ic_degerlendirme_raporlari(request):
 def izleme(request):
     """İzleme Ana Sayfası - 4 Sekmeli Yapı (BİDR Yükleme, Paydaş Analizi, Dış Değerlendirme, Süreç Değerlendirme)"""
     submitted = False
+    error_message = None
+
     if request.method == 'POST':
         name = request.POST.get('name', '').strip()
         email = request.POST.get('email', '').strip()
         birim = request.POST.get('birim', '').strip()
         uploaded_file = request.FILES.get('rapor_dosyasi')
-        
-        if uploaded_file:
-            import os
-            from django.conf import settings
-            upload_dir = os.path.join(settings.MEDIA_ROOT, 'kalite_akreditasyon', 'bidr_yuklemeleri')
-            os.makedirs(upload_dir, exist_ok=True)
-            safe_filename = f"{birim}_{name}_{uploaded_file.name}".replace(' ', '_')
-            file_path = os.path.join(upload_dir, safe_filename)
-            with open(file_path, 'wb+') as destination:
-                for chunk in uploaded_file.chunks():
-                    destination.write(chunk)
-        
-        from django.contrib import messages
-        messages.success(request, 'Birim İç Değerlendirme Raporunuz başarıyla iletilmiştir.')
-        submitted = True
+
+        if not uploaded_file or not name or not email or birim not in ALLOWED_BIRIM_VALUES:
+            error_message = 'Lütfen tüm zorunlu alanları geçerli bilgilerle doldurunuz.'
+        else:
+            original_name = os.path.basename(uploaded_file.name)
+            _, ext = os.path.splitext(original_name)
+            ext = ext.lower()
+
+            if ext not in ALLOWED_BIDR_EXTENSIONS:
+                error_message = 'Sadece PDF, Word (.doc, .docx), Excel (.xls, .xlsx) veya Arşiv (.zip, .rar) dosyaları yüklenebilir.'
+            elif uploaded_file.size > MAX_BIDR_FILE_SIZE:
+                error_message = 'Dosya boyutu en fazla 25 MB olabilir.'
+            else:
+                upload_dir = os.path.join(settings.MEDIA_ROOT, 'kalite_akreditasyon', 'bidr_yuklemeleri')
+                os.makedirs(upload_dir, exist_ok=True)
+                timestamp = timezone.now().strftime('%Y%m%d_%H%M%S')
+                safe_birim = get_valid_filename(birim)[:40]
+                safe_name = get_valid_filename(name)[:50]
+                safe_orig = get_valid_filename(original_name)[:100]
+                safe_filename = f"{timestamp}_{safe_birim}_{safe_name}_{safe_orig}"
+                file_path = os.path.abspath(os.path.join(upload_dir, safe_filename))
+
+                # جلوگیری کامل از Path Traversal
+                if not file_path.startswith(os.path.abspath(upload_dir) + os.sep):
+                    error_message = 'Geçersiz dosya adı.'
+                else:
+                    with open(file_path, 'wb+') as destination:
+                        for chunk in uploaded_file.chunks():
+                            destination.write(chunk)
+                    messages.success(request, 'Birim İç Değerlendirme Raporunuz başarıyla iletilmiştir.')
+                    submitted = True
+
+        if error_message:
+            messages.error(request, error_message)
 
     context = {
         'page_title': 'İzleme',
         'active_menu': 'izleme',
         'active_tab': 'tab-bidr-yukleme',
         'submitted': submitted,
+        'error_message': error_message,
     }
     return render(request, 'kalite_akreditasyon/izleme.html', context)
 

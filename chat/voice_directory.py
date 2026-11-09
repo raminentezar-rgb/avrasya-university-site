@@ -1316,33 +1316,36 @@ TOPICS_DEFINITIONS = [
     }
 ]
 
-_CACHED_RESOLVED_DIRECTORY = None
+_CACHED_RESOLVED_DIRECTORY = {}
 
 def normalize_text(text):
-    """Metni Türkçe ve küçük harfe normalize eder."""
+    """Metni Türkçe, Farsça/Arapça, Rusça ve küçük harfe normalize eder."""
     if not text:
         return ""
     text = str(text).lower()
-    # Türkçe özel karakter eşleştirmeleri
+    # Türkçe ve Farsça/Arapça özel karakter eşleştirmeleri
     replacements = {
         'ı': 'i', 'İ': 'i', 'I': 'i',
         'ğ': 'g', 'Ğ': 'g',
         'ü': 'u', 'Ü': 'u',
         'ş': 's', 'Ş': 's',
         'ö': 'o', 'Ö': 'o',
-        'ç': 'c', 'Ç': 'c'
+        'ç': 'c', 'Ç': 'c',
+        'ي': 'ی', 'ك': 'ک', 'ة': 'ه', 'أ': 'ا', 'إ': 'ا', 'آ': 'ا',
     }
     for k, v in replacements.items():
         text = text.replace(k, v)
-    text = re.sub(r'[^a-z0-9\s]', ' ', text)
+    text = re.sub(r'[^\w\s]', ' ', text)
     return re.sub(r'\s+', ' ', text).strip()
 
 
 def get_voice_directory(force_reload=False):
-    """Tüm konuların URL'lerini reverse ederek hazır dizin listesi döner."""
+    """Tüm konuların URL'lerini aktif dile göre reverse ederek hazır dizin listesi döner."""
+    from django.utils import translation
     global _CACHED_RESOLVED_DIRECTORY
-    if _CACHED_RESOLVED_DIRECTORY and not force_reload:
-        return _CACHED_RESOLVED_DIRECTORY
+    lang_code = translation.get_language() or 'tr'
+    if not force_reload and lang_code in _CACHED_RESOLVED_DIRECTORY:
+        return _CACHED_RESOLVED_DIRECTORY[lang_code]
 
     resolved_list = []
     for item in TOPICS_DEFINITIONS:
@@ -1382,8 +1385,8 @@ def get_voice_directory(force_reload=False):
         }
         resolved_list.append(topic_entry)
 
-    _CACHED_RESOLVED_DIRECTORY = resolved_list
-    return _CACHED_RESOLVED_DIRECTORY
+    _CACHED_RESOLVED_DIRECTORY[lang_code] = resolved_list
+    return resolved_list
 
 
 def search_voice_topics(query_text, max_results=8):

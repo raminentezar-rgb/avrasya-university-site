@@ -12,6 +12,7 @@ def my_tickets(request):
     })
 
 
+@login_required
 def ticket_detail(request, ticket_id):
     ticket = get_object_or_404(
         Ticket,
@@ -25,4 +26,3 @@ def ticket_detail(request, ticket_id):
         'ticket': ticket,
         'replies': replies
     })
-

@@ -1,8 +1,10 @@
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / '.env')
 
 # SECRET_KEY, DEBUG, and ALLOWED_HOSTS are defined at the bottom of this file using environment variables.
 
@@ -90,8 +92,8 @@ INSTALLED_APPS = [
     'channels',
     'chat',
     'tuition',
-    
-    #MYO
+
+    # MYO
     'adalet',
     'ascilik',
     'bilgisayar_programciligi',
@@ -114,7 +116,7 @@ INSTALLED_APPS = [
     'spor_yonetimi',
     'web_tasarimi',
     'sosyal_hizmet',
-    
+
     # SHMYO
     'acil_durum',
     'agiz_dis',
@@ -138,30 +140,14 @@ INSTALLED_APPS = [
     'tibbi_goruntuleme',
     'tibbi_laboratuvar',
 
-    #UBYO
+    # UBYO
     'yonetim_bilisim_sistemleri',
     'gastronomi_mutfak_sanatlari',
-    
-    
 
-    
-    
-    
-    
-
-    
     # third-party
     'crispy_forms',
     'crispy_bootstrap5',
 ]
-
-
-
-
-
-
-
-
 
 # تنظیمات crispy forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -208,7 +194,7 @@ WSGI_APPLICATION = 'avrasya_site.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'postgresql://postgres:{os.environ.get("DB_PASSWORD", "1136130@NaNa")}@127.0.0.1:5432/avrasya_db',
+        default=f'postgresql://postgres:{os.environ.get("DB_PASSWORD", "")}@127.0.0.1:5432/avrasya_db',
         conn_max_age=600
     )
 }
@@ -236,7 +222,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'avrasya-default-cache',
     }
 }
 
@@ -245,6 +232,7 @@ TIME_ZONE = 'Europe/Istanbul'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
 # زبان‌های پشتیبانی شده
 LANGUAGES = [
     ('tr', ('Turkish')),
@@ -263,17 +251,6 @@ LOCALE_PATHS = [
 # زبان‌های RTL (راست به چپ)
 LANGUAGES_BIDI = ["ar", "fa", "he", "ur"]
 # --- پایان بخش زبان‌ها ---
-
-
-
-
-
-
-
-
-
-
-
 
 # --- تنظیمات دپلوی ---
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
@@ -302,7 +279,7 @@ X_FRAME_OPTIONS = 'DENY'
 # --- End Security Hardening ---
 
 # استفاده از متغیر محیطی برای امنیت
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-default-key-for-dev')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'v9#k2!m8$p0@q5^z7&x1*w4(r6)t3_y8+u0=a2-b5c7d9e1f3g5h7j9k1l3m5n7')
 
 # --- تنظیمات استاتیک ---
 STATIC_URL = '/static/'
@@ -337,7 +314,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'avu.web@avrasya.edu.tr'
 # پسورد ایمیل را در سرور به صورت متغیر محیطی تعریف می‌کنیم
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'Avu202561.*') 
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL = 'avu.web@avrasya.edu.tr'
 SERVER_EMAIL = 'noreply@avrasya.edu.tr'
 
@@ -353,12 +330,9 @@ AUTHENTICATION_BACKENDS = [
 
 AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 1  # 1 hour
-AXES_LOCKOUT_TEMPLATE = None # Can be a custom template
+AXES_LOCKOUT_TEMPLATE = None  # Can be a custom template
 AXES_RESET_ON_SUCCESS = True
-AXES_IP_GETTER = 'axes.helpers.get_ip'
-AXES_PROXY_COUNT = 1
-
-
+AXES_IPWARE_PROXY_COUNT = 1
 
 # CKEditor configuration
 CKEDITOR_UPLOAD_PATH = 'uploads/'
@@ -395,7 +369,6 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-
 # Channels configuration
 ASGI_APPLICATION = 'avrasya_site.asgi.application'
 
@@ -408,5 +381,3 @@ CHANNEL_LAYERS = {
         },
     },
 }
-
-# Auto-reload trigger

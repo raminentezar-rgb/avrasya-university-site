@@ -120,6 +120,12 @@
 
                         <!-- Right Column: Submission Form -->
                         <div class="col-lg-6 pl-lg-4">
+                            {% if error_message %}
+                                <div class="alert alert-danger border-0 shadow-sm mb-4" style="background-color: #dc3545; color: #ffffff;">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                                    {{ error_message }}
+                                </div>
+                            {% endif %}
                             {% if submitted %}
                                 <div class="alert alert-success border-0 shadow-sm mb-4" style="background-color: #28a745; color: #ffffff;">
                                     <i class="fas fa-check-circle mr-2"></i>
@@ -163,7 +169,7 @@
                                     <label class="font-weight-bold d-block mb-2" style="color: #c94a29; font-size: 0.95rem;">
                                         {% trans "Birim İç Değerlendirme Raporunuzu yükleyiniz." %}
                                     </label>
-                                    <input type="file" name="rapor_dosyasi" class="form-control-file" required style="background: #ffffff; color: #2d3748 !important; padding: 10px; border-radius: 4px; width: 100%;">
+                                    <input type="file" name="rapor_dosyasi" accept=".pdf,.doc,.docx,.xls,.xlsx,.zip,.rar" class="form-control-file" required style="background: #ffffff; color: #2d3748 !important; padding: 10px; border-radius: 4px; width: 100%;">
                                 </div>
 
                                 <button type="submit" class="btn font-weight-bold px-4 py-2" style="background: #f79f10; color: #ffffff; font-size: 1rem; border-radius: 4px; min-width: 140px; border: none; box-shadow: 0 4px 12px rgba(247, 159, 16, 0.35);">
