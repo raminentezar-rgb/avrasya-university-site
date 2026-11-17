@@ -1,0 +1,870 @@
+{% load i18n %}
+<style>
+/* ==========================================================================
+   Avrasya University - Dynamic Faculty & Department Tabs Styling
+   Strict Brand Palette: #092442, #1d61a9, #8dd4e3, #f6f2e7, #ffffff
+   ========================================================================== */
+.avrasya-dyn-tabs .tab-container {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(9, 36, 66, 0.09);
+    border: 1px solid rgba(141, 212, 227, 0.35);
+}
+
+.avrasya-dyn-tabs .tab-header {
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+    padding: 0;
+}
+
+.avrasya-dyn-tabs .tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(141, 212, 227, 0.45) transparent;
+}
+
+.avrasya-dyn-tabs .tab-menu::-webkit-scrollbar {
+    height: 4px;
+}
+
+.avrasya-dyn-tabs .tab-menu::-webkit-scrollbar-thumb {
+    background: rgba(141, 212, 227, 0.55);
+    border-radius: 4px;
+}
+
+.avrasya-dyn-tabs .tab-menu-item {
+    flex: 1 1 auto;
+    min-width: auto;
+    padding: 18px 12px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.86);
+    font-weight: 600;
+    font-size: 0.94rem;
+    cursor: pointer;
+    transition: all 0.28s ease;
+    border-bottom: 4px solid transparent;
+    border-inline-end: 1px solid rgba(255, 255, 255, 0.24);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.avrasya-dyn-tabs .tab-menu-item:last-child {
+    border-inline-end: none;
+}
+
+.avrasya-dyn-tabs .tab-menu-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.avrasya-dyn-tabs .tab-menu-item.active {
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    border-bottom: 4px solid #8dd4e3;
+}
+
+.avrasya-dyn-tabs .tab-menu-item i {
+    font-size: 1.05rem;
+    color: #8dd4e3;
+}
+
+.avrasya-dyn-tabs .tab-content {
+    display: none;
+    animation: avrasyaTabFadeIn 0.35s ease;
+}
+
+.avrasya-dyn-tabs .tab-content.active {
+    display: block;
+}
+
+@keyframes avrasyaTabFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.avrasya-dyn-tabs .tab-content-header {
+    background: linear-gradient(135deg, rgba(9, 36, 66, 0.04) 0%, rgba(141, 212, 227, 0.16) 100%);
+    padding: 24px 30px;
+    border-bottom: 1px solid rgba(141, 212, 227, 0.35);
+}
+
+.avrasya-dyn-tabs .tab-content-header h3 {
+    color: #092442;
+    margin: 0;
+    font-size: 1.55rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avrasya-dyn-tabs .tab-content-header h3 i {
+    color: #1d61a9;
+}
+
+.avrasya-dyn-tabs .tab-content-header p {
+    margin: 8px 0 0 0;
+    color: rgba(9, 36, 66, 0.72);
+    font-size: 0.98rem;
+}
+
+.avrasya-dyn-tabs .tab-content-body {
+    padding: 30px;
+    color: #092442;
+    line-height: 1.8;
+}
+
+/* Top highlight box matching existing screenshots */
+.avrasya-highlight-box {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.16) 0%, rgba(246, 242, 231, 0.55) 100%);
+    border-left: 5px solid #1d61a9;
+    border-top: 3px solid #092442;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 26px;
+}
+
+.avrasya-highlight-box h2,
+.avrasya-highlight-box h4 {
+    color: #092442;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(29, 97, 169, 0.22);
+}
+
+/* CKEditor / Rich Content Formatting */
+.avrasya-rich-content {
+    color: rgba(9, 36, 66, 0.88);
+    font-size: 1.03rem;
+    line-height: 1.85;
+}
+
+.avrasya-rich-content p {
+    margin-bottom: 14px;
+    color: rgba(9, 36, 66, 0.88);
+}
+
+.avrasya-rich-content p:last-child {
+    margin-bottom: 0;
+}
+
+.avrasya-rich-content h2,
+.avrasya-rich-content h3 {
+    color: #092442;
+    font-weight: 700;
+    margin: 26px 0 14px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #8dd4e3;
+}
+
+.avrasya-rich-content h4,
+.avrasya-rich-content h5,
+.avrasya-rich-content h6 {
+    color: #1d61a9;
+    font-weight: 700;
+    margin: 20px 0 10px 0;
+}
+
+.avrasya-rich-content ul,
+.avrasya-rich-content ol {
+    margin: 12px 0 20px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.avrasya-rich-content ul li,
+.avrasya-rich-content ol li {
+    position: relative;
+    padding: 10px 16px 10px 38px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border: 1px solid rgba(141, 212, 227, 0.38);
+    border-left: 4px solid #1d61a9;
+    border-radius: 10px;
+    color: #092442;
+    box-shadow: 0 2px 8px rgba(9, 36, 66, 0.04);
+}
+
+.avrasya-rich-content ul li::before {
+    content: "\f058";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 13px;
+    top: 12px;
+    color: #1d61a9;
+    font-size: 0.95rem;
+}
+
+.avrasya-rich-content ol {
+    counter-reset: avrasya-counter;
+}
+
+.avrasya-rich-content ol li {
+    counter-increment: avrasya-counter;
+}
+
+.avrasya-rich-content ol li::before {
+    content: counter(avrasya-counter);
+    position: absolute;
+    left: 11px;
+    top: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #092442;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avrasya-rich-content blockquote {
+    background: #f6f2e7;
+    border-left: 5px solid #092442;
+    border-radius: 0 12px 12px 0;
+    padding: 18px 22px;
+    margin: 20px 0;
+    color: #092442;
+    font-style: italic;
+}
+
+.avrasya-rich-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 14px rgba(9, 36, 66, 0.07);
+}
+
+.avrasya-rich-content table th {
+    background: #092442;
+    color: #ffffff;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.avrasya-rich-content table td {
+    padding: 11px 15px;
+    border-bottom: 1px solid rgba(9, 36, 66, 0.1);
+    color: #092442;
+}
+
+.avrasya-rich-content table tr:nth-child(even) td {
+    background: #f6f2e7;
+}
+
+.avrasya-rich-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 12px 0;
+}
+
+/* Misyon & Vizyon Structured Cards */
+.avrasya-mv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.avrasya-mv-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(141, 212, 227, 0.42);
+    box-shadow: 0 6px 22px rgba(9, 36, 66, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.avrasya-mv-card-header {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #f6f2e7 0%, rgba(141, 212, 227, 0.2) 100%);
+    border-bottom: 1px solid rgba(141, 212, 227, 0.35);
+}
+
+.avrasya-mv-card.mission .avrasya-mv-card-header {
+    border-top: 4px solid #1d61a9;
+}
+
+.avrasya-mv-card.vision .avrasya-mv-card-header {
+    border-top: 4px solid #092442;
+}
+
+.avrasya-mv-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.35rem;
+    flex-shrink: 0;
+}
+
+.avrasya-mv-card.mission .avrasya-mv-icon {
+    background: linear-gradient(135deg, #1d61a9 0%, #092442 100%);
+}
+
+.avrasya-mv-card.vision .avrasya-mv-icon {
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+}
+
+.avrasya-mv-title h4 {
+    margin: 0 0 4px 0;
+    color: #092442;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.avrasya-mv-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: rgba(29, 97, 169, 0.12);
+    color: #1d61a9;
+}
+
+.avrasya-mv-card-body {
+    padding: 24px;
+    flex: 1;
+}
+
+.avrasya-values-card {
+    background: #f6f2e7;
+    border: 1px solid rgba(141, 212, 227, 0.45);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-top: 8px;
+}
+
+.avrasya-values-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: #092442;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.avrasya-values-card-header i {
+    color: #1d61a9;
+}
+
+/* Leader / Dean / Chair Profile Card */
+.avrasya-leader-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(141, 212, 227, 0.45);
+    box-shadow: 0 8px 28px rgba(9, 36, 66, 0.08);
+    overflow: hidden;
+    margin-bottom: 26px;
+}
+
+.avrasya-leader-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.16) 0%, #f6f2e7 100%);
+    border-bottom: 1px solid rgba(141, 212, 227, 0.35);
+}
+
+.avrasya-leader-avatar-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.avrasya-leader-photo {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #8dd4e3;
+    box-shadow: 0 6px 18px rgba(9, 36, 66, 0.16);
+}
+
+.avrasya-leader-avatar-placeholder {
+    width: 106px;
+    height: 106px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    border: 4px solid #8dd4e3;
+    box-shadow: 0 6px 18px rgba(9, 36, 66, 0.16);
+}
+
+.avrasya-leader-role-pill {
+    background: #092442;
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-align: center;
+}
+
+.avrasya-leader-meta {
+    flex: 1;
+    min-width: 240px;
+}
+
+.avrasya-leader-meta h3 {
+    color: #092442;
+    font-size: 1.55rem;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+}
+
+.avrasya-leader-subtitle {
+    color: #1d61a9;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+}
+
+.avrasya-leader-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.avrasya-contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: #ffffff;
+    border: 1px solid rgba(29, 97, 169, 0.22);
+    border-radius: 10px;
+    color: #092442;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.avrasya-contact-pill i {
+    color: #1d61a9;
+}
+
+a.avrasya-contact-pill:hover {
+    background: #1d61a9;
+    color: #ffffff;
+    border-color: #1d61a9;
+}
+
+a.avrasya-contact-pill:hover i {
+    color: #8dd4e3;
+}
+
+.avrasya-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 9px 18px;
+    border-radius: 10px;
+    background: #092442;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: background 0.25s ease;
+}
+
+.avrasya-cv-btn:hover {
+    background: #1d61a9;
+}
+
+.avrasya-leader-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 20px 28px;
+    background: #ffffff;
+}
+
+.avrasya-leader-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #f6f2e7;
+}
+
+.avrasya-leader-detail-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #1d61a9;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.avrasya-leader-detail-text small {
+    display: block;
+    color: rgba(9, 36, 66, 0.65);
+    font-weight: 600;
+    font-size: 0.78rem;
+}
+
+.avrasya-leader-detail-text span {
+    color: #092442;
+    font-weight: 600;
+    font-size: 0.93rem;
+}
+
+.avrasya-message-box {
+    background: #ffffff;
+    border: 1px solid rgba(141, 212, 227, 0.42);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 5px 20px rgba(9, 36, 66, 0.05);
+}
+
+.avrasya-signature-box {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 2px solid rgba(141, 212, 227, 0.45);
+    text-align: right;
+}
+
+.avrasya-signature-box .sig-name {
+    color: #092442;
+    font-weight: 800;
+    font-size: 1.08rem;
+}
+
+.avrasya-signature-box .sig-role {
+    color: #1d61a9;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.avrasya-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.avrasya-team-card {
+    background: #ffffff;
+    border: 1px solid rgba(141, 212, 227, 0.4);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 14px rgba(9, 36, 66, 0.05);
+}
+
+.avrasya-empty-tab {
+    text-align: center;
+    padding: 46px 24px;
+    background: #f6f2e7;
+    border-radius: 14px;
+    border: 1px dashed rgba(29, 97, 169, 0.35);
+    color: #092442;
+}
+
+.avrasya-empty-tab i {
+    font-size: 2.3rem;
+    color: #1d61a9;
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* Akademik Kadro Tab Styling */
+.avrasya-kadro-count-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #092442;
+    color: #ffffff;
+    padding: 7px 15px;
+    border-radius: 24px;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.avrasya-kadro-count-pill i {
+    color: #8dd4e3;
+}
+
+.avrasya-kadro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.avrasya-kadro-card {
+    background: #ffffff;
+    border: 1px solid rgba(141, 212, 227, 0.45);
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 5px 18px rgba(9, 36, 66, 0.06);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.avrasya-kadro-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(9, 36, 66, 0.11);
+    border-color: #1d61a9;
+}
+
+.avrasya-kadro-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.avrasya-kadro-photo {
+    width: 68px;
+    height: 68px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid #8dd4e3;
+    flex-shrink: 0;
+}
+
+.avrasya-kadro-identity {
+    flex: 1;
+    min-width: 0;
+}
+
+.avrasya-kadro-badge {
+    display: inline-block;
+    background: rgba(141, 212, 227, 0.28);
+    color: #092442;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.avrasya-kadro-card h4 {
+    color: #092442;
+    font-size: 1.12rem;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+    line-height: 1.35;
+}
+
+.avrasya-kadro-field {
+    color: #1d61a9;
+    font-size: 0.88rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.avrasya-kadro-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 14px;
+}
+
+.avrasya-kadro-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: rgba(9, 36, 66, 0.84);
+    font-size: 0.92rem;
+    text-decoration: none;
+    word-break: break-word;
+}
+
+.avrasya-kadro-contact-row i {
+    color: #1d61a9;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+a.avrasya-kadro-contact-row:hover {
+    color: #1d61a9;
+}
+
+.avrasya-kadro-bio {
+    font-size: 0.9rem;
+    color: rgba(9, 36, 66, 0.72);
+    line-height: 1.6;
+    margin: 0 0 12px 0;
+}
+
+.avrasya-kadro-footer {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(9, 36, 66, 0.08);
+}
+
+.avrasya-kadro-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #092442;
+    color: #ffffff !important;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.avrasya-kadro-cv-btn:hover {
+    background: #1d61a9;
+}
+
+.avrasya-kadro-no-cv {
+    color: rgba(9, 36, 66, 0.55);
+    font-size: 0.88rem;
+    font-style: italic;
+}
+
+.avrasya-kadro-subhead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0 18px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #8dd4e3;
+    color: #092442;
+}
+
+.avrasya-kadro-subhead i {
+    color: #1d61a9;
+    font-size: 1.2rem;
+}
+
+.avrasya-kadro-subhead h4 {
+    margin: 0;
+    font-weight: 800;
+    color: #092442;
+}
+
+@media (max-width: 768px) {
+    .avrasya-dyn-tabs .tab-menu-item {
+        min-width: 140px;
+        padding: 15px 12px;
+        font-size: 0.92rem;
+    }
+    .avrasya-dyn-tabs .tab-content-body,
+    .avrasya-dyn-tabs .tab-content-header {
+        padding: 20px 16px;
+    }
+    .avrasya-leader-top {
+        padding: 20px;
+        justify-content: center;
+        text-align: center;
+    }
+    .avrasya-leader-badges {
+        justify-content: center;
+    }
+}
+</style>
+
+<script>
+(function() {
+    if (window.__avrasyaDynTabsBound) return;
+    window.__avrasyaDynTabsBound = true;
+
+    function activateTab(tabId) {
+        if (!tabId) return;
+        const target = document.getElementById(tabId);
+        if (!target) return;
+
+        const container = target.closest('.tab-container') || document;
+        const menuItems = container.querySelectorAll('.tab-menu-item');
+        const contents = container.querySelectorAll('.tab-content');
+
+        menuItems.forEach(function(item) {
+            item.classList.remove('active');
+            if (item.getAttribute('data-tab') === tabId) {
+                item.classList.add('active');
+            }
+        });
+        contents.forEach(function(content) {
+            content.classList.remove('active');
+        });
+        target.classList.add('active');
+    }
+
+    document.addEventListener('click', function(e) {
+        const tabItem = e.target.closest('.tab-menu-item');
+        if (tabItem) {
+            const tabId = tabItem.getAttribute('data-tab');
+            if (tabId) {
+                activateTab(tabId);
+            }
+            return;
+        }
+        const switchBtn = e.target.closest('.tab-switch[href^="#"]');
+        if (switchBtn) {
+            e.preventDefault();
+            const hashId = switchBtn.getAttribute('href').replace('#', '');
+            activateTab(hashId);
+            const target = document.getElementById(hashId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash) {
+            const h = window.location.hash.replace('#', '');
+            if (document.getElementById(h)) {
+                activateTab(h);
+            }
+        }
+    });
+})();
+</script>

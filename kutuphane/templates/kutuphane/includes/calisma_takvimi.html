@@ -102,7 +102,7 @@
                             {% if messages %}
                             <div class="messages">
                                 {% for message in messages %}
-                                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" style="padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; {% if message.tags == 'success' %}color: #155724; background-color: #d4edda; border-color: #c3e6cb;{% else %}color: #721c24; background-color: #f8d7da; border-color: #f5c6cb;{% endif %}">
+                                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" style="padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; {% if message.tags == 'success' %}color: rgba(9, 36, 66, 0.76); background-color: rgba(141, 212, 227, 0.22); border-color: rgba(9, 36, 66, 0.14);{% else %}color: #092442; background-color: #f6f2e7; border-color: rgba(9, 36, 66, 0.14);{% endif %}">
                                     {{ message }}
                                 </div>
                                 {% endfor %}
@@ -324,18 +324,18 @@
 /* متغیرهای رنگ */
 :root {
     --primary-dark-blue: #092442;
-    --secondary-medium-blue: rgb(29, 97, 169);
+    --secondary-medium-blue: #1d61a9;
     --accent-light-blue: #8dd4e3;
-    --neutral-cream: rgb(247, 243, 233);
-    --pure-white: rgb(255, 255, 255);
-    --text-dark: #1a1a1a;
-    --text-light: #666666;
-    --error-red: #dc3545;
-    --success-green: #28a745;
+    --neutral-cream: #f6f2e7;
+    --pure-white: #ffffff;
+    --text-dark: #092442;
+    --text-light: rgba(9, 36, 66, 0.72);
+    --error-red: #092442;
+    --success-green: #1d61a9;
 }
 /* Hero Section */
 .research-hero {
-    background: linear-gradient(135deg, #4a6fa5 0%, #2e4a7d 100%);
+    background: linear-gradient(135deg, #1d61a9 0%, #092442 100%);
     padding: 80px 0 60px;
     color: white;
     text-align: center;
@@ -352,7 +352,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255, 255, 255, 0.1)"/></svg>');
     background-size: cover;
 }
 
@@ -361,7 +361,7 @@
     font-weight: 800;
     margin-bottom: 15px;
     margin-top: 20px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 10px rgba(9, 36, 66, 0.2);
 }
 
 .research-hero-content p {
@@ -386,7 +386,7 @@
     top: 120px;
     background: var(--pure-white);
     border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 20px rgba(9, 36, 66, 0.1);
     padding: 20px;
     height: fit-content;
     border: 1px solid rgba(141, 212, 227, 0.2);
@@ -396,7 +396,7 @@
     background: var(--pure-white);
     border-radius: 12px;
     padding: 40px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 20px rgba(9, 36, 66, 0.1);
     border: 1px solid rgba(141, 212, 227, 0.2);
     margin-bottom: 40px;
 }
@@ -475,7 +475,7 @@
     padding: 25px;
     background: var(--pure-white);
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(9, 36, 66, 0.08);
     border: 2px solid rgba(141, 212, 227, 0.3);
     transition: all 0.3s ease;
 }
@@ -483,7 +483,7 @@
 .saat-item:hover {
     transform: translateY(-5px);
     border-color: var(--accent-light-blue);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 25px rgba(9, 36, 66, 0.12);
 }
 
 .saat-icon {
@@ -750,7 +750,7 @@
 
 /* طراحی اسلایدر */
 .kutuphane-slider-section {
-    background: linear-gradient(135deg, #0a1e3c, var(--primary-dark-blue));
+    background: linear-gradient(135deg, #092442, var(--primary-dark-blue));
     padding: 60px 0;
     position: relative;
     overflow: hidden;
@@ -807,7 +807,7 @@
 .slider-container {
     overflow: hidden;
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(9, 36, 66, 0.3);
 }
 
 .slider-track {
@@ -1222,11 +1222,11 @@ document.addEventListener('DOMContentLoaded', function() {
             position: fixed;
             top: 100px;
             right: 20px;
-            background: linear-gradient(135deg, #28a745, #1e7e34);
+            background: linear-gradient(135deg, #1d61a9, #092442);
             color: white;
             padding: 20px 30px;
             border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 10px 30px rgba(29, 97, 169, 0.3);
             display: flex;
             align-items: center;
             gap: 15px;

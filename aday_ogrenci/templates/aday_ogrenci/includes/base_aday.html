@@ -10,15 +10,42 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
+        :root {
+            --bs-primary: #1d61a9;
+            --bs-primary-rgb: 29, 97, 169;
+            --bs-secondary: #092442;
+            --bs-secondary-rgb: 9, 36, 66;
+            --bs-success: #1d61a9;
+            --bs-success-rgb: 29, 97, 169;
+            --bs-info: #8dd4e3;
+            --bs-info-rgb: 141, 212, 227;
+            --bs-warning: #8dd4e3;
+            --bs-warning-rgb: 141, 212, 227;
+            --bs-danger: #092442;
+            --bs-danger-rgb: 9, 36, 66;
+            --bs-light: #f6f2e7;
+            --bs-light-rgb: 246, 242, 231;
+            --bs-dark: #092442;
+            --bs-dark-rgb: 9, 36, 66;
+            --bs-body-color: #092442;
+            --bs-body-bg: #ffffff;
+        }
+        .bg-primary, .btn-primary { background-color: #1d61a9 !important; border-color: #1d61a9 !important; }
+        .btn-primary:hover { background-color: #092442 !important; border-color: #092442 !important; }
+        .bg-secondary, .bg-dark { background-color: #092442 !important; }
+        .bg-light { background-color: #f6f2e7 !important; }
+        .text-primary { color: #1d61a9 !important; }
+        .text-light { color: #f6f2e7 !important; }
+        .text-dark { color: #092442 !important; }
         .aday-header {
-            background: linear-gradient(135deg, #2ED1F2  0%, #2ED1F2  100%);
+            background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
         }
         .icon-card {
             transition: all 0.3s ease;
         }
         .icon-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(9, 36, 66, 0.1);
         }
         
         /* استایل‌های منوی کشویی */
@@ -29,7 +56,7 @@
         
         .dropdown-menu {
             border: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(9, 36, 66, 0.1);
         }
         
         .dropdown-item {
@@ -38,8 +65,8 @@
         }
         
         .dropdown-item:hover {
-            background-color: #f8f9fa;
-            color: #0d6efd;
+            background-color: #f6f2e7;
+            color: #1d61a9;
         }
         
         .dropdown-submenu {
@@ -65,7 +92,7 @@
         }
         
         .nav-link:hover {
-            color: #0d6efd !important;
+            color: #1d61a9 !important;
         }
     </style>
 </head>
@@ -220,7 +247,7 @@
                             <li><a class="dropdown-item" href="#">{% trans "Tıp Fakültesi" %}</a></li>
                             <li><a class="dropdown-item" href="#">{% trans "Hukuk Fakültesi" %}</a></li>
                             <li><a class="dropdown-item" href="#">{% trans "İktisadi ve İdari Bilimler Fakültesi" %}</a></li>
-                            <li><a class="dropdown-item" href="#">{% trans "Fen-Edebiyat Fakültesi" %}</a></li>
+                            <li><a class="dropdown-item" href="#">{% trans "İnsan ve Toplum Bilimleri Fakültesi" %}</a></li>
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="#">{% trans "Diğer Fakülteler" %}</a>
                                 <ul class="dropdown-menu">

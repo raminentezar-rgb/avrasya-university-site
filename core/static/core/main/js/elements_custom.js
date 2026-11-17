@@ -218,7 +218,7 @@ $(document).ready(function()
 		    			strokeWidth: 0.5,
 						easing: 'easeInOut',
 						duration: 1400,
-						color: '#ffb606',
+						color: '#1d61a9',
 						trailColor: '#ffffff',
 						trailWidth: 1,
 						svgStyle: {display: 'block', width: '100%', height: '100%'},
@@ -230,7 +230,7 @@ $(document).ready(function()
 								textAlign: 'right',
 								fontSize: '14px',
 								width: '40px',
-								color: '#1a1a1a',
+								color: '#092442',
 								position: 'absolute',
 								right: 0,
 								top: '-33px',
@@ -240,8 +240,8 @@ $(document).ready(function()
 								},
 								autoStyleContainer: false
 						},
-						from: {color: '#00bcd5'},
-						to: {color: '#00bcd5'},
+						from: {color: '#8dd4e3'},
+						to: {color: '#1d61a9'},
 						step: function(state, bar) {
 						bar.setText(Math.round(bar.value() * 100) + ' %');
 						}
@@ -316,20 +316,20 @@ $(document).ready(function()
 		    	{
 		    		var bar = new ProgressBar.Circle(loader,
 					{
-						color: '#aaa',
+						color: '#092442',
 						// This has to be the same size as the maximum width to
 						// prevent clipping
 						strokeWidth: 4,
 						trailWidth: 10,
-						trailColor: '#f8f4f4',
+						trailColor: '#f6f2e7',
 						easing: 'easeInOut',
 						duration: 1400,
 						text:
 						{
 							autoStyleContainer: false
 						},
-						from:{ color: '#ffb606', width: 2 },
-						to: { color: '#ffb606', width: 2 },
+						from:{ color: '#1d61a9', width: 2 },
+						to: { color: '#1d61a9', width: 2 },
 						// Set default step function for all animate calls
 						step: function(state, circle)
 						{
@@ -350,7 +350,7 @@ $(document).ready(function()
 					bar.text.style.fontFamily = '"Roboto", sans-serif';
 					bar.text.style.fontSize = '48px';
 					bar.text.style.fontWeight = '400';
-					bar.text.style.color = "#ffb606";
+					bar.text.style.color = "#1d61a9";
 
 
 					bar.animate(endValue);  // Number from 0.0 to 1.0

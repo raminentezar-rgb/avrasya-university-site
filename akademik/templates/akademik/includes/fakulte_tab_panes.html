@@ -1,0 +1,254 @@
+{% load i18n %}
+
+<!-- Tab 2: Tarihçe -->
+<div class="tab-content {% if not f.show_bolumler %}active{% endif %}" id="tab2">
+    <div class="tab-content-header">
+        <h3><i class="fas fa-history"></i> {{ f.tarihce_baslik }}</h3>
+        {% if f.tarihce_alt_baslik %}
+        <p>{{ f.tarihce_alt_baslik }}</p>
+        {% endif %}
+    </div>
+    <div class="tab-content-body">
+        {% if f.tarihce_icerik %}
+        <div class="avrasya-highlight-box">
+            <h2>{{ f.tarihce_baslik }}</h2>
+            <div class="avrasya-rich-content">
+                {{ f.tarihce_icerik|safe }}
+            </div>
+        </div>
+        {% else %}
+        <div class="avrasya-empty-tab">
+            <i class="fas fa-history"></i>
+            <h5>{% trans "Bu sekme için henüz tarihçe içeriği eklenmemiştir." %}</h5>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Tab 3: Misyon & Vizyon -->
+<div class="tab-content" id="tab3">
+    <div class="tab-content-header">
+        <h3><i class="fas fa-bullseye"></i> {{ f.mv_baslik }}</h3>
+        {% if f.mv_alt_baslik %}
+        <p>{{ f.mv_alt_baslik }}</p>
+        {% endif %}
+    </div>
+    <div class="tab-content-body">
+        {% if f.mv_giris %}
+        <div class="avrasya-highlight-box">
+            <h2>{{ f.fakulte_adi }} {{ f.mv_baslik }}</h2>
+            <div class="avrasya-rich-content">
+                {{ f.mv_giris|safe }}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if f.misyon_icerik or f.vizyon_icerik %}
+        <div class="avrasya-mv-grid">
+            {% if f.misyon_icerik %}
+            <div class="avrasya-mv-card mission">
+                <div class="avrasya-mv-card-header">
+                    <div class="avrasya-mv-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="avrasya-mv-title">
+                        <h4>{% trans "Misyonumuz" %}</h4>
+                        <span class="avrasya-mv-badge"><i class="fas fa-bullseye"></i> {% trans "Temel Görev" %}</span>
+                    </div>
+                </div>
+                <div class="avrasya-mv-card-body">
+                    <div class="avrasya-rich-content">
+                        {{ f.misyon_icerik|safe }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if f.vizyon_icerik %}
+            <div class="avrasya-mv-card vision">
+                <div class="avrasya-mv-card-header">
+                    <div class="avrasya-mv-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="avrasya-mv-title">
+                        <h4>{% trans "Vizyonumuz" %}</h4>
+                        <span class="avrasya-mv-badge"><i class="fas fa-rocket"></i> {% trans "Uzun Vadeli Hedef" %}</span>
+                    </div>
+                </div>
+                <div class="avrasya-mv-card-body">
+                    <div class="avrasya-rich-content">
+                        {{ f.vizyon_icerik|safe }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if f.temel_degerler_icerik %}
+        <div class="avrasya-values-card">
+            <div class="avrasya-values-card-header">
+                <i class="fas fa-star"></i>
+                <span>{% trans "Temel Değerlerimiz" %}</span>
+            </div>
+            <div class="avrasya-rich-content">
+                {{ f.temel_degerler_icerik|safe }}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if not f.misyon_icerik and not f.vizyon_icerik and not f.temel_degerler_icerik and not f.mv_giris %}
+        <div class="avrasya-empty-tab">
+            <i class="fas fa-bullseye"></i>
+            <h5>{% trans "Bu sekme için henüz Misyon & Vizyon içeriği eklenmemiştir." %}</h5>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Tab 4: Dekan / Müdür Mesajı -->
+<div class="tab-content" id="tab4">
+    <div class="tab-content-header">
+        <h3><i class="fas fa-comments"></i> {{ f.mesaj_baslik }}</h3>
+        {% if f.mesaj_alt_baslik %}
+        <p>{{ f.mesaj_alt_baslik }}</p>
+        {% endif %}
+    </div>
+    <div class="tab-content-body">
+        {% if f.yonetici_unvan_ad or f.dekan_mesaji or f.ek_yoneticiler %}
+        <div class="avrasya-highlight-box" style="margin-bottom: 22px;">
+            <h2>{{ f.mesaj_baslik }}</h2>
+            {% if f.fakulte_adi %}
+            <p class="mb-0" style="color: #1d61a9; font-weight: 600;">{{ f.fakulte_adi }}</p>
+            {% endif %}
+        </div>
+
+        {% if f.yonetici_unvan_ad %}
+        <div class="avrasya-leader-card">
+            <div class="avrasya-leader-top">
+                <div class="avrasya-leader-avatar-wrap">
+                    {% if f.yonetici_fotografi %}
+                    <img src="{{ f.yonetici_fotografi.url }}" alt="{{ f.yonetici_unvan_ad }}" class="avrasya-leader-photo">
+                    {% else %}
+                    <div class="avrasya-leader-avatar-placeholder">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    {% endif %}
+                    <span class="avrasya-leader-role-pill">{% trans "Görevde" %}</span>
+                </div>
+                <div class="avrasya-leader-meta">
+                    <h3>{{ f.yonetici_unvan_ad }}</h3>
+                    {% if f.yonetici_gorevi %}
+                    <div class="avrasya-leader-subtitle">{{ f.yonetici_gorevi }}</div>
+                    {% endif %}
+                    <div class="avrasya-leader-badges">
+                        {% if f.yonetici_unvan_rozet %}
+                        <span class="avrasya-contact-pill"><i class="fas fa-graduation-cap"></i> {{ f.yonetici_unvan_rozet }}</span>
+                        {% endif %}
+                        <span class="avrasya-contact-pill"><i class="fas fa-university"></i> {% trans "Avrasya Üniversitesi" %}</span>
+                    </div>
+                </div>
+            </div>
+            {% if f.yonetici_eposta or f.yonetici_telefon or f.ziyaret_saatleri %}
+            <div class="avrasya-leader-details-grid">
+                {% if f.yonetici_eposta %}
+                <div class="avrasya-leader-detail-item">
+                    <div class="avrasya-leader-detail-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="avrasya-leader-detail-text">
+                        <small>{% trans "E-posta" %}</small>
+                        <span>{{ f.yonetici_eposta }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% if f.yonetici_telefon %}
+                <div class="avrasya-leader-detail-item">
+                    <div class="avrasya-leader-detail-icon"><i class="fas fa-phone"></i></div>
+                    <div class="avrasya-leader-detail-text">
+                        <small>{% trans "Telefon" %}</small>
+                        <span>{{ f.yonetici_telefon }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% if f.ziyaret_saatleri %}
+                <div class="avrasya-leader-detail-item">
+                    <div class="avrasya-leader-detail-icon"><i class="fas fa-door-open"></i></div>
+                    <div class="avrasya-leader-detail-text">
+                        <small>{% trans "Ziyaret Saatleri" %}</small>
+                        <span>{{ f.ziyaret_saatleri }}</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if f.dekan_mesaji %}
+        <div class="avrasya-message-box">
+            <div class="avrasya-rich-content">
+                {{ f.dekan_mesaji|safe }}
+            </div>
+            {% if f.yonetici_unvan_ad %}
+            <div class="avrasya-signature-box">
+                <div class="sig-name">{{ f.yonetici_unvan_ad }}</div>
+                {% if f.yonetici_gorevi %}
+                <div class="sig-role">{{ f.yonetici_gorevi }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if f.ek_yoneticiler %}
+        <div class="avrasya-team-grid">
+            {% for y in f.ek_yoneticiler %}
+            <div class="avrasya-team-card">
+                {% if y.fotograf %}
+                <img src="{{ y.fotograf.url }}" alt="{{ y.ad_soyad }}" class="avrasya-leader-photo" style="width: 68px; height: 68px;">
+                {% else %}
+                <div class="avrasya-leader-avatar-placeholder" style="width: 64px; height: 64px; font-size: 1.5rem;">
+                    <i class="fas fa-user"></i>
+                </div>
+                {% endif %}
+                <div>
+                    <h5 style="color: #092442; font-weight: 700; margin: 0 0 3px 0;">{{ y.ad_soyad }}</h5>
+                    <div style="color: #1d61a9; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px;">{{ y.gorev }}</div>
+                    {% if y.eposta %}
+                    <div style="font-size: 0.85rem; color: rgba(9, 36, 66, 0.78);"><i class="fas fa-envelope me-1"></i> {{ y.eposta }}</div>
+                    {% endif %}
+                    {% if y.telefon %}
+                    <div style="font-size: 0.85rem; color: rgba(9, 36, 66, 0.78);"><i class="fas fa-phone me-1"></i> {{ y.telefon }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="avrasya-empty-tab">
+            <i class="fas fa-comments"></i>
+            <h5>{% trans "Bu sekme için henüz mesaj eklenmemiştir." %}</h5>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Optional Custom Tabs -->
+{% for sekme in f.ek_sekmeler %}
+<div class="tab-content" id="{{ sekme.id }}">
+    <div class="tab-content-header">
+        <h3><i class="{{ sekme.ikon }}"></i> {{ sekme.baslik }}</h3>
+        {% if sekme.alt_baslik %}
+        <p>{{ sekme.alt_baslik }}</p>
+        {% endif %}
+    </div>
+    <div class="tab-content-body">
+        <div class="avrasya-rich-content">
+            {{ sekme.icerik|safe }}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% include 'akademik/includes/dinamik_tab_styles.html' %}

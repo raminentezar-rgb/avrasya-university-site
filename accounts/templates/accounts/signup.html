@@ -232,12 +232,12 @@
     .auth-form input[type="password"] {
         width: 100%;
         padding: 12px 15px;
-        border: 2px solid #e1e5eb;
+        border: 2px solid rgba(9, 36, 66, 0.14);
         border-radius: 8px;
         font-size: 15px;
         transition: all 0.3s ease;
         background-color: white;
-        color: #333;
+        color: #092442;
     }
     
     .auth-form input:focus {
@@ -247,7 +247,7 @@
     }
     
     .auth-form input::placeholder {
-        color: #adb5bd;
+        color: rgba(9, 36, 66, 0.62);
         font-size: 14px;
     }
     
@@ -256,7 +256,7 @@
         display: block;
         margin-top: 5px;
         font-size: 12px;
-        color: #6c757d !important;
+        color: rgba(9, 36, 66, 0.76) !important;
     }
     
     /* استایل برای خطاها */
@@ -264,7 +264,7 @@
         display: block;
         margin-top: 5px;
         font-size: 12px;
-        color: #dc3545;
+        color: #1d61a9;
     }
     
     .invalid-feedback i {
@@ -288,7 +288,7 @@
     
     .custom-control-label {
         font-size: 14px;
-        color: #495057;
+        color: rgba(9, 36, 66, 0.76);
         cursor: pointer;
     }
     
@@ -309,7 +309,7 @@
         font-weight: 600;
         margin-bottom: 20px;
         padding-bottom: 10px;
-        border-bottom: 2px solid #f0f7ff;
+        border-bottom: 2px solid rgba(9, 36, 66, 0.14);
     }
     
     .form-section-title i {
@@ -327,7 +327,7 @@
         right: 15px;
         top: 50%;
         transform: translateY(-50%);
-        color: #6c757d;
+        color: rgba(9, 36, 66, 0.76);
         cursor: pointer;
         z-index: 2;
     }
@@ -351,7 +351,7 @@
     
     .strength-bar {
         height: 4px;
-        background: #e9ecef;
+        background: #f6f2e7;
         border-radius: 2px;
         overflow: hidden;
         margin-bottom: 5px;
@@ -360,13 +360,13 @@
     .strength-fill {
         height: 100%;
         width: 0%;
-        background: #dc3545;
+        background: #1d61a9;
         transition: width 0.3s ease, background 0.3s ease;
     }
     
     .strength-text {
         font-size: 12px;
-        color: #6c757d;
+        color: rgba(9, 36, 66, 0.76);
     }
     
     /* استایل برای validation icon */
@@ -391,7 +391,7 @@
     /* استایل برای required fields */
     .required-field::after {
         content: " *";
-        color: #dc3545;
+        color: #1d61a9;
     }
     
     /* استایل برای حالت focus */
@@ -512,16 +512,16 @@
                     if (isValid) {
                         emailValidIcon.classList.remove('d-none');
                         emailInvalidIcon.classList.add('d-none');
-                        this.style.borderColor = '#28a745';
+                        this.style.borderColor = '#1d61a9';
                     } else {
                         emailValidIcon.classList.add('d-none');
                         emailInvalidIcon.classList.remove('d-none');
-                        this.style.borderColor = '#dc3545';
+                        this.style.borderColor = '#1d61a9';
                     }
                 } else {
                     emailValidIcon.classList.add('d-none');
                     emailInvalidIcon.classList.add('d-none');
-                    this.style.borderColor = '#e1e5eb';
+                    this.style.borderColor = '#f6f2e7';
                 }
             });
         }
@@ -571,11 +571,11 @@
             if (/[^A-Za-z0-9]/.test(password)) score++;
             
             const strength = [
-                { percentage: 20, color: '#dc3545', text: 'Çok Zayıf' },
-                { percentage: 40, color: '#fd7e14', text: 'Zayıf' },
-                { percentage: 60, color: '#ffc107', text: 'Orta' },
-                { percentage: 80, color: '#28a745', text: 'Güçlü' },
-                { percentage: 100, color: '#20c997', text: 'Çok Güçlü' }
+                { percentage: 20, color: '#1d61a9', text: 'Çok Zayıf' },
+                { percentage: 40, color: '#8dd4e3', text: 'Zayıf' },
+                { percentage: 60, color: '#8dd4e3', text: 'Orta' },
+                { percentage: 80, color: '#1d61a9', text: 'Güçlü' },
+                { percentage: 100, color: '#8dd4e3', text: 'Çok Güçlü' }
             ];
             
             return strength[Math.min(score, 4)];
@@ -621,7 +621,7 @@
                 background: white;
                 border-radius: 8px;
                 padding: 15px 20px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                box-shadow: 0 5px 15px rgba(9, 36, 66, 0.1);
                 z-index: 9999;
                 transform: translateX(120%);
                 transition: transform 0.3s ease;
@@ -634,19 +634,19 @@
             }
             
             .auth-toast-success {
-                border-left-color: #28a745;
+                border-left-color: #1d61a9;
             }
             
             .auth-toast-error {
-                border-left-color: #dc3545;
+                border-left-color: #1d61a9;
             }
             
             .auth-toast-warning {
-                border-left-color: #ffc107;
+                border-left-color: #8dd4e3;
             }
             
             .auth-toast-info {
-                border-left-color: #17a2b8;
+                border-left-color: #1d61a9;
             }
             
             .toast-content {
@@ -660,25 +660,25 @@
             }
             
             .auth-toast-success .toast-content i {
-                color: #28a745;
+                color: #1d61a9;
             }
             
             .auth-toast-error .toast-content i {
-                color: #dc3545;
+                color: #1d61a9;
             }
             
             .auth-toast-warning .toast-content i {
-                color: #ffc107;
+                color: #1d61a9;
             }
             
             .auth-toast-info .toast-content i {
-                color: #17a2b8;
+                color: #1d61a9;
             }
             
             .toast-content span {
                 flex: 1;
                 font-size: 14px;
-                color: #333;
+                color: #092442;
             }
         `;
         document.head.appendChild(toastStyle);

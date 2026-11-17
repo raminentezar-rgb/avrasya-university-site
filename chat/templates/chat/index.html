@@ -21,22 +21,22 @@
     <style>
         /* ===== Renk Değişkenleri ===== */
         :root {
-            --primary-dark-blue: #0a2b44;
-            --secondary-medium-blue: #1e6f9f;
-            --accent-light-blue: #7fc9e0;
-            --neutral-cream: #f8f6f0;
+            --primary-dark-blue: #092442;
+            --secondary-medium-blue: #1d61a9;
+            --accent-light-blue: #8dd4e3;
+            --neutral-cream: #f6f2e7;
             --pure-white: #ffffff;
-            --text-dark: #2c3e50;
-            --text-light: #6c757d;
-            --border-light: #e2e8f0;
-            --success-green: #28a745;
-            --online-green: #2ecc71;
-            --offline-gray: #95a5a6;
-            --message-sent: #d4f1f9;
+            --text-dark: #092442;
+            --text-light: rgba(9, 36, 66, 0.72);
+            --border-light: rgba(9, 36, 66, 0.14);
+            --success-green: #1d61a9;
+            --online-green: #8dd4e3;
+            --offline-gray: rgba(9, 36, 66, 0.55);
+            --message-sent: rgba(141, 212, 227, 0.25);
             --message-received: #ffffff;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --shadow-sm: 0 1px 3px rgba(9, 36, 66, 0.08);
+            --shadow-md: 0 4px 12px rgba(9, 36, 66, 0.1);
+            --shadow-lg: 0 8px 24px rgba(9, 36, 66, 0.12);
         }
 
         * {
@@ -47,14 +47,14 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a2b44 0%, #1e6f9f 100%);
+            background: linear-gradient(135deg, #1d61a9 0%, #1d61a9 100%);
             min-height: 100vh;
             color: var(--text-dark);
         }
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, rgba(30, 111, 159, 0.85) 0%, rgba(30, 111, 159, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(29, 97, 169, 0.85) 0%, rgba(29, 97, 169, 0.85) 100%);
             padding: 40px 0 30px;
             text-align: center;
             position: relative;
@@ -71,7 +71,7 @@
         }
 
         .hero-section p {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1rem;
             margin-top: 8px;
         }
@@ -126,7 +126,7 @@
             font-size: 24px;
             font-weight: 600;
             color: var(--primary-dark-blue);
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
             position: relative;
         }
 
@@ -261,7 +261,7 @@
         }
 
         .chat-item.active {
-            background: linear-gradient(135deg, rgba(30, 111, 159, 0.08), rgba(127, 201, 224, 0.08));
+            background: linear-gradient(135deg, rgba(29, 97, 169, 0.08), rgba(141, 212, 227, 0.08));
             border-left: 3px solid var(--secondary-medium-blue);
         }
 
@@ -535,7 +535,7 @@
             font-size: 0.65rem;
         }
 
-        .sent .message-meta { color: rgba(255,255,255,0.7); }
+        .sent .message-meta { color: rgba(255, 255, 255, 0.7); }
         .received .message-meta { color: var(--text-light); }
 
         /* Dosya Mesajları */
@@ -543,18 +543,18 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 10px;
         }
 
-        .sent .file-message { background: rgba(255,255,255,0.15); }
-        .received .file-message { background: #f1f3f5; }
+        .sent .file-message { background: rgba(255, 255, 255, 0.15); }
+        .received .file-message { background: #f6f2e7; }
 
         .file-icon {
             width: 36px;
             height: 36px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -726,7 +726,7 @@
         .notifications-btn {
             width: 44px;
             height: 44px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: 50%;
             color: white;
@@ -745,7 +745,7 @@
             position: absolute;
             top: -5px;
             right: -5px;
-            background: #e74c3c;
+            background: #1d61a9;
             color: white;
             font-size: 0.7rem;
             font-weight: 600;
@@ -791,7 +791,7 @@
         }
 
         .notifications-header button {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
             font-size: 0.7rem;
@@ -815,7 +815,7 @@
         }
 
         .notification-item:hover { background: var(--neutral-cream); }
-        .notification-item.unread { background: #e8f4f8; }
+        .notification-item.unread { background: #f6f2e7; }
 
         .notification-icon {
             width: 36px;
@@ -840,7 +840,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(9, 36, 66, 0.5);
             backdrop-filter: blur(4px);
             display: none;
             align-items: center;
@@ -913,7 +913,7 @@
         }
 
         .user-item:hover { background: var(--neutral-cream); }
-        .user-item.selected { background: #e8f4f8; border-left: 3px solid var(--secondary-medium-blue); }
+        .user-item.selected { background: #f6f2e7; border-left: 3px solid var(--secondary-medium-blue); }
 
         .user-avatar-lg {
             width: 48px;
@@ -1489,7 +1489,7 @@
             const container = document.getElementById('notificationsList');
             if (!container) return;
             if (!notifications.length) {
-                container.innerHTML = '<div style="padding: 30px; text-align: center; color: #999;">Bildirim yok</div>';
+                container.innerHTML = '<div style="padding: 30px; text-align: center; color: #1d61a9;">Bildirim yok</div>';
                 return;
             }
             container.innerHTML = notifications.map(n => `

@@ -192,16 +192,16 @@
 /* متغیرهای رنگ */
 :root {
     --primary-dark-blue: #092442;
-    --secondary-medium-blue: #1d61a9ff;
+    --secondary-medium-blue: #1d61a9;
     --accent-light-blue: #8dd4e3;
-    --neutral-cream: hsla(43, 47%, 94%, 1.00);
-    --pure-white: rgb(255, 255, 255);
-    --text-dark: #1a1a1a;
-    --text-light: #666666;
+    --neutral-cream: #f6f2e7;
+    --pure-white: #ffffff;
+    --text-dark: #092442;
+    --text-light: rgba(9, 36, 66, 0.72);
 }
 /* Hero Section */
 .research-hero {
-    background: linear-gradient(135deg, #4a6fa5 0%, #2e4a7d 100%);
+    background: linear-gradient(135deg, #1d61a9 0%, #092442 100%);
     padding: 80px 0 60px;
     color: white;
     text-align: center;
@@ -218,7 +218,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255, 255, 255, 0.1)"/></svg>');
     background-size: cover;
 }
 
@@ -227,7 +227,7 @@
     font-weight: 800;
     margin-bottom: 15px;
     margin-top: 20px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 10px rgba(9, 36, 66, 0.2);
 }
 
 .research-hero-content p {
@@ -399,11 +399,11 @@
 }
 
 .border-success {
-    border-color: #28a745 !important;
+    border-color: #1d61a9 !important;
 }
 
 .border-info {
-    border-color: #17a2b8 !important;
+    border-color: #1d61a9 !important;
 }
 
 .bg-primary {
@@ -427,25 +427,25 @@
 }
 
 .discount-50 {
-    background-color: rgba(40, 167, 69, 0.15) !important;
-    color: #28a745 !important;
-    border-left: 4px solid #28a745 !important;
+    background-color: rgba(29, 97, 169, 0.15) !important;
+    color: #1d61a9 !important;
+    border-left: 4px solid #1d61a9 !important;
 }
 
 .discount-25 {
-    background-color: rgba(23, 162, 184, 0.15) !important;
-    color: #17a2b8 !important;
-    border-left: 4px solid #17a2b8 !important;
+    background-color: rgba(29, 97, 169, 0.15) !important;
+    color: #1d61a9 !important;
+    border-left: 4px solid #1d61a9 !important;
 }
 
 .full-price {
-    background-color: rgba(255, 193, 7, 0.15) !important;
+    background-color: rgba(141, 212, 227, 0.15) !important;
     color: var(--secondary-medium-blue) !important;
     border-left: 4px solid var(--secondary-medium-blue) !important;
 }
 
 .empty-price {
-    background-color: rgba(108, 117, 125, 0.1) !important;
+    background-color: rgba(29, 97, 169, 0.1) !important;
     color: var(--text-light) !important;
     font-style: italic;
     border-left: 4px solid var(--accent-light-blue) !important;
@@ -732,12 +732,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     // داده‌های شهریه‌ها از PDF
     const tuitionData = [
-        // Fen-Edebiyat Fakültesi
-        { faculty: "Fen-Edebiyat Fakültesi", program: "İngiliz Dili ve Edebiyatı Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
-        { faculty: "Fen-Edebiyat Fakültesi", program: "İngilizce Mütercimi ve Tercümanlık Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
-        { faculty: "Fen-Edebiyat Fakültesi", program: "Moleküler Biyoloji ve Genetik Pr. (İngilizce)", discount25: "", discount50: "154.000,00", full: "308.000,00" },
-        { faculty: "Fen-Edebiyat Fakültesi", program: "Psikoloji Pr.", discount25: "", discount50: "231.000,00", full: "308.000,00" },
-        { faculty: "Fen-Edebiyat Fakültesi", program: "Türk Dili ve Edebiyatı Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        // İnsan ve Toplum Bilimleri Fakültesi
+        { faculty: "İnsan ve Toplum Bilimleri Fakültesi", program: "İngiliz Dili ve Edebiyatı Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "İnsan ve Toplum Bilimleri Fakültesi", program: "İngilizce Mütercimi ve Tercümanlık Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
+        { faculty: "İnsan ve Toplum Bilimleri Fakültesi", program: "Moleküler Biyoloji ve Genetik Pr. (İngilizce)", discount25: "", discount50: "154.000,00", full: "308.000,00" },
+        { faculty: "İnsan ve Toplum Bilimleri Fakültesi", program: "Psikoloji Pr.", discount25: "", discount50: "231.000,00", full: "308.000,00" },
+        { faculty: "İnsan ve Toplum Bilimleri Fakültesi", program: "Türk Dili ve Edebiyatı Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },
         
         // İktisadi ve İdari Bilimler Fakültesi
         { faculty: "İktisadi ve İdari Bilimler Fakültesi", program: "Siyaset Bilimi ve Kamu Yönetimi Pr.", discount25: "", discount50: "137.500,00", full: "275.000,00" },

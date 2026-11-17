@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Hero Section -->
-<div class="hero-section mb-5" style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8) 100%), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
+<div class="hero-section mb-5" style="background: linear-gradient(135deg, rgba(29, 97, 169, 0.9), rgba(29, 97, 169, 0.8) 100%), url('{% static 'img/Başlıksız-2.png' %}') center/cover;">
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-8">
@@ -265,14 +265,14 @@
 <style>
 /* پالت رنگی آبی و نارنجی */
 :root {
-    --blue-primary: #1e3a8a;
-    --blue-secondary: #2563eb;
-    --blue-light: #3b82f6;
-    --blue-dark: #1e40af;
-    --orange-primary: #ea580c;
-    --orange-secondary: #f97316;
-    --orange-light: #fb923c;
-    --orange-dark: #c2410c;
+    --blue-primary: #1d61a9;
+    --blue-secondary: #1d61a9;
+    --blue-light: #8dd4e3;
+    --blue-dark: #092442;
+    --orange-primary: #1d61a9;
+    --orange-secondary: #1d61a9;
+    --orange-light: #8dd4e3;
+    --orange-dark: #092442;
 }
 
 .text-blue {
@@ -288,7 +288,7 @@
 
 .hero-logo {
     max-height: 150px;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 4px 8px rgba(9, 36, 66, 0.3));
 }
 
 .section-title {
@@ -315,12 +315,12 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: none;
     overflow: hidden;
-    background: #fff;
+    background: #ffffff;
 }
 
 .service-card:hover {
     transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.15) !important;
+    box-shadow: 0 20px 40px rgba(29, 97, 169, 0.15) !important;
 }
 
 .card-image-container {
@@ -346,12 +346,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%);
+    background: linear-gradient(to bottom, transparent 0%, rgba(9, 36, 66, 0.1) 100%);
     transition: background 0.3s ease;
 }
 
 .service-card:hover .card-overlay {
-    background: linear-gradient(to bottom, transparent 0%, rgba(234, 88, 12, 0.1) 100%);
+    background: linear-gradient(to bottom, transparent 0%, rgba(29, 97, 169, 0.1) 100%);
 }
 
 .card-badge {
@@ -371,7 +371,7 @@
     justify-content: center;
     position: relative;
     z-index: 2;
-    box-shadow: 0 8px 20px rgba(234, 88, 12, 0.3);
+    box-shadow: 0 8px 20px rgba(29, 97, 169, 0.3);
     transition: all 0.3s ease;
 }
 
@@ -382,7 +382,7 @@
 
 .service-card:hover .card-icon {
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 12px 25px rgba(234, 88, 12, 0.4);
+    box-shadow: 0 12px 25px rgba(29, 97, 169, 0.4);
 }
 
 .card-body {
@@ -422,7 +422,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
 }
 
@@ -433,7 +433,7 @@
 .btn-orange:hover {
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(234, 88, 12, 0.3);
+    box-shadow: 0 8px 20px rgba(29, 97, 169, 0.3);
 }
 
 .bg-orange {
@@ -746,7 +746,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function markFieldError(fieldId, message) {
         const field = document.getElementById(fieldId);
         if (field) {
-            field.style.borderColor = '#dc2626';
+            field.style.borderColor = '#1d61a9';
             const errorElement = field.parentElement.querySelector('.form-error');
             if (errorElement) {
                 errorElement.textContent = message;
@@ -759,7 +759,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function clearFieldError(fieldId) {
         const field = document.getElementById(fieldId);
         if (field) {
-            field.style.borderColor = '#e2e8f0';
+            field.style.borderColor = '#f6f2e7';
             const errorElement = field.parentElement.querySelector('.form-error');
             if (errorElement) {
                 errorElement.style.opacity = '0';
@@ -771,7 +771,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function markCheckboxError(checkboxId, message) {
         const checkbox = document.getElementById(checkboxId);
         if (checkbox) {
-            checkbox.style.outline = '2px solid #dc2626';
+            checkbox.style.outline = '2px solid #1d61a9';
             const errorElement = checkbox.closest('.form-check').querySelector('.form-error');
             if (errorElement) {
                 errorElement.textContent = message;
@@ -803,10 +803,10 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 9999;
             padding: 15px 25px;
             border-radius: 8px;
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background: #f6f2e7;
+            color: #092442;
+            border: 1px solid rgba(9, 36, 66, 0.14);
+            box-shadow: 0 4px 12px rgba(9, 36, 66, 0.15);
             animation: slideInRight 0.3s ease;
             max-width: 350px;
         `;
@@ -834,10 +834,10 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 9999;
             padding: 15px 25px;
             border-radius: 8px;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background: rgba(141, 212, 227, 0.22);
+            color: rgba(9, 36, 66, 0.76);
+            border: 1px solid rgba(9, 36, 66, 0.14);
+            box-shadow: 0 4px 12px rgba(9, 36, 66, 0.15);
             animation: slideInRight 0.3s ease;
             max-width: 350px;
         `;
@@ -860,14 +860,14 @@ document.addEventListener('DOMContentLoaded', function() {
     formInputs.forEach(input => {
         input.addEventListener('input', function() {
             if (this.value.trim()) {
-                this.style.borderColor = '#10b981';
+                this.style.borderColor = '#8dd4e3';
                 const errorElement = this.parentElement.querySelector('.form-error');
                 if (errorElement) {
                     errorElement.style.opacity = '0';
                     errorElement.style.transform = 'translateY(-10px)';
                 }
             } else {
-                this.style.borderColor = '#e2e8f0';
+                this.style.borderColor = '#f6f2e7';
             }
         });
     });

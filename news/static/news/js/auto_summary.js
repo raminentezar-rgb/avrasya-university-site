@@ -258,7 +258,7 @@
                     void summaryEl.offsetWidth; // DOM reflow
                     summaryEl.classList.add('pulse-highlight');
 
-                    badge.innerHTML = `<span style="color: #10b981; font-weight: 600;"><i class="fa-solid fa-check"></i> Özet otomatik oluşturuldu (${summary.length} karakter)</span>`;
+                    badge.innerHTML = `<span style="color: #1d61a9; font-weight: 600;"><i class="fa-solid fa-check"></i> Özet otomatik oluşturuldu (${summary.length} karakter)</span>`;
                     if (countBadge) {
                         countBadge.style.display = 'inline-block';
                         countBadge.textContent = `${summary.length} karakter`;
@@ -290,7 +290,7 @@
             summaryEl.addEventListener('input', function () {
                 delete summaryEl.dataset.isAuto;
                 const len = summaryEl.value.length;
-                badge.innerHTML = `<span style="color: #64748b;"><i class="fa-solid fa-pencil"></i> Manuel düzenlendi (${len} karakter)</span>`;
+                badge.innerHTML = `<span style="color: rgba(9, 36, 66, 0.72);"><i class="fa-solid fa-pencil"></i> Manuel düzenlendi (${len} karakter)</span>`;
                 if (countBadge) {
                     countBadge.style.display = 'inline-block';
                     countBadge.textContent = `${len} karakter`;

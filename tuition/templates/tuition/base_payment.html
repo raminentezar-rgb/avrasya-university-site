@@ -14,19 +14,31 @@
     
     <style>
         :root {
-            --primary-bg: #0f172a;
-            --secondary-bg: #1e293b;
-            --accent-color: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.5);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --glass-bg: rgba(30, 41, 59, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary-bg: #092442;
+            --secondary-bg: #1d61a9;
+            --accent-color: #8dd4e3;
+            --accent-glow: rgba(141, 212, 227, 0.45);
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.75);
+            --glass-bg: rgba(9, 36, 66, 0.8);
+            --glass-border: rgba(141, 212, 227, 0.25);
+            --bs-primary: #1d61a9;
+            --bs-primary-rgb: 29, 97, 169;
+            --bs-secondary: #092442;
+            --bs-secondary-rgb: 9, 36, 66;
+            --bs-info: #8dd4e3;
+            --bs-info-rgb: 141, 212, 227;
+            --bs-light: #f6f2e7;
+            --bs-light-rgb: 246, 242, 231;
+            --bs-dark: #092442;
+            --bs-dark-rgb: 9, 36, 66;
         }
+        .text-muted { color: rgba(255, 255, 255, 0.75) !important; }
+        .text-primary { color: #8dd4e3 !important; }
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: radial-gradient(circle at top right, #1e1b4b, #0f172a, #020617);
+            background: radial-gradient(circle at top right, #1d61a9, #092442, #092442);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -48,14 +60,14 @@
             left: 10%;
             width: 300px;
             height: 300px;
-            background: rgba(59, 130, 246, 0.3);
+            background: rgba(29, 97, 169, 0.35);
         }
         .orb-2 {
             bottom: 10%;
             right: 10%;
             width: 400px;
             height: 400px;
-            background: rgba(139, 92, 246, 0.2);
+            background: rgba(141, 212, 227, 0.22);
             animation-delay: -5s;
         }
 
@@ -67,16 +79,24 @@
         /* Navbar */
         .payment-navbar {
             padding: 20px 0;
-            background: rgba(15, 23, 42, 0.5);
+            background: rgba(9, 36, 66, 0.65);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border);
             margin-bottom: 40px;
         }
 
+        .payment-navbar .text-primary {
+            color: #8dd4e3 !important;
+        }
+
+        .payment-navbar .text-muted {
+            color: rgba(255, 255, 255, 0.78) !important;
+        }
+
         .brand-logo {
             font-weight: 700;
             font-size: 1.5rem;
-            color: #fff;
+            color: #ffffff;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -94,15 +114,15 @@
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(9, 36, 66, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         /* Inputs */
         .form-control, .form-select {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
+            background: rgba(9, 36, 66, 0.65);
+            border: 1px solid rgba(141, 212, 227, 0.25);
+            color: #ffffff;
             padding: 15px 20px;
             border-radius: 12px;
             font-size: 1rem;
@@ -110,19 +130,19 @@
         }
 
         .form-control:focus, .form-select:focus {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(9, 36, 66, 0.85);
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-            color: #fff;
+            box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.2);
+            color: #ffffff;
         }
 
         .form-control::placeholder {
-            color: #64748b;
+            color: rgba(255, 255, 255, 0.55);
         }
 
         .input-group-text {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(9, 36, 66, 0.65);
+            border: 1px solid rgba(141, 212, 227, 0.25);
             border-right: none;
             color: var(--text-muted);
         }
@@ -133,7 +153,7 @@
 
         /* Buttons */
         .btn-glow {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            background: linear-gradient(135deg, #1d61a9 0%, #092442 100%);
             color: white;
             border: none;
             padding: 15px 30px;
@@ -151,7 +171,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #8dd4e3 0%, #1d61a9 100%);
             z-index: -1;
             transition: opacity 0.3s ease;
             opacity: 0;
@@ -169,16 +189,16 @@
 
         /* Alerts */
         .alert {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
+            background: rgba(246, 242, 231, 0.14);
+            border: 1px solid rgba(246, 242, 231, 0.35);
+            color: #f6f2e7;
             border-radius: 12px;
             backdrop-filter: blur(10px);
         }
         .alert-success {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            color: #86efac;
+            background: rgba(141, 212, 227, 0.15);
+            border: 1px solid rgba(141, 212, 227, 0.4);
+            color: #8dd4e3;
         }
 
         footer {
@@ -188,7 +208,7 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             border-top: 1px solid var(--glass-border);
-            background: rgba(15, 23, 42, 0.5);
+            background: rgba(9, 36, 66, 0.65);
             backdrop-filter: blur(10px);
         }
 

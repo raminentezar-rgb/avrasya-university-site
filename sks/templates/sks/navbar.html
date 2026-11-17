@@ -250,7 +250,7 @@
                                         <li><a class="dropdown-item" href="{% url 'fakulteler:fakulteler' %}">{% trans "Tüm Fakülteler" %}</a></li>
                                         <li><a class="dropdown-item"
                                                 href="{% url 'muhendislik_mimarlik:muhendislik_mimarlik' %}">{% trans "Mühendislik ve Mimarlık" %}</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'fen_edebiyat:fen_edebiyat' %}">{% trans "Fen ve Edebiyat" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'fen_edebiyat:fen_edebiyat' %}">{% trans "İnsan ve Toplum Bilimleri" %}</a></li>
                                         <li><a class="dropdown-item"
                                                 href="{% url 'iktisadi_idari:iktisadi_idari' %}">{% trans "İktisadi ve İdari Bilimler" %}</a></li>
                                         <li><a class="dropdown-item"
@@ -504,7 +504,7 @@
                                     </li>
                                     <li><a class="dropdown-item"
                                             href="{% url 'muhendislik_mimarlik:muhendislik_mimarlik' %}">{% trans "Mühendislik ve Mimarlık" %}</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'fen_edebiyat:fen_edebiyat' %}">{% trans "Fen ve Edebiyat" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'fen_edebiyat:fen_edebiyat' %}">{% trans "İnsan ve Toplum Bilimleri" %}</a></li>
                                     <li><a class="dropdown-item" href="{% url 'iktisadi_idari:iktisadi_idari' %}">{% trans "İktisadi ve İdari Bilimler" %}</a></li>
                                     <li><a class="dropdown-item"
                                             href="{% url 'saglik_bilimleri:saglik_bilimleri' %}">{% trans "Sağlık Bilimleri" %}</a></li>
@@ -838,22 +838,22 @@
 
     /* کلاس جدید برای تغییر رنگ لینک‌ها هنگام اسکرول */
     .navbar.scrolled .nav-link {
-        color: #1e90ff !important;
-        text-shadow: 0 2px 4px rgba(30, 144, 255, 0.4);
+        color: #1d61a9 !important;
+        text-shadow: 0 2px 4px rgba(29, 97, 169, 0.4);
         transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
     /* حفظ رنگ هاور در حالت اسکرول */
     .navbar.scrolled .nav-link:hover,
     .navbar.scrolled .nav-link:focus {
-        color: #0056b3 !important;
-        text-shadow: 0 2px 4px rgba(0, 86, 179, 0.4);
+        color: #1d61a9 !important;
+        text-shadow: 0 2px 4px rgba(29, 97, 169, 0.4);
     }
 
     /* حفظ رنگ برای منوی فعال در حالت اسکرول */
     .navbar.scrolled .nav-item.show>.nav-link,
     .navbar.scrolled .nav-link.active {
-        color: #0056b3 !important;
+        color: #1d61a9 !important;
     }
 
     /* (اختیاری) تغییر رنگ آیکون‌ها در حالت اسکرول */
@@ -863,7 +863,7 @@
 
     /* (اختیاری) تغییر رنگ dropdown-toggle در حالت اسکرول */
     .navbar.scrolled .dropdown-toggle::after {
-        border-top-color: #1e90ff;
+        border-top-color: #1d61a9;
     }
 
     /* تضمین کنتراست در حالت عادی */
@@ -896,7 +896,7 @@
     .header_icon_container .dropdown-menu {
         min-width: 250px;
         max-width: 300px;
-        background: rgba(247, 243, 233, 0.98) !important;
+        background: rgba(246, 242, 231, 0.98) !important;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border: 1px solid rgba(141, 212, 227, 0.3);
@@ -1118,7 +1118,7 @@
         width: 20px;
         height: 15px;
         border-radius: 2px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 3px rgba(9, 36, 66, 0.2);
         vertical-align: middle;
     }
 
@@ -1134,7 +1134,7 @@
 
     .header_side .language-dropdown {
         min-width: 200px !important;
-        background: rgba(247, 243, 233, 0.98) !important;
+        background: rgba(246, 242, 231, 0.98) !important;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border: 1px solid rgba(141, 212, 227, 0.3);
@@ -1165,7 +1165,7 @@
         width: 24px;
         height: 18px;
         border-radius: 3px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 4px rgba(9, 36, 66, 0.15);
         margin-right: 12px;
     }
 
@@ -1183,7 +1183,7 @@
 
     .header_side .language-dropdown .language-code.text-muted {
         font-size: 11px;
-        color: #666;
+        color: rgba(9, 36, 66, 0.72);
         display: block;
     }
 
@@ -1202,17 +1202,17 @@
 
     /* When navbar is scrolled */
     .navbar.scrolled .header_side .current-language {
-        background: rgba(30, 144, 255, 0.1);
-        border-color: rgba(30, 144, 255, 0.2);
+        background: rgba(29, 97, 169, 0.1);
+        border-color: rgba(29, 97, 169, 0.2);
     }
 
     .navbar.scrolled .header_side .language-code {
-        color: #1e90ff;
+        color: #1d61a9;
     }
 
     .navbar.scrolled .header_side .current-language:hover {
-        background: rgba(30, 144, 255, 0.2);
-        border-color: rgba(30, 144, 255, 0.3);
+        background: rgba(29, 97, 169, 0.2);
+        border-color: rgba(29, 97, 169, 0.3);
     }
 
     /* Responsive Design for Language Selector */

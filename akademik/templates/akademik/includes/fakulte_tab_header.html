@@ -1,0 +1,24 @@
+{% load i18n %}
+<div class="tab-header">
+    <ul class="tab-menu">
+        {% if show_bolumler %}
+        <li class="tab-menu-item active" data-tab="tab1">
+            <span>{{ bolumler_baslik }}</span>
+        </li>
+        {% endif %}
+        <li class="tab-menu-item {% if not show_bolumler %}active{% endif %}" data-tab="tab2">
+            <span>{{ tarihce_baslik }}</span>
+        </li>
+        <li class="tab-menu-item" data-tab="tab3">
+            <span>{{ mv_baslik }}</span>
+        </li>
+        <li class="tab-menu-item" data-tab="tab4">
+            <span>{{ mesaj_baslik }}</span>
+        </li>
+        {% for sekme in ek_sekmeler %}
+        <li class="tab-menu-item" data-tab="{{ sekme.id }}">
+            <span>{{ sekme.baslik }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
