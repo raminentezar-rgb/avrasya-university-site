@@ -4,16 +4,7 @@
 {% block content %}
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/auth.css' %}">
-
-{% comment %} <div class="auth-hero" style="margin-top: 240px;">
-    <div class="container">
-        <h1>{% trans "Welcome Back" %}</h1>
-        <p class="lead">{% trans "Sign in to access your support tickets and university resources" %}</p>
-    </div>
-</div> {% endcomment %}
-
-<div class="container auth-container" style="margin-top: 240px;">
+<div class="container auth-container auth-no-hero">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
             <div class="auth-card">
@@ -24,19 +15,62 @@
                             {% comment %} <i class="fas fa-graduation-cap"></i> {% endcomment %}
                         </div>
                     </div>
-                    <h2 style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">{% trans "Avrasya Üniversitesi'ne Giriş Yapın" %}</h2>
+                    <h2 style="font-family: Metropolis, sans-serif; font-weight: 800;">{% trans "Avrasya Üniversitesi'ne Giriş Yapın" %}</h2>
                     <p class="text-muted">{% trans "Devam etmek için kimlik bilgilerinizi girin." %}</p>
                 </div>
 
+                {% if user.is_authenticated %}
+                <div class="auth-session-banner">
+                    <div class="session-title">
+                        <i class="fas fa-check-circle mr-1"></i>
+                        {% trans "Şu anda oturumunuz açık:" %} {{ user.get_full_name|default:user.username }}
+                        <span class="small font-weight-normal">({{ user.username }})</span>
+                    </div>
+                    <div class="session-subtext small">
+                        {% trans "İsterseniz aşağıdaki kısayollardan devam edebilir veya farklı bir hesapla yeniden giriş yapabilirsiniz." %}
+                    </div>
+                    <div class="auth-session-actions">
+                        {% if user.is_staff or user.is_superuser or user.profile.role == 'staff' %}
+                        <a href="{% url 'support:department_dashboard' %}" class="btn btn-sm" style="background: #1d61a9; color: #ffffff;">
+                            <i class="fas fa-headset mr-1"></i> {% trans "Destek Paneli" %}
+                        </a>
+                        {% else %}
+                        <a href="{% url 'support:my_tickets' %}" class="btn btn-sm" style="background: #1d61a9; color: #ffffff;">
+                            <i class="fas fa-ticket-alt mr-1"></i> {% trans "Taleplerim" %}
+                        </a>
+                        {% endif %}
+                        {% if user.profile.role == 'staff' or user.profile.role == 'professor' or user.is_superuser %}
+                        <a href="{% url 'chat:index' %}" class="btn btn-sm" style="background: #092442; color: #8dd4e3; border: 1px solid #8dd4e3;">
+                            <i class="fas fa-comments mr-1"></i> {% trans "Sohbet" %}
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'core:index' %}" class="btn btn-sm btn-session-home">
+                            {% trans "Ana Sayfa" %}
+                        </a>
+                        <form method="post" action="{% url 'accounts:logout' %}" class="m-0">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-session-logout">
+                                <i class="fas fa-sign-out-alt mr-1"></i> {% trans "Çıkış Yap" %}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+
                 <form method="post" class="auth-form" id="loginForm">
                     {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
                     
-                    {% if form.errors %}
+                    {% if form.errors or form.non_field_errors %}
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <i class="fas fa-exclamation-triangle mr-2"></i>
-                        {% trans "Please enter a correct username and password. Note that both fields may be case-sensitive." %}
+                        {% if form.non_field_errors %}
+                            {% for err in form.non_field_errors %}{{ err }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+                        {% else %}
+                            {% trans "Kullanıcı adı veya parola hatalı. Her iki alanın da büyük/küçük harfe duyarlı olduğunu unutmayın." %}
+                        {% endif %}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">{% trans "&times;" %}</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     {% endif %}
@@ -117,8 +151,8 @@
                         </div>
                     </div>
                 </div>
-                <a href="{% url 'support:create_ticket' %}" class="auth-link small">
-                    <i class="fas fa-headset mr-1"></i> {% trans "Yardım mı gerek? IT destek ile iletişime geçin" %}
+                <a href="{% url 'support:search' %}" class="auth-link small">
+                    <i class="fas fa-headset mr-1"></i> {% trans "Yardım mı gerek? Destek Merkezi ile iletişime geçin" %}
                 </a>
             </div>
         </div>
@@ -200,6 +234,11 @@
         form.addEventListener('submit', function() {
             loginSpinner.classList.remove('d-none');
             loginBtn.disabled = true;
+        });
+
+        window.addEventListener('pageshow', function() {
+            loginSpinner.classList.add('d-none');
+            loginBtn.disabled = false;
         });
         
         // انیمیشن برای ورود

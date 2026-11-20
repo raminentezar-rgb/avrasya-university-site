@@ -61,6 +61,7 @@ class Notification(models.Model):
         ('message', 'پیام جدید'),
         ('mention', 'منشن'),
         ('system', 'سیستم'),
+        ('ticket', 'Destek Talebi'),
     ]
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
@@ -69,6 +70,7 @@ class Notification(models.Model):
     message = models.TextField()
     thread_id = models.IntegerField(null=True, blank=True)
     sender_id = models.IntegerField(null=True, blank=True)
+    link_url = models.CharField(max_length=255, blank=True)
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -86,6 +88,7 @@ class SupportThread(models.Model):
     email = models.EmailField(blank=True)
     language = models.CharField(max_length=10, default='tr')
     assigned_staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_support_threads')
+    human_handoff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -105,7 +108,29 @@ class SupportMessage(models.Model):
     sender_name = models.CharField(max_length=255)
     text = models.TextField()
     is_staff = models.BooleanField(default=False)
+    is_ai = models.BooleanField(default=False)
+    links = models.TextField(blank=True, default='[]')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_links(self):
+        import json
+        if isinstance(self.links, list):
+            return self.links
+        if not self.links:
+            return []
+        try:
+            data = json.loads(self.links)
+            return data if isinstance(data, list) else []
+        except (TypeError, ValueError):
+            return []
+
+    def save(self, *args, **kwargs):
+        import json
+        if isinstance(self.links, (list, dict)):
+            self.links = json.dumps(self.links, ensure_ascii=False)
+        elif not self.links:
+            self.links = '[]'
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Support Message'

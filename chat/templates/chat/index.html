@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-{% include "chat/header.html" %}
-
 {% load static %}
 {% load i18n %}
 <html lang="tr">
@@ -15,6 +13,8 @@
 
     <!-- Fonts and Styles -->
     <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/bootstrap4/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/main_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/responsive.css' %}?v=2">
     <link href="{% static 'core/main/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -47,39 +47,38 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1d61a9 0%, #1d61a9 100%);
+            background: #f6f2e7;
             min-height: 100vh;
             color: var(--text-dark);
         }
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, rgba(29, 97, 169, 0.85) 0%, rgba(29, 97, 169, 0.85) 100%);
-            padding: 40px 0 30px;
+            background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+            padding: 18px 0;
             text-align: center;
             position: relative;
-            margin-top: 80px;
-
+            margin-top: 0;
         }
 
         .hero-section h1 {
-            font-size: 2.2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: white;
             margin: 0;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
 
         .hero-section p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            margin-top: 8px;
+            color: #f6f2e7;
+            font-size: 0.9rem;
+            margin: 4px 0 0;
         }
 
         /* ===== Ana Sohbet Konteyneri ===== */
         .chat-wrapper {
             max-width: 1400px;
-            margin: 30px auto;
+            margin: 14px auto 20px;
             padding: 0 20px;
         }
 
@@ -87,8 +86,8 @@
             display: flex;
             gap: 20px;
             background: transparent;
-            height: calc(100vh - 180px);
-            min-height: 550px;
+            height: calc(100vh - 315px);
+            min-height: 430px;
         }
 
         /* ===== Kenar Çubuğu ===== */
@@ -97,7 +96,9 @@
             background: var(--pure-white);
             border-radius: 24px;
             box-shadow: var(--shadow-lg);
-            overflow: hidden;
+            overflow: visible;
+            position: relative;
+            z-index: 30;
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
@@ -107,6 +108,7 @@
             padding: 20px;
             background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-medium-blue));
             color: white;
+            border-radius: 24px 24px 0 0;
         }
 
         .user-profile {
@@ -524,6 +526,8 @@
             font-size: 0.85rem;
             line-height: 1.4;
             word-wrap: break-word;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         .message-meta {
@@ -716,28 +720,36 @@
         }
 
         /* Bildirimler */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
         .notifications-dropdown {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
+            position: relative;
+            z-index: 50;
         }
 
         .notifications-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(141, 212, 227, 0.35);
             border-radius: 50%;
             color: white;
             cursor: pointer;
             position: relative;
-            backdrop-filter: blur(8px);
             transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .notifications-btn:hover {
             background: var(--accent-light-blue);
+            color: var(--primary-dark-blue);
             transform: scale(1.05);
         }
 
@@ -760,15 +772,18 @@
 
         .notifications-panel {
             position: absolute;
-            top: 50px;
+            top: 46px;
             right: 0;
-            width: 340px;
+            left: auto;
+            width: 320px;
+            max-width: calc(100vw - 32px);
             background: white;
             border-radius: 16px;
             box-shadow: var(--shadow-lg);
             display: none;
-            z-index: 1001;
+            z-index: 2050;
             overflow: hidden;
+            border: 1px solid var(--border-light);
         }
 
         .notifications-panel.active { display: block; }
@@ -785,6 +800,7 @@
         .notifications-header h4 {
             font-size: 0.9rem;
             margin: 0;
+            color: #ffffff;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -957,31 +973,25 @@
             .chat-main { min-height: 500px; }
             .hero-section h1 { font-size: 1.5rem; }
             .message-bubble { max-width: 85%; }
-            .notifications-panel { width: 300px; right: -10px; }
+            .notifications-panel { width: min(310px, calc(100vw - 48px)); right: 0; left: auto; }
         }
     </style>
 </head>
 
 <body>
+    {% include "chat/header.html" %}
 
     <div class="hero-section">
-        <div class="container">
-            <h1>{% trans "Akademik ve İdari Personel" %}</h1>
-            <h1>{% trans "İletişim Merkezi" %}</h1>
-        </div>
-    </div>
-
-    <div class="notifications-dropdown">
-        <button class="notifications-btn" onclick="toggleNotifications()">
-            <i class="fas fa-bell"></i>
-            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
-        </button>
-        <div class="notifications-panel" id="notificationsPanel">
-            <div class="notifications-header">
-                <h4><i class="fas fa-bell"></i> {% trans "Bildirimler" %}</h4>
-                <button onclick="markAllNotificationsRead()">{% trans "Tümünü okundu işaretle" %}</button>
+        <div class="container d-flex justify-content-between align-items-center flex-wrap" style="gap: 12px;">
+            <div class="text-left">
+                <h1>{% trans "Akademik ve İdari Personel İletişim Merkezi" %}</h1>
+                <p>{% trans "Dahili mesajlaşma ve ziyaretçi canlı destek görüşmeleri" %}</p>
             </div>
-            <div class="notifications-list" id="notificationsList"></div>
+            {% if user.is_staff or user.profile.role == 'staff' %}
+            <a href="{% url 'support:department_dashboard' %}" class="btn btn-sm" style="background: rgba(255,255,255,0.14); color: #ffffff; border: 1px solid rgba(141,212,227,0.45); border-radius: 999px; padding: 8px 16px; font-weight: 600;">
+                <i class="fas fa-headset mr-1" style="color: #8dd4e3;"></i> {% trans "Destek Talepleri Panosu" %}
+            </a>
+            {% endif %}
         </div>
     </div>
 
@@ -997,11 +1007,23 @@
                             {% else %}
                             {{ user.first_name|first|default:user.username|first|upper }}
                             {% endif %}
-                            <span class="online-status"></span>
                         </div>
                         <div class="user-info">
-                            <h3>{{ user.get_full_name|default:user.username }}</h3>
-                            <p><i class="fas fa-circle" style="font-size: 8px;"></i> {% trans "Çevrimiçi" %}</p>
+                            <h3 style="color: #ffffff;">{{ user.get_full_name|default:user.username }}</h3>
+                            <p style="color: #8dd4e3;">{% if user.profile %}{{ user.profile.get_role_display }}{% else %}{% trans "Personel" %}{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="notifications-dropdown">
+                        <button class="notifications-btn" onclick="toggleNotifications(event)" title="{% trans 'Bildirimler' %}">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+                        <div class="notifications-panel" id="notificationsPanel">
+                            <div class="notifications-header">
+                                <h4><i class="fas fa-bell"></i> {% trans "Bildirimler" %}</h4>
+                                <button onclick="markAllNotificationsRead()">{% trans "Tümünü okundu işaretle" %}</button>
+                            </div>
+                            <div class="notifications-list" id="notificationsList"></div>
                         </div>
                     </div>
                 </div>
@@ -1027,10 +1049,9 @@
                 <div class="chat-list" id="chatList">
                     <div id="supportList" style="display: none;">
                         {% for s_thread in support_threads %}
-                        <div class="chat-item support-chat-item" data-session-key="{{ s_thread.session_key }}" onclick="openSupportChat('{{ s_thread.session_key }}')">
+                        <div class="chat-item support-chat-item" data-session-key="{{ s_thread.session_key }}" onclick="openSupportChat('{{ s_thread.session_key|escapejs }}')">
                             <div class="chat-avatar">
                                 <i class="fas fa-user"></i>
-                                <span class="status-dot online"></span>
                             </div>
                             <div class="chat-info">
                                 <div class="chat-name">
@@ -1038,7 +1059,7 @@
                                     <span class="chat-time">{{ s_thread.updated_at|date:'H:i' }}</span>
                                 </div>
                                 <div class="chat-message-preview">
-                                    <p>{{ s_thread.language|upper }} - {{ s_thread.session_key|truncatechars:12 }}</p>
+                                    <p>{% if s_thread.last_support_msg %}{{ s_thread.last_support_msg.text|truncatechars:28 }}{% else %}{{ s_thread.language|upper }} · {% trans "Yeni canlı sohbet" %}{% endif %}</p>
                                 </div>
                             </div>
                         </div>
@@ -1051,14 +1072,13 @@
 
                     <div id="regularChatList">
                         {% for item in threads_with_participants %}
-                        <div class="chat-item {% if forloop.first %}active{% endif %}" data-thread-id="{{ item.thread.id }}">
+                        <div class="chat-item {% if first_valid_thread and item.thread.id == first_valid_thread.thread.id %}active{% endif %}" data-thread-id="{{ item.thread.id }}">
                             <div class="chat-avatar">
                                 {% if item.other_user.profile and item.other_user.profile.avatar %}
                                 <img src="{{ item.other_user.profile.avatar.url }}" alt="{{ item.other_user.get_full_name }}">
                                 {% else %}
                                 {{ item.other_user.get_full_name|first|default:item.other_user.username|first|upper }}
                                 {% endif %}
-                                <span class="status-dot online"></span>
                             </div>
                             <div class="chat-info">
                                 <div class="chat-name">
@@ -1106,11 +1126,11 @@
                         </div>
                         <div class="header-text">
                             <h3 id="currentChatName">{% if first_valid_thread %}{{ first_valid_thread.other_user.get_full_name|default:first_valid_thread.other_user.username }}{% else %}Sohbet Seçin{% endif %}</h3>
-                            <p id="currentChatStatus"><i class="fas fa-circle" style="font-size: 6px;"></i> {% if first_valid_thread %}Çevrimiçi{% else %}Sohbet başlatın{% endif %}</p>
+                            <p id="currentChatStatus">{% if first_valid_thread %}{% trans "Dahili Mesajlaşma" %}{% else %}Sohbet başlatın{% endif %}</p>
                         </div>
                     </div>
                     <div>
-                        <button class="header-btn" onclick="deleteCurrentThread()" {% if not first_valid_thread %}disabled{% endif %}><i class="fas fa-trash-alt"></i></button>
+                        <button class="header-btn" id="deleteThreadBtn" title="{% trans 'Sohbeti Sil' %}" onclick="deleteCurrentThread()" {% if not first_valid_thread %}disabled{% endif %}><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
 
@@ -1182,29 +1202,45 @@
         let chatSocket = null;
         let notificationSocket = null;
         let currentSupportSession = null;
+        let supportPollTimer = null;
+        let regularPollTimer = null;
+        let lastSupportMsgId = 0;
+        let initialUsersListHtml = '';
+        const renderedSupportMsgIds = new Set();
 
         document.addEventListener('DOMContentLoaded', function() {
+            const usersListEl = document.getElementById('usersList');
+            if (usersListEl) initialUsersListHtml = usersListEl.innerHTML;
+
             document.querySelectorAll('.chat-item[data-thread-id]').forEach(item => {
                 item.addEventListener('click', function() {
                     document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');
+                    stopSupportPolling();
+                    currentSupportSession = null;
                     currentThreadId = this.dataset.threadId;
                     document.getElementById('messageInput').disabled = false;
                     document.querySelector('.attach-btn').disabled = false;
                     document.querySelector('.send-btn').disabled = false;
+                    document.getElementById('deleteThreadBtn').disabled = false;
                     loadMessages(currentThreadId);
                     updateChatHeader(this);
                     connectChatSocket(currentThreadId);
                 });
             });
 
-            if (currentThreadId) loadMessages(currentThreadId);
+            if (currentThreadId) {
+                loadMessages(currentThreadId);
+                connectChatSocket(currentThreadId);
+            }
+            startRegularPolling();
 
-            document.getElementById('chatSearch')?.addEventListener('keyup', function(e) {
-                const query = this.value.toLowerCase();
-                document.querySelectorAll('#regularChatList .chat-item').forEach(item => {
+            document.getElementById('chatSearch')?.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                document.querySelectorAll('#regularChatList .chat-item, #supportList .chat-item').forEach(item => {
                     const name = item.querySelector('.chat-name h4')?.textContent.toLowerCase() || '';
-                    item.style.display = name.includes(query) ? 'flex' : 'none';
+                    const preview = item.querySelector('.chat-message-preview')?.textContent.toLowerCase() || '';
+                    item.style.display = (!query || name.includes(query) || preview.includes(query)) ? 'flex' : 'none';
                 });
             });
 
@@ -1229,6 +1265,49 @@
                 .catch(err => console.error('Mesaj yükleme hatası:', err));
         }
 
+        function buildMessageHtml(msg) {
+            const isSent = !!msg.is_sent;
+            return `
+                <div class="message-wrapper ${isSent ? 'sent' : 'received'}" data-message-id="${msg.id || ''}">
+                    <div class="message-bubble">
+                        ${msg.file_url ? `
+                        <div class="file-message">
+                            <div class="file-icon"><i class="fas fa-file"></i></div>
+                            <div class="file-info">
+                                <div class="file-name">${escapeHtml(msg.file_name || 'Dosya')}</div>
+                                <div class="file-size">${msg.file_size ? (msg.file_size/1024).toFixed(1)+' KB' : ''}</div>
+                            </div>
+                            <a href="${escapeHtml(msg.file_url)}" class="file-download" download><i class="fas fa-download"></i></a>
+                        </div>
+                        ` : ''}
+                        ${msg.text ? `<div class="message-text">${escapeHtml(msg.text)}</div>` : ''}
+                        <div class="message-meta">
+                            <span>${escapeHtml(msg.created_at || '')}</span>
+                            ${isSent ? `<i class="fas ${msg.is_read ? 'fa-check-double' : 'fa-check'}"></i>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function appendRenderedMessage(msg) {
+            const container = document.getElementById('messagesContainer');
+            if (msg.id && container.querySelector(`.message-wrapper[data-message-id="${msg.id}"]`)) {
+                return;
+            }
+            const emptyState = container.querySelector('.empty-state');
+            if (emptyState) emptyState.remove();
+
+            const msgDate = msg.created_at_full ? new Date(msg.created_at_full).toLocaleDateString('tr-TR') : null;
+            const dateDividers = container.querySelectorAll('.date-text');
+            const lastDate = dateDividers.length > 0 ? dateDividers[dateDividers.length - 1].textContent : null;
+            if (msgDate && lastDate !== msgDate) {
+                container.innerHTML += `<div class="message-date-divider"><span class="date-text">${escapeHtml(msgDate)}</span></div>`;
+            }
+            container.innerHTML += buildMessageHtml(msg);
+            container.scrollTop = container.scrollHeight;
+        }
+
         function renderMessages(messages) {
             const container = document.getElementById('messagesContainer');
             container.innerHTML = '';
@@ -1241,34 +1320,94 @@
             messages.forEach(msg => {
                 const msgDate = new Date(msg.created_at_full).toLocaleDateString('tr-TR');
                 if (lastDate !== msgDate) {
-                    container.innerHTML += `<div class="message-date-divider"><span class="date-text">${msgDate}</span></div>`;
+                    container.innerHTML += `<div class="message-date-divider"><span class="date-text">${escapeHtml(msgDate)}</span></div>`;
                     lastDate = msgDate;
                 }
-
-                const isSent = msg.is_sent;
-                container.innerHTML += `
-                    <div class="message-wrapper ${isSent ? 'sent' : 'received'}">
-                        <div class="message-bubble">
-                            ${msg.file_url ? `
-                            <div class="file-message">
-                                <div class="file-icon"><i class="fas fa-file"></i></div>
-                                <div class="file-info">
-                                    <div class="file-name">${msg.file_name || 'Dosya'}</div>
-                                    <div class="file-size">${msg.file_size ? (msg.file_size/1024).toFixed(1)+' KB' : ''}</div>
-                                </div>
-                                <a href="${msg.file_url}" class="file-download" download><i class="fas fa-download"></i></a>
-                            </div>
-                            ` : ''}
-                            ${msg.text ? `<div class="message-text">${escapeHtml(msg.text)}</div>` : ''}
-                            <div class="message-meta">
-                                <span>${msg.created_at || ''}</span>
-                                ${isSent ? `<i class="fas ${msg.is_read ? 'fa-check-double' : 'fa-check'}"></i>` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `;
+                container.innerHTML += buildMessageHtml(msg);
             });
             container.scrollTop = container.scrollHeight;
+        }
+
+        function appendSupportMessage(msg) {
+            if (msg.id) {
+                if (renderedSupportMsgIds.has(msg.id)) return;
+                renderedSupportMsgIds.add(msg.id);
+                if (msg.id > lastSupportMsgId) lastSupportMsgId = msg.id;
+            }
+            const container = document.getElementById('messagesContainer');
+            const emptyState = container.querySelector('.empty-state');
+            if (emptyState) emptyState.remove();
+
+            const rawText = msg.text || msg.message || '';
+            const aiTag = msg.is_ai ? '<div style="font-size:11px;font-weight:700;opacity:0.85;margin-bottom:4px;"><i class="fas fa-robot"></i> Avrasya AI Asistan</div>' : '';
+            let linksHtml = '';
+            if (Array.isArray(msg.links) && msg.links.length > 0) {
+                linksHtml = '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">' + msg.links.map(l => {
+                    const u = (l.url && (l.url.startsWith('/') || l.url.startsWith('http'))) ? l.url : '#';
+                    return `<a href="${escapeHtml(u)}" target="_blank" style="font-size:11px;background:rgba(255,255,255,0.2);color:inherit;border:1px solid rgba(255,255,255,0.35);padding:3px 8px;border-radius:999px;text-decoration:none;"><i class="fas fa-link"></i> ${escapeHtml(l.title || '')}</a>`;
+                }).join('') + '</div>';
+            }
+
+            container.innerHTML += `
+                <div class="message-wrapper ${msg.is_staff ? 'sent' : 'received'}">
+                    <div class="message-bubble">
+                        ${aiTag}
+                        <div class="message-text">${escapeHtml(rawText).replace(/\n/g, '<br>')}</div>
+                        ${linksHtml}
+                        <div class="message-meta"><span>${escapeHtml(msg.created_at || '')}</span></div>
+                    </div>
+                </div>
+            `;
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function stopSupportPolling() {
+            if (supportPollTimer) {
+                clearInterval(supportPollTimer);
+                supportPollTimer = null;
+            }
+        }
+
+        function startSupportPolling(sessionKey) {
+            stopSupportPolling();
+            supportPollTimer = setInterval(() => {
+                if (
+                    currentSupportSession === sessionKey &&
+                    document.querySelector('.tab-btn[data-tab="support"]')?.classList.contains('active') &&
+                    (!supportSocket || supportSocket.readyState !== WebSocket.OPEN)
+                ) {
+                    const url = `/chat/support/${encodeURIComponent(sessionKey)}/messages/${lastSupportMsgId ? `?after_id=${lastSupportMsgId}` : ''}`;
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success && Array.isArray(data.messages)) {
+                                data.messages.forEach(appendSupportMessage);
+                            }
+                        })
+                        .catch(() => {});
+                }
+            }, 4000);
+        }
+
+        function startRegularPolling() {
+            if (regularPollTimer) clearInterval(regularPollTimer);
+            regularPollTimer = setInterval(() => {
+                if (
+                    currentThreadId &&
+                    !currentSupportSession &&
+                    document.querySelector('.tab-btn[data-tab="all"]')?.classList.contains('active') &&
+                    (!chatSocket || chatSocket.readyState !== WebSocket.OPEN)
+                ) {
+                    fetch(`/chat/thread/${currentThreadId}/messages/`)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.messages) {
+                                data.messages.forEach(appendRenderedMessage);
+                            }
+                        })
+                        .catch(() => {});
+                }
+            }, 5000);
         }
 
         function sendMessage(event) {
@@ -1286,8 +1425,30 @@
 
             if (currentSupportSession && document.querySelector('.tab-btn[data-tab="support"]')?.classList.contains('active')) {
                 if (supportSocket && supportSocket.readyState === WebSocket.OPEN) {
-                    supportSocket.send(JSON.stringify({ type: 'message', message: text, sender_name: '{{ user.get_full_name|default:user.username }}' }));
+                    supportSocket.send(JSON.stringify({ type: 'message', message: text }));
                     input.value = '';
+                } else {
+                    fetch('/chat/support/send/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken'),
+                        },
+                        body: JSON.stringify({
+                            session_key: currentSupportSession,
+                            message: text,
+                        }),
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success && data.message) {
+                            input.value = '';
+                            appendSupportMessage(data.message);
+                        } else {
+                            alert(data.error || 'Canlı destek mesajı gönderilemedi');
+                        }
+                    })
+                    .catch(err => console.error('Hata:', err));
                 }
                 return;
             }
@@ -1307,8 +1468,12 @@
                 if (data.success) {
                     input.value = '';
                     fileInput.value = '';
-                    // WS will automatically append the message
-                } else alert('Mesaj gönderilemedi');
+                    if (data.message) {
+                        appendRenderedMessage(data.message);
+                    }
+                } else {
+                    alert(data.error || 'Mesaj gönderilemedi');
+                }
             })
             .catch(err => console.error('Hata:', err));
         }
@@ -1326,7 +1491,7 @@
         function updateChatHeader(chatItem) {
             const name = chatItem.querySelector('.chat-name h4')?.textContent || 'Sohbet';
             document.getElementById('currentChatName').textContent = name;
-            document.getElementById('currentChatStatus').innerHTML = '<i class="fas fa-circle" style="font-size: 6px;"></i> Çevrimiçi';
+            document.getElementById('currentChatStatus').textContent = 'Dahili Mesajlaşma';
         }
 
         function switchChatTab(tab, event) {
@@ -1345,50 +1510,50 @@
 
         function openSupportChat(sessionKey) {
             currentSupportSession = sessionKey;
+            lastSupportMsgId = 0;
+            renderedSupportMsgIds.clear();
+            stopSupportPolling();
             document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
             document.querySelector(`.chat-item[data-session-key="${sessionKey}"]`)?.classList.add('active');
             if (supportSocket) supportSocket.close();
 
-            fetch(`/chat/support/${sessionKey}/messages/`)
+            document.getElementById('messageInput').disabled = false;
+            document.querySelector('.send-btn').disabled = false;
+            document.querySelector('.attach-btn').disabled = true;
+            document.getElementById('deleteThreadBtn').disabled = true;
+
+            fetch(`/chat/support/${encodeURIComponent(sessionKey)}/messages/`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
                         document.getElementById('currentChatName').textContent = data.visitor_name || 'Ziyaretçi';
-                        document.getElementById('currentChatStatus').innerHTML = '<i class="fas fa-circle" style="font-size: 6px;"></i> Canlı Destek';
+                        document.getElementById('currentChatStatus').textContent = 'Canlı Destek';
                         const container = document.getElementById('messagesContainer');
                         container.innerHTML = '';
-                        data.messages.forEach(msg => {
-                            container.innerHTML += `
-                                <div class="message-wrapper ${msg.is_staff ? 'sent' : 'received'}">
-                                    <div class="message-bubble">
-                                        <div class="message-text">${escapeHtml(msg.text)}</div>
-                                        <div class="message-meta"><span>${msg.created_at || ''}</span></div>
-                                    </div>
-                                </div>
-                            `;
-                        });
+                        if (data.messages.length === 0) {
+                            container.innerHTML = '<div class="empty-state"><i class="fas fa-headset"></i><h3>Henüz mesaj yok</h3><p>Ziyaretçiden mesaj bekleniyor</p></div>';
+                        } else {
+                            data.messages.forEach(appendSupportMessage);
+                        }
                         container.scrollTop = container.scrollHeight;
                         connectSupportSocket(sessionKey);
+                        startSupportPolling(sessionKey);
                     }
                 });
         }
 
         function connectSupportSocket(sessionKey) {
             const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-            supportSocket = new WebSocket(`${protocol}://${window.location.host}/ws/support/${sessionKey}/`);
+            try {
+                supportSocket = new WebSocket(`${protocol}://${window.location.host}/ws/support/${sessionKey}/`);
+            } catch (e) {
+                supportSocket = null;
+                return;
+            }
             supportSocket.onmessage = function(e) {
                 const data = JSON.parse(e.data);
                 if (data.type === 'message') {
-                    const container = document.getElementById('messagesContainer');
-                    container.innerHTML += `
-                        <div class="message-wrapper ${data.is_staff ? 'sent' : 'received'}">
-                            <div class="message-bubble">
-                                <div class="message-text">${escapeHtml(data.message)}</div>
-                                <div class="message-meta"><span>${data.created_at || ''}</span></div>
-                            </div>
-                        </div>
-                    `;
-                    container.scrollTop = container.scrollHeight;
+                    appendSupportMessage(data);
                 }
             };
         }
@@ -1400,44 +1565,19 @@
             chatSocket.onmessage = function(e) {
                 const data = JSON.parse(e.data);
                 if (data.type === 'message') {
-                    const container = document.getElementById('messagesContainer');
                     const isSent = data.sender_id == "{{ user.id }}";
-                    
-                    // Remove empty state if present
-                    const emptyState = container.querySelector('.empty-state');
-                    if (emptyState) emptyState.remove();
+                    appendRenderedMessage({
+                        id: data.message_id,
+                        text: data.message,
+                        file_url: data.file_url,
+                        file_name: data.file_name,
+                        file_size: data.file_size,
+                        created_at: data.created_at,
+                        created_at_full: data.created_at_full,
+                        is_read: data.is_read,
+                        is_sent: isSent
+                    });
 
-                    const msgDate = data.created_at_full ? new Date(data.created_at_full).toLocaleDateString('tr-TR') : null;
-                    const dateDividers = container.querySelectorAll('.date-text');
-                    const lastDate = dateDividers.length > 0 ? dateDividers[dateDividers.length - 1].textContent : null;
-                    
-                    if (msgDate && lastDate !== msgDate) {
-                        container.innerHTML += `<div class="message-date-divider"><span class="date-text">${msgDate}</span></div>`;
-                    }
-
-                    container.innerHTML += `
-                        <div class="message-wrapper ${isSent ? 'sent' : 'received'}">
-                            <div class="message-bubble">
-                                ${data.file_url ? `
-                                <div class="file-message">
-                                    <div class="file-icon"><i class="fas fa-file"></i></div>
-                                    <div class="file-info">
-                                        <div class="file-name">${data.file_name || 'Dosya'}</div>
-                                        <div class="file-size">${data.file_size ? (data.file_size/1024).toFixed(1)+' KB' : ''}</div>
-                                    </div>
-                                    <a href="${data.file_url}" class="file-download" download><i class="fas fa-download"></i></a>
-                                </div>
-                                ` : ''}
-                                ${data.message ? `<div class="message-text">${escapeHtml(data.message)}</div>` : ''}
-                                <div class="message-meta">
-                                    <span>${data.created_at || ''}</span>
-                                    ${isSent ? `<i class="fas ${data.is_read ? 'fa-check-double' : 'fa-check'}"></i>` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    container.scrollTop = container.scrollHeight;
-                    
                     // Mark as read if not sent by us
                     if (!isSent) {
                         fetch('/chat/mark-read/', {
@@ -1455,21 +1595,32 @@
 
         function connectNotificationSocket() {
             const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-            notificationSocket = new WebSocket(`${protocol}://${window.location.host}/ws/notifications/`);
-            notificationSocket.onmessage = function(e) {
-                const data = JSON.parse(e.data);
-                if (data.type === 'unread_count') {
-                    const badge = document.getElementById('notificationBadge');
-                    if (data.count > 0) {
-                        badge.textContent = data.count > 99 ? '99+' : data.count;
-                        badge.style.display = 'flex';
-                    } else {
-                        badge.style.display = 'none';
+            try {
+                notificationSocket = new WebSocket(`${protocol}://${window.location.host}/ws/notifications/`);
+            } catch (e) {
+                notificationSocket = null;
+            }
+            if (notificationSocket) {
+                notificationSocket.onmessage = function(e) {
+                    const data = JSON.parse(e.data);
+                    if (data.type === 'unread_count') {
+                        const badge = document.getElementById('notificationBadge');
+                        if (data.count > 0) {
+                            badge.textContent = data.count > 99 ? '99+' : data.count;
+                            badge.style.display = 'flex';
+                        } else {
+                            badge.style.display = 'none';
+                        }
+                    } else if (data.type === 'notification' || data.type === 'new_support_request') {
+                        fetchNotifications();
                     }
-                } else if (data.type === 'notification' || data.type === 'new_support_request') {
+                };
+            }
+            setInterval(() => {
+                if (!notificationSocket || notificationSocket.readyState !== WebSocket.OPEN) {
                     fetchNotifications();
                 }
-            };
+            }, 10000);
         }
 
         function fetchNotifications() {
@@ -1493,24 +1644,32 @@
                 return;
             }
             container.innerHTML = notifications.map(n => `
-                <div class="notification-item ${n.is_read ? '' : 'unread'}" onclick="openThreadFromNotification(${n.thread_id}, ${n.id})">
-                    <div class="notification-icon"><i class="fas fa-envelope"></i></div>
+                <div class="notification-item ${n.is_read ? '' : 'unread'}" data-notif-id="${n.id}" data-thread-id="${n.thread_id || ''}" data-link-url="${escapeHtml(n.link_url || '')}" onclick="handleNotificationClick(this)">
+                    <div class="notification-icon"><i class="fas ${n.type === 'ticket' ? 'fa-ticket-alt' : 'fa-envelope'}"></i></div>
                     <div class="notification-content">
-                        <div class="notification-title">${escapeHtml(n.title || 'Yeni mesaj')}</div>
+                        <div class="notification-title">${escapeHtml(n.title || 'Yeni bildirim')}</div>
                         <div class="notification-message">${escapeHtml(n.message || '')}</div>
-                        <div class="notification-time">${n.created_at?.split(' ')[1] || ''}</div>
+                        <div class="notification-time">${escapeHtml(n.created_at?.split(' ')[1] || '')}</div>
                     </div>
                 </div>
             `).join('');
         }
 
-        function openThreadFromNotification(threadId, notificationId) {
+        function handleNotificationClick(el) {
+            const notificationId = Number(el.dataset.notifId);
+            const threadId = el.dataset.threadId;
+            const linkUrl = el.dataset.linkUrl;
+            markNotificationRead(notificationId);
+            document.getElementById('notificationsPanel')?.classList.remove('active');
+
+            if (linkUrl) {
+                window.location.href = linkUrl;
+                return;
+            }
             if (threadId) {
-                markNotificationRead(notificationId);
                 const chatItem = document.querySelector(`.chat-item[data-thread-id="${threadId}"]`);
                 if (chatItem) chatItem.click();
                 else window.location.href = `/chat/?thread=${threadId}`;
-                document.getElementById('notificationsPanel')?.classList.remove('active');
             }
         }
 
@@ -1523,7 +1682,18 @@
         }
 
         function markAllNotificationsRead() { markNotificationRead(); }
-        function toggleNotifications() { document.getElementById('notificationsPanel')?.classList.toggle('active'); }
+        function toggleNotifications(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('notificationsPanel')?.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            const dropdown = document.querySelector('.notifications-dropdown');
+            const panel = document.getElementById('notificationsPanel');
+            if (panel && panel.classList.contains('active') && dropdown && !dropdown.contains(e.target)) {
+                panel.classList.remove('active');
+            }
+        });
 
         function openNewChatModal() { document.getElementById('newChatModal').classList.add('active'); }
         function closeNewChatModal() { document.getElementById('newChatModal').classList.remove('active'); }
@@ -1536,12 +1706,19 @@
         }
 
         function searchUsers() {
-            const query = document.getElementById('userSearch').value;
-            if (query.length < 2) return;
+            const query = document.getElementById('userSearch').value.trim();
+            const list = document.getElementById('usersList');
+            if (query.length < 2) {
+                if (initialUsersListHtml) list.innerHTML = initialUsersListHtml;
+                return;
+            }
             fetch(`/chat/search-users/?q=${encodeURIComponent(query)}`)
                 .then(res => res.json())
                 .then(data => {
-                    const list = document.getElementById('usersList');
+                    if (!data.users || !data.users.length) {
+                        list.innerHTML = '<div style="padding: 24px; text-align: center; color: #1d61a9;">Kullanıcı bulunamadı</div>';
+                        return;
+                    }
                     list.innerHTML = data.users.map(u => `
                         <div class="user-item" data-user-id="${u.id}" onclick="selectUser(this)">
                             <div class="user-avatar-lg">${u.avatar ? `<img src="${u.avatar}" style="width:100%;height:100%;border-radius:50%;">` : (u.name?.charAt(0) || '?')}</div>
@@ -1582,7 +1759,11 @@
             return value;
         }
 
-        function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
+        function escapeHtml(str) { if (!str) return ''; return String(str).replace(/[&<>"]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; if (m === '"') return '&quot;'; return m; }); }
     </script>
+    <script src="{% static 'core/main/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'core/main/styles/bootstrap4/popper.js' %}"></script>
+    <script src="{% static 'core/main/styles/bootstrap4/bootstrap.min.js' %}"></script>
+    <script src="{% static 'core/main/js/custom.js' %}"></script>
 </body>
 </html>

@@ -70,12 +70,29 @@ class FakulteSayfasi(LocalizedContentMixin, models.Model):
         _('Bölümler Tanıtım Metni (Opsiyonel)'),
         blank=True,
     )
+    bolumler_liste_baslik = models.CharField(
+        _('Bölümler Liste Başlığı'),
+        max_length=200,
+        default='Lisans Programları',
+        blank=True,
+    )
+    bolumler_liste_aciklama = models.CharField(
+        _('Bölümler Liste Açıklaması'),
+        max_length=400,
+        default='Aşağıda fakültemiz bünyesindeki programlar hakkında detaylı bilgileri bulabilirsiniz:',
+        blank=True,
+    )
 
     # Yıllık Değişebilen Fakülte İstatistikleri
-    ogrenci_sayisi = models.CharField(_('Toplam Öğrenci Sayısı'), max_length=50, blank=True)
-    akademik_kadro_sayisi = models.CharField(_('Akademik Kadro Sayısı'), max_length=50, blank=True)
-    uluslararasi_anlasma_sayisi = models.CharField(_('Uluslararası Anlaşma Sayısı'), max_length=50, blank=True)
-    mezun_istihdam_orani = models.CharField(_('Mezun İstihdam Oranı (%)'), max_length=50, blank=True)
+    istatistikleri_goster = models.BooleanField(_('İstatistik Kartlarını Göster'), default=True)
+    istatistik_1_baslik = models.CharField(_('1. İstatistik Etiketi'), max_length=100, default='Toplam Öğrenci', blank=True)
+    ogrenci_sayisi = models.CharField(_('1. İstatistik Değeri'), max_length=50, blank=True)
+    istatistik_2_baslik = models.CharField(_('2. İstatistik Etiketi'), max_length=100, default='Akademik Kadro', blank=True)
+    akademik_kadro_sayisi = models.CharField(_('2. İstatistik Değeri'), max_length=50, blank=True)
+    istatistik_3_baslik = models.CharField(_('3. İstatistik Etiketi'), max_length=100, default='Uluslararası Anlaşma', blank=True)
+    uluslararasi_anlasma_sayisi = models.CharField(_('3. İstatistik Değeri'), max_length=50, blank=True)
+    istatistik_4_baslik = models.CharField(_('4. İstatistik Etiketi'), max_length=100, default='Mezun İstihdam Oranı', blank=True)
+    mezun_istihdam_orani = models.CharField(_('4. İstatistik Değeri (%)'), max_length=50, blank=True)
 
     # Sekme: Tarihçe
     tarihce_baslik = models.CharField(
@@ -227,6 +244,55 @@ class FakulteEkSekme(LocalizedContentMixin, models.Model):
 
     def __str__(self):
         return f"{self.fakulte.fakulte_adi} - {self.baslik}"
+
+
+class FakulteBolumKarti(LocalizedContentMixin, models.Model):
+    """Fakülte Bölümler Sekmesindeki Bölüm / Program Kartları"""
+
+    fakulte = models.ForeignKey(
+        FakulteSayfasi,
+        on_delete=models.CASCADE,
+        related_name='bolum_kartlari',
+        verbose_name=_('Fakülte Sayfası'),
+    )
+    ad = models.CharField(_('Bölüm / Program Adı'), max_length=200)
+    kisa_kod = models.CharField(
+        _('Kısa Kod (Rozet)'),
+        max_length=24,
+        blank=True,
+        help_text=_('Örn: İDE, PSK, ADL'),
+    )
+    ikon = models.CharField(
+        _('FontAwesome İkon'),
+        max_length=80,
+        default='fas fa-graduation-cap',
+        blank=True,
+    )
+    program_turu = models.CharField(
+        _('Derece / Program Türü'),
+        max_length=120,
+        default='Lisans Derecesi',
+        blank=True,
+    )
+    egitim_dili = models.CharField(_('Eğitim Dili'), max_length=120, default='Türkçe', blank=True)
+    egitim_suresi = models.CharField(_('Eğitim Süresi'), max_length=80, default='4 Yıl', blank=True)
+    aciklama = models.TextField(_('Kısa Açıklama'), blank=True)
+    detay_url = models.CharField(
+        _('Detaylı Bilgi Linki'),
+        max_length=300,
+        blank=True,
+        help_text=_('Örn: /ingiliz_dili_edebiyati/'),
+    )
+    sira = models.PositiveIntegerField(_('Sıralama'), default=0)
+    aktif = models.BooleanField(_('Yayında'), default=True)
+
+    class Meta:
+        verbose_name = _('Fakülte Bölüm Kartı')
+        verbose_name_plural = _('Fakülte Bölümler Kartları')
+        ordering = ['sira', 'id']
+
+    def __str__(self):
+        return f"{self.ad} ({self.fakulte.fakulte_adi})"
 
 
 class BolumSayfasi(LocalizedContentMixin, models.Model):

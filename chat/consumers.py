@@ -219,6 +219,9 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 class SupportConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.session_key = self.scope['url_route']['kwargs']['session_key']
+        if not self.session_key or len(self.session_key) < 8:
+            await self.close()
+            return
         self.group_name = f'support_{self.session_key}'
 
         await self.channel_layer.group_add(
@@ -226,7 +229,8 @@ class SupportConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
-        if self.scope['user'].is_authenticated and self.scope['user'].is_staff:
+        user = self.scope.get('user')
+        if user and user.is_authenticated and user.is_staff:
             await self.channel_layer.group_add(
                 'support_staff_notifications',
                 self.channel_name
@@ -235,40 +239,53 @@ class SupportConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(
-            self.group_name,
-            self.channel_name
-        )
+        if hasattr(self, 'group_name'):
+            await self.channel_layer.group_discard(
+                self.group_name,
+                self.channel_name
+            )
 
-        if self.scope['user'].is_authenticated and self.scope['user'].is_staff:
+        user = self.scope.get('user')
+        if user and user.is_authenticated and user.is_staff:
             await self.channel_layer.group_discard(
                 'support_staff_notifications',
                 self.channel_name
             )
 
     async def receive(self, text_data):
-        data = json.loads(text_data)
+        try:
+            data = json.loads(text_data)
+        except json.JSONDecodeError:
+            return
         message_type = data.get('type', 'message')
 
         if message_type == 'message':
-            text = data.get('message', '').strip()
-            sender_name = data.get('sender_name', 'Ziyaretçi')
+            text = (data.get('message') or '').strip()[:2000]
+            user = self.scope.get('user')
+            is_staff = bool(user and user.is_authenticated and user.is_staff)
+            if is_staff:
+                sender_name = user.get_full_name() or user.username
+            else:
+                sender_name = ((data.get('sender_name') or 'Ziyaretçi').strip()[:80]) or 'Ziyaretçi'
 
             if text:
-                msg = await self.save_support_message(text, sender_name)
+                msg = await self.save_support_message(text, sender_name, is_staff)
 
                 await self.channel_layer.group_send(
                     self.group_name,
                     {
                         'type': 'chat_message',
+                        'id': msg.id,
                         'message': text,
                         'sender_name': sender_name,
-                        'is_staff': self.scope['user'].is_authenticated and self.scope['user'].is_staff,
+                        'is_staff': is_staff,
+                        'is_ai': msg.is_ai,
+                        'links': msg.get_links(),
                         'created_at': msg.created_at.strftime('%H:%M')
                     }
                 )
 
-                if not (self.scope['user'].is_authenticated and self.scope['user'].is_staff):
+                if not is_staff:
                     await self.channel_layer.group_send(
                         'support_staff_notifications',
                         {
@@ -278,13 +295,31 @@ class SupportConsumer(AsyncWebsocketConsumer):
                             'message': text[:50]
                         }
                     )
+                    ai_msg = await self.generate_ai_reply(msg.thread_id, text, sender_name)
+                    if ai_msg:
+                        await self.channel_layer.group_send(
+                            self.group_name,
+                            {
+                                'type': 'chat_message',
+                                'id': ai_msg.id,
+                                'message': ai_msg.text,
+                                'sender_name': ai_msg.sender_name,
+                                'is_staff': True,
+                                'is_ai': True,
+                                'links': ai_msg.get_links(),
+                                'created_at': ai_msg.created_at.strftime('%H:%M'),
+                            }
+                        )
 
     async def chat_message(self, event):
         await self.send(text_data=json.dumps({
             'type': 'message',
+            'id': event.get('id'),
             'message': event['message'],
             'sender_name': event['sender_name'],
             'is_staff': event['is_staff'],
+            'is_ai': event.get('is_ai', False),
+            'links': event.get('links', []),
             'created_at': event['created_at']
         }))
 
@@ -297,23 +332,32 @@ class SupportConsumer(AsyncWebsocketConsumer):
         }))
 
     @database_sync_to_async
-    def save_support_message(self, text, sender_name):
+    def save_support_message(self, text, sender_name, is_staff):
         thread, _ = SupportThread.objects.get_or_create(
             session_key=self.session_key,
-            defaults={'full_name': sender_name}
+            defaults={'full_name': sender_name if not is_staff else 'Ziyaretçi'}
         )
-
-        is_staff = self.scope['user'].is_authenticated and self.scope['user'].is_staff
 
         msg = SupportMessage.objects.create(
             thread=thread,
             sender_user=self.scope['user'] if is_staff else None,
             sender_name=sender_name,
             text=text,
-            is_staff=is_staff
+            is_staff=is_staff,
+            is_ai=False,
         )
 
+        if is_staff and not thread.human_handoff:
+            thread.human_handoff = True
         thread.is_active = True
-        thread.save()
+        thread.save(update_fields=['is_active', 'human_handoff', 'updated_at'])
 
         return msg
+
+    @database_sync_to_async
+    def generate_ai_reply(self, thread_id, text, sender_name):
+        from .ai_assistant import maybe_reply_as_ai
+        thread = SupportThread.objects.filter(id=thread_id).first()
+        if not thread:
+            return None
+        return maybe_reply_as_ai(thread, text, visitor_name=sender_name)

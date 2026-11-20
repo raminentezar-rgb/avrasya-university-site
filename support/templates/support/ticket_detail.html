@@ -3,57 +3,10 @@
 {% load static %}
 
 {% block content %}
-<div class="page-header" style="margin-top: -100px; position: relative;">
+<div class="page-header" style="margin-top: 0;">
     <div class="page-header-content">
-        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Destek Talebi Ayrıntıları" %}</h1>
-        <p>{% trans "Destek talebinizin durumunu takip edin" %}</p>
-    </div>
-
-    <!-- قسمت احراز هویت در گوشه بالا راست -->
-    <div class="auth-buttons"
-        style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; align-items: center;">
-        {% if user.is_authenticated %}
-        <!-- اگر کاربر لاگین کرده باشد -->
-        <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
-            <span style="color: white; font-weight: 500;">
-                <i class="fas fa-user-circle"></i> {{ user.username }}
-            </span>
-
-            <!-- دکمه داشبورد -->
-            {% if user.profile.role == 'student' %}
-            <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-tachometer-alt"></i> {% trans "Taleplerim" %}
-            </a>
-            {% elif user.profile.role == 'staff' %}
-            <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
-            </a>
-            {% else %}
-            <a href="/" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
-            </a>
-            {% endif %}
-
-            <!-- فرم logout -->
-            <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-outline-light btn-sm">
-                    <i class="fas fa-sign-out-alt"></i> {% trans "Çıkış Yap" %}
-                </button>
-            </form>
-        </div>
-        {% else %}
-        <!-- اگر کاربر لاگین نکرده باشد -->
-        <div class="guest-buttons" style="display: flex; gap: 10px;">
-            <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-sign-in-alt"></i> {% trans "Giriş Yap" %}
-            </a>
-            <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm"
-                style="background-color: white; color: var(--primary-dark-blue);">
-                <i class="fas fa-user-plus"></i> {% trans "Kayıt Ol" %}
-            </a>
-        </div>
-        {% endif %}
+        <h1 style="color: #8dd4e3; font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Destek Talebi Ayrıntıları" %}</h1>
+        <p>{% trans "Destek talebinizin durumunu takip edin ve yanıt ekleyin." %}</p>
     </div>
 </div>
 
@@ -70,7 +23,7 @@
 
     <div class="row">
         <!-- سایدبار اطلاعات تیکت -->
-        <div class="col-4">
+        <div class="col-lg-4 mb-4">
             <div class="card" style="position: sticky; top: 2rem;">
                 <div class="card-header">
                     <h2 class="card-title">{% trans "Talep Bilgileri" %}</h2>
@@ -83,17 +36,39 @@
                     <div style="margin-bottom: 1.5rem;">
                         <h3
                             style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
-                            {% trans "Talep ID" %}
+                            {% trans "Takip Kodu" %}
                         </h3>
-                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-blue);">
-                            #{{ ticket.id|stringformat:"04d" }}
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <span id="ticketTrackingCode" style="font-size: 1.2rem; font-weight: 800; color: var(--primary-blue); letter-spacing: 0.5px;">
+                                {{ ticket.tracking_code|default:ticket.id }}
+                            </span>
+                            {% if ticket.tracking_code %}
+                            <button type="button" id="copyCodeBtn" class="btn btn-sm btn-secondary" style="padding: 3px 10px; font-size: 0.78rem;"
+                                onclick="navigator.clipboard && navigator.clipboard.writeText('{{ ticket.tracking_code|escapejs }}').then(() => { this.innerHTML='<i class=\'fas fa-check\'></i> Kopyalandı'; setTimeout(() => this.innerHTML='<i class=\'fas fa-copy\'></i> Kopyala', 2000); });">
+                                <i class="fas fa-copy"></i> {% trans "Kopyala" %}
+                            </button>
+                            {% endif %}
                         </div>
+                        <small style="color: var(--text-light);">(#{{ ticket.id|stringformat:"04d" }})</small>
                     </div>
 
                     <div style="margin-bottom: 1.5rem;">
                         <h3
                             style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
-                            {% trans "Department" %}
+                            {% trans "Başvuran" %}
+                        </h3>
+                        <div style="font-weight: 600; color: var(--text-dark);">
+                            {{ ticket.requester_name }}
+                        </div>
+                        {% if ticket.requester_email %}
+                        <small style="color: var(--text-light);">{{ ticket.requester_email }}</small>
+                        {% endif %}
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <h3
+                            style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">
+                            {% trans "Bölüm / Birim" %}
                         </h3>
                         <div style="font-weight: 600; color: var(--text-dark);">
                             <i class="fas fa-building"></i> {{ ticket.department.name }}
@@ -128,8 +103,8 @@
                             {% trans "Öncelik" %}
                         </h3>
                         <div
-                            style="display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; background: rgba(141, 212, 227, 0.1); color: #1d61a9; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
-                            <i class="fas fa-flag"></i> {% trans "Medium" %}
+                            style="display: inline-flex; align-items: center; gap: 6px; padding: 0.25rem 0.75rem; background: #f6f2e7; color: #1d61a9; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
+                            <i class="fas fa-flag"></i> {{ ticket.get_priority_display }}
                         </div>
                     </div>
                 </div>
@@ -141,29 +116,56 @@
                     <i class="fas fa-cog"></i> {% trans "Eylemler" %}
                 </h3>
                 <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    {% if is_dept_staff %}
+                    <a href="{% url 'support:department_dashboard' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> {% trans "Bölüm Panosuna Dön" %}
+                    </a>
+                    <a href="{% url 'support:reply_ticket' ticket.id %}" class="btn btn-primary">
+                        <i class="fas fa-reply"></i> {% trans "Personel Yanıt Ekranı" %}
+                    </a>
+                    {% elif user.is_authenticated %}
                     <a href="{% url 'support:my_tickets' %}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i> {% trans "Taleplere Geri Dön" %}
                     </a>
+                    {% else %}
+                    <a href="{% url 'support:track_ticket' %}" class="btn btn-secondary">
+                        <i class="fas fa-search"></i> {% trans "Talep Takip Sayfası" %}
+                    </a>
+                    {% endif %}
                     <a href="{% url 'support:create_ticket' %}" class="btn btn-primary">
                         <i class="fas fa-plus"></i> {% trans "Yeni Talep Oluştur" %}
                     </a>
                     {% if ticket.status != 'closed' %}
-                    <button class="btn btn-danger">
-                        <i class="fas fa-times-circle"></i> {% trans "Talebi Kapat" %}
-                    </button>
+                    <form method="post" onsubmit="return confirm('Bu destek talebini kapatmak istediğinizden emin misiniz?');">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="close">
+                        <button type="submit" class="btn btn-danger" style="width: 100%;">
+                            <i class="fas fa-times-circle"></i> {% trans "Talebi Kapat" %}
+                        </button>
+                    </form>
                     {% endif %}
                 </div>
             </div>
         </div>
 
         <!-- محتوای اصلی -->
-        <div class="col-8">
+        <div class="col-lg-8">
+            {% if messages %}
+            <div class="mb-3">
+                {% for msg in messages %}
+                <div class="alert alert-{{ msg.tags|default:'info' }} mb-2" style="border-radius: 10px;">
+                    {{ msg }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <!-- موضوع تیکت -->
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">{{ ticket.subject }}</h2>
                     <div style="color: var(--text-light); font-size: 0.9rem;">
-                        {{ ticket.category.name|default:"No Category" }}
+                        {{ ticket.category.name|default:"Genel" }}
                     </div>
                 </div>
 
@@ -177,10 +179,10 @@
                         </div>
                         <div>
                             <h3 style="color: var(--primary-blue); margin: 0; font-size: 1.1rem;">
-                                {% trans "Sorunuz" %}
+                                {{ ticket.requester_name }}
                             </h3>
                             <small style="color: var(--text-light);">
-                                {{ ticket.user.username }} • {{ ticket.created_at|date:"d.m.Y H:i" }}
+                                {{ ticket.created_at|date:"d.m.Y H:i" }}
                             </small>
                         </div>
                     </div>
@@ -190,40 +192,55 @@
                         <p style="color: var(--text-dark); line-height: 1.6; margin: 0; white-space: pre-line;">
                             {{ ticket.message }}
                         </p>
+                        {% if ticket.attachment %}
+                        <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(9,36,66,0.12);">
+                            <a href="{{ ticket.attachment.url }}" target="_blank" style="color: #1d61a9; font-weight: 600; text-decoration: none;">
+                                <i class="fas fa-paperclip"></i> {{ ticket.attachment_name }}
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
 
-                <!-- پاسخ (اگر وجود دارد) -->
+                <!-- پاسخ‌ها (گفتگوی دوطرفه) -->
                 {% if replies %}
                 {% for reply in replies %}
-                <div style="margin-top: 2rem;">
+                <div style="margin-top: 1.75rem;">
                     <div
-                        style="display: flex; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-blue);">
+                        style="display: flex; align-items: center; margin-bottom: 0.85rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-blue);">
                         <div
-                            style="width: 40px; height: 40px; background: linear-gradient(135deg, #1d61a9 0%, #092442 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                            <i class="fas fa-university"></i>
+                            style="width: 40px; height: 40px; background: {% if reply.is_staff_reply %}#1d61a9{% else %}#092442{% endif %}; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <i class="fas {% if reply.is_staff_reply %}fa-university{% else %}fa-user{% endif %}"></i>
                         </div>
                         <div>
-                            <h3 style="color: #1d61a9; margin: 0; font-size: 1.1rem;">
-                                {% trans "Department Cevap" %}
+                            <h3 style="color: {% if reply.is_staff_reply %}#1d61a9{% else %}#092442{% endif %}; margin: 0; font-size: 1.05rem;">
+                                {{ reply.display_sender }}
+                                <span style="font-size: 0.75rem; font-weight: 600; background: #f6f2e7; color: #092442; padding: 2px 8px; border-radius: 12px; margin-left: 6px;">
+                                    {% if reply.is_staff_reply %}{% trans "Birim Yanıtı" %}{% else %}{% trans "Başvuran" %}{% endif %}
+                                </span>
                             </h3>
                             <small style="color: var(--text-light);">
-                                {{ reply.staff.get_full_name|default:reply.staff.username }}
-                                • {{ reply.created_at|date:"d.m.Y H:i" }}
+                                {{ reply.created_at|date:"d.m.Y H:i" }}
                             </small>
                         </div>
                     </div>
 
                     <div
-                        style="background: rgba(141, 212, 227, 0.05); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid #1d61a9;">
+                        style="background: {% if reply.is_staff_reply %}rgba(141, 212, 227, 0.14){% else %}#f6f2e7{% endif %}; padding: 1.35rem; border-radius: var(--radius-md); border-left: 4px solid {% if reply.is_staff_reply %}#1d61a9{% else %}#092442{% endif %};">
                         <p style="color: var(--text-dark); line-height: 1.6; margin: 0; white-space: pre-line;">
                             {{ reply.message }}
                         </p>
+                        {% if reply.attachment %}
+                        <div style="margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px solid rgba(9,36,66,0.12);">
+                            <a href="{{ reply.attachment.url }}" target="_blank" style="color: #1d61a9; font-weight: 600; text-decoration: none;">
+                                <i class="fas fa-paperclip"></i> {{ reply.attachment_name }}
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
                 {% else %}
-                <!-- Ticket Under Review (همان UI فعلی‌ات، بدون تغییر) -->
                 <div
                     style="text-align: center; padding: 2rem; background: rgba(29, 97, 169, 0.05); border-radius: var(--radius-md); border: 2px dashed rgba(29, 97, 169, 0.3);">
                     <div style="font-size: 3rem; color: var(--status-resolved); margin-bottom: 1rem;">
@@ -235,6 +252,30 @@
                     <p style="color: var(--text-medium); max-width: 500px; margin: 0 auto;">
                         {% trans "Talebiniz" %} <strong>{{ ticket.department.name }}</strong> {% trans "tarafından inceleniyor." %}
                     </p>
+                </div>
+                {% endif %}
+
+                {% if ticket.status != 'closed' %}
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #f6f2e7;">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.15rem;">
+                        <i class="fas fa-reply"></i> {% trans "Yanıt Ekle" %}
+                    </h3>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="reply">
+                        <div class="form-group mb-3">
+                            <textarea name="message" rows="4" class="form-control" placeholder="{% trans 'Ek bilgi veya yanıtınızı buraya yazınız...' %}"
+                                      style="background: #f6f2e7; border: 1px solid rgba(9,36,66,0.18); border-radius: 12px; padding: 12px;"></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="small font-weight-bold" style="color: #092442;">{% trans "Dosya Ekle (İsteğe Bağlı - Max 10 MB)" %}</label>
+                            <input type="file" name="attachment" class="form-control" accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.png,.jpg,.jpeg,.webp"
+                                   style="background: #f6f2e7; border-radius: 10px;">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> {% trans "Yanıt Gönder" %}
+                        </button>
+                    </form>
                 </div>
                 {% endif %}
 

@@ -1,16 +1,19 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.contrib.auth.models import User
-from django.db.models import Q, Count
-from django.utils import timezone
-from .models import Thread, Message, Notification
 import json
-from django.contrib import messages
 import os
-from django.utils.timesince import timesince
-from channels.layers import get_channel_layer
+import re
+import secrets
 from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Count, Q
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
+from django.utils.timesince import timesince
+from support.services.uploads import validate_attachment
+from .models import Message, Notification, SupportMessage, SupportThread, Thread
 
 
 @login_required
@@ -19,7 +22,7 @@ def chat_index(request):
     # Sadece staff ve professor rollerine izin ver
     if not hasattr(request.user, 'profile') or request.user.profile.role not in ['staff', 'professor']:
         messages.error(request, 'Bu sayfaya erişim yetkiniz yok.')
-        return redirect('core:home')
+        return redirect('core:index')
 
     # Sadece geçerli diğer kullanıcısı olan thread'leri al
     threads = request.user.threads.filter(is_active=True).prefetch_related(
@@ -33,31 +36,41 @@ def chat_index(request):
         profile__role__in=['staff', 'professor']
     ).select_related('profile')
     
-    # Prepare support threads for staff
+    # Prepare support threads for staff with last message preview
     support_threads = []
     if request.user.is_staff:
-        from .models import SupportThread
-        support_threads = SupportThread.objects.filter(is_active=True).order_by('-updated_at')
+        support_qs = SupportThread.objects.filter(is_active=True).prefetch_related('support_messages').order_by('-updated_at')
+        for s_thread in support_qs:
+            msgs_list = list(s_thread.support_messages.all())
+            s_thread.last_support_msg = msgs_list[-1] if msgs_list else None
+            support_threads.append(s_thread)
     
     # Prepare threads data with other participant - sadece geçerli olanları ekle
     threads_with_participants = []
+    requested_thread_id = request.GET.get('thread')
+    selected_thread = None
+
     for thread in threads:
         other_user = thread.get_other_participant(request.user)
         if other_user:  # Sadece other_user varsa ekle
-            threads_with_participants.append({
+            entry = {
                 'thread': thread,
                 'other_user': other_user,
                 'unread_count': getattr(thread, 'unread_count', 0),
                 'last_message': thread.get_last_message()
-            })
+            }
+            threads_with_participants.append(entry)
+            if requested_thread_id and str(thread.id) == str(requested_thread_id):
+                selected_thread = entry
+
+    first_valid_thread = selected_thread or (threads_with_participants[0] if threads_with_participants else None)
     
-    # Eğer hiç geçerli thread yoksa, boş liste gönder
     context = {
         'threads_with_participants': threads_with_participants,
         'support_threads': support_threads,
         'users': users,
         'has_valid_threads': len(threads_with_participants) > 0,
-        'first_valid_thread': threads_with_participants[0] if threads_with_participants else None
+        'first_valid_thread': first_valid_thread,
     }
     return render(request, 'chat/index.html', context)
 
@@ -75,7 +88,10 @@ def thread_messages(request, thread_id):
         return JsonResponse({'error': 'Thread not found'}, status=404)
     
     # Get messages with pagination
-    page = int(request.GET.get('page', 1))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+    except (TypeError, ValueError):
+        page = 1
     page_size = 50
     start = (page - 1) * page_size
     end = start + page_size
@@ -141,6 +157,11 @@ def send_message(request):
         except Thread.DoesNotExist:
             return JsonResponse({'error': 'Thread not found'}, status=404)
 
+        if file:
+            file_ok, file_err = validate_attachment(file, extra_extensions={'.zip'})
+            if not file_ok:
+                return JsonResponse({'error': file_err}, status=400)
+
         if text or file:
             msg = Message.objects.create(
                 thread=thread,
@@ -149,10 +170,10 @@ def send_message(request):
                 file=file
             )
             
-            # Ø§Ø±Ø³Ø§Ù„ Ù†ÙˆØªÛŒÙÛŒÚ©ÛŒØ´Ù† Ø¨Ù‡ Ø³Ø§ÛŒØ± Ø´Ø±Ú©Øªâ€ŒÚ©Ù†Ù†Ø¯Ú¯Ø§Ù†
+            # ارسال نوتیفیکیشن به سایر شرکت‌کنندگان
             other_users = thread.participants.exclude(id=request.user.id)
             for user in other_users:
-                if text:  # ÙÙ‚Ø· Ø§Ú¯Ø± Ù…ØªÙ† ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø´Øª Ù†ÙˆØªÛŒÙÛŒÚ©ÛŒØ´Ù† Ø¨ÙØ±Ø³Øª
+                if text:
                     Notification.objects.create(
                         user=user,
                         notification_type='message',
@@ -161,49 +182,52 @@ def send_message(request):
                         thread_id=thread.id,
                         sender_id=request.user.id
                     )
-                elif file:  # Ø§Ú¯Ø± ÙØ§ÛŒÙ„ Ø¨ÙˆØ¯
+                elif file:
                     Notification.objects.create(
                         user=user,
                         notification_type='message',
                         title=f'Yeni dosya: {request.user.get_full_name() or request.user.username}',
-                        message='Bir dosya gÃ¶nderdi',
+                        message='Bir dosya gönderdi',
                         thread_id=thread.id,
                         sender_id=request.user.id
                     )
 
-            # Broadcast message via WebSockets
-            channel_layer = get_channel_layer()
-            async_to_sync(channel_layer.group_send)(
-                f'chat_{thread.id}',
-                {
-                    'type': 'chat_message',
-                    'message': msg.text,
-                    'file_url': msg.file.url if msg.file else None,
-                    'file_name': msg.file.name.split('/')[-1] if msg.file else None,
-                    'file_size': msg.file.size if msg.file else None,
-                    'sender_id': msg.sender.id,
-                    'sender_name': msg.sender.get_full_name() or msg.sender.username,
-                    'created_at': msg.created_at.strftime('%H:%M'),
-                    'created_at_full': msg.created_at.strftime('%Y-%m-%d %H:%M'),
-                    'message_id': msg.id,
-                    'is_read': False,
-                }
-            )
-            
-            # Broadcast notifications via WebSockets
-            for user in other_users:
-                async_to_sync(channel_layer.group_send)(
-                    f'notifications_{user.id}',
-                    {
-                        'type': 'send_notification',
-                        'notification_id': msg.id,
-                        'title': f'Yeni mesaj: {request.user.get_full_name() or request.user.username}',
-                        'message': msg.text[:50] + '...' if len(msg.text) > 50 else (msg.text or 'Bir dosya gÃ¶nderdi'),
-                        'thread_id': thread.id,
-                        'sender_id': request.user.id,
-                        'created_at': msg.created_at.strftime('%H:%M')
-                    }
-                )
+            # Broadcast message via WebSockets (graceful fallback if Redis is offline)
+            try:
+                channel_layer = get_channel_layer()
+                if channel_layer:
+                    async_to_sync(channel_layer.group_send)(
+                        f'chat_{thread.id}',
+                        {
+                            'type': 'chat_message',
+                            'message': msg.text,
+                            'file_url': msg.file.url if msg.file else None,
+                            'file_name': msg.file.name.split('/')[-1] if msg.file else None,
+                            'file_size': msg.file.size if msg.file else None,
+                            'sender_id': msg.sender.id,
+                            'sender_name': msg.sender.get_full_name() or msg.sender.username,
+                            'created_at': msg.created_at.strftime('%H:%M'),
+                            'created_at_full': msg.created_at.strftime('%Y-%m-%d %H:%M'),
+                            'message_id': msg.id,
+                            'is_read': False,
+                        }
+                    )
+
+                    for user in other_users:
+                        async_to_sync(channel_layer.group_send)(
+                            f'notifications_{user.id}',
+                            {
+                                'type': 'send_notification',
+                                'notification_id': msg.id,
+                                'title': f'Yeni mesaj: {request.user.get_full_name() or request.user.username}',
+                                'message': msg.text[:50] + '...' if len(msg.text) > 50 else (msg.text or 'Bir dosya gönderdi'),
+                                'thread_id': thread.id,
+                                'sender_id': request.user.id,
+                                'created_at': msg.created_at.strftime('%H:%M')
+                            }
+                        )
+            except Exception:
+                pass
 
             return JsonResponse({
                 'success': True,
@@ -387,6 +411,7 @@ def get_notifications(request):
             'message': n.message,
             'thread_id': n.thread_id,
             'sender_id': n.sender_id,
+            'link_url': n.link_url,
             'is_read': n.is_read,
             'created_at': n.created_at.strftime('%Y-%m-%d %H:%M')
         })
@@ -412,25 +437,277 @@ def mark_notification_read(request):
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
+def _serialize_support_message(msg):
+    return {
+        'id': msg.id,
+        'text': msg.text,
+        'sender_name': msg.sender_name,
+        'is_staff': msg.is_staff,
+        'is_ai': getattr(msg, 'is_ai', False),
+        'links': msg.get_links() if hasattr(msg, 'get_links') else (getattr(msg, 'links', None) or []),
+        'created_at': msg.created_at.strftime('%H:%M'),
+    }
+
+
+def _broadcast_support_message(session_key, msg):
+    try:
+        channel_layer = get_channel_layer()
+        if channel_layer:
+            async_to_sync(channel_layer.group_send)(
+                f'support_{session_key}',
+                {
+                    'type': 'chat_message',
+                    'id': msg.id,
+                    'message': msg.text,
+                    'sender_name': msg.sender_name,
+                    'is_staff': msg.is_staff,
+                    'is_ai': msg.is_ai,
+                    'links': msg.get_links() if hasattr(msg, 'get_links') else (msg.links or []),
+                    'created_at': msg.created_at.strftime('%H:%M'),
+                },
+            )
+    except Exception:
+        pass
+
+
+def _is_valid_support_key(session_key):
+    return bool(session_key and len(session_key) >= 8 and re.fullmatch(r'\w+', session_key))
+
+
 @login_required
 def get_support_messages(request, session_key):
     if not request.user.is_staff:
-        return JsonResponse({'success': False, 'error': 'Yetkisiz erişim'})
-    from .models import SupportThread, SupportMessage
+        return JsonResponse({'success': False, 'error': 'Yetkisiz erişim'}, status=403)
     try:
         thread = SupportThread.objects.get(session_key=session_key)
-        messages = thread.support_messages.all().order_by('created_at')
-        data = []
-        for msg in messages:
-            data.append({
-                'text': msg.text,
-                'sender_name': msg.sender_name,
-                'is_staff': msg.is_staff,
-                'created_at': msg.created_at.strftime('%H:%M')
-            })
+        msgs_qs = thread.support_messages.all().order_by('created_at', 'id')
+        after_id = request.GET.get('after_id')
+        if after_id and str(after_id).isdigit():
+            msgs_qs = msgs_qs.filter(id__gt=int(after_id))
+        data = [_serialize_support_message(msg) for msg in msgs_qs]
         return JsonResponse({'success': True, 'messages': data, 'visitor_name': thread.full_name})
     except SupportThread.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'Oturum bulunamadı'})
+        return JsonResponse({'success': False, 'error': 'Oturum bulunamadı'}, status=404)
+
+
+def support_init_session(request):
+    if request.method != 'POST':
+        return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
+    try:
+        payload = json.loads(request.body or '{}')
+    except json.JSONDecodeError:
+        payload = {}
+
+    requested_key = (payload.get('session_key') or '').strip()
+    full_name = (payload.get('full_name') or 'Ziyaretçi').strip()[:120] or 'Ziyaretçi'
+    language = (payload.get('language') or 'tr').strip()[:10] or 'tr'
+
+    owned_keys = list(request.session.get('support_session_keys', []))
+    if _is_valid_support_key(requested_key):
+        if requested_key in owned_keys or not SupportThread.objects.filter(session_key=requested_key).exists():
+            session_key = requested_key
+        else:
+            session_key = f"vis_{secrets.token_hex(16)}"
+    else:
+        session_key = f"vis_{secrets.token_hex(16)}"
+
+    thread, created = SupportThread.objects.get_or_create(
+        session_key=session_key,
+        defaults={'full_name': full_name, 'language': language},
+    )
+    if not created and full_name and full_name != 'Ziyaretçi' and not thread.full_name:
+        thread.full_name = full_name
+        thread.language = language
+        thread.save(update_fields=['full_name', 'language', 'updated_at'])
+
+    if session_key not in owned_keys:
+        owned_keys.append(session_key)
+        request.session['support_session_keys'] = owned_keys
+
+    return JsonResponse({
+        'success': True,
+        'session_key': session_key,
+        'visitor_name': thread.full_name,
+        'human_handoff': thread.human_handoff,
+    })
+
+
+def support_send_message(request):
+    if request.method != 'POST':
+        return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
+    try:
+        payload = json.loads(request.body or '{}')
+    except json.JSONDecodeError:
+        payload = {}
+
+    session_key = (payload.get('session_key') or '').strip()
+    text = (payload.get('message') or '').strip()[:2000]
+    visitor_name = (payload.get('sender_name') or 'Ziyaretçi').strip()[:80] or 'Ziyaretçi'
+
+    if not text:
+        return JsonResponse({'success': False, 'error': 'Mesaj boş olamaz.'}, status=400)
+    if not _is_valid_support_key(session_key):
+        return JsonResponse({'success': False, 'error': 'Geçersiz oturum anahtarı.'}, status=400)
+
+    is_staff = bool(request.user.is_authenticated and request.user.is_staff)
+    owned_keys = list(request.session.get('support_session_keys', []))
+
+    if not is_staff:
+        if session_key not in owned_keys:
+            if not SupportThread.objects.filter(session_key=session_key).exists():
+                owned_keys.append(session_key)
+                request.session['support_session_keys'] = owned_keys
+            else:
+                return JsonResponse({'success': False, 'error': 'Oturum doğrulanamadı.'}, status=403)
+        sender_name = visitor_name
+    else:
+        sender_name = request.user.get_full_name() or request.user.username
+
+    thread, _ = SupportThread.objects.get_or_create(
+        session_key=session_key,
+        defaults={'full_name': visitor_name if not is_staff else 'Ziyaretçi'},
+    )
+    msg = SupportMessage.objects.create(
+        thread=thread,
+        sender_user=request.user if is_staff else None,
+        sender_name=sender_name,
+        text=text,
+        is_staff=is_staff,
+        is_ai=False,
+    )
+    if is_staff and not thread.human_handoff:
+        thread.human_handoff = True
+    thread.is_active = True
+    thread.save(update_fields=['is_active', 'human_handoff', 'updated_at'])
+
+    _broadcast_support_message(session_key, msg)
+    if not is_staff:
+        try:
+            channel_layer = get_channel_layer()
+            if channel_layer:
+                async_to_sync(channel_layer.group_send)(
+                    'support_staff_notifications',
+                    {
+                        'type': 'staff_notification',
+                        'session_key': session_key,
+                        'visitor_name': sender_name,
+                        'message': text[:50],
+                    },
+                )
+        except Exception:
+            pass
+
+    ai_msg = None
+    if not is_staff:
+        from .ai_assistant import maybe_reply_as_ai
+        ai_msg = maybe_reply_as_ai(thread, text, visitor_name=sender_name)
+        if ai_msg:
+            _broadcast_support_message(session_key, ai_msg)
+
+    return JsonResponse({
+        'success': True,
+        'message': _serialize_support_message(msg),
+        'ai_message': _serialize_support_message(ai_msg) if ai_msg else None,
+        'human_handoff': thread.human_handoff,
+    })
+
+
+def support_set_mode(request):
+    if request.method != 'POST':
+        return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
+    try:
+        payload = json.loads(request.body or '{}')
+    except json.JSONDecodeError:
+        payload = {}
+
+    session_key = (payload.get('session_key') or '').strip()
+    mode = (payload.get('mode') or '').strip().lower()
+    if mode not in {'ai', 'human'}:
+        return JsonResponse({'success': False, 'error': 'Geçersiz mod.'}, status=400)
+    if not _is_valid_support_key(session_key):
+        return JsonResponse({'success': False, 'error': 'Geçersiz oturum.'}, status=400)
+
+    is_staff = bool(request.user.is_authenticated and request.user.is_staff)
+    owned_keys = request.session.get('support_session_keys', [])
+    if not is_staff and session_key not in owned_keys:
+        return JsonResponse({'success': False, 'error': 'Yetkisiz erişim.'}, status=403)
+
+    thread, _ = SupportThread.objects.get_or_create(
+        session_key=session_key,
+        defaults={'full_name': 'Ziyaretçi'},
+    )
+    thread.human_handoff = (mode == 'human')
+    thread.is_active = True
+    thread.save(update_fields=['human_handoff', 'is_active', 'updated_at'])
+
+    status_msg = None
+    if mode == 'human':
+        status_msg = SupportMessage.objects.create(
+            thread=thread,
+            sender_user=None,
+            sender_name='Avrasya AI Asistan',
+            text='Canlı destek ekibimize bağlantı isteğiniz iletildi. Görevli personelimiz bu pencereden size yanıt verecektir.',
+            is_staff=True,
+            is_ai=True,
+            links=[{'title': 'Yeni Destek Talebi Aç', 'url': '/support/ticket/create/', 'category': 'Destek'}],
+        )
+        _broadcast_support_message(session_key, status_msg)
+        try:
+            channel_layer = get_channel_layer()
+            if channel_layer:
+                async_to_sync(channel_layer.group_send)(
+                    'support_staff_notifications',
+                    {
+                        'type': 'staff_notification',
+                        'session_key': session_key,
+                        'visitor_name': thread.full_name or 'Ziyaretçi',
+                        'message': 'Canlı destek yetkilisi talep edildi',
+                    },
+                )
+        except Exception:
+            pass
+    else:
+        status_msg = SupportMessage.objects.create(
+            thread=thread,
+            sender_user=None,
+            sender_name='Avrasya AI Asistan',
+            text='Akıllı Asistan tekrar aktif! Üniversiteyle ilgili her türlü sorunuzu sorabilirsiniz.',
+            is_staff=True,
+            is_ai=True,
+            links=[],
+        )
+        _broadcast_support_message(session_key, status_msg)
+
+    return JsonResponse({
+        'success': True,
+        'human_handoff': thread.human_handoff,
+        'message': _serialize_support_message(status_msg) if status_msg else None,
+    })
+
+
+def support_poll_messages(request, session_key):
+    if not _is_valid_support_key(session_key):
+        return JsonResponse({'success': False, 'error': 'Geçersiz oturum'}, status=400)
+
+    is_staff = bool(request.user.is_authenticated and request.user.is_staff)
+    owned_keys = request.session.get('support_session_keys', [])
+    if not is_staff and session_key not in owned_keys:
+        return JsonResponse({'success': False, 'error': 'Yetkisiz erişim'}, status=403)
+
+    thread = SupportThread.objects.filter(session_key=session_key).first()
+    if not thread:
+        return JsonResponse({'success': True, 'messages': [], 'human_handoff': False})
+
+    msgs_qs = thread.support_messages.all().order_by('created_at', 'id')
+    after_id = request.GET.get('after_id')
+    if after_id and str(after_id).isdigit():
+        msgs_qs = msgs_qs.filter(id__gt=int(after_id))
+
+    return JsonResponse({
+        'success': True,
+        'messages': [_serialize_support_message(m) for m in msgs_qs],
+        'human_handoff': thread.human_handoff,
+    })
 
 
 def voice_assistant_directory(request):

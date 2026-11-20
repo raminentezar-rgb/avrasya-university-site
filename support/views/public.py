@@ -1,247 +1,156 @@
 # support/views/public.py
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
-from django.http import JsonResponse
-from django.db.models import Q, Count, CharField, TextField, F
-from django.apps import apps
-from django.core.cache import cache
-from django.utils import translation
 from django.core.paginator import Paginator
-from support.models import FAQ, KnowledgeBase, ImportantLink, Department, Category, Tag
+from django.db.models import F
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.utils import translation
 
-TRANSLATION_SUFFIXES = ('_tr', '_en', '_fa', '_ar', '_ru', '_de')
-PRIMARY_DYNAMIC_APPS = {'core', 'news', 'duyurular', 'etkinlikler', 'kalite_akreditasyon'}
+from support.models import Department, FAQ, KnowledgeBase
+from support.services.search import search_site_content
+
+
+def _classify_faq(faq):
+    text = f"{faq.question} {faq.answer}".lower()
+    if any(k in text for k in ('ücret', 'taksit', 'harç', 'burs', 'ödeme')):
+        return 'mali', 'Burs & Ücretler'
+    if any(k in text for k in ('tez', 'akts', 'lisansüstü', 'enstitü', 'devam zorunluluğu', 'geçme notu', 'başvuru')):
+        return 'enstitu', 'Lisansüstü'
+    if any(k in text for k in ('yemekhane', 'kütüphane', 'spor', 'wi-fi', 'eduroam', 'internet', 'yerleşke')):
+        return 'kampus', 'Kampüs & Teknik'
+    if any(k in text for k in ('dekan', 'müdür', 'fakülte', 'yüksekokul')):
+        return 'yonetim', 'Yönetim & Birimler'
+    return 'genel', 'Genel'
 
 
 def support_search(request):
     query = request.GET.get("q", "").strip()
+    active_type = (request.GET.get("type") or "all").strip()
     is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
     lang_code = translation.get_language() or 'tr'
 
-    results = {
-        'faqs': [],
-        'knowledge': [],
-        'links': [],
-        'departments': [],
-        'categories': [],
-        'tags': [],
-    }
+    all_results = search_site_content(query, lang_code=lang_code, limit=80) if len(query) >= 2 else []
 
-    all_results = []
-
-    if len(query) >= 2:
-        cache_key = f"support_search:{lang_code}:{'ajax' if is_ajax else 'full'}:{query.lower()}"
-        cached_payload = cache.get(cache_key)
-
-        if cached_payload is not None and is_ajax:
-            return JsonResponse(cached_payload)
-
-        # جستجوی هوشمند در FAQ
-        results['faqs'] = FAQ.objects.filter(
-            Q(question__icontains=query) |
-            Q(answer__icontains=query),
-            is_active=True
-        ).select_related('department')
-
-        # جستجوی جامع در پایگاه دانش
-        results['knowledge'] = KnowledgeBase.objects.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query)
-        ).select_related('category', 'department')
-
-        # جستجوی لینک‌های مهم
-        results['links'] = ImportantLink.objects.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query)
-        )
-
-        if not is_ajax:
-            # جستجو در دپارتمان‌ها، دسته‌بندی‌ها و تگ‌ها فقط برای صفحه کامل
-            results['departments'] = Department.objects.filter(
-                Q(name__icontains=query) |
-                Q(email__icontains=query)
-            )
-            results['categories'] = Category.objects.filter(
-                Q(name__icontains=query)
-            )
-            results['tags'] = Tag.objects.filter(
-                Q(name__icontains=query)
-            )
-
-        # FAQ‌ها با اولویت بالا
-        for faq in results['faqs']:
-            all_results.append({
-                'type': 'faq',
-                'title': faq.question,
-                'content': faq.answer,
-                'category': 'SSS',
-                'department': faq.department.name if faq.department else 'Genel',
-                'created_at': None,
-                'url': reverse('support:faq_detail', kwargs={'pk': faq.pk}),
-            })
-
-        # مطالب پایگاه دانش
-        for kb in results['knowledge']:
-            all_results.append({
-                'id': kb.pk,
-                'type': kb.content_type,
-                'title': kb.title,
-                'content': kb.content,
-                'category': kb.category.name if kb.category else 'Bilgi Bankası',
-                'department': kb.department.name if kb.department else 'Genel',
-                'created_at': kb.created_at,
-                'url': reverse('support:knowledge_detail', kwargs={'pk': kb.pk}),
-            })
-
-        # لینک‌های مهم
-        for link in results['links']:
-            all_results.append({
-                'type': 'link',
-                'title': link.title,
-                'content': link.description,
-                'category': 'Bağlantı',
-                'department': '',
-                'created_at': None,
-                'url': link.url,
-            })
-
-        # -- جستجوی پویا و بهینه‌شده در سایر اپلیکیشن‌ها --
-        excluded_apps = {
-            'admin', 'auth', 'contenttypes', 'sessions', 'messages',
-            'staticfiles', 'axes', 'daphne', 'modeltranslation',
-            'crispy_forms', 'crispy_bootstrap5', 'channels', 'support',
-            'ckeditor', 'ckeditor_uploader',
-        }
-
-        for model in apps.get_models():
-            app_label = model._meta.app_label
-            if app_label in excluded_apps or model._meta.proxy:
-                continue
-
-            # در حالت پیش‌نمایش زنده (AJAX)، فقط اپ‌های اصلی را کوئری می‌زنیم تا دیتابیس زیر بار نرود
-            if is_ajax and app_label not in PRIMARY_DYNAMIC_APPS:
-                continue
-
-            if not hasattr(model, 'get_absolute_url'):
-                continue
-
-            # فیلتر کردن فیلدهای تکراری modeltranslation برای کاهش ۷۰ درصدی بار کوئری LIKE
-            active_lang_suffix = f'_{lang_code}'
-            searchable_fields = [
-                f.name for f in model._meta.get_fields()
-                if isinstance(f, (CharField, TextField))
-                and getattr(f, 'choices', None) is None
-                and f.name != 'slug'
-                and (
-                    not f.name.endswith(TRANSLATION_SUFFIXES)
-                    or f.name.endswith('_tr')
-                    or f.name.endswith(active_lang_suffix)
-                )
-            ]
-
-            if not searchable_fields:
-                continue
-
-            q_objects = Q()
-            for field in searchable_fields:
-                q_objects |= Q(**{f"{field}__icontains": query})
-
-            try:
-                queryset = model.objects.all()
-                field_names = {f.name for f in model._meta.get_fields()}
-
-                if 'yayinda' in field_names:
-                    queryset = queryset.filter(yayinda=True)
-                if 'is_published' in field_names:
-                    queryset = queryset.filter(is_published=True)
-                if 'aktif' in field_names:
-                    queryset = queryset.filter(aktif=True)
-                if 'is_active' in field_names:
-                    queryset = queryset.filter(is_active=True)
-
-                dynamic_results = queryset.filter(q_objects).distinct()[:5]
-
-                for obj in dynamic_results:
-                    try:
-                        url = obj.get_absolute_url()
-                    except Exception:
-                        continue
-
-                    title_attr = next((attr for attr in ['baslik', 'title', 'question', 'name', 'ad'] if hasattr(obj, attr)), None)
-                    title = getattr(obj, title_attr, str(obj)) if title_attr else str(obj)
-                    if callable(title):
-                        title = title()
-
-                    content_attr = next((attr for attr in ['icerik', 'detayli_aciklama', 'aciklama', 'answer', 'description', 'kisa_aciklama', 'content'] if hasattr(obj, attr)), None)
-                    content = getattr(obj, content_attr, '') if content_attr else ''
-                    if callable(content):
-                        content = content()
-
-                    category = str(model._meta.verbose_name).title()
-                    app_config = apps.get_app_config(app_label)
-                    department = str(app_config.verbose_name)
-
-                    created_at = (
-                        getattr(obj, 'olusturulma_tarihi', None)
-                        or getattr(obj, 'created_at', None)
-                        or getattr(obj, 'yayin_tarihi', None)
-                    )
-
-                    all_results.append({
-                        'type': 'guide',
-                        'title': title,
-                        'content': content,
-                        'category': category,
-                        'department': department,
-                        'created_at': created_at,
-                        'url': url,
-                    })
-            except Exception:
-                pass
-
-    # مرتب‌سازی
-    with_date = [r for r in all_results if r.get('created_at')]
-    without_date = [r for r in all_results if not r.get('created_at')]
-
-    if with_date:
-        with_date.sort(key=lambda x: x['created_at'], reverse=True)
-    all_results = with_date + without_date
-
-    # اگر درخواست AJAX بود، نتایج را به صورت JSON برگردان و کش کن
     if is_ajax:
-        payload = {
-            'results': all_results[:5],
-            'total': len(all_results)
-        }
-        if len(query) >= 2:
-            cache.set(cache_key, payload, 180)
-        return JsonResponse(payload)
+        return JsonResponse({
+            'results': all_results[:7],
+            'total': len(all_results),
+        })
 
-    # صفحه‌بندی
-    paginator = Paginator(all_results, 10)
+    type_labels = [
+        ('page', 'Sayfa & Portal'),
+        ('academic', 'Akademik & Bölüm'),
+        ('faq', 'SSS'),
+        ('news', 'Haber & Duyuru'),
+        ('guide', 'Rehber & Kalite'),
+    ]
+    counts = {}
+    for item in all_results:
+        t = item.get('type', 'page')
+        counts[t] = counts.get(t, 0) + 1
+
+    type_tabs = [
+        {'slug': slug, 'label': label, 'count': counts.get(slug, 0)}
+        for slug, label in type_labels
+        if counts.get(slug, 0) > 0
+    ]
+
+    valid_types = {t['slug'] for t in type_tabs}
+    if active_type != 'all' and active_type not in valid_types:
+        active_type = 'all'
+
+    filtered_results = (
+        all_results if active_type == 'all'
+        else [r for r in all_results if r.get('type') == active_type]
+    )
+
+    paginator = Paginator(filtered_results, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # موضوعات محبوب
-    try:
-        popular_topics = Category.objects.annotate(
-            ticket_count=Count('ticket')
-        ).order_by('-ticket_count')[:6]
-    except Exception:
-        popular_topics = Category.objects.all()[:6]
+    popular_topics = []
+    icon_map = [
+        ('öğrenci', 'fa-user-graduate'),
+        ('bilgi işlem', 'fa-laptop-code'),
+        ('sağlık hizmetleri', 'fa-notes-medical'),
+        ('mühendislik', 'fa-cogs'),
+        ('sağlık bilimleri', 'fa-heartbeat'),
+        ('idari', 'fa-building'),
+        ('insan', 'fa-book-reader'),
+        ('meslek', 'fa-briefcase'),
+    ]
+    preferred_names = [
+        'Öğrenci İşleri',
+        'Bilgi İşlem',
+        'Sağlık Hizmetleri Meslek Yüksekokulu',
+        'İdari Birimler',
+        'Mühendislik ve Mimarlık Fakültesi',
+        'İnsan ve Toplum Bilimleri Fakültesi',
+    ]
+    all_depts = list(Department.objects.all())
+    dept_by_name = {d.name: d for d in all_depts}
+    ordered_depts = [dept_by_name[n] for n in preferred_names if n in dept_by_name]
+    for d in all_depts:
+        if d not in ordered_depts and len(ordered_depts) < 6:
+            ordered_depts.append(d)
+
+    for dept in ordered_depts[:6]:
+        lname = dept.name.lower()
+        icon = next((ic for kw, ic in icon_map if kw in lname), 'fa-university')
+        popular_topics.append({
+            'id': dept.id,
+            'name': dept.name,
+            'subtitle': 'Doğrudan bu birime talep açın',
+            'icon': icon,
+        })
 
     return render(request, "support/search.html", {
         "page_obj": page_obj,
         "query": query,
+        "active_type": active_type,
+        "type_tabs": type_tabs,
         "total_results": len(all_results),
+        "filtered_results_count": len(filtered_results),
         "popular_topics": popular_topics,
-        "results_by_type": results,
+        "faq_count": FAQ.objects.filter(is_active=True).count(),
     })
 
 
 def faq_list_view(request):
-    faqs = FAQ.objects.filter(is_active=True)
-    return render(request, 'support/faq_list.html', {'faqs': faqs})
+    initial_query = (request.GET.get('q') or '').strip()
+    raw_faqs = FAQ.objects.filter(is_active=True).select_related('department').order_by('id')
+
+    faqs_enriched = []
+    seen = set()
+    cat_counts = {}
+    for faq in raw_faqs:
+        norm_q = ' '.join((faq.question or '').lower().split())
+        if norm_q in seen:
+            continue
+        seen.add(norm_q)
+        cat_slug, cat_label = _classify_faq(faq)
+        faq.category_slug = cat_slug
+        faq.category_label = cat_label
+        faqs_enriched.append(faq)
+        cat_counts[cat_slug] = cat_counts.get(cat_slug, 0) + 1
+
+    category_order = [
+        ('yonetim', 'Yönetim & Dekanlık'),
+        ('kampus', 'Kampüs & Teknik'),
+        ('enstitu', 'Lisansüstü'),
+        ('mali', 'Burs & Ücretler'),
+        ('genel', 'Genel'),
+    ]
+    filter_categories = [
+        {'slug': slug, 'label': label, 'count': cat_counts.get(slug, 0)}
+        for slug, label in category_order
+        if cat_counts.get(slug, 0) > 0
+    ]
+
+    return render(request, 'support/faq_list.html', {
+        'faqs': faqs_enriched,
+        'filter_categories': filter_categories,
+        'initial_query': initial_query,
+    })
 
 
 def faq_detail(request, pk):

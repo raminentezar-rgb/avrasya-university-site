@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load cache %}
-{% cache 3600 footer CURRENT_LANG %}
+{% cache 3600 footer_v2 CURRENT_LANG %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <footer class="footer">
     <div class="container">
@@ -44,9 +44,9 @@
                             </a>
                         </div>
                         <div class="social-icons" style="margin-top: 20px;">
-                            <a href="{% url 'support:create_ticket' %}" class="quick-link">
-                            <i class="fas fa-folder"></i>
-                            <span>{% trans "Destek Almak İçin Tiklayin" %}</span>
+                            <a href="{% url 'support:search' %}" class="quick-link">
+                            <i class="fas fa-headset"></i>
+                            <span>{% trans "Destek Almak İçin Tıklayın" %}</span>
                             </a>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                         <li><a href="{% url 'ogrenci_isleri:kayit' %}"><i class="fas fa-chevron-right"></i> {% trans "Kayıt İşlemleri" %}</a></li>
                         <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Yatay Geçiş" %}</a></li>
                         <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Dikey Geçiş" %}</a></li>
-                        <li><a href="{% url 'ogrenci_isleri:yurtlar' %}"><i class="fas fa-chevron-right"></i> {% trans "Yurtlar" %}</a></li>
+                        <li><a href="{% url 'ogrenci_isleri:yurtlar' %}"><i class="fas fa-chevron-right"></i> {% trans "Konukevleri" %}</a></li>
                         <li><a href="{% url 'ogrenci_isleri:erasmus' %}"><i class="fas fa-chevron-right"></i> {% trans "Erasmus" %}</a></li>
                         <li><a href="https://obs.avrasya.edu.tr/"><i class="fas fa-chevron-right"></i> {% trans "Kontenjanr" %}</a></li>
                         <li><a href="#"><i class="fas fa-chevron-right"></i> {% trans "Taban Puanlar" %}</a></li>

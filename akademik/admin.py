@@ -6,6 +6,7 @@ from modeltranslation.admin import TabbedTranslationAdmin, TranslationTabularInl
 
 from .models import (
     FakulteSayfasi,
+    FakulteBolumKarti,
     FakulteYonetimUyesi,
     FakulteEkSekme,
     BolumSayfasi,
@@ -28,10 +29,29 @@ def _apply_ckeditor_widget(db_field, kwargs, rich_prefixes):
         kwargs['widget'] = forms.Textarea(attrs={'rows': 4, 'style': 'width: 96%;'})
 
 
+class FakulteBolumKartiInline(admin.StackedInline):
+    model = FakulteBolumKarti
+    extra = 1
+    fields = (
+        ('ad_tr', 'kisa_kod', 'ikon'),
+        ('program_turu_tr', 'egitim_dili_tr', 'egitim_suresi_tr'),
+        ('detay_url', 'sira', 'aktif'),
+        'aciklama_tr',
+    )
+    verbose_name = _('Bölüm Kartı')
+    verbose_name_plural = _('Bölümler Sekmesi İçeriği: Fakülteye Bağlı Bölümler / Programlar')
+
+    def formfield_for_dbfield(self, db_field, request=None, **kwargs):
+        if db_field.name == 'aciklama_tr':
+            kwargs['widget'] = forms.Textarea(attrs={'rows': 2, 'style': 'width: 96%;'})
+        return super().formfield_for_dbfield(db_field, request=request, **kwargs)
+
+
 class FakulteYonetimUyesiInline(TranslationTabularInline):
     model = FakulteYonetimUyesi
     extra = 0
     fields = ['ad_soyad', 'gorev', 'eposta', 'telefon', 'fotograf', 'ozgecmis_url', 'sira', 'aktif']
+    classes = ['collapse']
     verbose_name = _('Ek Yönetici')
     verbose_name_plural = _('Ek Yöneticiler (Dekan Yardımcıları vb.)')
 
@@ -52,6 +72,7 @@ class FakulteSayfasiAdmin(TabbedTranslationAdmin):
     list_display = [
         'fakulte_adi_badge',
         'fakulte_kodu',
+        'bolum_kart_sayisi',
         'yonetici_unvan_ad',
         'bolumler_sekmesi_goster',
         'aktif',
@@ -60,7 +81,7 @@ class FakulteSayfasiAdmin(TabbedTranslationAdmin):
     list_filter = ['aktif', 'bolumler_sekmesi_goster']
     search_fields = ['fakulte_adi', 'fakulte_kodu', 'yonetici_unvan_ad', 'tarihce_icerik', 'dekan_mesaji']
     list_editable = ['bolumler_sekmesi_goster', 'aktif']
-    inlines = [FakulteYonetimUyesiInline, FakulteEkSekmeInline]
+    inlines = [FakulteBolumKartiInline, FakulteYonetimUyesiInline, FakulteEkSekmeInline]
 
     class Media:
         css = {
@@ -72,17 +93,20 @@ class FakulteSayfasiAdmin(TabbedTranslationAdmin):
             'fields': ('fakulte_kodu', 'fakulte_adi', 'hero_alt_baslik', 'aktif'),
             'description': _('Fakülte veya yüksekokul ana sayfasının üst başlık ve genel ayarları.'),
         }),
-        (_('Bölümler Sekmesi ve Yıllık İstatistikler'), {
+        (_('0. Sekme: Bölümler ve Yıllık İstatistikler'), {
             'fields': (
                 'bolumler_sekmesi_goster',
                 'bolumler_baslik',
                 'bolumler_alt_baslik',
                 'bolumler_giris_icerik',
-                ('ogrenci_sayisi', 'akademik_kadro_sayisi'),
-                ('uluslararasi_anlasma_sayisi', 'mezun_istihdam_orani'),
+                ('bolumler_liste_baslik', 'bolumler_liste_aciklama'),
+                'istatistikleri_goster',
+                ('istatistik_1_baslik', 'ogrenci_sayisi'),
+                ('istatistik_2_baslik', 'akademik_kadro_sayisi'),
+                ('istatistik_3_baslik', 'uluslararasi_anlasma_sayisi'),
+                ('istatistik_4_baslik', 'mezun_istihdam_orani'),
             ),
-            'classes': ('collapse',),
-            'description': _('İsterseniz "Bölümler" sekmesini açıp kapatabilir ve yıllık değişen sayıları güncelleyebilirsiniz.'),
+            'description': _('Bölümler sekmesinin üst tanıtımı, istatistikleri ve sayfanın en altındaki panelden bölüm kartları eklenip güncellenebilir.'),
         }),
         (_('1. Tarihçe Sekmesi'), {
             'fields': ('tarihce_baslik', 'tarihce_alt_baslik', 'tarihce_icerik'),
@@ -132,6 +156,24 @@ class FakulteSayfasiAdmin(TabbedTranslationAdmin):
             obj.get_localized('fakulte_adi', obj.get_fakulte_kodu_display()),
         )
     fakulte_adi_badge.short_description = _('Fakülte / Birim')
+
+    def bolum_kart_sayisi(self, obj):
+        cnt = obj.bolum_kartlari.filter(aktif=True).count()
+        return format_html('<span class="avrasya-admin-badge cyan">{} Bölüm</span>', cnt)
+    bolum_kart_sayisi.short_description = _('Bölüm Kartları')
+
+
+@admin.register(FakulteBolumKarti)
+class FakulteBolumKartiAdmin(TabbedTranslationAdmin):
+    list_display = ['ad', 'fakulte', 'kisa_kod', 'program_turu', 'egitim_dili', 'sira', 'aktif']
+    list_filter = ['aktif', 'fakulte', 'program_turu', 'egitim_dili']
+    search_fields = ['ad', 'kisa_kod', 'aciklama', 'fakulte__fakulte_adi']
+    list_editable = ['sira', 'aktif']
+
+    class Media:
+        css = {
+            'all': ('akademik/css/akademik_admin.css',)
+        }
 
 
 class BolumAkademikKadroInline(admin.StackedInline):

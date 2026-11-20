@@ -1,5 +1,117 @@
 {% load i18n %}
 
+{% if f.show_bolumler %}
+<!-- Tab 1: Bölümler -->
+<div class="tab-content active" id="tab1">
+    <div class="tab-content-header">
+        <h3><i class="fas fa-university"></i> {{ f.bolumler_baslik }}</h3>
+        {% if f.bolumler_alt_baslik %}
+        <p>{{ f.bolumler_alt_baslik }}</p>
+        {% endif %}
+    </div>
+    <div class="tab-content-body">
+        {% if f.bolumler_giris_icerik %}
+        <div class="avrasya-highlight-box">
+            <h2>{{ f.fakulte_adi }} {{ f.bolumler_baslik }}</h2>
+            <div class="avrasya-rich-content">
+                {{ f.bolumler_giris_icerik|safe }}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if f.bolum_kartlari %}
+        <div class="avrasya-dept-section">
+            {% if f.bolumler_liste_baslik or f.bolumler_liste_aciklama %}
+            <div class="avrasya-dept-intro">
+                {% if f.bolumler_liste_baslik %}
+                <h4><i class="fas fa-graduation-cap"></i> {{ f.bolumler_liste_baslik }}</h4>
+                {% endif %}
+                {% if f.bolumler_liste_aciklama %}
+                <p>{{ f.bolumler_liste_aciklama }}</p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <div class="avrasya-dept-grid">
+                {% for kart in f.bolum_kartlari %}
+                <div class="avrasya-dept-card">
+                    <div class="avrasya-dept-card-inner">
+                        <div class="avrasya-dept-front">
+                            {% if kart.kisa_kod %}
+                            <span class="avrasya-dept-code">{{ kart.kisa_kod }}</span>
+                            {% endif %}
+                            <div class="avrasya-dept-icon">
+                                <i class="{{ kart.ikon }}"></i>
+                            </div>
+                            <h4>{{ kart.ad }}</h4>
+                        </div>
+                        <div class="avrasya-dept-back">
+                            <h5>{{ kart.ad }}</h5>
+                            <div class="avrasya-dept-meta">
+                                {% if kart.program_turu %}
+                                <div class="avrasya-dept-meta-row">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>{{ kart.program_turu }}</span>
+                                </div>
+                                {% endif %}
+                                {% if kart.egitim_dili %}
+                                <div class="avrasya-dept-meta-row">
+                                    <i class="fas fa-language"></i>
+                                    <span>{% trans "Eğitim Dili" %}: {{ kart.egitim_dili }}</span>
+                                </div>
+                                {% endif %}
+                                {% if kart.egitim_suresi %}
+                                <div class="avrasya-dept-meta-row">
+                                    <i class="fas fa-clock"></i>
+                                    <span>{% trans "Eğitim Süresi" %}: {{ kart.egitim_suresi }}</span>
+                                </div>
+                                {% endif %}
+                                {% if kart.aciklama %}
+                                <p class="avrasya-dept-desc">{{ kart.aciklama }}</p>
+                                {% endif %}
+                            </div>
+                            {% if kart.detay_url %}
+                            <div class="avrasya-dept-actions">
+                                <a href="{{ kart.detay_url }}" class="avrasya-dept-btn">
+                                    <i class="fas fa-info-circle"></i> {% trans "Detaylı Bilgi" %}
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% elif not f.bolumler_giris_icerik %}
+        <div class="avrasya-empty-tab">
+            <i class="fas fa-university"></i>
+            <h5>{% trans "Bu sekme için henüz bölüm eklenmemiştir." %}</h5>
+        </div>
+        {% endif %}
+
+        {% if f.stats %}
+        <div class="avrasya-stats-section">
+            <h4><i class="fas fa-chart-line"></i> {% trans "Bölüm İstatistikleri" %}</h4>
+            <div class="avrasya-stats-grid">
+                {% for st in f.stats %}
+                <div class="avrasya-stat-card">
+                    <div class="avrasya-stat-icon">
+                        <i class="{{ st.icon }}"></i>
+                    </div>
+                    <div class="avrasya-stat-info">
+                        <h5>{{ st.label }}</h5>
+                        <div class="avrasya-stat-val">{{ st.value }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
 <!-- Tab 2: Tarihçe -->
 <div class="tab-content {% if not f.show_bolumler %}active{% endif %}" id="tab2">
     <div class="tab-content-header">

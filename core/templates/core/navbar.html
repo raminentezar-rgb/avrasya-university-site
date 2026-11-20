@@ -2,7 +2,6 @@
 {% load i18n %}
 {% load cache %}
 {% get_current_language as CURRENT_LANG %}
-{% get_current_language as CURRENT_LANG %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 <!-- templates/core/mega_navbar.html -->
 <nav class="navbar navbar-expand-lg">
@@ -138,7 +137,7 @@
                                     <ul class="list-unstyled menu-list">
                                         <li><a class="dropdown-item" href="{% url 'aday_ogrenci:basvuru' %}">{% trans "Erasmus" %}</a></li>
                                         <li><a class="dropdown-item" href="{% url 'aday_ogrenci:kampus_yasam' %}">{% trans "Kampüste Yaşam" %}</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:yurt_olanaklari' %}">{% trans "Yurt Olanakları" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'aday_ogrenci:yurt_olanaklari' %}">{% trans "Konukevi Olanakları" %}</a></li>
                                         <li><a class="dropdown-item" href="{% url 'aday_ogrenci:foto_galeri' %}">{% trans "Foto Galerı" %}</a></li>
                                         <li><a class="dropdown-item" href="{% url 'aday_ogrenci:laboratuvarlar' %}">{% trans "Laboratuvarlar" %}</a></li>
 
@@ -193,7 +192,7 @@
                                 <div class="menu-section">
                                     <h6 class="section-title mb-3">{% trans "SOSYAL YAŞAM" %}</h6>
                                     <ul class="list-unstyled menu-list">
-                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:yurtlar' %}">{% trans "Yurtlar" %}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:yurtlar' %}">{% trans "Konukevleri" %}</a></li>
                                         <li><a class="dropdown-item" href="{% url 'international:international' %}">{% trans "Uluslararası Öğrenciler" %}</a></li>
                                         <li><a class="dropdown-item" href="{% url 'yatay_gecis:yatay_gecis' %}">{% trans "Yatay Geçiş" %}</a></li>
                                         <li><a class="dropdown-item" href="{% url 'ogrenci_isleri:muafiyetler' %}">{% trans "Muafiyet" %}</a></li>
@@ -516,10 +515,10 @@
                         </div>
                     </div>
 
-                    <!-- User Icon Dropdown -->
+                    <!-- User Icon Dropdown (Öğrenci) -->
                     <div class="dropdown header_icon_container">
                         <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                            aria-expanded="false" title="{% if user.is_authenticated %}{{ user.get_full_name|default:user.username }}{% else %}{% trans 'Öğrenci' %}{% endif %}">
                             <img src="{% static 'core/main/images/morta.png' %}" class="header_icon"
                                 alt="{% trans 'حساب کاربری' %}">
                         </a>
@@ -527,9 +526,17 @@
                             <div class="menu-section">
                                 <h6 class="section-title mb-3">{% trans "Öğrenci" %}</h6>
                                 <ul class="list-unstyled menu-list">
+                                    {% if user.is_authenticated %}
+                                    <li class="px-2 py-1 mb-2" style="background: rgba(141, 212, 227, 0.2); border-left: 3px solid #1d61a9; border-radius: 6px; color: #092442; font-size: 13px; font-weight: 700;">
+                                        <i class="fas fa-user-check mr-1" style="color: #1d61a9;"></i> {{ user.get_full_name|default:user.username }}
+                                    </li>
+                                    <li><a class="dropdown-item font-weight-bold" href="{% url 'support:my_tickets' %}">{% trans "Taleplerim" %}</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'support:search' %}">{% trans "Destek Merkezi" %}</a></li>
+                                    {% else %}
                                     <li><a class="dropdown-item" href="{% url 'accounts:login' %}">{% trans "Giriş Yapmak" %}</a></li>
                                     <li><a class="dropdown-item" href="{% url 'accounts:signup' %}">{% trans "Hesabı Oluşturmak" %}</a></li>
                                     <li><a class="dropdown-item" href="{% url 'support:search' %}">{% trans "Destek Merkezi" %}</a></li>
+                                    {% endif %}
                                     <li><a class="dropdown-item" href="#">{% trans "Kayıt İşlemleri" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Öğrenim Ücretleri" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Burs ve İndirimler" %}</a></li>
@@ -538,11 +545,22 @@
                                     <li><a class="dropdown-item" href="#">{% trans "Öğrenci Kulüpleri" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Etkinlik Takvimi" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Kampüs Hayatı" %}</a></li>
-                                    <li><a class="dropdown-item" href="#">{% trans "Yurtlarımız" %}</a></li>
+                                    <li><a class="dropdown-item" href="#">{% trans "Konukevlerimiz" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Öğrenci Temsilciliği" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Sosyal Alanlar" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Mail Kullanımı" %}</a></li>
                                     <li><a class="dropdown-item" href="#">{% trans "Öğrenci Deneyimi" %}</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><hr class="dropdown-divider my-2"></li>
+                                    <li>
+                                        <form method="post" action="{% url 'accounts:logout' %}" class="m-0">
+                                            {% csrf_token %}
+                                            <button type="submit" class="dropdown-item font-weight-bold" style="background: transparent; border: 0; width: 100%; text-align: left; color: #092442; cursor: pointer;">
+                                                <i class="fas fa-sign-out-alt mr-1"></i> {% trans "Çıkış Yap" %}
+                                            </button>
+                                        </form>
+                                    </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -554,29 +572,57 @@
 
 
 
-                    <!-- User Icon Dropdown -->
+                    <!-- User Icon Dropdown (Akademik ve idari personel) -->
                     <div class="dropdown header_icon_container">
-                        <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle p-0 position-relative" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" title="{% if user.is_authenticated %}{{ user.get_full_name|default:user.username }}{% else %}{% trans 'Akademik ve idari personel' %}{% endif %}">
                             <img src="{% static 'core/main/images/teacher-svgrepo-com.svg' %}" class="header_icon"
                                 alt="{% trans 'حساب کاربری' %}">
+                            {% if user.is_authenticated %}
+                            <span style="position: absolute; top: -2px; right: -2px; width: 10px; height: 10px; border-radius: 50%; background: #8dd4e3; border: 2px solid #092442;" aria-label="{% trans 'Oturum açık' %}"></span>
+                            {% endif %}
                         </a>
                         <div class="dropdown-menu dropdown-menu-end header-dropdown-menu p-3">
                             <div class="menu-section">
                                 <h6 class="section-title mb-3">{% trans "Akademik ve idari personel" %}</h6>
                                 <ul class="list-unstyled menu-list">
-                                    <li><a class="dropdown-item" href="{% url 'accounts:login' %}">{% trans "Giriş Yapmak" %}</a></li>
-                                    
-                                    {% if user.profile.role == 'staff' or user.profile.role == 'professor' %}
-                                    <li><a class="dropdown-item" href="{% url 'chat:index' %}">{% trans "Meslektaşlarla iletişim" %}</a></li>
-                                    {% endif %}
-                                    
-                                    {% if user.is_superuser %}
-                                        <li><a class="dropdown-item text-primary font-weight-bold" href="{% url 'accounts:crm_dashboard' %}">
-                                            <i class="fas fa-chart-line mr-1"></i> {% trans "CRM Dashboard" %}
+                                    {% if user.is_authenticated %}
+                                        <li class="px-2 py-2 mb-2" style="background: rgba(141, 212, 227, 0.2); border-left: 3px solid #1d61a9; border-radius: 6px; color: #092442; font-size: 13px;">
+                                            <div class="font-weight-bold"><i class="fas fa-user-check mr-1" style="color: #1d61a9;"></i> {{ user.get_full_name|default:user.username }}</div>
+                                            <div style="font-size: 11px; color: rgba(9, 36, 66, 0.78);">{{ user.username }}{% if user.profile.department %} · {{ user.profile.department.name }}{% endif %}</div>
+                                        </li>
+
+                                        {% if user.is_staff or user.is_superuser or user.profile.role == 'staff' %}
+                                        <li><a class="dropdown-item font-weight-bold" href="{% url 'support:department_dashboard' %}" style="color: #1d61a9;">
+                                            <i class="fas fa-headset mr-1"></i> {% trans "Destek Paneli" %}
                                         </a></li>
+                                        {% endif %}
+
+                                        {% if user.profile.role == 'staff' or user.profile.role == 'professor' or user.is_superuser %}
+                                        <li><a class="dropdown-item" href="{% url 'chat:index' %}">
+                                            <i class="fas fa-comments mr-1"></i> {% trans "Meslektaşlarla iletişim" %}
+                                        </a></li>
+                                        {% endif %}
+
+                                        {% if user.is_superuser %}
+                                            <li><a class="dropdown-item text-primary font-weight-bold" href="{% url 'accounts:crm_dashboard' %}">
+                                                <i class="fas fa-chart-line mr-1"></i> {% trans "CRM Dashboard" %}
+                                            </a></li>
+                                        {% endif %}
+
+                                        <li><hr class="dropdown-divider my-2"></li>
+                                        <li>
+                                            <form method="post" action="{% url 'accounts:logout' %}" class="m-0">
+                                                {% csrf_token %}
+                                                <button type="submit" class="dropdown-item font-weight-bold" style="background: transparent; border: 0; width: 100%; text-align: left; color: #092442; cursor: pointer;">
+                                                    <i class="fas fa-sign-out-alt mr-1"></i> {% trans "Çıkış Yap" %}
+                                                </button>
+                                            </form>
+                                        </li>
+                                    {% else %}
+                                        <li><a class="dropdown-item" href="{% url 'accounts:login' %}">{% trans "Giriş Yapmak" %}</a></li>
                                     {% endif %}
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -913,11 +959,6 @@
         background: var(--secondary-medium-blue);
         color: white;
         border-color: var(--secondary-medium-blue);
-    }
-
-    /* Remove Font Awesome dependency */
-    .fas {
-        display: none !important;
     }
 
     /* کلاس جدید برای تغییر رنگ لینک‌ها هنگام اسکرول */

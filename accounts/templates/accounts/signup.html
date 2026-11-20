@@ -4,9 +4,7 @@
 {% block content %}
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/auth.css' %}">
-
-<div class="container auth-container" style="margin-top: 240px;">
+<div class="container auth-container auth-no-hero">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
             <div class="auth-card">
@@ -16,7 +14,7 @@
                             <img src="{% static 'core/img/AVRASYA-PNG-LOGO.png' %}" alt="{% trans 'Avrasya University Logo' %}" class="logo-image">
                         </div>
                     </div>
-                    <h2 style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">{% trans "Öğrenci Hesabı Oluştur" %}</h2>
+                    <h2 style="font-family: Metropolis, sans-serif; font-weight: 800;">{% trans "Öğrenci Hesabı Oluştur" %}</h2>
                     <p class="text-muted">{% trans "Başlamak için bilgilerinizi doldurun" %}</p>
                 </div>
 
@@ -36,7 +34,7 @@
                     <div class="row">
                         <!-- Sol Taraf: Kişisel Bilgiler -->
                         <div class="col-md-6">
-                            <h5 class="form-section-title" style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">
+                            <h5 class="form-section-title" style="font-family: Metropolis, sans-serif; font-weight: 800;">
                                 <i class="fas fa-user-circle"></i> {% trans "Kişisel Bilgiler" %}
                             </h5>
                             
@@ -85,7 +83,7 @@
                         
                         <!-- Sağ Taraf: Güvenlik Bilgileri -->
                         <div class="col-md-6">
-                            <h5 class="form-section-title" style=" font-family: Metropolis, sans-serif; font-weight: 800; color:white;">
+                            <h5 class="form-section-title" style="font-family: Metropolis, sans-serif; font-weight: 800;">
                                 <i class="fas fa-shield-alt"></i> {% trans "Güvenlik Bilgileri" %}
                             </h5>
                             
@@ -145,12 +143,12 @@
                             
                             <!-- Şartlar ve Koşullar -->
                             <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="terms" required>
-                                    <label class="custom-control-label" for="terms">
+                                <div class="terms-check-row">
+                                    <input type="checkbox" class="terms-checkbox-input" id="terms" required>
+                                    <label class="terms-check-label" for="terms">
                                         <a href="#" class="terms-link">{% trans "Kullanım Şartları" %}</a>{% trans "'nı ve" %} 
                                         <a href="#" class="terms-link">{% trans "Gizlilik Politikası" %}</a>{% trans "'nı okudum ve kabul ediyorum" %}
-                                        <span class="text-danger">*</span>
+                                        <span class="required-star">*</span>
                                     </label>
                                 </div>
                             </div>
@@ -272,34 +270,109 @@
     }
     
     /* استایل برای checkbox */
-    .custom-checkbox {
+    .terms-check-row {
         margin-top: 15px;
-        padding-left: 30px;
-        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
     }
-    
-    .custom-control-input {
-        position: absolute;
-        left: 0;
-        top: 2px;
-        width: 20px;
-        height: 20px;
-    }
-    
-    .custom-control-label {
-        font-size: 14px;
-        color: rgba(9, 36, 66, 0.76);
+
+    .auth-form input.terms-checkbox-input {
+        -webkit-appearance: none;
+        appearance: none;
+        position: relative !important;
+        opacity: 1 !important;
+        width: 22px !important;
+        min-width: 22px;
+        height: 22px !important;
+        margin: 2px 0 0 0;
+        padding: 0 !important;
+        border: 2px solid #1d61a9;
+        border-radius: 6px;
+        background-color: #ffffff;
         cursor: pointer;
+        flex-shrink: 0;
+        display: inline-grid;
+        place-content: center;
+        transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    
-    .custom-control-label a {
+
+    .auth-form input.terms-checkbox-input:hover,
+    .auth-form input.terms-checkbox-input:focus {
+        border-color: #8dd4e3;
+        box-shadow: 0 0 0 3px rgba(141, 212, 227, 0.28);
+        outline: none;
+    }
+
+    .auth-form input.terms-checkbox-input::after {
+        content: "";
+        width: 6px;
+        height: 11px;
+        border: solid #ffffff;
+        border-width: 0 2.5px 2.5px 0;
+        transform: rotate(45deg) scale(0);
+        transition: transform 0.15s ease-in-out;
+        margin-bottom: 2px;
+    }
+
+    .auth-form input.terms-checkbox-input:checked {
+        background-color: #1d61a9;
+        border-color: #1d61a9;
+    }
+
+    .auth-form input.terms-checkbox-input:checked::after {
+        transform: rotate(45deg) scale(1);
+    }
+
+    .terms-check-label {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #092442;
+        cursor: pointer;
+        margin-bottom: 0;
+    }
+
+    .terms-check-label a {
         color: #1d61a9;
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 600;
     }
-    
-    .custom-control-label a:hover {
+
+    .terms-check-label a:hover {
         text-decoration: underline;
+    }
+
+    .required-star {
+        color: #1d61a9;
+        font-weight: 700;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .auth-card .terms-check-label {
+            color: #f6f2e7 !important;
+        }
+
+        .auth-card .terms-check-label a {
+            color: #8dd4e3 !important;
+        }
+
+        .auth-card .required-star {
+            color: #8dd4e3;
+        }
+
+        .auth-form input.terms-checkbox-input {
+            background-color: rgba(255, 255, 255, 0.12);
+            border-color: #8dd4e3;
+        }
+
+        .auth-form input.terms-checkbox-input:checked {
+            background-color: #8dd4e3;
+            border-color: #8dd4e3;
+        }
+
+        .auth-form input.terms-checkbox-input::after {
+            border-color: #092442;
+        }
     }
     
     /* استایل بخش‌های فرم */

@@ -35,7 +35,7 @@ def get_fakulte_sayfasi(context, fakulte_kodu=None):
         return None
     return (
         FakulteSayfasi.objects.filter(fakulte_kodu=kod, aktif=True)
-        .prefetch_related('ek_yoneticiler', 'ek_sekmeler')
+        .prefetch_related('bolum_kartlari', 'ek_yoneticiler', 'ek_sekmeler')
         .first()
     )
 
@@ -260,10 +260,41 @@ def render_fakulte_tab_panes(context, fakulte_sayfasi=None):
             }
             for sek in fakulte_sayfasi.ek_sekmeler.filter(aktif=True)
         ]
+        bolum_kartlari = [
+            {
+                'ad': k.get_localized('ad'),
+                'kisa_kod': k.kisa_kod,
+                'ikon': k.ikon or 'fas fa-graduation-cap',
+                'program_turu': k.get_localized('program_turu', _('Lisans Derecesi')),
+                'egitim_dili': k.get_localized('egitim_dili', _('Türkçe')),
+                'egitim_suresi': k.get_localized('egitim_suresi', _('4 Yıl')),
+                'aciklama': k.get_localized('aciklama'),
+                'detay_url': k.detay_url,
+            }
+            for k in fakulte_sayfasi.bolum_kartlari.filter(aktif=True)
+        ]
+        stats = []
+        if fakulte_sayfasi.istatistikleri_goster:
+            stat_specs = [
+                (fakulte_sayfasi.get_localized('istatistik_1_baslik', _('Toplam Öğrenci')), fakulte_sayfasi.ogrenci_sayisi, 'fas fa-users'),
+                (fakulte_sayfasi.get_localized('istatistik_2_baslik', _('Akademik Kadro')), fakulte_sayfasi.akademik_kadro_sayisi, 'fas fa-chalkboard-teacher'),
+                (fakulte_sayfasi.get_localized('istatistik_3_baslik', _('Uluslararası Anlaşma')), fakulte_sayfasi.uluslararasi_anlasma_sayisi, 'fas fa-handshake'),
+                (fakulte_sayfasi.get_localized('istatistik_4_baslik', _('Mezun İstihdam Oranı')), fakulte_sayfasi.mezun_istihdam_orani, 'fas fa-briefcase'),
+            ]
+            for lbl, val, ico in stat_specs:
+                if val and str(val).strip():
+                    stats.append({'label': lbl, 'value': str(val).strip(), 'icon': ico})
         data = {
             'exists': True,
             'show_bolumler': fakulte_sayfasi.bolumler_sekmesi_goster,
             'fakulte_adi': fakulte_adi,
+            'bolumler_baslik': fakulte_sayfasi.get_localized('bolumler_baslik', _('Bölümler')),
+            'bolumler_alt_baslik': fakulte_sayfasi.get_localized('bolumler_alt_baslik') or f"{fakulte_adi} {_('bünyesinde yer alan bölümler hakkında detaylı bilgi')}",
+            'bolumler_giris_icerik': fakulte_sayfasi.get_localized('bolumler_giris_icerik'),
+            'bolumler_liste_baslik': fakulte_sayfasi.get_localized('bolumler_liste_baslik', _('Lisans Programları')),
+            'bolumler_liste_aciklama': fakulte_sayfasi.get_localized('bolumler_liste_aciklama'),
+            'bolum_kartlari': bolum_kartlari,
+            'stats': stats,
             'tarihce_baslik': fakulte_sayfasi.get_localized('tarihce_baslik', _('Tarihçe')),
             'tarihce_alt_baslik': fakulte_sayfasi.get_localized('tarihce_alt_baslik') or f"{fakulte_adi} {_('Tarihçesi')}",
             'tarihce_icerik': fakulte_sayfasi.get_localized('tarihce_icerik'),
@@ -291,6 +322,13 @@ def render_fakulte_tab_panes(context, fakulte_sayfasi=None):
             'exists': False,
             'show_bolumler': True,
             'fakulte_adi': '',
+            'bolumler_baslik': _('Bölümler'),
+            'bolumler_alt_baslik': '',
+            'bolumler_giris_icerik': '',
+            'bolumler_liste_baslik': _('Lisans Programları'),
+            'bolumler_liste_aciklama': '',
+            'bolum_kartlari': [],
+            'stats': [],
             'tarihce_baslik': _('Tarihçe'),
             'tarihce_alt_baslik': '',
             'tarihce_icerik': '',

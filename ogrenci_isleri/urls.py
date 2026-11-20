@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import RedirectView
 from . import views
 
 app_name = 'ogrenci_isleri'
@@ -9,7 +10,8 @@ urlpatterns = [
     path('ogrenim_ucretleri/',views.ogrenim_ucretleri,name='ogrenim_ucretleri'),
     path('kayit_islemleri/',views.kayit,name='kayit'),
     path('burslar_indirimler/',views.burslar,name='burslar'),
-    path('yurtlar/',views.yurtlar,name='yurtlar'),
+    path('konukevleri/',views.yurtlar,name='yurtlar'),
+    path('yurtlar/',RedirectView.as_view(pattern_name='ogrenci_isleri:yurtlar',permanent=True)),
     path('muafiyetler/',views.muafiyetler,name='muafiyetler'),
     path('kulupler/',views.kulupler,name='kulupler'),
     path('yonetmelik/',views.yonetmelik,name='yonetmelik'),

@@ -1,0 +1,87 @@
+{% extends "support/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="page-header" style="margin-top: 0;">
+    <div class="page-header-content text-center">
+        <h1 style="color: #ffffff; font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Talep Takip Merkezi" %}</h1>
+        <p style="margin: 0 auto;">{% trans "Takip kodunuz ve e-posta adresiniz ile destek talebinizin güncel durumunu görüntüleyin." %}</p>
+    </div>
+</div>
+
+<div class="support-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="support-section" style="padding: 2.25rem;">
+                <h2 class="section-title" style="margin-bottom: 1.25rem;">
+                    <i class="fas fa-search"></i> {% trans "Talep Sorgula" %}
+                </h2>
+
+                {% if messages %}
+                <div class="mb-3">
+                    {% for msg in messages %}
+                    <div class="alert alert-{{ msg.tags|default:'info' }} mb-2" style="border-radius: 10px;">
+                        {{ msg }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="tracking_code" class="font-weight-bold" style="color: #092442;">{% trans "Talep Takip Kodu *" %}</label>
+                        <input type="text" id="tracking_code" name="tracking_code" class="form-control"
+                               value="{{ lookup_code }}" placeholder="{% trans 'Örn: AVU-2026-A1B2C3D4' %}" required
+                               style="background: #f6f2e7; border: 1px solid rgba(9,36,66,0.18); border-radius: 10px; padding: 12px 14px;">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="email" class="font-weight-bold" style="color: #092442;">{% trans "E-posta Adresi *" %}</label>
+                        <input type="email" id="email" name="email" class="form-control"
+                               value="{{ lookup_email }}" placeholder="ornek@avrasya.edu.tr" required
+                               style="background: #f6f2e7; border: 1px solid rgba(9,36,66,0.18); border-radius: 10px; padding: 12px 14px;">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 12px;">
+                        <i class="fas fa-ticket-alt"></i> {% trans "Talebi Görüntüle" %}
+                    </button>
+                </form>
+
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-3" style="border-top: 1px solid rgba(9,36,66,0.12); flex-wrap: wrap; gap: 10px;">
+                    <a href="{% url 'support:create_ticket' %}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-plus"></i> {% trans "Yeni Talep Oluştur" %}
+                    </a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'support:my_tickets' %}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-list"></i> {% trans "Tüm Taleplerim" %}
+                    </a>
+                    {% else %}
+                    <a href="{% url 'accounts:login' %}?next={% url 'support:my_tickets' %}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-sign-in-alt"></i> {% trans "Hesabımla Giriş Yap" %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if session_tickets %}
+            <div class="support-section" style="padding: 1.75rem;">
+                <h3 style="color: #092442; font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">
+                    <i class="fas fa-history" style="color: #1d61a9;"></i> {% trans "Bu Oturumdaki Talepleriniz" %}
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    {% for t in session_tickets %}
+                    <a href="{% url 'support:ticket_detail' t.id %}" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: #f6f2e7; border-radius: 10px; text-decoration: none; color: #092442; border: 1px solid rgba(9,36,66,0.12);">
+                        <div>
+                            <strong>{{ t.tracking_code }}</strong> - {{ t.subject|truncatechars:45 }}
+                            <div style="font-size: 0.8rem; color: rgba(9,36,66,0.72);">{{ t.department.name }}</div>
+                        </div>
+                        <span class="status-badge status-{{ t.status }}">{{ t.get_status_display }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

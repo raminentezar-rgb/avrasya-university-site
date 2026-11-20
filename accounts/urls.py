@@ -1,6 +1,6 @@
 from django.urls import path, reverse_lazy
 from django.contrib.auth import views as auth_views
-from .views import student_signup
+from .views import CustomLoginView, student_signup
 from . import views
 
 app_name = 'accounts'
@@ -8,9 +8,7 @@ app_name = 'accounts'
 urlpatterns = [
     path(
         "login/",
-        auth_views.LoginView.as_view(
-            template_name="accounts/login.html"
-        ),
+        CustomLoginView.as_view(),
         name="login",
     ),
 

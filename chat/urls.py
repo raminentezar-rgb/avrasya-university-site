@@ -34,6 +34,10 @@ urlpatterns = [
 
     path('notifications/', views.get_notifications, name='notifications'),
     path('notifications/mark-read/', views.mark_notification_read, name='mark_notification_read'),
+    path('support/init/', views.support_init_session, name='support_init_session'),
+    path('support/send/', views.support_send_message, name='support_send_message'),
+    path('support/mode/', views.support_set_mode, name='support_set_mode'),
+    path('support/<str:session_key>/poll/', views.support_poll_messages, name='support_poll_messages'),
     path('support/<str:session_key>/messages/', views.get_support_messages, name='get_support_messages'),
     
     # Sesli Asistan API Endpoint'leri

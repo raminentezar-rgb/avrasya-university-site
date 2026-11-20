@@ -10,7 +10,7 @@
     <div class="header-overlay"></div>
     <div class="container position-relative">
         <div class="header-content-wrapper text-center animate-fade-in">
-            <nav class="premium-breadcrumb mb-4">
+            <nav class="premium-breadcrumb mb-3">
                 <a href="/">{% trans "Ana Sayfa" %}</a>
                 <span class="divider"><i class="fas fa-chevron-right"></i></span>
                 <a href="{% url 'support:search' %}">{% trans "Destek Merkezi" %}</a>
@@ -21,38 +21,10 @@
             <p class="premium-subtitle">{% trans "Sorununuzu veya sorunuzu iletin, uzman ekibimiz en kısa sürede size geri dönüş yapsın." %}</p>
         </div>
     </div>
-
-    <!-- Auth Status Floating -->
-    <div class="auth-floating-badge">
-        {% if user.is_authenticated %}
-        <div class="user-badge shadow-lg">
-            <div class="user-avatar">
-                <i class="fas fa-user-circle"></i>
-            </div>
-            <div class="user-details">
-                <span class="username">{{ user.username }}</span>
-                <div class="badge-actions">
-                    <a href="{% url 'support:my_tickets' %}" title="{% trans 'Taleplerim' %}"><i class="fas fa-ticket-alt"></i></a>
-                    <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" title="{% trans 'ÇıkışYap' %}" class="logout-btn"><i
-                                class="fas fa-sign-out-alt"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        {% else %}
-        <div class="guest-badge shadow-lg">
-            <a href="{% url 'accounts:login' %}" class="login-link">{% trans "Giriş Yap" %}</a>
-            <span class="sep">|</span>
-            <a href="{% url 'accounts:signup' %}" class="signup-btn">{% trans "Kayıt Ol" %}</a>
-        </div>
-        {% endif %}
-    </div>
 </div>
 
-<div class="container main-content-wrapper pb-5" style="margin-top: 200px;">
-    <div class="row justify-content-center" <!-- Main Form Column -->
+<div class="container main-content-wrapper pb-5">
+    <div class="row justify-content-center"><!-- Main Form Column -->
         <div class="col-lg-8">
             <div class="form-container-premium animate-slide-up">
                 <div class="form-card">
@@ -64,53 +36,114 @@
                         <div class="drag-line"></div>
                     </div>
 
-                    <form method="post" id="ticket-form" class="premium-form">
+                    {% if messages %}
+                    <div class="mb-4">
+                        {% for msg in messages %}
+                        <div class="alert alert-{{ msg.tags|default:'info' }} mb-2" style="border-radius: 12px;">
+                            {{ msg }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="post" id="ticket-form" class="premium-form" enctype="multipart/form-data">
                         {% csrf_token %}
 
-                        <div class="row g-4">
-                            <!-- Department Selection -->
+                        {% if not user.is_authenticated %}
+                        <div class="mb-4 p-3" style="background: #f6f2e7; border-left: 4px solid #1d61a9; border-radius: 12px; color: #092442; font-size: 0.92rem;">
+                            <i class="fas fa-info-circle mr-1" style="color: #1d61a9;"></i>
+                            {% trans "Üye olmadan destek talebi oluşturabilirsiniz. Talebiniz sonrasında size özel bir takip kodu verilecektir." %}
+                        </div>
+                        <div class="row g-3 mb-2">
                             <div class="col-md-6">
-                                <div class="floating-group">
+                                <div class="field-group">
+                                    <label class="ticket-field-label" for="guest_name"><i class="fas fa-user"></i> {% trans "Adınız Soyadınız *" %}</label>
+                                    <input type="text" id="guest_name" name="guest_name" class="premium-input"
+                                        placeholder="{% trans 'Adınız ve soyadınız' %}"
+                                        value="{{ form_data.guest_name|default:'' }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="field-group">
+                                    <label class="ticket-field-label" for="guest_email"><i class="fas fa-envelope"></i> {% trans "E-posta Adresiniz *" %}</label>
+                                    <input type="email" id="guest_email" name="guest_email" class="premium-input"
+                                        placeholder="ornek@avrasya.edu.tr"
+                                        value="{{ form_data.guest_email|default:'' }}" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="field-group">
+                                    <label class="ticket-field-label" for="guest_phone"><i class="fas fa-phone"></i> {% trans "Telefon Numarası (İsteğe Bağlı)" %}</label>
+                                    <input type="text" id="guest_phone" name="guest_phone" class="premium-input"
+                                        placeholder="05XX XXX XX XX"
+                                        value="{{ form_data.guest_phone|default:'' }}">
+                                </div>
+                            </div>
+                        </div>
+                        {% elif not user.email %}
+                        <div class="row g-3 mb-2">
+                            <div class="col-12">
+                                <div class="field-group">
+                                    <label class="ticket-field-label" for="guest_email"><i class="fas fa-envelope"></i> {% trans "Bildirim E-postası (İsteğe Bağlı)" %}</label>
+                                    <input type="email" id="guest_email" name="guest_email" class="premium-input"
+                                        placeholder="ornek@avrasya.edu.tr"
+                                        value="{{ form_data.guest_email|default:'' }}">
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="row g-3">
+                            <!-- Department Selection -->
+                            <div class="col-md-12" id="department-col">
+                                <div class="field-group">
+                                    <label class="ticket-field-label" for="department-select"><i class="fas fa-building"></i> {% trans "İlgili Bölüm / Birim *" %}</label>
                                     <select id="department-select" name="department" class="premium-select" required>
-                                        <option value="" disabled selected></option>
+                                        <option value="" disabled {% if not form_data.department %}selected{% endif %}>{% trans "Lütfen ilgili birimi seçiniz..." %}</option>
                                         {% for dept in departments %}
-                                        <option value="{{ dept.id }}">{{ dept.name }}</option>
+                                        <option value="{{ dept.id }}" {% if form_data.department == dept.id|stringformat:"s" %}selected{% endif %}>{{ dept.name }}</option>
                                         {% endfor %}
                                     </select>
-                                    <label class="floating-label"><i class=""></i>{% trans "İlgili Bölüm *" %}</label>
-                                    <div class="focus-line"></div>
                                 </div>
                             </div>
 
-                            <!-- Category Selection -->
-                            <div class="col-md-6">
-                                <div class="floating-group">
-                                    <select id="category-select" name="category" class="premium-select" required
-                                        disabled>
-                                        <option value="" disabled selected></option>
+                            <!-- Category Selection (automatically shown when department has sub-categories) -->
+                            <div class="col-md-6 d-none" id="category-col">
+                                <div class="field-group">
+                                    <label class="ticket-field-label" for="category-select"><i class="fas fa-folder-open"></i> {% trans "Alt Kategori *" %}</label>
+                                    <select id="category-select" name="category" class="premium-select"
+                                        data-selected="{{ form_data.category|default:'' }}" disabled>
+                                        <option value="" disabled selected>{% trans "Kategori seçiniz..." %}</option>
                                     </select>
-                                    <label class="floating-label"><i class=""></i>{% trans "Kategori *" %}</label>
-                                    <div class="focus-line"></div>
                                 </div>
                             </div>
 
                             <!-- Subject -->
                             <div class="col-12">
-                                <div class="floating-group">
-                                    <input type="text" id="subject" name="subject" class="premium-input" placeholder=" "
-                                        required>
-                                    <label class="floating-label"><i class=""></i>{% trans "Konu Başlığı *" %}</label>
-                                    <div class="focus-line"></div>
+                                <div class="field-group">
+                                    <label class="ticket-field-label" for="subject"><i class="fas fa-heading"></i> {% trans "Konu Başlığı *" %}</label>
+                                    <input type="text" id="subject" name="subject" class="premium-input"
+                                        placeholder="{% trans 'Sorununuzu kısaca özetleyin (Örn: Kayıt yenileme, EDUROAM şifresi...)' %}"
+                                        value="{{ form_data.subject|default:'' }}" required>
+                                </div>
+
+                                <!-- Live Smart FAQ Deflection -->
+                                <div id="smart-faq-box" class="smart-faq-box d-none">
+                                    <div class="smart-faq-header">
+                                        <span><i class="fas fa-lightbulb"></i> {% trans "Bunlar sorunuzu hemen çözebilir:" %}</span>
+                                        <button type="button" class="smart-faq-close" onclick="document.getElementById('smart-faq-box').classList.add('d-none')">&times;</button>
+                                    </div>
+                                    <div id="smart-faq-items" class="smart-faq-items"></div>
                                 </div>
                             </div>
 
                             <!-- Message -->
                             <div class="col-12">
-                                <div class="floating-group">
-                                    <textarea id="message" name="message" class="premium-textarea" placeholder=" "
-                                        required></textarea>
-                                    <label class="floating-label"><i class=""></i>{% trans "Sorun veya Soru Detayı *" %}</label>
-                                    <div class="focus-line"></div>
+                                <div class="field-group">
+                                    <label class="ticket-field-label" for="message"><i class="fas fa-align-left"></i> {% trans "Sorun veya Soru Detayı *" %}</label>
+                                    <textarea id="message" name="message" class="premium-textarea"
+                                        placeholder="{% trans 'Yaşadığınız durumu veya talebinizi mümkün olduğunca açık bir şekilde yazınız...' %}"
+                                        required>{{ form_data.message|default:'' }}</textarea>
                                     <div class="textarea-support-info">
                                         <i class="fas fa-info-circle"></i>
                                         {% trans "Lütfen hata mesajlarını veya işlem adımlarını detaylı yazın." %}
@@ -119,11 +152,11 @@
                             </div>
 
                             <!-- Priority Selection -->
-                            <div class="col-12 mt-4">
-                                <label class="section-label mb-3">{% trans "Öncelik Seviyesi" %}</label>
+                            <div class="col-12 mt-2">
+                                <label class="section-label mb-3"><i class="fas fa-flag mr-1" style="color: #1d61a9;"></i> {% trans "Öncelik Seviyesi" %}</label>
                                 <div class="priority-selector-grid">
-                                    <label class="priority-option low" for="p-low">
-                                        <input type="radio" id="p-low" name="priority" value="low">
+                                    <label class="priority-option low {% if form_data.priority == 'low' %}active{% endif %}" for="p-low">
+                                        <input type="radio" id="p-low" name="priority" value="low" {% if form_data.priority == 'low' %}checked{% endif %}>
                                         <div class="option-content">
                                             <div class="indicator"></div>
                                             <div class="text">
@@ -134,8 +167,8 @@
                                         </div>
                                     </label>
 
-                                    <label class="priority-option medium active" for="p-medium">
-                                        <input type="radio" id="p-medium" name="priority" value="medium" checked>
+                                    <label class="priority-option medium {% if not form_data.priority or form_data.priority == 'medium' %}active{% endif %}" for="p-medium">
+                                        <input type="radio" id="p-medium" name="priority" value="medium" {% if not form_data.priority or form_data.priority == 'medium' %}checked{% endif %}>
                                         <div class="option-content">
                                             <div class="indicator"></div>
                                             <div class="text">
@@ -146,8 +179,8 @@
                                         </div>
                                     </label>
 
-                                    <label class="priority-option high" for="p-high">
-                                        <input type="radio" id="p-high" name="priority" value="high">
+                                    <label class="priority-option high {% if form_data.priority == 'high' %}active{% endif %}" for="p-high">
+                                        <input type="radio" id="p-high" name="priority" value="high" {% if form_data.priority == 'high' %}checked{% endif %}>
                                         <div class="option-content">
                                             <div class="indicator"></div>
                                             <div class="text">
@@ -158,6 +191,23 @@
                                         </div>
                                     </label>
                                 </div>
+                            </div>
+
+                            <!-- Attachment -->
+                            <div class="col-12 mt-3">
+                                <label class="section-label mb-2" for="attachment"><i class="fas fa-paperclip mr-1" style="color: #1d61a9;"></i> {% trans "Ek Dosya (İsteğe Bağlı)" %}</label>
+                                <label class="file-upload-card" for="attachment" id="file-dropzone">
+                                    <input type="file" id="attachment" name="attachment" class="d-none"
+                                           accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.png,.jpg,.jpeg,.webp">
+                                    <div class="file-upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                    <div class="file-upload-info">
+                                        <strong id="file-label-title">{% trans "Dosya seçmek için tıklayın" %}</strong>
+                                        <span id="file-label-sub">{% trans "PDF, Office, TXT veya görsel dosyalar (En fazla 10 MB)" %}</span>
+                                    </div>
+                                    <button type="button" id="file-clear-btn" class="file-clear-btn d-none" title="{% trans 'Kaldır' %}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </label>
                             </div>
                         </div>
 
@@ -208,13 +258,26 @@
                         </li>
                         <li>
                             <div class="tip-icon"><i class="fas fa-clock"></i></div>
-                            <div class="tip-text"><b>{% trans "Takip:" %}</b> {% trans "Talebinizden sonra bilet numaranızı \"Taleplerim\" sayfasından takip edebilirsiniz." %}</div>
+                            <div class="tip-text"><b>{% trans "Takip:" %}</b> {% trans "Talebinizden sonra size verilen takip koduyla \"Talep Takip\" sayfasından süreci izleyebilirsiniz." %}</div>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Emergency Support -->
-                <div class="whatsapp-card-mini mt-4 animate-fade-in-right" style="animation-delay: 0.2s;">
+                <div class="whatsapp-card-mini mt-3" style="background: #092442; cursor: pointer;" onclick="document.getElementById('live-support-button')?.click()">
+                    <div class="wa-content">
+                        <div class="wa-icon" style="color: #8dd4e3;">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="wa-text">
+                            <h6 style="color: #ffffff;">{% trans "Canlı Destek Sohbeti" %}</h6>
+                            <p>{% trans "Anlık yazışma için canlı destek penceresini açın." %}</p>
+                        </div>
+                        <span class="wa-btn"><i class="fas fa-comments"></i></span>
+                    </div>
+                </div>
+
+                <div class="whatsapp-card-mini mt-3 animate-fade-in-right" style="animation-delay: 0.2s;">
                     <div class="wa-content">
                         <div class="wa-icon">
                             <i class="fab fa-whatsapp"></i>
@@ -309,15 +372,22 @@
 
     /* Premium Header */
     .premium-header {
-        height: 350px;
-        background: var(--p-bg-gradient);
+        min-height: 270px;
+        background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
         position: relative;
         display: flex;
         align-items: center;
         color: white;
-        margin-bottom: -100px;
+        padding: 55px 0 110px;
+        margin-bottom: 0;
         overflow: hidden;
-        margin-top: -10px;
+        margin-top: 0;
+    }
+
+    .main-content-wrapper {
+        margin-top: -55px;
+        position: relative;
+        z-index: 6;
     }
 
     .header-overlay {
@@ -335,12 +405,12 @@
     .header-content-wrapper {
         position: relative;
         z-index: 2;
-        padding-top: 60px;
+        padding-top: 0;
     }
 
     .premium-breadcrumb {
         font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(246, 242, 231, 0.85);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -364,31 +434,31 @@
 
     .premium-breadcrumb .divider {
         font-size: 0.7rem;
-        opacity: 0.5;
+        opacity: 0.6;
     }
 
     .premium-title {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
         font-weight: 800;
         font-family: 'Metropolis', sans-serif;
         margin-bottom: 1rem;
-        background: linear-gradient(to right, #ffffff, #8dd4e3);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #ffffff;
     }
 
     .premium-subtitle {
-        font-size: 1.2rem;
-        max-width: 600px;
+        font-size: 1.15rem;
+        max-width: 650px;
         margin: 0 auto;
-        opacity: 0.8;
-        font-weight: 300;
+        color: #f6f2e7;
+        opacity: 0.96;
+        font-weight: 400;
+        line-height: 1.6;
     }
 
     /* Auth Floating Badge */
     .auth-floating-badge {
         position: absolute;
-        top: 130px;
+        top: 20px;
         right: 30px;
         z-index: 10;
     }
@@ -506,10 +576,23 @@
         border-radius: 10px;
     }
 
-    /* Floating Form Controls */
-    .floating-group {
-        position: relative;
-        margin-bottom: 30px;
+    /* Clean Top-Aligned Form Controls */
+    .field-group {
+        margin-bottom: 18px;
+    }
+
+    .ticket-field-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #092442;
+        margin-bottom: 8px;
+    }
+
+    .ticket-field-label i {
+        color: #1d61a9;
     }
 
     .premium-input,
@@ -518,71 +601,154 @@
         width: 100%;
         background: #f6f2e7;
         border: 2px solid rgba(9, 36, 66, 0.14);
-        border-radius: 16px;
-        padding: 18px 20px;
+        border-radius: 14px;
+        padding: 13px 16px;
         font-weight: 500;
         font-family: var(--p-font);
-        font-size: 1rem;
-        color: var(--p-primary);
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-size: 0.98rem;
+        color: #092442;
+        transition: all 0.2s ease;
         outline: none;
     }
 
     .premium-textarea {
-        min-height: 180px;
-        padding-top: 25px;
-    }
-
-    .floating-label {
-        position: absolute;
-        top: 18px;
-        left: 20px;
-        color: rgba(9, 36, 66, 0.62);
-        pointer-events: none;
-        transition: all 0.3s ease;
-        font-weight: 500;
+        min-height: 155px;
+        resize: vertical;
     }
 
     .premium-input:focus,
     .premium-select:focus,
     .premium-textarea:focus {
         background: white;
-        border-color: var(--p-primary);
-        box-shadow: 0 10px 20px rgba(9, 36, 66, 0.05);
+        border-color: #1d61a9;
+        box-shadow: 0 0 0 4px rgba(141, 212, 227, 0.28);
     }
 
-    .premium-input:focus+.floating-label,
-    .premium-input:not(:placeholder-shown)+.floating-label,
-    .premium-select:focus+.floating-label,
-    .premium-select:valid+.floating-label,
-    .premium-textarea:focus+.floating-label,
-    .premium-textarea:not(:placeholder-shown)+.floating-label {
-        top: -12px;
-        left: 15px;
-        font-size: 0.85rem;
-        background: white;
-        padding: 0 8px;
-        color: var(--p-primary);
+    /* Smart FAQ Deflection */
+    .smart-faq-box {
+        background: rgba(141, 212, 227, 0.16);
+        border: 1px solid rgba(29, 97, 169, 0.25);
+        border-left: 4px solid #1d61a9;
+        border-radius: 14px;
+        padding: 12px 16px;
+        margin-bottom: 18px;
+    }
+
+    .smart-faq-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.88rem;
         font-weight: 700;
-        transform: none;
+        color: #092442;
+        margin-bottom: 8px;
     }
 
-    .focus-line {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 3px;
-        background: var(--p-accent);
-        transition: 0.4s;
-        border-radius: 0 0 16px 16px;
+    .smart-faq-header i {
+        color: #1d61a9;
+        margin-right: 6px;
     }
 
-    .premium-input:focus~.focus-line,
-    .premium-select:focus~.focus-line,
-    .premium-textarea:focus~.focus-line {
-        width: 100%;
-        left: 0;
+    .smart-faq-close {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        line-height: 1;
+        color: #092442;
+        cursor: pointer;
+    }
+
+    .smart-faq-items {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .smart-faq-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        padding: 8px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #092442;
+        font-size: 0.88rem;
+        font-weight: 600;
+        border: 1px solid rgba(9, 36, 66, 0.08);
+        transition: 0.2s;
+    }
+
+    .smart-faq-link:hover {
+        border-color: #1d61a9;
+        color: #1d61a9;
+        text-decoration: none;
+    }
+
+    /* File Upload Card */
+    .file-upload-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: #f6f2e7;
+        border: 2px dashed rgba(29, 97, 169, 0.35);
+        border-radius: 16px;
+        padding: 14px 18px;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .file-upload-card:hover {
+        background: #ffffff;
+        border-color: #1d61a9;
+    }
+
+    .file-upload-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #ffffff;
+        color: #1d61a9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+        box-shadow: 0 3px 10px rgba(9, 36, 66, 0.06);
+    }
+
+    .file-upload-info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .file-upload-info strong {
+        color: #092442;
+        font-size: 0.94rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .file-upload-info span {
+        color: rgba(9, 36, 66, 0.72);
+        font-size: 0.8rem;
+    }
+
+    .file-clear-btn {
+        background: #092442;
+        color: #ffffff;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
     }
 
     .textarea-support-info {
@@ -799,7 +965,7 @@
 
     .info-header i {
         font-size: 1.5rem;
-        color: var(--p-gold);
+        color: var(--p-primary);
     }
 
     .info-header h4 {
@@ -871,8 +1037,9 @@
 
     .wa-text p {
         margin: 0;
-        font-size: 0.8rem;
-        opacity: 0.9;
+        font-size: 0.85rem;
+        color: #f6f2e7;
+        opacity: 0.95;
     }
 
     .wa-btn {
@@ -943,12 +1110,19 @@
 
     @media (max-width: 991px) {
         .premium-title {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
         }
 
         .auth-floating-badge {
-            top: 20px;
-            right: 20px;
+            position: static;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .premium-header {
+            flex-direction: column;
+            padding: 40px 0 85px;
         }
 
         .form-card {
@@ -969,10 +1143,43 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const deptCol = document.getElementById("department-col");
         const deptSelect = document.getElementById("department-select");
+        const categoryCol = document.getElementById("category-col");
         const categorySelect = document.getElementById("category-select");
         const ticketForm = document.getElementById("ticket-form");
         const submitBtn = document.querySelector(".btn-submit-premium");
+
+        // File upload feedback
+        const fileInput = document.getElementById("attachment");
+        const fileTitle = document.getElementById("file-label-title");
+        const fileSub = document.getElementById("file-label-sub");
+        const fileClearBtn = document.getElementById("file-clear-btn");
+
+        if (fileInput) {
+            fileInput.addEventListener("change", function () {
+                const file = this.files && this.files[0];
+                if (file) {
+                    fileTitle.textContent = file.name;
+                    fileSub.textContent = `${(file.size / 1024).toFixed(1)} KB`;
+                    fileClearBtn.classList.remove("d-none");
+                } else {
+                    fileTitle.textContent = "{% trans 'Dosya seçmek için tıklayın' %}";
+                    fileSub.textContent = "{% trans 'PDF, Office, TXT veya görsel dosyalar (En fazla 10 MB)' %}";
+                    fileClearBtn.classList.add("d-none");
+                }
+            });
+        }
+        if (fileClearBtn) {
+            fileClearBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                fileInput.value = "";
+                fileTitle.textContent = "{% trans 'Dosya seçmek için tıklayın' %}";
+                fileSub.textContent = "{% trans 'PDF, Office, TXT veya görsel dosyalar (En fazla 10 MB)' %}";
+                fileClearBtn.classList.add("d-none");
+            });
+        }
 
         // Priority Selector Visual Logic
         const priorityOptions = document.querySelectorAll(".priority-option");
@@ -983,38 +1190,116 @@
             });
         });
 
-        // Dynamic Categories
-        deptSelect.addEventListener("change", function () {
-            const departmentId = this.value;
+        function showCategoryColumn(show) {
+            if (show) {
+                deptCol.className = "col-md-6";
+                categoryCol.classList.remove("d-none");
+            } else {
+                deptCol.className = "col-md-12";
+                categoryCol.classList.add("d-none");
+            }
+        }
 
+        function loadCategoriesForDepartment(departmentId, preselectedId = "") {
             if (!departmentId) {
-                categorySelect.innerHTML = '<option value="" disabled selected></option>';
+                categorySelect.innerHTML = '<option value="" disabled selected>{% trans "Kategori seçiniz..." %}</option>';
                 categorySelect.disabled = true;
+                categorySelect.required = false;
+                showCategoryColumn(false);
                 return;
             }
 
             categorySelect.innerHTML = '<option value="" disabled selected>Yükleniyor...</option>';
             categorySelect.disabled = true;
 
-            fetch(`/support/api/categories/?department_id=${departmentId}`)
+            fetch(`/support/api/categories/?department_id=${encodeURIComponent(departmentId)}`)
                 .then(res => res.json())
                 .then(data => {
-                    if (data.length > 0) {
-                        categorySelect.innerHTML = '<option value="" disabled selected></option>';
+                    if (Array.isArray(data) && data.length > 0) {
+                        categorySelect.innerHTML = '<option value="" disabled selected>{% trans "Alt kategori seçiniz..." %}</option>';
                         data.forEach(item => {
-                            categorySelect.innerHTML += `<option value="${item.id}">${item.name}</option>`;
+                            const opt = document.createElement("option");
+                            opt.value = item.id;
+                            opt.textContent = item.name;
+                            if (preselectedId && String(item.id) === String(preselectedId)) {
+                                opt.selected = true;
+                            }
+                            categorySelect.appendChild(opt);
                         });
                         categorySelect.disabled = false;
+                        categorySelect.required = true;
+                        showCategoryColumn(true);
                     } else {
-                        categorySelect.innerHTML = '<option value="" disabled selected>Kategori yok</option>';
+                        categorySelect.innerHTML = '<option value="" selected></option>';
                         categorySelect.disabled = true;
+                        categorySelect.required = false;
+                        showCategoryColumn(false);
                     }
+                })
+                .catch(() => {
+                    categorySelect.innerHTML = '<option value="" selected></option>';
+                    categorySelect.disabled = true;
+                    categorySelect.required = false;
+                    showCategoryColumn(false);
                 });
+        }
+
+        // Dynamic Categories
+        deptSelect.addEventListener("change", function () {
+            loadCategoriesForDepartment(this.value);
         });
 
-        // Loading State
+        if (deptSelect.value) {
+            loadCategoriesForDepartment(deptSelect.value, categorySelect.dataset.selected || "");
+        }
+
+        // Instant Smart FAQ Suggestions on Subject typing
+        const subjectInput = document.getElementById("subject");
+        const smartBox = document.getElementById("smart-faq-box");
+        const smartItems = document.getElementById("smart-faq-items");
+        let faqTimer = null;
+
+        function escHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+        }
+
+        if (subjectInput && smartBox && smartItems) {
+            subjectInput.addEventListener("input", function () {
+                const q = this.value.trim();
+                clearTimeout(faqTimer);
+                if (q.length < 3) {
+                    smartBox.classList.add("d-none");
+                    return;
+                }
+                faqTimer = setTimeout(() => {
+                    fetch(`{% url 'support:search' %}?q=${encodeURIComponent(q)}`, {
+                        headers: { "X-Requested-With": "XMLHttpRequest" }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            const items = (data && Array.isArray(data.results)) ? data.results.slice(0, 3) : [];
+                            if (items.length > 0) {
+                                smartItems.innerHTML = items.map(it => {
+                                    const safeUrl = (it.url && (it.url.startsWith('/') || it.url.startsWith('http'))) ? it.url : '#';
+                                    return `<a href="${escHtml(safeUrl)}" target="_blank" class="smart-faq-link"><span>${escHtml(it.title)}</span><i class="fas fa-external-link-alt" style="color:#1d61a9;font-size:0.8rem;"></i></a>`;
+                                }).join('');
+                                smartBox.classList.remove("d-none");
+                            } else {
+                                smartBox.classList.add("d-none");
+                            }
+                        })
+                        .catch(() => smartBox.classList.add("d-none"));
+                }, 350);
+            });
+        }
+
+        // Loading State & Back-button reset
         ticketForm.addEventListener("submit", function () {
             submitBtn.disabled = true;
+        });
+
+        window.addEventListener("pageshow", function () {
+            if (submitBtn) submitBtn.disabled = false;
         });
     });
 </script>

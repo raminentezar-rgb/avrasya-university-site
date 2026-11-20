@@ -1,6 +1,7 @@
 from modeltranslation.translator import TranslationOptions, register
 from .models import (
     FakulteSayfasi,
+    FakulteBolumKarti,
     FakulteYonetimUyesi,
     FakulteEkSekme,
     BolumSayfasi,
@@ -18,6 +19,12 @@ class FakulteSayfasiTranslationOptions(TranslationOptions):
         'bolumler_baslik',
         'bolumler_alt_baslik',
         'bolumler_giris_icerik',
+        'bolumler_liste_baslik',
+        'bolumler_liste_aciklama',
+        'istatistik_1_baslik',
+        'istatistik_2_baslik',
+        'istatistik_3_baslik',
+        'istatistik_4_baslik',
         'tarihce_baslik',
         'tarihce_alt_baslik',
         'tarihce_icerik',
@@ -38,6 +45,11 @@ class FakulteSayfasiTranslationOptions(TranslationOptions):
 @register(FakulteYonetimUyesi)
 class FakulteYonetimUyesiTranslationOptions(TranslationOptions):
     fields = ('gorev',)
+
+
+@register(FakulteBolumKarti)
+class FakulteBolumKartiTranslationOptions(TranslationOptions):
+    fields = ('ad', 'program_turu', 'egitim_dili', 'egitim_suresi', 'aciklama')
 
 
 @register(FakulteEkSekme)

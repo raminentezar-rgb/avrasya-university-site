@@ -20,7 +20,11 @@
             <div class="hero-search-container animate-up delay-2">
                 <i class="fas fa-search search-icon-hero"></i>
                 <input type="text" id="faqSearchInput" class="hero-search-input"
-                    placeholder="{% trans 'Bir soru arayın... (Örn: Burs, Kayıt, Transkript)' %}">
+                    value="{{ initial_query|default:'' }}"
+                    placeholder="{% trans 'Bir soru arayın... (Örn: Yemekhane, Ücret, Tez, EDUROAM)' %}">
+                <button type="button" id="faqClearBtn" class="faq-clear-btn {% if not initial_query %}d-none{% endif %}" title="{% trans 'Temizle' %}">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -29,53 +33,52 @@
 
         <!-- Filter Bar -->
         <div class="filter-bar animate-up delay-3">
-            <button class="filter-btn active" data-filter="all">{% trans "Tümü" %}</button>
-            <button class="filter-btn" data-filter="akademik">{% trans "Akademik" %}</button>
-            <button class="filter-btn" data-filter="teknik">{% trans "Teknik" %}</button>
-            <button class="filter-btn" data-filter="mali">{% trans "Mali İşler" %}</button>
-            <button class="filter-btn" data-filter="ogrenci">{% trans "Öğrenci İşleri" %}</button>
+            <button class="filter-btn active" data-filter="all">{% trans "Tümü" %} ({{ faqs|length }})</button>
+            {% for cat in filter_categories %}
+            <button class="filter-btn" data-filter="{{ cat.slug }}">{{ cat.label }} ({{ cat.count }})</button>
+            {% endfor %}
         </div>
 
         <!-- Popular Topics Grid -->
         <div class="row mb-5 animate-up delay-4">
             <div class="col-12 mb-4">
-                <h3 class="section-heading"><i class="fas fa-fire text-warning"></i> {% trans "Popüler Konular" %}</h3>
+                <h3 class="section-heading"><i class="fas fa-fire" style="color: #1d61a9;"></i> {% trans "Popüler Konular" %}</h3>
             </div>
 
             <div class="col-md-4 mb-4">
-                <div class="topic-card" onclick="triggerSearch('Kayıt')">
+                <div class="topic-card" onclick="triggerSearch('yemekhane')">
                     <div class="topic-icon bg-blue-light">
-                        <i class="fas fa-user-graduate text-blue"></i>
+                        <i class="fas fa-utensils text-blue"></i>
                     </div>
                     <div class="topic-info">
-                        <h5>{% trans "Kayıt İşlemleri" %}</h5>
-                        <p>{% trans "Ders kaydı ve yenileme" %}</p>
+                        <h5>{% trans "Kampüs & Yemekhane" %}</h5>
+                        <p>{% trans "Yemekhane, kütüphane ve spor salonu" %}</p>
                     </div>
                     <i class="fas fa-arrow-right topic-arrow"></i>
                 </div>
             </div>
 
             <div class="col-md-4 mb-4">
-                <div class="topic-card" onclick="triggerSearch('Burs')">
+                <div class="topic-card" onclick="triggerSearch('ücret')">
                     <div class="topic-icon bg-green-light">
-                        <i class="fas fa-money-bill-wave text-green"></i>
+                        <i class="fas fa-credit-card text-green"></i>
                     </div>
                     <div class="topic-info">
-                        <h5>{% trans "Burs & Ücretler" %}</h5>
-                        <p>{% trans "Ödeme planları ve burslar" %}</p>
+                        <h5>{% trans "Ücretler & Taksitler" %}</h5>
+                        <p>{% trans "Öğrenim ücreti ve ödeme planı" %}</p>
                     </div>
                     <i class="fas fa-arrow-right topic-arrow"></i>
                 </div>
             </div>
 
             <div class="col-md-4 mb-4">
-                <div class="topic-card" onclick="triggerSearch('Sınav')">
+                <div class="topic-card" onclick="triggerSearch('lisansüstü')">
                     <div class="topic-icon bg-purple-light">
-                        <i class="fas fa-pen-alt text-purple"></i>
+                        <i class="fas fa-graduation-cap text-purple"></i>
                     </div>
                     <div class="topic-info">
-                        <h5>{% trans "Sınavlar" %}</h5>
-                        <p>{% trans "Takvim ve sonuçlar" %}</p>
+                        <h5>{% trans "Lisansüstü Eğitim" %}</h5>
+                        <p>{% trans "Tez, AKTS ve devam kuralları" %}</p>
                     </div>
                     <i class="fas fa-arrow-right topic-arrow"></i>
                 </div>
@@ -85,14 +88,14 @@
         <!-- FAQ List -->
         <div class="faq-list-section animate-up delay-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="section-heading">{% trans "Tüm Sorular" %}</h3>
-                <span class="badge-count">{{ faqs|length }} Soru</span>
+                <h3 class="section-heading mb-0">{% trans "Tüm Sorular" %}</h3>
+                <span class="badge-count" id="faqVisibleCount">{{ faqs|length }} Soru</span>
             </div>
 
             <div class="faq-grid" id="faqGrid">
                 {% if faqs %}
                 {% for faq in faqs %}
-                <div class="faq-card" data-category="{{ faq.category.name|lower|default:'all' }}"
+                <div class="faq-card" data-category="{{ faq.category_slug|default:'genel' }}"
                     data-keywords="{{ faq.question|striptags|lower }} {{ faq.answer|striptags|lower }}">
                     <div class="faq-header" onclick="toggleFaq(this)">
                         <h5 class="faq-title">{{ faq.question }}</h5>
@@ -103,7 +106,7 @@
                             {{ faq.answer|linebreaks }}
                             <div class="faq-actions mt-3">
                                 <div class="tag-badge">
-                                    <i class="fas fa-tag"></i> {{ faq.category.name|default:"Genel" }}
+                                    <i class="fas fa-tag"></i> {{ faq.category_label|default:"Genel" }}
                                 </div>
                                 <button class="btn-useful" onclick="markUseful(this, {{ faq.id }})">
                                     <i class="far fa-thumbs-up"></i> {% trans "Yararlı" %}
@@ -140,9 +143,9 @@
                 <a href="{% url 'support:create_ticket' %}" class="btn-cta primary">
                     <i class="fas fa-paper-plane"></i> {% trans "Talep Oluştur" %}
                 </a>
-                <a href="{% url 'contact:contact' %}" class="btn-cta outline">
-                    <i class="fas fa-comment-alt"></i> {% trans "İletişime Geç" %}
-                </a>
+                <button type="button" class="btn-cta outline" onclick="document.getElementById('live-support-button')?.click()">
+                    <i class="fas fa-headset"></i> {% trans "Canlı Destek" %}
+                </button>
             </div>
         </div>
 
@@ -170,14 +173,11 @@
     /* Hero */
     .faq-hero {
         background: var(--f-gradient);
-        padding: 5rem 0 8rem;
+        padding: 4rem 0 6.5rem;
         position: relative;
         overflow: hidden;
         color: white;
-        margin-top: -85px;
-        /* Adjust for navbar overlap if needed */
-        padding-top: 150px;
-        margin-top: -10px;
+        margin-top: 0;
     }
 
 
@@ -219,9 +219,10 @@
 
     .hero-subtitle {
         font-size: 1.2rem;
-        opacity: 0.9;
+        color: #f6f2e7;
+        opacity: 0.95;
         margin-bottom: 3rem;
-        font-weight: 300;
+        font-weight: 400;
     }
 
     /* Search Box */
@@ -252,6 +253,25 @@
         color: var(--f-text);
         outline: none;
         font-family: 'Outfit', sans-serif;
+    }
+
+    .faq-clear-btn {
+        background: #f6f2e7;
+        color: #092442;
+        border: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        margin-right: 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .faq-clear-btn:hover {
+        background: #8dd4e3;
     }
 
     /* Main Content */
@@ -665,47 +685,46 @@
     // Search and Filter Logic
     document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.getElementById('faqSearchInput');
+        const clearBtn = document.getElementById('faqClearBtn');
+        const visibleCountEl = document.getElementById('faqVisibleCount');
         const filterBtns = document.querySelectorAll('.filter-btn');
         const faqCards = document.querySelectorAll('.faq-card');
         const noResultsMsg = document.getElementById('js-no-results');
 
-        // Filter Buttons
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Toggle active state
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 filterContent();
             });
         });
 
-        // Search Input
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                clearBtn.classList.add('d-none');
+                filterContent();
+                searchInput.focus();
+            });
+        }
+
         searchInput.addEventListener('input', filterContent);
 
         function filterContent() {
-            // Enhanced Turkish character handling
-            const searchTerm = searchInput.value.toLocaleLowerCase('tr');
+            const rawVal = searchInput.value.trim();
+            if (clearBtn) clearBtn.classList.toggle('d-none', !rawVal);
 
-            const activeCategory = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+            const searchTerm = rawVal.toLocaleLowerCase('tr');
+            const activeBtn = document.querySelector('.filter-btn.active');
+            const activeCategory = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
             let visibleCount = 0;
 
             faqCards.forEach(card => {
-                const keywords = card.getAttribute('data-keywords'); // Assuming backend provides lowercase
-                const category = card.getAttribute('data-category');
+                const keywords = card.getAttribute('data-keywords') || '';
+                const category = card.getAttribute('data-category') || '';
 
-                // Check Category
-                let catMatch = (activeCategory === 'all');
-                if (!catMatch) {
-                    if (activeCategory === 'akademik' && category.includes('akademik')) catMatch = true;
-                    else if (activeCategory === 'teknik' && category.includes('teknik')) catMatch = true;
-                    else if (activeCategory === 'mali' && (category.includes('mali') || category.includes('ücret'))) catMatch = true;
-                    else if (activeCategory === 'ogrenci' && (category.includes('öğrenci') || category.includes('kayıt'))) catMatch = true;
-                }
-
-                // Check Search
-                // Simple includes check is often sufficient if both sides are lowercased correctly
-                let searchMatch = !searchTerm || keywords.includes(searchTerm);
+                const catMatch = (activeCategory === 'all') || (category === activeCategory);
+                const searchMatch = !searchTerm || keywords.includes(searchTerm);
 
                 if (catMatch && searchMatch) {
                     card.style.display = 'block';
@@ -715,14 +734,18 @@
                 }
             });
 
-            // Toggle No Results Message
-            if (noResultsMsg) {
-                if (visibleCount === 0 && faqCards.length > 0) {
-                    noResultsMsg.style.display = 'block';
-                } else {
-                    noResultsMsg.style.display = 'none';
-                }
+            if (visibleCountEl) {
+                visibleCountEl.textContent = `${visibleCount} Soru`;
             }
+
+            if (noResultsMsg) {
+                noResultsMsg.style.display = (visibleCount === 0 && faqCards.length > 0) ? 'block' : 'none';
+            }
+        }
+
+        // Apply ?q= filter if landed with query string
+        if (searchInput.value.trim()) {
+            filterContent();
         }
     });
 </script>

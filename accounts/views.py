@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
 from django.db.models import Count, Q
-from django.contrib.auth import login, logout 
+from django.contrib.auth import login, logout
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
@@ -8,12 +9,26 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .forms import StudentSignUpForm
 from .models import Profile
 
+
+class CustomLoginView(auth_views.LoginView):
+    """Redirect department staff to their support panel when no ?next= target is set."""
+
+    template_name = 'accounts/login.html'
+
+    def get_default_redirect_url(self):
+        user = self.request.user
+        profile = getattr(user, 'profile', None)
+        role = getattr(profile, 'role', None)
+        if user.is_authenticated and not user.is_superuser and role == 'staff':
+            return resolve_url('support:department_dashboard')
+        return super().get_default_redirect_url()
+
 def student_signup(request):
     if request.method == "POST":
         form = StudentSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('/')
     else:
         form = StudentSignUpForm()

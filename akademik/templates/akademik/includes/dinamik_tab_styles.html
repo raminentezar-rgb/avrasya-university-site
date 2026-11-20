@@ -809,6 +809,278 @@ a.avrasya-kadro-contact-row:hover {
         justify-content: center;
     }
 }
+
+/* ==========================================================================
+   Uniform 3D Flip Department Cards for Faculty Bölümler Tab
+   Identical Avrasya Brand Gradient (#1d61a9 -> #092442) Across All Faculties
+   ========================================================================== */
+.avrasya-dept-intro {
+    background: linear-gradient(135deg, rgba(141, 212, 227, 0.14) 0%, #f6f2e7 100%);
+    border-left: 5px solid #1d61a9;
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.avrasya-dept-intro h4 {
+    color: #092442 !important;
+    font-weight: 800;
+    font-size: 1.28rem;
+    margin: 0 0 6px 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.avrasya-dept-intro h4 i {
+    color: #1d61a9;
+}
+
+.avrasya-dept-intro p {
+    margin: 0;
+    color: rgba(9, 36, 66, 0.78);
+    font-size: 0.96rem;
+}
+
+.avrasya-dept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+    gap: 22px;
+    margin-bottom: 30px;
+}
+
+.avrasya-dept-card {
+    height: 295px;
+    perspective: 1100px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.avrasya-dept-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform-style: preserve-3d;
+}
+
+.avrasya-dept-card:hover .avrasya-dept-card-inner,
+.avrasya-dept-card.is-flipped .avrasya-dept-card-inner {
+    transform: rotateY(180deg);
+}
+
+.avrasya-dept-front,
+.avrasya-dept-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    box-shadow: 0 10px 26px rgba(9, 36, 66, 0.12);
+}
+
+.avrasya-dept-front {
+    background: linear-gradient(135deg, #1d61a9 0%, #092442 100%) !important;
+    border: 1px solid rgba(141, 212, 227, 0.4) !important;
+    color: #ffffff !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 22px;
+    text-align: center;
+}
+
+.avrasya-dept-code {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.16) !important;
+    border: 1px solid rgba(141, 212, 227, 0.48) !important;
+    color: #ffffff !important;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.avrasya-dept-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
+    background: rgba(141, 212, 227, 0.16) !important;
+    border: 1px solid rgba(141, 212, 227, 0.45) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    font-size: 2rem;
+    color: #8dd4e3 !important;
+}
+
+.avrasya-dept-front h4 {
+    color: #ffffff !important;
+    font-size: 1.26rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    line-height: 1.38 !important;
+    text-shadow: 0 2px 6px rgba(9, 36, 66, 0.3);
+}
+
+.avrasya-dept-back {
+    background: #ffffff !important;
+    border: 2px solid #8dd4e3 !important;
+    color: #092442 !important;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 22px;
+    text-align: left;
+}
+
+.avrasya-dept-back h5 {
+    color: #092442 !important;
+    font-size: 1.08rem !important;
+    font-weight: 800 !important;
+    margin: 0 0 10px 0 !important;
+    padding-bottom: 8px !important;
+    border-bottom: 2px solid #8dd4e3 !important;
+    line-height: 1.3;
+}
+
+.avrasya-dept-meta {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+.avrasya-dept-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #092442;
+    font-weight: 500;
+}
+
+.avrasya-dept-meta-row i {
+    color: #1d61a9;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.avrasya-dept-desc {
+    margin: 6px 0 0 0;
+    font-size: 0.83rem;
+    line-height: 1.5;
+    color: rgba(9, 36, 66, 0.78);
+}
+
+.avrasya-dept-actions {
+    margin-top: auto;
+    padding-top: 6px;
+}
+
+.avrasya-dept-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none !important;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.avrasya-dept-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    color: #ffffff !important;
+}
+
+/* Faculty Stats Row */
+.avrasya-stats-section {
+    background: #f6f2e7;
+    border: 1px solid rgba(141, 212, 227, 0.45);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-top: 10px;
+}
+
+.avrasya-stats-section h4 {
+    color: #092442 !important;
+    font-weight: 800;
+    font-size: 1.15rem;
+    margin: 0 0 18px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avrasya-stats-section h4 i {
+    color: #1d61a9;
+}
+
+.avrasya-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+}
+
+.avrasya-stat-card {
+    background: #ffffff;
+    border: 1px solid rgba(141, 212, 227, 0.4);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 3px 12px rgba(9, 36, 66, 0.05);
+}
+
+.avrasya-stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.avrasya-stat-info h5 {
+    margin: 0 0 3px 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(9, 36, 66, 0.72);
+}
+
+.avrasya-stat-val {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #092442;
+    line-height: 1.2;
+}
 </style>
 
 <script>
@@ -855,6 +1127,11 @@ a.avrasya-kadro-contact-row:hover {
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+            return;
+        }
+        const deptCard = e.target.closest('.avrasya-dept-card');
+        if (deptCard && !e.target.closest('a')) {
+            deptCard.classList.toggle('is-flipped');
         }
     });
 

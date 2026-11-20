@@ -55,7 +55,7 @@
             <div class="va-search-wrapper">
                 <div class="va-search-box">
                     <i class="fa-solid fa-magnifying-glass va-search-icon"></i>
-                    <input type="text" id="va-search-input" placeholder="{% trans 'Konu söyleyin veya yazın (Örn: Kalite, Adalet, Bilgisayar, Burslar)...' %}" autocomplete="off">
+                    <input type="text" id="va-search-input" placeholder="{% trans 'Konu söyleyin veya yazın (Örn: Kalite, Aşçılık, Bilgisayar, Burslar)...' %}" autocomplete="off">
                     <button id="va-search-clear" class="va-search-clear" title="{% trans 'Temizle' %}" style="display: none;"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
@@ -105,7 +105,7 @@
             <div class="va-cat-chips-scroll" id="va-cat-chips">
                 <button class="va-cat-chip active" data-cat="all">{% trans "Tümü (120+)" %}</button>
                 <button class="va-cat-chip" data-cat="Koordinatörlük">{% trans "Kalite & Akreditasyon" %}</button>
-                <button class="va-cat-chip" data-cat="Program (MYO)">{% trans "Adalet & MYO" %}</button>
+                <button class="va-cat-chip" data-cat="Program (MYO)">{% trans "MYO Programları" %}</button>
                 <button class="va-cat-chip" data-cat="Bölüm (Lisans)">{% trans "Lisans Bölümleri" %}</button>
                 <button class="va-cat-chip" data-cat="Fakülte">{% trans "Fakülteler" %}</button>
                 <button class="va-cat-chip" data-cat="Program (SHMYO)">{% trans "Sağlık SHMYO" %}</button>
@@ -143,14 +143,18 @@
         <div class="support-header">
             <div class="support-title"><i class="fa-solid fa-headset me-2"></i>{% trans "Canlı Destek" %}</div>
             <div class="support-controls">
+                <a href="{% url 'support:create_ticket' %}" title="{% trans 'Destek Talebi Oluştur' %}" style="color: #8dd4e3; font-size: 11px; font-weight: 700; text-decoration: none; margin-right: 4px; padding: 4px 8px; border: 1px solid rgba(141,212,227,0.4); border-radius: 999px;">
+                    {% trans "Talep Aç" %}
+                </a>
                 <button id="minimize-support" title="{% trans 'Küçült' %}"><i class="fa-solid fa-minus" style="color: #ffffff !important; font-size: 18px;"></i></button>
-                <button id="close-support" title="{% trans 'Kapat' %}" style="margin-left: 10px;"><i class="fa-solid fa-xmark" style="color: #ffffff !important; font-size: 20px;"></i></button>
+                <button id="close-support" title="{% trans 'Kapat' %}" style="margin-left: 6px;"><i class="fa-solid fa-xmark" style="color: #ffffff !important; font-size: 20px;"></i></button>
             </div>
         </div>
         
         <div id="support-onboarding" class="support-body">
             <p>{% trans "Merhaba! Size nasıl yardımcı olabiliriz?" %}</p>
             <form id="support-init-form">
+                {% csrf_token %}
                 <div class="mb-3">
                     <input type="text" id="support-name" class="form-control" placeholder="{% trans 'Adınız Soyadınız' %}" required>
                 </div>
@@ -165,12 +169,24 @@
             </form>
         </div>
 
-        <div id="support-chat-container" class="support-body" style="display: none;">
+        <div id="support-chat-container" class="support-body" style="display: none; padding: 12px 14px;">
+            <div class="support-mode-bar" id="support-mode-bar">
+                <span class="mode-badge" id="support-mode-badge">
+                    <i class="fa-solid fa-robot"></i>
+                    <span id="support-mode-text">{% trans "AI Asistan Aktif" %}</span>
+                </span>
+                <button type="button" class="mode-switch-btn" id="support-mode-switch">
+                    <i class="fa-solid fa-headset"></i> {% trans "Yetkiliye Bağlan" %}
+                </button>
+            </div>
             <div id="support-messages" class="support-messages-list">
                 <!-- Messages will appear here -->
             </div>
+            <div id="support-ai-typing" class="support-ai-typing" style="display: none;">
+                <i class="fa-solid fa-robot"></i> {% trans "Avrasya AI yanıt hazırlıyor..." %}
+            </div>
             <div class="support-input-area">
-                <textarea id="support-input" placeholder="{% trans 'Mesajınızı yazın...' %}" rows="1"></textarea>
+                <textarea id="support-input" placeholder="{% trans 'Sorunuzu yazın (Örn: Aday öğrenci, burs, ücret)...' %}" rows="1"></textarea>
                 <button id="send-support-msg"><i class="fa-solid fa-paper-plane" style="color: white; font-size: 16px;"></i></button>
             </div>
         </div>
@@ -1066,25 +1082,148 @@
     }
 
     .support-msg {
-        max-width: 80%;
-        padding: 8px 12px;
-        border-radius: 12px;
-        font-size: 14px;
-        line-height: 1.4;
+        max-width: 88%;
+        padding: 10px 13px;
+        border-radius: 14px;
+        font-size: 13.5px;
+        line-height: 1.45;
+        word-break: break-word;
     }
 
     .support-msg-visitor {
         align-self: flex-end;
-        background: rgba(141, 212, 227, 0.22);
-        color: #1d61a9;
-        border-bottom-right-radius: 2px;
+        background: #1d61a9;
+        color: #ffffff;
+        border-bottom-right-radius: 3px;
     }
 
     .support-msg-staff {
         align-self: flex-start;
         background: #f6f2e7;
         color: #092442;
-        border-bottom-left-radius: 2px;
+        border-bottom-left-radius: 3px;
+        border: 1px solid rgba(9, 36, 66, 0.08);
+    }
+
+    .support-msg-sender {
+        font-size: 11px;
+        font-weight: 700;
+        color: #1d61a9;
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .support-msg-links {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 9px;
+        padding-top: 8px;
+        border-top: 1px solid rgba(9, 36, 66, 0.1);
+    }
+
+    .support-link-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        background: #ffffff;
+        color: #092442 !important;
+        border: 1px solid rgba(29, 97, 169, 0.3);
+        border-radius: 9px;
+        padding: 7px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none !important;
+        transition: all 0.2s ease;
+    }
+
+    .support-link-btn:hover {
+        background: #1d61a9;
+        color: #ffffff !important;
+        border-color: #1d61a9;
+    }
+
+    .support-mode-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 7px 10px;
+        margin-bottom: 10px;
+        background: #f6f2e7;
+        border: 1px solid rgba(9, 36, 66, 0.1);
+        border-radius: 10px;
+        font-size: 11.5px;
+        flex-shrink: 0;
+    }
+
+    .mode-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 700;
+        color: #092442;
+    }
+
+    .mode-badge i {
+        color: #1d61a9;
+    }
+
+    .mode-switch-btn {
+        background: #ffffff;
+        color: #1d61a9;
+        border: 1px solid rgba(29, 97, 169, 0.3);
+        border-radius: 999px;
+        padding: 3px 9px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: 0.2s;
+    }
+
+    .mode-switch-btn:hover {
+        background: #1d61a9;
+        color: #ffffff;
+    }
+
+    .support-quick-prompts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .support-quick-chip {
+        background: #ffffff;
+        color: #1d61a9;
+        border: 1px solid rgba(29, 97, 169, 0.28);
+        border-radius: 999px;
+        padding: 5px 10px;
+        font-size: 11.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .support-quick-chip:hover {
+        background: #1d61a9;
+        color: #ffffff;
+    }
+
+    .support-ai-typing {
+        font-size: 11.5px;
+        color: #1d61a9;
+        font-weight: 600;
+        padding: 4px 8px 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
 
     .support-input-area {
@@ -1885,7 +2024,7 @@
                 </div>
                 <div class="va-tags-list">
                     <button class="va-tag-btn" data-cmd="Kalite ve Akreditasyon"><i class="fa-solid fa-award me-1"></i> "Kalite ve Akreditasyon"</button>
-                    <button class="va-tag-btn" data-cmd="Adalet"><i class="fa-solid fa-scale-balanced me-1"></i> "Adalet Programı"</button>
+                    <button class="va-tag-btn" data-cmd="Aşçılık"><i class="fa-solid fa-kitchen-set me-1"></i> "Aşçılık Programı"</button>
                     <button class="va-tag-btn" data-cmd="Bilgisayar Mühendisliği"><i class="fa-solid fa-laptop-code me-1"></i> "Bilgisayar Mühendisliği"</button>
                     <button class="va-tag-btn" data-cmd="Öğrenim Ücretleri"><i class="fa-solid fa-money-bill-wave me-1"></i> "Öğrenim Ücretleri"</button>
                     <button class="va-tag-btn" data-cmd="Hemşirelik"><i class="fa-solid fa-user-nurse me-1"></i> "Hemşirelik"</button>
@@ -2086,7 +2225,7 @@
         } else {
             playChime('error');
             updateStatus('idle', `"${queryText}" konusuna ilişkin kayıt bulunamadı.`);
-            speakText(`Üzgünüm, ${queryText} ile ilgili bir birim veya sayfa bulunamadı. Lütfen Kalite, Adalet, Bilgisayar Mühendisliği, Öğrenim Ücretleri veya Burslar gibi bir konu adı söyleyin.`);
+            speakText(`Üzgünüm, ${queryText} ile ilgili bir birim veya sayfa bulunamadı. Lütfen Kalite, Bilgisayar Mühendisliği, Öğrenim Ücretleri veya Burslar gibi bir konu adı söyleyin.`);
         }
     }
 
@@ -2161,7 +2300,7 @@
                 }
             });
         } else {
-            speakText('Avrasya Üniversitesi Sesli Asistanına hoş geldiniz. Kalite, Adalet, Bölümler, Burslar veya gitmek istediğiniz konuyu söyleyebilirsiniz.', function() {
+            speakText('Avrasya Üniversitesi Sesli Asistanına hoş geldiniz. Kalite, Aşçılık, Bölümler, Burslar veya gitmek istediğiniz konuyu söyleyebilirsiniz.', function() {
                 if (autoListen) {
                     startListening();
                 }
@@ -2303,28 +2442,165 @@
     const badge = document.getElementById('support-badge');
     const closeSupportBtn = document.getElementById('close-support');
     const minimizeSupportBtn = document.getElementById('minimize-support');
+    const modeTextEl = document.getElementById('support-mode-text');
+    const modeBadgeEl = document.getElementById('support-mode-badge');
+    const modeSwitchBtn = document.getElementById('support-mode-switch');
+    const aiTypingEl = document.getElementById('support-ai-typing');
 
     let socket = null;
     let sessionKey = localStorage.getItem('support_session_key');
     let visitorName = localStorage.getItem('support_visitor_name') || 'Ziyaretçi';
     let unreadCount = 0;
+    let pollTimer = null;
+    let lastMsgId = 0;
+    let humanHandoff = false;
+    const renderedMsgIds = new Set();
 
-    if (!sessionKey) {
-        sessionKey = 'vis_' + Math.random().toString(36).substr(2, 9);
+    function escapeWidgetHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+    }
+
+    function sanitizeWidgetUrl(url) {
+        const val = String(url || '').trim();
+        if (val.startsWith('/') || val.startsWith('http://') || val.startsWith('https://')) {
+            return val;
+        }
+        return '#';
+    }
+
+    function updateModeUi(isHuman) {
+        humanHandoff = !!isHuman;
+        if (!modeBadgeEl || !modeSwitchBtn) return;
+        if (humanHandoff) {
+            modeBadgeEl.innerHTML = '<i class="fa-solid fa-headset"></i><span>{% trans "Canlı Destek Ekibi" %}</span>';
+            modeSwitchBtn.innerHTML = '<i class="fa-solid fa-robot"></i> {% trans "AI Asistana Dön" %}';
+        } else {
+            modeBadgeEl.innerHTML = '<i class="fa-solid fa-robot"></i><span>{% trans "AI Asistan Aktif" %}</span>';
+            modeSwitchBtn.innerHTML = '<i class="fa-solid fa-headset"></i> {% trans "Yetkiliye Bağlan" %}';
+        }
+    }
+
+    if (modeSwitchBtn) {
+        modeSwitchBtn.addEventListener('click', async () => {
+            const targetMode = humanHandoff ? 'ai' : 'human';
+            try {
+                const res = await fetch('/chat/support/mode/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getSupportCsrf(),
+                    },
+                    body: JSON.stringify({ session_key: sessionKey, mode: targetMode }),
+                });
+                const data = await res.json();
+                if (data.success) {
+                    updateModeUi(data.human_handoff);
+                    if (data.message) {
+                        addMessage(data.message.text, data.message.sender_name, true, data.message.id, data.message.is_ai, data.message.links);
+                    }
+                }
+            } catch (err) {}
+        });
+    }
+
+    if (!sessionKey || sessionKey.length < 16) {
+        if (window.crypto && window.crypto.randomUUID) {
+            sessionKey = 'vis_' + window.crypto.randomUUID().replace(/-/g, '');
+        } else {
+            const bytes = new Uint8Array(16);
+            (window.crypto || window.msCrypto).getRandomValues(bytes);
+            sessionKey = 'vis_' + Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+        }
         localStorage.setItem('support_session_key', sessionKey);
     }
 
+    function getSupportCsrf() {
+        const input = document.querySelector('#support-init-form input[name="csrfmiddlewaretoken"]');
+        if (input && input.value) return input.value;
+        const match = document.cookie.match(/(?:^|;\s*)csrftoken=([^;]+)/);
+        return match ? decodeURIComponent(match[1]) : '';
+    }
+
+    async function ensureSupportSession(langVal = 'tr') {
+        try {
+            const res = await fetch('/chat/support/init/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getSupportCsrf(),
+                },
+                body: JSON.stringify({
+                    session_key: sessionKey,
+                    full_name: visitorName,
+                    language: langVal,
+                }),
+            });
+            const data = await res.json();
+            if (data.success && data.session_key) {
+                sessionKey = data.session_key;
+                localStorage.setItem('support_session_key', sessionKey);
+                updateModeUi(!!data.human_handoff);
+            }
+        } catch (err) {
+            console.error('Support session init error:', err);
+        }
+    }
+
+    function startPolling() {
+        stopPolling();
+        pollTimer = setInterval(() => {
+            if (!socket || socket.readyState !== WebSocket.OPEN) {
+                pollSupportMessages();
+            }
+        }, 4000);
+    }
+
+    function stopPolling() {
+        if (pollTimer) {
+            clearInterval(pollTimer);
+            pollTimer = null;
+        }
+    }
+
+    async function pollSupportMessages() {
+        try {
+            const url = `/chat/support/${encodeURIComponent(sessionKey)}/poll/${lastMsgId ? `?after_id=${lastMsgId}` : ''}`;
+            const res = await fetch(url);
+            if (!res.ok) return;
+            const data = await res.json();
+            if (typeof data.human_handoff !== 'undefined') {
+                updateModeUi(!!data.human_handoff);
+            }
+            if (data.success && Array.isArray(data.messages)) {
+                data.messages.forEach(m => {
+                    addMessage(m.text, m.sender_name, m.is_staff, m.id, m.is_ai, m.links);
+                    if (supportWindow.style.display === 'none' && m.is_staff) {
+                        unreadCount++;
+                        updateBadge();
+                    }
+                });
+            }
+        } catch (err) {
+            // Silent retry on next poll
+        }
+    }
+
     if (supportBtn) {
-        supportBtn.addEventListener('click', () => {
+        supportBtn.addEventListener('click', async () => {
             if (vaWindow) vaWindow.style.display = 'none';
             if (actionsStack) actionsStack.style.display = 'none';
             supportWindow.style.display = 'flex';
             unreadCount = 0;
             updateBadge();
-            
+
             if (localStorage.getItem('support_active') === 'true') {
                 showChat();
-                if (!socket) connectSocket();
+                await ensureSupportSession();
+                await pollSupportMessages();
+                if (!socket || socket.readyState !== WebSocket.OPEN) {
+                    connectSocket();
+                }
+                startPolling();
             } else {
                 onboarding.style.display = 'flex';
                 chatContainer.style.display = 'none';
@@ -2341,30 +2617,67 @@
     if (minimizeSupportBtn) minimizeSupportBtn.addEventListener('click', hideSupportWindow);
 
     if (initForm) {
-        initForm.addEventListener('submit', (e) => {
+        initForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            visitorName = document.getElementById('support-name').value;
+            visitorName = (document.getElementById('support-name').value || 'Ziyaretçi').trim();
+            const langVal = document.getElementById('support-lang')?.value || 'tr';
             localStorage.setItem('support_visitor_name', visitorName);
             localStorage.setItem('support_active', 'true');
             showChat();
+            await ensureSupportSession(langVal);
+            await pollSupportMessages();
             connectSocket();
+            startPolling();
         });
     }
 
     function showChat() {
         onboarding.style.display = 'none';
         chatContainer.style.display = 'flex';
+        if (msgList && msgList.children.length === 0) {
+            const welcomeDiv = document.createElement('div');
+            welcomeDiv.className = 'support-msg support-msg-staff';
+            welcomeDiv.innerHTML = `
+                <div class="support-msg-sender"><i class="fa-solid fa-robot"></i> Avrasya AI Asistan</div>
+                <div>Merhaba ${escapeWidgetHtml(visitorName)}! Ben akıllı asistanım. Sorularınızı anında yanıtlayıp sizi doğru sayfaya yönlendirebilir veya isterseniz canlı destek ekibimize bağlayabilirim.</div>
+                <div class="support-quick-prompts">
+                    <button type="button" class="support-quick-chip" data-q="Aday öğrenci kontenjan ve taban puanları nerede?">Aday Öğrenci</button>
+                    <button type="button" class="support-quick-chip" data-q="Öğrenim ücretleri taksitle ödenebilir mi?">Öğrenim Ücretleri</button>
+                    <button type="button" class="support-quick-chip" data-q="Burs olanakları nelerdir?">Burslar</button>
+                    <button type="button" class="support-quick-chip" data-q="Kütüphane ve Wi-Fi nasıl kullanılır?">Kütüphane & Wi-Fi</button>
+                </div>
+            `;
+            welcomeDiv.querySelectorAll('.support-quick-chip').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    msgInput.value = btn.getAttribute('data-q') || '';
+                    sendMessage();
+                });
+            });
+            msgList.appendChild(welcomeDiv);
+        }
     }
 
     function connectSocket() {
+        if (socket) {
+            try { socket.close(); } catch (e) {}
+        }
         const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        socket = new WebSocket(`${protocol}://${window.location.host}/ws/support/${sessionKey}/`);
+        try {
+            socket = new WebSocket(`${protocol}://${window.location.host}/ws/support/${sessionKey}/`);
+        } catch (err) {
+            socket = null;
+            return;
+        }
 
         socket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             if (data.type === 'message') {
-                addMessage(data.message, data.sender_name, data.is_staff);
-                if (supportWindow.style.display === 'none') {
+                if (aiTypingEl) aiTypingEl.style.display = 'none';
+                addMessage(data.message, data.sender_name, data.is_staff, data.id, data.is_ai, data.links);
+                if (data.is_staff && !data.is_ai) {
+                    updateModeUi(true);
+                }
+                if (supportWindow.style.display === 'none' && data.is_staff) {
                     unreadCount++;
                     updateBadge();
                 }
@@ -2372,14 +2685,36 @@
         };
 
         socket.onclose = function() {
-            console.error('Support socket closed');
+            console.warn('Support WebSocket unavailable, using HTTP polling fallback.');
         };
     }
 
-    function addMessage(text, sender, isStaff) {
+    function addMessage(text, sender, isStaff, msgId = null, isAi = false, links = null) {
+        if (msgId) {
+            if (renderedMsgIds.has(msgId)) return;
+            renderedMsgIds.add(msgId);
+            if (msgId > lastMsgId) lastMsgId = msgId;
+        }
         const div = document.createElement('div');
         div.className = `support-msg ${isStaff ? 'support-msg-staff' : 'support-msg-visitor'}`;
-        div.textContent = text;
+
+        let html = '';
+        if (isStaff) {
+            const iconCls = isAi ? 'fa-robot' : 'fa-headset';
+            html += `<div class="support-msg-sender"><i class="fa-solid ${iconCls}"></i> ${escapeWidgetHtml(sender || 'Destek')}</div>`;
+        }
+        html += `<div>${escapeWidgetHtml(text).replace(/\n/g, '<br>')}</div>`;
+
+        if (Array.isArray(links) && links.length > 0) {
+            html += '<div class="support-msg-links">';
+            links.forEach(lnk => {
+                const safeUrl = sanitizeWidgetUrl(lnk.url);
+                html += `<a href="${escapeWidgetHtml(safeUrl)}" class="support-link-btn"><span>${escapeWidgetHtml(lnk.title || 'Sayfaya Git')}</span><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>`;
+            });
+            html += '</div>';
+        }
+
+        div.innerHTML = html;
         msgList.appendChild(div);
         msgList.scrollTop = msgList.scrollHeight;
     }
@@ -2403,15 +2738,52 @@
         });
     }
 
-    function sendMessage() {
+    async function sendMessage() {
         const msg = msgInput.value.trim();
-        if (msg && socket && socket.readyState === WebSocket.OPEN) {
+        if (!msg) return;
+
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            if (!humanHandoff && aiTypingEl) aiTypingEl.style.display = 'flex';
             socket.send(JSON.stringify({
                 'type': 'message',
                 'message': msg,
                 'sender_name': visitorName
             }));
             msgInput.value = '';
+            return;
+        }
+
+        if (!humanHandoff && aiTypingEl) aiTypingEl.style.display = 'flex';
+        try {
+            const res = await fetch('/chat/support/send/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getSupportCsrf(),
+                },
+                body: JSON.stringify({
+                    session_key: sessionKey,
+                    message: msg,
+                    sender_name: visitorName,
+                }),
+            });
+            const data = await res.json();
+            if (aiTypingEl) aiTypingEl.style.display = 'none';
+            if (typeof data.human_handoff !== 'undefined') {
+                updateModeUi(!!data.human_handoff);
+            }
+            if (data.success && data.message) {
+                msgInput.value = '';
+                addMessage(data.message.text, data.message.sender_name, data.message.is_staff, data.message.id, data.message.is_ai, data.message.links);
+                if (data.ai_message) {
+                    addMessage(data.ai_message.text, data.ai_message.sender_name, true, data.ai_message.id, true, data.ai_message.links);
+                }
+            } else {
+                addMessage(data.error || 'Mesaj gönderilemedi.', 'Sistem', true, null, true);
+            }
+        } catch (err) {
+            if (aiTypingEl) aiTypingEl.style.display = 'none';
+            addMessage('Bağlantı hatası. Lütfen tekrar deneyin.', 'Sistem', true, null, true);
         }
     }
 })();

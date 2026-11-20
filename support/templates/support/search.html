@@ -6,7 +6,7 @@
 <!-- Modern Typography -->
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Hero Section بدون جستجو -->
+<!-- Hero Section -->
 <div class="hero-section">
     <div class="hero-glow-wrapper">
         <div class="hero-glow-1"></div>
@@ -14,41 +14,9 @@
     </div>
 
     <div class="container hero-container">
-
-        <!-- Auth Floating Badge -->
-        <div class="auth-floating-top animate-fade-in">
-
-            {% if user.is_authenticated %}
-            <div class="user-pill shadow-lg">
-                <span class="u-name"><i class="fas fa-user-circle me-2"></i>{{ user.username }}</span>
-                <div class="pill-actions">
-
-                    {% if user.profile.role == 'student' %}
-                    <a href="{% url 'support:my_tickets' %}" class="pill-link" title="{% trans 'Taleplerim' %}"><i
-                            class="fas fa-ticket-alt"></i></a>
-                    {% elif user.profile.role == 'staff' %}
-                    <a href="{% url 'support:department_dashboard' %}" class="pill-link" title="{% trans 'Dashboard' %}"><i
-                            class="fas fa-tachometer-alt"></i></a>
-                    {% endif %}
-                    <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="pill-logout"><i class="fas fa-sign-out-alt"></i></button>
-                    </form>
-                </div>
-            </div>
-            {% else %}
-            <div class="guest-pill shadow-lg">
-                <a href="{% url 'accounts:login' %}" class="pill-btn primary">{% trans "Giriş Yap" %}</a>
-                <a href="{% url 'accounts:signup' %}" class="pill-btn secondary">{% trans "Kayıt Ol" %}</a>
-            </div>
-            {% endif %}
-        </div>
-
         <div class="hero-text-content text-center animate-slide-up">
-            <h1 class="main-title" style="color:#ffffff">{% trans "Destek Merkezi" %}</h1>
-            <p class="main-subtitle">{% trans "Sizin için buradayız. Üniversite hayatınızla ilgili her konuda hızlıca çözüm bulun." %}
-            </p>
-            <p style="margin-bottom: 250px;"></p>
+            <h1 class="main-title" style="color:#ffffff;">{% trans "Site İçi Arama & Destek Merkezi" %}</h1>
+            <p class="main-subtitle" style="color:#f6f2e7;">{% trans "Tüm sayfalar, fakülteler, bölümler, duyurular, akademisyenler ve SSS içinde anında arama yapın." %}</p>
         </div>
     </div>
 </div>
@@ -62,7 +30,10 @@
                 <div class="premium-search-input">
                     <i class="fas fa-search search-icon-left"></i>
                     <input type="text" id="live-search-input" name="q" value="{{ query }}"
-                        placeholder="{% trans 'Kayıt, harç, yurt, sınavlar gibi konularda arama yapın...' %}" autocomplete="off">
+                        placeholder="{% trans 'Örn: aday öğrenci, burs, psikoloji, eduroam, shmyo, akademik takvim...' %}" autocomplete="off">
+                    <button type="button" id="clear-search-btn" class="clear-search-btn {% if not query %}d-none{% endif %}" title="{% trans 'Temizle' %}" aria-label="{% trans 'Temizle' %}">
+                        <i class="fas fa-times"></i>
+                    </button>
                     <button type="submit" class="search-submit-btn">
                         <span>{% trans "Ara" %}</span>
                         <i class="fas fa-arrow-right"></i>
@@ -82,28 +53,51 @@
         </div>
     </div>
     <!-- Quick Access Chips -->
-    <div class="quick-access-chips mt-4 animate-fade-in" style="margin-bottom: 33px;">
-        <a href="{% url 'support:create_ticket' %}" class="chip-item"><i class="fas fa-plus"></i> {% trans "Yeni Talep" %}</a>
-        <a href="{% url 'support:faq_list' %}" class="chip-item"><i class="fas fa-question-circle"></i> {% trans "SSS" %}</a>
-        <a href="{% url 'support:my_tickets' %}" class="chip-item"><i class="fas fa-history"></i> {% trans "Taleplerim" %}</a>
+    <div class="quick-access-chips mt-4 animate-fade-in">
+        <a href="{% url 'support:create_ticket' %}" class="chip-item chip-primary"><i class="fas fa-paper-plane"></i> {% trans "Yeni Talep Oluştur" %}</a>
+        <a href="{% url 'support:faq_list' %}" class="chip-item"><i class="fas fa-question-circle"></i> {% trans "Sıkça Sorulan Sorular" %} ({{ faq_count }})</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'support:my_tickets' %}" class="chip-item"><i class="fas fa-ticket-alt"></i> {% trans "Taleplerim" %}</a>
+        {% else %}
+        <a href="{% url 'support:track_ticket' %}" class="chip-item"><i class="fas fa-search-location"></i> {% trans "Talep Takip" %}</a>
+        {% endif %}
+        <button type="button" class="chip-item chip-accent" onclick="openLiveSupportWidget()">
+            <i class="fas fa-headset"></i> {% trans "Canlı Destek" %}
+        </button>
     </div>
+
+    {% if not query %}
+    <div class="popular-search-hints mt-3 text-center">
+        <span class="hint-label">{% trans "Hızlı aramalar:" %}</span>
+        <a href="?q=aday+öğrenci" class="hint-pill">aday öğrenci</a>
+        <a href="?q=burs" class="hint-pill">burs</a>
+        <a href="?q=öğrenim+ücreti" class="hint-pill">öğrenim ücreti</a>
+        <a href="?q=akademik+takvim" class="hint-pill">akademik takvim</a>
+        <a href="?q=eduroam" class="hint-pill">eduroam</a>
+        <a href="?q=kalite" class="hint-pill">kalite</a>
+        <a href="?q=psikoloji" class="hint-pill">psikoloji</a>
+    </div>
+    {% endif %}
 </div>
 
 <!-- محتوای اصلی -->
-{% comment %} <div class="container main-content-layout">
+<div class="container main-content-layout">
     {% if query %}
     <!-- Search Results View -->
     <div class="results-layout animate-slide-up">
-        <div class="section-top-bar mb-5">
+        <div class="section-top-bar mb-4">
             <div class="results-info">
-                <h2>"{{ query }}" için sonuçlar</h2>
-                <p>{{ total_results }} eşleşme bulundu</p>
+                <h2>"{{ query }}" {% trans "için arama sonuçları" %}</h2>
+                <p>{% if active_type != 'all' %}{{ filtered_results_count }} / {{ total_results }} eşleşme gösteriliyor{% else %}{{ total_results }} eşleşme bulundu{% endif %}</p>
             </div>
+            {% if type_tabs %}
             <div class="filter-group-premium">
-                <button class="filter-btn active" data-filter="all">{% trans "Tümü" %}</button>
-                <button class="filter-btn" data-filter="faq">{% trans "SSS" %}</button>
-                <button class="filter-btn" data-filter="guide">{% trans "Rehber" %}</button>
+                <a href="?q={{ query|urlencode }}" class="filter-btn {% if active_type == 'all' %}active{% endif %}">{% trans "Tümü" %} ({{ total_results }})</a>
+                {% for tab in type_tabs %}
+                <a href="?q={{ query|urlencode }}&type={{ tab.slug }}" class="filter-btn {% if active_type == tab.slug %}active{% endif %}">{{ tab.label }} ({{ tab.count }})</a>
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
 
         {% if page_obj %}
@@ -112,24 +106,30 @@
             <div class="result-card-premium animate-fade-in" data-type="{{ item.type }}">
                 <div class="card-icon-area">
                     <div class="icon-shape">
-                        {% if item.type == 'faq' %}<i class="fas fa-question"></i>
-                        {% elif item.type == 'guide' %}<i class="fas fa-book-open"></i>
-                        {% elif item.type == 'policy' %}<i class="fas fa-gavel"></i>
-                        {% else %}<i class="fas fa-file-alt"></i>{% endif %}
+                        <i class="fas {{ item.icon|default:'fa-file-alt' }}"></i>
                     </div>
                 </div>
                 <div class="card-body-area">
                     <div class="card-meta">
                         <span class="tag-badge">{{ item.category }}</span>
-                        {% if item.department %}
+                        {% if item.department and item.department != item.category %}
                         <span class="dept-badge"><i class="fas fa-building me-1"></i>{{ item.department }}</span>
                         {% endif %}
+                        <span class="url-hint">{{ item.url }}</span>
                     </div>
                     <h3 class="card-title"><a href="{{ item.url }}">{{ item.title }}</a></h3>
-                    <p class="card-excerpt">{{ item.content|striptags|truncatechars:180 }}</p>
+                    {% if item.content %}
+                    <p class="card-excerpt">{{ item.content|striptags|truncatechars:210 }}</p>
+                    {% endif %}
+                    {% if item.quick_links %}
+                    <div class="card-quick-links mb-3">
+                        {% for ql in item.quick_links %}
+                        <a href="{{ ql.url }}" class="sub-quick-pill"><i class="fas fa-angle-right"></i> {{ ql.title }}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                     <div class="card-footer-area">
-                        <a href="{{ item.url }}" class="learn-more-btn">{% trans "Devamını Oku" %} <i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="{{ item.url }}" class="learn-more-btn">{% trans "Sayfaya Git" %} <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -140,12 +140,12 @@
         {% if page_obj.has_other_pages %}
         <div class="modern-pagination-premium mt-5">
             {% if page_obj.has_previous %}
-            <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}" class="page-nav-btn"><i
+            <a href="?q={{ query|urlencode }}&type={{ active_type }}&page={{ page_obj.previous_page_number }}" class="page-nav-btn"><i
                     class="fas fa-chevron-left"></i></a>
             {% endif %}
             <span class="current-pages">Sayfa {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
             {% if page_obj.has_next %}
-            <a href="?q={{ query }}&page={{ page_obj.next_page_number }}" class="page-nav-btn"><i
+            <a href="?q={{ query|urlencode }}&type={{ active_type }}&page={{ page_obj.next_page_number }}" class="page-nav-btn"><i
                     class="fas fa-chevron-right"></i></a>
             {% endif %}
         </div>
@@ -169,7 +169,7 @@
                 <div class="tag-cloud">
                     <a href="?q=kayıt">{% trans "Kayıt" %}</a>
                     <a href="?q=harç">{% trans "Harç" %}</a>
-                    <a href="?q=yurt">{% trans "Konaklama" %}</a>
+                    <a href="?q=konukevi">{% trans "Konaklama" %}</a>
                     <a href="?q=burs">{% trans "Burs" %}</a>
                 </div>
             </div>
@@ -179,14 +179,14 @@
     {% else %}
     <!-- Landing View -->
      <div class="landing-layout">
-        <h2 class="section-title-premium text-center mb-5">{% trans "Popüler Konular" %}</h2>
+        <h2 class="section-title-premium text-center mb-4">{% trans "Birimlere Göre Hızlı Destek" %}</h2>
         <div class="popular-topics-grid animate-slide-up">
             {% for topic in popular_topics %}
-            <a href="?q={{ topic.name }}" class="topic-box-premium">
-                <div class="box-icon"><i class="fas fa-folder"></i></div>
+            <a href="{% url 'support:create_ticket' %}?department={{ topic.id }}" class="topic-box-premium">
+                <div class="box-icon"><i class="fas {{ topic.icon }}"></i></div>
                 <div class="box-text">
                     <h4>{{ topic.name }}</h4>
-                    <p>{{ topic.ticket_count }} aktif başlık</p>
+                    <p>{{ topic.subtitle }}</p>
                 </div>
                 <div class="box-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
@@ -194,24 +194,24 @@
         </div>
 
         <!-- Modern Feature Cards -->
-        <div class="feature-cards-grid mt-5 pt-5 animate-slide-up">
+        <div class="feature-cards-grid mt-5 animate-slide-up">
             <div class="feature-card-premium">
                 <div class="f-icon"><i class="fas fa-graduation-cap"></i></div>
-                <h3>{% trans "Akademik Takvim" %}</h3>
-                <p>{% trans "Dönem başlangıçları, vize ve final tarihlerini takip edin." %}</p>
-                <a href="?q=takvim" class="f-link">{% trans "İncele" %}</a>
+                <h3>{% trans "Lisansüstü & Akademik" %}</h3>
+                <p>{% trans "Tez, AKTS, devam zorunluluğu ve fakülte dekanlık bilgileri." %}</p>
+                <a href="{% url 'support:faq_list' %}?q=lisansüstü" class="f-link">{% trans "İncele" %} <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
             <div class="feature-card-premium">
                 <div class="f-icon"><i class="fas fa-university"></i></div>
-                <h3>{% trans "Kampüs Yaşamı" %}</h3>
-                <p>{% trans "Sosyal tesisler, kütüphane ve yemekhane saatleri." %}</p>
-                <a href="?q=kampüs" class="f-link">{% trans "İncele" %}</a>
+                <h3>{% trans "Kampüs & Teknik Destek" %}</h3>
+                <p>{% trans "Yemekhane, kütüphane saatleri, spor salonu ve EDUROAM Wi-Fi." %}</p>
+                <a href="{% url 'support:faq_list' %}?q=eduroam" class="f-link">{% trans "İncele" %} <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
             <div class="feature-card-premium">
                 <div class="f-icon"><i class="fas fa-wallet"></i></div>
-                <h3>{% trans "Finansal Bilgiler" %}</h3>
-                <p>{% trans "Ödeme yöntemleri, burs ve harç detayları." %}</p>
-                <a href="?q=ücret" class="f-link">{% trans "İncele" %}</a>
+                <h3>{% trans "Ücretler & Taksitler" %}</h3>
+                <p>{% trans "Öğrenim ücretleri, taksit seçenekleri ve ödeme detayları." %}</p>
+                <a href="{% url 'support:faq_list' %}?q=ücret" class="f-link">{% trans "İncele" %} <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
         </div>
     </div> 
@@ -223,15 +223,16 @@
         <div class="wa-flex-container">
             <div class="wa-left">
                 <div class="wa-avatar-group">
-                    <div class="wa-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-                            alt="{% trans 'Support' %}"></div>
-                    <div class="wa-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka"
-                            alt="{% trans 'Support' %}"></div>
-                    <div class="wa-badge"><i class="fab fa-whatsapp"></i></div>
+                    <div class="wa-avatar d-flex align-items-center justify-content-center" style="background: #092442; color: #8dd4e3; font-size: 1.6rem;">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="wa-avatar d-flex align-items-center justify-content-center" style="background: #8dd4e3; color: #092442; font-size: 1.7rem;">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
                 </div>
                 <div class="wa-text-info">
                     <h4>{% trans "WhatsApp Canlı Destek" %}</h4>
-                    <p>{% trans "Sorularınızı anında yanıtlamak için ekiplerimiz hazır." %}</p>
+                    <p style="color: #f6f2e7;">{% trans "Sorularınızı anında yanıtlamak için ekiplerimiz hazır." %}</p>
                 </div>
             </div>
             <div class="wa-right">
@@ -241,8 +242,8 @@
                 </a>
             </div>
         </div>
-    </div> 
-</div> {% endcomment %}
+    </div>
+</div>
 
 
 
@@ -270,22 +271,21 @@
 
     /* Hero Section */
     .hero-section {
-        min-height: 500px;
-        background: var(--p-primary);
+        min-height: 220px;
+        background: linear-gradient(135deg, #092442 0%, #1d61a9 100%);
         position: relative;
         display: flex;
         align-items: center;
         color: white;
-        padding-top: 180px;
-        /* Clear the fixed header area */
+        padding: 42px 0 68px;
         z-index: 10;
-        margin-top: -10px;
+        margin-top: 0;
     }
 
     .hero-container {
         position: relative;
         z-index: 5;
-        margin-top: 30px;
+        margin-top: 0;
     }
 
     .hero-glow-wrapper {
@@ -329,10 +329,11 @@
 
     .main-subtitle {
         font-size: 1.2rem;
-        opacity: 0.9;
-        font-weight: 300;
+        color: #f6f2e7;
+        opacity: 0.95;
+        font-weight: 400;
         max-width: 700px;
-        margin: 0 auto 30px;
+        margin: 0 auto 10px;
         line-height: 1.6;
     }
 
@@ -422,33 +423,82 @@
     .quick-access-chips {
         display: flex;
         justify-content: center;
-        gap: 15px;
+        gap: 12px;
         flex-wrap: wrap;
     }
 
     .chip-item {
-        background: #092442;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #ffffff;
+        background: #ffffff;
+        border: 1px solid rgba(9, 36, 66, 0.16);
+        color: #092442;
         text-decoration: none;
-        padding: 12px 28px;
+        padding: 11px 22px;
         border-radius: 50px;
         font-weight: 600;
-        font-size: 1rem;
-        transition: 0.3s;
-        display: flex;
+        font-size: 0.95rem;
+        transition: 0.25s;
+        display: inline-flex;
         align-items: center;
         gap: 8px;
+        cursor: pointer;
+    }
+
+    .chip-item i {
+        color: #1d61a9;
+        transition: 0.25s;
+    }
+
+    .chip-item.chip-primary {
+        background: #092442;
+        border-color: #092442;
+        color: #ffffff;
+    }
+
+    .chip-item.chip-primary i {
+        color: #8dd4e3;
+    }
+
+    .chip-item.chip-accent {
+        background: #f6f2e7;
+        border-color: rgba(29, 97, 169, 0.25);
+        color: #092442;
     }
 
     .chip-item:hover {
-        background: rgba(255, 255, 255, 0.25);
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(9, 36, 66, 0.1);
+        background: #1d61a9;
+        border-color: #1d61a9;
+        color: #ffffff;
+        text-decoration: none;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(9, 36, 66, 0.14);
+    }
+
+    .chip-item:hover i {
+        color: #8dd4e3;
+    }
+
+    .clear-search-btn {
+        background: #f6f2e7;
+        color: #092442;
+        border: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .clear-search-btn:hover {
+        background: #8dd4e3;
     }
 
     /* Search Bar Premium */
     .search-box-wrapper {
+        position: relative;
         margin: 0 auto;
         max-width: 850px;
     }
@@ -544,18 +594,93 @@
     .filter-btn {
         background: white;
         border: 1px solid rgba(9, 36, 66, 0.14);
-        padding: 10px 22px;
+        padding: 9px 18px;
         border-radius: 40px;
         font-weight: 600;
         color: var(--p-text-muted);
-        transition: 0.3s;
+        transition: 0.25s;
         cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 0.9rem;
+    }
+
+    .filter-btn:hover {
+        border-color: #1d61a9;
+        color: #1d61a9;
+        text-decoration: none;
     }
 
     .filter-btn.active {
         background: var(--p-primary);
         color: white;
         border-color: var(--p-primary);
+    }
+
+    .popular-search-hints {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .hint-label {
+        font-size: 0.85rem;
+        color: rgba(9, 36, 66, 0.65);
+        font-weight: 600;
+    }
+
+    .hint-pill {
+        background: #f6f2e7;
+        color: #1d61a9;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid rgba(29, 97, 169, 0.16);
+        transition: 0.2s;
+    }
+
+    .hint-pill:hover {
+        background: #1d61a9;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .url-hint {
+        font-size: 0.78rem;
+        color: rgba(9, 36, 66, 0.5);
+        margin-left: auto;
+    }
+
+    .card-quick-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .sub-quick-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: #f6f2e7;
+        color: #092442;
+        border: 1px solid rgba(9, 36, 66, 0.12);
+        border-radius: 999px;
+        padding: 4px 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+    .sub-quick-pill:hover {
+        background: #1d61a9;
+        color: #ffffff;
+        border-color: #1d61a9;
+        text-decoration: none;
     }
 
     .search-results-grid {
@@ -632,7 +757,7 @@
     }
 
     .card-title a:hover {
-        color: var(--p-accent);
+        color: var(--p-dark);
     }
 
     .card-excerpt {
@@ -644,7 +769,7 @@
 
     .learn-more-btn {
         text-decoration: none;
-        color: var(--p-accent);
+        color: var(--p-primary);
         font-weight: 700;
         font-size: 1rem;
         display: flex;
@@ -654,6 +779,7 @@
     }
 
     .learn-more-btn:hover {
+        color: var(--p-dark);
         gap: 12px;
     }
 
@@ -836,9 +962,16 @@
     }
 
     .f-icon {
-        font-size: 3rem;
-        color: var(--p-accent);
-        margin-bottom: 25px;
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 20px;
+        border-radius: 20px;
+        background: #f6f2e7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: var(--p-primary);
     }
 
     .feature-card-premium h3 {
@@ -1036,6 +1169,7 @@
 
     .p-live-item:hover {
         background: #f6f2e7;
+        text-decoration: none;
     }
 
     .p-live-icon {
@@ -1161,10 +1295,11 @@
 
     /* Highlights */
     .highlight {
-        background: #f6f2e7;
-        padding: 0 2px;
+        background: rgba(141, 212, 227, 0.48);
+        padding: 1px 4px;
         border-radius: 4px;
-        color: var(--p-dark);
+        color: #092442;
+        font-weight: 700;
     }
 
     /* Responsive */
@@ -1189,8 +1324,8 @@
 
     @media (max-width: 768px) {
         .hero-section {
-            min-height: 300px;
-            padding-top: 80px;
+            min-height: 220px;
+            padding: 40px 0 60px;
         }
 
         .main-title {
@@ -1260,16 +1395,40 @@
 </style>
 
 <script>
+    function openLiveSupportWidget() {
+        const trigger = document.getElementById('live-support-button');
+        if (trigger) trigger.click();
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('live-search-input');
+        const clearBtn = document.getElementById('clear-search-btn');
         const resultsContainer = document.getElementById('live-results-container');
         const resultsList = document.getElementById('live-results-list');
+        const resultsFooter = document.getElementById('live-results-footer');
         const viewAllLink = document.getElementById('view-all-results');
 
         let debounceTimer;
 
+        if (searchInput && searchInput.value.trim()) {
+            const qTerm = searchInput.value.trim();
+            document.querySelectorAll('.result-card-premium .card-title a, .result-card-premium .card-excerpt').forEach(el => {
+                el.innerHTML = highlightTerm(el.textContent || '', qTerm);
+            });
+        }
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function () {
+                searchInput.value = '';
+                clearBtn.classList.add('d-none');
+                resultsContainer.style.display = 'none';
+                searchInput.focus();
+            });
+        }
+
         searchInput.addEventListener('input', function () {
             const query = this.value.trim();
+            if (clearBtn) clearBtn.classList.toggle('d-none', !query);
             clearTimeout(debounceTimer);
 
             if (query.length < 2) {
@@ -1284,25 +1443,31 @@
                     .then(res => res.json())
                     .then(data => {
                         resultsList.innerHTML = '';
-                        if (data.results.length > 0) {
+                        if (data.results && data.results.length > 0) {
                             data.results.forEach(item => {
-                                const icon = getIconForType(item.type);
+                                const icon = item.icon || getIconForType(item.type);
+                                const safeUrl = sanitizeUrl(item.url);
+                                const safeCategory = escapeHtml(item.category || '');
+                                const safeDept = item.department && item.department !== item.category ? ` · ${escapeHtml(item.department)}` : '';
                                 const itemHtml = `
-                            <a href="${item.url}" class="p-live-item">
+                            <a href="${escapeHtml(safeUrl)}" class="p-live-item">
                                 <div class="p-live-icon">
-                                    <i class="fas ${icon}"></i>
+                                    <i class="fas ${escapeHtml(icon)}"></i>
                                 </div>
                                 <div class="p-live-info">
-                                    <h4>${highlightTerm(item.title, query)}</h4>
-                                    <span>${item.category}</span>
+                                    <h4>${highlightTerm(item.title || '', query)}</h4>
+                                    <span>${safeCategory}${safeDept}</span>
                                 </div>
                             </a>
                         `;
                                 resultsList.insertAdjacentHTML('beforeend', itemHtml);
                             });
+                            viewAllLink.innerHTML = `Tüm ${data.total || data.results.length} sonucu gör <i class="fas fa-chevron-right ms-1"></i>`;
                             viewAllLink.href = `{% url 'support:search' %}?q=${encodeURIComponent(query)}`;
+                            if (resultsFooter) resultsFooter.style.display = 'block';
                             resultsContainer.style.display = 'block';
                         } else {
+                            if (resultsFooter) resultsFooter.style.display = 'none';
                             resultsList.innerHTML = `
                         <div class="no-results-live">
                             <p>Arama teriminizle eşleşen sonuç bulunamadı</p>
@@ -1312,8 +1477,11 @@
                         </div>`;
                             resultsContainer.style.display = 'block';
                         }
+                    })
+                    .catch(() => {
+                        resultsContainer.style.display = 'none';
                     });
-            }, 300);
+            }, 200);
         });
 
         document.addEventListener('click', function (e) {
@@ -1325,33 +1493,51 @@
         function getIconForType(type) {
             switch (type) {
                 case 'faq': return 'fa-question';
+                case 'academic': return 'fa-graduation-cap';
+                case 'news': return 'fa-bullhorn';
                 case 'guide': return 'fa-book-open';
-                case 'policy': return 'fa-gavel';
-                default: return 'fa-file-alt';
+                default: return 'fa-compass';
             }
         }
 
-        function highlightTerm(text, term) {
-            const regex = new RegExp(`(${term})`, 'gi');
-            return text.replace(regex, '<mark class="highlight">$1</mark>');
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, function (m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+            });
         }
 
-        // Filter pills
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const filter = this.dataset.filter;
-                const items = document.querySelectorAll('.result-card-premium');
-                items.forEach(item => {
-                    if (filter === 'all' || item.dataset.type === filter) {
-                        item.style.display = 'flex';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
+        function escapeRegExp(str) {
+            return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function sanitizeUrl(url) {
+            const val = String(url || '').trim();
+            if (val.startsWith('/') || val.startsWith('http://') || val.startsWith('https://')) {
+                return val;
+            }
+            return '#';
+        }
+
+        function buildTurkishPattern(token) {
+            const charMap = {
+                a: '[aâAÂ]', c: '[cçCÇ]', g: '[gğGĞ]', i: '[iıİIîÎ]',
+                ı: '[iıİIîÎ]', o: '[oöOÖ]', s: '[sşSŞ]', u: '[uüUÜûÛ]',
+                ç: '[cçCÇ]', ğ: '[gğGĞ]', ö: '[oöOÖ]', ş: '[sşSŞ]', ü: '[uüUÜûÛ]',
+            };
+            return Array.from(token).map(ch => {
+                const lower = ch.replace('İ', 'i').replace('I', 'ı').toLowerCase();
+                return charMap[lower] || escapeRegExp(ch);
+            }).join('');
+        }
+
+        function highlightTerm(text, term) {
+            const safeText = escapeHtml(text);
+            const tokens = String(term || '').trim().split(/\s+/).filter(t => t.length >= 2);
+            if (!tokens.length) return safeText;
+            const pattern = tokens.map(buildTurkishPattern).join('|');
+            const regex = new RegExp(`(${pattern})`, 'gi');
+            return safeText.replace(regex, '<mark class="highlight">$1</mark>');
+        }
     });
 </script>
 {% endblock %}

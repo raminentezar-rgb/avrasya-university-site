@@ -1,65 +1,17 @@
 {% extends "support/base.html" %}
 {% load i18n %}
 {% block content %}
-
-
-
-<div class="page-header" style="margin-top: 20px; position: relative; ">
+<div class="page-header" style="margin-top: 0;">
     <div class="page-header-content">
-        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-chart-line"></i> {% trans "Bölüm Destek Paneli" %}</h1>
-        <p>{% trans "Bölümünüzdeki tüm destek taleplerini yönetin ve takip edin" %}</p>
-    </div>
-    
-    <!-- قسمت احراز هویت در گوشه بالا راست -->
-    <div class="auth-buttons" style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; align-items: center;">
-        {% if user.is_authenticated %}
-            <!-- اگر کاربر لاگین کرده باشد -->
-            <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
-                <span style="color: white; font-weight: 500;">
-                    <i class="fas fa-user-circle"></i> {{ user.username }}
-                </span>
-                
-                <!-- دکمه داشبورد -->
-                {% if user.profile.role == 'student' %}
-                    <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> {% trans "Taleplerim" %}
-                    </a>
-                {% elif user.profile.role == 'staff' %}
-                    <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
-                    </a>
-                {% else %}
-                    <a href="/" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
-                    </a>
-                {% endif %}
-                
-                <!-- فرم logout -->
-                <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-sign-out-alt"></i> {% trans "Çıkış Yap" %}
-                    </button>
-                </form>
-            </div>
-        {% else %}
-            <!-- اگر کاربر لاگین نکرده باشد -->
-            <div class="guest-buttons" style="display: flex; gap: 10px;">
-                <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
-                    <i class="fas fa-sign-in-alt"></i> {% trans "Giriş Yap" %}
-                </a>
-                <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm" style="background-color: white; color: var(--primary-dark-blue);">
-                    <i class="fas fa-user-plus"></i> {% trans "Kayıt Ol" %}
-                </a>
-            </div>
-        {% endif %}
+        <h1 style="color: #8dd4e3; font-family: 'Metropolis', sans-serif; font-weight: 800;"><i class="fas fa-chart-line"></i> {% trans "Bölüm Destek Paneli" %}</h1>
+        <p>{% trans "Bölümünüzdeki tüm destek taleplerini yönetin ve takip edin." %}</p>
     </div>
 </div>
 
 <div class="container support-container">
     <!-- İstatistik Kartları -->
-    {% comment %} <div class="row mb-5">
-        <div class="col-md-3 col-sm-6 mb-4">
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
             <div class="stat-card bg-primary">
                 <div class="stat-icon">
                     <i class="fas fa-ticket-alt"></i>
@@ -70,36 +22,36 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
             <div class="stat-card bg-warning">
                 <div class="stat-icon">
                     <i class="fas fa-clock"></i>
                 </div>
                 <div class="stat-content">
                     <h3>{{ pending_tickets|default:"0" }}</h3>
-                    <p>{% trans "Bekleyen Talep" %}</p>
+                    <p>{% trans "Açık Talep" %}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
             <div class="stat-card bg-success">
                 <div class="stat-icon">
                     <i class="fas fa-check-circle"></i>
                 </div>
                 <div class="stat-content">
                     <h3>{{ resolved_tickets|default:"0" }}</h3>
-                    <p>{% trans "Çözülen Talep" %}</p>
+                    <p>{% trans "Yanıtlandı" %}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
             <div class="stat-card bg-info">
                 <div class="stat-icon">
-                    <i class="fas fa-spinner"></i>
+                    <i class="fas fa-archive"></i>
                 </div>
                 <div class="stat-content">
-                    <h3>{{ in_progress_tickets|default:"0" }}</h3>
-                    <p>{% trans "Devam Eden Talep" %}</p>
+                    <h3>{{ closed_tickets|default:"0" }}</h3>
+                    <p>{% trans "Kapalı Talep" %}</p>
                 </div>
             </div>
         </div>
@@ -111,39 +63,35 @@
             <h4><i class="fas fa-filter"></i> {% trans "Talepleri Filtrele" %}</h4>
         </div>
         <div class="filter-body">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">{% trans "Duruma Göre" %}</label>
-                    <select class="form-control" id="status-filter">
-                        <option value="all">{% trans "Tüm Durumlar" %}</option>
-                        <option value="open">{% trans "Açık" %}</option>
-                        <option value="pending">{% trans "Beklemede" %}</option>
-                        <option value="in_progress">{% trans "Devam Ediyor" %}</option>
-                        <option value="resolved">{% trans "Çözüldü" %}</option>
-                        <option value="closed">{% trans "Kapandı" %}</option>
+            <form method="get" class="row align-items-end">
+                <div class="col-md-3 mb-2">
+                    <label class="form-label" for="status-filter">{% trans "Duruma Göre" %}</label>
+                    <select class="form-control" id="status-filter" name="status">
+                        <option value="all" {% if status_filter == 'all' %}selected{% endif %}>{% trans "Tüm Durumlar" %}</option>
+                        <option value="open" {% if status_filter == 'open' %}selected{% endif %}>{% trans "Açık" %}</option>
+                        <option value="answered" {% if status_filter == 'answered' %}selected{% endif %}>{% trans "Yanıtlandı" %}</option>
+                        <option value="closed" {% if status_filter == 'closed' %}selected{% endif %}>{% trans "Kapalı" %}</option>
                     </select>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">{% trans "Tarihe Göre" %}</label>
-                    <select class="form-control" id="date-filter">
-                        <option value="all">{% trans "Tüm Zamanlar" %}</option>
-                        <option value="today">{% trans "Bugün" %}</option>
-                        <option value="week">{% trans "Bu Hafta" %}</option>
-                        <option value="month">{% trans "Bu Ay" %}</option>
+                <div class="col-md-3 mb-2">
+                    <label class="form-label" for="priority-filter">{% trans "Önceliğe Göre" %}</label>
+                    <select class="form-control" id="priority-filter" name="priority">
+                        <option value="all" {% if priority_filter == 'all' %}selected{% endif %}>{% trans "Tüm Öncelikler" %}</option>
+                        <option value="high" {% if priority_filter == 'high' %}selected{% endif %}>{% trans "Yüksek" %}</option>
+                        <option value="medium" {% if priority_filter == 'medium' %}selected{% endif %}>{% trans "Orta" %}</option>
+                        <option value="low" {% if priority_filter == 'low' %}selected{% endif %}>{% trans "Düşük" %}</option>
                     </select>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">{% trans "Arama" %}</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="{% trans 'Talep veya öğrenci ara...' %}">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
+                <div class="col-md-4 mb-2">
+                    <label class="form-label" for="query-filter">{% trans "Arama" %}</label>
+                    <input type="text" class="form-control" id="query-filter" name="q" value="{{ query_filter }}" placeholder="{% trans 'Takip kodu, konu, isim veya e-posta...' %}">
                 </div>
-            </div>
+                <div class="col-md-2 mb-2">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-search"></i> {% trans "Filtrele" %}</button>
+                </div>
+            </form>
         </div>
-    </div> {% endcomment %}
+    </div>
 
     <!-- Talepler Tablosu -->
     <div class="dashboard-card">
@@ -161,7 +109,7 @@
                     <tr>
                         <th>{% trans "Talep No" %}</th>
                         <th>{% trans "Konu" %}</th>
-                        <th>{% trans "Öğrenci" %}</th>
+                        <th>{% trans "Başvuran" %}</th>
                         <th>{% trans "Durum" %}</th>
                         <th>{% trans "Öncelik" %}</th>
                         <th>{% trans "Tarih" %}</th>
@@ -173,7 +121,8 @@
                     <tr class="ticket-row" data-status="{{ ticket.status }}" data-priority="{{ ticket.priority }}">
                         <td>
                             <div class="ticket-id">
-                                <strong>#{{ ticket.id|stringformat:"04d" }}</strong>
+                                <strong>{{ ticket.tracking_code|default:ticket.id }}</strong>
+                                <div class="small text-muted">#{{ ticket.id|stringformat:"04d" }}</div>
                             </div>
                         </td>
                         <td>
@@ -188,14 +137,14 @@
                                     <i class="fas fa-user"></i>
                                 </div>
                                 <div class="student-details">
-                                    <strong>{{ ticket.user.get_full_name|default:ticket.user.username }}</strong>
-                                    <small>{{ ticket.user.email }}</small>
+                                    <strong>{{ ticket.requester_name }}</strong>
+                                    <small>{{ ticket.requester_email|default:"E-posta yok" }}</small>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <span class="status-badge status-{{ ticket.status }}">
-                                <i class="fas {% if ticket.status == 'open' %}fa-envelope-open{% elif ticket.status == 'pending' %}fa-clock{% elif ticket.status == 'in_progress' %}fa-spinner{% elif ticket.status == 'resolved' %}fa-check-circle{% else %}fa-times-circle{% endif %}"></i>
+                                <i class="fas {% if ticket.status == 'open' %}fa-envelope-open{% elif ticket.status == 'answered' %}fa-check-circle{% else %}fa-times-circle{% endif %}"></i>
                                 {{ ticket.get_status_display }}
                             </span>
                         </td>
@@ -212,15 +161,12 @@
                             </div>
                         </td>
                         <td>
-                            <div class="action-buttons">
-                                <a href="{% url 'support:reply_ticket' ticket.id %}" class="btn-action btn-reply" title="{% trans 'Yanıtla' %}">
-                                    <i class="fas fa-reply"></i>
+                            <div class="action-buttons" style="display: inline-flex; gap: 6px; align-items: center;">
+                                <a href="{% url 'support:reply_ticket' ticket.id %}" class="btn btn-primary btn-sm" style="padding: 6px 12px; border-radius: 8px; font-size: 0.8rem;" title="{% trans 'Yanıtla / Yönet' %}">
+                                    <i class="fas fa-reply"></i> {% trans "Yanıtla" %}
                                 </a>
-                                <a href="#" class="btn-action btn-view" title="{% trans 'Detayları Gör' %}">
+                                <a href="{% url 'support:ticket_detail' ticket.id %}" class="btn btn-secondary btn-sm" style="padding: 6px 10px; border-radius: 8px; font-size: 0.8rem;" title="{% trans 'Detayları Gör' %}">
                                     <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="#" class="btn-action btn-edit" title="{% trans 'Durumu Güncelle' %}">
-                                    <i class="fas fa-edit"></i>
                                 </a>
                             </div>
                         </td>
@@ -268,7 +214,7 @@
             </div>
             <h3>{% trans "Henüz Talep Yok" %}</h3>
             <p class="text-muted">{% trans "Bölümünüze atanmış destek talebi bulunmuyor." %}</p>
-            <a href="#" class="btn btn-primary mt-3">
+            <a href="{% url 'support:department_dashboard' %}" class="btn btn-primary mt-3">
                 <i class="fas fa-sync-alt"></i> {% trans "Yenile" %}
             </a>
         </div>
@@ -659,45 +605,24 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Filtreleme işlevselliği
     const statusFilter = document.getElementById('status-filter');
-    const dateFilter = document.getElementById('date-filter');
+    const priorityFilter = document.getElementById('priority-filter');
     const ticketRows = document.querySelectorAll('.ticket-row');
-    
+
     function filterTickets() {
-        const status = statusFilter.value;
-        const date = dateFilter.value;
-        
+        const status = statusFilter ? statusFilter.value : 'all';
+        const priority = priorityFilter ? priorityFilter.value : 'all';
+
         ticketRows.forEach(row => {
             let show = true;
-            
-            // Durum filtresi
-            if (status !== 'all' && row.dataset.status !== status) {
-                show = false;
-            }
-            
-            // Tarih filtresi (basit örnek)
-            if (date !== 'all') {
-                // Tarih filtresi mantığı buraya eklenebilir
-            }
-            
+            if (status !== 'all' && row.dataset.status !== status) show = false;
+            if (priority !== 'all' && row.dataset.priority !== priority) show = false;
             row.style.display = show ? '' : 'none';
         });
     }
-    
-    statusFilter.addEventListener('change', filterTickets);
-    dateFilter.addEventListener('change', filterTickets);
-    
-    // Talep satırı tıklama
-    ticketRows.forEach(row => {
-        row.addEventListener('click', function(e) {
-            if (!e.target.closest('.action-buttons')) {
-                // Talep detaylarını göster
-                const ticketId = this.querySelector('.ticket-id strong').textContent;
-                window.location.href = `#ticket-${ticketId.slice(1)}`;
-            }
-        });
-    });
+
+    if (statusFilter) statusFilter.addEventListener('change', filterTickets);
+    if (priorityFilter) priorityFilter.addEventListener('change', filterTickets);
 });
 </script>
 

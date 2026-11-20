@@ -258,12 +258,12 @@ TOPICS_DEFINITIONS = [
     },
     {
         'id': 'yurtlar',
-        'title': 'Yurt Olanakları ve Barınma',
+        'title': 'Konukevi Olanakları ve Barınma',
         'category': 'Öğrenci Hizmetleri',
         'icon': 'fa-hotel',
         'url_name': 'ogrenci_isleri:yurtlar',
-        'description': 'Üniversitemiz bünyesindeki ve anlaşmalı kız ve erkek öğrenci yurtları, konaklama ücretleri, güvenlik ve oda imkânları.',
-        'keywords': ['yurt', 'yurtlar', 'barınma', 'konaklama', 'öğrenci yurdu', 'kız yurdu', 'erkek yurdu', 'pansiyon'],
+        'description': 'Üniversitemiz bünyesindeki ve anlaşmalı kız ve erkek öğrenci konukevleri, konaklama ücretleri, güvenlik ve oda imkânları.',
+        'keywords': ['konukevi', 'konukevleri', 'öğrenci konukevi', 'kız konukevi', 'erkek konukevi', 'barınma', 'konaklama', 'yurt', 'yurtlar', 'öğrenci yurdu', 'kız yurdu', 'erkek yurdu', 'pansiyon'],
         'quick_links': []
     },
     {
@@ -492,7 +492,7 @@ TOPICS_DEFINITIONS = [
         'category': 'MYO',
         'icon': 'fa-laptop-code',
         'url_name': 'meslek_yuksekokulu:meslek_yuksekokulu',
-        'description': 'Adalet, Bilgisayar Programcılığı, Aşçılık, Grafik Tasarımı, Harita Kadastro gibi teknik ve idari 2 yıllık önlisans programları.',
+        'description': 'Bilgisayar Programcılığı, Aşçılık, Grafik Tasarımı, Harita Kadastro gibi teknik ve idari 2 yıllık önlisans programları.',
         'keywords': ['meslek yüksekokulu programları', 'teknik myo', 'sosyal myo'],
         'quick_links': []
     },
@@ -890,16 +890,6 @@ TOPICS_DEFINITIONS = [
     # =========================================================================
     # 14. MESLEK YÜKSEKOKULU (MYO) 2 YILLIK ÖNLİSANS PROGRAMLARI
     # =========================================================================
-    {
-        'id': 'adalet',
-        'title': 'Adalet Programı',
-        'category': 'Program (MYO)',
-        'icon': 'fa-scale-balanced',
-        'url_name': 'adalet:liste',
-        'description': 'Hukuk büroları, adliyeler, cezaevleri ve noterliklerde görev alacak nitelikli zabıt katibi ve adalet ara elemanı yetiştiren 2 yıllık önlisans programıdır.',
-        'keywords': ['adalet', 'adalet programı', 'zabıt katibi', 'adliye', 'mahkeme', 'hukuk önlisans', 'icra memuru'],
-        'quick_links': []
-    },
     {
         'id': 'ascilik',
         'title': 'Aşçılık Programı',

@@ -543,55 +543,10 @@ input:checked + .toggle-slider:before {
     margin-top: 0.5rem;
 }
 </style>
-<div class="page-header" style="margin-top: -100px; position: relative; ">
+<div class="page-header" style="margin-top: 0;">
     <div class="page-header-content">
-        <h1 style="color: #8dd4e3; margin-top: 60px; font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Talebi Onayla ve Yanıtla" %}</h1>
-        <p >{% trans "Öğrencinin destek talebine yanıt verin. Yanıtınız öğrenciye gönderilecek ve talep durumu güncellenecektir." %}</p>
-    </div>
-    
-    <!-- قسمت احراز هویت در گوشه بالا راست -->
-    <div class="auth-buttons" style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; align-items: center;">
-        {% if user.is_authenticated %}
-            <!-- اگر کاربر لاگین کرده باشد -->
-            <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
-                <span style="color: white; font-weight: 500;">
-                    <i class="fas fa-user-circle"></i> {{ user.username }}
-                </span>
-                
-                <!-- دکمه داشبورد -->
-                {% if user.profile.role == 'student' %}
-                    <a href="{% url 'support:my_tickets' %}" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> {% trans "Taleplerim" %}
-                    </a>
-                {% elif user.profile.role == 'staff' %}
-                    <a href="{% url 'support:department_dashboard' %}" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
-                    </a>
-                {% else %}
-                    <a href="/" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-tachometer-alt"></i> {% trans "Dashboard" %}
-                    </a>
-                {% endif %}
-                
-                <!-- فرم logout -->
-                <form method="post" action="{% url 'accounts:logout' %}" style="margin: 0;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-light btn-sm">
-                        <i class="fas fa-sign-out-alt"></i> {% trans "Çıkış Yap" %}
-                    </button>
-                </form>
-            </div>
-        {% else %}
-            <!-- اگر کاربر لاگین نکرده باشد -->
-            <div class="guest-buttons" style="display: flex; gap: 10px;">
-                <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
-                    <i class="fas fa-sign-in-alt"></i> {% trans "Giriş Yap" %}
-                </a>
-                <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm" style="background-color: white; color: var(--primary-dark-blue);">
-                    <i class="fas fa-user-plus"></i> {% trans "Kayıt Ol" %}
-                </a>
-            </div>
-        {% endif %}
+        <h1 style="color: #8dd4e3; font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Talebi İncele ve Yanıtla" %}</h1>
+        <p>{% trans "Başvuruya yanıt verin; yanıtınız e-posta ve takip sistemi üzerinden iletilecektir." %}</p>
     </div>
 </div>
 <div class="reply-container">
@@ -605,11 +560,11 @@ input:checked + .toggle-slider:before {
             <div class="ticket-card">
                 <div class="ticket-header">
                     <div class="ticket-id">
-                        Talep #{{ ticket.id|stringformat:"04d" }}
+                        {{ ticket.tracking_code|default:ticket.id }}
                     </div>
                     <div class="ticket-status">
                         <i class="fas fa-circle" style="font-size: 0.7rem;"></i>
-                        {{ ticket.get_status_display }}
+                        {{ ticket.get_status_display }} • {{ ticket.get_priority_display }}
                     </div>
                 </div>
 
@@ -618,15 +573,9 @@ input:checked + .toggle-slider:before {
                     <div class="meta-item">
                         <div class="meta-label">
                             <i class="fas fa-user-graduate"></i>
-                            {% trans "Öğrenci" %}
+                            {% trans "Başvuran" %}
                         </div>
-                        <div class="meta-value">
-                            {% if ticket.user.get_full_name %}
-                                {{ ticket.user.get_full_name }}
-                            {% else %}
-                                {{ ticket.user.username }}
-                            {% endif %}
-                        </div>
+                        <div class="meta-value">{{ ticket.requester_name }}</div>
                     </div>
                     
                     <div class="meta-item">
@@ -634,15 +583,15 @@ input:checked + .toggle-slider:before {
                             <i class="fas fa-envelope"></i>
                             {% trans "E-posta" %}
                         </div>
-                        <div class="meta-value">{{ ticket.user.email }}</div>
+                        <div class="meta-value">{{ ticket.requester_email|default:"Belirtilmemiş" }}</div>
                     </div>
                     
                     <div class="meta-item">
                         <div class="meta-label">
                             <i class="fas fa-layer-group"></i>
-                            {% trans "Bölüm" %}
+                            {% trans "Bölüm / Birim" %}
                         </div>
-                        <div class="meta-value">{{ ticket.get_department_display }}</div>
+                        <div class="meta-value">{{ ticket.department.name }}</div>
                     </div>
                     
                     <div class="meta-item">
@@ -658,27 +607,17 @@ input:checked + .toggle-slider:before {
                 <div class="original-message-container">
                     <h3 style="color: var(--reply-text); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
                         <i class="fas fa-comment-alt" style="color: var(--reply-accent);"></i>
-                        {% trans "Öğrencinin Talep Metni" %}
+                        {{ ticket.subject }}
                     </h3>
                     
                     <div class="message-bubble">
                         <div class="message-author">
                             <div class="author-avatar">
-                                {% if ticket.user.get_full_name %}
-                                    {{ ticket.user.get_full_name|first|upper }}
-                                {% else %}
-                                    {{ ticket.user.username|first|upper }}
-                                {% endif %}
+                                {{ ticket.requester_name|first|upper }}
                             </div>
                             <div class="author-info">
-                                <h4>
-                                    {% if ticket.user.get_full_name %}
-                                        {{ ticket.user.get_full_name }}
-                                    {% else %}
-                                        {{ ticket.user.username }}
-                                    {% endif %}
-                                </h4>
-                                <span>{% trans "Avrasya Üniversitesi Öğrencisi" %}</span>
+                                <h4>{{ ticket.requester_name }}</h4>
+                                <span>{% if ticket.user %}{% trans "Kayıtlı Kullanıcı" %}{% else %}{% trans "Misafir / Aday" %}{% endif %}</span>
                             </div>
                         </div>
                         
@@ -690,9 +629,52 @@ input:checked + .toggle-slider:before {
                         <div class="message-content">
                             {{ ticket.message|linebreaks }}
                         </div>
+                        {% if ticket.attachment %}
+                        <div class="mt-3 pt-2" style="border-top: 1px solid rgba(9,36,66,0.12);">
+                            <a href="{{ ticket.attachment.url }}" target="_blank" style="color: #1d61a9; font-weight: 600; text-decoration: none;">
+                                <i class="fas fa-paperclip"></i> {{ ticket.attachment_name }}
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+
+            {% if replies %}
+            <div class="reply-history mt-4">
+                <div class="history-header">
+                    <div class="history-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 style="margin: 0; color: var(--reply-text);">{% trans "Yazışma Geçmişi" %}</h3>
+                </div>
+                
+                <div class="history-list">
+                    {% for reply in replies %}
+                    <div class="history-item">
+                        <div class="history-meta">
+                            <span class="history-author">
+                                <i class="fas {% if reply.is_staff_reply %}fa-user-tie{% else %}fa-user{% endif %}"></i>
+                                {{ reply.display_sender }}
+                                ({% if reply.is_staff_reply %}{% trans "Birim" %}{% else %}{% trans "Başvuran" %}{% endif %})
+                            </span>
+                            <span class="history-time">{{ reply.created_at|date:"d.m.Y H:i" }}</span>
+                        </div>
+                        <div class="history-content">
+                            {{ reply.message|linebreaks }}
+                            {% if reply.attachment %}
+                            <div class="mt-2">
+                                <a href="{{ reply.attachment.url }}" target="_blank" style="color: #1d61a9; font-weight: 600; text-decoration: none;">
+                                    <i class="fas fa-paperclip"></i> {{ reply.attachment_name }}
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
 
         <!-- Sağ sütun: Yanıt formu -->
@@ -703,124 +685,68 @@ input:checked + .toggle-slider:before {
                         <i class="fas fa-edit"></i>
                         {% trans "Yanıtınızı Yazın" %}
                     </h3>
-                    <p>{% trans "Yanıtınız doğrudan öğrenciye gönderilecektir" %}</p>
+                    <p>{% trans "Yanıtınız doğrudan talep sahibine iletilecektir." %}</p>
                 </div>
 
-                <form method="post" id="replyForm">
+                {% if messages %}
+                <div class="mb-3">
+                    {% for msg in messages %}
+                    <div class="alert alert-{{ msg.tags|default:'info' }} mb-2">{{ msg }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form method="post" id="replyForm" enctype="multipart/form-data">
                     {% csrf_token %}
                     
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-align-left"></i>
-                            {% trans "Yanıt Metni" %}
+                            {% trans "Yanıt Metni *" %}
                         </label>
                         <textarea 
                             name="message" 
                             class="reply-textarea" 
-                            placeholder="{% trans 'Detaylı ve eksiksiz yanıtınızı buraya yazın. HTML işaretlemesi kullanabilirsiniz...' %}"
+                            placeholder="{% trans 'Detaylı ve anlaşılır yanıtınızı buraya yazın...' %}"
                             required
                         ></textarea>
                         <div class="char-counter">{% trans "0 karakter" %}</div>
                     </div>
 
-                    <!-- Yanıt ayarları -->
-                    {% comment %} <div class="reply-settings">
-                        <h4 style="color: var(--reply-text); margin-bottom: 1rem; font-size: 1.1rem;">
-                            <i class="fas fa-cog"></i>
-                            {% trans "Yanıt Ayarları" %}
-                        </h4>
-                        
-                        <div class="setting-item">
-                            <div class="setting-label">
-                                <i class="fas fa-check-circle" style="color: #1d61a9;"></i>
-                                {% trans "Durumu \"Yanıtlandı\" olarak değiştir" %}
-                            </div>
-                            <label class="toggle-switch">
-                                <input type="checkbox" name="change_status" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="setting-item">
-                            <div class="setting-label">
-                                <i class="fas fa-paper-plane" style="color: #1d61a9;"></i>
-                                {% trans "Öğrenciye e-posta gönder" %}
-                            </div>
-                            <label class="toggle-switch">
-                                <input type="checkbox" name="send_email" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="setting-item">
-                            <div class="setting-label">
-                                <i class="fas fa-bell" style="color: #1d61a9;"></i>
-                                {% trans "Dahili bildirim" %}
-                            </div>
-                            <label class="toggle-switch">
-                                <input type="checkbox" name="internal_notify">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div> {% endcomment %}
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-flag"></i>
+                            {% trans "Talep Durumu" %}
+                        </label>
+                        <select name="status" class="form-control" style="background: #f6f2e7; border-radius: 10px;">
+                            <option value="answered" selected>{% trans "Yanıtlandı" %}</option>
+                            <option value="open">{% trans "Açık (İncelemede)" %}</option>
+                            <option value="closed">{% trans "Kapalı" %}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-paperclip"></i>
+                            {% trans "Ek Dosya (İsteğe Bağlı)" %}
+                        </label>
+                        <input type="file" name="attachment" class="form-control" accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.png,.jpg,.jpeg,.webp" style="background: #f6f2e7; border-radius: 10px;">
+                    </div>
 
                     <!-- İşlem butonları -->
-                    <div class="action-buttons" style="margin-top: 180px;">
+                    <div class="action-buttons" style="margin-top: 1.5rem;">
                         <button type="submit" class="btn-reply">
                             <i class="fas fa-paper-plane"></i>
                             {% trans "Yanıtı Gönder" %}
                         </button>
                         
-                        <button type="button" class="btn-cancel" onclick="window.history.back()">
-                            <i class="fas fa-arrow-right"></i>
-                            {% trans "Geri Dön" %}
-                        </button>
+                        <a href="{% url 'support:department_dashboard' %}" class="btn-cancel text-center" style="text-decoration: none;">
+                            <i class="fas fa-arrow-left"></i>
+                            {% trans "Panoya Dön" %}
+                        </a>
                     </div>
                 </form>
             </div>
-
-            {% comment %} <!-- Yanıt geçmişi -->
-            {% if ticket.replies.all %}
-            <div class="reply-history">
-                <div class="history-header">
-                    <div class="history-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h3 style="margin: 0; color: var(--reply-text);">{% trans "Yanıt Geçmişi" %}</h3>
-                </div>
-                
-                <div class="history-list">
-                    {% for reply in ticket.replies.all|slice:":3" %}
-                    <div class="history-item">
-                        <div class="history-meta">
-                            <span class="history-author">
-                                <i class="fas fa-user-tie"></i>
-                                {% if reply.staff %}
-                                    {% if reply.staff.user.get_full_name %}
-                                        {{ reply.staff.user.get_full_name }}
-                                    {% else %}
-                                        {{ reply.staff.user.username }}
-                                    {% endif %}
-                                {% elif reply.user %}
-                                    {% if reply.user.get_full_name %}
-                                        {{ reply.user.get_full_name }}
-                                    {% else %}
-                                        {{ reply.user.username }}
-                                    {% endif %}
-                                {% else %}
-                                    Destek Personeli
-                                {% endif %}
-                            </span>
-                            <span class="history-time">{{ reply.created_at|timesince }} önce</span>
-                        </div>
-                        <div class="history-content">
-                            {{ reply.message|truncatewords:20 }}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %} {% endcomment %}
         </div>
     </div>
 </div>
@@ -829,47 +755,16 @@ input:checked + .toggle-slider:before {
 document.addEventListener('DOMContentLoaded', function() {
     const textarea = document.querySelector('.reply-textarea');
     const charCounter = document.querySelector('.char-counter');
+    if (!textarea || !charCounter) return;
     
-    // Karakter sayımı
     textarea.addEventListener('input', function() {
         const length = this.value.length;
         charCounter.textContent = `${length} karakter`;
-        
-        // Uzunluğa göre renk değişimi
-        if (length < 50) {
-            charCounter.style.color = '#1d61a9';
-        } else if (length < 150) {
-            charCounter.style.color = '#8dd4e3';
-        } else {
-            charCounter.style.color = '#8dd4e3';
-        }
-        
-        // Otomatik yükseklik ayarı
+        charCounter.style.color = '#1d61a9';
         this.style.height = 'auto';
-        this.style.height = (this.scrollHeight + 2) + 'px';
+        this.style.height = Math.max(180, this.scrollHeight + 2) + 'px';
     });
-    
-    // Başlangıç yüksekliği ayarı
     textarea.dispatchEvent(new Event('input'));
-    
-    // Form gönderim onayı
-    document.getElementById('replyForm').addEventListener('submit', function(e) {
-        const message = textarea.value.trim();
-        if (message.length < 20) {
-            e.preventDefault();
-            alert('Lütfen daha kapsamlı bir yanıt yazın (en az 20 karakter)');
-            textarea.focus();
-        }
-    });
-    
-    // Yazma efekti
-    textarea.addEventListener('focus', function() {
-        this.parentElement.style.transform = 'translateY(-5px)';
-    });
-    
-    textarea.addEventListener('blur', function() {
-        this.parentElement.style.transform = 'translateY(0)';
-    });
 });
 </script>
 
