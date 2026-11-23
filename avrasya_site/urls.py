@@ -1,10 +1,15 @@
 import os
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
+from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.conf.urls.static import static
+
+from core import views as core_views
+from core.sitemaps import sitemaps
 
 ADMIN_URL = os.environ.get('DJANGO_ADMIN_URL', 'avrasya-yonetim-paneli-2026/')
 
@@ -12,6 +17,9 @@ urlpatterns = [
     path(ADMIN_URL, admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('robots.txt', core_views.robots_txt, name='robots_txt'),
+    path('sitemap.xml', cache_page(3600)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('api/live-visitors/', core_views.live_visitors_api, name='live_visitors_api'),
 ]
 
 # در محیط توسعه، مسیر /admin/ را به پنل مدیریت هدایت می‌کنیم تا تداخل Namespace ایجاد نشود

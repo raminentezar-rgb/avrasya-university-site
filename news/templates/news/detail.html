@@ -1,5 +1,38 @@
 {% extends 'core/base.html' %}
 {% block title %}{{ item.title }} - Avrasya Üniversitesi{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="{{ item.summary|default:item.content|striptags|truncatechars:155 }}">
+{% endblock %}
+
+{% block meta %}
+<meta property="og:title" content="{{ item.title }}">
+<meta property="og:description" content="{{ item.summary|default:item.content|striptags|truncatechars:155 }}">
+{% if CANONICAL_URL %}<meta property="og:url" content="{{ CANONICAL_URL }}">{% endif %}
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Avrasya Üniversitesi">
+{% if item.main_image %}<meta property="og:image" content="https://www.avrasya.edu.tr{{ item.main_image.url }}">{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ item.title }}">
+<meta name="twitter:description" content="{{ item.summary|default:item.content|striptags|truncatechars:155 }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "{{ item.title|escapejs }}",
+  "description": "{{ item.summary|default:item.content|striptags|truncatechars:160|escapejs }}",
+  "datePublished": "{{ item.published_at|date:'c' }}",
+  "dateModified": "{{ item.published_at|date:'c' }}",
+  "publisher": {
+    "@type": "EducationalOrganization",
+    "name": "Avrasya Üniversitesi",
+    "url": "https://www.avrasya.edu.tr"
+  }{% if item.main_image %},
+  "image": ["https://www.avrasya.edu.tr{{ item.main_image.url }}"]{% endif %}
+}
+</script>
+{% endblock %}
+
 {% block content %}
 {% load static %}
 {% load i18n %}

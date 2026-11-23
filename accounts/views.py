@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from .forms import StudentSignUpForm
 from .models import Profile
+from core.services.visitors import get_visitor_stats
 
 
 class CustomLoginView(auth_views.LoginView):
@@ -55,6 +56,8 @@ def crm_dashboard(request):
     recent_users = User.objects.select_related('profile').order_by('-date_joined')[:10]
     all_users = User.objects.select_related('profile', 'profile__department').all().order_by('-date_joined')
     
+    visitor_stats = get_visitor_stats()
+
     context = {
         'total_users': total_users,
         'students_count': students_count,
@@ -62,5 +65,6 @@ def crm_dashboard(request):
         'professors_count': professors_count,
         'recent_users': recent_users,
         'all_users': all_users,
+        'visitor_stats': visitor_stats,
     }
     return render(request, 'accounts/crm_dashboard.html', context)

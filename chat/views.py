@@ -7,6 +7,8 @@ from channels.layers import get_channel_layer
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -358,41 +360,51 @@ def search_users(request):
 
 @login_required
 def edit_profile(request):
-    """ÙˆÛŒØ±Ø§ÛŒØ´ Ù¾Ø±ÙˆÙØ§ÛŒÙ„ Ú©Ø§Ø±Ø¨Ø±"""
+    """Edit authenticated user profile with strict avatar upload validation."""
     if request.method == 'POST':
-        # Ø¨Ø±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ú©Ø§Ø±Ø¨Ø±
         user = request.user
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        
+        first_name = (request.POST.get('first_name') or '').strip()[:150]
+        last_name = (request.POST.get('last_name') or '').strip()[:150]
+        email = (request.POST.get('email') or '').strip()
+
+        if email:
+            try:
+                validate_email(email)
+            except ValidationError:
+                messages.error(request, 'Lütfen geçerli bir e-posta adresi giriniz.')
+                return redirect('chat:index')
+            user.email = email
+
+        avatar_file = request.FILES.get('avatar')
+        if avatar_file:
+            ext = os.path.splitext(avatar_file.name or '')[1].lower()
+            if ext not in {'.png', '.jpg', '.jpeg', '.webp'}:
+                messages.error(request, 'Profil fotoğrafı yalnızca PNG, JPG, JPEG veya WEBP olabilir.')
+                return redirect('chat:index')
+            if avatar_file.size > 5 * 1024 * 1024:
+                messages.error(request, 'Profil fotoğrafı en fazla 5 MB olabilir.')
+                return redirect('chat:index')
+            if hasattr(user, 'profile') and user.profile.avatar:
+                try:
+                    if os.path.isfile(user.profile.avatar.path):
+                        os.remove(user.profile.avatar.path)
+                except OSError:
+                    pass
+            if hasattr(user, 'profile'):
+                user.profile.avatar = avatar_file
+                user.profile.save()
+
         if first_name:
             user.first_name = first_name
         if last_name:
             user.last_name = last_name
-        if email:
-            user.email = email
-        
-        # Ø¨Ø±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ø¹Ú©Ø³ Ù¾Ø±ÙˆÙØ§ÛŒÙ„
-        if request.FILES.get('avatar'):
-            # Ø­Ø°Ù Ø¹Ú©Ø³ Ù‚Ø¨Ù„ÛŒ Ø§Ú¯Ø± ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø±Ø¯
-            if hasattr(user, 'profile') and user.profile.avatar:
-                if os.path.isfile(user.profile.avatar.path):
-                    os.remove(user.profile.avatar.path)
-            
-            if hasattr(user, 'profile'):
-                user.profile.avatar = request.FILES['avatar']
-                user.profile.save()
-        
+
         user.save()
-        messages.success(request, 'Ù¾Ø±ÙˆÙØ§ÛŒÙ„ Ø¨Ø§ Ù…ÙˆÙÙ‚ÛŒØª Ø¨Ø±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ø´Ø¯.')
+        messages.success(request, 'Profiliniz başarıyla güncellendi.')
         return redirect('chat:index')
-    
-    # Ø§Ú¯Ø± Ø¯Ø±Ø®ÙˆØ§Ø³Øª GET Ø¨Ø§Ø´Ø¯ØŒ ØµÙØ­Ù‡ ÙˆÛŒØ±Ø§ÛŒØ´ Ù¾Ø±ÙˆÙØ§ÛŒÙ„ Ø±Ø§ Ù†Ù…Ø§ÛŒØ´ Ù…ÛŒâ€ŒØ¯Ù‡ÛŒÙ…
+
     return render(request, 'chat/edit_profile.html', {'user': request.user})
 
-
-@login_required
 
 @login_required
 def get_notifications(request):

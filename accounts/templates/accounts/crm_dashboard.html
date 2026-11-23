@@ -12,6 +12,33 @@
         </div>
     </div>
 
+    <!-- Live Online Visitors Card -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg live-visitors-card" style="border-radius: 24px; background: linear-gradient(135deg, #092442 0%, #1d61a9 100%); color: #ffffff;">
+                <div class="card-body d-flex flex-wrap justify-content-between align-items-center py-3 px-4">
+                    <div class="d-flex align-items-center mb-2 mb-md-0">
+                        <span class="live-pulse-dot mr-3" aria-hidden="true"></span>
+                        <div>
+                            <div class="text-uppercase small" style="letter-spacing: 0.08em; opacity: 0.85;">{% trans "Canlı Site Trafiği" %}</div>
+                            <h4 class="mb-0 text-white font-weight-bold">{% trans "Şu An Aktif Ziyaretçi" %} <small style="opacity: 0.75; font-weight: 400;">({% trans "Son 5 Dakika" %})</small></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center" style="gap: 1.5rem;">
+                        <div class="text-center">
+                            <div id="liveVisitorsCount" class="display-4 font-weight-bold mb-0" style="line-height: 1;">{{ visitor_stats.online_count|default:ONLINE_VISITORS_COUNT|default:0 }}</div>
+                            <small style="opacity: 0.8;">{% trans "Çevrimiçi" %}</small>
+                        </div>
+                        <div class="text-center pl-3" style="border-left: 1px solid rgba(255,255,255,0.22);">
+                            <div id="liveVisitorsPeak" class="h2 font-weight-bold mb-0">{{ visitor_stats.peak_today|default:0 }}</div>
+                            <small style="opacity: 0.8;">{% trans "Bugün Zirve" %}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Statistics Cards -->
     <div class="row mb-5 text-center">
         <div class="col-md-3">
@@ -533,6 +560,22 @@
     .table-striped tbody tr:nth-of-type(odd) {
         background-color: rgba(29, 97, 169, 0.02);
     }
+
+    .live-pulse-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #2ecc71;
+        display: inline-block;
+        box-shadow: 0 0 0 rgba(46, 204, 113, 0.7);
+        animation: livePulse 1.8s infinite;
+    }
+
+    @keyframes livePulse {
+        0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+        70% { box-shadow: 0 0 0 12px rgba(46, 204, 113, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+    }
 </style>
 
 <script>
@@ -543,5 +586,19 @@
             row.style.display = row.textContent.toLowerCase().indexOf(value) > -1 ? '' : 'none';
         });
     });
+
+    function refreshLiveVisitors() {
+        fetch('/api/live-visitors/', { credentials: 'same-origin' })
+            .then(function(r) { return r.ok ? r.json() : null; })
+            .then(function(data) {
+                if (!data) return;
+                var c = document.getElementById('liveVisitorsCount');
+                var p = document.getElementById('liveVisitorsPeak');
+                if (c) c.textContent = data.online_count;
+                if (p) p.textContent = data.peak_today;
+            })
+            .catch(function() {});
+    }
+    setInterval(refreshLiveVisitors, 15000);
 </script>
 {% endblock %}

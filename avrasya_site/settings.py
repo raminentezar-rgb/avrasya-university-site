@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'axes',
     'ckeditor',
     'ckeditor_uploader',
@@ -165,6 +167,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'axes.middleware.AxesMiddleware',
+    'core.middleware.OnlineVisitorMiddleware',
+    'core.middleware.NoIndexHeadersMiddleware',
 ]
 
 ROOT_URLCONF = 'avrasya_site.urls'
@@ -185,6 +189,7 @@ TEMPLATES = [
             ],
             'builtins': [
                 'core.templatetags.turkish_date',
+                'core.templatetags.safe_html',
             ],
         },
     },
@@ -220,12 +225,40 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'avrasya-default-cache',
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379')
+
+
+def _is_redis_available(url: str) -> bool:
+    mode = os.environ.get('USE_REDIS_CACHE', 'auto').strip().lower()
+    if mode == 'false':
+        return False
+    if mode == 'true':
+        return True
+    try:
+        import redis
+        redis.Redis.from_url(url, socket_connect_timeout=0.25, socket_timeout=0.25).ping()
+        return True
+    except Exception:
+        return False
+
+
+if _is_redis_available(REDIS_URL):
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': REDIS_URL,
+            'KEY_PREFIX': 'avrasya',
+            'TIMEOUT': 300,
+        }
     }
-}
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'avrasya-default-cache',
+            'OPTIONS': {'MAX_ENTRIES': 2000},
+        }
+    }
 
 LANGUAGE_CODE = 'tr'
 TIME_ZONE = 'Europe/Istanbul'
@@ -272,14 +305,22 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Browser security headers
-SECURE_BROWSER_XSS_FILTER = True
+# Browser & cookie security headers
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
 SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = 'same-origin'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
 X_FRAME_OPTIONS = 'DENY'
 # --- End Security Hardening ---
 
-# استفاده از متغیر محیطی برای امنیت
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'v9#k2!m8$p0@q5^z7&x1*w4(r6)t3_y8+u0=a2-b5c7d9e1f3g5h7j9k1l3m5n7')
+# استفاده از متغیر محیطی برای امنیت (در پروداکشن بدون کلید اجرا نمی‌شود)
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '').strip()
+if not SECRET_KEY:
+    if not DEBUG:
+        raise ImproperlyConfigured('DJANGO_SECRET_KEY environment variable must be set when DJANGO_DEBUG is False.')
+    SECRET_KEY = 'dev-only-insecure-secret-key-do-not-use-in-production'
 
 # --- تنظیمات استاتیک ---
 STATIC_URL = '/static/'
@@ -300,8 +341,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # تنظیمات آپلود فایل
-FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50MB
-DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 15 * 1024 * 1024  # 15MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 15 * 1024 * 1024  # 15MB
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -14,8 +14,8 @@ def index(request):
         raw_student_data = OBSIntegrationService.get_student_data(student_id)
         
         if raw_student_data:
-            # اگر دانشجو وجود داشت، کاربر را به صفحه پرداخت هدایت می‌کنیم
-            # در یک سیستم واقعی ممکن است اینجا بررسی کنیم که آیا اصلا بدهی دارد یا خیر
+            # Store verified student lookup in session to prevent direct ID enumeration
+            request.session['verified_tuition_student_id'] = student_id
             return redirect('tuition:payment', student_id=student_id)
         else:
             messages.error(request, "Öğrenci bulunamadı veya bu döneme ait borcunuz bulunmamaktadır.")
@@ -24,6 +24,10 @@ def index(request):
     return render(request, 'tuition/index.html')
 
 def payment(request, student_id):
+    if request.session.get('verified_tuition_student_id') != student_id:
+        messages.error(request, "Lütfen öncelikle kimlik / öğrenci doğrulaması yapınız.")
+        return redirect('tuition:index')
+
     # ۱. دریافت مجدد اطلاعات خام (یا دریافت از Session)
     raw_student_data = OBSIntegrationService.get_student_data(student_id)
     if not raw_student_data:

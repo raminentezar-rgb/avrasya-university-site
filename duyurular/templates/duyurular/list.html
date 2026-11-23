@@ -112,12 +112,12 @@
                         <div class="card-header">
                             <div class="category-badges">
                                 <span class="category-badge faculty">{{ duyuru.get_fakulte_display }}</span>
-                                {% if duyuru.bolumler.exists %}
+                                {% if duyuru.bolumler.all %}
                                     {% for bolum in duyuru.bolumler.all|slice:":2" %}
                                         <span class="category-badge department" >{{ bolum.isim }}</span>
                                     {% endfor %}
-                                    {% if duyuru.bolumler.count > 2 %}
-                                        <span class="category-badge more">+{{ duyuru.bolumler.count|add:"-2" }}</span>
+                                    {% if duyuru.bolumler.all|length > 2 %}
+                                        <span class="category-badge more">+{{ duyuru.bolumler.all|length|add:"-2" }}</span>
                                     {% endif %}
                                 {% endif %}
                             </div>
@@ -156,8 +156,8 @@
                                             <span>{{ dosya.tur }}</span>
                                         </a>
                                         {% endfor %}
-                                        {% if dosyalar.count > 3 %}
-                                        <span class="attachment-more">+{{ dosyalar.count|add:"-3" }}</span>
+                                        {% if dosyalar|length > 3 %}
+                                        <span class="attachment-more">+{{ dosyalar|length|add:"-3" }}</span>
                                         {% endif %}
                                     </div>
                                 </div>

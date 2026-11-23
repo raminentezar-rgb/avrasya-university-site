@@ -157,11 +157,18 @@
                                                     <div class="form-section-icon">
                                                         <i class="fas fa-credit-card"></i>
                                                     </div>
-                                                    <h4>{% trans "Kart Bilgileri" %}</h4>
+                                                    <h4>{% trans "Banka ve Ödeme Bildirim Bilgileri" %}</h4>
                                                     <div class="form-section-security">
                                                         <i class="fas fa-lock"></i>
-                                                        <span>{% trans "Güvenli Bağlantı" %}</span>
+                                                        <span>{% trans "PCI-DSS Güvenli Bildirim" %}</span>
                                                     </div>
+                                                </div>
+
+                                                <div class="alert alert-info mb-4" role="alert" style="font-size: 0.92rem;">
+                                                    <i class="fas fa-shield-alt me-2"></i>
+                                                    {% trans "Güvenliğiniz gereği bu form üzerinden kredi kartı numarası veya CVC kodu alınmamaktadır. Kartla ödeme için" %}
+                                                    <a href="{% url 'tuition:index' %}" class="fw-bold text-decoration-underline">{% trans "Güvenli Ödeme Portalını" %}</a>
+                                                    {% trans "kullanabilir veya banka havalesi / EFT sonrası dekontunuzu aşağıya yükleyebilirsiniz." %}
                                                 </div>
 
                                                 <div class="row g-3">
@@ -169,37 +176,17 @@
                                                         <div class="form-group floating-label">
                                                             <input type="text" name="bankaname" class="form-control"
                                                                 id="bankName" required>
-                                                            <label for="bankName">{% trans "Banka Adı*" %}</label>
+                                                            <label for="bankName">{% trans "Banka / Ödeme Kurumu Adı*" %}</label>
                                                             <div class="form-underline"></div>
                                                             <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group floating-label">
-                                                            <input type="text" name="kartno" class="form-control"
-                                                                id="cardNumber" required>
-                                                            <label for="cardNumber">{% trans "Kart Numarası*" %}</label>
+                                                            <input type="text" name="referans_no" class="form-control"
+                                                                id="referansNo">
+                                                            <label for="referansNo">{% trans "İşlem / Dekont Referans No (Opsiyonel)" %}</label>
                                                             <div class="form-underline"></div>
-                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group floating-label with-placeholder">
-                                                            <input type="text" name="kartdate" class="form-control"
-                                                                id="cardExpiry" required>
-                                                            <label for="cardExpiry">{% trans "Son Kullanma Tarihi*" %}</label>
-                                                            <div class="form-placeholder-hint">{% trans "MM/YY" %}</div>
-                                                            <div class="form-underline"></div>
-                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group floating-label">
-                                                            <input type="number" name="kartcvc" class="form-control"
-                                                                id="cvc" required>
-                                                            <label for="cvc">{% trans "CVC Kodu*" %}</label>
-                                                            <div class="form-underline"></div>
-                                                            <div class="form-error">{% trans "Bu alanı doldurunuz" %}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -374,8 +361,8 @@
                                                                 <i class="fas fa-shield-check"></i>
                                                             </div> {% endcomment %}
                                                             <div class="agreement-content">
-                                                                <h5>{% trans "Kart Onayı" %}</h5>
-                                                                <p>{% trans "Kredi Kartım ile işlem yapılması için kartımın mail order'a açık olduğunu beyan eder, aksi durumda uygulanacak tüm koşulları kabul ederim." %}</p>
+                                                                <h5>{% trans "Beyan ve Belge Doğruluğu" %}</h5>
+                                                                <p>{% trans "Seçtiğim ödeme yöntemini ve yüklediğim dekont / yerleştirme belgelerinin doğruluğunu beyan ederim." %}</p>
                                                             </div>
                                                         </label>
                                                     </div>

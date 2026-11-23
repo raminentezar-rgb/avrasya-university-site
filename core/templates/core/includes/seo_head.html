@@ -1,0 +1,7 @@
+{% if SEO_NOINDEX %}
+<meta name="robots" content="noindex, nofollow">
+{% else %}
+<meta name="robots" content="index, follow">
+{% if CANONICAL_URL %}<link rel="canonical" href="{{ CANONICAL_URL }}">{% endif %}
+{% for alt in HREFLANG_LINKS %}<link rel="alternate" hreflang="{{ alt.lang }}" href="{{ alt.href }}">{% endfor %}
+{% endif %}

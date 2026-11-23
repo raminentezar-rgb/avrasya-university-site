@@ -3,10 +3,14 @@
 {% load static %}
 {% block title %}{{ duyuru.baslik }} - Avrasya Üniversitesi{% endblock %}
 
+{% block meta_description %}
+<meta name="description" content="{{ duyuru.ozet|default:duyuru.icerik|striptags|truncatechars:155 }}">
+{% endblock %}
+
 {% block meta %}
 <meta property="og:title" content="{{ duyuru.baslik }}">
 <meta property="og:description" content="{{ duyuru.ozet|default:duyuru.icerik|striptags|truncatechars:150 }}">
-<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:url" content="{{ CANONICAL_URL|default:request.build_absolute_uri }}">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Avrasya Üniversitesi">
 <meta name="twitter:card" content="summary_large_image">
@@ -77,7 +81,7 @@
                         <div class="article-content">
                             <div class="content-body">
                                 {% if '<table' in duyuru.icerik or '<p' in duyuru.icerik or '<div' in duyuru.icerik or '<ul' in duyuru.icerik or '<ol' in duyuru.icerik or '<h' in duyuru.icerik %}
-                                    {{ duyuru.icerik|safe }}
+                                    {{ duyuru.icerik|safe_html }}
                                 {% else %}
                                     {{ duyuru.icerik|linebreaks }}
                                 {% endif %}

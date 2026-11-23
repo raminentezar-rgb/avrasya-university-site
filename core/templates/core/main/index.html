@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-{% comment %} {% load cache %} {% endcomment %}
-{% comment %} {% get_current_language as CURRENT_LANG %} {% endcomment %}
-<html lang="en">
+{% load cache %}
+{% get_current_language as CURRENT_LANG %}
+<html lang="{{ LANGUAGE_CODE|default:'tr' }}" {% if LANGUAGE_BIDI %}dir="rtl" {% endif %}>
 <head>
-    <title>{% trans "Avrasya University" %}</title>
+    <title>{% trans "Avrasya Üniversitesi | Trabzon" %}</title>
     <link rel="icon" type="image/x-icon" href="{% static 'core/img/Avrasya Logo.png' %}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Course Project">
+    <meta name="description" content="{% trans 'Avrasya Üniversitesi resmi web sitesi — Trabzon. Ön lisans, lisans ve lisansüstü programlar, güncel haberler, duyurular, etkinlikler ve aday öğrenci rehberi.' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'core/includes/seo_head.html' %}
+    <meta property="og:title" content="{% trans 'Avrasya Üniversitesi | Trabzon' %}">
+    <meta property="og:description" content="{% trans 'Avrasya Üniversitesi resmi web sitesi — Trabzon. Güncel haberler, duyurular, fakülteler ve aday öğrenci bilgileri.' %}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Avrasya Üniversitesi">
+    {% if CANONICAL_URL %}<meta property="og:url" content="{{ CANONICAL_URL }}">{% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Avrasya Üniversitesi",
+      "url": "https://www.avrasya.edu.tr",
+      "logo": "https://www.avrasya.edu.tr{% static 'core/img/Avrasya Logo.png' %}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Trabzon",
+        "addressCountry": "TR"
+      },
+      "sameAs": [
+        "https://www.facebook.com/avrasyaunv/",
+        "https://x.com/avrasyaunv",
+        "https://www.instagram.com/avrasyaunv/",
+        "https://www.youtube.com/channel/UCvfQvZoFT32v68SwXgd_Miw"
+      ]
+    }
+    </script>
     <link rel="stylesheet" type="text/css" href="{% static 'core/main/styles/bootstrap4/bootstrap.min.css' %}">
     <link href="{% static 'core/main/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static 'core/main/plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
@@ -79,7 +106,7 @@
                     <li class="top_bar_item"><a href="https://ebys.avrasya.edu.tr/Giris.aspx">{% trans "EBYS" %}</a></li>
                     <li class="top_bar_item"><a href="https://obs.avrasya.edu.tr/oibs/bologna/index.aspx#/">{% trans "Bologna" %}</a></li>
                     <li class="top_bar_item"><a href="https://kampus.avrasya.edu.tr/Account/Login?ReturnUrl=%2F">{% trans "Online Eğitim" %}</a></li>
-                    <li class="top_bar_item"><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638996701980044877.MjRiNzMxNjQtMjE3YS00YTE5LWIxMTAtNmI1OGE1ODg1MTExYjYxZWRkYTktMTA3ZS00ZTgzLWE0YjMtZGQxYzRkMGU4NDRm&ui_locales=tr-TR&mkt=tr-TR&client-request-id=552d74f3-e879-46b5-8cf9-af6111fc0737&state=aoBhGvBmR_CkgkJYuR98DDaLwkfd6kISsF4I3D3gxShv1udv4H2O4JLpjx6Zg-RxAAPsosdtPe4ZQ8dwmpEHqs9UID2r3kKLbv8VWoK4Aze4XpRbP-K17MWLR9y-wMrih4SoGJ8fwL5t30Iw5ZuTmtBrdIWm20UxdoknRwbcYekQgO-D5WuZ2XY0oAoVD97wKPBPcmFzdzE1ojFkcDKxY4PwfVpR2MFdPCXYmjvISJWcs3sT0oN28WS0pzBx9XF-4_s_EXpkCQ7nNs2pGxv8W7b4owvr_cqeynfqVP2DuKM&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true">{% trans "Mail" %}</a></li>
+                    <li class="top_bar_item"><a href="https://outlook.office.com/">{% trans "Mail" %}</a></li>
                     
                     <li class="top_bar_item"><a href="{% url 'kutuphane:kutuphane' %}">{% trans "Kütüphane" %}</a></li>
                     <li class="top_bar_item"><a href="{% url 'core:iletisim' %}">{% trans "İLETİŞİM" %}</a></li>
@@ -108,7 +135,7 @@
             <div class="logo_container">
                 <div class="logo">
                     <a href="{% url 'core:index' %}">
-                        <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="">
+                        <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="{% trans 'Avrasya Üniversitesi Logosu' %}">
                     </a>
                     <span></span>
                 </div>
@@ -189,7 +216,7 @@
                     </div>
                     <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
                         <div class="hero_slide_content text-center">
-                            <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">{% trans "Eğitiminizi bugün alın!" %}</h1>
+                            <h2 class="hero-slide-heading" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">{% trans "Eğitiminizi bugün alın!" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -208,7 +235,7 @@
                     </div>
                     <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
                         <div class="hero_slide_content text-center">
-                            <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">{% trans "Geleceğinizi bizimle şekillendirin" %}</h1>
+                            <h2 class="hero-slide-heading" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">{% trans "Geleceğinizi bizimle şekillendirin" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -227,7 +254,7 @@
                     </div>
                     <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
                         <div class="hero_slide_content text-center">
-                           <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">{% trans "Geleceğinizi bizimle şekillendirin" %}</h1>
+                           <h2 class="hero-slide-heading" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">{% trans "Geleceğinizi bizimle şekillendirin" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -237,7 +264,7 @@
                     <div class="hero_slide_background" style="background-image:url({% static 'core/img/student/about-banner.png' %})"></div>
                     <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
                         <div class="hero_slide_content text-center">
-                            <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">{% trans "Geleceğinizi bizimle şekillendirin" %}</h1>
+                            <h2 class="hero-slide-heading" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">{% trans "Geleceğinizi bizimle şekillendirin" %}</h2>
                         </div>
                     </div>
                 </div> {% endcomment %}
@@ -262,16 +289,16 @@
                             <div class="hero_box d-flex flex-row align-items-center justify-content-start">
                                 <a href="{% url 'international:international' %}" class="hero_box_link"><img src="{% static 'core/main/images/earth-globe.svg' %}" class="svg" alt="{% trans 'International' %}"></a>
                                 <div class="hero_box_content">
-                                    <h1 class="hero_box_title"><a href="{% url 'international:international' %}" class="hero_box_link">{% trans "International" %}</a></h1>
+                                    <h2 class="hero_box_title"><a href="{% url 'international:international' %}" class="hero_box_link">{% trans "International" %}</a></h2>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-lg-3 hero_box_col">
                             <div class="hero_box d-flex flex-row align-items-center justify-content-start">
-                                <a href="{% url 'ogrenci_isleri:erasmus' %}" class="hero_box_link"><img src="{% static 'core/main/images/milestone_1.svg' %}" class="svg" alt=""></a>
+                                <a href="{% url 'ogrenci_isleri:erasmus' %}" class="hero_box_link"><img src="{% static 'core/main/images/milestone_1.svg' %}" class="svg" alt="{% trans 'Erasmus' %}"></a>
                                 <div class="hero_box_content">
-                                    <h1 class="hero_box_title" style="margin-left:-80px;"><a href="{% url 'ogrenci_isleri:erasmus' %}" class="hero_box_link">{% trans "erasmus" %}</a></h1>
+                                    <h2 class="hero_box_title" style="margin-left:-80px;"><a href="{% url 'ogrenci_isleri:erasmus' %}" class="hero_box_link">{% trans "erasmus" %}</a></h2>
                                 </div>
                             </div>
                         </div>
@@ -280,7 +307,7 @@
                             <div class="hero_box d-flex flex-row align-items-center justify-content-start">
                                 <a href="{% url 'ogrenci_isleri:kayit' %}" class="hero_box_link"><img src="{% static 'core/main/images/exam.svg' %}" class="svg" alt="{% trans 'Kayıt İşlemleri' %}"></a>
                                 <div class="hero_box_content">
-                                    <h1 class="hero_box_title" style="margin-left:-120px;"><a href="{% url 'ogrenci_isleri:kayit' %}" class="hero_box_link">{% trans "Kayıt İşlemleri" %}</a></h1>
+                                    <h2 class="hero_box_title" style="margin-left:-120px;"><a href="{% url 'ogrenci_isleri:kayit' %}" class="hero_box_link">{% trans "Kayıt İşlemleri" %}</a></h2>
                                 </div>
                             </div>
                         </div>
@@ -289,7 +316,7 @@
                             <div class="hero_box d-flex flex-row align-items-center justify-content-start">
                                 <a href="{% url 'ogrenci_isleri:akademik_takvim' %}" class="hero_box_link"><img src="{% static 'core/main/images/calendar-svgrepo-com.svg' %}" class="svg" alt="{% trans 'Akademik Takvim' %}"></a>
                                 <div class="hero_box_content">
-                                    <h1 class="hero_box_title" style="margin-left:-130px;"><a href="{% url 'ogrenci_isleri:akademik_takvim' %}" class="hero_box_link">{% trans "Akademik Takvim" %}</a></h1>
+                                    <h2 class="hero_box_title" style="margin-left:-130px;"><a href="{% url 'ogrenci_isleri:akademik_takvim' %}" class="hero_box_link">{% trans "Akademik Takvim" %}</a></h2>
                                 </div>
                             </div>
                         </div>
@@ -302,7 +329,7 @@
     </div>
 
     <!-- News Section -->
-    {% comment %} {% cache 3600 index_news CURRENT_LANG %} {% endcomment %}
+    {% cache 600 index_news CURRENT_LANG %}
     <section id="news" class="page_section">
         <div class="container">
             <div class="news-header">
@@ -416,10 +443,10 @@
             </div>
         </div>
     </section>
-    {% comment %} {% endcache %} {% endcomment %}
+    {% endcache %}
 
     <!-- Duyurular Section -->
-    {% comment %} {% cache 3600 index_announcements CURRENT_LANG %} {% endcomment %}
+    {% cache 600 index_announcements CURRENT_LANG %}
     <section id="announcements" class="page_section">
         <div class="container">
             <div class="announcements-header">
@@ -501,7 +528,7 @@
             </div>
         </div>
     </section>
-    {% comment %} {% endcache %} {% endcomment %}
+    {% endcache %}
 
 
 
@@ -830,7 +857,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="row">
                 <div class="col">
                     <div class="section_title text-center">
-                        <h1>{% trans "HİZMETLERİMİZ" %}</h1>
+                        <h2 class="section-heading">{% trans "HİZMETLERİMİZ" %}</h2>
                         <p class="section_subtitle">{% trans "Modern Hizmetlerle Geleceğinizi Şekillendirin" %}</p>
                     </div>
                 </div>
@@ -1176,7 +1203,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="row">
                 <div class="col">
                     <div class="section_title text-center">
-                        <h1>{% trans "KAMPÜSLERİMİZ" %}</h1>
+                        <h2 class="section-heading">{% trans "KAMPÜSLERİMİZ" %}</h2>
                         <p class="section_subtitle">{% trans "Avrasya Üniversitesi'nin tüm yerleşkeleri ve iletişim bilgileri" %}</p>
                     </div>
                 </div>
@@ -1416,7 +1443,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="row">
             <div class="col">
                 <div class="section_title text-center">
-                    <h1>{% trans "DİĞER BAĞLANTILAR" %}</h1>
+                    <h2 class="section-heading">{% trans "DİĞER BAĞLANTILAR" %}</h2>
                     <p class="section_subtitle">{% trans "Uluslararası iş birliklerimiz ve akreditasyonlarımız" %}</p>
                 </div>
             </div>
@@ -1615,7 +1642,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <!-- Register -->
                     <div class="register_section d-flex flex-column align-items-center justify-content-center">
                         <div class="register_content text-center">
-                            <h1 class="register_title">{% trans "Apply For" %} <span>2025</span></h1>
+                            <h2 class="register_title">{% trans "Apply For" %} <span>2025</span></h2>
                             <p class="register_text">{% trans "We invite you to become a part of the AVU family. If you have any questions related to our programs or application procedures, we are here to help you." %}</p>
                             <div class="button button_1 register_button mx-auto trans_200"><a href="{% url 'international:application_form' %}">{% trans "Apply Now" %}</a></div>
                         </div>
@@ -1628,8 +1655,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="search_section d-flex flex-column align-items-center justify-content-center">
                         <div class="search_background" style="background-image:url(images/search_background.jpg);"></div>
                         <div class="search_content text-center">
-                            <img src="{% static 'core/img/search/search.png' %}" alt="">
-                            <h1 class="search_title">  </h1>
+                            <img src="{% static 'core/img/search/search.png' %}" alt="{% trans 'Arama İkonu' %}">
+                            <h2 class="search_title">  </h2>
                             <form id="search_form" class="search_form" action="post">
                                 {% comment %} <input id="search_form_name" class="input_field search_form_name" type="text" placeholder="{% trans 'Course Name' %}" required="required" data-error="{% trans 'Course name is required.' %}">
                                 <input id="search_form_category" class="input_field search_form_category" type="text" placeholder="{% trans 'Category' %}">
@@ -1658,7 +1685,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="row">
                     <div class="col">
                         <div class="section_title text-center">
-                            <h1 id="H1">{% trans "BAŞARILARIMIZ" %}</h1>
+                            <h2 id="H1" class="section-heading">{% trans "BAŞARILARIMIZ" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -1725,7 +1752,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <!-- Logo -->
                         <div class="logo_container">
                             <div class="logo">
-                                <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="">
+                                <img src="{% static 'core/img/LGOO-WEB.png' %}" alt="{% trans 'Avrasya Üniversitesi Logosu' %}">
                                 <span></span>
                             </div>
                         </div>

@@ -2,9 +2,11 @@
 
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core.cache import cache
+from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
+from django.core.validators import validate_email
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
 import json
 import logging
 from datetime import datetime
@@ -158,13 +160,32 @@ def bahar(request):
     return render(request, 'yatay_gecis/includes/bahar.html')
 
 
+def _clean_callback_header(val):
+    return str(val or '').replace('\r', '').replace('\n', '').strip()
+
+
+def _rate_limited(request, limit=5, window=600):
+    fwd = request.META.get('HTTP_X_FORWARDED_FOR', '').split(',')[0].strip()
+    ip = fwd or request.META.get('REMOTE_ADDR', 'unknown')
+    key = f"yatay_cb_rl:{ip}"
+    count = cache.get(key, 0)
+    if count >= limit:
+        return True
+    cache.set(key, count + 1, window)
+    return False
+
+
 # API endpoint için ek fonksiyon
-@csrf_exempt
 def callback_request_api(request):
     """
-    API endpoint for callback requests (separate from the main view)
+    CSRF-protected and rate-limited API endpoint for callback requests.
     """
     if request.method == 'POST':
+        if _rate_limited(request):
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyiniz.'
+            }, status=429)
         try:
             # JSON verisini parse et
             try:
@@ -176,9 +197,9 @@ def callback_request_api(request):
                 }, status=400)
             
             # Verileri kontrol et
-            full_name = data.get('full_name')
-            email = data.get('email')
-            phone = data.get('phone')
+            full_name = _clean_callback_header(data.get('full_name'))[:120]
+            email = _clean_callback_header(data.get('email'))[:150]
+            phone = _clean_callback_header(data.get('phone'))[:30]
             accept_communication = data.get('accept_communication')
             accept_kvkk = data.get('accept_kvkk')
             
@@ -188,8 +209,11 @@ def callback_request_api(request):
                 errors['full_name'] = 'Ad Soyad alanı zorunludur.'
             if not email:
                 errors['email'] = 'E-posta alanı zorunludur.'
-            elif '@' not in email:
-                errors['email'] = 'Geçerli bir e-posta adresi giriniz.'
+            else:
+                try:
+                    validate_email(email)
+                except ValidationError:
+                    errors['email'] = 'Geçerli bir e-posta adresi giriniz.'
             if not phone:
                 errors['phone'] = 'Telefon alanı zorunludur.'
             if not accept_communication:
