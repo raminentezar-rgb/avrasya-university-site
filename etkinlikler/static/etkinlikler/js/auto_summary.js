@@ -126,8 +126,15 @@
             const badge = toolbar.querySelector('.auto-summary-badge');
             const countBadge = toolbar.querySelector('.auto-summary-count');
 
+            function getDetayText() {
+                if (window.CKEDITOR && detayEl.id && window.CKEDITOR.instances[detayEl.id]) {
+                    return (window.CKEDITOR.instances[detayEl.id].getData() || '').trim();
+                }
+                return (detayEl.value || '').trim();
+            }
+
             function triggerSummary(force) {
-                const detayText = (detayEl.value || '').trim();
+                const detayText = getDetayText();
                 const kisaText = (kisaEl.value || '').trim();
                 const titleText = baslikEl ? (baslikEl.value || '').trim() : '';
 
@@ -172,6 +179,19 @@
                     triggerSummary(false);
                 }, 100);
             });
+
+            if (window.CKEDITOR && detayEl.id && window.CKEDITOR.instances[detayEl.id]) {
+                const editor = window.CKEDITOR.instances[detayEl.id];
+                editor.on('change', function () { triggerSummary(false); });
+                editor.on('blur', function () { triggerSummary(false); });
+            } else if (window.CKEDITOR) {
+                window.CKEDITOR.on('instanceReady', function (evt) {
+                    if (evt.editor && detayEl.id && evt.editor.name === detayEl.id) {
+                        evt.editor.on('change', function () { triggerSummary(false); });
+                        evt.editor.on('blur', function () { triggerSummary(false); });
+                    }
+                });
+            }
 
             // Kullanıcı kısa açıklamayı kendisi düzenlerse otomatik bayrağını kaldır
             kisaEl.addEventListener('input', function () {

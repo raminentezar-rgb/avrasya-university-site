@@ -18,6 +18,7 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('robots.txt', core_views.robots_txt, name='robots_txt'),
+    path('favicon.ico', core_views.favicon_ico, name='favicon_ico'),
     path('sitemap.xml', cache_page(3600)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('api/live-visitors/', core_views.live_visitors_api, name='live_visitors_api'),
 ]

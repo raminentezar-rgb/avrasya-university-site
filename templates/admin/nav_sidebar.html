@@ -1,0 +1,44 @@
+{% load i18n admin_dashboard_tags %}
+{% get_categorized_admin_apps available_apps as side_categories %}
+<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="{% translate 'Toggle navigation' %}"></button>
+<nav class="sticky" id="nav-sidebar" aria-label="{% translate 'Sidebar' %}">
+  <input type="search" id="nav-filter"
+         placeholder="Hızlı menü ara (Haber, Duyuru, Bölüm...)"
+         aria-label="{% translate 'Filter navigation items' %}">
+
+  {% for cat in side_categories %}
+  <div class="av-side-cat {% if cat.default_open %}is-open{% endif %}" data-cat="{{ cat.key }}">
+    <button type="button" class="av-side-cat-btn">
+      <span class="av-side-cat-title">
+        <i class="{{ cat.icon }}" style="color: {{ cat.color }};"></i>
+        <span>{{ cat.title }}</span>
+      </span>
+      <i class="fas fa-chevron-down av-chevron"></i>
+    </button>
+    <div class="av-side-cat-body">
+      {% for app in cat.apps %}
+      <div class="av-side-app{% if app.app_url in request.path|urlencode %} current-app{% endif %}" data-search="{{ app.display_name }} {{ app.app_label }}">
+        <a href="{{ app.app_url }}" class="av-side-app-title">
+          <i class="{{ app.icon }}"></i>
+          <span>{{ app.display_name }}</span>
+        </a>
+        <ul class="av-side-model-list">
+          {% for model in app.models %}
+          <li class="av-side-model-item{% if model.admin_url and model.admin_url in request.path|urlencode %} current-model{% endif %}" data-search="{{ app.display_name }} {{ model.name }}">
+            {% if model.admin_url %}
+              <a href="{{ model.admin_url }}" class="av-side-model-link" title="{{ model.name }}">{{ model.name }}</a>
+            {% else %}
+              <span class="av-side-model-link">{{ model.name }}</span>
+            {% endif %}
+            {% if model.add_url %}
+              <a href="{{ model.add_url }}" class="av-side-add-btn" title="{{ model.name }} ekle">+</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</nav>

@@ -15,6 +15,7 @@ def clear_all_public_caches(**kwargs):
         pass
 
     cache.delete("duyurular:stats:v1")
+    cache.delete("core:admin_dashboard_stats:v1")
 
     lang_codes = [code for code, _ in getattr(settings, "LANGUAGES", [("tr", "Turkish")])]
     for lang in lang_codes:
@@ -39,6 +40,9 @@ def connect_cache_invalidation_signals():
         "duyurular.Duyuru",
         "duyurular.Bolum",
         "etkinlikler.Etkinlik",
+        "etkinlikler.EtkinlikGorsel",
+        "etkinlikler.EtkinlikDosya",
+        "etkinlikler.EtkinlikKonusmaci",
         "core.SliderItem",
         "core.QuestionAnswer",
         "support.FAQ",

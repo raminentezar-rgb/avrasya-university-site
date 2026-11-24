@@ -2,6 +2,46 @@
 {% load i18n %}
 {% load static %}
 {% block title %}{{ etkinlik.baslik }} - Avrasya Üniversitesi{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="{{ etkinlik.get_ozet|default:etkinlik.detayli_aciklama|striptags|truncatechars:155 }}">
+{% endblock %}
+
+{% block meta %}
+<meta property="og:title" content="{{ etkinlik.baslik }}">
+<meta property="og:description" content="{{ etkinlik.get_ozet|default:etkinlik.detayli_aciklama|striptags|truncatechars:155 }}">
+{% if CANONICAL_URL %}<meta property="og:url" content="{{ CANONICAL_URL }}">{% endif %}
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Avrasya Üniversitesi">
+{% if etkinlik.afis %}<meta property="og:image" content="https://www.avrasya.edu.tr{{ etkinlik.afis.url }}">{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ etkinlik.baslik }}">
+<meta name="twitter:description" content="{{ etkinlik.get_ozet|default:etkinlik.detayli_aciklama|striptags|truncatechars:155 }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "{{ etkinlik.baslik|escapejs }}",
+  "description": "{{ etkinlik.get_ozet|default:etkinlik.detayli_aciklama|striptags|truncatechars:220|escapejs }}",
+  "startDate": "{{ etkinlik.baslangic_tarihi|date:'c' }}",
+  {% if etkinlik.bitis_tarihi %}"endDate": "{{ etkinlik.bitis_tarihi|date:'c' }}",{% endif %}
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "isAccessibleForFree": {% if etkinlik.ucretli %}false{% else %}true{% endif %},
+  "location": {
+    "@type": "Place",
+    "name": "{{ etkinlik.yer|escapejs }}"
+  },
+  "organizer": {
+    "@type": "EducationalOrganization",
+    "name": "{{ etkinlik.duzenleyen|default:'Avrasya Üniversitesi'|escapejs }}",
+    "url": "https://www.avrasya.edu.tr"
+  }{% if etkinlik.afis %},
+  "image": ["https://www.avrasya.edu.tr{{ etkinlik.afis.url }}"]{% endif %}
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="page_section">
     <div class="container">
@@ -19,22 +59,28 @@
             <div class="hero-section position-relative">
             {% if etkinlik.afis %}
             <div class="poster-wrapper text-center bg-light" style="padding: 2rem; border-radius: 20px 20px 0 0;">
-                <img src="{{ etkinlik.afis.url }}" 
-                    alt="{{ etkinlik.baslik }}" 
-                    class="poster-img"
-                    style="max-width: 100%; max-height: 80vh; width: auto; height: auto; object-fit: contain; border-radius: 12px; box-shadow: 0 5px 20px rgba(9, 36, 66, 0.1);">
+                <a href="{{ etkinlik.afis.url }}"
+                   class="etkinlik-lightbox-trigger d-inline-block"
+                   data-src="{{ etkinlik.afis.url }}"
+                   data-caption="{{ etkinlik.baslik }}"
+                   title="{% trans 'Afişi büyütmek için tıklayın' %}">
+                    <img src="{{ etkinlik.afis.url }}" 
+                        alt="{{ etkinlik.baslik }}" 
+                        class="poster-img"
+                        style="max-width: 100%; max-height: 80vh; width: auto; height: auto; object-fit: contain; border-radius: 12px; box-shadow: 0 5px 20px rgba(9, 36, 66, 0.1); cursor: zoom-in;">
+                </a>
             </div>
             {% else %}
             <div class="placeholder-hero bg-light-blue" style="height: 300px;"></div>
             {% endif %}
             
             <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end"
-                style="background: linear-gradient(transparent 70%, rgba(9, 36, 66, 0.85) 100%); border-radius: 20px 20px 0 0;">
+                style="background: linear-gradient(transparent 70%, rgba(9, 36, 66, 0.85) 100%); border-radius: 20px 20px 0 0; pointer-events: none;">
                 <div class="container text-white p-4">
                     <div class="row align-items-end">
                         <div class="col-md-8">
                             <span class="badge bg-white text-dark-blue mb-3 fs-6">{{ etkinlik.get_etkinlik_turu_display }}</span>
-                            <h1 class="display-5 fw-bold mb-3">{{ etkinlik.baslik }}</h1>
+                            <div class="display-5 fw-bold mb-3 text-white hero-event-subtitle">{{ etkinlik.baslik }}</div>
                         </div>
                         <div class="col-md-4 text-md-end">
                             {% if etkinlik.kayit_gerekiyor %}
@@ -54,31 +100,38 @@
                     <!-- Main Content -->
                     <div class="col-lg-8">
                         <!-- Quick Info Cards -->
-                        <div class="row mb-5 ">
+                        <div class="row mb-5">
                             <div class="col-md-6 mb-3">
-                                <div class="info-card-small border-0 rounded-3 p-4 h-100 ">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <i class="fas fa-calendar-day text-medium-blue fs-2 me-3"></i>
-                                        <div>
-                                            <h2 class="text-muted mb-1" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Tarih & Saat" %}</h2><br>
-                                            <h3 class="fw-bold text-dark-blue mb-0">
-                                                {{ etkinlik.baslangic_tarihi|date:'d F Y' }}
-                                                {% if etkinlik.baslangic_tarihi|date:'H:i' != '00:00' %}
-                                                <br><p class="text-muted">{{ etkinlik.baslangic_tarihi|date:'H:i' }}</p>
-                                                {% endif %}
-                                            </h3>
+                                <div class="info-card-small etkinlik-quick-card border-0 p-4 h-100">
+                                    <div class="etkinlik-quick-icon" aria-hidden="true">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </div>
+                                    <div class="etkinlik-quick-body">
+                                        <div class="etkinlik-quick-label">{% trans "Tarih & Saat" %}</div>
+                                        <div class="etkinlik-quick-value">
+                                            {{ etkinlik.baslangic_tarihi|date:'d F Y' }}
                                         </div>
+                                        {% if etkinlik.baslangic_tarihi|date:'H:i' != '00:00' %}
+                                        <div class="etkinlik-quick-sub">
+                                            <i class="far fa-clock me-1" aria-hidden="true"></i>{{ etkinlik.baslangic_tarihi|date:'H:i' }}
+                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <div class="info-card-small border-0 rounded-3 p-4 h-100 ">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <i class="fas fa-map-marker-alt text-medium-blue fs-2 me-3"></i>
-                                        <div>
-                                            <h2 class="text-muted mb-1" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Yer" %}</h2><br>
-                                            <h3 class="fw-bold text-dark-blue mb-0">{{ etkinlik.yer }}</h3>
-                                        </div>
+                                <div class="info-card-small etkinlik-quick-card border-0 p-4 h-100">
+                                    <div class="etkinlik-quick-icon" aria-hidden="true">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="etkinlik-quick-body">
+                                        <div class="etkinlik-quick-label">{% trans "Yer" %}</div>
+                                        <div class="etkinlik-quick-value">{{ etkinlik.yer }}</div>
+                                        {% if etkinlik.harita_linki %}
+                                        <a href="{{ etkinlik.harita_linki }}" target="_blank" rel="noopener noreferrer" class="etkinlik-quick-sub text-decoration-none">
+                                            <i class="fas fa-map-marked-alt me-1" aria-hidden="true"></i>{% trans "Haritada Gör" %}
+                                        </a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -98,9 +151,133 @@
                         <div class="content mb-5">
                             <h3 class="text-dark-blue mb-4" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">{% trans "Etkinlik Detayları" %}</h3>
                             <div class="content-text">
-                                {{ etkinlik.detayli_aciklama|linebreaks }}
+                                {% if '<p' in etkinlik.detayli_aciklama or '<div' in etkinlik.detayli_aciklama or '<table' in etkinlik.detayli_aciklama or '<ul' in etkinlik.detayli_aciklama or '<ol' in etkinlik.detayli_aciklama or '<h' in etkinlik.detayli_aciklama or '<br' in etkinlik.detayli_aciklama or '<strong' in etkinlik.detayli_aciklama %}
+                                    {{ etkinlik.detayli_aciklama|safe_html }}
+                                {% else %}
+                                    {{ etkinlik.detayli_aciklama|linebreaks }}
+                                {% endif %}
                             </div>
                         </div>
+
+                        {% with konusmacilar=etkinlik.konusmacilar.all %}
+                        {% if konusmacilar %}
+                        <!-- Konuşmacılar / Eğitmenler -->
+                        <div class="etkinlik-speakers-section mb-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3 class="text-dark-blue mb-0" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">
+                                    <i class="fas fa-microphone-alt text-medium-blue me-2"></i>{% trans "Konuşmacılar" %}
+                                </h3>
+                                <span class="badge bg-light-blue text-dark-blue">{{ konusmacilar|length }} {% trans "Kişi" %}</span>
+                            </div>
+                            <div class="row">
+                                {% for k in konusmacilar %}
+                                <div class="col-md-6 mb-3">
+                                    <div class="etkinlik-speaker-card h-100">
+                                        <div class="etkinlik-speaker-avatar">
+                                            {% if k.fotograf %}
+                                            <img src="{{ k.fotograf.url }}" alt="{{ k.ad_soyad }}">
+                                            {% else %}
+                                            <i class="fas fa-user-tie"></i>
+                                            {% endif %}
+                                        </div>
+                                        <div class="etkinlik-speaker-info">
+                                            <h6 class="mb-1 text-dark-blue fw-bold">{{ k.ad_soyad }}</h6>
+                                            {% if k.unvan %}<div class="text-medium-blue small fw-semibold">{{ k.unvan }}</div>{% endif %}
+                                            {% if k.kurum %}<div class="text-muted small">{{ k.kurum }}</div>{% endif %}
+                                            {% if k.bio %}<p class="text-muted small mt-2 mb-0">{{ k.bio|truncatewords:24 }}</p>{% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+
+                        {% with gorseller=etkinlik.gorseller.all %}
+                        {% if gorseller %}
+                        <!-- Etkinlik Görselleri (Galeri) -->
+                        <div class="etkinlik-gallery-section mb-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3 class="text-dark-blue mb-0" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">
+                                    <i class="fas fa-images text-medium-blue me-2"></i> {% trans "Etkinlik Görselleri" %}
+                                </h3>
+                                <span class="badge bg-light-blue text-dark-blue">{{ gorseller|length }} {% trans "Görsel" %}</span>
+                            </div>
+                            <div class="etkinlik-gallery-grid">
+                                {% for g in gorseller %}
+                                <div class="etkinlik-gallery-item">
+                                    <a href="{{ g.gorsel.url }}"
+                                       class="etkinlik-lightbox-trigger"
+                                       data-src="{{ g.gorsel.url }}"
+                                       data-caption="{{ g.baslik|default:etkinlik.baslik }}"
+                                       data-index="{{ forloop.counter0 }}">
+                                        <img src="{{ g.gorsel.url }}"
+                                             alt="{{ g.baslik|default:etkinlik.baslik }}"
+                                             loading="lazy">
+                                        <div class="etkinlik-gallery-zoom">
+                                            <i class="fas fa-search-plus"></i>
+                                        </div>
+                                        {% if g.baslik %}
+                                        <div class="etkinlik-gallery-caption">{{ g.baslik }}</div>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+
+                        {% with dosyalar=etkinlik.dosyalar.all %}
+                        {% if dosyalar %}
+                        <!-- Ek Dosyalar (PDF, Excel, Görsel vb.) -->
+                        <div class="etkinlik-attachments-section mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3 class="text-dark-blue mb-0" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">
+                                    <i class="fas fa-paperclip text-medium-blue me-2"></i> {% trans "Ek Dosyalar" %}
+                                </h3>
+                                <span class="badge bg-light-blue text-dark-blue">{{ dosyalar|length }} {% trans "Dosya" %}</span>
+                            </div>
+                            <div class="etkinlik-attachments-list">
+                                {% for dosya in dosyalar %}
+                                <div class="etkinlik-attachment-item">
+                                    <div class="etkinlik-attachment-icon" style="color: {{ dosya.get_badge_color }};">
+                                        {% if dosya.is_image %}
+                                        <img src="{{ dosya.dosya.url }}" alt="{{ dosya.display_name }}" class="etkinlik-attachment-thumb">
+                                        {% else %}
+                                        <i class="{{ dosya.get_icon }}"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="etkinlik-attachment-info">
+                                        <h6 class="mb-1 text-dark-blue fw-bold">{{ dosya.display_name }}</h6>
+                                        {% if dosya.aciklama %}
+                                        <p class="text-muted small mb-2">{{ dosya.aciklama }}</p>
+                                        {% endif %}
+                                        <div class="etkinlik-attachment-meta">
+                                            <span class="etkinlik-file-badge" style="background: {{ dosya.get_badge_color }};">
+                                                {{ dosya.file_extension|default:dosya.get_dosya_turu_display }}
+                                            </span>
+                                            <span><i class="fas fa-weight-hanging me-1"></i>{{ dosya.get_file_size }}</span>
+                                            <span><i class="far fa-calendar-alt me-1"></i>{{ dosya.olusturulma_tarihi|date:'d.m.Y' }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="etkinlik-attachment-actions">
+                                        {% if dosya.is_pdf or dosya.is_image %}
+                                        <a href="{{ dosya.dosya.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-eye me-1"></i> {% trans "Görüntüle" %}
+                                        </a>
+                                        {% endif %}
+                                        <a href="{{ dosya.dosya.url }}" download class="btn btn-primary btn-sm">
+                                            <i class="fas fa-download me-1"></i> {% trans "İndir" %}
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
                     </div>
 
                     <!-- Sidebar -->
@@ -110,19 +287,41 @@
                             <div class="card-body p-4 text-center">
                                 
                                 {% if etkinlik.katilim_linki %}
-                                <a href="{{ etkinlik.katilim_linki }}" target="_blank" class="btn btn-primary btn-lg w-100 mb-3">
+                                <a href="{{ etkinlik.katilim_linki }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg w-100 mb-3">
                                     <i class="fas fa-external-link-alt me-2"></i> {% trans "Etkinliğe Katıl" %}
                                 </a>
                                 {% endif %}
                                 
                                 {% if etkinlik.kayit_gerekiyor %}
-                                <button class="btn btn-outline-primary btn-lg w-100 mb-3">
-                                    <i class="fas fa-user-plus me-2"></i> {% trans "Kayıt Ol" %}
-                                </button>
+                                    {% if etkinlik.kontenjan %}
+                                    <div id="kalanKontenjanBadge" class="mb-3 px-3 py-2 rounded-3" style="background: rgba(29, 97, 169, 0.08); color: #092442; font-size: 0.9rem; font-weight: 600;">
+                                        <i class="fas fa-chair text-medium-blue me-1"></i>
+                                        {% trans "Kalan Kontenjan" %}: <span id="kalanKontenjanVal">{{ etkinlik.kalan_kontenjan }}</span> / {{ etkinlik.kontenjan }}
+                                    </div>
+                                    {% endif %}
+                                    {% if etkinlik.kayit_acik_mi %}
+                                    <button type="button" class="btn btn-outline-primary btn-lg w-100 mb-3" data-bs-toggle="modal" data-bs-target="#kayitModal">
+                                        <i class="fas fa-user-plus me-2"></i> {% trans "Kayıt Ol" %}
+                                    </button>
+                                    {% else %}
+                                    <div class="alert alert-warning py-2 px-3 mb-3 small fw-semibold">
+                                        <i class="fas fa-lock me-1"></i> {{ etkinlik.kayit_durumu.1 }}
+                                    </div>
+                                    {% endif %}
                                 {% endif %}
+
+                                <!-- Takvime Ekle -->
+                                <div class="etkinlik-calendar-group mb-3">
+                                    <a href="{{ etkinlik.google_calendar_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary btn-sm flex-fill etkinlik-cal-btn">
+                                        <i class="far fa-calendar-plus me-1"></i> {% trans "Google Takvim" %}
+                                    </a>
+                                    <a href="{% url 'etkinlikler:takvim_ics' etkinlik.slug %}" class="btn btn-outline-secondary btn-sm flex-fill etkinlik-cal-btn">
+                                        <i class="fas fa-calendar-check me-1"></i> {% trans ".ics İndir" %}
+                                    </a>
+                                </div>
                                 
                                 <!-- Paylaş Butonu -->
-                                <button type="button" class="btn btn-outline-secondary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#shareModal" style="font-family: 'Metropolis', sans-serif; font-weight: 800; color: var(--secondary-medium-blue);">
+                                <button type="button" class="btn btn-outline-secondary w-100" data-bs-toggle="modal" data-bs-target="#shareModal" style="font-family: 'Metropolis', sans-serif; font-weight: 800; color: var(--secondary-medium-blue);">
                                     <i class="fas fa-share-alt me-2"></i> {% trans "Paylaş" %}
                                 </button>
                                 
@@ -130,26 +329,33 @@
                         </div>
 
                         <!-- Info Card -->
-                        <div class="card info-card-sidebar border-0 rounded-3 shadow-sm">
+                        <div class="card info-card-sidebar border-0 shadow-sm">
                             <div class="card-body p-4">
-                                <h3 class="text-dark-blue mb-4" style="font-family: 'Metropolis', sans-serif; font-weight: 800;">
-                                    <i class="fas fa-info-circle me-2"></i> {% trans "Etkinlik Bilgileri" %}
+                                <h3 class="text-dark-blue mb-3 etkinlik-sidebar-heading">
+                                    <span class="etkinlik-heading-icon" aria-hidden="true">
+                                        <i class="fas fa-info"></i>
+                                    </span>
+                                    <span>{% trans "Etkinlik Bilgileri" %}</span>
                                 </h3>
                                 
                                 <div class="info-list">
-                                    <div class="info-item d-flex align-items-center mb-3">
-                                        <i class="fas fa-tag text-medium-blue me-3"></i>
-                                        <div>
-                                            <small class="text-muted">{% trans "Tür" %}</small>
-                                            <div class="fw-semibold text-dark-blue">{{ etkinlik.get_etkinlik_turu_display }}</div>
+                                    <div class="info-item">
+                                        <div class="etkinlik-info-icon" aria-hidden="true">
+                                            <i class="fas fa-tag"></i>
+                                        </div>
+                                        <div class="etkinlik-info-content">
+                                            <div class="etkinlik-info-label">{% trans "Tür" %}</div>
+                                            <div class="etkinlik-info-value">{{ etkinlik.get_etkinlik_turu_display }}</div>
                                         </div>
                                     </div>
                                     
-                                    <div class="info-item d-flex align-items-center mb-3">
-                                        <i class="fas fa-clock text-medium-blue me-3"></i>
-                                        <div>
-                                            <small class="text-muted">{% trans "Süre" %}</small>
-                                            <div class="fw-semibold text-dark-blue">
+                                    <div class="info-item">
+                                        <div class="etkinlik-info-icon" aria-hidden="true">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="etkinlik-info-content">
+                                            <div class="etkinlik-info-label">{% trans "Süre" %}</div>
+                                            <div class="etkinlik-info-value">
                                                 {{ etkinlik.baslangic_tarihi|date:'H:i' }}
                                                 {% if etkinlik.bitis_tarihi %}
                                                 - {{ etkinlik.bitis_tarihi|date:'H:i' }}
@@ -158,25 +364,57 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="info-item d-flex align-items-center mb-3">
-                                        <i class="fas fa-money-bill text-medium-blue me-3"></i>
-                                        <div>
-                                            <small class="text-muted">{% trans "Ücret" %}</small>
-                                            <div class="fw-semibold text-dark-blue">
-                                                {% if etkinlik.ucretli %}Ücretli{% else %}Ücretsiz{% endif %}
+                                    <div class="info-item">
+                                        <div class="etkinlik-info-icon" aria-hidden="true">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                        </div>
+                                        <div class="etkinlik-info-content">
+                                            <div class="etkinlik-info-label">{% trans "Ücret" %}</div>
+                                            <div class="etkinlik-info-value">
+                                                {% if etkinlik.ucretli %}{% trans "Ücretli" %}{% else %}{% trans "Ücretsiz" %}{% endif %}
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <div class="info-item d-flex align-items-center">
-                                        <i class="fas fa-users text-medium-blue me-3"></i>
-                                        <div>
-                                            <small class="text-muted">{% trans "Katılım" %}</small>
-                                            <div class="fw-semibold text-dark-blue">
-                                                {% if etkinlik.kayit_gerekiyor %}Kayıt Gerekli{% else %}Açık Katılım{% endif %}
+                                    <div class="info-item">
+                                        <div class="etkinlik-info-icon" aria-hidden="true">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="etkinlik-info-content">
+                                            <div class="etkinlik-info-label">{% trans "Katılım" %}</div>
+                                            <div class="etkinlik-info-value">
+                                                {% if etkinlik.kayit_gerekiyor %}{% trans "Kayıt Gerekli" %}{% else %}{% trans "Açık Katılım" %}{% endif %}
                                             </div>
                                         </div>
                                     </div>
+
+                                    {% if etkinlik.fakulte or etkinlik.duzenleyen %}
+                                    <div class="info-item">
+                                        <div class="etkinlik-info-icon" aria-hidden="true">
+                                            <i class="fas fa-university"></i>
+                                        </div>
+                                        <div class="etkinlik-info-content">
+                                            <div class="etkinlik-info-label">{% trans "Düzenleyen" %}</div>
+                                            <div class="etkinlik-info-value">
+                                                {% if etkinlik.duzenleyen %}{{ etkinlik.duzenleyen }}{% endif %}
+                                                {% if etkinlik.fakulte and etkinlik.duzenleyen %} — {% endif %}
+                                                {% if etkinlik.fakulte %}{{ etkinlik.get_fakulte_display }}{% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if etkinlik.son_kayit_tarihi %}
+                                    <div class="info-item">
+                                        <div class="etkinlik-info-icon" aria-hidden="true">
+                                            <i class="fas fa-hourglass-half"></i>
+                                        </div>
+                                        <div class="etkinlik-info-content">
+                                            <div class="etkinlik-info-label">{% trans "Son Kayıt" %}</div>
+                                            <div class="etkinlik-info-value">{{ etkinlik.son_kayit_tarihi|date:'d F Y H:i' }}</div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -198,6 +436,85 @@
                 </div>
             </div>
         </article>
+    </div>
+</div>
+
+<!-- Etkinlik Kayıt Modalı -->
+{% if etkinlik.kayit_gerekiyor %}
+<div class="modal fade" id="kayitModal" tabindex="-1" aria-labelledby="kayitModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 24px; border: none; overflow: hidden;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #092442 0%, #1d61a9 100%); color: #ffffff; padding: 1.4rem 1.8rem;">
+                <div>
+                    <h5 class="modal-title fw-bold text-white mb-1" id="kayitModalLabel">
+                        <i class="fas fa-user-plus me-2"></i>{% trans "Etkinlik Kayıt Formu" %}
+                    </h5>
+                    <p class="mb-0 small" style="opacity: 0.85;">{{ etkinlik.baslik|truncatechars:60 }}</p>
+                </div>
+                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close" style="opacity: 0.9;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4" style="background: #ffffff;">
+                <div id="kayitAlertBox" class="alert d-none mb-3" role="alert"></div>
+                <form id="etkinlikKayitForm" data-url="{% url 'etkinlikler:kayit_ol' etkinlik.slug %}">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label class="small fw-bold text-dark-blue mb-1" for="kayitAdSoyad">{% trans "Ad Soyad" %} *</label>
+                        <input type="text" id="kayitAdSoyad" name="ad_soyad" class="form-control" required maxlength="150" placeholder="{% trans 'Örn: Ahmet Yılmaz' %}">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label class="small fw-bold text-dark-blue mb-1" for="kayitEmail">{% trans "E-posta" %} *</label>
+                            <input type="email" id="kayitEmail" name="email" class="form-control" required maxlength="150" placeholder="ornek@avrasya.edu.tr">
+                        </div>
+                        <div class="col-md-6 form-group mb-3">
+                            <label class="small fw-bold text-dark-blue mb-1" for="kayitTelefon">{% trans "Telefon" %} *</label>
+                            <input type="tel" id="kayitTelefon" name="telefon" class="form-control" required maxlength="30" placeholder="05XX XXX XX XX">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label class="small fw-bold text-dark-blue mb-1" for="kayitOgrenciNo">{% trans "Öğrenci No / T.C. No" %}</label>
+                            <input type="text" id="kayitOgrenciNo" name="ogrenci_no" class="form-control" maxlength="50">
+                        </div>
+                        <div class="col-md-6 form-group mb-3">
+                            <label class="small fw-bold text-dark-blue mb-1" for="kayitKurum">{% trans "Fakülte / Kurum" %}</label>
+                            <input type="text" id="kayitKurum" name="kurum_fakulte" class="form-control" maxlength="150">
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="small fw-bold text-dark-blue mb-1" for="kayitNotlar">{% trans "Not / Soru" %}</label>
+                        <textarea id="kayitNotlar" name="notlar" class="form-control" rows="2" maxlength="1000"></textarea>
+                    </div>
+                    <button type="submit" id="kayitSubmitBtn" class="btn btn-primary w-100 py-2">
+                        <i class="fas fa-check-circle me-2"></i>{% trans "Kaydı Tamamla" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Galeri Lightbox Modal -->
+<div class="modal fade" id="etkinlikGalleryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content" style="background: #092442; color: #ffffff; border-radius: 20px; overflow: hidden;">
+            <div class="modal-header border-0 px-4 py-3">
+                <h5 class="modal-title mb-0" id="etkinlikGalleryCaption">{{ etkinlik.baslik }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center p-3 position-relative">
+                <img id="etkinlikGalleryPreview" src="" alt="" style="max-height: 78vh; max-width: 100%; object-fit: contain; border-radius: 10px;">
+                <button type="button" id="etkinlikGalleryPrev" class="btn btn-light btn-sm position-absolute top-50 start-0 translate-middle-y ms-3 rounded-circle" style="width: 40px; height: 40px;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" id="etkinlikGalleryNext" class="btn btn-light btn-sm position-absolute top-50 end-0 translate-middle-y me-3 rounded-circle" style="width: 40px; height: 40px;">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -540,7 +857,475 @@
         font-size: 22px !important;
     }
 }
+
+/* Etkinlik Galeri ve Ek Dosyalar Stilleri */
+.etkinlik-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 16px;
+}
+
+.etkinlik-gallery-item {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(9, 36, 66, 0.12);
+    box-shadow: 0 4px 14px rgba(9, 36, 66, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.etkinlik-gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(9, 36, 66, 0.14);
+}
+
+.etkinlik-gallery-item img {
+    width: 100%;
+    height: 165px;
+    object-fit: cover;
+    display: block;
+}
+
+.etkinlik-gallery-zoom {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(9, 36, 66, 0.72);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.etkinlik-gallery-item:hover .etkinlik-gallery-zoom {
+    opacity: 1;
+}
+
+.etkinlik-gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(9, 36, 66, 0.82);
+    color: #ffffff;
+    padding: 6px 10px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.etkinlik-attachments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.etkinlik-attachment-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid rgba(9, 36, 66, 0.12);
+    border-left: 4px solid var(--secondary-medium-blue);
+    border-radius: 12px;
+    transition: all 0.25s ease;
+}
+
+.etkinlik-attachment-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 8px 20px rgba(9, 36, 66, 0.08);
+}
+
+.etkinlik-attachment-icon {
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(141, 212, 227, 0.18);
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.etkinlik-attachment-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.etkinlik-attachment-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.etkinlik-attachment-info h6 {
+    word-break: break-word;
+}
+
+.etkinlik-attachment-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(9, 36, 66, 0.68);
+}
+
+.etkinlik-file-badge {
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+}
+
+.etkinlik-attachment-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.etkinlik-attachment-actions .btn-primary,
+.etkinlik-attachment-actions .btn-outline-primary {
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .etkinlik-attachment-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .etkinlik-attachment-actions {
+        width: 100%;
+    }
+    .etkinlik-attachment-actions .btn {
+        flex: 1;
+    }
+}
+
+/* Bootstrap 4 uyumlu ikon/metin boşlukları ve Bilgi Kartı düzeni */
+.page_section .me-1, .modal .me-1 { margin-inline-end: 0.35rem !important; }
+.page_section .me-2, .modal .me-2 { margin-inline-end: 0.6rem !important; }
+.page_section .me-3, .modal .me-3 { margin-inline-end: 1rem !important; }
+.page_section .ms-1, .modal .ms-1 { margin-inline-start: 0.35rem !important; }
+.page_section .ms-2, .modal .ms-2 { margin-inline-start: 0.6rem !important; }
+.page_section .ms-3, .modal .ms-3 { margin-inline-start: 1rem !important; }
+.page_section .gap-2, .modal .gap-2 { gap: 0.5rem !important; }
+.page_section .gap-3, .modal .gap-3 { gap: 1rem !important; }
+.page_section .fw-semibold { font-weight: 600 !important; }
+.page_section .fw-bold { font-weight: 700 !important; }
+.page_section .fs-5 { font-size: 1.15rem !important; }
+.page_section .fs-6 { font-size: 0.92rem !important; }
+
+.etkinlik-quick-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    border-radius: 16px !important;
+    border: 1px solid rgba(9, 36, 66, 0.08) !important;
+    box-shadow: 0 4px 16px rgba(9, 36, 66, 0.05);
+}
+
+.etkinlik-quick-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(29, 97, 169, 0.14), rgba(141, 212, 227, 0.28));
+    color: var(--secondary-medium-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.etkinlik-quick-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.etkinlik-quick-label {
+    font-family: 'Metropolis', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #5b7083;
+    margin-bottom: 4px;
+}
+
+.etkinlik-quick-value {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.etkinlik-quick-sub {
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(9, 36, 66, 0.08);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #4b5d70;
+}
+
+.info-card-sidebar {
+    border-radius: 18px !important;
+    border: 1px solid rgba(9, 36, 66, 0.08) !important;
+}
+
+.etkinlik-sidebar-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Metropolis', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(9, 36, 66, 0.08);
+}
+
+.etkinlik-heading-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--primary-dark-blue);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.info-card-sidebar .info-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(9, 36, 66, 0.07);
+}
+
+.info-card-sidebar .info-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.etkinlik-info-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #ffffff;
+    border: 1px solid rgba(29, 97, 169, 0.16);
+    color: var(--secondary-medium-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(9, 36, 66, 0.04);
+}
+
+.etkinlik-info-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.etkinlik-info-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #5b7083;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+.etkinlik-info-value {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    line-height: 1.3;
+}
+
+#etkinlikGalleryPrev {
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#etkinlikGalleryNext {
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.content-text table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+.content-text th,
+.content-text td {
+    border: 1px solid rgba(9, 36, 66, 0.16);
+    padding: 8px 12px;
+}
+.content-text ul,
+.content-text ol {
+    padding-inline-start: 1.5rem;
+    margin-bottom: 1rem;
+}
+.content-text img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.etkinlik-speaker-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid rgba(9, 36, 66, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(9, 36, 66, 0.04);
+}
+.etkinlik-speaker-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(29, 97, 169, 0.14), rgba(141, 212, 227, 0.28));
+    color: var(--secondary-medium-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.etkinlik-speaker-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.etkinlik-speaker-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.etkinlik-calendar-group {
+    display: flex;
+    gap: 8px;
+}
+.etkinlik-cal-btn {
+    padding: 0.55rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    border-radius: 10px !important;
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var triggers = Array.prototype.slice.call(document.querySelectorAll('.etkinlik-lightbox-trigger'));
+    var modalEl = document.getElementById('etkinlikGalleryModal');
+    if (triggers.length && modalEl && window.bootstrap) {
+        var galleryModal = new bootstrap.Modal(modalEl);
+        var previewImg = document.getElementById('etkinlikGalleryPreview');
+        var captionEl = document.getElementById('etkinlikGalleryCaption');
+        var prevBtn = document.getElementById('etkinlikGalleryPrev');
+        var nextBtn = document.getElementById('etkinlikGalleryNext');
+        var currentIndex = 0;
+
+        function showImage(idx) {
+            currentIndex = (idx + triggers.length) % triggers.length;
+            var item = triggers[currentIndex];
+            previewImg.src = item.getAttribute('data-src');
+            previewImg.alt = item.getAttribute('data-caption') || '';
+            captionEl.textContent = item.getAttribute('data-caption') || '';
+        }
+
+        triggers.forEach(function(el, idx) {
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                showImage(idx);
+                galleryModal.show();
+            });
+        });
+
+        if (prevBtn) prevBtn.addEventListener('click', function() { showImage(currentIndex - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', function() { showImage(currentIndex + 1); });
+
+        modalEl.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+            if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+        });
+    }
+    // Etkinlik Kayıt Formu AJAX
+    var kayitForm = document.getElementById('etkinlikKayitForm');
+    if (kayitForm) {
+        kayitForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('kayitSubmitBtn');
+            var alertBox = document.getElementById('kayitAlertBox');
+            btn.disabled = true;
+            alertBox.className = 'alert d-none mb-3';
+
+            fetch(kayitForm.getAttribute('data-url'), {
+                method: 'POST',
+                body: new FormData(kayitForm),
+                headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                credentials: 'same-origin'
+            })
+            .then(function(resp) {
+                return resp.json().then(function(data) {
+                    return { ok: resp.ok, data: data };
+                });
+            })
+            .then(function(res) {
+                if (res.ok && res.data.success) {
+                    alertBox.className = 'alert alert-success mb-3';
+                    alertBox.textContent = res.data.message;
+                    kayitForm.reset();
+                    var valEl = document.getElementById('kalanKontenjanVal');
+                    if (valEl && res.data.kalan_kontenjan !== null && res.data.kalan_kontenjan !== undefined) {
+                        valEl.textContent = res.data.kalan_kontenjan;
+                    }
+                } else {
+                    alertBox.className = 'alert alert-danger mb-3';
+                    alertBox.textContent = (res.data && res.data.error) || 'Kayıt sırasında bir hata oluştu.';
+                }
+            })
+            .catch(function() {
+                alertBox.className = 'alert alert-danger mb-3';
+                alertBox.textContent = 'Bağlantı hatası oluştu. Lütfen tekrar deneyiniz.';
+            })
+            .finally(function() {
+                btn.disabled = false;
+            });
+        });
+    }
+});
+</script>
 
 <!-- JavaScript for Share Functionality -->
 <script>
@@ -550,10 +1335,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const etkinlikTarih = "{{ etkinlik.baslangic_tarihi|date:'d F Y' }}";
     const etkinlikYer = "{{ etkinlik.yer|escapejs }}";
     const etkinlikUrl = window.location.href;
-    const etkinlikDetay = "{{ etkinlik.kisa_aciklama|escapejs|truncatechars:100 }}";
+    const etkinlikDetay = "{{ etkinlik.get_ozet|escapejs|truncatechars:100 }}";
     
-    // Paylaşım metni oluştur
-    const shareText = `${etkinlikBaslik} <i class="fas fa-calendar-alt"></i>  ${etkinlikTarih} <i class="fas fa-map-marker-alt"></i>  ${etkinlikYer}\n\n${etkinlikDetay}\n\nDetaylar ve katılım için:`;
+    // Paylaşım metni oluştur (HTML etiketsiz temiz metin)
+    const shareText = `${etkinlikBaslik} — 📅 ${etkinlikTarih} | 📍 ${etkinlikYer}\n\n${etkinlikDetay}\n\nDetaylar ve katılım için:`;
     
     // Paylaşım linkleri
     const shareUrls = {
@@ -574,7 +1359,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (platform === 'instagram') {
                 e.preventDefault();
-                alert(' Instagram\'da paylaşmak için:\n\n1. Etkinlik afişini kaydedin\n2. Instagram uygulamasını açın\n3. Gönderi oluşturun\n\n<i class="fas fa-link"></i>  Etkinlik linki: ' + etkinlikUrl);
+                alert('Instagram\'da paylaşmak için:\n\n1. Etkinlik afişini kaydedin\n2. Instagram uygulamasını açın\n3. Gönderi oluşturun\n\n🔗 Etkinlik linki: ' + etkinlikUrl);
                 return;
             }
             

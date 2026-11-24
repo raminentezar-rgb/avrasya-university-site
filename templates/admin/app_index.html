@@ -1,0 +1,23 @@
+{% extends "admin/index.html" %}
+{% load i18n admin_dashboard_tags %}
+
+{% block bodyclass %}{{ block.super }} app-{{ app_label }}{% endblock %}
+
+{% if not is_popup %}
+{% block nav-breadcrumbs %}
+  <nav aria-label="{% translate 'Breadcrumbs' %}">
+    <div class="breadcrumbs">
+      <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+      &rsaquo;
+      {% get_categorized_admin_apps app_list as single_cats %}
+      {% for cat in single_cats %}
+        {% for app in cat.apps %}
+          {{ app.display_name }}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </nav>
+{% endblock %}
+{% endif %}
+
+{% block sidebar %}{% endblock %}

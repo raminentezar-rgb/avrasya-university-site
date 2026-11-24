@@ -62,7 +62,12 @@
                     <!-- Main image -->
                     {% if item.main_image %}
                     <div class="news-detail-image">
-                        <img src="{{ item.main_image.url }}" alt="{{ item.title }}" class="img-fluid">
+                        <a href="{{ item.main_image.url }}"
+                           class="news-lightbox-trigger d-block"
+                           data-src="{{ item.main_image.url }}"
+                           data-caption="{{ item.title }}">
+                            <img src="{{ item.main_image.url }}" alt="{{ item.title }}" class="img-fluid" style="cursor: zoom-in;">
+                        </a>
                     </div>
                     {% endif %}
 
@@ -88,11 +93,16 @@
                         <div class="gallery-grid">
                             {% for img in item.images.all %}
                             <div class="gallery-item">
-                                <a href="{{ img.image.url }}" data-lightbox="news-gallery" 
-                                   data-title="{% if img.caption %}{{ img.caption }}{% else %}{{ item.title }}{% endif %}">
+                                <a href="{{ img.image.url }}"
+                                   class="news-lightbox-trigger"
+                                   data-src="{{ img.image.url }}"
+                                   data-caption="{% if img.caption %}{{ img.caption }}{% else %}{{ item.title }}{% endif %}">
                                     <img src="{{ img.image.url }}" 
                                          alt="{% if img.caption %}{{ img.caption }}{% else %}{{ item.title }}{% endif %}" 
                                          class="img-fluid">
+                                    <span class="news-gallery-zoom" aria-hidden="true">
+                                        <i class="fas fa-expand-alt"></i>
+                                    </span>
                                     {% if img.caption %}
                                     <div class="gallery-caption">{{ img.caption }}</div>
                                     {% endif %}
@@ -475,22 +485,258 @@
     }
 }
 
-/* Add Lightbox CSS if needed */
-.lightbox-overlay {
-    background: rgba(9, 36, 66, 0.9) !important;
+.news-detail-header .btn-outline-primary,
+.news-detail-footer .btn-outline-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.news-gallery-zoom {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(9, 36, 66, 0.78);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.gallery-item:hover .news-gallery-zoom {
+    opacity: 1;
+}
+
+/* Fullscreen Interactive Lightbox Viewer */
+.news-lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(6, 18, 34, 0.94);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 76px 56px;
+}
+
+.news-lightbox-overlay.is-open {
+    display: flex;
+}
+
+.news-lightbox-close {
+    position: fixed;
+    top: 18px;
+    right: 22px;
+    z-index: 100001;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.news-lightbox-close:hover {
+    background: rgba(220, 53, 69, 0.9);
+    border-color: transparent;
+    transform: scale(1.06);
+}
+
+.news-lightbox-counter {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 100001;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.news-lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100001;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.news-lightbox-nav:hover {
+    background: var(--secondary-medium-blue, #1d61a9);
+    border-color: transparent;
+    transform: translateY(-50%) scale(1.08);
+}
+
+.news-lightbox-prev {
+    left: 18px;
+}
+
+.news-lightbox-next {
+    right: 18px;
+}
+
+.news-lightbox-stage {
+    position: relative;
+    max-width: 92vw;
+    max-height: 82vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-lightbox-stage img {
+    max-width: 100%;
+    max-height: 76vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+    user-select: none;
+}
+
+.news-lightbox-caption {
+    margin-top: 12px;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 14px;
+    text-align: center;
+    max-width: 720px;
+}
+
+@media (max-width: 768px) {
+    .news-lightbox-overlay {
+        padding: 64px 16px 48px;
+    }
+    .news-lightbox-nav {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+    .news-lightbox-prev { left: 10px; }
+    .news-lightbox-next { right: 10px; }
 }
 </style>
 
-<!-- Add Lightbox JS for gallery -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+<!-- Interactive News Image Gallery Viewer -->
+<div id="newsLightboxOverlay" class="news-lightbox-overlay" role="dialog" aria-modal="true" aria-label="{% trans 'Görsel Görüntüleyici' %}">
+    <div id="newsLightboxCounter" class="news-lightbox-counter">1 / 1</div>
+    <button type="button" id="newsLightboxClose" class="news-lightbox-close" aria-label="{% trans 'Kapat' %}" title="{% trans 'Kapat (Esc)' %}">
+        <i class="fas fa-times"></i>
+    </button>
+    <button type="button" id="newsLightboxPrev" class="news-lightbox-nav news-lightbox-prev" aria-label="{% trans 'Önceki Görsel' %}" title="{% trans 'Önceki' %}">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="news-lightbox-stage">
+        <img id="newsLightboxImg" src="" alt="">
+        <div id="newsLightboxCaption" class="news-lightbox-caption"></div>
+    </div>
+    <button type="button" id="newsLightboxNext" class="news-lightbox-nav news-lightbox-next" aria-label="{% trans 'Sonraki Görsel' %}" title="{% trans 'Sonraki' %}">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+</div>
+
 <script>
-    lightbox.option({
-        'resizeDuration': 200,
-        'wrapAround': true,
-        'albumLabel': "Resim %1 / %2",
-        'fadeDuration': 300,
-        'imageFadeDuration': 300
+document.addEventListener('DOMContentLoaded', function() {
+    var triggers = Array.prototype.slice.call(document.querySelectorAll('.news-lightbox-trigger'));
+    var overlay = document.getElementById('newsLightboxOverlay');
+    if (!triggers.length || !overlay) return;
+
+    var imgEl = document.getElementById('newsLightboxImg');
+    var captionEl = document.getElementById('newsLightboxCaption');
+    var counterEl = document.getElementById('newsLightboxCounter');
+    var closeBtn = document.getElementById('newsLightboxClose');
+    var prevBtn = document.getElementById('newsLightboxPrev');
+    var nextBtn = document.getElementById('newsLightboxNext');
+    var currentIndex = 0;
+
+    // Move overlay to document.body so fixed positioning sits cleanly above header/nav
+    if (overlay.parentNode !== document.body) {
+        document.body.appendChild(overlay);
+    }
+
+    function updateSlide(index) {
+        currentIndex = (index + triggers.length) % triggers.length;
+        var item = triggers[currentIndex];
+        imgEl.src = item.getAttribute('data-src');
+        var caption = item.getAttribute('data-caption') || '';
+        imgEl.alt = caption;
+        captionEl.textContent = caption;
+        captionEl.style.display = caption ? 'block' : 'none';
+        counterEl.textContent = (currentIndex + 1) + ' / ' + triggers.length;
+
+        var showNav = triggers.length > 1;
+        prevBtn.style.display = showNav ? 'flex' : 'none';
+        nextBtn.style.display = showNav ? 'flex' : 'none';
+    }
+
+    function openLightbox(index) {
+        updateSlide(index);
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    triggers.forEach(function(el, idx) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            openLightbox(idx);
+        });
     });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        updateSlide(currentIndex - 1);
+    });
+    nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        updateSlide(currentIndex + 1);
+    });
+
+    // Clicking dark area outside image closes viewer
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (!overlay.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') updateSlide(currentIndex - 1);
+        if (e.key === 'ArrowRight') updateSlide(currentIndex + 1);
+    });
+});
 </script>
 {% endblock %}

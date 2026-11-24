@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Avrasya Üniversitesi Yönetim Paneli{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'core/admin/avrasya_admin.css' %}?v=2">
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{% include 'core/includes/favicon.html' %}
+<script src="{% static 'core/admin/avrasya_admin.js' %}?v=1" defer></script>
+{% endblock %}
+
+{% block branding %}
+<a href="{% url 'admin:index' %}" class="av-brand">
+    <span class="av-brand-logo-wrap">
+        <img src="{% static 'core/admin/admin-logo.png' %}" alt="Avrasya Üniversitesi" class="av-brand-logo">
+    </span>
+    <span class="av-brand-badge">İçerik Yönetim Paneli</span>
+</a>
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

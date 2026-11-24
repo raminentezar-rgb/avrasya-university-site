@@ -156,7 +156,7 @@
                         </div>
                         {% endif %}
                         
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                             <div class="d-flex gap-2">
                                 <a href="{{ etkinlik.get_absolute_url }}" class="btn btn-primary btn-sm px-4">
                                     <i class="fas fa-info-circle me-2"></i> {% trans "Detaylı Bilgi" %}
@@ -167,11 +167,23 @@
                                 </a>
                                 {% endif %}
                             </div>
-                            {% if etkinlik.kayit_gerekiyor %}
-                            <span class="badge bg-info text-dark">
-                                <i class="fas fa-user-check me-1"></i> {% trans "Kayıt Gerekli" %}
-                            </span>
-                            {% endif %}
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                {% if etkinlik.gorseller.all %}
+                                <span class="badge bg-light text-dark border">
+                                    <i class="fas fa-images text-medium-blue me-1"></i> {{ etkinlik.gorseller.all|length }}
+                                </span>
+                                {% endif %}
+                                {% if etkinlik.dosyalar.all %}
+                                <span class="badge bg-light text-dark border">
+                                    <i class="fas fa-paperclip text-medium-blue me-1"></i> {{ etkinlik.dosyalar.all|length }}
+                                </span>
+                                {% endif %}
+                                {% if etkinlik.kayit_gerekiyor %}
+                                <span class="badge bg-info text-dark">
+                                    <i class="fas fa-user-check me-1"></i> {% trans "Kayıt Gerekli" %}
+                                </span>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -196,14 +208,14 @@
                         Önümüzdeki 7 gün içinde planlanmış etkinlik bulunmamaktadır.
                         {% endif %}
                     </p>
-                    <div class="d-flex justify-content-center gap-3">
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
                         <a href="{% url 'etkinlikler:liste' %}" class="btn btn-primary">
                             {% trans "Tüm Etkinlikleri Görüntüle" %}
                         </a>
                         {% if not search_query %}
-                        <a href="#" class="btn btn-outline-primary">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#bildirimModal">
                             <i class="fas fa-bell me-2"></i> {% trans "Bildirim Al" %}
-                        </a>
+                        </button>
                         {% endif %}
                     </div>
                 </div>
@@ -212,24 +224,69 @@
         </div>
 
         <!-- Upcoming Events Alert -->
-        {% if etkinlikler %}
         <div class="row mt-5">
             <div class="col-12">
                 <div class="alert alert-light-blue border-0 rounded-3 p-4">
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex flex-wrap align-items-center gap-3">
                         <i class="fas fa-info-circle text-medium-blue fs-2 me-3"></i>
                         <div class="flex-grow-1">
                             <h5 class="text-dark-blue mb-2">{% trans "Etkinlik Bildirimi Alın" %}</h5>
-                            <p class="text-muted mb-0">{% trans "Yaklaşan etkinliklerden haberdar olmak için bildirim sistemimize kaydolun." %}</p>
+                            <p class="text-muted mb-0">{% trans "Yaklaşan etkinliklerden haberdar olmak için e-posta bildirim sistemimize kaydolun veya RSS ile takip edin." %}</p>
                         </div>
-                        <button class="btn btn-outline-primary">
-                            <i class="fas fa-bell me-2"></i> {% trans "Bildirim Al" %}
-                        </button>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <a href="{% url 'etkinlikler:rss' %}" target="_blank" rel="noopener" class="btn btn-outline-primary">
+                                <i class="fas fa-rss me-1"></i> {% trans "RSS" %}
+                            </a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bildirimModal">
+                                <i class="fas fa-bell me-2"></i> {% trans "Bildirim Al" %}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        {% endif %}
+    </div>
+</div>
+
+<!-- Bildirim Abonelik Modalı -->
+<div class="modal fade" id="bildirimModal" tabindex="-1" aria-labelledby="bildirimModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 22px; border: none; overflow: hidden;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #092442 0%, #1d61a9 100%); color: #ffffff; padding: 1.3rem 1.7rem;">
+                <h5 class="modal-title fw-bold text-white mb-0" id="bildirimModalLabel">
+                    <i class="fas fa-bell me-2"></i>{% trans "Etkinlik Bildirimi Al" %}
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="opacity: 0.9;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4" style="background: #ffffff;">
+                <div id="bildirimAlertBox" class="alert d-none mb-3" role="alert"></div>
+                <form id="etkinlikBildirimForm" data-url="{% url 'etkinlikler:bildirim_abone' %}">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label class="small fw-bold text-dark-blue mb-1" for="bildirimEmail">{% trans "E-posta Adresiniz" %} *</label>
+                        <input type="email" id="bildirimEmail" name="email" class="form-control" required maxlength="150" placeholder="ornek@avrasya.edu.tr">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="small fw-bold text-dark-blue mb-1" for="bildirimAd">{% trans "Ad Soyad" %}</label>
+                        <input type="text" id="bildirimAd" name="ad_soyad" class="form-control" maxlength="150">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="small fw-bold text-dark-blue mb-1" for="bildirimTur">{% trans "İlgilendiğiniz Etkinlik Türü" %}</label>
+                        <select id="bildirimTur" name="tercih_turu" class="form-control">
+                            <option value="">{% trans "Tüm Etkinlikler" %}</option>
+                            {% for kod, ad in etkinlik_turu_choices %}
+                            <option value="{{ kod }}">{{ ad }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" id="bildirimSubmitBtn" class="btn btn-primary w-100 py-2">
+                        <i class="fas fa-paper-plane me-2"></i>{% trans "Abone Ol" %}
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -493,6 +550,20 @@
         padding: 2rem 1rem;
     }
 }
+
+.page_section .me-1, .modal .me-1 { margin-inline-end: 0.35rem !important; }
+.page_section .me-2, .modal .me-2 { margin-inline-end: 0.6rem !important; }
+.page_section .me-3, .modal .me-3 { margin-inline-end: 0.9rem !important; }
+.page_section .ms-1, .modal .ms-1 { margin-inline-start: 0.35rem !important; }
+.page_section .ms-2, .modal .ms-2 { margin-inline-start: 0.6rem !important; }
+.page_section .ms-3, .modal .ms-3 { margin-inline-start: 0.9rem !important; }
+.page_section .gap-2, .modal .gap-2 { gap: 0.5rem !important; }
+.page_section .gap-3, .modal .gap-3 { gap: 1rem !important; }
+.page_section .fw-semibold { font-weight: 600 !important; }
+.page_section .fw-bold { font-weight: 700 !important; }
+.page_section .fs-1 { font-size: 2.2rem !important; }
+.page_section .fs-2 { font-size: 1.6rem !important; }
+.page_section .fs-5 { font-size: 1.15rem !important; }
 </style>
 
 <script>
@@ -538,6 +609,43 @@ if (searchButton) {
             this.innerHTML = 'Ara';
             this.disabled = false;
         }, 2000);
+    });
+}
+
+// Etkinlik Bildirim Aboneliği AJAX
+const bildirimForm = document.getElementById('etkinlikBildirimForm');
+if (bildirimForm) {
+    bildirimForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('bildirimSubmitBtn');
+        const alertBox = document.getElementById('bildirimAlertBox');
+        btn.disabled = true;
+        alertBox.className = 'alert d-none mb-3';
+
+        fetch(bildirimForm.getAttribute('data-url'), {
+            method: 'POST',
+            body: new FormData(bildirimForm),
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            credentials: 'same-origin'
+        })
+        .then(resp => resp.json().then(data => ({ ok: resp.ok, data: data })))
+        .then(res => {
+            if (res.ok && res.data.success) {
+                alertBox.className = 'alert alert-success mb-3';
+                alertBox.textContent = res.data.message;
+                bildirimForm.reset();
+            } else {
+                alertBox.className = 'alert alert-danger mb-3';
+                alertBox.textContent = (res.data && res.data.error) || 'Abonelik kaydedilemedi.';
+            }
+        })
+        .catch(() => {
+            alertBox.className = 'alert alert-danger mb-3';
+            alertBox.textContent = 'Bağlantı hatası oluştu.';
+        })
+        .finally(() => {
+            btn.disabled = false;
+        });
     });
 }
 </script>

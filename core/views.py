@@ -1,5 +1,7 @@
 from datetime import timedelta
+from pathlib import Path
 from django.conf import settings
+from django.contrib.staticfiles.finders import find as find_static
 from django.core.cache import cache
 from django.db.models import Count, Q
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -84,6 +86,17 @@ def live_visitors_api(request):
     response = JsonResponse(get_visitor_stats())
     response["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
     return response
+
+
+def favicon_ico(request):
+    """Serve the official Avrasya favicon.ico directly at /favicon.ico for all browsers."""
+    ico_path = find_static("core/img/favicon.ico")
+    if ico_path and Path(ico_path).is_file():
+        data = Path(ico_path).read_bytes()
+        resp = HttpResponse(data, content_type="image/x-icon")
+        resp["Cache-Control"] = "public, max-age=86400"
+        return resp
+    return HttpResponse(status=404)
 
 
 def _build_homepage_context():

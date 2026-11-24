@@ -1,0 +1,226 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static admin_dashboard_tags %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'admin/css/dashboard.css' %}">
+{{ block.super }}
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+{% block bodyclass %}{{ block.super }}{% if not app_label %} dashboard{% endif %}{% endblock %}
+
+{% block nav-breadcrumbs %}{% endblock %}
+{% block nav-sidebar %}{% if app_label %}{{ block.super }}{% endif %}{% endblock %}
+{% block content_title %}{% endblock %}
+
+{% block content %}
+{% get_categorized_admin_apps app_list as categorized_apps %}
+{% if not app_label %}
+{% get_admin_quick_actions app_list as quick_actions %}
+{% get_admin_dashboard_stats as dash_stats %}
+
+<div id="content-main">
+  <!-- Executive Welcome Hero -->
+  <div class="av-dash-hero">
+    <div>
+      <h2>Hoş Geldiniz, {% firstof user.get_full_name user.get_short_name user.get_username %}</h2>
+      <p>Avrasya Üniversitesi içeriklerini kolayca ekleyip güncelleyebilirsiniz. Haber, duyuru veya etkinlik paylaşmak için aşağıdaki hızlı işlemleri ya da kategori aramasını kullanın.</p>
+    </div>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <a href="/" target="_blank" rel="noopener" class="av-hero-btn">
+        <i class="fas fa-external-link-alt"></i> Siteyi Görüntüle
+      </a>
+      {% if user.is_superuser %}
+      <a href="{% url 'accounts:crm_dashboard' %}" class="av-hero-btn">
+        <i class="fas fa-chart-line"></i> Canlı Trafik ({{ dash_stats.online_visitors }})
+      </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- KPI Summary Strip -->
+  <div class="av-kpi-grid">
+    <div class="av-kpi-card">
+      <div class="av-kpi-icon" style="background: rgba(29, 97, 169, 0.12); color: #1d61a9;">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div>
+        <div class="av-kpi-num">{{ dash_stats.news_count }}</div>
+        <div class="av-kpi-label">Yayındaki Haber</div>
+      </div>
+    </div>
+    <div class="av-kpi-card">
+      <div class="av-kpi-icon" style="background: rgba(2, 132, 199, 0.12); color: #0284c7;">
+        <i class="fas fa-bullhorn"></i>
+      </div>
+      <div>
+        <div class="av-kpi-num">{{ dash_stats.duyuru_count }}</div>
+        <div class="av-kpi-label">Yayındaki Duyuru</div>
+      </div>
+    </div>
+    <div class="av-kpi-card">
+      <div class="av-kpi-icon" style="background: rgba(13, 148, 136, 0.12); color: #0d9488;">
+        <i class="fas fa-calendar-alt"></i>
+      </div>
+      <div>
+        <div class="av-kpi-num">{{ dash_stats.etkinlik_count }}</div>
+        <div class="av-kpi-label">Yaklaşan Etkinlik</div>
+      </div>
+    </div>
+    <div class="av-kpi-card">
+      <div class="av-kpi-icon" style="background: rgba(234, 88, 12, 0.12); color: #ea580c;">
+        <i class="fas fa-life-ring"></i>
+      </div>
+      <div>
+        <div class="av-kpi-num">{{ dash_stats.open_tickets }}</div>
+        <div class="av-kpi-label">Açık Destek Talebi</div>
+      </div>
+    </div>
+    <div class="av-kpi-card">
+      <div class="av-kpi-icon" style="background: rgba(22, 163, 74, 0.12); color: #16a34a;">
+        <i class="fas fa-users"></i>
+      </div>
+      <div>
+        <div class="av-kpi-num">{{ dash_stats.online_visitors }}</div>
+        <div class="av-kpi-label">Şu An Çevrimiçi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Content Actions -->
+  {% if quick_actions %}
+  <div class="av-section-head">
+    <h3><i class="fas fa-bolt" style="color: #1d61a9;"></i> Hızlı İçerik İşlemleri</h3>
+  </div>
+  <div class="av-quick-grid">
+    {% for qa in quick_actions %}
+    <a href="{{ qa.url }}" class="av-quick-card">
+      <div class="av-quick-icon" style="background: {{ qa.color }};">
+        <i class="{{ qa.icon }}"></i>
+      </div>
+      <div>
+        <div class="av-quick-title">{{ qa.title }}</div>
+        <div class="av-quick-sub">{{ qa.subtitle }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Categorized Modules Toolbar -->
+  <div class="av-section-head">
+    <h3><i class="fas fa-th-large" style="color: #092442;"></i> Tüm İçerik ve Yönetim Alanları</h3>
+  </div>
+
+  <div class="av-directory-toolbar">
+    <div class="av-search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="search" id="avDashSearch" placeholder="Bölüm, fakülte veya içerik türü ara... (ör. Haber, Duyuru, Etkinlik, Bilgisayar, Hemşirelik)">
+    </div>
+    <div class="av-cat-tabs">
+      <button type="button" class="av-cat-tab is-active" data-cat="all">
+        <i class="fas fa-border-all"></i> Tümü
+      </button>
+      {% for cat in categorized_apps %}
+      <button type="button" class="av-cat-tab" data-cat="{{ cat.key }}">
+        <i class="{{ cat.icon }}"></i>
+        <span>{{ cat.title }}</span>
+        <span class="av-cat-count">{{ cat.apps|length }}</span>
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+<div id="content-main">
+{% endif %}
+
+  <!-- Categorized Module Cards -->
+  {% for cat in categorized_apps %}
+  <section class="av-category-block{% if not app_label and not cat.default_open %} is-collapsed{% endif %}" data-cat="{{ cat.key }}">
+    {% if not app_label %}
+    <div class="av-category-header" title="Aç / Kapat">
+      <div class="av-category-header-left">
+        <i class="{{ cat.icon }}" style="color: {{ cat.color }};"></i>
+        <span>{{ cat.title }}</span>
+        <span class="av-cat-count" style="background: rgba(29, 97, 169, 0.1); color: #1d61a9;">{{ cat.apps|length }} bölüm</span>
+      </div>
+      <span style="font-size: 0.78rem; color: var(--av-muted); font-weight: 600;">
+        Aç / Kapat <i class="fas fa-chevron-down" style="margin-inline-start: 4px;"></i>
+      </span>
+    </div>
+    {% endif %}
+
+    <div class="av-category-grid">
+      {% for app in cat.apps %}
+      <div class="av-app-card" data-search="{{ app.display_name }} {{ app.name }} {{ app.app_label }}">
+        <div class="av-app-card-head">
+          <a href="{{ app.app_url }}">
+            <span class="av-app-card-icon"><i class="{{ app.icon }}"></i></span>
+            <span>{{ app.display_name }}</span>
+          </a>
+        </div>
+        <div class="av-app-models">
+          {% for model in app.models %}
+          <div class="av-model-row" data-search="{{ app.display_name }} {{ model.name }}">
+            {% if model.admin_url %}
+              <a href="{{ model.admin_url }}" class="av-model-name">{{ model.name }}</a>
+            {% else %}
+              <span class="av-model-name">{{ model.name }}</span>
+            {% endif %}
+            <div class="av-model-actions">
+              {% if model.add_url %}
+                <a href="{{ model.add_url }}" class="av-btn-mini av-btn-add"><i class="fas fa-plus"></i> Ekle</a>
+              {% endif %}
+              {% if model.admin_url %}
+                <a href="{{ model.admin_url }}" class="av-btn-mini av-btn-edit">
+                  {% if model.view_only %}Görüntüle{% else %}Düzenle{% endif %}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% empty %}
+  <p>{% translate 'You don’t have permission to view or edit anything.' %}</p>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+{% if not app_label %}
+<div id="content-related">
+  <div class="module" id="recent-actions-module">
+    <h2><i class="fas fa-history" style="margin-inline-end: 6px; color: #1d61a9;"></i>{% translate 'Recent actions' %}</h2>
+    <h3>{% translate 'My actions' %}</h3>
+    {% load log %}
+    {% get_admin_log 10 as admin_log for_user user %}
+    {% if not admin_log %}
+      <p style="padding: 12px 18px; color: var(--av-muted);">{% translate 'None available' %}</p>
+    {% else %}
+      <ul class="actionlist">
+      {% for entry in admin_log %}
+      <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+        <span class="visually-hidden">{% if entry.is_addition %}{% translate 'Added:' %}{% elif entry.is_change %}{% translate 'Changed:' %}{% elif entry.is_deletion %}{% translate 'Deleted:' %}{% endif %}</span>
+        {% if entry.is_deletion or not entry.get_admin_url %}
+          <strong>{{ entry.object_repr }}</strong>
+        {% else %}
+          <a href="{{ entry.get_admin_url }}" style="font-weight: 600;">{{ entry.object_repr }}</a>
+        {% endif %}
+        <br>
+        {% if entry.content_type %}
+          <span class="mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+        {% else %}
+          <span class="mini quiet">{% translate 'Unknown content' %}</span>
+        {% endif %}
+      </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

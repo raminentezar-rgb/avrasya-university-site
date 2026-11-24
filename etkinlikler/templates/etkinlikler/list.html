@@ -11,17 +11,22 @@
                 <h1 class="fw-bold text-dark-blue mb-2">{% trans "ETKİNLİKLER" %}</h1>
                 <p class="text-muted fs-5">{% trans "Üniversitemizde düzenlenen etkinlikler ve organizasyonlar" %}</p>
             </div>
-            <div class="col-md-4 text-end">
+            <div class="col-md-4 text-end d-flex justify-content-md-end align-items-center gap-2 flex-wrap">
                 <a href="{% url 'etkinlikler:yaklasan' %}" class="btn btn-outline-primary btn-lg">
                     {% trans "Yaklaşan Etkinlikler" %} <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+                <a href="{% url 'etkinlikler:rss' %}" class="btn btn-outline-primary btn-lg" title="{% trans 'RSS Beslemesi' %}" target="_blank" rel="noopener">
+                    <i class="fas fa-rss"></i>
                 </a>
             </div>
         </div>
 
         <!-- Search and Filter Section -->
-        <div class="row mb-5">
+        <div class="row mb-4">
             <div class="col-md-8">
-                <form method="GET" action="{% url 'etkinlikler:liste' %}" class="search-form">
+                <form method="GET" action="{% url 'etkinlikler:liste' %}" class="search-form" id="etkinlikFilterForm">
+                    {% if tur_filter %}<input type="hidden" name="tur" value="{{ tur_filter }}">{% endif %}
+                    {% if sort_param != 'newest' %}<input type="hidden" name="sort" value="{{ sort_param }}">{% endif %}
                     <div class="search-container">
                         <div class="input-group input-group-lg search-box">
                             <span class="input-group-text search-icon">
@@ -30,7 +35,7 @@
                             <input type="text" 
                                    name="q" 
                                    class="form-control search-input" 
-                                   placeholder="{% trans 'Etkinlik başlığı, özet veya içerikte ara...' %}"
+                                   placeholder="{% trans 'Etkinlik başlığı, konuşmacı, özet veya içerikte ara...' %}"
                                    value="{{ search_query }}">
                             {% if search_query %}
                             <button type="button" class="btn btn-clear" onclick="clearSearch()">
@@ -42,9 +47,35 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- Ek Filtreler: Birim, Ücret ve Kayıt Durumu -->
+                    <div class="row mt-3">
+                        <div class="col-md-5 mb-2 mb-md-0">
+                            <select name="birim" class="form-control etkinlik-select-filter" onchange="this.form.submit()">
+                                <option value="">{% trans "Tüm Birimler / Fakülteler" %}</option>
+                                {% for kod, ad in birim_choices %}
+                                <option value="{{ kod }}" {% if birim_filter == kod %}selected{% endif %}>{{ ad }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-2 mb-md-0">
+                            <select name="ucret" class="form-control etkinlik-select-filter" onchange="this.form.submit()">
+                                <option value="">{% trans "Tüm Ücret Durumları" %}</option>
+                                <option value="ucretsiz" {% if ucret_filter == 'ucretsiz' %}selected{% endif %}>{% trans "Ücretsiz" %}</option>
+                                <option value="ucretli" {% if ucret_filter == 'ucretli' %}selected{% endif %}>{% trans "Ücretli" %}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="kayit" class="form-control etkinlik-select-filter" onchange="this.form.submit()">
+                                <option value="">{% trans "Tüm Katılım Türleri" %}</option>
+                                <option value="gerekiyor" {% if kayit_filter == 'gerekiyor' %}selected{% endif %}>{% trans "Kayıt Gereken" %}</option>
+                                <option value="acik" {% if kayit_filter == 'acik' %}selected{% endif %}>{% trans "Açık Katılım" %}</option>
+                            </select>
+                        </div>
+                    </div>
                 </form>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3 mt-md-0">
                 <div class="filter-container">
                     <div class="dropdown custom-dropdown">
                         <button class="btn btn-filter dropdown-toggle" type="button" id="sortDropdown" 
@@ -53,27 +84,41 @@
                             {% trans "Tarihe Göre Sırala" %}
                         </button>
                         <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="sortDropdown">
-                            <li><a class="dropdown-item" href="?sort=newest{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">{% trans "En Yeni" %}</a></li>
-                            <li><a class="dropdown-item" href="?sort=oldest{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">{% trans "En Eski" %}</a></li>
-                            <li><a class="dropdown-item" href="?sort=upcoming{% if search_query %}&q={{ search_query|urlencode }}{% endif %}">{% trans "Yaklaşanlar" %}</a></li>
+                            <li><a class="dropdown-item" href="?sort=newest{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if tur_filter %}&tur={{ tur_filter }}{% endif %}{% if birim_filter %}&birim={{ birim_filter }}{% endif %}{% if ucret_filter %}&ucret={{ ucret_filter }}{% endif %}{% if kayit_filter %}&kayit={{ kayit_filter }}{% endif %}">{% trans "En Yeni" %}</a></li>
+                            <li><a class="dropdown-item" href="?sort=oldest{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if tur_filter %}&tur={{ tur_filter }}{% endif %}{% if birim_filter %}&birim={{ birim_filter }}{% endif %}{% if ucret_filter %}&ucret={{ ucret_filter }}{% endif %}{% if kayit_filter %}&kayit={{ kayit_filter }}{% endif %}">{% trans "En Eski" %}</a></li>
+                            <li><a class="dropdown-item" href="?sort=upcoming{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if tur_filter %}&tur={{ tur_filter }}{% endif %}{% if birim_filter %}&birim={{ birim_filter }}{% endif %}{% if ucret_filter %}&ucret={{ ucret_filter }}{% endif %}{% if kayit_filter %}&kayit={{ kayit_filter }}{% endif %}">{% trans "Yaklaşanlar" %}</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Etkinlik Türü Filtre Chipleri -->
+        <div class="etkinlik-filter-chips mb-4">
+            <a href="?{% if search_query %}q={{ search_query|urlencode }}&{% endif %}{% if birim_filter %}birim={{ birim_filter }}&{% endif %}{% if ucret_filter %}ucret={{ ucret_filter }}&{% endif %}{% if kayit_filter %}kayit={{ kayit_filter }}&{% endif %}sort={{ sort_param }}"
+               class="etkinlik-chip {% if not tur_filter %}active{% endif %}">
+                {% trans "Tümü" %}
+            </a>
+            {% for kod, ad in etkinlik_turu_choices %}
+            <a href="?tur={{ kod }}{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if birim_filter %}&birim={{ birim_filter }}{% endif %}{% if ucret_filter %}&ucret={{ ucret_filter }}{% endif %}{% if kayit_filter %}&kayit={{ kayit_filter }}{% endif %}&sort={{ sort_param }}"
+               class="etkinlik-chip {% if tur_filter == kod %}active{% endif %}">
+                {{ ad }}
+            </a>
+            {% endfor %}
+        </div>
+
         <!-- بقیه کد بدون تغییر -->
         <!-- Search Results Info -->
-        {% if search_query %}
+        {% if has_active_filters %}
         <div class="row mb-4">
             <div class="col-12">
                 <div class="search-results-info">
                     <p class="mb-0">
-                        <strong>"{{ search_query }}"</strong> {% trans "için" %} 
-                        <span class="text-primary">{{ gelecek_etkinlikler|length|add:gecmis_etkinlikler|length }}</span> 
+                        {% if search_query %}<strong>"{{ search_query }}"</strong> {% trans "için" %} {% endif %}
+                        <span class="text-primary fw-bold">{{ gelecek_etkinlikler|length|add:gecmis_total_count }}</span> 
                         {% trans "sonuç bulundu" %}
                         <a href="{% url 'etkinlikler:liste' %}" class="btn-clear-search ms-3">
-                            <i class="fas fa-times me-1"></i> {% trans "Filtreyi Temizle" %}
+                            <i class="fas fa-times me-1"></i> {% trans "Filtreleri Temizle" %}
                         </a>
                     </p>
                 </div>
@@ -92,7 +137,12 @@
             <div class="row">
                 {% for etkinlik in gelecek_etkinlikler %}
                 <div class="col-lg-6 mb-4">
-                    <div class="card etkinlik-card h-100 border-0 shadow-hover">
+                    <div class="card etkinlik-card h-100 border-0 shadow-hover overflow-hidden">
+                        {% if etkinlik.afis %}
+                        <a href="{{ etkinlik.get_absolute_url }}" class="etkinlik-poster-link">
+                            <img src="{{ etkinlik.afis.url }}" alt="{{ etkinlik.baslik }}" class="etkinlik-poster-thumb" loading="lazy">
+                        </a>
+                        {% endif %}
                         <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <div class="flex-grow-1">
@@ -128,15 +178,27 @@
                             </p>
                             {% endif %}
                             
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                                 <a href="{{ etkinlik.get_absolute_url }}" class="btn btn-primary btn-sm px-4">
                                     {% trans "Detaylı Bilgi" %} <i class="fas fa-arrow-right ms-2"></i>
                                 </a>
-                                {% if etkinlik.kayit_gerekiyor %}
-                                <span class="badge bg-info text-dark">
-                                    <i class="fas fa-user-check me-1"></i> {% trans "Kayıt Gerekli" %}
-                                </span>
-                                {% endif %}
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    {% if etkinlik.gorseller.all %}
+                                    <span class="badge bg-light text-dark border">
+                                        <i class="fas fa-images text-medium-blue me-1"></i> {{ etkinlik.gorseller.all|length }}
+                                    </span>
+                                    {% endif %}
+                                    {% if etkinlik.dosyalar.all %}
+                                    <span class="badge bg-light text-dark border">
+                                        <i class="fas fa-paperclip text-medium-blue me-1"></i> {{ etkinlik.dosyalar.all|length }}
+                                    </span>
+                                    {% endif %}
+                                    {% if etkinlik.kayit_gerekiyor %}
+                                    <span class="badge bg-info text-dark">
+                                        <i class="fas fa-user-check me-1"></i> {% trans "Kayıt Gerekli" %}
+                                    </span>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -174,13 +236,18 @@
         <div class="mt-5 pt-5 border-top">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h3 class="text-dark-blue mb-0">{% trans "Geçmiş Etkinlikler" %}</h3>
-                <span class="badge bg-secondary fs-6">{{ gecmis_etkinlikler|length }} etkinlik</span>
+                <span class="badge bg-secondary fs-6">{{ gecmis_total_count }} {% trans "etkinlik" %}</span>
             </div>
             
             <div class="row">
                 {% for etkinlik in gecmis_etkinlikler %}
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card etkinlik-card-gecmis h-100 border-0">
+                    <div class="card etkinlik-card-gecmis h-100 border-0 overflow-hidden">
+                        {% if etkinlik.afis %}
+                        <a href="{{ etkinlik.get_absolute_url }}">
+                            <img src="{{ etkinlik.afis.url }}" alt="{{ etkinlik.baslik }}" style="width: 100%; height: 150px; object-fit: cover;" loading="lazy">
+                        </a>
+                        {% endif %}
                         <div class="card-body p-4">
                             <span class="badge bg-secondary mb-3">{{ etkinlik.get_etkinlik_turu_display }}</span>
                             <h6 class="card-title text-dark-blue mb-3">{{ etkinlik.baslik }}</h6>
@@ -198,6 +265,28 @@
                 </div>
                 {% endfor %}
             </div>
+
+            {% if gecmis_etkinlikler.has_other_pages %}
+            <nav aria-label="Sayfalandırma" class="mt-4 d-flex justify-content-center">
+                <ul class="pagination">
+                    {% if gecmis_etkinlikler.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ gecmis_etkinlikler.previous_page_number }}{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if tur_filter %}&tur={{ tur_filter }}{% endif %}{% if birim_filter %}&birim={{ birim_filter }}{% endif %}{% if ucret_filter %}&ucret={{ ucret_filter }}{% endif %}{% if kayit_filter %}&kayit={{ kayit_filter }}{% endif %}&sort={{ sort_param }}">&laquo;</a>
+                    </li>
+                    {% endif %}
+                    {% for num in gecmis_etkinlikler.paginator.page_range %}
+                    <li class="page-item {% if gecmis_etkinlikler.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if tur_filter %}&tur={{ tur_filter }}{% endif %}{% if birim_filter %}&birim={{ birim_filter }}{% endif %}{% if ucret_filter %}&ucret={{ ucret_filter }}{% endif %}{% if kayit_filter %}&kayit={{ kayit_filter }}{% endif %}&sort={{ sort_param }}">{{ num }}</a>
+                    </li>
+                    {% endfor %}
+                    {% if gecmis_etkinlikler.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ gecmis_etkinlikler.next_page_number }}{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if tur_filter %}&tur={{ tur_filter }}{% endif %}{% if birim_filter %}&birim={{ birim_filter }}{% endif %}{% if ucret_filter %}&ucret={{ ucret_filter }}{% endif %}{% if kayit_filter %}&kayit={{ kayit_filter }}{% endif %}&sort={{ sort_param }}">&raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
         </div>
         {% endif %}
     </div>
@@ -464,6 +553,72 @@
 
 .shadow-hover {
     box-shadow: 0 5px 20px rgba(9, 36, 66, 0.08);
+}
+
+.page_section .me-1 { margin-inline-end: 0.35rem !important; }
+.page_section .me-2 { margin-inline-end: 0.6rem !important; }
+.page_section .me-3 { margin-inline-end: 0.9rem !important; }
+.page_section .ms-1 { margin-inline-start: 0.35rem !important; }
+.page_section .ms-2 { margin-inline-start: 0.6rem !important; }
+.page_section .ms-3 { margin-inline-start: 0.9rem !important; }
+.page_section .gap-2 { gap: 0.5rem !important; }
+.page_section .gap-3 { gap: 1rem !important; }
+.page_section .fw-semibold { font-weight: 600 !important; }
+.page_section .fw-bold { font-weight: 700 !important; }
+.page_section .fs-5 { font-size: 1.15rem !important; }
+.page_section .fs-6 { font-size: 0.92rem !important; }
+
+.etkinlik-select-filter {
+    border-radius: 10px;
+    border: 1px solid rgba(9, 36, 66, 0.16);
+    height: 42px;
+    font-size: 0.9rem;
+    color: var(--primary-dark-blue);
+}
+
+.etkinlik-filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.etkinlik-chip {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid rgba(9, 36, 66, 0.16);
+    color: var(--primary-dark-blue);
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.etkinlik-chip:hover,
+.etkinlik-chip.active {
+    background: var(--primary-dark-blue);
+    border-color: var(--primary-dark-blue);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.etkinlik-poster-link {
+    display: block;
+    overflow: hidden;
+    background: #f6f2e7;
+}
+
+.etkinlik-poster-thumb {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.etkinlik-card:hover .etkinlik-poster-thumb {
+    transform: scale(1.03);
 }
 </style>
 
