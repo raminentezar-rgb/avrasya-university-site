@@ -1179,10 +1179,18 @@
     transform: translateY(-50%);
 }
 
-.content-text table {
+.content-text .table-responsive-wrapper {
     width: 100%;
-    border-collapse: collapse;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin: 1rem 0;
+}
+.content-text table {
+    width: 100% !important;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin: 0;
 }
 .content-text th,
 .content-text td {
@@ -1194,10 +1202,21 @@
     padding-inline-start: 1.5rem;
     margin-bottom: 1rem;
 }
-.content-text img {
-    max-width: 100%;
-    height: auto;
+.content-text figure {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 1rem auto;
+}
+.content-text img,
+.content-text video {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 1rem auto;
     border-radius: 10px;
+}
+.content-text iframe {
+    max-width: 100% !important;
 }
 
 .etkinlik-speaker-card {
@@ -1417,6 +1436,15 @@ document.addEventListener('DOMContentLoaded', function() {
             copyLink();
         });
     }
+
+    document.querySelectorAll('.content-text table').forEach(function(table) {
+        if (!table.parentElement.classList.contains('table-responsive-wrapper')) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive-wrapper';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        }
+    });
 });
 </script>
 
